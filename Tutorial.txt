@@ -28,3 +28,5 @@ Inputs to hyperhop:
 
 You can also do a soft fastfall with every character. When ever you're not going up in the air, you can press down at ANY time and you will fall faster.
 
+Star Cancel:
+Press the [Charge] Button During Some Action to cancel that action. This costs a bar. Anything goes, but you can get hit out of it if you cancel out of a combo.
