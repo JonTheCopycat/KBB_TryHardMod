@@ -1,6 +1,102 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
-| Try-Hard Version 0.3.0 Changes:                   /
+| Try-Hard Version 0.4.0 Changes:                    /
+|---------------------------------------------------/
+
+Some more adjustments to try improve the feel while also addressing some accidental comboes.
+
+Universal:
+1. Adjusted Wavedash Speed Curve
+	* Faster at the start, but slows down faster
+	* Total distance remains approximately the same, maybe a bit further.
+2. Added Star Cancel:
+	* you can cancel any move by pressing the powercharge button. Costs one bar.
+	* takes slightly longer when cancelling out of a combo
+3. Pressing back while 
+
+
+Aege:
+1. Removed WD A > A Loop
+2. Changed how his wavedash controls due to the addition of wavestop.
+
+
+Vei:
+1. 214B clone no longer stays on screen
+	* Cost lowered (1.5 Bar > 1 Bar)
+2. Changed how his wavedash controls, allowing him to actually move forward with the wavedash.
+3. Removed 5ba.
+4. 5b > 5bb is now counterable
+5. 2c now has more start up.
+6. Reduced his meter gain from his grounded normals
+7. 214B now initially counts as a special attack rather than a normal projectile.
+
+
+Violet:
+1. Buffed Wavedash B:
+	* Less Startup
+	* More Velocity
+	* Possible to continue comboes after it.
+
+
+Hyrio:
+1. Wavedash B crossup now occures later
+
+
+Stray:
+1. Lowered knockback of 5a, 5aa, 5aaa and 5b
+2. Increased Range and Reduced Cost of 236C
+
+
+Max:
+1. Made cancels out of 5aaa > c and wavedash b normal in timing
+
+
+Bill:
+1. Wavedash C Nerfed:
+	* No longer detonates bombs planted on opponents.
+
+
+Fly:
+1. Adjusted 236B and 214B to better fit the new Star Cancel System.
+
+
+Jodie:
+1. New Wavedash A: Functions as an otg rekka.
+2. Increased Startup of Wavedash C; Animation Changed to compensate
+
+
+Leon:
+1. Removed 5b > 2a Cancel
+
+
+Noll:
+1. Wavedash C:
+	* Added jump cancel
+	* Fixed bug where it couldn't be used in certain scenarios
+2. New Wavedash A
+3. 214A no longer automatically does j.5c on hit.
+	* It can now be manually inputted along with a few more options.
+
+
+Saito:
+1. Increased Startup and Reduced Velocity of Wavedash A
+2. Adjusted Knockback of Wavedash C
+	* Fixed bug where proration wasn't properly applied to it and its followups.
+3. Wavedash C > 2C initial hitbox slightly reduced.
+
+
+Vivienne:
+1. Armor Walk B can now hit in comboes again with certain restrictions.
+
+
+Watanabe:
+1. Grounded Sword no longer follows the screen.
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
+| Try-Hard Version 0.3.0 Changes:                    /
 |---------------------------------------------------/
 
 In this update, Vei and Watanabe get some pretty substancial changes. On top of that, a few bugs were fixed.

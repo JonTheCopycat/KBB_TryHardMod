@@ -315,9 +315,9 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 50
-ground.velocity = 7,-2.5
+ground.velocity = 0,vel y * 1.2
 guard.velocity = -4
-air.velocity = 7,-2.5
+air.velocity = 0,vel y * 1.2
 Fall = 1
 fall.recover = 0
 Envshake.time = 30
@@ -349,9 +349,9 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 50
-ground.velocity = -4.5,-1
+ground.velocity = -1,vel y * 1.2
 guard.velocity = -4
-air.velocity = -4.5,-1
+air.velocity = -1,vel y * 1.2
 Fall = 1
 Envshake.time = 30
 p2facing = 1
@@ -369,17 +369,25 @@ time = 10
 freq = 30
 ampl = 3
 
+[State 200, End]
+type = ChangeState
+triggerall = hitcount >= 6
+triggerall = var(13) < 2
+trigger1 = command = "WD" && command != "NotWD"
+value = 30
+ctrl = 0
+
 [State 200, Cancel into j236B]	;Ends with j.236b
 type = ChangeState
 triggerall = command = "SPECIAL 3"
 trigger1 = power >= 1000
-trigger1 = hitcount = 8
+trigger1 = hitcount >= 6
 value = 23000
 ctrl = 0
 
 [State 200, End]	;Ends with Air C
 type = ChangeState
-trigger1 = hitcount = 8
+trigger1 = hitcount >= 6 && command = "c"
 value = 620
 ctrl = 0
 
@@ -387,7 +395,7 @@ ctrl = 0
 type = ChangeState
 trigger1 = time > 15
 trigger1 = vel y > 0 && pos y >= -15
-value = 621
+value = ifelse(movehit,52,621)
 ctrl = 0
 ;===============================================================================
 ; Spinner Cutters:

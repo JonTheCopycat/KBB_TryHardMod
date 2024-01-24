@@ -770,7 +770,7 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 22000
-poweradd = -1500
+poweradd = -1000
 sprpriority = 2
 
 [State 0, Busterable]
@@ -865,7 +865,7 @@ trigger5 = AnimElem = 8
 trigger6 = AnimElem = 9
 trigger7 = AnimElem = 10
 trigger8 = AnimElem = 11
-attr = A, NP
+attr = A, SA
 animtype  = Heavy 
 damage    = 15
 Hitflag = MAFD
@@ -980,6 +980,15 @@ value = movehit
 ;ignorehitpause = 
 ;persistent = 
 
+[State 0, HurtOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA, AA, AP, AT     ;SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+slot = 0
+stateno = 39
+time = 2
+forceair = 0
+
 
 [State 0, Damage Proration]
 type = ParentVarAdd
@@ -1024,11 +1033,11 @@ Fall = 1
 Fall.recovertime = 100
 Envshake.time = 5
 
-[State 0, ScreenBound]	;Don't leave screen pls
-type = ScreenBound
-trigger1 = Time = [1,100]
-value = 1
-movecamera = 0,0
+;[State 0, ScreenBound]	;Don't leave screen pls
+;type = ScreenBound
+;trigger1 = Time = [1,100]
+;value = 1
+;movecamera = 0,0
 
 [State 200, End]
 type = ChangeState

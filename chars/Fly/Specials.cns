@@ -900,7 +900,7 @@ ctrl = 1
 ; Fly Dash Slash
 ;-------------------------------------------------------------------------------
 [Statedef 23000]
-type    = S
+type    = U
 movetype= A
 physics = S
 juggle  = 0
@@ -1157,8 +1157,8 @@ ctrl = 1
 ; Fly Cross Up:
 ;-------------------------------------------------------------------------------
 [Statedef 24000]
-type    = S
-movetype= I
+type    = A
+movetype= A
 physics = S
 juggle  = 0
 ctrl = 0
@@ -1166,6 +1166,7 @@ anim = 24000
 velset = 0,0
 sprpriority = 2
 poweradd = -1000
+attackdist = 30
 
 [State 0, Busterable]
 type = MapSet
@@ -1240,7 +1241,7 @@ ctrl = 1
 ; Fly Cross Up - Return
 ;-------------------------------------------------------------------------------
 [Statedef 24001]
-type    = S
+type    = A
 movetype= A
 physics = S
 juggle  = 0

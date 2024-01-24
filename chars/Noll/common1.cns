@@ -398,7 +398,7 @@ trigger1 = animtime = 0
 
 ;---------------------------------------------------------------------------
 ;Standard Wavedash
-[Statedef 35]
+[Statedef 33]
 type = C
 movetype= I
 physics = S

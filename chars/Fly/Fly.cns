@@ -2191,7 +2191,7 @@ type = Helper
 trigger1 = animelem = 4
 helpertype = normal
 name = "C - Start"
-ID = 450
+ID = 455
 stateno = 451
 pos = 25,-15
 postype = p1
@@ -2206,7 +2206,7 @@ trigger1 = animelem = 6
 trigger1 = var(15) = 1
 helpertype = normal
 name = "C - Start"
-ID = 450
+ID = 455
 stateno = 451
 pos = 30,-15
 postype = p1
@@ -2217,7 +2217,7 @@ inheritjuggle = 1
 
 [State 200, End]
 type = ChangeState
-triggerall = helper(450),movehit || time >= 20
+triggerall = helper(455),movehit || time >= 20
 trigger1 = command = "c"
 value = 452
 ctrl = 1
@@ -2532,8 +2532,9 @@ volumescale = 100
 [State 200, End]
 type = PosSet
 trigger1 = AnimElem = 5 ; basically noll
-x = helper(450),pos x + 20
-y = helper(450),pos y + 5
+x = helper(455),pos x + 20
+y = helper(455),pos y + 5
+
 
 
 [State 0, Explod]
@@ -2574,7 +2575,7 @@ value = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = AnimTime = 0 || numhelper(450) = 0
+trigger1 = AnimTime = 0 || numhelper(455) = 0
 value = 50
 ctrl = 1
 
@@ -5416,24 +5417,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-type = MapSet
-trigger1 = teammode != tag && enemy,teammode != tag
-map = "initialDefence"
-value = 1
-persistent = 0
-
-[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-type = MapSet
-trigger1 = roundstate = 1
-map = "defence"
-value = 0
-
-[State -2, Defense Set] ; Used to determine character defense
-type = defenceMulSet
-trigger1 = 1 
-value = map(initialDefence) + map(defence)
-onhit = 0
+;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+;type = MapSet
+;trigger1 = teammode != tag && enemy,teammode != tag
+;map = "initialDefence"
+;value = 1
+;persistent = 0
+;
+;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+;type = MapSet
+;trigger1 = roundstate = 1
+;map = "defence"
+;value = 0
+;
+;[State -2, Defense Set] ; Used to determine character defense
+;type = defenceMulSet
+;trigger1 = 1 
+;value = map(initialDefence) + map(defence)
+;onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

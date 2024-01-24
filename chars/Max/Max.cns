@@ -1316,7 +1316,7 @@ fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 
 [State 200, GRENADE SPAWN AIR]
 type = ChangeState
-Triggerall = movehit = 1
+Triggerall = movehit
 triggerall = hitcount = 2
 triggerall = power >= 200
 triggerall = numhelper(452) = 0
@@ -1327,7 +1327,7 @@ trigger1 = command = "holddown"
 value = 630
 [State 200, CANNON AIR]
 type = ChangeState
-Triggerall = movehit = 1
+Triggerall = movehit
 triggerall = hitcount = 2
 triggerall = power >= 200
 triggerall = numhelper(402) = 0
@@ -1338,7 +1338,7 @@ value = 620
 
 [State 200, j5B]
 type = ChangeState
-Triggerall = movehit = 1
+Triggerall = movehit
 triggerall = hitcount = 2
 trigger1 = command = "b"
 value = 610
@@ -2648,7 +2648,7 @@ fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 
 [State 200, GRENADE SPAWN AIR]
 type = ChangeState
-Triggerall = movehit = 1
+Triggerall = movehit
 triggerall = hitcount = 2
 triggerall = power >= 200
 triggerall = numhelper(452) = 0
@@ -2659,7 +2659,7 @@ trigger1 = command = "holddown"
 value = 630
 [State 200, CANNON AIR]
 type = ChangeState
-Triggerall = movehit = 1
+Triggerall = movehit
 triggerall = hitcount = 2
 triggerall = power >= 200
 triggerall = numhelper(402) = 0
@@ -2670,7 +2670,7 @@ value = 620
 
 [State 200, j5B]
 type = ChangeState
-Triggerall = movehit = 1
+Triggerall = movehit
 triggerall = hitcount = 2
 trigger1 = command = "b"
 value = 610
@@ -5559,24 +5559,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-type = MapSet
-trigger1 = teammode != tag && enemy,teammode != tag
-map = "initialDefence"
-value = 1
-persistent = 0
-
-[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-type = MapSet
-trigger1 = roundstate = 1
-map = "defence"
-value = 0
-
-[State -2, Defense Set] ; Used to determine character defense
-type = defenceMulSet
-trigger1 = 1 
-value = map(initialDefence) + map(defence)
-onhit = 0
+;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+;type = MapSet
+;trigger1 = teammode != tag && enemy,teammode != tag
+;map = "initialDefence"
+;value = 1
+;persistent = 0
+;
+;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+;type = MapSet
+;trigger1 = roundstate = 1
+;map = "defence"
+;value = 0
+;
+;[State -2, Defense Set] ; Used to determine character defense
+;type = defenceMulSet
+;trigger1 = 1 
+;value = map(initialDefence) + map(defence)
+;onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

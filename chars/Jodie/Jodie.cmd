@@ -593,7 +593,7 @@ type = VelSet
 triggerall = statetype = A
 triggerall = command = "down" && movetype != H
 triggerall = vel y > 0 && vel y < 6
-triggerall = stateno != 900 && stateno != 2900 && stateno != 615
+triggerall = stateno != 900 && stateno != 2900 && stateno != 292
 trigger1 = 1
 y = 6
 
@@ -790,14 +790,14 @@ trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
 ; Dash Attack
-[State -1, Dash Attack]
-type = ChangeState
-value = 2605
-triggerall = var(10) = 1
-triggerall = stateno = 100
-triggerall = command = "b"
-Triggerall = statetype != A
-trigger1 = ctrl
+;[State -1, Dash Attack]
+;type = ChangeState
+;value = 2605
+;triggerall = var(10) = 1
+;triggerall = stateno = 100
+;triggerall = command = "b"
+;Triggerall = statetype != A
+;trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
 ; A
@@ -1015,34 +1015,34 @@ Triggerall = statetype != A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Counter - Air
-[State -1, Counter]
-type = ChangeState
-value = 810
-triggerall = ailevel = 0
-triggerall = command = "hold_x"
-Triggerall = statetype = A
-trigger1 = ctrl
-
-;---------------------------------------------------------------------------
-; Counter - Red
-[State -1, Counter]
-type = ChangeState
-value = 830
-triggerall = ailevel = 0
-triggerall = command = "hold_x"
-triggerall = command = "holdfwd"
-Triggerall = statetype != A
-trigger1 = ctrl
-
-;---------------------------------------------------------------------------
-; Counter - Stand
-[State -1, Counter]
-type = ChangeState
-value = 800
-triggerall = ailevel = 0
-triggerall = command = "hold_x"
-Triggerall = statetype != A
-trigger1 = ctrl
+;[State -1, Counter]
+;type = ChangeState
+;value = 810
+;triggerall = ailevel = 0
+;triggerall = command = "hold_x"
+;Triggerall = statetype = A
+;trigger1 = ctrl
+;
+;;---------------------------------------------------------------------------
+;; Counter - Red
+;[State -1, Counter]
+;type = ChangeState
+;value = 830
+;triggerall = ailevel = 0
+;triggerall = command = "hold_x"
+;triggerall = command = "holdfwd"
+;Triggerall = statetype != A
+;trigger1 = ctrl
+;
+;;---------------------------------------------------------------------------
+;; Counter - Stand
+;[State -1, Counter]
+;type = ChangeState
+;value = 800
+;triggerall = ailevel = 0
+;triggerall = command = "hold_x"
+;Triggerall = statetype != A
+;trigger1 = ctrl
 
 
 

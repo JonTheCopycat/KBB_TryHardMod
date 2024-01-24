@@ -677,7 +677,8 @@ value = 25000
 
 [State 200, End]
 type = ChangeState
-triggerall = movehit || (movecontact && AnimTime > -7)
+triggerall = movehit
+triggerall = var(13) < 2
 trigger1 = command = "WD" && command != "NotWD"
 value = 30
 ctrl = 0
@@ -896,8 +897,9 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = movecontact && prevstateno != 390
-trigger1 = command = "WD"
+triggerall = movecontact
+triggerall = var(13) < 2
+trigger1 = command = "WD" && command != "NotWD"
 value = 30
 ctrl = 0
 
@@ -1298,7 +1300,7 @@ type = ChangeState
 Triggerall = movecontact
 ;triggerall = command = "holdback"
 trigger1 = command = "a"
-value = 250
+value = 210
 
 ;Lambda Stance Options
 [State 310, 9B]	; Up + Fwd
@@ -5060,7 +5062,7 @@ inheritJuggle = 1
 [State 200, Special 1 - TRIPLE SLASH]
 type = ChangeState
 triggerall = power >= 1000
-Triggerall = helper(451), movehit
+Triggerall = helper(491), movehit
 triggerall = time >= 40
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
@@ -5071,7 +5073,7 @@ value = 21000
 [State 200, Special 2 - Rapidslash DP]
 type = ChangeState
 triggerall = power >= 1000
-Triggerall = helper(451), movehit
+Triggerall = helper(491), movehit
 triggerall = time >= 40
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
@@ -5080,13 +5082,21 @@ value = 22000
 [State -1, SPECIAL 5 - Spinner Cutters 2 Counter]
 type = ChangeState
 triggerall = power >= 2000
-Triggerall = helper(451), movehit
+Triggerall = helper(491), movehit
 triggerall = time >= 40
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 5"
 trigger2 = P2movetype = A
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel ** ailevel) * 2
 value = 25000
+
+[State 200, End]
+type = ChangeState
+Triggerall = helper(491), hitcount >= 1
+trigger1 = (command = "up" || command = "holdup") && ailevel = 0
+trigger2 = time > 45
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel ** ailevel) * 2
+value = 40
 
 [State 200, End]
 type = ChangeState
@@ -6190,7 +6200,7 @@ Envshake.time = 10
 type = ChangeState
 triggerall = movecontact
 triggerall = var(13) < 2
-trigger1 = command = "WD" && command = "NotWD"
+trigger1 = command = "WD" && command != "NotWD"
 value = 30
 ctrl = 0
 
@@ -6323,7 +6333,7 @@ Envshake.time = 15
 type = ChangeState
 triggerall = movecontact
 triggerall = var(13) < 2
-trigger1 = command = "WD" && command = "NotWD"
+trigger1 = command = "WD" && command != "NotWD"
 value = 30
 ctrl = 0
 
@@ -6454,6 +6464,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 3"
 Trigger1 = power >= 1000
 value = 23000
+
+[State 200, End]
+type = ChangeState
+triggerall = movecontact
+triggerall = var(13) < 2
+trigger1 = command = "WD" && command != "NotWD"
+value = 30
+ctrl = 0
 
 [State 200, End]
 type = ChangeState
@@ -8931,24 +8949,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-type = MapSet
-trigger1 = teammode != tag && enemy,teammode != tag
-map = "initialDefence"
-value = 1
-persistent = 0
-
-[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-type = MapSet
-trigger1 = roundstate = 1
-map = "defence"
-value = 0
-
-[State -2, Defense Set] ; Used to determine character defense
-type = defenceMulSet
-trigger1 = 1 
-value = map(initialDefence) + map(defence)
-onhit = 0
+;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+;type = MapSet
+;trigger1 = teammode != tag && enemy,teammode != tag
+;map = "initialDefence"
+;value = 1
+;persistent = 0
+;
+;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+;type = MapSet
+;trigger1 = roundstate = 1
+;map = "defence"
+;value = 0
+;
+;[State -2, Defense Set] ; Used to determine character defense
+;type = defenceMulSet
+;trigger1 = 1 
+;value = map(initialDefence) + map(defence)
+;onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

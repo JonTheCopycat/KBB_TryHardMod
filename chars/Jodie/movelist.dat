@@ -11,9 +11,18 @@ _F_F^B
 <#f0f000>:COMMAND DASH ATTACKS:</>
 Normal Jodie:
 
-Jumpkick										_F_D_DF^A
+Scoop Kick										_F_D_DF^A
+	"Jodie performs a reverse cart wheel
+	and scoops the opponent off the ground.
+	Can be repeated once before gaining access
+	to unique moves."
+_! Thrust Kick									A
+	"Jodie thrusts both feet at the opponent"
+_! Jump Kick									B
 	"Jodie jumps at the opponent with the
 	kick"
+_! Quick Spindash!
+	"See Quick Spindash!"
 
 Bounce											_F_D_DF^A
 	"Jodie charges up a spindash upwards."

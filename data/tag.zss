@@ -1,0 +1,1028 @@
+#Tag code with Active Switch and Counter Switch mechanics, inspired by MvCI
+#More info: https://github.com/K4thos/Ikemen_GO/wiki#misc_tag
+#===============================================================================
+#Functions
+#===============================================================================
+#Returns tagged in char ID
+[Function fTagPartnerRange(partnerID) ret]
+if $partnerID > GetPlayerID(TeamSide) + NumPartner {
+	let partnerID = GetPlayerID(TeamSide);
+} else if $partnerID < GetPlayerID(TeamSide) {
+	let partnerID = GetPlayerID(TeamSide) + NumPartner;
+}
+let ret = $partnerID;
+
+[Function fTagGetPartnerID(add) ret]
+let partnerID = call fTagPartnerRange(ID + $add);
+if playerID($partnerID),Alive = 0 {
+	let partnerCnt = 1;
+	if $partnerCnt = Min(NumPartner, 3) {
+		let partnerID = 0;
+	} else {
+		let partnerID = call fTagPartnerRange($partnerID + $add);
+		if playerID($partnerID),Alive = 0 {
+			let partnerCnt = $partnerCnt + 1;
+			if $partnerCnt = Min(NumPartner, 3) {
+				let partnerID = 0;
+			} else {
+				let partnerID = call fTagPartnerRange($partnerID + $add);
+				if playerID($partnerID),Alive = 0 {
+					let partnerID = 0;
+				}
+			}
+		}
+	}
+}
+let ret = $partnerID;
+
+#Decides if AI switch should happen, returns tagged in char ID (the function can be overridden locally)
+#TODO: Balance default AI switch scaling (prioritize partner with more life, less red life, increase chance at the hyper start, or as a reaction to Counter Switch, decrease when pressured in corner etc.)
+[Function fTagAISwitch(nextPartnerID, previousPartnerID) ret]
+let ret = 0;
+if Const(TagCommandAIChance) >= rand(1, 100) {
+	if Command = "TagShiftFwd" {
+		let ret = $nextPartnerID;
+	} else if Command = "TagShiftBack" {
+		let ret = $previousPartnerID;
+	}
+}
+
+#TagIn Switch Explod
+[Function fTagSwitchExplod()]
+let anim = Const(FxTagSwitchAI);
+if AILevel = 0 {
+	let anim = $anim + TeamSide;
+}
+Explod{
+	anim: F $anim;
+	postype: p1;
+	pos: 0, floor((Const(size.head.pos.y) - Const(size.ground.front) / 2 - Const(size.ground.back) / 2));
+	sprpriority: 5;
+	ownpal: 1;
+	facing: Facing;
+	scale: Const240p(0.5), Const240p(0.5);
+	bindtime: -1;
+	supermovetime: -1;
+	pausemovetime: -1;
+	removeongethit: 1;
+	ignorehitpause: 1;
+}
+
+#===============================================================================
+#TagLimiterHelper
+#===============================================================================
+[Statedef 5601; type: U; movetype: I; physics: N;
+ anim: 9999; sprpriority: 2; ctrl: 0;]
+
+if time >= 120 {
+	DestroySelf{}
+}
+
+#===============================================================================
+#StateTagEnteringScreen
+#===============================================================================
+[Statedef 5600; type: S; movetype: H; physics: N;
+ anim: Const(AnimTagEnteringScreen); sprpriority: 2; ctrl: 0;]
+
+ScreenBound{value: 0; movecamera: 1, 1}
+
+if Time = 0 {
+	if Facing != playerID(GetPlayerID(TeamLeader)),Facing {
+		Turn{}
+	}
+	# set starting pos (redirected to gather consistent local coordinate space values ready for Const240p conversion)
+	TeamMapSet{map: "_iksys_tagPosX"; value: Pos X * LocalScale - (BackEdgeBodyDist * LocalScale + 90) * Facing; redirectid: playerID(GetPlayerID(TeamLeader)),ID}
+	PosSet{x: Const240p(Map(_iksys_tagPosX)); y: 0}
+	# store distance to switch initiation position
+	MapSet{map: "_iksys_tagSwitchDist"; value: abs(Pos X - playerID(GetPlayerID(TeamLeader)),Pos X)}
+	# set movement
+	VelSet{x: Const240p(Const(TagInVelX)); y: 0}
+	# change active player assignment
+	MapSet{map: "_iksys_tagLastID"; value: playerID(GetPlayerID(TeamLeader)),ID}
+	TagIn{leader: PlayerNo}
+	call fTagSwitchExplod();
+	
+	#Proration and Juggle sharing code
+	var(11) := Map(tagProration);
+	if Map(tagSwitch) = 0{
+		TeamMapSet {map: "juggle"; value: map(juggle) / 2}
+		MapSet {map: "tagSwitch"; value: 1}
+	}
+	
+} else {
+	MapAdd{map: "_iksys_tagSwitchDist"; value: -Vel X}
+}
+
+# regain control in place where the switch was initiated or right after entering screen, in case of Counter Switch
+if !Ctrl && BackEdgeBodyDist >= 0 && (floor(Map(_iksys_tagSwitchDist)) <= Const(size.ground.front) || Map(_iksys_tagRegainCtrl) = 1) {
+	StateTypeSet{movetype: I} # disables countermeasure against global states triggering when character is off-screen
+	CtrlSet{value: 1}
+	MapSet{map: "_iksys_tagRegainCtrl"; value: 0}
+}
+
+# continue at least until TagInTime * TagInVelX distance is reached, or further if control is not regained yet, but stop in front of enemy
+if (Ctrl && Time >= Const(TagInTime)) || (BackEdgeBodyDist >= 0 && P2BodyDist X < Const240p(30)) {
+	VelSet{x: 0; y: 0}
+	ChangeState{value: Const(StateStand); ctrl: 1}
+}
+
+#===============================================================================
+#StateTagLeavingScreen
+#===============================================================================
+[Statedef 5610; type: S; movetype: I; physics: N;
+ anim: Const(AnimTagLeavingScreen); sprpriority: -2; velset: 0, 0; ctrl: 0; facep2: 1;]
+
+persistent(0) {
+	Turn{}
+}
+
+ScreenBound{value: 0; movecamera: 0, 0}
+PlayerPush{value: 0}
+
+VelSet{x: min(Const(velocity.run.fwd.x), Const240p(Const(TagInVelX))); y: 0}
+
+if (BackEdgeDist < -Const240p(160) || FrontEdgeDist < -Const240p(160) || Map(_iksys_tagLeavingPosX) = Pos X){
+	TagOut{stateno: Const(StateTagWaitingOutside)}
+}
+MapSet{map: "_iksys_tagLeavingPosX"; value: Pos X} #TODO: won't be needed once this bug is fixed: https://github.com/Windblade-GR01/Ikemen-GO/issues/171
+
+#===============================================================================
+#StateTagWaitingOutside
+#===============================================================================
+[Statedef 5611; type: A; movetype: I; physics: N;
+ anim: Const(AnimStanding); velset: 0, 0; ctrl: 0;]
+
+AssertSpecial{flag: invisible; flag2: noautoturn}
+ScreenBound{value: 0; movecamera: 0, 0}
+
+# force Standby character to always stay outside visible area
+PosSet{
+	x: (playerID(GetPlayerID(TeamLeader)),Pos X - playerID(GetPlayerID(TeamLeader)),ScreenPos X - Const240p(160)) * -Facing;
+	y: playerID(GetPlayerID(TeamLeader)),Pos Y - playerID(GetPlayerID(TeamLeader)),ScreenPos Y - Const240p(160);
+}
+
+if RoundState = 3{
+	TagIn{stateno: Const(StateTagJumpingIn)}
+}
+
+#===============================================================================
+#StateTagJumpingIn
+#===============================================================================
+[Statedef 5620; type: A; movetype: I; physics: N;
+ anim: 30000; sprpriority: 2; ctrl: 0;]
+
+if RoundState = 3 {
+	ScreenBound{value: 0; movecamera: 0, 0}
+	PlayerPush{value: 0}
+} else {
+	ScreenBound{value: 0; movecamera: 1, 1}
+}
+
+NotHitBy{time:1;value:SCA}
+
+if Alive = 0{
+	ChangeState{value: Const(StateDownedGetHit_lyingDefeated)}
+}
+
+# the character cannot be hit until he has fully entered the stage
+if BackEdgeBodyDist <= 0 {
+	NotHitBy{value: SCA; time: 2}
+}
+
+if Time = 0 {
+	if Facing != playerID(GetPlayerID(TeamLeader)),Facing {
+		Turn{}
+	}
+	# set starting pos (redirected to gather consistent local coordinate space values ready for Const240p conversion)
+	TeamMapSet{map: "_iksys_tagPosX"; value: Pos X * LocalScale - (BackEdgeBodyDist * LocalScale + 90) * Facing; redirectid: playerID(GetPlayerID(TeamLeader)),ID}
+	PosSet{x: Const240p(Map(_iksys_tagPosX)); y: 0}
+	# change active player assignment if the battle still goes on
+	if RoundState = 2 {
+		MapSet{map: "_iksys_tagLastID"; value: playerID(GetPlayerID(TeamLeader)),ID}
+		TagIn{leader: PlayerNo}
+		call fTagSwitchExplod();
+	}
+}
+
+# regain control right after entering screen, in case of active player loss
+if !Ctrl && BackEdgeBodyDist >= 0 && Map(_iksys_tagRegainCtrl) = 1 {
+	CtrlSet{value: 1}
+	MapSet{map: "_iksys_tagRegainCtrl"; value: 0}
+}
+
+if AnimElemTime(2) = 0 && Map(_iksys_tagJumpingInState) = 0 {
+	VelSet{x: Const240p(4); y: -Const240p(8.75)}
+	MapSet{map: "_iksys_tagJumpingInState"; value: 1}
+} else if AnimElemTime(2) > 0 {
+	Gravity{}
+	if Vel Y >= 0 && Pos Y > 0 {
+		VelSet{x: 0; y: 0}
+		MapSet{map: "_iksys_tagJumpingInState"; value: 0}
+		ChangeState{value: Const(StateTagLanding)}
+	}
+}
+
+#===============================================================================
+#StateTagLanding
+#===============================================================================
+[Statedef 5621; type: S; movetype: I; physics: N;
+ anim: Const(AnimTagLanding); sprpriority: 2;]
+
+if Time = 0 {
+	PosSet{y: 0}
+}
+
+if AnimTime >= 0 {
+	ChangeState{value: Const(StateStand); ctrl: 1}
+}
+
+#===============================================================================
+#StateTagSnapback - Original by Orochi_Kyo; edits by Kokorz and Triea woo yeah
+#===============================================================================
+[Statedef 5630; type: S; movetype: A; physics: S;  anim: cond(pos y >= 0, Const(snapBackAttack), Const(snapBackAirAttack)); sprpriority: 2; ctrl: 0; juggle:0; poweradd :-1000; velset: 0,0;]
+
+persistent(0) {superpause{time:20; sound: 20,0; movetime:0; anim:-1; endcmdbuftime: 0}}
+
+NotHitBy{value: SCA; time: 2}	
+
+if AnimElem = 2 {
+	VelSet{x:9}
+}
+	
+
+persistent(0) if !movecontact && enemynear,stateno != 5635 && enemynear,stateno != 5636 && enemynear, stateno != 1030 && enemynear, stateno != 1031 {
+	HitDef {
+		hitonce: 1;
+		attr: S, NA;
+		getpower: 0;
+		animtype: heavy;
+		damage: 50;
+		hitflag: MAF;
+		guardflag: MA;
+		pausetime: 12, 12;
+		sparkno: 2;
+		guard.sparkno: 13000;
+		sparkxy: -8, -35;
+		hitsound: 5, 4;
+		guardsound: 6, 0;
+		ground.type: Low;
+		ground.slidetime: 10;
+		ground.hittime: 10;
+		fall:1;
+		kill:0;
+		fall.recover: 0;
+		p2stateno: cond(enemynear, teammode = tag && enemynear, numpartner > 0, 5635, 1030);
+		p2getp1state:0;
+		ground.velocity: -26/localscale, -9/localscale;
+		air.velocity: -26/localscale, -9/localscale;
+		ground.cornerpush.veloff: -12;
+	}
+}
+
+ignorehitpause if movehit || enemynear,stateno = 5636 {
+	MoveHitReset{} 
+}
+
+ignorehitpause if animtime = 0 {
+	 ChangeState{value: 0; ctrl: 1}
+}
+
+#===============================================================================
+#StateTagSnapbackHurtState - Shaking
+#===============================================================================
+[Statedef 5635; type: A; movetype: H; physics: N;  
+ anim: Const(snapBackHit); sprpriority: 2; ctrl: 0; juggle:0; velset: 0,0; facep2: 1;]
+
+let partnerID = 0;
+let nextPartnerID = call fTagGetPartnerID(1);
+let previousPartnerID = call fTagGetPartnerID(-1);
+
+let partnerID = $nextPartnerID;
+
+if playerID($nextPartnerID),Alive = 0 && playerID($previousPartnerID),Alive = 0{
+	changeState{value: 1030}
+}
+#if pos y >= 0 {PosSet {y: 0}}
+if HitShakeOver {selfstate {value:5636;ctrl:0}}
+
+
+#===============================================================================
+#StateTagSnapbackHurtState - Fly
+#===============================================================================
+[Statedef 5636; type: A; movetype: H; physics: A;  
+ anim: Const(snapBackHit); sprpriority: 2; ctrl: 0; juggle:0; facep2: 1;]
+
+persistent(0) {NotHitBy{value: SCA; time: 2}}				
+
+if map(partnerIsReady) && time = 1 {
+	teammapadd{map:"partnerIsReady";value:-1}
+}
+
+HitVelSet{x:2; y:0.2}
+
+if !Standby {
+	TagOut{}
+}
+
+let partnerID = 0;
+let nextPartnerID = call fTagGetPartnerID(1);
+let previousPartnerID = call fTagGetPartnerID(-1);
+
+let partnerID = $nextPartnerID;
+
+if (playerID($nextPartnerID),Alive = 1 && playerID($previousPartnerID),Alive = 1) && TeamMode = Tag {
+	if (BackEdgeDist < -50 || FrontEdgeDist < -50) && time > 60 { 
+
+		let partnerID = 0;
+		let nextPartnerID = call fTagGetPartnerID(1);
+		let previousPartnerID = call fTagGetPartnerID(-1);
+
+		let partnerID = $nextPartnerID;
+
+		if playerID($partnerID), MoveType != H {
+			TagIn{stateno: 5637; redirectid: $partnerID}
+			RedLifeSet{value: 0; redirectid: $partnerID}
+		} else if playerID($partnerID), MoveType = H {
+			TagIn{redirectid: $partnerID}
+			RedLifeSet{value: 0; redirectid: $partnerID}
+		}
+
+		selfState{value: Const(StateTagWaitingOutside)}
+	}
+} else if ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) && (playerID($nextPartnerID),Alive = 0 && playerID($previousPartnerID),Alive = 0)) || TeamMode != Tag {
+	changeState{value: 5638}
+}
+
+if !Standby && time > 180 {
+	TagIn{stateno: 5637}
+}
+
+#===============================================================================
+#StateTagSnapbackHurtState - Hit Wall
+#===============================================================================
+[Statedef 5638; type: A; movetype: H; physics: N;  
+ sprpriority: 2; ctrl: 0; juggle:0;]
+
+ScreenBound{value:1;movecamera:0,1}
+PosFreeze{}
+PosAdd{x: 5 - BackEdgeBodyDist}
+
+if time = 0 {
+	PlaySnd{value:F40,0}
+	EnvShake{time:10;freq:120;ampl:2}
+	Explod{anim:F72; pos:0,floor(screenpos y) -50; postype: back; sprpriority: 3}
+	ChangeAnim{value:1027}
+	if FrontEdgeBodyDist <= 30 {
+		Turn{}
+	}
+}
+
+if time >= 5 {
+	ChangeState{value: 5639}
+}
+
+#===============================================================================
+#StateTagSnapbackHurtState - Slide Off Wall
+#===============================================================================
+[Statedef 5639; type: A; movetype: H; physics: N;  
+ anim: 1027; sprpriority: 2; ctrl: 0; juggle:0;]
+
+PosAdd{x: 5 - BackEdgeBodyDist}
+ScreenBound{value:1;movecamera:0,1}
+
+if time = 1 {
+	VelSet{y: -1}
+}
+
+if time >= 30 {
+	VelAdd{y: .25}
+}
+
+if vel y > 0 && pos y >= 0 {
+	SelfState{value: 0; ctrl: 1}
+}
+
+#===============================================================================
+#StateTagRunningIn - SnapBack Variant - USED
+#===============================================================================
+[Statedef 5637; type: S; movetype: H; physics: N;
+ anim: Const(AnimTagEnteringScreen); sprpriority: 2; ctrl: 0;]
+
+ScreenBound{value: 0; movecamera: 1, 1}
+
+
+if Time = 0 {
+	if Facing != playerID(GetPlayerID(TeamLeader)),Facing {
+		Turn{}
+	}
+	# set starting pos (redirected to gather consistent local coordinate space values ready for Const240p conversion)
+	TeamMapSet{map: "_iksys_tagPosX"; value: Pos X * LocalScale - (BackEdgeBodyDist * LocalScale + 90) * Facing; redirectid: playerID(GetPlayerID(TeamLeader)),ID}
+	PosSet{x: Const240p(Map(_iksys_tagPosX)); y: 0}
+	# store distance to switch initiation position
+	MapSet{map: "_iksys_tagSwitchDist"; value: abs(Pos X - playerID(GetPlayerID(TeamLeader)),Pos X)}
+	# set movement
+	VelSet{x: Const240p(Const(TagInVelX))*.6; y: 0}
+	# change active player assignment
+	MapSet{map: "_iksys_tagLastID"; value: playerID(GetPlayerID(TeamLeader)),ID}
+	TagIn{leader: PlayerNo}
+	call fTagSwitchExplod();
+} else {
+	MapAdd{map: "_iksys_tagSwitchDist"; value: -Vel X}
+}
+
+if StateNo = 5637 {
+	NotHitBy{value:SCA; time: 1}
+}
+
+# regain control in place where the switch was initiated or right after entering screen, in case of Counter Switch
+if !Ctrl && BackEdgeBodyDist >= 0 && (floor(Map(_iksys_tagSwitchDist)) <= Const(size.ground.front) || Map(_iksys_tagRegainCtrl) = 1) {
+	StateTypeSet{movetype: I} # disables countermeasure against global states triggering when character is off-screen
+	CtrlSet{value: 1}
+	MapSet{map: "_iksys_tagRegainCtrl"; value: 0}
+}
+
+# continue at least until TagInTime * TagInVelX distance is reached, or further if control is not regained yet, but stop in front of enemy
+if (Ctrl && Time >= Const(TagInTime)) || (BackEdgeBodyDist >= 0 && P2BodyDist X < Const240p(30)) {
+	VelSet{x: 0; y: 0}
+	ChangeState{value: Const(StateStand); ctrl: 1}
+}
+
+#===============================================================================
+#StateTagJumpingIn - SnapBack Variant - UNUSED
+#===============================================================================
+#[Statedef 5637; type: A; movetype: I; physics: N;
+# anim: 30000; sprpriority: 2; ctrl: 0;]
+
+#if stateno = 5637 && (AnimElemTime(2) <= 30 || !AnimElem = 2) {
+#	NotHitBy{time:1;value:SCA}
+#}
+
+#if RoundState = 3 {
+#	ScreenBound{value: 1; movecamera: 0, 0}
+#	PlayerPush{value: 0}
+#} else {
+#	ScreenBound{value: 0; movecamera: 1, 1}
+#}
+
+#if Alive = 0 {
+#	ChangeState{value: Const(StateDownedGetHit_lyingDefeated)}
+#}
+
+#prevents character from tagging out for a WHILE
+#if !numhelper(5601) {
+#	Helper{stateno:5601; pos: 999999, 99999; id: 5601}
+#}
+
+#if Time = 0 {
+#	if Facing != playerID(GetPlayerID(TeamLeader)),Facing {
+#		Turn{}
+#	}
+#	# set starting pos (redirected to gather consistent local coordinate space values ready for Const240p conversion)
+#	TeamMapSet{map: "_iksys_tagPosX"; value: Pos X * LocalScale - (BackEdgeBodyDist * LocalScale + 90) * Facing; redirectid: playerID(GetPlayerID(TeamLeader)),ID}
+#	PosSet{x: -Const240p(Map(_iksys_tagPosX)); y: -30}
+#	# change active player assignment if the battle still goes on
+#	if RoundState = 2 {
+#		MapSet{map: "_iksys_tagLastID"; value: playerID(GetPlayerID(TeamLeader)),ID}
+#		TagIn{leader: PlayerNo}
+#		call fTagSwitchExplod();
+#	}
+#}
+
+#regain control right after entering screen, in case of active player loss
+#if !Ctrl && FrontEdgeBodyDist >= 0 && Map(_iksys_tagRegainCtrl) = 1 {
+	#CtrlSet{value: 1}
+	#MapSet{map: "_iksys_tagRegainCtrl"; value: 0}
+#}
+
+#if AnimElemTime(2) > 40 && FrontEdgeBodyDist >= 0 && !Ctrl {
+#	CtrlSet{value: 1}
+#}
+
+#if AnimElemTime(2) = 0 && Map(_iksys_tagJumpingInState) = 0 {
+#	VelSet{x: -Const240p(4); y: -Const240p(8)}
+#	MapSet{map: "_iksys_tagJumpingInState"; value: 1}
+#	Turn{}
+#} else if AnimElemTime(2) > 0 {
+#	Gravity{}
+#	#AssertSpecial {flag: NoAirJump}
+#	if Vel Y >= 0 && Pos Y > 0 && AnimElemTime(2) > 10 {
+#		VelSet{x: 0; y: 0}
+#		MapSet{map: "_iksys_tagJumpingInState"; value: 0}
+#		ChangeState{value: Const(StateTagLanding)}
+#	}
+#}
+
+#===============================================================================
+#StateTagRunningIn - DHC Variant A
+#===============================================================================
+[Statedef 5650; type: S; movetype: H; physics: N;
+ anim: Const(AnimTagEnteringScreen); sprpriority: 2; ctrl: 0;]
+
+#prevents character from tagging out for a WHILE
+#if !numhelper(5601) {
+#	Helper{stateno:5601; pos: 0, 0; id: 5601}
+#}
+
+if Const(dhcAirA) = 1 {
+	ChangeState{value: stateNo + 5}
+}
+
+ScreenBound{value: 0; movecamera: 1, 1}
+
+if Time = 0 {
+	if Facing != playerID(GetPlayerID(TeamLeader)),Facing {
+		Turn{}
+	}
+	# set starting pos (redirected to gather consistent local coordinate space values ready for Const240p conversion)
+	TeamMapSet{map: "_iksys_tagPosX"; value: Pos X * LocalScale - (BackEdgeBodyDist * LocalScale + 90) * Facing; redirectid: playerID(GetPlayerID(TeamLeader)),ID}
+	PosSet{x: Const240p(Map(_iksys_tagPosX)); y: 0}
+	# store distance to switch initiation position
+	MapSet{map: "_iksys_tagSwitchDist"; value: abs(Pos X - playerID(GetPlayerID(TeamLeader)),Pos X)}
+	# set movement
+	VelSet{x: Const240p(Const(TagInVelX))*2; y: 0}
+	# change active player assignment
+	MapSet{map: "_iksys_tagLastID"; value: playerID(GetPlayerID(TeamLeader)),ID}
+	TagIn{leader: PlayerNo}
+	call fTagSwitchExplod();
+	
+	#Proration and juggle sharing
+	var(11) := Map(tagProration);
+	if Map(tagSwitch) = 0{
+		TeamMapSet {map: "juggle"; value: map(juggle) / 2}
+		MapSet {map: "tagSwitch"; value: 1}
+	}
+	
+} else {
+	MapAdd{map: "_iksys_tagSwitchDist"; value: -Vel X}
+}
+
+# regain control in place where the switch was initiated or right after entering screen, in case of Counter Switch
+#if !Ctrl && BackEdgeBodyDist >= 0 && (floor(Map(_iksys_tagSwitchDist)) <= Const(size.ground.front) || Map(_iksys_tagRegainCtrl) = 1) {
+#	StateTypeSet{movetype: I} # disables countermeasure against global states triggering when character is off-screen
+#	CtrlSet{value: 1}
+#	MapSet{map: "_iksys_tagRegainCtrl"; value: 0}
+#}
+
+# If character is too far offscreen, pushes them back in screen slightly
+if (BackEdgeBodyDist >= -20){
+	PosAdd{x: 2}
+}
+
+# continue at least until TagInTime * TagInVelX distance is reached, or further if control is not regained yet, but stop in front of enemy
+if (P2BodyDist X < Const240p(30)) {
+	VelSet{x: 0; y: 0}
+	ChangeState{value: Const(dhcAttackA); ctrl: 0}
+}
+
+#===============================================================================
+#StateTagFallingIn - DHC Variant A
+#===============================================================================
+[Statedef 5655; type: A; movetype: H; physics: N;
+ anim: Const(AnimTagDHCFallingIn); sprpriority: 2; ctrl: 0;]
+
+ScreenBound{value: 0; movecamera: 1, 0}
+
+if Time = 0 {
+	if Facing != playerID(GetPlayerID(TeamLeader)),Facing {
+		Turn{}
+	}
+	# change active player assignment
+	MapSet{map: "_iksys_tagLastID"; value: playerID(GetPlayerID(TeamLeader)),ID}
+	TagIn{leader: PlayerNo}
+	call fTagSwitchExplod();
+	# set starting pos (redirected to gather consistent local coordinate space values ready for Const240p conversion)
+	TeamMapSet{map: "_iksys_tagPosX"; value: Pos X * LocalScale - (BackEdgeBodyDist * LocalScale + 90) * Facing; redirectid: playerID(GetPlayerID(TeamLeader)),ID}
+	PosSet{x: playerID(Map(_iksys_tagLastID)), pos x; y: topedge - 180}
+	# store distance to switch initiation position
+	MapSet{map: "_iksys_tagSwitchDist"; value: abs(Pos X - playerID(GetPlayerID(TeamLeader)),Pos X)}
+	# set movement
+	VelSet{x: 0; y: 24}
+	
+	#Proration and juggle sharing
+	var(11) := Map(tagProration);
+	if Map(tagSwitch) = 0{
+		TeamMapSet {map: "juggle"; value: map(juggle) / 2}
+		MapSet {map: "tagSwitch"; value: 1}
+	}
+	
+} else {
+	MapAdd{map: "_iksys_tagSwitchDist"; value: -Vel X}
+}
+
+# regain control in place where the switch was initiated or right after entering screen, in case of Counter Switch
+#if !Ctrl && BackEdgeBodyDist >= 0 && (floor(Map(_iksys_tagSwitchDist)) <= Const(size.ground.front) || Map(_iksys_tagRegainCtrl) = 1) {
+#	StateTypeSet{movetype: I} # disables countermeasure against global states triggering when character is off-screen
+#	CtrlSet{value: 1}
+#	MapSet{map: "_iksys_tagRegainCtrl"; value: 0}
+#}
+
+# If character is too far offscreen, pushes them back in screen slightly
+if (BackEdgeBodyDist >= -20){
+	PosAdd{x: 2}
+}
+
+# continue at least until TagInTime * TagInVelX distance is reached, or further if control is not regained yet, but stop in front of enemy
+if (P2BodyDist Y < Const240p(50)) || pos Y > -20 {
+	VelSet{x: 0; y: 0}
+	ChangeState{value: Const(dhcAttackA); ctrl: 0}
+}
+
+#===============================================================================
+#StateTagRunningIn - DHC Variant B
+#===============================================================================
+[Statedef 5651; type: S; movetype: H; physics: N;
+ anim: Const(AnimTagEnteringScreen); sprpriority: 2; ctrl: 0;]
+
+#prevents character from tagging out for a WHILE
+#if !numhelper(5601) {
+#	Helper{stateno:5601; pos: 999999, 99999; id: 5601}
+#}
+
+if Const(dhcAirB) = 1 {
+	ChangeState{value: stateNo + 5}
+}
+
+ScreenBound{value: 0; movecamera: 1, 1}
+
+if Time = 0 {
+	if Facing != playerID(GetPlayerID(TeamLeader)),Facing {
+		Turn{}
+	}
+	# set starting pos (redirected to gather consistent local coordinate space values ready for Const240p conversion)
+	TeamMapSet{map: "_iksys_tagPosX"; value: Pos X * LocalScale - (BackEdgeBodyDist * LocalScale + 90) * Facing; redirectid: playerID(GetPlayerID(TeamLeader)),ID}
+	PosSet{x: Const240p(Map(_iksys_tagPosX)); y: 0}
+	# store distance to switch initiation position
+	MapSet{map: "_iksys_tagSwitchDist"; value: abs(Pos X - playerID(GetPlayerID(TeamLeader)),Pos X)}
+	# set movement
+	VelSet{x: Const240p(Const(TagInVelX))*2; y: 0}
+	# change active player assignment
+	MapSet{map: "_iksys_tagLastID"; value: playerID(GetPlayerID(TeamLeader)),ID}
+	TagIn{leader: PlayerNo}
+	call fTagSwitchExplod();
+	
+	#Proration and juggle sharing
+	var(11) := Map(tagProration);
+	if Map(tagSwitch) = 0{
+		TeamMapSet {map: "juggle"; value: map(juggle) / 2}
+		MapSet {map: "tagSwitch"; value: 1}
+	}
+	
+} else {
+	MapAdd{map: "_iksys_tagSwitchDist"; value: -Vel X}
+}
+
+# regain control in place where the switch was initiated or right after entering screen, in case of Counter Switch
+#if !Ctrl && BackEdgeBodyDist >= 0 && (floor(Map(_iksys_tagSwitchDist)) <= Const(size.ground.front) || Map(_iksys_tagRegainCtrl) = 1) {
+#	StateTypeSet{movetype: I} # disables countermeasure against global states triggering when character is off-screen
+#	CtrlSet{value: 1}
+#	MapSet{map: "_iksys_tagRegainCtrl"; value: 0}
+#}
+
+# If character is too far offscreen, pushes them back in screen slightly
+if (BackEdgeBodyDist >= -20){
+	PosAdd{x: 2}
+}
+
+# continue at least until TagInTime * TagInVelX distance is reached, or further if control is not regained yet, but stop in front of enemy
+if (P2BodyDist X < Const240p(30)) {
+	VelSet{x: 0; y: 0}
+	ChangeState{value: Const(dhcAttackB); ctrl: 0}
+}
+#===============================================================================
+#StateTagFallingIn - DHC Variant B
+#===============================================================================
+[Statedef 5656; type: A; movetype: H; physics: N;
+ anim: Const(AnimTagDHCFallingIn); sprpriority: 2; ctrl: 0;]
+
+ScreenBound{value: 0; movecamera: 1, 0}
+
+if Time = 0 {
+	if Facing != playerID(GetPlayerID(TeamLeader)),Facing {
+		Turn{}
+	}
+	# change active player assignment
+	MapSet{map: "_iksys_tagLastID"; value: playerID(GetPlayerID(TeamLeader)),ID}
+	TagIn{leader: PlayerNo}
+	call fTagSwitchExplod();
+	# set starting pos (redirected to gather consistent local coordinate space values ready for Const240p conversion)
+	TeamMapSet{map: "_iksys_tagPosX"; value: Pos X * LocalScale - (BackEdgeBodyDist * LocalScale + 90) * Facing; redirectid: playerID(GetPlayerID(TeamLeader)),ID}
+	PosSet{x: playerID(Map(_iksys_tagLastID)), pos x; y: topedge - 180}
+	# store distance to switch initiation position
+	MapSet{map: "_iksys_tagSwitchDist"; value: abs(Pos X - playerID(GetPlayerID(TeamLeader)),Pos X)}
+	# set movement
+	VelSet{x: 0; y: 24}
+	
+	#Proration and juggle sharing
+	var(11) := Map(tagProration);
+	if Map(tagSwitch) = 0{
+		TeamMapSet {map: "juggle"; value: map(juggle) / 2}
+		MapSet {map: "tagSwitch"; value: 1}
+	}
+
+} else {
+	MapAdd{map: "_iksys_tagSwitchDist"; value: -Vel X}
+}
+
+# regain control in place where the switch was initiated or right after entering screen, in case of Counter Switch
+#if !Ctrl && BackEdgeBodyDist >= 0 && (floor(Map(_iksys_tagSwitchDist)) <= Const(size.ground.front) || Map(_iksys_tagRegainCtrl) = 1) {
+#	StateTypeSet{movetype: I} # disables countermeasure against global states triggering when character is off-screen
+#	CtrlSet{value: 1}
+#	MapSet{map: "_iksys_tagRegainCtrl"; value: 0}
+#}
+
+# If character is too far offscreen, pushes them back in screen slightly
+if (BackEdgeBodyDist >= -20){
+	PosAdd{x: 2}
+}
+
+# continue at least until TagInTime * TagInVelX distance is reached, or further if control is not regained yet, but stop in front of enemy
+if (P2BodyDist Y < Const240p(50)) || pos Y > -20 {
+	VelSet{x: 0; y: 0}
+	ChangeState{value: Const(dhcAttackB); ctrl: 0}
+}
+
+#===============================================================================
+#StateTagRunningIn - DHC Variant C
+#===============================================================================
+[Statedef 5652; type: S; movetype: H; physics: N;
+ anim: Const(AnimTagEnteringScreen); sprpriority: 2; ctrl: 0;]
+
+#prevents character from tagging out for a WHILE
+#if !numhelper(5601) {
+#	Helper{stateno:5601; pos: 999999, 99999; id: 5601}
+#}
+
+if Const(dhcAirC) = 1 {
+	ChangeState{value: stateNo + 5}
+}
+
+ScreenBound{value: 0; movecamera: 1, 1}
+
+if Time = 0 {
+	if Facing != playerID(GetPlayerID(TeamLeader)),Facing {
+		Turn{}
+	}
+	# set starting pos (redirected to gather consistent local coordinate space values ready for Const240p conversion)
+	TeamMapSet{map: "_iksys_tagPosX"; value: Pos X * LocalScale - (BackEdgeBodyDist * LocalScale + 90) * Facing; redirectid: playerID(GetPlayerID(TeamLeader)),ID}
+	PosSet{x: Const240p(Map(_iksys_tagPosX)); y: 0}
+	# store distance to switch initiation position
+	MapSet{map: "_iksys_tagSwitchDist"; value: abs(Pos X - playerID(GetPlayerID(TeamLeader)),Pos X)}
+	# set movement
+	VelSet{x: Const240p(Const(TagInVelX))*2; y: 0}
+	# change active player assignment
+	MapSet{map: "_iksys_tagLastID"; value: playerID(GetPlayerID(TeamLeader)),ID}
+	TagIn{leader: PlayerNo}
+	call fTagSwitchExplod();
+
+	#Proration and juggle sharing
+	var(11) := Map(tagProration);
+	if Map(tagSwitch) = 0{
+		TeamMapSet {map: "juggle"; value: map(juggle) / 2}
+		MapSet {map: "tagSwitch"; value: 1}
+	}
+
+} else {
+	MapAdd{map: "_iksys_tagSwitchDist"; value: -Vel X}
+}
+
+# regain control in place where the switch was initiated or right after entering screen, in case of Counter Switch
+#if !Ctrl && BackEdgeBodyDist >= 0 && (floor(Map(_iksys_tagSwitchDist)) <= Const(size.ground.front) || Map(_iksys_tagRegainCtrl) = 1) {
+#	StateTypeSet{movetype: I} # disables countermeasure against global states triggering when character is off-screen
+#	CtrlSet{value: 1}
+#	MapSet{map: "_iksys_tagRegainCtrl"; value: 0}
+#}
+
+# If character is too far offscreen, pushes them back in screen slightly
+if (BackEdgeBodyDist >= -20){
+	PosAdd{x: 2}
+}
+
+# continue at least until TagInTime * TagInVelX distance is reached, or further if control is not regained yet, but stop in front of enemy
+if (P2BodyDist X < Const240p(30)) {
+	VelSet{x: 0; y: 0}
+	ChangeState{value: Const(dhcAttackC); ctrl: 0}
+}
+
+#===============================================================================
+#StateTagFallingIn - DHC Variant C
+#===============================================================================
+[Statedef 5657; type: A; movetype: H; physics: N;
+ anim: Const(AnimTagDHCFallingIn); sprpriority: 2; ctrl: 0;]
+
+ScreenBound{value: 0; movecamera: 1, 0}
+
+if Time = 0 {
+	if Facing != playerID(GetPlayerID(TeamLeader)),Facing {
+		Turn{}
+	}
+	# change active player assignment
+	MapSet{map: "_iksys_tagLastID"; value: playerID(GetPlayerID(TeamLeader)),ID}
+	TagIn{leader: PlayerNo}
+	call fTagSwitchExplod();
+	# set starting pos (redirected to gather consistent local coordinate space values ready for Const240p conversion)
+	TeamMapSet{map: "_iksys_tagPosX"; value: Pos X * LocalScale - (BackEdgeBodyDist * LocalScale + 90) * Facing; redirectid: playerID(GetPlayerID(TeamLeader)),ID}
+	PosSet{x: playerID(Map(_iksys_tagLastID)), pos x; y: topedge - 180}
+	# store distance to switch initiation position
+	MapSet{map: "_iksys_tagSwitchDist"; value: abs(Pos X - playerID(GetPlayerID(TeamLeader)),Pos X)}
+	# set movement
+	VelSet{x: 0; y: 24}
+	
+	#Proration and juggle sharing
+	var(11) := Map(tagProration);
+	if Map(tagSwitch) = 0{
+		TeamMapSet {map: "juggle"; value: map(juggle) / 2}
+		MapSet {map: "tagSwitch"; value: 1}
+	}
+
+} else {
+	MapAdd{map: "_iksys_tagSwitchDist"; value: -Vel X}
+}
+
+# regain control in place where the switch was initiated or right after entering screen, in case of Counter Switch
+#if !Ctrl && BackEdgeBodyDist >= 0 && (floor(Map(_iksys_tagSwitchDist)) <= Const(size.ground.front) || Map(_iksys_tagRegainCtrl) = 1) {
+#	StateTypeSet{movetype: I} # disables countermeasure against global states triggering when character is off-screen
+#	CtrlSet{value: 1}
+#	MapSet{map: "_iksys_tagRegainCtrl"; value: 0}
+#}
+
+# If character is too far offscreen, pushes them back in screen slightly
+if (BackEdgeBodyDist >= -20){
+	PosAdd{x: 2}
+}
+
+# continue at least until TagInTime * TagInVelX distance is reached, or further if control is not regained yet, but stop in front of enemy
+if (P2BodyDist Y < Const240p(50)) || pos Y > -20 {
+	VelSet{x: 0; y: 0}
+	ChangeState{value: Const(dhcAttackC); ctrl: 0}
+}
+
+#===============================================================================
+#Global states
+#===============================================================================
+[Statedef -2]
+
+if !Const(Default.Enable.Tag) || IsHelper || TeamSide = 0 {
+	#do nothing, global code disabled locally or executed by helper/stage
+} else if RoundState = 0 && TeamMode = Tag {
+	MapSet{map: "_iksys_tagActive"; value: 1}
+	MapSet{map: "_iksys_tagJumpingInState"; value: 0}
+	MapSet{map: "_iksys_tagLastID"; value: 0}
+	if PlayerNo = TeamLeader {
+		MapSet{map: "_iksys_tagIntroFlag"; value: 1}
+	} else {
+		MapSet{map: "_iksys_tagIntroFlag"; value: 0}
+	}
+	mapSet{map: "_iksys_tagSwitchCooldown"; value: 0}
+} else if Map(_iksys_tagActive) = 1 {
+	if RoundState = 4 {
+		MapSet{map: "_iksys_tagActive"; value: 0}
+		
+	# alive players
+	} else if Alive {
+		let beingHit = 0;
+		ignorehitpause if MoveType = H || GetHitVar(isbound) != 0 || StateNo = Const(StateDownedGetHit_gettingUp) ||
+			StateNo = [Const(StateAirGetHit_fallRecoveryOnGroundStillFalling), Const(StateAirGetHit_fallRecoveryInAir)] {
+			let beingHit = 1;
+		}
+		# active player
+		if PlayerNo = TeamLeader {
+			# not being hit or having enough power for Counter Switch
+			ignorehitpause if $beingHit = 0 || Power >= Const(TagCounterSwitchPower) {
+				# last active player has left the screen or died
+				if Map(_iksys_tagLastID) = 0 || playerID(Map(_iksys_tagLastID)),StateNo = Const(StateTagWaitingOutside) || playerID(Map(_iksys_tagLastID)),Alive = 0 {
+					let partnerID = 0;
+					let nextPartnerID = call fTagGetPartnerID(1);
+					let previousPartnerID = call fTagGetPartnerID(-1);
+					if AILevel > 0 {
+						let partnerID = call fTagAISwitch($nextPartnerID, $previousPartnerID);
+					} else if Command = "TagShiftFwd" {
+						let partnerID = $nextPartnerID;
+					} else if Command = "TagShiftBack" {
+						let partnerID = $previousPartnerID;
+					}
+					if $partnerID > 0 && playerID($partnerID),StateNo = Const(StateTagWaitingOutside) && Map(disableTag) != 1 {
+						if $beingHit != 1 && !command = "snapback" && !command = "dhc_a" && !command = "dhc_b" && !command = "dhc_c" && !numhelper(5601) && StateNo != [20000,29999] {
+							LifebarAction{spr: Const(MsgActiveSwitch), 0}
+							TagIn{stateno: Const(StateTagEnteringScreen); redirectid: $partnerID}
+						} 
+						if $beingHit != 1 && command = "dhc_a" && power >= playerID($partnerID),Const(dhcMeterRequirementA) && Map(enableDHC) = 1 {
+							#LifebarAction{spr: Const(MsgActiveSwitch), 0}
+							TagIn{stateno: Const(StateTagDHC_A); redirectid: $partnerID}
+						}
+						if $beingHit != 1 && command = "dhc_b" && power >= playerID($partnerID),Const(dhcMeterRequirementB) && Map(enableDHC) = 1 {
+							#LifebarAction{spr: Const(MsgActiveSwitch), 0}
+							TagIn{stateno: Const(StateTagDHC_B); redirectid: $partnerID}
+						} 
+						if $beingHit != 1 && command = "dhc_c" && power >= playerID($partnerID),Const(dhcMeterRequirementC) && Map(enableDHC) = 1 {
+							#LifebarAction{spr: Const(MsgActiveSwitch), 0}
+							TagIn{stateno: Const(StateTagDHC_C); redirectid: $partnerID}
+						} 
+					}
+				}
+			}
+		# partners (not hit)
+		} else if $beingHit = 0{
+			AssertSpecial{flag: noinput; flag2: noturntarget}
+			# on screen, at the round start / during round
+			if RoundState = 2 && (Ctrl || Standby || Map(_iksys_tagIntroFlag) = 0) && (StateNo = Const(StateStand) ||
+				(Pos Y >= 0 && StateNo != [Const(StateTagEnteringScreen), Const(StateTagWaitingOutside)])) {
+				MapSet{map: "_iksys_tagIntroFlag"; value: 1}
+				MapSet{map: "_iksys_tagLeavingPosX"; value: Pos X + 0.0001}
+				ChangeState{value: Const(StateTagLeavingScreen); ctrl: 0}
+			# tagged out, at the round end
+			} else if RoundState = 3 && StateNo = Const(StateTagWaitingOutside) {
+				TagIn{stateno: Const(StateTagJumpingIn)}
+			}
+		}
+	# active player died and hit the ground
+	} else if PlayerNo = TeamLeader && StateNo = Const(StateDownedGetHit_lyingDefeated) || (StateNo = Const(StateTagLeavingScreen)){
+		MapSet{map: "_iksys_tagActive"; value: 0}
+		let partnerID = call fTagGetPartnerID(1);
+		if $partnerID > 0 {
+			LifebarAction{spr: Const(MsgPartnerChange), 0}
+			MapSet{map: "_iksys_tagRegainCtrl"; value: 1; redirectid: $partnerID}
+			TagIn{stateno: Const(StateTagJumpingIn); redirectid: $partnerID}
+		}
+	}
+	# Red Life regeneration
+	if Standby && RedLife > 0 && (Time % Const(TagRedLifeRegenFrames)) = 0 { #every 30 frames (0.5s) by default
+		let regenVal = min(RedLife, ceil(LifeMax * Const(TagRedLifeRegenPercent))); #0.5% LifeMax by default
+		LifeAdd{value: $regenVal; absolute: 1}
+		RedLifeAdd{value: -$regenVal; absolute: 1}
+	}
+	#Team shares juggle and proration
+	if movehit || helper,movehit{
+		TeamMapSet{map: "tagProration"; value: var(11)}
+		TeamMapSet{map: "juggle"; value: map(juggle)}
+	}
+	#Reset tagSwitch map
+	if (enemy,movetype != H && enemy,stateno != 52 ) || !numenemy {
+		TeamMapSet{map: "tagSwitch"; value: 0}
+	}
+
+
+} 
+
+#Tag defense settings (Alters character effective life depending on tag team size)
+# 1 character life = 2000
+# 2 character life = 1000
+# 3 character life = 666, or 833 against 3 or 4 opponents
+# 4 character life = 500, 625 vs 3 opponents and 700 vs 4 opponents
+if RoundState = 0 && (TeamMode = Tag || enemy,TeamMode = Tag) {
+
+	if numPartner = 0{
+		TeamMapSet{map: "initialDefence"; value: 0.5}
+	}
+	else if numPartner = 1{
+		TeamMapSet{map: "initialDefence"; value: 1}
+	}
+	else if numPartner = 2{
+		if enemy,numPartner >= 2{
+			TeamMapSet{map: "initialDefence"; value: 1.2}
+		}
+		else{
+			TeamMapSet{map: "initialDefence"; value: 1.5}
+		}
+	}
+	else if numPartner = 3{
+		if enemy,numPartner = 2{
+			TeamMapSet{map: "initialDefence"; value: 1.6}
+		}
+		else if enemy,numPartner = 3{
+			TeamMapSet{map: "initialDefence"; value: 1.4275}
+		}
+		else{
+			TeamMapSet{map: "initialDefence"; value: 2}
+		}
+	}
+
+	TeamMapSet{map: "initialDefence"; value: map(initialDefence) * 0.75}
+}
+
+
+
+
+#===============================================================================
+#Global States - Custom Tag Stuff
+#===============================================================================
+#[Statedef -4]
+
+ignorehitpause if !standby && roundstate = 2 && (Teammode = Tag || (TeamMode != Tag && enemynear, TeamMode = Tag))  {
+
+	if (command="snapback") && ctrl && const(snapBack) = 1 && power >= 1000 {
+		 changestate{value: const(StateTagSnapback); ctrl:0}
+ 	}
+}
+
+#Snapback
+#[State -1, Snapback]
+#type = ChangeState
+#value = 5630
+#triggerall = numhelper(3500) = 0
+#triggerall = command = "snapback"
+#Triggerall = power >=1000
+#triggerall = ID = map(_iksys_tagCurrentID)
+#triggerall = roundstate = 2
+#triggerall = (TeamMode = Tag || (TeamMode != Tag && enemynear, teammode = Tag))
+#trigger1 = ctrl
+#trigger1 = const(snapBack) = 1

@@ -1139,9 +1139,9 @@ volumescale = 150
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = Time = (3,13)
-x = 4
-y = 0
+trigger1 = Time = [8,10]
+x = 3
+y = -1
 
 [State 0, VelSet if coming from wavedash]
 type = VelSet
@@ -1151,8 +1151,8 @@ x = const(velocity.run.fwd.x)
 
 [State 0, VelSet Slide Start]
 type = VelSet
-trigger1 = time = [6,14]
-x = 8
+trigger1 = time = [10,16]
+x = 7
 y = 0
 
 [State 200, 1]
@@ -2047,6 +2047,14 @@ map = "juggle"
 value = 5
 persistent = 0
 
+[State 0, Damage Proration]
+type = Varadd 
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 3
+
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = AnimElem = 2
@@ -2146,8 +2154,8 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 guard.hittime = 11
-ground.velocity = -2, -7
-air.velocity = -2,-5
+ground.velocity = -2, -8
+air.velocity = -2,-7
 Fall = 0
 Envshake.time = 10
 
@@ -2313,7 +2321,7 @@ value = 5
 persistent = 0
 
 [State 0, Damage Proration]
-type = parentvaradd 
+type = Varadd 
 trigger1 = movehit
 v = 11
 ignorehitpause = 1
@@ -2505,12 +2513,12 @@ value = 10
 persistent = 0
 
 [State 0, Damage Proration]
-type = parentvaradd 
+type = Varadd 
 trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 8
+value = 12
 
 [State 0, FatalCounter]
 type = MapSet
@@ -2561,7 +2569,7 @@ air.hittime = 15
 fall = 1
 fall.recover = ifelse(enemy,movetype = A,0,1)
 Fall.recovertime = 40
-fall.yvelocity = ifelse(enemy,movetype = A, -7, -2)
+fall.yvelocity = ifelse(enemy,movetype = A, -8, -5)
 ground.velocity = 0,10
 air.velocity = 0,10
 Envshake.time = 20
@@ -2662,12 +2670,12 @@ value = 10
 persistent = 0
 
 [State 0, Damage Proration]
-type = parentvaradd 
+type = Varadd 
 trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 8
+value = 10
 
 [State 0, FatalCounter]
 type = MapSet
@@ -2803,7 +2811,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 3
+value = 5
 
 [State 0, VelSet]
 type = VelSet
@@ -6017,24 +6025,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-type = MapSet
-trigger1 = teammode != tag && enemy,teammode != tag
-map = "initialDefence"
-value = 1
-persistent = 0
-
-[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-type = MapSet
-trigger1 = roundstate = 1
-map = "defence"
-value = 0
-
-[State -2, Defense Set] ; Used to determine character defense
-type = defenceMulSet
-trigger1 = 1 
-value = map(initialDefence) + map(defence)
-onhit = 0
+;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+;type = MapSet
+;trigger1 = teammode != tag && enemy,teammode != tag
+;map = "initialDefence"
+;value = 1
+;persistent = 0
+;
+;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+;type = MapSet
+;trigger1 = roundstate = 1
+;map = "defence"
+;value = 0
+;
+;[State -2, Defense Set] ; Used to determine character defense
+;type = defenceMulSet
+;trigger1 = 1 
+;value = map(initialDefence) + map(defence)
+;onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

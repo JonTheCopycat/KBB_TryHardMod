@@ -262,21 +262,33 @@ ownpal = 1
 inheritJuggle = 1
 
 [State 0, VelSet]
-type = VelSet
+type = VelAdd
 trigger1 = time = [0, 1]
-x = const(velocity.run.fwd.x) * 1.9
+x = const(velocity.run.fwd.x) * 1.9 * 0.6
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 2
+x = const(velocity.run.fwd.x) * 1.9 * 1.25
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = time > 5
+trigger1 = vel x > 1
+x = -0.25
 
 ;Ending teleports and velsets
 [State 30, End]
 type = PosSet
-trigger1 = AnimTime = 0 && command != "holdfwd"
+trigger1 = AnimTime = 0 && command = "holdback"
 trigger2 = command = "back"
 x = helper(31),pos x
 y = helper(31),pos y
 
 [State 30, End]
 type = VelSet
-trigger1 = AnimTime = 0 && command != "holdfwd"
+trigger1 = AnimTime = 0 && command = "holdback"
+trigger2 = command = "back"
 x = helper(31),vel x
 y = helper(31),vel y
 
@@ -326,7 +338,7 @@ ctrl = 1
 type = ChangeState
 ;triggerall = time >= 5
 trigger1 = command = "back"
-value = 105
+value = 35
 
 [State 200, End]
 type = ChangeState
@@ -377,6 +389,123 @@ velset = 0, 0
 type = DestroySelf
 trigger1 = AnimTime = 1
 trigger2 = root,stateno != 30
+
+;---------------------------------------------------------------------------
+;Wavedash
+[Statedef 35]
+type = C
+movetype= I
+physics = N
+anim = 36
+ctrl = 0
+velset = 0,0
+sprpriority = 1
+
+;[State 0, VelSet]
+;type = VelAdd
+;trigger1 = time > 5
+;trigger1 = vel x > 1
+;x = -0.25
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = F16000
+ID = 16000
+pos = -40,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+
+[State 200, End]
+type = ChangeState
+;triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+;[State 200, End]
+;type = ChangeState
+;triggerall = time >= 10
+;trigger1 = command = "WD"
+;value = 30
+;ctrl = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5 || command != "z"
+trigger1 = command = "FF" || (command = "z" && command != "holddown")
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+;triggerall = time >= 5
+trigger1 = command = "BB"
+value = 105
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "a"
+value = 250
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "b"
+value = 390
+ctrl = 0
+
+[State 200, C]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = power >=250
+trigger1 = command = "c"
+value = 590
+
+;[State 200, C]
+;type = ChangeState
+;triggerall = numhelper(3500) = 0
+;triggerall = power >=250
+;trigger1 = command = "s"
+;value = 590
+
+
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+;---------------------------------------------------------------------------
+;Wavedash Still Clone
+[Statedef 36]
+type = S
+movetype= I
+physics = S
+anim = 35
+ctrl = 0
+sprpriority = 1
+velset = 0, 0
+
+[State 31, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 1
+trigger2 = root,stateno != 30
+
 
 ;---------------------------------------------------------------------------
 ; Jump Start

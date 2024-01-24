@@ -1,4 +1,101 @@
 #===============================================================================
+#Star Cancel
+#===============================================================================
+[Statedef 67; 
+ type: U;
+ movetype: I;
+ physics: U;
+ ctrl: 0;
+ anim: 50500;
+ poweradd: 0;
+ sprpriority: 2;]
+
+ AttackDist{value:0}
+
+ #Twinkle Cancel F520
+
+ if time = 0 {
+    ChangeAnim2{value:50500;elem:2;}
+    
+    SuperPause{
+        anim: F520;
+        time: 5;
+        sound: 20, 0;
+        movetime: 0;
+        darken: 0;
+        p2defmul: 1;
+        poweradd: 0;
+        endcmdbuftime: 7;
+    }
+
+    var(4) := 1;
+    MapSet {map:"defence"; value: 0.15}
+
+    if numhelper(51000) = 0 {
+        AfterImage{
+            time: 10;
+            paladd: 240, 240, 0;
+            trans: add;
+        }
+
+        PowerAdd{value: -1000}
+    }
+
+    var(11) := var(11) - 5;
+    enemy,var(11) := enemy,var(11) - 5;
+ }
+
+ if prevstateno = [5000, 5999] || prevstateno = [1000,1039]
+ {
+    if time = 6 {
+        MapSet {map:"defence"; value: 0}
+        CtrlSet{value: 1;}
+     }
+ } else if prevstateno = [150, 155] {
+    if time = 4 {
+        MapSet {map:"defence"; value: 0}
+        CtrlSet{value: 1;}
+     }
+ } else {
+    if time = 2 {
+        MapSet {map:"defence"; value: 0}
+        CtrlSet{value: 1;}
+     }
+ }
+
+
+ if p2bodydist x < -10 {
+    Turn{}
+ }
+
+ if time >= 1 {
+    if pos y > 0 {
+        StateTypeSet{
+            statetype: S;
+            physics: S;
+        }
+        VelSet{y:0}
+        PosSet{y:0}
+    }
+    if pos y < -1 && name != "Noll" {
+        StateTypeSet{
+            physics: A;
+        }
+    }
+
+    #if time <= 5 {
+    #   AssertSpecial{flag: NoAirGuard}
+    #    AssertSpecial{flag: NoCrouchGuard}
+    #    AssertSpecial{flag: NoStandGuard}
+    #}
+ }
+
+ if time >= 20 {
+    ChangeState{value: 50}
+ }
+
+
+#===============================================================================
 #Counter
 #===============================================================================
 [Statedef 800; 
@@ -54,7 +151,9 @@ ignorehitpause if time = 1 {
 }
 
 if !movecontact && time >= 16 {
-    MapSet {map:"defence"; value: 0.2}
+    persistent(0) if prevStateNo != 820 {
+        poweradd{value: -1000}
+    }
     MapSet {map:"hitOverride"; value: 0}
 }
 
@@ -64,9 +163,7 @@ if enemynear, hitpausetime > 15 && var(47) <= 1 {
 }
 
 if animtime = 0 {
-    if prevStateNo != 820 {
-        poweradd{value: -1000}
-    }
+    
     changeState{value: 806; ctrl: 1}
 }
 
@@ -150,7 +247,7 @@ if time >= 16 {
 }
 
 if !movecontact && time = 17 {
-    MapSet {map:"defence"; value: 0.2}
+    #MapSet {map:"defence"; value: 0.2}
 }
 
 if !movecontact {
@@ -347,7 +444,7 @@ if !movecontact {
 }
 
 if !movecontact && time = 15 {
-    MapSet {map:"defence"; value: 0.2}
+    #MapSet {map:"defence"; value: 0.2}
 }
 
 if AnimTime = 0 {
@@ -422,7 +519,7 @@ if time >= 13 {
 }
 
 if !movecontact && time = 14 {
-    MapSet {map:"defence"; value: 0.2}
+    #MapSet {map:"defence"; value: 0.2}
 }
 
 if !movecontact {
@@ -611,13 +708,13 @@ ignorehitpause if time = 1 {
 }
 
 if prevStateNo != 820 {
-    if time = 15 {
+    persistent(0) if time = 15 {
         poweradd{value: -1000}
     }
 }
 
 if !movecontact && time > 15 {
-    MapSet {map:"defence"; value: 0.2}
+    #MapSet {map:"defence"; value: 0.2}
     MapSet {map:"hitOverride"; value: 0}
 }
 
@@ -719,7 +816,7 @@ if time >= 16 {
 }
 
 if !movecontact && time = 17 {
-    MapSet {map:"defence"; value: 0.2}
+    #MapSet {map:"defence"; value: 0.2}
 }
 
 if !movecontact {
@@ -867,7 +964,7 @@ if !movecontact {
 }
 
 if !movecontact && time = 12 {
-    MapSet {map:"defence"; value: 0.2}
+    #MapSet {map:"defence"; value: 0.2}
 }
 
 if AnimTime = 0 {
@@ -939,7 +1036,7 @@ if time >= 10 {
 }
 
 if !movecontact && time = 11 {
-    MapSet {map:"defence"; value: 0.2}
+    #MapSet {map:"defence"; value: 0.2}
 }
 
 if AnimElem = 3 {
@@ -1327,7 +1424,8 @@ ignorehitpause if time = 1 {
 }
 
 if !movecontact && time >= 6 {
-    MapSet {map:"defence"; value: 0.2}
+    #MapSet {map:"defence"; value: 0.2}
+    persistent(0) {powerAdd{value: -1000}}
     MapSet {map:"hitOverride"; value: 0}
 }
 
@@ -1337,7 +1435,6 @@ if enemynear, hitpausetime > 15 && var(47) <= 1 {
 }
 
 if animtime = 0 {
-    powerAdd{value: -1000}
     changeState{value: 806; ctrl: 1}
 }
 
@@ -2159,6 +2256,26 @@ if Const(KBB_Playable) = 1 {
         }
     }
 
+    #Star Cancel Command
+    if power >= 1000 || numhelper(51000) != 0 {
+        if alive && !ctrl && movetype != I && !ishelper && roundstate != 1 && command = "s" && time >= 3 {
+            #The exceptions
+            if stateno != 800 && stateno != 810 && stateno != [820, 829] && stateno != 830 &&
+            stateno != 150 && stateno != 152 && stateno != 154 &&
+            stateno != [1000, 1039] &&
+            !(GetHitVar(attr) = [129, 132] || GetHitVar(attr) = [1025, 1028] || GetHitVar(attr) = [8193,8196]) &&
+            !(enemy,movecountered != 0 && enemy,map(fatal) = 1) {
+                #Character exceptions
+                if !(name = "Leon" && stateno = [26000, 26999]) && 
+                    !(name = "Jodie" && ((stateno = 611 && movehit) || ((stateno = 401 || stateno = 292) && movecontact))) &&
+                    !(name != "Noll" && stateno = 900 && movehit) &&
+                    !(name != "Saito" && stateno = 300) {
+                    ChangeState{value: 67}
+                }
+            }
+        }
+    }
+
     #StarBuster
     if alive {
         if numhelper(51000) = 0 && numhelper(55000) = 0 && numhelper(56000) = 0 && numhelper(50750) = 0 {
@@ -2173,7 +2290,7 @@ if Const(KBB_Playable) = 1 {
     }
 
     #Counter
-    if command = "hold_x" && ailevel = 0 && ctrl {
+    if command = "hold_x" && ailevel = 0 && ctrl && stateno != 67 {
         #Air Counter
         if statetype = A {
             ChangeState{value: 810; ctrl: 0}
@@ -2192,6 +2309,11 @@ if Const(KBB_Playable) = 1 {
 [Statedef -2]
 
 if Const(KBB_Playable) = 1 {
+
+    #Stall Fixing
+    if statetype != A && ctrl {
+        VelSet{y: abs(vel y * 0.5 * 100) * 0.01}
+    }
 
     #Make StarBurst Un-Busterable
     if !enemynear, numhelper(51000) = 1 {
@@ -2398,3 +2520,15 @@ if Const(KBB_Playable) = 1 {
         }
     }
 }
+
+[Statedef -3]
+# ------ Defense Set ------
+if RoundState = 0 && teammode != tag && enemy,teammode != tag {
+    MapSet{map: "initialDefence"; value: 1}
+}
+
+if roundstate = 1 {
+    MapSet{map: "defence"; value: 0}
+}
+
+DefenceMulSet{value: map(initialDefence) + map(defence); onhit: 0}
