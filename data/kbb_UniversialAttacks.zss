@@ -47,7 +47,7 @@
 
  if prevstateno = [5000, 5999] || prevstateno = [1000,1039]
  {
-    if time = 6 {
+    if time = 10 {
         MapSet {map:"defence"; value: 0}
         CtrlSet{value: 1;}
      }
@@ -77,8 +77,9 @@
         VelSet{y:0}
         PosSet{y:0}
     }
-    if pos y < -1 && name != "Noll" {
+    if (pos y < -1 || vel y < 0 || prevstateno = [5080, 5199 ]) && name != "Noll" {
         StateTypeSet{
+            statetype: A;
             physics: A;
         }
     }

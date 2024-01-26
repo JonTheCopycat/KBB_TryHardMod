@@ -558,6 +558,11 @@ anim = 36
 ctrl = 0
 sprpriority = 1
 
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA, AA, AP, AT
+
 [State 200, End]
 type = ChangeState
 trigger1 = command = "a"
