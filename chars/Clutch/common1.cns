@@ -300,24 +300,31 @@ value = 35
 
 [State 200, End]
 type = ChangeState
-triggerall = numhelper(3500) = 0
 triggerall = prevstateno != 52 || time >= 3
 triggerall = prevstateno != (400, 410) || time >= 7
-Triggerall = power >= 200
-triggerall = numhelper(291) = 0
 trigger1 = command = "a"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 290
 ctrl = 0
 
-[State 200, End]
+[State 200, C]
 type = ChangeState
 triggerall = prevstateno != 52 || time >= 3
 triggerall = prevstateno != (400, 410) || time >= 7
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 900
-ctrl = 0
+
+;[State 200, C]
+;type = ChangeState
+;triggerall = numhelper(3500) = 0
+;triggerall = prevstateno != 52 || time >= 3
+;triggerall = prevstateno != (400, 410) || time >= 7
+;Triggerall = power >= 200
+;triggerall = numhelper(391) = 0
+;trigger1 = command = "b"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 390
 
 [State 200, C]
 type = ChangeState
@@ -327,7 +334,7 @@ Triggerall = numhelper(420) < 1
 Triggerall = Var(17) < 3 
 triggerall = prevstateno != 52 || time >= 3
 triggerall = prevstateno != (400, 410) || time >= 7
-trigger1 = command = "hold_c"
+trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 490
 
@@ -380,24 +387,31 @@ ctrl = 1
 
 [State 200, End]
 type = ChangeState
-triggerall = numhelper(3500) = 0
 triggerall = prevstateno != 52 || time >= 3
 triggerall = prevstateno != (400, 410) || time >= 7
-Triggerall = power >= 200
-triggerall = numhelper(291) = 0
 trigger1 = command = "a"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 290
 ctrl = 0
 
-[State 200, End]
+[State 200, C]
 type = ChangeState
 triggerall = prevstateno != 52 || time >= 3
 triggerall = prevstateno != (400, 410) || time >= 7
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 900
-ctrl = 0
+
+;[State 200, C]
+;type = ChangeState
+;triggerall = numhelper(3500) = 0
+;triggerall = prevstateno != 52 || time >= 3
+;triggerall = prevstateno != (400, 410) || time >= 7
+;Triggerall = power >= 200
+;triggerall = numhelper(391) = 0
+;trigger1 = command = "b"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 390
 
 [State 200, C]
 type = ChangeState
@@ -407,7 +421,7 @@ Triggerall = numhelper(420) < 1
 Triggerall = Var(17) < 3 
 triggerall = prevstateno != 52 || time >= 3
 triggerall = prevstateno != (400, 410) || time >= 7
-trigger1 = command = "hold_c"
+trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 490
 

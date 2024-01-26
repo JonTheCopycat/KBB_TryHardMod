@@ -1152,217 +1152,6 @@ value = 50
 ctrl = 1
 
 
-;-------------------------------------------------------------------------------
-; Wavedash A - Geiser Plant
-[Statedef 292]
-type    = S
-movetype= A
-physics = S
-juggle  = 1
-ctrl = 0
-anim = 290
-poweradd = -200
-sprpriority = 0
-
-[State 0, Damage Proration]
-type = VarAdd
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 5
-
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 5
-persistent = 0
-
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = AnimElem = 1
-value = S1,2
-volumescale = 50
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = animelem = 1
-x = const(velocity.run.fwd.x) * 1.5
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = animelem = 3
-x = 2
-
-[State 0, Helper]
-type = Helper
-trigger1 = AnimElem = 3
-helpertype = normal ;player
-name = "291"
-ID = 291
-stateno = 291
-pos = 50,0
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 1
-supermovetime = 0
-pausemovetime = 0
-inheritJuggle = 1
-
-
-[State 200, MASSIVE Laser Cancel]
-type = ChangeState
-Triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 1"
-value = 21000
-[State 200, TELEPORT]
-type = ChangeState
-Triggerall = power >= 1000
-triggerall = ailevel = 0 && command = "SPECIAL 3"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-trigger1 = Helper(405),movecontact		;Lvl 0
-value = 27000
-ctrl = 0
-
-
-[State 200, End]
-type = ChangeState
-trigger1 = AnimTime = 0
-value = 0
-ctrl = 1
-
-;----------------------------- Wavedash A Helper
-;-------------------------------------------------------------------------------
-[Statedef 293]
-movetype= I
-physics = N
-juggle  = 2
-ctrl = 0
-anim = 291
-velset = 0,0
-sprpriority = 3
-
-[State 0, Helper Guarded]
-type = RootMapSet
-trigger1 = 1 
-map = "helperGuarded"
-value = moveguarded
-;ignorehitpause = 
-;persistent = 
-
-[State 0, Helper Hit]
-type = RootMapSet
-trigger1 = 1 
-map = "helperHit"
-value = movehit
-;ignorehitpause = 
-;persistent = 
-
-[State -2, Counterhit TSP]
-type = Helper
-Triggerall = numhelper(4020) = 0
-trigger1 = movecountered
-helpertype = normal 
-name = "Counterhit TSP"
-supermovetime = 999999999999
-pausemovetime = 999999999999
-ignorehitpause = 1
-persistent = 0
-ID = 4020
-stateno = 4020
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 1
-ignorehitpause = 1
-persistent = 0
-
-[State 0, Damage Proration]
-type = parentvaradd 
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 5
-
-[State 0, Juggle Map]
-type = RootMapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 10
-persistent = 0
-
-[State 1010, Helper Attack Scale]
-type = AttackMulSet
-trigger1 = 1
-value = 1 * 0.99**root,var(11)
-ignorehitpause = 1
-
-[State 0, PlaySnd]
-type = PlaySnd
-triggerall = anim = 291
-triggerall = time >= 6
-trigger1 = root,command != "hold_a"
-value = S400,1
-volumescale = 500
-
-[State 291, ChangeAnimTo]
-type = ChangeAnim2
-triggerall = anim = 291
-triggerall = time >= 6
-trigger1 = root,command != "hold_a"
-value = 292
-elem = 1
-
-[State 0, StateTypeSet]
-type = StateTypeSet
-trigger1 = anim = 292
-trigger1 = movetype = I
-movetype = A
-physics = N
-
-[State 0, Attack Dist]
-type = AttackDist
-trigger1 = anim = 292
-value = 100
-
-[State 310, 1]
-type = HitDef
-getpower = 0
-triggerall = !movecontact
-triggerall = root,map(juggle) < 100
-trigger1 = 1
-attr = S, NP
-damage = 40
-hitflag = MAFD
-guardflag = MAF
-sparkno = 0
-guard.sparkno = 13000
-hitsound   = 5,4
-guardsound = 6,10
-ground.type = High
-ground.slidetime = 15
-ground.velocity = -4,-7
-airguard.velocity = -2,-2
-air.velocity = -4,-6
-fall = 1
-fall.recover = 1
-fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
-pausetime = 12,12
-ground.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-Envshake.time = 20
-
-[State 200, End]
-type = Destroyself
-trigger1 = animtime = 0 && anim = 292
-trigger2 = time >= 120 
-trigger3 = root,movetype = H
-
-
 ;===============================================================================
 ; B:
 ;-------------------------------------------------------------------------------
@@ -2016,6 +1805,218 @@ Envshake.time = 30
 [State 0, DestroySelf]
 type = DestroySelf
 trigger1 = animtime = 0
+
+;-------------------------------------------------------------------------------
+; Wavedash B - Geiser Plant
+[Statedef 390]
+type    = S
+movetype= A
+physics = S
+juggle  = 1
+ctrl = 0
+anim = 390
+poweradd = -200
+sprpriority = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S1,2
+volumescale = 50
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = animelem = 1
+x = const(velocity.run.fwd.x) * 1.5
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = animelem = 3
+x = 2
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElem = 3
+helpertype = normal ;player
+name = "Geyser"
+ID = 391
+stateno = 391
+pos = 50,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+inheritJuggle = 1
+
+
+[State 200, MASSIVE Laser Cancel]
+type = ChangeState
+Triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 1"
+value = 21000
+[State 200, TELEPORT]
+type = ChangeState
+Triggerall = power >= 1000
+triggerall = ailevel = 0 && command = "SPECIAL 3"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger1 = Helper(405),movecontact		;Lvl 0
+value = 27000
+ctrl = 0
+
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;----------------------------- Wavedash A Helper
+;-------------------------------------------------------------------------------
+[Statedef 391]
+movetype= I
+physics = N
+juggle  = 2
+ctrl = 0
+anim = 391
+velset = 0,0
+sprpriority = 3
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = moveguarded
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = movehit
+;ignorehitpause = 
+;persistent = 
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Damage Proration]
+type = parentvaradd 
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+triggerall = anim = 391
+triggerall = time >= 6
+trigger1 = root,command != "hold_b"
+value = S400,1
+volumescale = 500
+
+[State 291, ChangeAnimTo]
+type = ChangeAnim2
+triggerall = anim = 391
+triggerall = time >= 6
+trigger1 = root,command != "hold_b"
+value = 392
+elem = 1
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = anim = 392
+trigger1 = movetype = I
+movetype = A
+physics = N
+
+[State 0, Attack Dist]
+type = AttackDist
+trigger1 = anim = 392
+value = 100
+
+[State 310, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+triggerall = root,map(juggle) < 100
+trigger1 = 1
+attr = S, NP
+damage = 40
+hitflag = MAFD
+guardflag = MAF
+sparkno = 0
+guard.sparkno = 13000
+hitsound   = 5,4
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 15
+ground.velocity = -4,-7
+airguard.velocity = -2,-2
+air.velocity = -4,-6
+fall = 1
+fall.recover = 1
+fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+pausetime = 12,12
+ground.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
+air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
+Envshake.time = 20
+
+[State 200, End]
+type = Destroyself
+trigger1 = animtime = 0 && anim = 392
+trigger2 = time >= 120 
+trigger3 = root,movetype = H
+
+
 
 ;===============================================================================
 ;C - START
