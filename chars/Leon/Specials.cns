@@ -3052,14 +3052,14 @@ trigger1 = 1
 value = ,NP,SP,AT
 time = 1
 
-;[State 0, NotHitBy]
-;type = NotHitBy
-;trigger1 = time > 45
-;value = SCA
-;;value2 = S,NA
-;time = 1
-;;ignorehitpause = 
-;;persistent = 
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time > 45
+value = SCA
+;value2 = S,NA
+time = 1
+;ignorehitpause = 
+;persistent = 
 
 [State 0, Shatters from Physical Attacks and System Mechanics]
 type = ReversalDef 
