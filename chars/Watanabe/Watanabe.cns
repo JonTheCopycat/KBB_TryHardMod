@@ -6043,10 +6043,10 @@ ownpal = 1
 supermovetime = 9999
 pausemovetime = 9999
 
-;[State 0, ScreenBound]
-;type = ScreenBound
-;trigger1 = 1
-;value = 1
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = 1
+value = 1
 
 [State 0, AttackDist]
 type = AttackDist
@@ -6284,12 +6284,12 @@ trigger1 = AnimElem = 8
 value = S621,1
 volume = 100
 
-;[State 0, FatalCounter]
-;type = MapSet
-;trigger1 = 1
-;map = "fatal"
-;value = 1
-;ignorehitpause = 1
+[State 0, FatalCounter]
+type = MapSet
+trigger1 = 1
+map = "fatal"
+value = 1
+ignorehitpause = 1
 
 [State 1010, Helper Attack Scale]
 type = AttackMulSet
@@ -6331,8 +6331,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S,SA
 animtype  = Medium
-;damage    = ifelse(enemy,movetype = A,ifelse(parent,stateno=462,160,120),ifelse(parent,stateno=462,80,60))
-damage = ifelse(parent,stateno=462,70,50)
+damage    = ifelse(enemy,movetype = A,ifelse(parent,stateno=462,160,120),ifelse(parent,stateno=462,80,60))
 hitflag = MAFD
 guardflag =  MA
 sparkno = 0
@@ -7165,24 +7164,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-;type = MapSet
-;trigger1 = teammode != tag && enemy,teammode != tag
-;map = "initialDefence"
-;value = 1
-;persistent = 0
-;
-;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-;type = MapSet
-;trigger1 = roundstate = 1
-;map = "defence"
-;value = 0
-;
-;[State -2, Defense Set] ; Used to determine character defense
-;type = defenceMulSet
-;trigger1 = 1 
-;value = map(initialDefence) + map(defence)
-;onhit = 0
+[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+type = MapSet
+trigger1 = teammode != tag && enemy,teammode != tag
+map = "initialDefence"
+value = 1
+persistent = 0
+
+[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+type = MapSet
+trigger1 = roundstate = 1
+map = "defence"
+value = 0
+
+[State -2, Defense Set] ; Used to determine character defense
+type = defenceMulSet
+trigger1 = 1 
+value = map(initialDefence) + map(defence)
+onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

@@ -83,7 +83,7 @@ dhcAttackB = 24000 ;DHC Attack State when B+T is pressed
 dhcAttackC = 25000 ;DHC Attack State when C+T is pressed
 dhcMeterRequirementA = 1000 ;Meter Requirement for doing DHC A
 dhcMeterRequirementB = 1000 ;Meter Requirement for doing DHC B
-dhcMeterRequirementC = 1500 ;Meter Requirement for doing DHC C
+dhcMeterRequirementC = 2000 ;Meter Requirement for doing DHC C
 dhcAirA = 0 ;If DHC Attack A is aerial (1: Yes, 0: No)
 dhcAirB = 1 ;If DHC Attack B is aerial (1: Yes, 0: No)
 dhcAirC = 0 ;If DHC Attack C is aerial (1: Yes, 0: No)
@@ -4689,8 +4689,8 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15
-ground.velocity = -3,6
-air.velocity = -3,6
+ground.velocity = -2,6
+air.velocity = -2,6
 Fall = 1
 Envshake.time = 30
 fall.recover = 0
@@ -5740,24 +5740,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-;type = MapSet
-;trigger1 = teammode != tag && enemy,teammode != tag
-;map = "initialDefence"
-;value = 1
-;persistent = 0
-;
-;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-;type = MapSet
-;trigger1 = roundstate = 1
-;map = "defence"
-;value = 0
-;
-;[State -2, Defense Set] ; Used to determine character defense
-;type = defenceMulSet
-;trigger1 = 1 
-;value = map(initialDefence) + map(defence)
-;onhit = 0
+[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+type = MapSet
+trigger1 = teammode != tag && enemy,teammode != tag
+map = "initialDefence"
+value = 1
+persistent = 0
+
+[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+type = MapSet
+trigger1 = roundstate = 1
+map = "defence"
+value = 0
+
+[State -2, Defense Set] ; Used to determine character defense
+type = defenceMulSet
+trigger1 = 1 
+value = map(initialDefence) + map(defence)
+onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

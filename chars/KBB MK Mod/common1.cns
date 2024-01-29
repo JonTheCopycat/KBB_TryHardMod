@@ -171,13 +171,13 @@ trans = add
 
 [State 0, VelSet]
 type = VelAdd
-trigger1 = time = [0, 1]
+trigger1 = time = 0
 x = const(velocity.run.fwd.x) * 1.78 * 0.6
 y = 0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = 2
+trigger1 = time = [1, 2]
 x = const(velocity.run.fwd.x) * 1.78 * 1.25
 
 [State 0, VelSet]
@@ -231,76 +231,7 @@ ctrl = 1
 type = ChangeState
 ;triggerall = time >= 5
 trigger1 = command = "back"
-value = 35
-
-[State 200, End]
-type = ChangeState
-triggerall = prevstateno != 52 || time > 3
-trigger1 = command = "a"
-value = 290
-ctrl = 0
-
-[State 200, End]
-type = ChangeState
-triggerall = prevstateno != 52 || time > 3
-trigger1 = command = "b"
-value = 910
-ctrl = 0
-
-[State 200, C]
-type = ChangeState
-triggerall = numhelper(3500) = 0
-Triggerall = power >= 200
-trigger1 = command = "c"
-value = 490
-ctrl = 0
-
-[State 200, End]
-type = ChangeState
-trigger1 = AnimTime = 0
-value = 11
-ctrl = 1
-
-;---------------------------------------------------------------------------
-;Wavedash Stop
-[Statedef 35]
-type = C
-movetype= I
-physics = C
-anim = 35
-ctrl = 0
-sprpriority = 1
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = 1
-x = vel x * 0.5
-
-[State 200, End]
-type = ChangeState
-;triggerall = time >= 5
-trigger1 = command = "holdup"
-value = 60
-ctrl = 0
-
-;[State 200, End]
-;type = ChangeState
-;triggerall = time >= 10
-;trigger1 = command = "WD"
-;value = 30
-;ctrl = 0
-
-[State 200, End]
-type = ChangeState
-trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
-value = 100
-ctrl = 1
-
-[State 200, End]
-type = ChangeState
-trigger1 = command = "BB"
 value = 105
-ctrl = 1
 
 [State 200, End]
 type = ChangeState
@@ -329,10 +260,6 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 11
 ctrl = 1
-
-
-
-
 
 ;---------------------------------------------------------------------------
 ; Jump Start
@@ -499,7 +426,7 @@ value = 3
 
 [State 0, CtrlSet]
 type = CtrlSet
-trigger1 = time >= 15
+trigger1 = time >= 14
 trigger2 = movehit
 value = 1
 
@@ -519,7 +446,7 @@ x = 6
 type = VelSet
 triggerall = time >= 2
 trigger1 = time <= 14
-y = 1
+y = 0.8
 
 [State 0, VelAdd]
 type = VelAdd
@@ -581,38 +508,6 @@ triggerall = time >= 2
 trigger1 = command = "s" && var(4) = 0 
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && var(4) = 0 
 value = 66
-ctrl = 1
-
-[State 0, ChangeState]
-type = ChangeState
-triggerall = time >= 2
-trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 600
-ctrl = 1
-
-[State 0, ChangeState]
-type = ChangeState
-triggerall = time >= 2
-trigger1 = command = "a"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 610
-ctrl = 1
-
-[State 0, ChangeState]
-type = ChangeState
-triggerall = time >= 2
-trigger1 = command = "holdfwd"
-trigger1 = command = "c"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 625
-
-[State 0, ChangeState]
-type = ChangeState
-triggerall = time >= 2
-trigger1 = command = "c" && var(12) < const(movement.airjump.num)
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 620
 ctrl = 1
 
 [State 200, End]		
