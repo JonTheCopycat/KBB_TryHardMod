@@ -157,7 +157,7 @@ value = 21
 ;-------------------------------------------------------------------------------
 [Statedef 30]
 type    = C
-movetype= A
+movetype= I
 physics = S
 juggle  = 1
 ctrl = 0
@@ -166,9 +166,20 @@ sprpriority = 2
 
 
 [State 0, VelSet]
-type = VelSet
+type = VelAdd
 trigger1 = time = [0, 1]
-x = -2
+x = const(velocity.run.fwd.x) * ifelse(prevstateno = 30, 0.9, 0.6) * 0.6
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 2
+x = const(velocity.run.fwd.x) * ifelse(prevstateno = 30, 0.9, 0.6) * 1.25
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = time > 5
+trigger1 = vel x > 1
+x = -0.25
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -215,7 +226,7 @@ ctrl = 1
 type = ChangeState
 ;triggerall = time >= 5
 trigger1 = command = "back"
-value = 105
+value = 35
 
 [State 200, End]
 type = ChangeState
@@ -248,7 +259,7 @@ ctrl = 1
 type = C
 movetype= I
 physics = S
-anim = 36
+anim = 31
 ctrl = 0
 sprpriority = 1
 
@@ -273,26 +284,32 @@ trans = add
 
 [State 0, VelSet]
 type = VelAdd
-trigger1 = time = 0
-x = const(velocity.run.fwd.x) * 2 * 0.6
+trigger1 = time = [0, 1]
+x = const(velocity.run.fwd.x) * ifelse(p2bodydist x < 30, 1.1, 2) * 0.6
 y = 0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = [1, 2]
-x = const(velocity.run.fwd.x) * 2 * 1.25
+trigger1 = time = 2
+x = const(velocity.run.fwd.x) * ifelse(p2bodydist x < 30, 1.1, 2) * 1.25
 
 [State 0, VelSet]
 type = VelSet
-triggerall = abs(p2bodydist x) < 40
-trigger1 = time = [0, 3]
-x = const(velocity.run.fwd.x) * 0.75
+triggerall = p2bodydist x < 40
+trigger1 = time >= 3
+x = vel x * 0.75
 
 [State 0, VelSet]
 type = VelAdd
 trigger1 = time > 5
 trigger1 = vel x > 1
 x = -0.25
+
+[State 0, VelSet]
+type = VelSet
+triggerall = abs(p2bodydist x) < 40
+trigger1 = time = [0, 3]
+x = const(velocity.run.fwd.x) * 0.75
 
 [State 0, Explod]
 type = Explod
@@ -331,6 +348,13 @@ value = SCA, AA, AP, AT
 
 [State 200, End]
 type = ChangeState
+;triggerall = time >= 5
+trigger1 = command = "back"
+trigger2 = root,stateno = 35
+value = 36
+
+[State 200, End]
+type = ChangeState
 trigger1 = command = "a"
 trigger2 = root,stateno = 290
 value = 291
@@ -346,7 +370,6 @@ ctrl = 0
 [State 200, End]
 type = ChangeState
 trigger1 = command = "c"
-trigger2 = root,stateno = 390
 value = 470
 ctrl = 0
 
@@ -360,6 +383,211 @@ value = 31
 [State 200, End]
 type = DestroySelf
 trigger1 = AnimTime = 0
+
+;---------------------------------------------------------------------------
+;Wavedash
+[Statedef 32]
+type = C
+movetype= I
+physics = N
+anim = 36
+ctrl = 0
+velset = 0,0
+sprpriority = 1
+
+;[State 0, VelSet]
+;type = VelAdd
+;trigger1 = time > 5
+;trigger1 = vel x > 1
+;x = -0.25
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = F16000
+ID = 16000
+pos = -40,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+
+[State 200, End]
+type = ChangeState
+;triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+;[State 200, End]
+;type = ChangeState
+;triggerall = time >= 10
+;trigger1 = command = "WD"
+;value = 30
+;ctrl = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5 || command != "z"
+trigger1 = command = "FF" || (command = "z" && command != "holddown")
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+;triggerall = time >= 5
+trigger1 = command = "BB"
+value = 105
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "a"
+value = 250
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "b"
+value = 390
+ctrl = 0
+
+[State 200, C]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = power >=250
+trigger1 = command = "c"
+value = 590
+
+;[State 200, C]
+;type = ChangeState
+;triggerall = numhelper(3500) = 0
+;triggerall = power >=250
+;trigger1 = command = "s"
+;value = 590
+
+
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+
+;---------------------------------------------------------------------------
+;Wavedash Stop
+[Statedef 35]
+type = C
+movetype= I
+physics = C
+anim = 35
+ctrl = 0
+sprpriority = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = 1
+x = vel x * 0.5
+
+[State 200, End]
+type = ChangeState
+;triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+;[State 200, End]
+;type = ChangeState
+;triggerall = time >= 10
+;trigger1 = command = "WD"
+;value = 30
+;ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "BB"
+value = 105
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "a"
+value = 290
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "b"
+trigger2 = command = "c"
+value = 390
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+
+
+
+;---------------------------------------------------------------------------
+;Wavedash Still Clone
+[Statedef 36]
+type = C
+movetype= I
+physics = S
+anim = 36
+ctrl = 0
+sprpriority = 1
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA, AA, AP, AT
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "a"
+trigger2 = root,stateno = 290
+value = 291
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "b"
+trigger2 = root,stateno = 390
+value = 321
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "c"
+value = 470
+ctrl = 0
+
+[State 31, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
+
 
 ;---------------------------------------------------------------------------
 ;Clone Hurt
@@ -388,7 +616,7 @@ trigger1 = AnimTime = 0
 
 
 ;Standard Wavedash
-[Statedef 35]
+[Statedef 32]
 type = C
 movetype= I
 physics = S

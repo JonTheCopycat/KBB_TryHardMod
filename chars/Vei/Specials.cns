@@ -865,7 +865,7 @@ trigger5 = AnimElem = 8
 trigger6 = AnimElem = 9
 trigger7 = AnimElem = 10
 trigger8 = AnimElem = 11
-attr = A, NP
+attr = A, SA
 animtype  = Heavy 
 damage    = 15
 Hitflag = MAFD

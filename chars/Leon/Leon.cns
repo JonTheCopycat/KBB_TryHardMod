@@ -2827,15 +2827,6 @@ trigger1 = command = "BB"
 value = 107
 ctrl = 0
 
-[State 300, 2A Cancel]
-type = ChangeState
-Triggerall = hitcount = 2 || moveguarded
-Triggerall = var(17) = 0
-trigger1 = command = "holddown"
-trigger1 = ailevel = 0 && command = "a"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 950
-
 [State 300, 4B Cancel]
 type = ChangeState
 Triggerall = hitcount = 2 || moveguarded
@@ -3832,9 +3823,9 @@ guard.velocity = -8
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15
-ground.velocity = -2,-3.5
+ground.velocity = -2,-3
 air.hittime  = 30
-air.velocity = -2,-3.5
+air.velocity = -2,-1
 Fall = 1
 Envshake.time = 20
 fall.recover = 1
@@ -10676,24 +10667,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-type = MapSet
-trigger1 = teammode != tag && enemy,teammode != tag
-map = "initialDefence"
-value = 1
-persistent = 0
-
-[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-type = MapSet
-trigger1 = roundstate = 1
-map = "defence"
-value = 0
-
-[State -2, Defense Set] ; Used to determine character defense
-type = defenceMulSet
-trigger1 = 1 
-value = map(initialDefence) + map(defence)
-onhit = 0
+;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+;type = MapSet
+;trigger1 = teammode != tag && enemy,teammode != tag
+;map = "initialDefence"
+;value = 1.2
+;persistent = 0
+;
+;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+;type = MapSet
+;trigger1 = roundstate = 1
+;map = "defence"
+;value = 0
+;
+;[State -2, Defense Set] ; Used to determine character defense
+;type = defenceMulSet
+;trigger1 = 1 
+;value = map(initialDefence) + map(defence)
+;onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

@@ -296,28 +296,35 @@ ctrl = 1
 type = ChangeState
 triggerall = (prevstateno != (400, 410)) || time >= 7
 trigger1 = command = "back"
-value = 105
+value = 35
 
 [State 200, End]
 type = ChangeState
-triggerall = numhelper(3500) = 0
 triggerall = prevstateno != 52 || time >= 3
 triggerall = prevstateno != (400, 410) || time >= 7
-Triggerall = power >= 200
-triggerall = numhelper(291) = 0
 trigger1 = command = "a"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 290
 ctrl = 0
 
-[State 200, End]
+;[State 200, C]
+;type = ChangeState
+;triggerall = prevstateno != 52 || time >= 3
+;triggerall = prevstateno != (400, 410) || time >= 7
+;trigger1 = command = "b"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 900
+
+[State 200, C]
 type = ChangeState
+triggerall = numhelper(3500) = 0
 triggerall = prevstateno != 52 || time >= 3
 triggerall = prevstateno != (400, 410) || time >= 7
+Triggerall = power >= 200
+triggerall = numhelper(391) = 0
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 900
-ctrl = 0
+value = 390
 
 [State 200, C]
 type = ChangeState
@@ -327,7 +334,7 @@ Triggerall = numhelper(420) < 1
 Triggerall = Var(17) < 3 
 triggerall = prevstateno != 52 || time >= 3
 triggerall = prevstateno != (400, 410) || time >= 7
-trigger1 = command = "hold_c"
+trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 490
 
@@ -336,6 +343,96 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 11
 ctrl = 1
+
+;---------------------------------------------------------------------------
+;Wavedash Stop
+[Statedef 35]
+type = C
+movetype= I
+physics = N
+anim = 35
+ctrl = 0
+sprpriority = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = 1
+x = vel x * 0.5
+
+[State 200, End]
+type = ChangeState
+;triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+;[State 200, End]
+;type = ChangeState
+;triggerall = time >= 10
+;trigger1 = command = "WD"
+;value = 30
+;ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "BB"
+value = 105
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = prevstateno != 52 || time >= 3
+triggerall = prevstateno != (400, 410) || time >= 7
+trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 290
+ctrl = 0
+
+[State 200, C]
+type = ChangeState
+triggerall = prevstateno != 52 || time >= 3
+triggerall = prevstateno != (400, 410) || time >= 7
+trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 900
+
+;[State 200, C]
+;type = ChangeState
+;triggerall = numhelper(3500) = 0
+;triggerall = prevstateno != 52 || time >= 3
+;triggerall = prevstateno != (400, 410) || time >= 7
+;Triggerall = power >= 200
+;triggerall = numhelper(391) = 0
+;trigger1 = command = "b"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 390
+
+[State 200, C]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 100
+Triggerall = numhelper(420) < 1
+Triggerall = Var(17) < 3 
+triggerall = prevstateno != 52 || time >= 3
+triggerall = prevstateno != (400, 410) || time >= 7
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 490
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+
+
 
 ;---------------------------------------------------------------------------
 ; Jump Start

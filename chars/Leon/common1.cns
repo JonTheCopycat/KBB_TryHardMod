@@ -243,7 +243,6 @@ value = 105
 [State 200, End]
 type = ChangeState
 triggerall = prevstateno != 52 || time > 3
-triggerall = time > 1
 trigger1 = command = "a"
 value = 290
 ctrl = 0
@@ -271,14 +270,6 @@ triggerall = time > 1
 triggerall = var(53) > 10
 trigger1 = command = "c"
 value = 490
-ctrl = 0
-
-[State 200, End]
-type = ChangeState
-triggerall = prevstateno != 52 || time > 3
-triggerall = power >= 500
-trigger1 = command = "s" && command = "holddown"
-value = 590
 ctrl = 0
 
 [State 200, End]
