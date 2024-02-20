@@ -1,6 +1,48 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
-| Try-Hard Version 0.5.0 Changes:                    /
+| Try-Hard Version 0.6.1 Changes:                    /
+|---------------------------------------------------/
+
+Some balance changes, replaced moves, and bug fixes to keep things healthy.
+
+Junichi:
+1. Baton Ready Stance reworked
+2. Backturned 5b now jump cancellable
+3. Wavedash Moves Retouched and polished around the board
+4. Added wavedash cancel to:
+	* Phoenix 5bb
+	* Baton Ready 5a
+	* Punch 5c
+
+
+Max:
+1. New Wavedash B
+
+
+Fly:
+1. Nerfed Wavedash B
+
+
+Takuya:
+1. 5C is faster
+2. 2C is slower
+3. 4C jump cancel is instant if you hit shadow ball
+4. 2[B] with spike is slowwer
+5. 5AA gives less meter
+6. j.5b & j.5bb are no longer overheads
+7. J.5[B] does more damage
+8. 2C's first spike dissapears if Takuya gets hit (or blocks)
+9. J2C and J2[C] both are somewhat faster
+10. 236A does less damage
+11. 214B has less superpause time
+12. 214[B] is less minus than uncharged
+13. 236[C] with spike has a cut-in now 
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
+| Try-Hard Version 0.5.0/0.6.0 Changes:              /
 |---------------------------------------------------/
 
 Star Cancel was fun, but it was frankly broken. This updates revamps him as well as a few characters that were underwhelming last patch.
@@ -10,6 +52,7 @@ Universal:
 	* You can no longer star cancel out of comboes, however...
 	* You can now influence your trajectory when using star cancel.
 
+New Characters: Junichi and Takuya
 
 
 
