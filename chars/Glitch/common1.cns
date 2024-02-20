@@ -179,12 +179,12 @@ trans = add
 type = VelAdd
 trigger1 = time = [0, 1]
 x = const(velocity.run.fwd.x) * 1.8 * 0.6
-y = 0
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 2
 x = const(velocity.run.fwd.x) * 1.8 * 1.25
+y = 0
 
 [State 0, VelSet]
 type = VelAdd

@@ -704,7 +704,7 @@ triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 50
+value = 30
 
 [State 0, Rapid Sound]
 type = PlaySnd
@@ -799,6 +799,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
+triggerall = numhelper(19004) = 0
 trigger1 = command = "SPECIAL 1"
 value = 20000
 
@@ -839,6 +840,7 @@ value = 315
 type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(420) = 0
 triggerall = power >= 200
 trigger1 = command = "holddown"
 trigger1 = command = "c"
@@ -1044,6 +1046,7 @@ damage    = 15
 hitflag = MAF
 guardflag = MA
 pausetime = 10,15
+guard.pausetime = 10,5
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-55
@@ -1226,6 +1229,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
+triggerall = numhelper(19004) = 0
 trigger1 = command = "SPECIAL 1"
 value = 20000
 
@@ -1278,6 +1282,7 @@ value = ifelse(prevstateno=200||prevstateno=305,210,200) ;1. Charge Cancel bypas
 [State 200, 2C]
 type = ChangeState
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(420) = 0
 Triggerall = movecontact
 triggerall = power >= 500
 trigger1 = command = "c"
@@ -1521,8 +1526,8 @@ hitsound   = s0, 4
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
-ground.velocity = -6,-3
-air.velocity = -6,-3
+ground.velocity = -7,-3
+air.velocity = -7,-3
 guard.velocity = -5
 Fall.recovertime = 70
 fall = 1
@@ -1606,6 +1611,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
+triggerall = numhelper(19004) = 0
 trigger1 = command = "SPECIAL 1"
 value = 20000
 
@@ -1784,6 +1790,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
+triggerall = numhelper(19004) = 0
 trigger1 = command = "SPECIAL 1"
 value = 20000
 
@@ -1814,6 +1821,7 @@ value = 40
 type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(420) = 0
 triggerall = power >= 200
 trigger1 = command = "holddown"
 trigger1 = command = "c"
@@ -1916,6 +1924,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
+triggerall = numhelper(19004) = 0
 trigger1 = command = "SPECIAL 1"
 value = 20000
 
@@ -1946,6 +1955,7 @@ value = 40
 type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(420) = 0
 triggerall = power >= 200
 trigger1 = command = "holddown"
 trigger1 = command = "c"
@@ -2104,7 +2114,7 @@ damage    = 50
 guardflag = MA
 hitflag = MAFD
 pausetime = 15,15
-guard.pausetime = 8,15
+guard.pausetime = 8,10
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2741,7 +2751,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Hard
-damage    = 20
+damage    = 30
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,0
@@ -3047,7 +3057,6 @@ air.velocity = -2,-3
 Fall = 1
 fall.recovertime = 45
 Envshake.time = 30
-p2getp1state = 0
 p1sprpriority = 0
 p2facing = 1        ;Force to face p1
 
@@ -3762,7 +3771,7 @@ x = -2
 type = ChangeState
 trigger1 = command = "holdup" && time > 18
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && time > 20
-value = ifelse(var(3)=0,ifelse(pos y<0,45,443),50)
+value = ifelse(var(3)=0,ifelse(pos y<0,45,ifelse(helper(445),movehit,40,443)),50)
 ctrl = 1
 
 
@@ -4335,7 +4344,7 @@ sprpriority = 2
 
 [State 0, Helper]
 type = Helper
-trigger1 = Time = 0
+trigger1 = AnimElem = 6
 helpertype = normal ;player
 name = "Spam Deny"
 ID = 420
@@ -4353,7 +4362,7 @@ supermovetime= 0
 
 [State 0, Helper]
 type = Helper
-trigger1 = Time = 15
+trigger1 = Time = 18
 helpertype = normal ;player
 name = "Spike"
 ID = 451
@@ -4523,11 +4532,9 @@ ownpal = 0
 supermovetime = 0
 pausemovetime = 0
 
-
-
 [State 0, DestroySelf]
 type = DestroySelf
-trigger1 = AnimTime = 0
+trigger1 = AnimTime = 0 || root,movetype = H 
 ;ignorehitpause = 
 ;persistent = 
 
@@ -5529,7 +5536,7 @@ persistent = 0
 
 [State 0, VelAdd]
 type = VelSet
-trigger1 = AnimTime = 0 && movecontact && command = "holdback"
+trigger1 = AnimTime = 0  && command = "holdback" 
 x = -4
 y = -5
 ;ignorehitpause = 
@@ -5551,13 +5558,13 @@ inheritjuggle = 1
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = AnimTime = 0 && command = "holdback"
+trigger1 = AnimTime = 0 && command = "holdback" || AnimTime = 0 && !movecontact
 value = 50
 ctrl = 1
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = AnimTime = 0
+trigger1 = AnimTime = 0 && movecontact
 value = 480
 ctrl = 1
 
@@ -6036,6 +6043,42 @@ fall.yvelocity = -4
 fall = 1
 Envshake.time = 25
 
+[State 200, 4 Strikes]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 500
+trigger1 = command = "SPECIAL 2"
+value = 21000
+
+[State 200, 4 Strikes]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+value = 22000
+
+[State 200, 4 Strikes]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 4"
+value = 23000
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = command = "DD" && movehit
+value = 55
+ctrl = 1
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = command = "holdup" && movehit && var(3) = 0 
+value = 45
+ctrl = 1 
+
 ;-------------------------------------------------------------------------------
 ; Wavedash B
 [Statedef 490]
@@ -6086,7 +6129,7 @@ physics = A         ;A,C,S,N
 type = Helper
 trigger1 = AnimElem = 4
 helpertype = normal
-name = "Wavedash C"
+name = "Wavedash B"
 ID = 495
 stateno = 495
 pos = 0,0
@@ -6985,6 +7028,7 @@ Envshake.time = 10
 type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(420) = 0
 triggerall = power >= 200
 trigger1 = command = "holddown"
 trigger1 = command = "c"
@@ -7233,6 +7277,7 @@ y = 0
 type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(420) = 0
 triggerall = power >= 200
 trigger1 = command = "holddown"
 trigger1 = command = "c"
@@ -7406,6 +7451,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
+triggerall = numhelper(19004) = 0
 trigger1 = command = "SPECIAL 1"
 value = 20000
 
@@ -7437,6 +7483,7 @@ value = 24000
 type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(420) = 0
 triggerall = power >= 200
 trigger1 = command = "holddown"
 trigger1 = command = "c"
@@ -7596,16 +7643,16 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
-trigger1 = command = "SPECIAL 4"
-value = 23000
+trigger1 = command = "SPECIAL 3"
+value = 22000
 
 [State 200, 4 Strikes]
 type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
-trigger1 = command = "SPECIAL 3"
-value = 22000
+trigger1 = command = "SPECIAL 4"
+value = 23000
 
 [State 0, ChangeState]
 type = ChangeState
@@ -7804,7 +7851,7 @@ attr = A, NA
 animtype  = Heavy 
 damage    = 7
 Hitflag = MAF
-guardflag = HA
+guardflag = MA
 pausetime = 4,10
 guard.pausetime = 4,2
 sparkno = 0
@@ -7971,7 +8018,7 @@ attr = A, NA
 animtype  = Up
 damage    = 20
 hitflag = MAF
-guardflag = HA
+guardflag = MA
 pausetime = 15,10
 sparkno = 2
 guard.sparkno = 13000
@@ -8229,7 +8276,7 @@ trigger1 = hitcount <= 15
 trigger1 = 1
 attr = A, NA
 animtype  = Heavy 
-damage    = 4,2
+damage    = 5,2
 Hitflag = MAFD
 guardflag = HA
 pausetime = 3,10
@@ -8952,7 +8999,7 @@ value = 621
 
 [State 0, Charge Cancel]
 type = changestate
-triggerall = time <= 7
+triggerall = time <= 5 && prevstateno != 630
 trigger1 = command != "hold_c"
 value = 620
 
@@ -9568,8 +9615,8 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1.5,-7
-air.velocity = -1,-7
+ground.velocity = -.5,-7
+air.velocity = -.5,-7
 Fall = 1
 Fall.recovertime = 50 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
@@ -9722,8 +9769,8 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1.5,-8
-air.velocity = -1,-8
+ground.velocity = -.5,-7
+air.velocity = -.5,-7
 Fall = 1
 Fall.recovertime = 70 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
@@ -9831,7 +9878,7 @@ sprpriority = 5
 
 [State 200, End]
 type = Changestate
-trigger1 = time = 120
+trigger1 = time = 170
 value = 430
 ;-------------------------------------------------------------------------------
 ; Spam Allow
@@ -9856,7 +9903,7 @@ type = S
 ctrl = 0
 anim = 5600
 velset = 0,0
-movetype = A
+movetype = H
 physics = N
 sprpriority = 2
 
@@ -9952,6 +9999,8 @@ value = 5150
 
 [Statedef -2]
 ;Failed to Block stuff.
+
+
 
 [State 0, Failed to block a low!]
 type = Explod
@@ -10061,12 +10110,7 @@ value = 0
 ignorehitpause = 1
 persistent = 0
 
-;[State -3, Special KO] ; Disabled for now
-;type = changestate
-;trigger1 = life <= 0
-;trigger1 = stateno != 5690 && prevstateno != 5690 
-;trigger1 = teammode = single
-;value = 5690
+
 
 ;[State -3, Special KO]
 ;type = changestate
@@ -10078,6 +10122,13 @@ persistent = 0
 ;===============================================================================================================
 [Statedef -3]
 
+;[State -3, Special KO] ; Disabled for now
+;type = changestate
+;triggerall = stateno != 5690 
+;triggerall = enemy,map(fatal) = 1 && enemy,movehit = 1
+;trigger1 = life <= 0
+;value = 5690
+;ignorehitpause = 1
 
 ; 5bb wallbounce spam prevent ----------
 [State 0, Wallbounce prevent reset]

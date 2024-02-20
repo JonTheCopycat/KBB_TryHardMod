@@ -2008,17 +2008,10 @@ ctrl = 1
 type    = S
 movetype= A
 physics = S
-juggle  = 1
+juggle  = 0
 ctrl = 0
 anim = 251
 sprpriority = 2
-
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 5
-persistent = 0
 
 [State 0, staleMovesException] ;Negates stale moves
 type = MapSet
@@ -2066,7 +2059,6 @@ scale = 0.4,0.4
 
 [State 200, 1]
 type = HitDef
-triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 trigger1 = 1
 attr = S, NP

@@ -856,6 +856,36 @@ ignorehitpause = 1
 ;volumescale = 200
 ;channel = 0
 
+[State 0, I'm gonna do an unblockable attack!]
+type = Explod
+trigger1 = time = 1
+anim = F30000
+id = 30000
+pos = -30 + (cond(BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30, 60, 0)),-50
+postype = p1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+pausemovetime = 999
+supermovetime = 999
+ontop = 0
+shadow = 0,0,0
+removeongethit = 0
+ignorehitpause = 1
+facing = facing
+vfacing = 1
+scale = 0.6,0.6
+sprpriority = 5
+removetime = -2
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
 [State 0, Damage Proration]
 type = VarAdd
 trigger1 = hitcount >= 8
@@ -938,12 +968,12 @@ triggerall = AnimElem = 9
 trigger1 = 1
 attr = S, NP
 animtype  = Hard
-damage    = 40
+damage    = 60
 kill = 0
-hitflag = MAF
-guardflag = MAF
-pausetime = 8,100
-guard.pausetime = 12,12
+hitflag = MAFD
+guardflag = 
+pausetime = 10,100
+guard.pausetime = 16,16
 guard.hittime = 15
 airguard.hittime = 15
 sparkno = 0
@@ -1011,7 +1041,7 @@ triggerall = AnimElem = 2 || AnimElem = 4 || AnimElem = 6 || AnimElem = 8
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 5
+damage    = 10
 kill = 0
 hitflag = MAFD
 guardflag = MAF
@@ -1086,7 +1116,7 @@ triggerall = AnimElem = 6 || AnimElem = 8 || AnimElem = 10
 trigger1 = 1
 attr = S, NA
 animtype  = Hard
-damage    = 10
+damage    = 5
 kill = 0
 hitflag = MAFD
 guardflag = MAF
@@ -1150,7 +1180,7 @@ Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 [State 200, VelSet]
 type = VelSet
 trigger1 = AnimElem = 20
-x = -6
+x = -8
 
 [State 0, Helper]
 type = Helper
@@ -1239,6 +1269,12 @@ ignorehitpause = 1
 persistent = 0
 value = 3
 
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S6,1
+volumescale = 999
+
 [State 200, Hit]
 type = HitDef
 getpower = 0
@@ -1250,11 +1286,11 @@ animtype  = Light
 damage    = 50
 hitflag = MAFD
 guardflag = MA
-pausetime = 2,8
+pausetime = 5,10
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = S4,1
+hitsound   = S0,5
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
@@ -1276,117 +1312,26 @@ animtype  = Medium
 damage    = 50
 hitflag = MAFD
 guardflag = MA
-pausetime = 10,10
+pausetime = 18,18
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = S4,1
+hitsound   = S6,1
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -5,-4
-air.velocity = -5,-4
+ground.velocity = -5,-5
+air.velocity = -5,-5
 Fall = 0
-Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
-envshake.time = 10
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+envshake.time = 20
 
 [State 200, DestroySelf]
 type = DestroySelf
 trigger1 = AnimTime = 0
 
 
-;-------------------------------------------------------------------------------
-;Glitch Clone Explosion
-Statedef 302]
-type    = S
-movetype= A
-physics = S
-juggle  = 0
-ctrl = 0
-anim = 302
-velset = 0,0
-sprpriority = 2
-poweradd = 0
-
-[State 0, Busterable]
-type = ParentMapSet
-trigger1 = 1
-map = "busterable"
-value = 1
-ignorehitpause = 1
-
-[State 1010, Helper Attack Scale]
-type = AttackMulSet
-trigger1 = 1
-value = 1 * 0.99**root,var(11)
-ignorehitpause = 1
-
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = AnimElem = 1
-value = S5,1
-volumescale = 999
-
-[State 0, PosAdd]
-type = PosAdd
-trigger1 = Time = 1
-y = -30
-
-[State 200, 1]
-type = HitDef
-getpower = 0
-triggerall = !movecontact
-trigger1 = 1
-attr = S, SA
-animtype  = Heavy
-damage    = 120+ parent,var(11),30
-guard.kill = 0
-hitflag = MAFD
-guardflag = MAF
-pausetime = 12,12
-sparkno = 0
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = 5,4
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 12
-ground.hittime  = 15
-ground.velocity = -5,-3
-air.velocity = -5,-3
-Fall = 1
-Envshake.time = 30
-fall.recover = 0
-
-[State 1010, Helper Attack Scale]
-type = AttackMulSet
-trigger1 = 1
-value = 1 * 0.99**root,var(11)
-ignorehitpause = 1
-
-[State 200, End]
-type = ChangeState
-trigger1 = AnimTime = 0
-value = 303
-ctrl = 1
-
-;-------------------------------------------------------------------------------
-;Glitch Clone Explosion End
-Statedef 303]
-type    = S
-movetype= I
-physics = S
-juggle  = 0
-ctrl = 0
-anim = 9999
-velset = 0,0
-sprpriority = 2
-poweradd = 0
-
-[State 200, End]
-type = Destroyself
-trigger1 = time = 6
 ;===============================================================================
 ; SkyFall Kick:
 ;-------------------------------------------------------------------------------
@@ -1409,7 +1354,7 @@ value = 0
 
 [State 0, DP INVINCIBILLITY BABY]
 type = NotHitBy
-trigger1 = time = [0, 30] 
+trigger1 = time = [0, 15] 
 value = C,NA,SA,NP,SP,NT,ST
 time = 1
 
@@ -1435,13 +1380,13 @@ y = -5
 [State 21000, VelSet]
 type = VelSet
 trigger1 = AnimElem = 1
-x = 2
-y = -5
+x = 2.5
+y = -7
 
 [State 21000, VelSet]
 type = VelAdd
 trigger1 = 1
-y = 0.33
+y = 0.5
 
 [State 200, End]
 type = ChangeState
@@ -1936,7 +1881,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A || movecountered, 7,0)
 ground.velocity = 0
-guard.velocity = 5
+guard.velocity = -5
 air.velocity = 0,0
 Fall = 1
 down.bounce = 1

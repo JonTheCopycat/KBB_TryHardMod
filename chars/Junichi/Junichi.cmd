@@ -683,6 +683,8 @@ Triggerall = statetype != A
 Triggerall = power >= 1500
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
+trigger3 = movecontact
+trigger3 = stateno = [200, 499] || stateno = [900, 999]
 
 ;===========================================================================
 ;---------------------------------------------------------------------------

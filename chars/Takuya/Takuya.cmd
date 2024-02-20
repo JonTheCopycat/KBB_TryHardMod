@@ -615,6 +615,7 @@ triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 1"
 Triggerall = power >= 1000
 Triggerall = statetype != A
+triggerall = numhelper(19004) = 0
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;;---------------------------------------------------------------------------
