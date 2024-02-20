@@ -1744,7 +1744,7 @@ volumescale = 100
 type = VelSet
 trigger1 = Time = 0
 x = 3.8
-y = -2.8
+y = -3
 
 [State 0, VelAdd]
 type = VelAdd
@@ -1786,7 +1786,7 @@ animtype  = Up
 damage    = 30
 hitflag = MAF
 guardflag = HA
-pausetime = 16,22
+pausetime = 16,18
 guard.pausetime = 16,16
 sparkno = 1
 guard.sparkno = 13000
@@ -1804,7 +1804,7 @@ Envshake.time = 20
 
 [State 200, End]
 type = ChangeState
-Triggerall = movecontact && time > 19
+Triggerall = movehit
 trigger1 = command = "s"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 66
