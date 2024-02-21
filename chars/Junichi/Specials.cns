@@ -1796,6 +1796,7 @@ sprpriority = 5
 [State 200, End]
 type = DestroySelf
 trigger1 = time = 60
+trigger2 = root,movecontact
 
 
 ;--------------------------------------------------------------------------------
@@ -2099,18 +2100,9 @@ pausemovetime = 0
 type = HitOverride
 trigger1 = prevstateno = 23000 && time = [0, 15]
 trigger2 =  time = [2,15]
-attr = SCA,NA,SA
+attr = SCA,NA,SA,NP,SP
 slot = 1
-stateno = 23050
-time = 1
-
-[State 0, HitOverride]
-type = HitOverride
-trigger1 = prevstateno = 23000 && time = [0, 15]
-trigger2 =  time = [2,15]
-attr = SCA,NP,SP
-slot = 2
-stateno = 23051
+stateno = ifelse(p2bodydist x < 100 && abs(p2bodydist y) < 30, 23050, 23051)
 time = 1
 
 [State 0, HitOverrideCheck]

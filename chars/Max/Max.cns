@@ -2420,6 +2420,14 @@ ontop = 0
 shadow = 0,0,0
 ownpal = 1
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+triggerall = movehit
+Trigger1 = command = "WD" && command != "NotWD"
+trigger2 = roundstate = 2 && ailevel > 5 && random < (ailevel * 100)
+value = 30
+ctrl = 1
+
 [State 230, Jump Cancel]
 type = ChangeState
 triggerall = Movehit
@@ -2608,7 +2616,7 @@ air.velocity = -1,-6
 guard.velocity = -2
 airguard.velocity = -2, -3.5
 fall = 1
-fall.recover = 0
+fall.recovertime = 50
 Envshake.time = 10
 
 

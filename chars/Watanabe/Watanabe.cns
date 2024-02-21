@@ -821,7 +821,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 8
+value = 10
 
 [State -2, Counterhit TSP]
 type = Helper
@@ -4876,7 +4876,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 6
+value = 12
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -5149,6 +5149,21 @@ type = MapSet
 trigger1 = 1 
 map = "Main"
 value = ifelse(parent,numhelper(401) > 1 && helper(401),ID != ID,0,1)
+
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 0, Damage Proration]
+type = ParentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 12
 
 
 [State 0, PosSet]
@@ -6336,7 +6351,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S,SA
 animtype  = Medium
-damage    = ifelse(enemy,movetype = A,ifelse(parent,stateno=462,160,120),ifelse(parent,stateno=462,80,60))
+damage    = ifelse(enemy,movetype = A,ifelse(parent,stateno=462,120,80),ifelse(parent,stateno=462,60,40))
 hitflag = MAFD
 guardflag =  MA
 sparkno = 0

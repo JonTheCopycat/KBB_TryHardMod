@@ -1515,7 +1515,7 @@ animtype  = Medium
 damage    = 45
 hitflag = MAFD
 guardflag = MA
-pausetime = 20,25
+pausetime = 20,30
 ground.hittime  = 16
 air.hittime = 16
 guard.pausetime = 10,24
@@ -2407,7 +2407,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 0
+damage    = 20
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,0
@@ -2524,7 +2524,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 0
+damage    = 20
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,0
@@ -2634,7 +2634,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 0
+damage    = 20
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,0
@@ -2751,7 +2751,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Hard
-damage    = 30
+damage    = 10
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,0
@@ -2766,10 +2766,10 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 30 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 30 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2,-6
-air.velocity = -2,-6
+ground.velocity = ifelse(prevstateno = [23400,23500], ifelse(root,facing=facing,-5,5),-2),ifelse(prevstateno = [23400,23500], -3,-6)
+air.velocity = ifelse(prevstateno = [23400,23500], ifelse(root,facing=facing,-5,5),-2),ifelse(prevstateno = [23400,23500], -3,-6)
 Fall = 1
-Fall.recovertime = 45 + ifelse(enemy,movetype = A, 7,0) + ifelse(prevstateno = [23400,23500], 25,0)
+Fall.recovertime = 45 + ifelse(enemy,movetype = A, 7,0) + ifelse(prevstateno = [23400,23500], -15,0)
 
 [State 0, DestroySelf]
 type = DestroySelf
@@ -4376,6 +4376,7 @@ supermovetime = 0
 pausemovetime = 0
 
 
+
 [State 200, End]
 type = ChangeState
 trigger1 = AnimElemTime(6) > 0 && command = "hold_c" && power >= 50 && (helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466)
@@ -5536,7 +5537,7 @@ persistent = 0
 
 [State 0, VelAdd]
 type = VelSet
-trigger1 = AnimTime = 0  && command = "holdback" 
+trigger1 = AnimTime = 0 && movecontact && command = "holdback" 
 x = -4
 y = -5
 ;ignorehitpause = 
@@ -6857,7 +6858,8 @@ animtype  = Light
 damage    = 10
 hitflag = MAF
 guardflag = HAFD
-pausetime = 16,22
+pausetime = 16,30
+guard.pausetime = 16,22
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-55

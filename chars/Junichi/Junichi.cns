@@ -14742,7 +14742,7 @@ ignorehitpause = 1
 [State -2, Attack Scale]
 type = AttackMulSet
 trigger1 = 1
-value = 1 * 0.99**var(11) * ifelse(numhelper(22012) != 0, 1.2, 1)
+value = 1 * 0.99**var(11) * ifelse(numhelper(22012) != 0, 1.5, 1)
 ignorehitpause = 1
 
 [State -2, Counterhit TSP]
