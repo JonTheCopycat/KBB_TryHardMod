@@ -625,7 +625,7 @@ type = VelSet
 triggerall = statetype = A && movetype != H
 triggerall = command = "down"
 triggerall = vel y > 0 && vel y < 6
-triggerall = stateno != 900
+triggerall = stateno != 900 && stateno != 390
 trigger1 = 1
 y = 6
 
@@ -717,7 +717,7 @@ type = ChangeState
 value = 30
 trigger1 = command = "WD" && command != "NotWD"
 trigger1 = statetype = C || statetype = S
-trigger1 = ctrl
+trigger1 = ctrl || stateno = 100
 
 ;---------------------------------------------------------------------------
 ; backsway to Stance
@@ -726,7 +726,7 @@ type = ChangeState
 value = 31
 trigger1 = command = "BWD" && command != "NotBWD"
 trigger1 = statetype = C || statetype = S
-trigger1 = ctrl
+trigger1 = ctrl || stateno = 105
 
 ;---------------------------------------------------------------------------
 ; Run Fwd

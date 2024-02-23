@@ -259,6 +259,7 @@ value = 35
 type = ChangeState
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 290 + var(10) * 3
 ctrl = 0
 
@@ -266,6 +267,7 @@ ctrl = 0
 type = ChangeState
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 390 + var(10) * 3
 ctrl = 0
 
@@ -274,6 +276,7 @@ type = ChangeState
 triggerall = power >= 200
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 490 + var(10) * 3
 
 [State 200, End]
@@ -411,8 +414,8 @@ sysvar(1) = 0
 [State 40, 2]
 type = VarSet
 trigger1 = command = "holdfwd" && ailevel = 0
-trigger2 = abs(P2Bodydist X) > 100 
-trigger2 = ailevel > 0 && time = 0 && random < 300 && random >= 200 && p2movetype != H
+trigger2 = abs(P2Bodydist X) > 100 || p2movetype = H
+trigger2 = ailevel > 0 && time = 0 && random < 300 && random >= 200
 sysvar(1) = 1
 
 [State 40, 3]

@@ -289,16 +289,16 @@ ctrl = 0
 type = ChangeState
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "b"
-value = 491
+value = 390
 ctrl = 0
 
 [State 200, C]
 type = ChangeState
 triggerall = numhelper(3500) = 0
-triggerall = power >=200
+triggerall = power >= 100
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "c"
-value = 408
+value = 491
 
 [State 200, End]
 type = ChangeState
@@ -1195,12 +1195,6 @@ trigger1 = command = "a"
 value = 22
 ctrl = 0
 
-[State 105, 3]
-type = ChangeState
-trigger1 = command = "down"
-value = 10
-ctrl = 1
-
 [State 100, 4]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -1262,12 +1256,6 @@ sprpriority = 2
 ontop = 0
 shadow = 0,0,0
 ownpal = 0
-
-[State 105, 3]
-type = ChangeState
-trigger1 = command = "down"
-value = 10
-ctrl = 1
 
 [State 105, 3]
 type = ChangeState

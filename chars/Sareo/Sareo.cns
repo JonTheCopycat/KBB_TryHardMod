@@ -5434,18 +5434,18 @@ sprpriority = 1
 type = SuperPause
 triggerall = enemy,movetype = H
 trigger1 = Time = 1
-anim = 92006
+anim = 9999
 time = 10
 pos = 0,-20
 movetime = 10
 darken = 0
 p2defmul = 1
 poweradd = 0
-endcmdbuftime = 7
+endcmdbuftime = 10
 
 [State 105, NotHitBy]
 type = NotHitBy
-trigger1 = Time = [1, 5]
+trigger1 = Time = [1, 4]
 value = SCA
 time = 1
 

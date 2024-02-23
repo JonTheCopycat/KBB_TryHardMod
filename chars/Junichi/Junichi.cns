@@ -3,6 +3,7 @@
 ; var(0):= 1003 - Hard Knockdown - hit ground from fall, 1005 - Hard Knockdown - Lying Down, 40 - Jump Start, 45 - AirJump Start, 50 - Jump Up, 132 - Air guard (guarding), 155 - Air guard hit (knocked away), 5080 - Downed get-hit (shaking), 5081 - Downed get-hit (knocked back), 5100 - Downed get-hit (hit ground from fall), 5110 - Downed get-hit (lying down)
 ; var(3):= 450 - Down C:, 955 - Custom Jump Cancel, -3, 45 - AirJump Start
 ; var(4):= -3, 66 - Instant Airdash:
+;var(10):= Stance Indicator
 ;var(11):= 200 - A - 1, 210 - A - 2, 300 - B:, 310 - B - 2, 320 - B - 3, 410 - C - Start, 470 - Down C - Air Finisher:, 700 - Grab, 950 - Low Attack, 600 - A - Aire, 610 - B - Aire, 615 - Down + B Aire, 620 - C - Aire, -3, 50000 - Star Burst, 51000 - Star Burst Start, 54000 - Star Buster, 54500 - Star Buster off Block, 51001 - Star Burst ground dash proration cooldown, 51002 - Star Burst air dash proration cooldown, -3 - StarBurst Negative Statedef Stuff
 ;var(19):= 421 - Special Autoblock Variable
 ;var(20):= 460 - Down C - Air:, -3
@@ -528,6 +529,7 @@ ctrl = 1
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 210
 
 [State 200, End]
@@ -690,14 +692,14 @@ type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "holddown"
 trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * (50 + ifelse(movehit, 50, 0)))
 value = 413
 
 [State 210, Cancel into 5BB]
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * (50 + ifelse(movehit, 50, 0)))
 value = 414
 
 [State 210, End]
@@ -869,6 +871,7 @@ Triggerall = movecontact
 triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 21000
 
 [State 210, Cancel into 5BB]
@@ -1034,6 +1037,7 @@ value = 21000
 type = ChangeState
 Triggerall = movecontact || time >= 6
 trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 240
 
 [State 200, End]
@@ -1356,12 +1360,14 @@ type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "holddown"
 trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 952
 
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 270
 
 [State 200, End]
@@ -2138,6 +2144,7 @@ Triggerall = movecontact
 triggerall = power >= 500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 23000
 
 [State 200, Special 2 - Skyfall Kick]
@@ -2146,6 +2153,7 @@ Triggerall = movecontact
 triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 21000
 
 [State 200, End]
@@ -2436,6 +2444,7 @@ airguard.cornerpush.veloff = -4
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 30
 ctrl = 1
 
@@ -2453,6 +2462,7 @@ Triggerall = movecontact
 triggerall = power >= 500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 23000
 
 [State 200, Special 2 - Skyfall Kick]
@@ -2614,6 +2624,7 @@ Triggerall = movecontact
 triggerall = power >= 1500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 5"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 20010
 
 [State 200, Special 2 - Weave]
@@ -2623,6 +2634,14 @@ triggerall = power >= 500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
 value = 23000
+
+[State -1, SPECIAL 3 - Super Dash]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+value = 22010
 
 [State 200, Special 2 - Skyfall Kick]
 type = ChangeState
@@ -2643,6 +2662,7 @@ type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "holddown"
 trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 951
 
 ;[State 200, End]
@@ -3045,6 +3065,7 @@ Triggerall = movecontact
 triggerall = power >= 500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 23000
 
 [State 200, Special 2 - Skyfall Kick]
@@ -3053,7 +3074,17 @@ Triggerall = movecontact
 triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 21000
+
+[State -1, SPECIAL 3 - Super Dash]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 22010
 
 ;[State 200, End]
 ;type = ChangeState
@@ -3195,6 +3226,7 @@ Triggerall = movecontact
 triggerall = power >= 1500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 5"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 20020
 
 [State 200, Special 2 - Weave]
@@ -3203,6 +3235,7 @@ Triggerall = movecontact
 triggerall = power >= 500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 23000
 
 [State 200, Special 2 - Skyfall Kick]
@@ -3211,6 +3244,7 @@ Triggerall = movecontact
 triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 21000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
@@ -3369,6 +3403,7 @@ Triggerall = movecontact
 triggerall = power >= 500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 23000
 
 [State 200, Special 2 - Skyfall Kick]
@@ -3377,6 +3412,7 @@ Triggerall = movecontact
 triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 21000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
@@ -3385,6 +3421,7 @@ Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 22020
 
 ;[State 200, End]
@@ -3547,6 +3584,7 @@ Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 22020
 
 ;[State 210, Cancel into 2C]
@@ -4153,7 +4191,7 @@ value = 2
 ;triggerall = prevstateno != 430
 ;triggerall = var(10) = 2
 ;trigger1 = time = 0
-;value = 480
+;value = 470
 ;ctrl = 1
 
 [State 1000, 6]
@@ -4480,6 +4518,26 @@ triggerall = command != "holdback" && command != "holdfwd"
 trigger1 = Anim != 410
 value = 410
 
+;Stance Timer ----------
+[State 0, Stance Timer Reset]
+type = VarSet
+trigger1 = command = "holdback" || command = "holdfwd"
+v = 12
+value = 0
+
+[State 0, Stance Timer Count]
+type = VarAdd
+trigger1 = command != "holdback" && command != "holdfwd"
+v = 12
+value = 1
+
+[State 0, Stance Timeout]
+type = ChangeState
+trigger1 = var(12) >= 120
+value = 0
+ctrl = 1
+;-------------------------
+
 [State 0, VelSet]
 type = VelSet
 trigger1 = command = "holdback"
@@ -4515,6 +4573,8 @@ type = ChangeState
 ;triggerall = time >= 1
 trigger1 = command = "up"
 trigger2 = command = "holdup"
+trigger3 = p2movetype != H
+trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
 ctrl = 0
 
@@ -4564,23 +4624,25 @@ value = 21000
 [State 200, 2A]
 type = ChangeState
 trigger1 = command = "a" && command = "holddown"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist y > -40
 value = 412
 ctrl = 0
 [State 200, AA]
 type = ChangeState
 trigger1 = command = "a"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist y > -40
 value = 201
 ctrl = 0
 [State 200, B]
 type = ChangeState
 trigger1 = command = "b" && command = "holddown"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5 && p2bodydist x < 60
 value = 413
 ctrl = 0
 [State 200, B]
 type = ChangeState
 trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && enemy,movetype = A && enemy,time >= 12
 value = 414
 ctrl = 0
 
@@ -4589,6 +4651,7 @@ type = ChangeState
 triggerall = power >= 100
 triggerall = numhelper(3500) = 0
 trigger1 = command = "holdback" && command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && enemy,movetype = A && enemy,time <= 6 && p2bodydist x < 35
 value = 409
 
 [State -1, Punch C]
@@ -4844,6 +4907,7 @@ value = 21000
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 201
 ctrl = 1
 
@@ -4851,6 +4915,7 @@ ctrl = 1
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 414
 ctrl = 1
 
@@ -5143,7 +5208,7 @@ ctrl = 1
 type = ChangeState
 Triggerall = movehit
 trigger1 = command = "up"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 50)
 value = 40
 
 [State 200, Special 2 - Big Kick]
@@ -5160,6 +5225,7 @@ Triggerall = movecontact
 triggerall = power >= 500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 23000
 
 [State 200, Special 2 - Skyfall Kick]
@@ -5568,6 +5634,26 @@ trigger1 = anim = 422
 trigger1 = command = "holdfwd"
 x = const(velocity.walk.fwd.x) * 0.5
 y = 0
+
+;Stance Timer ----------
+[State 0, Stance Timer Reset]
+type = VarSet
+trigger1 = command = "holdfwd"
+v = 12
+value = 0
+
+[State 0, Stance Timer Count]
+type = VarAdd
+trigger1 = command != "holdfwd"
+v = 12
+value = 1
+
+[State 0, Stance Timeout]
+type = ChangeState
+trigger1 = var(12) >= 120
+value = 0
+ctrl = 1
+;-------------------------
 
 [State 50, 3]
 type = Turn
@@ -6098,6 +6184,7 @@ value = 21000
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 426
 
 ;[State 200, End]
@@ -6113,7 +6200,7 @@ triggerall = power >= 100
 triggerall = numhelper(3500) = 0
 trigger1 = command = "holddown"
 trigger1 = command = "c"
-value = 403
+value = 400
 ctrl = 1
 
 
@@ -6956,7 +7043,17 @@ Triggerall = movecontact
 triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
 value = 21000
+
+[State -1, SPECIAL 3 - Super Dash]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
+value = 22010
 
 ;[State 200, Backturned]
 ;type = ChangeState
@@ -7373,7 +7470,16 @@ Triggerall = movecontact
 triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
 value = 21000
+
+[State -1, SPECIAL 3 - Super Dash]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+value = 22010
 
 [State 200, Special 5 - Big Kick]
 type = ChangeState
@@ -7381,6 +7487,7 @@ Triggerall = movecontact
 triggerall = power >= 1500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 5"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
 value = 20010
 
 ;[State 200, End]
@@ -7649,6 +7756,7 @@ triggerall = time >= 3 || prevstateno = 480
 triggerall = command = "holddown"
 trigger1 = command = "a"
 trigger2 = command = "hold_a"
+trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
 value = 467
 
 [State 200, End]
@@ -7656,6 +7764,7 @@ type = ChangeState
 triggerall = time >= 3 || prevstateno = 480
 trigger1 = command = "a"
 trigger2 = command = "hold_a"
+trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 60
 value = 465
 
 [State 200, End]
@@ -7664,6 +7773,7 @@ triggerall = time >= 3 || prevstateno = 480
 triggerall = command = "holddown"
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
+trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 60
 value = 461
 
 [State 200, End]
@@ -7671,6 +7781,7 @@ type = ChangeState
 triggerall = time >= 3 || prevstateno = 480
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
+trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 60
 value = 466
 
 [State 200, End]
@@ -7678,11 +7789,12 @@ type = ChangeState
 triggerall = power >= 200
 triggerall = time >= 3 || prevstateno = 480
 trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x > 60
 value = 470
 
 [State 1000, 6]
 type = ChangeState
-trigger1 = AnimTime = 0
+trigger1 = time >= 90
 value = 0
 ctrl = 1
 
@@ -7816,6 +7928,7 @@ Triggerall = movecontact
 triggerall = power >= 500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
 value = 23000
 
 [State 200, Special 2 - Skyfall Kick]
@@ -7975,6 +8088,7 @@ Triggerall = movecontact
 triggerall = power >= 500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
 value = 23000
 
 [State 200, Special 2 - Skyfall Kick]
@@ -8218,6 +8332,7 @@ Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
 value = 22020
 
 [State 200, End]
@@ -8965,12 +9080,12 @@ envshake.time = 30
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
-;[State 200, End]
-;type = ChangeState
-;Triggerall = movehit
-;trigger1 = command = "up"
-;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-;value = 40
+[State 200, End]
+type = ChangeState
+Triggerall = movehit
+trigger1 = command = "up"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 50)
+value = 40
 
 [State 200, Wavedash Cancel]
 type = ChangeState
@@ -11083,8 +11198,8 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1,-5
-air.velocity = -1,-4
+ground.velocity = -1,-4.8
+air.velocity = -1,-3.8
 Fall = 1
 Envshake.time = 20
 Fall.recovertime = 43 + ifelse(enemy,movetype = A, 7,0)
@@ -11828,6 +11943,7 @@ Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
 value = 22000
 
 [State 200, End]
@@ -11837,13 +11953,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 620
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-triggerall = command = "holddown"
-trigger1 = command = "b"
-value = 615
 
 [State 0, ChangeState]
 type = ChangeState
@@ -12598,7 +12707,7 @@ type = ChangeState
 triggerall = time >= 4
 trigger1 = command = "a"
 trigger2 = command = "hold_a"
-trigger3 = roundstate = 2 && ailevel > 0 && enemy,movetype != H && random < (ailevel * 100)
+trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 30
 value = 621
 ctrl = 0
 [State 200, B]
@@ -12606,14 +12715,14 @@ type = ChangeState
 triggerall = time >= 4
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
-trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 60
 value = 622
 ctrl = 0
 [State 200, B]
 type = ChangeState
 triggerall = time >= 4
 trigger1 = command = "c"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x >= 60
 value = 623
 ctrl = 0
 
@@ -13046,7 +13155,7 @@ triggerall = time >= 6
 trigger1 = command = "hold_a"
 trigger2 = command = "hold_b"
 trigger3 = command = "c"
-trigger4 = roundstate = 2 && ailevel > 0 && enemy,movetype != H && random < (ailevel * 100)
+trigger4 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 40
 value = 631
 ctrl = 1
 
@@ -13241,6 +13350,7 @@ type = ChangeState
 triggerall = time >= 3
 trigger1 = command = "a"
 trigger2 = command = "hold_a"
+trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 60 && p2bodydist y < 20
 value = 641
 
 [State 200, End]
@@ -13248,12 +13358,14 @@ type = ChangeState
 triggerall = time >= 3
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
+trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 50 && p2bodydist y > 20
 value = 642
 
 [State 200, End]
 type = ChangeState
 triggerall = time >= 3
 trigger1 = command = "c"
+trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 50
 value = 643
 
 [State 1000, 6]
@@ -14048,6 +14160,14 @@ v = 31
 value = 0
 ignorehitpause = 1
 
+;Stance Timer ----------
+[State 0, Stance Timer Reset]
+type = VarSet
+trigger1 = ctrl
+v = 12
+value = 0
+ignorehitpause = 1
+
 ;---------------------------------------
 
 [State 0, PosSet]
@@ -14742,7 +14862,7 @@ ignorehitpause = 1
 [State -2, Attack Scale]
 type = AttackMulSet
 trigger1 = 1
-value = 1 * 0.99**var(11) * ifelse(numhelper(22012) != 0, 1.5, 1)
+value = 1 * 0.99**var(11) * ifelse(numhelper(22012) != 0, 2.2, 1)
 ignorehitpause = 1
 
 [State -2, Counterhit TSP]

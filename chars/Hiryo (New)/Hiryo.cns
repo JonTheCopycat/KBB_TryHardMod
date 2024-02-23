@@ -1749,7 +1749,7 @@ juggle  = 1
 velset = 0,0
 ctrl = 0
 anim = 390
-poweradd = 25
+poweradd = 0
 sprpriority = 2
 
 [State 0, Juggle Map]
@@ -1771,7 +1771,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 8
+value = 3
 
 [State 0, VelSet]
 type = VelSet
@@ -1791,8 +1791,13 @@ y = 0.38
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = movecontact = 1 && (command != "holddown" || moveguarded)
+trigger1 = movecontact = 1 && AnimElem = 4
 y = -0.5
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = movecontact = 1 && AnimElem = 9
+y = -0.2
 
 
 [State 200, 1]
@@ -1806,7 +1811,8 @@ animtype  = Light
 damage    = 10
 hitflag = MAFD
 guardflag = HA
-pausetime = 12,16
+pausetime = 6,12
+guard.pausetime = 6,6
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-55
@@ -1824,14 +1830,15 @@ Envshake.time = 10
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 10
+triggerall = AnimElem = 9
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 35
+damage    = 25
 hitflag = MAFD
 guardflag = HA
-pausetime = 12,16
+pausetime = 6,6
+guard.pausetime = 6,3
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-55
@@ -1840,8 +1847,8 @@ guardsound = 6,12
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A || movecountered, 7,0)
-ground.velocity = -3, -3
-air.velocity = -3, -3
+ground.velocity = -2, -3
+air.velocity = -2, -3
 Fall = 0
 Envshake.time = 10
 
@@ -1868,14 +1875,14 @@ trigger1 = command = "holddown"
 trigger1 = command = "b"
 value = 615
 
-[State 200, End] ;AIR RAPIDSLASH
-type = ChangeState
-Triggerall = movecontact
-Trigger1 = power > 200
-trigger1 = command = "holddown"
-triggerall = numhelper(3500) = 0
-trigger1 = command = "c"
-value = 630 
+;[State 200, End] ;AIR RAPIDSLASH
+;type = ChangeState
+;Triggerall = movecontact
+;Trigger1 = power > 200
+;trigger1 = command = "holddown"
+;triggerall = numhelper(3500) = 0
+;trigger1 = command = "c"
+;value = 630 
 
 [State 200, End]
 type = ChangeState
@@ -3081,7 +3088,7 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 491
-poweradd = 0
+poweradd = -100
 sprpriority = 2
 
 [State 0, Juggle Map]
@@ -3140,10 +3147,10 @@ triggerall = !movecontact && enemy,movetype = A
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 60
-hitflag = MAF
+damage    = 80
+hitflag = MAFD
 guardflag = MA
-pausetime = 16,60
+pausetime = 30,60
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -3168,11 +3175,11 @@ triggerall = !movecontact && enemy,movetype != A
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 30
-hitflag = MAF
+damage    = 40
+hitflag = MAFD
 guardflag = MA
-pausetime = 10,18
-guard.pausetime = 10,12
+pausetime = 12,18
+guard.pausetime = 12,12
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
