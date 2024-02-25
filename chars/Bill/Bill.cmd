@@ -778,24 +778,6 @@ triggerall = command = "a"
 Triggerall = statetype != A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
-; Fwd + A
-[State -1, Fwd + A]
-type = ChangeState
-value = 220
-triggerall = command = "holdfwd"
-triggerall = command = "a"
-Triggerall = statetype != A
-trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Back + A
-[State -1, Back + A]
-type = ChangeState
-value = 211
-triggerall = command = "holdback"
-triggerall = command = "a"
-Triggerall = statetype != A
-trigger1 = ctrl
-;---------------------------------------------------------------------------
 ; A
 [State -1, A]
 type = ChangeState

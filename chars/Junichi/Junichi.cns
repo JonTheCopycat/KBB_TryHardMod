@@ -10495,7 +10495,7 @@ type = PowerAdd
 triggerall = time >= 7
 triggerall = numhelper(9999) = 0
 trigger1 = 1
-value = 10
+value = 12
 
 [State 200, End]
 type = ChangeState
