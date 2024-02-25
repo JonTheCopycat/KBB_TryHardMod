@@ -664,14 +664,15 @@ trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Special 4
-;[State -1, SPECIAL 4]
-;type = ChangeState
-;value = 23000
-;triggerall = var(19) = 0
-;triggerall = numhelper(3500) = 0
-;triggerall = command = "SPECIAL 4"
-;Triggerall = power >= 500
-;trigger1 = ctrl
+[State -1, SPECIAL 4]
+type = ChangeState
+value = 24000
+triggerall = numhelper(3500) = 0
+triggerall = command = "SPECIAL 4"
+Triggerall = statetype != A
+Triggerall = power >= 1000
+trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 5
 [State -1, SPECIAL 5]
@@ -1058,8 +1059,8 @@ triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
-; Down + B
-[State -1, Down + B]
+; Back + B
+[State -1, Back + B]
 type = ChangeState
 value = 380
 triggerall = var(10) = 2

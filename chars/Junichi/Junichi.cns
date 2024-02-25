@@ -687,6 +687,22 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -874,6 +890,15 @@ trigger1 = command = "SPECIAL 2"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 24000
+
 [State 210, Cancel into 5BB]
 type = ChangeState
 Triggerall = movecontact
@@ -1023,6 +1048,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 ;[State 200, End]
 ;type = ChangeState
@@ -1207,6 +1240,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 ;[State 200, End]
 ;type = ChangeState
 ;Triggerall = movecontact
@@ -1354,6 +1395,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State 200, End]
 type = ChangeState
@@ -1523,13 +1572,13 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
-[State 210, Cancel into 5BB]
+[State 200, Special 4 - Gundown]
 type = ChangeState
 Triggerall = movecontact
-trigger1 = command = "holdback"
-trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 380
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State 210, Cancel into 5BB]
 type = ChangeState
@@ -1678,6 +1727,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State 200, End]
 type = ChangeState
@@ -1835,6 +1892,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 ;[State 200, End]
 ;type = ChangeState
@@ -2009,6 +2074,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -2156,6 +2229,15 @@ trigger1 = command = "SPECIAL 2"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -2281,6 +2363,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3]
 type = ChangeState
@@ -2473,6 +2563,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State 0, Helper]
 type = Helper
 trigger1 = AnimTime = 0
@@ -2650,6 +2748,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 ;[State 200, Backturned]
 ;type = ChangeState
@@ -3077,6 +3183,15 @@ trigger1 = command = "SPECIAL 2"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 24000
+
 [State -1, SPECIAL 3 - Super Dash]
 type = ChangeState
 Triggerall = movecontact
@@ -3247,6 +3362,15 @@ trigger1 = command = "SPECIAL 2"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 24000
+
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
 Triggerall = movecontact
@@ -3382,13 +3506,6 @@ Envshake.time = 10
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
-[State 200, Wavedash Cancel]
-type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
-value = 30
-ctrl = 1
-
 [State 200, Special 2 - Big Kick]
 type = ChangeState
 Triggerall = movecontact
@@ -3414,6 +3531,15 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -3577,6 +3703,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -3841,6 +3975,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -4057,6 +4199,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Smack]
 type = ChangeState
@@ -4720,6 +4870,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 ;Attacks
 [State 200, 2A]
 type = ChangeState
@@ -4903,6 +5061,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -5021,6 +5187,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -5236,6 +5410,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 ;[State 200, End]
 ;type = ChangeState
 ;Triggerall = movecontact
@@ -5412,6 +5594,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 ;[State 200, End]
 ;type = ChangeState
@@ -5961,6 +6151,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movehit >= 10
@@ -6179,6 +6377,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 ;
 [State 200, End]
 type = ChangeState
@@ -6422,6 +6628,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 ;[State 200, Backturned]
 ;type = ChangeState
@@ -6839,6 +7053,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 ;[State 200, End]
 ;type = ChangeState
 ;Triggerall = movecontact
@@ -7045,6 +7267,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dash]
 type = ChangeState
@@ -7473,6 +7703,15 @@ trigger1 = command = "SPECIAL 2"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
+value = 24000
+
 [State -1, SPECIAL 3 - Super Dash]
 type = ChangeState
 Triggerall = movecontact
@@ -7609,6 +7848,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3]
 type = ChangeState
@@ -7757,7 +8004,7 @@ triggerall = command = "holddown"
 trigger1 = command = "a"
 trigger2 = command = "hold_a"
 trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
-value = 467
+value = 463
 
 [State 200, End]
 type = ChangeState
@@ -7795,175 +8042,6 @@ value = 470
 [State 1000, 6]
 type = ChangeState
 trigger1 = time >= 90
-value = 0
-ctrl = 1
-
-;-------------------------------------------------------------------------------
-; Baton Stance Smack
-[Statedef 461]
-type    = S
-movetype= A
-physics = S
-juggle  = 2
-ctrl = 0
-anim = 461
-poweradd = 0
-sprpriority = 2
-
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 10
-persistent = 0
-
-[State 0, PlaySnd]
-type = PlaySnd
-triggerall = random < 600
-trigger1 = AnimElem = 1
-value = S200,2
-volumescale = 200
-channel = 0
-
-[State 200, Damage Proration]
-type = VarAdd
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 10
-
-[State 200, Power Gain]
-type = PowerAdd
-triggerall = numhelper(51000) = 0
-triggerall = numhelper(55000) = 0
-triggerall = numhelper(56000) = 0
-trigger1 = movecontact = 1
-value = 100
-
-[State 200, Woosh]
-type = PlaySnd
-trigger1 = AnimElem = 1
-value = S1,1
-volumescale = 50
-
-[State 200, Move Forward]
-type = VelSet
-trigger1 = animelem = 3
-x = 2
-
-[State 200, Move Forward]
-type = VelSet
-trigger1 = animelem = 4
-x = 4
-
-[State 200, Move Forward]
-type = VelSet
-trigger1 = animelem = 5
-x = 1
-
-[State 200, Explod]
-type = Explod
-trigger1 = movecontact 
-anim = 40000
-ID = 40000
-pos = -10,-100
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = -2
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = 1,1
-sprpriority = 0
-ontop = 0
-shadow = 0,0,0
-ownpal = 1
-removeongethit = 1
-ignorehitpause = 1
-
-[State 200, Attack!]
-type = HitDef
-getpower = 0
-triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = !movecontact
-trigger1 = 1
-attr = S, NA
-animtype  = Medium
-damage    = 25
-hitflag = MAF
-guardflag = MA
-pausetime = 16,16
-sparkno = 0
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = 5,4
-guardsound = 6,10
-ground.type = High
-ground.slidetime = 12
-ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2,8
-air.velocity = -2,8
-Fall = 1
-Fall.recover = 0
-fall.yvelocity = -5
-Envshake.time = 10
-guard.cornerpush.veloff = -5
-airguard.cornerpush.veloff = -4
-
-[State 200, Special 2 - Big Kick]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1500
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 5"
-value = 20020
-
-[State 200, Special 2 - Weave]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 500
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 1"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
-value = 23000
-
-[State 200, Special 2 - Skyfall Kick]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 2"
-value = 21000
-
-[State -1, SPECIAL 3 - Super Dive Kick]
-type = ChangeState
-Triggerall = movecontact
-triggerall = numhelper(3500) = 0
-Triggerall = power >= 1000
-trigger1 = command = "SPECIAL 3"
-value = 22020
-
-;[State 200, End]
-;type = ChangeState
-;Triggerall = movecontact
-;trigger1 = command = "holddown"
-;trigger1 = command = "b"
-;value = 466
-;
-;[State 200, End]
-;type = ChangeState
-;Triggerall = movecontact
-;trigger1 = command = "b"
-;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-;value = 465
-
-[State 200, End]
-type = ChangeState
-trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
@@ -8058,7 +8136,7 @@ damage    = 20
 hitflag = MAF
 guardflag = MA
 pausetime = 10,28
-guard.pausetime = 10,16
+guard.pausetime = 10,14
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -8098,6 +8176,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -8158,6 +8244,121 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+
+;-------------------------------------------------------------------------------
+; Baton Stance Bomb Plant
+[Statedef 463]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+anim = 463
+poweradd = 0
+sprpriority = 2
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+triggerall = random < 600
+trigger1 = AnimElem = 1
+value = S200,2
+volumescale = 200
+channel = 0
+
+[State 200, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 3
+
+[State 200, Power Gain]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = movecontact = 1
+value = 100
+
+[State 200, Woosh]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S1,1
+volumescale = 50
+
+[State 200, Move Forward]
+type = VelSet
+trigger1 = animelem = 2
+x = 3
+
+[State 200, Attack!]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Light
+damage    = 10
+hitflag = MAF
+guardflag = MA
+pausetime = 10,10
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,2
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -1
+air.velocity = -1,-2
+Fall = 0
+Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
+guard.cornerpush.veloff = -2
+
+[State 0, Helper Summon]
+Type = Helper
+trigger1 = AnimElem = 4
+name = "C4"
+ID = 475
+stateno = 475
+pos = 25,0
+postype = p1
+facing = 1
+keyctrl = 0
+ownpal = 1
+size.xscale = 1
+size.yscale = 1
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+trigger1 = command = "holddown"
+trigger1 = command = "b"
+value = 461
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 466
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
 
 ;-------------------------------------------------------------------------------
 ; Baton Up Smack
@@ -8326,6 +8527,22 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
 Triggerall = movecontact
@@ -8381,6 +8598,184 @@ value = 40
 ;triggerall = numhelper(3500) = 0
 ;trigger1 = command = "holdback" && command = "c"
 ;value = 460
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+;-------------------------------------------------------------------------------
+; Baton Stance Smack
+[Statedef 461]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 461
+poweradd = 0
+sprpriority = 2
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+triggerall = random < 600
+trigger1 = AnimElem = 1
+value = S200,2
+volumescale = 200
+channel = 0
+
+[State 200, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 10
+
+[State 200, Power Gain]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = movecontact = 1
+value = 100
+
+[State 200, Woosh]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S1,1
+volumescale = 50
+
+[State 200, Move Forward]
+type = VelSet
+trigger1 = animelem = 3
+x = 2
+
+[State 200, Move Forward]
+type = VelSet
+trigger1 = animelem = 4
+x = 4
+
+[State 200, Move Forward]
+type = VelSet
+trigger1 = animelem = 5
+x = 1
+
+[State 200, Explod]
+type = Explod
+trigger1 = movecontact 
+anim = 40000
+ID = 40000
+pos = -10,-100
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -2
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+ignorehitpause = 1
+
+[State 200, Attack!]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 25
+hitflag = MAF
+guardflag = MA
+pausetime = 16,16
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2,8
+air.velocity = -2,8
+Fall = 1
+Fall.recover = 0
+fall.yvelocity = -5
+Envshake.time = 10
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, Special 2 - Big Kick]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1500
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 5"
+value = 20020
+
+[State 200, Special 2 - Weave]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 500
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 1"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5
+value = 23000
+
+[State 200, Special 2 - Skyfall Kick]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 2"
+value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
+[State -1, SPECIAL 3 - Super Dive Kick]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+value = 22020
+
+;[State 200, End]
+;type = ChangeState
+;Triggerall = movecontact
+;trigger1 = command = "holddown"
+;trigger1 = command = "b"
+;value = 466
+;
+;[State 200, End]
+;type = ChangeState
+;Triggerall = movecontact
+;trigger1 = command = "b"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 465
 
 [State 200, End]
 type = ChangeState
@@ -8512,6 +8907,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -8650,6 +9053,29 @@ trigger1 = Animelem = 3
 value = S4,2
 volumescale = 80
 
+[State 200, Explod]
+type = Explod
+trigger1 = animelem = 5
+anim = 14000
+ID = 14000
+pos = 40,-30
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -2
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+
 [State 200, Hit]
 type = HitDef
 getpower = 0
@@ -8691,6 +9117,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State 200, Special 2 - Big Shot]
 type = ChangeState
@@ -8781,6 +9215,29 @@ trigger1 = Animelem = 2
 value = S4,2
 volumescale = 80
 
+[State 200, Explod]
+type = Explod
+trigger1 = animelem = 5
+anim = 14000
+ID = 14000
+pos = 40,-30
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -2
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+
 [State 200, Hit]
 type = HitDef
 getpower = 0
@@ -8822,6 +9279,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State 200, Special 2 - Big Kick]
 type = ChangeState
@@ -8900,6 +9365,151 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+;Planted Bomb
+;------------------------------------------------------------------------------
+[Statedef 475]
+movetype= A
+physics = S
+anim = 475
+sprpriority = 2
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 15
+trigger1 = time >= 120
+trigger2 = abs(p2bodydist x) <= 20 && abs(p2bodydist y) <= 20
+value = 476
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; Bomb Explode
+[Statedef 476]
+movetype= A
+physics = N
+juggle  = 0
+ctrl = 0
+anim = 12001
+sprpriority = 2
+velset = 0,0
+
+[State 0, AttackDist]
+type = AttackDist
+trigger1 = 1
+value = 40
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = moveguarded
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = movehit
+;ignorehitpause = 
+;persistent = 
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+
+[State 0, Damage Proration]
+type = ParentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 3
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S6,1
+volumescale = 999
+
+[State 200, Hit]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = AnimElem = 1
+trigger1 = 1
+attr = S, NP
+animtype  = Light
+damage    = 10
+hitflag = MAFD
+guardflag = MA
+pausetime = 0,5
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S0,5
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2,-1.5
+air.velocity = -2,-1.5
+Fall = 1
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+envshake.time = 10
+
+[State 200, Hit]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = AnimElem = 4
+trigger1 = 1
+attr = S, NP
+animtype  = Medium
+damage    = 20
+hitflag = MAFD
+guardflag = MA
+pausetime = 0,10
+guard.pausetime = 0,5
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S6,1
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+guard.slidetime = 3
+guard.hittime = 5
+ground.velocity = -3,-3
+air.velocity = -3,-3
+Fall = 0
+Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+envshake.time = 20
+
+[State 200, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
 
 
 ;-------------------------------------------------------------------------------
@@ -9118,6 +9728,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State -1, SPECIAL 3]
 type = ChangeState
 triggerall = numhelper(3500) = 0
@@ -9272,6 +9890,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State 200, Return to Idle]
 type = ChangeState
@@ -9644,6 +10270,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 ;[State 200, End]
 ;type = ChangeState
@@ -10308,6 +10942,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -10400,6 +11042,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -10491,6 +11141,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State 200, End]
 type = ChangeState
@@ -10624,6 +11282,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State 200, End]
 type = ChangeState
@@ -10846,6 +11512,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 ;[State 200, End]
 ;type = ChangeState
 ;Triggerall = movecontact
@@ -11027,6 +11701,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State 200, End]
 type = ChangeState
@@ -11252,6 +11934,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 ;[State 200, Backturned]
 ;type = ChangeState
 ;Triggerall = AnimElem = 7
@@ -11410,6 +12100,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
 Triggerall = movecontact
@@ -11543,6 +12241,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
 Triggerall = movecontact
@@ -11671,6 +12377,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -11798,6 +12512,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -11936,6 +12658,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -12124,6 +12854,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -12305,6 +13043,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 
 [State 200, End]
 type = ChangeState
@@ -12447,6 +13193,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -12610,6 +13364,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -13425,6 +14187,11 @@ type = VelAdd
 trigger1 = 1
 y = 0.44
 
+[State 200, Move Forward]
+type = VelSet
+trigger1 = movecontact = 1
+y = -1
+
 [State 200, Explod]
 type = Explod
 trigger1 = movecontact 
@@ -13452,6 +14219,7 @@ ignorehitpause = 1
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = enemy,movetype != A
 triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
@@ -13460,6 +14228,7 @@ damage    = 30
 hitflag = MAF
 guardflag = MA
 pausetime = 16,16
+guard.pausetime = 16,12
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -13513,6 +14282,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
 Triggerall = movecontact
@@ -13537,7 +14314,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = pos Y >= 0 && Vel Y > 0
-value = ifelse(movehit,52,624)
+value = 52
 ctrl = 1
 
 ;-------------------------------------------------------------------------------
@@ -13599,6 +14376,11 @@ type = VelAdd
 trigger1 = 1
 y = 0.44
 
+;[State 200, Move Forward]
+;type = VelSet
+;trigger1 = movecontact = 1
+;y = 0
+
 [State 200, Explod]
 type = Explod
 trigger1 = movecontact 
@@ -13635,6 +14417,7 @@ damage    = 35
 hitflag = MAF
 guardflag = MA
 pausetime = 16,16
+guard.pausetime = 16,12
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -13688,6 +14471,14 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
 Triggerall = movecontact
@@ -13738,7 +14529,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = pos Y >= 0 && Vel Y > 0
-value = ifelse(movehit,52,624)
+value = 52
 ctrl = 1
 
 
@@ -13828,7 +14619,7 @@ damage    = 10
 hitflag = MAF
 guardflag = MA
 pausetime = 6,6
-guard.pausetime = 6,6
+guard.pausetime = 6,4
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -13857,6 +14648,7 @@ damage    = 15
 hitflag = MAF
 guardflag = MA
 pausetime = 16,16
+guard.pausetime = 16,12
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -13880,6 +14672,14 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -13905,7 +14705,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = pos Y >= 0 && Vel Y > 0
-value = ifelse(movehit,52,624)
+value = 52
 ctrl = 1
 
 

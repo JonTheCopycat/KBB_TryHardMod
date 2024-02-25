@@ -1385,8 +1385,8 @@ y = -5
 [State 21000, VelSet]
 type = VelSet
 trigger1 = AnimElem = 1
-x = 2.5
-y = -7.5
+x = 1.5 + ifelse(p2bodydist x * 0.01 <= 2, p2bodydist x * 0.01, 2)
+y = -7
 
 [State 21000, VelSet]
 type = VelAdd
@@ -1456,7 +1456,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, SA
 animtype  = Hard
-damage    = 110
+damage    = 140
 hitflag = MAF
 guardflag = HA
 pausetime = 16,16
@@ -3172,96 +3172,38 @@ ctrl = 1
 
 
 
-;===============================================================================
-; "No more of that annoying ability!":
 ;-------------------------------------------------------------------------------
+; Gun Down
 [Statedef 24000]
 type    = S
 movetype= A
 physics = S
-juggle  = 0
+juggle  = 2
 ctrl = 0
-anim = 24000
-velset = 0,0
+anim = 23000
+poweradd = -1000
 sprpriority = 2
-poweradd = -1500
-
-[State 200, Damage Proration] ; Sets player proration to 200 to prevent the Glitched state + infinite protection from breaking
-type = Varset
-trigger1 = movehit
-trigger1 = var(11) >= 250
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 200
-
-[State 0, I'm gonna do an unblockable attack!]
-type = Explod
-trigger1 = time = 1
-anim = F30000
-id = 30000
-pos = -30 + (cond(BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30, 60, 0)),-50
-postype = p1
-bindtime = -1
-vel = 0,0
-accel = 0,0
-random = 0,0
-pausemovetime = 999
-supermovetime = 999
-ontop = 0
-shadow = 0,0,0
-removeongethit = 0
-ignorehitpause = 1
-facing = facing
-vfacing = 1
-scale = 0.6,0.6
-sprpriority = 5
-removetime = -2
-
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = movecontact = 1
-value = S200,12+(random<500)*1
-volumescale = 200
-channel = 0
 
 [State 0, Busterable]
 type = MapSet
 trigger1 = 1
 map = "busterable"
 value = 1
+ignorehitpause = 1
 
-[State 0, AfterImage]
-type = AfterImage
+[State 200, Damage Proration]
+type = VarAdd
+trigger1 = hitcount = 4
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+[State 0, VarSet]
+type = VarSet
 trigger1 = AnimElem = 1
-time = 40
-length = 20
-trans = add
-
-[State 0, NotHitBy]
-type = NotHitBy
-trigger1 = time = 0
-trigger2 = movehit
-value = SCA
-time = 33
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 1
-x = -9
-y = 0
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 8
-x = 17
-y = 0
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 10
-x = 13
-y = 0
+v = 10
+value = 2
 
 [State 0, SuperPause]
 type = SuperPause
@@ -3270,126 +3212,28 @@ anim = 92006
 time = 10
 sound = 20,0
 pos = 0,-20
-movetime = 0
+movetime = 10
 darken = 1
 p2defmul = 1
 poweradd = 0
 endcmdbuftime = 7
 
-[State 0, TargetBind]
-type = TargetBind
-trigger1 = movecontact
-time = 1
-id = -1
-pos = 40,0
+[State 200, Woosh]
+type = PlaySnd
+trigger1 = AnimElem = 3
+value = S1,1
+volumescale = 50
 
-[State 200, 1]
-type = HitDef
-getpower = 0
-triggerall = !movecontact
-triggerall = enemy,stateno != [150,156]
-trigger1 = enemy,anim != 40 && (AnimElem = 8 || AnimElem = 9 || AnimElem = 10) && P2statetype != A
-trigger2 = P2MoveType = H
-attr = S, HT
-animtype  = Heavy
-damage    = 30
-hitflag = MFD
-pausetime = 0,100
-sparkno = 2
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = S4,0
-ground.type = High
-ground.slidetime = 12
-ground.hittime  = 15
-ground.velocity = 0,0
-air.velocity = -0,0
-Fall = 1
-Envshake.time = 20
-fall.recover = 0
-p2stateno = 5020
-p2getp1state = 0
-kill = 0
-p2facing = 1
-
-[State 200, End]
-type = ChangeState
-triggerall = movecontact
-trigger1 = AnimTime = 0
-value = 24500
-ctrl = 1
-
-[State 200, End]
-type = ChangeState
-trigger1 = AnimTime = 0
-value = 0
-ctrl = 1
-
-;===============================================================================
-; "No more of that annoying ability!":
-;-------------------------------------------------------------------------------
-[Statedef 24500]
-type    = S
-movetype= A
-physics = S
-juggle  = 0
-ctrl = 0
-anim = 24500
-velset = 0,0
-sprpriority = 2
-poweradd = 0
-
-[State 0, Busterable]
-type = MapSet
-trigger1 = 1
-map = "busterable"
-value = 1
-
-[State 0, enableDHC] ; Enables DHC and disables tag
-type = MapSet
-triggerall = teammode = tag
-trigger1 = 1
-map = "enableDHC"
-value = 1
-
-[State 0, Helper]
-type = Helper
-trigger1 = AnimTime = 0
-helpertype = normal ;player
-name = "Power Delay"
-ID = 56000
-stateno = 56000
-pos = 9999,9999
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 0
-supermovetime = 0
-pausemovetime = 0
-
-[State 0, TargetBind]
-type = TargetBind
-trigger1 = !movecontact
-time = 1
-id = -1
-pos = 40,0
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = movecontact = 1
-x = -5
-
-[State 0, Explod]
+[State 200, Explod]
 type = Explod
-triggerall = numexplod(16000) = 0
-trigger1 = time = 6
-anim = F16000
-ID = 16000
-pos = 20,0
+trigger1 = movecontact 
+anim = 40000
+ID = 40000
+pos = -10,-100
 postype = p1  ;p2,front,back,left,right
 facing = 1
 vfacing = 1
-bindtime = 1
+bindtime = -2
 vel = 0,0
 accel = 0,0
 random = 0,0
@@ -3397,47 +3241,83 @@ removetime = -2
 pausemovetime = 0
 scale = 1,1
 sprpriority = 0
-ontop = 1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+ignorehitpause = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+triggerall = 1
+trigger1 = animelem = 7 || AnimElem = 9 || AnimElem = 11 || AnimElem = 13
+value = S0,10
+volumescale = 200
+channel = 0
+
+[State 200, Move Forward]
+type = VelSet
+trigger1 = animelem = 7 || AnimElem = 9 || AnimElem = 11 || AnimElem = 13
+x = -1
+
+[State 200, Explod]
+type = Explod
+trigger1 = animelem = 7 || AnimElem = 9 || AnimElem = 11 || AnimElem = 13
+anim = 14000
+ID = 14000
+pos = 40,-30
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -2
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+angle = -3 + 6 * random * 0.001
+sprpriority = 0
+ontop = 0
 shadow = 0,0,0
 ownpal = 1
 removeongethit = 0
 ignorehitpause = 1
 
-[State 200, 1]
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = animelem = 7 || AnimElem = 9 || AnimElem = 11 || AnimElem = 13
+value = S4,2
+volumescale = 80
+
+[State 200, Hit]
 type = HitDef
 getpower = 0
-triggerall = !movecontact
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = animelem = 7 || AnimElem = 9 || AnimElem = 11 || AnimElem = 13
 trigger1 = 1
-attr = S, SA
-animtype  = Heavy
-damage    = 200 * 1.01**var(11)
-kill = 0 
-hitflag = MAFD
-pausetime = 14,30
-sparkno = 2
+attr = S, NP
+animtype  = Hard
+damage    = 28,5
+hitflag = MAF
+guardflag = MA
+pausetime = 4,8
+sparkno = 3
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = 5,4
+hitsound   = S4,1
+guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
-ground.hittime  = 15
-ground.velocity = -10,0
-air.velocity = 0,0
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -3,-2.5
+air.velocity = -3,-1.5
 Fall = 1
-Envshake.time = 20
-fall.recover = 0
-p2stateno = 3000
-p2getp1state = 0
+Fall.recover = 0
+envshake.time = 10
 
-[State 200, Neutral Reset]
+[State 200, End]
 type = ChangeState
-Triggerall = time >=44 && enemy, life >= 1
-trigger1 = p2movetype !=H 
-value = 0
-ctrl = 1
-
-[State 200, Is he dead?]
-type = ChangeState
-Trigger1 = time >=44 && enemy, life <= 0
+trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
