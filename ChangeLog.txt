@@ -1,5 +1,64 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.6.2 Changes:                    /
+|---------------------------------------------------/
+
+Junichi:
+1. Feline 236B Reworked
+2. New Super: 214B - Gundown
+3. 214A: 
+	* Damage Increased
+	* More consistently connects up close
+4. Baton Ready Stance 2a Replaced With Bomb Plant
+5. Baton j.C: Removed Endlag and slightly improved block frame data.
+6. Baton j.C.B velocity on hit adjusted.
+7. Baton 5c Jump Cancel returned.
+
+
+Hyrio:
+1. Wavedash B Replaced with Jump Kick
+2. Wavedash C Replaced with Alpha Blade
+3. Alpha Blade:
+	* Increased hitbox range and size
+	* Now hits otg
+	* Damage Increased
+	* Now costs 1/5 bar
+4. Removed Dash Crouch Cancel
+
+
+Sareo:
+1. Removed Backsway Special Effect
+2. Removed 6a and 66b
+
+
+Bill:
+1. Removed 4a and 6a
+
+
+Leon:
+1. Wavedash A:
+	* Startup Reduced
+	* Recovery Increased
+
+
+Vivienne:
+1. Removed 4b
+
+
+Yoru:
+1. Wavedash C Projectile Trajectory Reworked
+	* This projectile now goes full screen.
+
+
+Fly:
+1. j.236A: Now longer invul
+2. 214B: Hitbox reduced when outside of comboes
+3. 214B: Blockstun reduced slightly
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
 | Try-Hard Version 0.6.1 Changes:                    /
 |---------------------------------------------------/
 
