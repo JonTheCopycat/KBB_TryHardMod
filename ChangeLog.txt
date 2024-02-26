@@ -3,6 +3,12 @@
 | Try-Hard Version 0.6.2 Changes:                    /
 |---------------------------------------------------/
 
+While Junichi reaches close to his completion, I've started to look back at some of the old additions and cutting out the pointless ones.
+
+Universal:
+1. Star Cancel: Input changed to Double Charge, or "s, s"
+
+
 Junichi:
 1. Feline 236B Reworked
 2. New Super: 214B - Gundown
@@ -52,8 +58,7 @@ Yoru:
 
 Fly:
 1. j.236A: Now longer invul
-2. 214B: Hitbox reduced when outside of comboes
-3. 214B: Blockstun reduced slightly
+2. 226B: Hitbox reduced when outside of comboes
 
 
 

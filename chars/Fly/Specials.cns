@@ -32,12 +32,12 @@ trigger1 = prevstateno = 24001&&time = 0
 trigger1 = p2dist x <= -0.5
 ignorehitpause = 1
 
-[State 0, NotHitBy]
-type = NotHitBy
-trigger1 = 1
-value = SCA,NA,NP
-time = 1
-ignorehitpause = 1
+;[State 0, NotHitBy]
+;type = NotHitBy
+;trigger1 = time = [0, 3]
+;value = SCA,NA,NP
+;time = 1
+;ignorehitpause = 1
 
 [State 0, SuperPause]
 type = SuperPause
@@ -953,6 +953,16 @@ trigger1 = movehit = 1
 v = 33
 value = 1
 ignorehitpause = 1
+
+[State 0, ChangeAnim2]
+type = ChangeAnim2
+triggerall = time = 0
+trigger1 = enemy,movetype != H
+value = 23001
+elem = 1
+;ignorehitpause = 
+;persistent = 
+
 
 [State 0, NotHitBy]
 type = NotHitBy

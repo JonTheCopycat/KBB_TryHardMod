@@ -4896,7 +4896,7 @@ persistent = 0
 [State 0, ScreenBound]
 type = ScreenBound
 trigger1 = 1
-value = 1
+value = 0
 movecamera = 0,0
 [State 0, ScreenBound]
 type = ScreenBound
@@ -4914,7 +4914,7 @@ trigger1 = time = 0
 x = -12
 [state 450]
 type = veladd
-triggerall = vel x < 12
+triggerall = vel x < 16
 trigger1 = time >= 15 && vel x < 16
 x = 2
 
@@ -4929,7 +4929,7 @@ value = 0
 type = MapAdd
 trigger1 = moveguarded = 1
 map = "guardCount"
-value = 1
+value = 4
 ;ignorehitpause = 
 ;persistent =
 

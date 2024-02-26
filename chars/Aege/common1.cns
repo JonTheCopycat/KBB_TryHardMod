@@ -391,7 +391,7 @@ trigger1 = AnimTime = 1
 trigger2 = root,stateno != 30
 
 ;---------------------------------------------------------------------------
-;Wavedash
+;Wavedash Stop
 [Statedef 35]
 type = C
 movetype= I
@@ -491,7 +491,7 @@ ctrl = 1
 
 
 ;---------------------------------------------------------------------------
-;Wavedash Still Clone
+;Wavedash Stop Still Clone
 [Statedef 36]
 type = S
 movetype= I

@@ -2242,6 +2242,26 @@ Clsn2: 1
   Clsn2[0] = -21, -40, 21, 0
 3,19, 0,0, 3, H
 
+; Fly Dash Slash Neutral
+[Begin Action 23001]
+Clsn2: 1
+  Clsn2[0] = -25, -38, 22, 3
+3,20, 0,0, 6, H
+Clsn2: 1
+  Clsn2[0] = -113, -48, 47, 0
+3,24, -35,0, 2
+Clsn1: 1
+  Clsn1[0] = -2, -65, 48, -1
+Clsn2: 1
+  Clsn2[0] = -21, -40, 21, 0
+3,25, 0,0, 10
+Clsn2: 1
+  Clsn2[0] = -21, -40, 21, 0
+3,18, 0,0, 3, H
+Clsn2: 1
+  Clsn2[0] = -21, -40, 21, 0
+3,19, 0,0, 3, H
+
 ; Fly Cross Up
 [Begin Action 24000]
 Clsn2: 1
