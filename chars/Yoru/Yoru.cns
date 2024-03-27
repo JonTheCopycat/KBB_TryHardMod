@@ -1856,7 +1856,7 @@ helpertype = normal ;player
 name = "B - 1: Helper"
 ID = 300
 stateno = 305
-pos = 0,0
+pos = p2bodydist x - 30,p2bodydist y
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -3444,7 +3444,7 @@ movecamera = 0,0
 type = ScreenBound
 trigger1 = hitcount >=1
 trigger2 = vel x < 0
-value = 0
+value = 1
 [State 0, AssertSpecial]
 type = AssertSpecial
 trigger1 = 1
@@ -3454,7 +3454,7 @@ flag = noshadow
 [state 450]
 type = velset
 trigger1 = time = 0
-x = 17
+x = 18
 [state 450]
 type = veladd
 trigger1 = time >= 7
@@ -3640,7 +3640,7 @@ helpertype = normal ;player
 name = "Metastar Rush"
 ID = 300
 stateno = 440
-pos = 0,0
+pos = p2bodydist x - 30,p2bodydist y
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -3902,7 +3902,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Light
-damage    = ifelse(enemy,movetype = A,20,10)
+damage    = ifelse(enemy,movetype = A,1000,100)
 hitflag = MAF
 guardflag = HAF
 pausetime = 2,ifelse(enemy,movetype = A,30,2)

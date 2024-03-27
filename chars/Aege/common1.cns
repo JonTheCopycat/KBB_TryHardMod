@@ -741,6 +741,7 @@ type = Turn
 triggerall = p2dist x < 0
 trigger1 = prevstateno = 24500
 trigger2 = numhelper(51000)!=0 && (enemynear,movetype=H)
+trigger3 = time = 3
 
 [State 0, Pause]
 type = Pause

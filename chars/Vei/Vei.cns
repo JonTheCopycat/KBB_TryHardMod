@@ -2671,6 +2671,22 @@ ownpal = 1
 ignorehitpause = 1
 persistent = 0
 
+[State 0, Helper]
+type = Helper
+trigger1 = time % 15 = 0
+helpertype = normal ;player
+name = "Glitch Bomb"
+ID = 415
+stateno = 415
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+inheritJuggle = 1
+
 [State 200, End]
 type = Changestate
 trigger1 = root,stateno = 450 && root,AnimElem = 5
@@ -2796,7 +2812,7 @@ triggerall = root,map(juggle) < 100 || hitcount != 0
 trigger1 = !movecontact && !movereversed
 animtype  = Heavy
 attr = S, NP
-damage = ifelse(enemy,movetype = A,80,60)
+damage = ifelse(enemy,movetype = A,40,30)
 guard.kill = 0
 hitflag = MAF
 guardflag = MA
@@ -3443,13 +3459,18 @@ value = movehit
 
 [State 0 , VelSet]
 type = VelSet
-trigger1 = time = 0
-x = 5
+trigger1 = 1
+x = target,vel x
+
+;[State 0 , VelSet]
+;type = VelAdd
+;trigger1 = time > 0
+;x = 0.5 + time * 0.05
 
 [State 0 , VelSet]
-type = VelAdd
-trigger1 = time > 0
-x = 0.5 + time * 0.05
+type = PosAdd
+trigger1 = 1
+x = p2bodydist x + 30
 
 [State 0 , VelSet]
 type = Velset

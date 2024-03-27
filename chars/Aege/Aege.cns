@@ -1989,6 +1989,11 @@ type = VelSet
 trigger1 = time = 8
 x = 0
 
+[State 0, VelSet]
+type = PosAdd
+trigger1 = time = 7
+x = p2bodydist x + 40
+
 [State 0, Explod]
 type = Explod
 trigger1 = AnimElem = 3
@@ -2449,7 +2454,7 @@ damage    = ifelse(enemy,movetype = A,100,50)
 Hitflag = MAF
 guardflag = MAF
 pausetime = ifelse(enemy,movetype = A,30,4),ifelse(enemy,movetype = A,30,6)
-guard.pausetime = 4,5
+guard.pausetime = 4,10
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-35
@@ -2461,7 +2466,7 @@ ground.hittime  = 15
 ground.velocity = 18,5
 guard.hittime  = 21
 guard.slidetime = 25
-guard.velocity = -20
+guard.velocity = -40
 air.velocity = 18,5
 airguard.velocity = -18,-5
 Fall = 1

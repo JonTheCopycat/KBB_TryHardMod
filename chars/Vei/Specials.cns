@@ -1033,11 +1033,11 @@ Fall = 1
 Fall.recovertime = 100
 Envshake.time = 5
 
-;[State 0, ScreenBound]	;Don't leave screen pls
-;type = ScreenBound
-;trigger1 = Time = [1,100]
-;value = 1
-;movecamera = 0,0
+[State 0, ScreenBound]	;Don't leave screen pls
+type = ScreenBound
+trigger1 = Time = [1,100]
+value = 1
+movecamera = 0,0
 
 [State 200, End]
 type = ChangeState
@@ -1241,7 +1241,7 @@ persistent = 0
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 11
+trigger1 = time % 5 = 0
 helpertype = normal ;player
 name = "Glitch Bomb"
 ID = 23005
@@ -1257,7 +1257,7 @@ inheritJuggle = 1
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElemTime(11) = 1
+trigger1 = time % 5 = 1
 helpertype = normal ;player
 name = "Glitch Bomb"
 ID = 23006
@@ -1761,6 +1761,13 @@ type = ScreenBound
 trigger1 = Time = [1,100]
 value = 1
 movecamera = 0,0
+
+[State 200, End]
+type = ChangeAnim
+triggerall = time <= 90
+trigger1 = AnimElem = 7
+value = 24001
+elem = 1
 
 [State 200, End]
 type = Destroyself

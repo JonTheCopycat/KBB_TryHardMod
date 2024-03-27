@@ -58,6 +58,12 @@ ownpal = 0
 supermovetime = 0
 pausemovetime = 0
 
+[State 200, End]
+type = ChangeState
+trigger1 = time = 5
+value = 22001
+ctrl = 1
+
 [State 0, HitOverride]
 type = HitOverride
 trigger1 = Time <= 39
@@ -891,25 +897,25 @@ pausemovetime = 0
 
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = AnimElem = 4
+trigger1 = time = 4
 x = p2bodydist x + 220
 y = p2bodydist y - 2
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = AnimElem = 4
+trigger1 = time = 4
 value = S3,0
 volumescale = 140
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = AnimElem = 4
+trigger1 = time = 4
 value = S3,1
 volumescale = 140
 
 [State 0, Explod]
 type = Explod
-trigger1 = AnimElem = 3
+trigger1 = time = 3
 anim = 24001
 ID = 24001
 pos = 40,0
@@ -931,13 +937,13 @@ removeongethit = 0
 trans = add
 [State 0, EnvShake]		;Small camera when he disappears
 type = EnvShake
-trigger1 = Animelem = 3
+trigger1 = time = 3
 time = 5
 freq = 100
 ampl = 2
 [State 0, Explod]
 type = Explod
-trigger1 = AnimElem = 3
+trigger1 = time = 3
 anim = 5400
 ID = 5400
 pos = 30,0
@@ -972,7 +978,7 @@ endcmdbuftime = 7
 
 [State 200, End]
 type = ChangeState
-trigger1 = AnimTime = 0
+trigger1 = time = 5
 value = 24500
 ctrl = 1
 

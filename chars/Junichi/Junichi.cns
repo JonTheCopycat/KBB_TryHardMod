@@ -5034,13 +5034,13 @@ ctrl = 1
 [State 0, VelSet]
 type = VelSet
 trigger1 = command = "holdback"
-x = -const(velocity.walk.fwd.x)
+x = -const(velocity.walk.fwd.x) * 10
 y = 0
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = command = "holdfwd"
-x = -const(velocity.walk.back.x)
+x = -const(velocity.walk.back.x) * 10
 y = 0
 
 
@@ -6019,7 +6019,7 @@ add = 82,0,0
 [State 0, Dash Velocity]
 type = VelSet
 trigger1 = time = [2, 6]
-x = 9
+x = 15
 
 ;[State 0, Dash Velocity]
 ;type = VelSet
@@ -6172,7 +6172,7 @@ value = 421
 type = VelSet
 trigger1 = anim = 422
 trigger1 = command = "holdfwd"
-x = const(velocity.walk.fwd.x) * 0.5
+x = const(velocity.walk.fwd.x) * 1
 y = 0
 
 ;Stance Timer ----------
