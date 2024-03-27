@@ -543,7 +543,7 @@ x = -16
 type = ChangeState
 triggerall = power >= 500
 triggerall = time >= 45
-trigger1 = command = "BB" || command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "BB" || command = "FF"
 value = 100
 
 [State 200, AirDash]
@@ -551,7 +551,7 @@ type = ChangeState
 triggerall = pos y < 0
 triggerall = power >= 500
 triggerall = time >= 45
-trigger1 = command = "BB" || command = "FF" || command = "z"
+trigger1 = command = "BB" || command = "FF"
 value = 65
 [State 200, Air State]
 type = ChangeState
@@ -1059,7 +1059,7 @@ Envshake.time = 30
 type = ChangeState
 triggerall = Time > 65
 triggerall = movecontact
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 value = 65
 ctrl = 1
 

@@ -275,7 +275,7 @@ value = 1
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = AnimElem = 1
-x = ifelse(prevstateno=310,12,3)
+x = ifelse(prevstateno=310||prevstateno=220,8,3)
 
 [State 0, VelSet]
 type = VelSet
@@ -501,7 +501,7 @@ ownpal = 0
 supermovetime = 0
 pausemovetime = 0
 inheritJuggle = 1
-keyctrl = 1
+keyctrl = 0
 
 [State 0, Explod]
 type = Explod
@@ -1349,14 +1349,14 @@ value = S5464,0+(random<500)*1
 volumescale = 200
 channel = 0
 
-[State 0, ChangeAnim]
-type = ChangeAnim
-trigger1 = helper(401),movehit
-trigger1 = helper(401),stateno = 401
-value = 23000
-elem = 5
-;ignorehitpause = 
-persistent = 0
+;[State 0, ChangeAnim]
+;type = ChangeAnim ; so sad
+;trigger1 = helper(401),movehit
+;trigger1 = helper(401),stateno = 401
+;value = 23000
+;elem = 5
+;;ignorehitpause = 
+;persistent = 0
 
 [State 0, SuperPause]
 type = SuperPause
@@ -1411,7 +1411,7 @@ ownpal = 0
 supermovetime = 0
 pausemovetime = 0
 inheritJuggle = 1
-keyctrl = 1
+keyctrl = 0
 persistent = 0
 
 [State 0, Helper]

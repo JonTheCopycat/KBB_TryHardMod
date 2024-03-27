@@ -1,0 +1,36 @@
+; Definition file for player
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Jodie"        ;Name of character
+displayname = "Jodie" ;Name of character to display
+versiondate = 3/12/2022   ;Version date of character
+mugenversion = 1.1  ;Version of M.U.G.E.N character works on
+ikemenVersion = 0.98
+author = "KBB Dev Team"      ;Character author name
+pal.defaults = 1,2,3,4,5,6,7,8   ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = Jodie.cmd   ;Command set
+cns     = Jodie.cns   ;Constants
+st      = Jodie.cns   ;States
+st1     = Specials.cns
+;st2     = StarBurst.cns
+;st3     = Power Delay.cns
+;st4     = StarStrike.cns
+;st5     = HurtStates.cns
+stcommon = common1.cns ;Common states
+sprite  = Jodie.sff   ;Sprite
+anim    = Jodie.air   ;Animation
+sound  = Jodie.snd   ;Sound
+movelist = movelist.dat
+
+[Palette Keymap]
+a = 1
+b = 1
+c = 1
+x = 1
+y = 1
+z = 1

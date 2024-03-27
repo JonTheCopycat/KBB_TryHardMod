@@ -1,0 +1,786 @@
+;===============================================================================
+;----------------------Supers---------------------------------------------------
+;===============================================================================
+; "It's already over":
+;-------------------------------------------------------------------------------
+[Statedef 30000]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 30001
+velset = 0,0
+sprpriority = 2
+poweradd = -3000
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = S5,5
+volumescale = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 20
+value = S1,1
+volumescale = 999
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 1
+time = 70
+sound = S5,1
+pos = 9999,9999
+movetime = 70 
+darken = 1
+p2defmul = 1
+poweradd = 0
+endcmdbuftime = 7
+
+[State 0, Explod]
+type = Explod
+trigger1 = Time = 0
+anim = 32002
+ID = 32002
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+supermove = 9999
+
+[State 0, Helper]
+type = Helper
+trigger1 = Time = 0
+helpertype = normal ;player
+name = "Portrait"
+ID = 34000
+stateno = 34000
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 0
+supermovetime = 9999
+pausemovetime = 9999
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time = (76,79)
+x = 20
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 0
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,100
+guard.pausetime = 0,0
+sparkno = 9999
+sparkxy = -8,-25
+guard.sparkno = 9999
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+Fall = 0
+
+[State 0, ChangeState]
+type = ChangeState
+Triggerall = !moveguarded
+Triggerall = movecontact
+Trigger1 = AnimTime = 0
+value = 31000
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 5050
+ctrl = 1
+;===========================================================================
+; "It's already over" Attack:
+;-------------------------------------------------------------------------------
+[Statedef 31000]
+type    = S
+movetype= I
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 31000
+velset = 20,0
+sprpriority = 2
+poweradd = 0
+
+[State 0, Helper]
+type = Helper
+trigger1 = Time = 30
+helpertype = normal ;player
+name = "Slashity Slash"
+ID = 32000
+stateno = 32000
+pos = p2bodydist x ,p2bodydist y - 30
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 0
+size.xscale = 2.1
+size.yscale = 2.1
+
+[State 200, End]
+type = ChangeState
+trigger1 = Time = 130
+value = 35000
+ctrl = 1
+
+;===============================================================================
+; Slash Effect:
+;-------------------------------------------------------------------------------
+[Statedef 32000]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 32000
+velset = 0,0
+sprpriority = 2
+poweradd = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 1
+value = S5,3
+volumescale = 100 
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 30
+value = S5,4
+volumescale = 70
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 1
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 3
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 5
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 7
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 9
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 11
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 14
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 16
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 18
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 20
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 22
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 24
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 25
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 26
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,10
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 28
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy
+damage    = 10
+hitflag = MAFD
+guardflag = MAF
+pausetime = 0,0
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = 0,0
+Envshake.time = 10
+fall = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 30
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy
+damage    = 50
+hitflag = MAFD
+guardflag = MAF
+pausetime = 15,30
+sparkno = 9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,-8
+air.velocity = 0,-8
+Envshake.time = 30
+kill = 0
+fall = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 33000
+ctrl = 1
+;-------------------------------------------------------------------------------
+; Explod Finishes:
+[Statedef 33000]
+type    = S
+movetype= I
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 9999
+velset = 0,0
+sprpriority = -1
+
+[State 200, End]
+type = Destroyself
+trigger1 = time = 0
+
+; "It's already over" Portrait:
+;-------------------------------------------------------------------------------
+[Statedef 34000]
+type    = S
+movetype= I
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 33001
+velset = 0,0
+sprpriority = 2
+poweradd = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = Time = 1 
+anim = 34000
+ID = 34000
+pos = 125,80
+postype = Left  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = .5,0
+accel = 0,0
+random = 0,0
+removetime = 80
+pausemovetime = 0
+scale = 0.3,0.3
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 1
+supermove = 9999
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 33000
+ctrl = 1
+
+; "It's already over" Finale:
+;-------------------------------------------------------------------------------
+[Statedef 35000]
+type    = S
+movetype= I
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 35000
+velset = 0,0
+sprpriority = 2
+poweradd = 0
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 1
+time = 115
+pos = 9999,9999
+movetime = 115
+darken = 1
+p2defmul = 1
+poweradd = 0
+unhittable = 1
+endcmdbuftime = 7
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 6
+value = S5,6
+volumescale = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 10 
+value = S5,7
+volumescale = 999 
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 10 
+value = S5,7
+volumescale = 999 
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 15
+value = S5,7
+volumescale = 100 
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 15
+value = S5,7
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = Time = 15
+anim = 32002
+ID = 32002
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+supermove = 9999
+
+[State 0, Explod]
+type = Explod
+trigger1 = Time = 15
+anim = 32002
+ID = 32002
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+supermove = 9999
+
+[State 0, Helper]
+type = Helper
+trigger1 = Time = 15
+helpertype = normal ;player
+name = "Shuriken"
+ID = 35001
+stateno = 35001 
+pos = p2bodydist X + 60,p2bodydist Y
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 0
+supermovetime = 9999
+pausemovetime = 9999
+
+[State 200, End]
+type = ChangeState
+trigger1 = Time = 115
+value = 0
+ctrl = 1
+
+;===============================================================================
+; Shuriken:
+;-------------------------------------------------------------------------------
+[Statedef 35001]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 35001
+velset = 0,0
+sprpriority = 2
+poweradd = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 1
+value = S1,1
+volumescale = 999 
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 30
+value = S5,2
+volumescale = 100
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy 
+damage    = 200
+hitflag = MAFD
+guardflag = MAF
+pausetime = 30,30
+sparkno = 15000
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S5,0
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,20
+air.velocity = 0,20
+Envshake.time = 30
+fall = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 33000
+ctrl = 1

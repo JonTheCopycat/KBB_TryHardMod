@@ -26,13 +26,15 @@ Clone Flurry (1/4 Bar)						_F_D_DF^C
 
 <#f0f000>:EX ATTACKS!:</>
 
-Projectile Portal (1/2 Bar, _AIR OK)			^C
-	"Vei Spawns a portal that shoots a projetile
-	after some time."
+Portal Set (1/2 Bar, _AIR OK)						^C
+	"Vei Spawns a portal somewhere in front of him."
+
+Portal Traverse (_AIR OK)						_B^C
+	"Vei Uses a portal to travel to the any existing portal."
 
 Flame Portal (1/2 Bar)							_D^C
 	"Vei Spawns a portal full of flames under
-	the opponent."
+	the opponent. Can be held to go further"
 	
 Cloaked Saw (1/5 Bar, _AIR OK)					_AIR_D^C
 	"Spins his cloak and drags the opponent

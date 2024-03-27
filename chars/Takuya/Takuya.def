@@ -1,0 +1,36 @@
+; Definition file for player
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Takuya"        ;Name of character
+displayname = "Takuya" ;Name of character to display
+versiondate = 3/12/2022   ;Version date of character
+mugenversion =  1.1 ;Version of M.U.G.E.N character works on
+ikemenVersion = 0.98
+author = "KBB Dev Team"       ;Character author name
+pal.defaults = 1,2,3,4,5,6,7,8  ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = Takuya.cmd   ;Command set
+cns     = Takuya.cns   ;Constants
+st      = Takuya.cns   ;States
+st1     = Specials.cns
+;st3     = StarBurst.cns
+;st4     = Power Delay.cns
+;st5     = StarStrike.cns
+;st6     = HurtStates.cns
+stcommon = common1.cns ;Common states
+sprite  = Takuya.sff   ;Sprite
+anim    = Takuya.air   ;Animation
+sound  = Takuya.snd   ;Sound
+movelist = movelist.dat
+
+[Palette Keymap]
+a = 1
+b = 1
+c = 1
+x = 1
+y = 1
+z = 1

@@ -1,0 +1,2478 @@
+#===============================================================================
+#Star Cancel
+#===============================================================================
+[Statedef 67; 
+ type: U;
+ movetype: I;
+ physics: U;
+ ctrl: 0;
+ anim: 196;
+ poweradd: 0;
+ sprpriority: 2;]
+
+ #Twinkle Cancel F520
+
+ if time = 0 {
+    SuperPause{
+        anim: F520;
+        time: 5;
+        sound: 20, 0;
+        movetime: 0;
+        darken: 1;
+        p2defmul: 1;
+        poweradd: 0;
+        endcmdbuftime: 7;
+    }
+
+    var(4) := 1;
+
+    if numhelper(51000) = 0 {
+        AfterImage{
+            time: 10;
+            paladd: 240, 240, 0;
+            trans: add;
+        }
+
+        PowerAdd{value: -1000}
+    }
+    
+ }
+
+ if time = 2 {
+    CtrlSet{value: 1;}
+
+    
+ }
+
+ if time >= 2 {
+    if pos y < -1 {
+        StateTypeSet{
+            physics: A;
+        }
+    }
+ }
+
+ if AnimTime = 0 {
+    ChangeState{value: 50}
+ }
+
+#===============================================================================
+#Counter
+#===============================================================================
+[Statedef 800; 
+ type: S;
+ movetype: A;
+ physics: S;
+ velset: -1.5,0;
+ ctrl: 0;
+ anim: 800;
+ poweradd: 0;
+ sprpriority: -1;]
+
+AttackDist{value: -1}
+
+if time = 0 {
+
+    MapSet{map:"hitOverride"; value: 1}
+    PlaySnd{value:s800,3; volumescale: 100}
+
+    if time <= 15 {
+        PalFX{time:3; add: 128,128,128}
+    }
+
+    #15 frames of oppurtunity, 15 frames of recovery.
+
+    if (P2Stateno != 801 || P2Stateno != 802 || P2Stateno != 803 || P2Stateno != 811 || P2Stateno != 812 || P2Stateno != 813) {
+        HitOverride {
+            attr: SCA,NA,SA,NP,SP;
+            slot: 0;
+            stateno: 801;
+            time: 15;
+        }
+    }
+
+}
+
+ignorehitpause if time = 1 {
+    Explod {
+        anim: F805;
+        ID: 805;
+        pos: 0,-20;
+        postype: p1;
+        facing: 1;
+        vfacing: 1;
+        bindtime: 1;
+        removetime: -2;
+        pausemovetime: 60;
+        scale: .2,.2;
+        sprpriority: 1;
+        ownpal: 1;
+        removeongethit: 0;
+    }
+}
+
+if !movecontact && time >= 16 {
+    MapSet {map:"defence"; value: 0.2}
+    MapSet {map:"hitOverride"; value: 0}
+}
+
+#Slowdown
+if enemynear, hitpausetime > 15 && var(47) <= 1 {
+    ChangeAnim{value: 800; elem: 1}
+}
+
+if animtime = 0 {
+    if prevStateNo != 820 {
+        poweradd{value: -1000}
+    }
+    changeState{value: 806; ctrl: 1}
+}
+
+#===============================================================================
+#Counter - Push - SLOW
+#===============================================================================
+[Statedef 801; 
+ type: S;
+ movetype: A;
+ physics: S;
+ juggle: 2;
+ ctrl: 0;
+ anim: 801;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+if movehit {
+    persistent(0) {
+        MapAdd{map: "juggle"; value: 200}
+    }
+    changeState{value: 804; ctrl: 0}
+}
+
+if time = 0 {
+
+    PlaySnd{value: F800,0; volumescale: 100}
+    MapSet{map:"hitOverride"; value: 1}
+    PosAdd{x: 2}
+
+    if (P2Stateno != 801 ||  P2Stateno != 802 || P2Stateno != 803) {
+        HitOverride{
+            attr: SCA,NA,SA,NP,SP;
+            slot: 0;
+            stateno: 802;
+            time: 16
+        }
+    }
+
+    IgnoreHitPause persistent(0) {
+        Explod{
+            anim: F806;
+            ID: 801;
+            pos: 5,-25;
+            postype: p1;
+            facing: 1;
+            vfacing: 1;
+            bindtime: 1;
+            removetime: -2;
+            pausemovetime: 60;
+            scale: .3,.3;
+            sprpriority: 1;
+            ownpal: 1;
+            removeongethit: 0
+        }
+    }
+}
+
+if AnimElem = 1 {
+    Pause{time: 20}
+}
+
+if AnimElem = 2 {
+    PlaySnd{value: F800,4; volumescale: 200}  
+}
+
+if Time = 2 {
+    sprpriority{value: 2}
+}
+
+if time = 4 {
+    VelSet{x: 10}
+}
+
+if time >= 6 {
+    StateTypeSet{movetype: A}
+}
+
+if time >= 16 {
+    MapSet {map:"hitOverride"; value: 0}
+}
+
+if !movecontact && time = 17 {
+    MapSet {map:"defence"; value: 0.2}
+}
+
+if !movecontact {
+    if enemy,!ishelper && enemy,movetype != H {
+        HitDef{
+            getpower: 1000,0; #get a bar. Nice!
+            attr: S, HP;
+            animtype: Heavy;
+            damage: 15;
+            Hitflag: MAF;
+            guardflag: ;
+            pausetime: 12,12;
+            sparkno: 14000;
+            guard.sparkno: 13000;
+            sparkxy: -9,-30;
+            hitsound: 5,4;
+            guardsound: 6,0;
+            ground.type: High;
+            ground.slidetime: 12;
+            ground.hittime: 30;
+            ground.velocity: -30,0;
+            air.velocity: -30,3;
+            Fall: 0;
+            Envshake.time: 30;
+            Envshake.ampl: 8;
+            kill: 0
+        }
+    } else { #if enemy,ishelper || enemy,movetype = H
+        HitDef{
+            getpower: 0,0; #get NO power
+            attr: S, HP;
+            animtype: Heavy;
+            damage: 15;
+            Hitflag: MAF;
+            guardflag: ;
+            pausetime: 12,12;
+            sparkno: 14000;
+            guard.sparkno: 13000;
+            sparkxy: -9,-30;
+            hitsound: 5,4;
+            guardsound: 6,0;
+            ground.type: High;
+            ground.slidetime: 12;
+            ground.hittime: 30;
+            ground.velocity: -30,0;
+            air.velocity: -30,3;
+            Fall: 0;
+            Envshake.time: 30;
+            Envshake.ampl: 8;
+            kill: 0 
+        }
+    }
+}
+
+if AnimTime = 0 {
+    IgnoreHitPause{
+        RemoveExplod{id: 801}
+    }
+    changeState{value: 805; ctrl: 1}
+}
+
+#===============================================================================
+#Counter - Push - FAST
+#===============================================================================
+[Statedef 802; 
+ type: S;
+ movetype: A;
+ physics: S;
+ juggle: 2;
+ ctrl: 0;
+ anim: 802;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+if movehit {
+    persistent(0) {
+        MapAdd{map: "juggle"; value: 200}
+    }
+    changeState{value: 804; ctrl: 0}
+}
+
+if Time = 2 {
+    sprpriority{value: 2}
+}
+
+if time = 4 {
+    VelSet{x: 10}
+}
+
+if AnimElem = 1 {
+    Pause{time: 5}
+}
+
+if time = 0 {
+
+    PlaySnd{value: F800,0; volumescale: 100}
+    MapSet{map:"hitOverride"; value: 1}
+    PosAdd{x: 5}
+
+    if p2statetype = A {
+        if (P2Stateno != 811 ||  P2Stateno != 812 || P2Stateno != 813) {
+            HitOverride{
+                attr: A,NA,SA,NP,SP;
+                slot: 0;
+                stateno: 813;
+                time: 14
+             }
+        }
+    }
+
+    if (P2Stateno != 801 ||  P2Stateno != 802 || P2Stateno != 803) {
+        HitOverride{
+            attr: SCA,NA,SA,NP,SP;
+            slot: 0;
+            stateno: 803;
+            time: 14
+        }
+    }
+
+    IgnoreHitPause persistent(0) {
+        Explod{
+            anim: F805;
+            ID: 803;
+            pos: 5,-10;
+            postype: p1;
+            facing: 1;
+            vfacing: 1;
+            bindtime: 1;
+            removetime: -2;
+            pausemovetime: 60;
+            scale: .7,.7;
+            sprpriority: -1;
+            ownpal: 1;
+            removeongethit: 0
+        }
+    }
+}
+
+if time >= 14 {
+    MapSet {map:"hitOverride"; value: 0}
+}
+
+if !movecontact {
+    if enemy,!ishelper && enemy,movetype != H {
+        HitDef{
+            getpower: 1000,0; #get a bar. Nice!
+            attr: S, HP;
+            animtype: Heavy;
+            damage: 15;
+            Hitflag: MAF;
+            guardflag: ;
+            pausetime: 12,12;
+            sparkno: 14000;
+            guard.sparkno: 13000;
+            sparkxy: -9,-30;
+            hitsound: 5,4;
+            guardsound: 6,0;
+            ground.type: High;
+            ground.slidetime: 12;
+            ground.hittime: 30;
+            ground.velocity: -30,0;
+            air.velocity: -30,3;
+            Fall: 0;
+            Envshake.time: 30;
+            Envshake.ampl: 8;
+            kill: 0
+        }
+    } else { #if enemy,ishelper || enemy,movetype = H
+        HitDef{
+            getpower: 0,0; #get NO power
+            attr: S, HP;
+            animtype: Heavy;
+            damage: 15;
+            Hitflag: MAF;
+            guardflag: ;
+            pausetime: 12,12;
+            sparkno: 14000;
+            guard.sparkno: 13000;
+            sparkxy: -9,-30;
+            hitsound: 5,4;
+            guardsound: 6,0;
+            ground.type: High;
+            ground.slidetime: 12;
+            ground.hittime: 30;
+            ground.velocity: -30,0;
+            air.velocity: -30,3;
+            Fall: 0;
+            Envshake.time: 30;
+            Envshake.ampl: 8;
+            kill: 0 
+        }
+    }
+}
+
+if !movecontact && time = 15 {
+    MapSet {map:"defence"; value: 0.2}
+}
+
+if AnimTime = 0 {
+    IgnoreHitPause{
+        RemoveExplod{id: 803}
+    }
+    changeState{value: 805; ctrl: 1}
+}
+
+#===============================================================================
+#Counter - Push - FASTEST
+#===============================================================================
+[Statedef 803; 
+ type: S;
+ movetype: A;
+ physics: S;
+ juggle: 2;
+ ctrl: 0;
+ anim: 803;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+if movehit {
+    persistent(0) {
+        MapAdd{map: "juggle"; value: 200}
+    }
+    changeState{value: 804; ctrl: 0}
+}
+
+ignorehitpause if p2bodydist x <= 80 {
+    NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP; time: 1}
+}
+
+if time = 0 {
+
+    PlaySnd{value: F800,2; volumescale: 100}
+    MapSet{map:"hitOverride"; value: 1}
+    PosAdd{x: 10}
+
+    if p2statetype = A {
+        if (P2Stateno != 811 ||  P2Stateno != 812 || P2Stateno != 813) {
+            HitOverride{
+                attr: A,NA,SA,NP,SP;
+                slot: 0;
+                stateno: 813;
+                time: 13
+             }
+        }
+    }
+
+    if (P2Stateno != 801 ||  P2Stateno != 802 || P2Stateno != 803) {
+        HitOverride{
+            attr: SCA,NA,SA,NP,SP;
+            slot: 0;
+            stateno: 803;
+            time: 13
+        }
+    }
+}
+
+if Time = 2 {
+    sprpriority{value: 2}
+}
+
+if time = 4 {
+    VelSet{x: 10}
+}
+
+if time >= 13 {
+    MapSet {map:"hitOverride"; value: 0}
+}
+
+if !movecontact && time = 14 {
+    MapSet {map:"defence"; value: 0.2}
+}
+
+if !movecontact {
+    if enemy,!ishelper && enemy,movetype != H {
+        HitDef{
+            getpower: 1000,0; #get a bar. Nice!
+            attr: S, HP;
+            animtype: Heavy;
+            damage: 15;
+            Hitflag: MAF;
+            guardflag: ;
+            pausetime: 12,12;
+            sparkno: 14000;
+            guard.sparkno: 13000;
+            sparkxy: -9,-30;
+            hitsound: 5,4;
+            guardsound: 6,0;
+            ground.type: High;
+            ground.slidetime: 12;
+            ground.hittime: 30;
+            ground.velocity: -30,0;
+            air.velocity: -30,3;
+            Fall: 0;
+            Envshake.time: 30;
+            Envshake.ampl: 8;
+            kill: 0
+        }
+    } else { #if enemy,ishelper || enemy,movetype = H
+        HitDef{
+            getpower: 0,0; #get NO power
+            attr: S, HP;
+            animtype: Heavy;
+            damage: 15;
+            Hitflag: MAF;
+            guardflag: ;
+            pausetime: 12,12;
+            sparkno: 14000;
+            guard.sparkno: 13000;
+            sparkxy: -9,-30;
+            hitsound: 5,4;
+            guardsound: 6,0;
+            ground.type: High;
+            ground.slidetime: 12;
+            ground.hittime: 30;
+            ground.velocity: -30,0;
+            air.velocity: -30,3;
+            Fall: 0;
+            Envshake.time: 30;
+            Envshake.ampl: 8;
+            kill: 0 
+        }
+    }
+}
+
+if AnimTime = 0 {
+    changeState{value: 805; ctrl: 1}
+}
+
+#===============================================================================
+#Counter - Recovery On Hit
+#===============================================================================
+[Statedef 804; 
+ type: S;
+ movetype: A;
+ physics: S;
+ ctrl: 0;
+ anim: 804;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+AttackDist{value: -1}
+
+NotHitBy{time: 1; value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT}
+
+if p2movetype !=H || (enemy,!alive || !numenemy) {
+    ChangeState{value: 0; ctrl: 1}
+}
+
+#===============================================================================
+#Counter - Recovery On Whiff
+#===============================================================================
+[Statedef 805; 
+ type: S;
+ movetype: A;
+ physics: S;
+ ctrl: 0;
+ anim: 804;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+if AnimTime = 0 {
+    ChangeState{value: 0; ctrl: 1}
+}
+
+#===============================================================================
+#Counter - Endlag
+#===============================================================================
+[Statedef 806; 
+ type: S;
+ movetype: A;
+ physics: S;
+ juggle: 0;
+ ctrl: 0;
+ anim: 0;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+AttackDist{value: -1}
+
+if Time >= 15 {
+    ChangeState{value: 0; ctrl: 1}
+}
+
+#===============================================================================
+#Counter AIR - Start
+#===============================================================================
+[Statedef 810; 
+ type: A;
+ movetype: A;
+ physics: N;
+ ctrl: 0;
+ anim: 810;
+ poweradd: 0;
+ sprpriority: -1;]
+ 
+ if enemy,stateType = A {
+	StateTypeSet{stateType: A}
+ } else {
+	StateTypeSet{stateType: S}
+ }
+
+AttackDist{value: -1}
+
+VelSet{x: vel x /2;y: vel y /2}
+if pos y < 0 {
+	VelAdd{y: 0.22}
+}
+else {
+	VelSet{y: 0}
+	PosSet{y: 0}
+}
+
+
+
+if gametime%10 = 1 {
+    PalFX{time:3; add: 128,128,128}
+}
+
+if time = 0 {
+
+    MapSet{map:"hitOverride"; value: 1}
+    PlaySnd{value:s800,3; volumescale: 100}
+
+    #15 frames of oppurtunity, 15 frames of recovery.
+
+    if (P2Stateno != 801 || P2Stateno != 802 || P2Stateno != 803 || P2Stateno != 811 || P2Stateno != 812 || P2Stateno != 813 || P2Stateno != 814) {
+        HitOverride {
+            attr: SCA,NA,SA,NP,SP;
+            slot: 0;
+            stateno: 811;
+            time: 15;
+        }
+    }
+
+}
+
+ignorehitpause if time = 1 {
+    Explod {
+        anim: F805;
+        ID: 805;
+        pos: 0,-20;
+        postype: p1;
+        facing: 1;
+        vfacing: 1;
+        bindtime: 1;
+        removetime: -2;
+        pausemovetime: 60;
+        scale: .2,.2;
+        sprpriority: 1;
+        ownpal: 1;
+        removeongethit: 0
+    }
+}
+
+if prevStateNo != 820 {
+    if time = 15 {
+        poweradd{value: -1000}
+    }
+}
+
+if !movecontact && time > 15 {
+    MapSet {map:"defence"; value: 0.2}
+    MapSet {map:"hitOverride"; value: 0}
+}
+
+#Slowdown
+if enemynear, hitpausetime > 15 && var(47) <= 1 {
+    ChangeAnim{value: 810; elem: 1}
+}
+
+if (Vel Y > 0 && Pos Y >= -1) && time > 15 {
+    ChangeState{value:816;ctrl:0}
+}
+
+if animtime = 0 {
+    ignorehitpause{RemoveExplod{id: 805}}
+    changeState{value: 815; ctrl: 0}
+}
+
+#===============================================================================
+#AIR Counter - Push - SLOW
+#===============================================================================
+[Statedef 811; 
+ type: A;
+ movetype: A;
+ physics: S;
+ juggle: 2;
+ ctrl: 0;
+ anim: 811;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+if movehit {
+    persistent(0) {
+        MapAdd{map: "juggle"; value: 200}
+    }
+    changeState{value: 814; ctrl: 0}
+}
+
+if pos y >= 0 {
+    PosSet{y: -5}
+}
+
+if time = 0 {
+
+    PlaySnd{value: F800,0; volumescale: 100}
+    MapSet{map:"hitOverride"; value: 1}
+    PosAdd{x: 2}
+
+    if (P2Stateno != 801 ||  P2Stateno != 802 || P2Stateno != 803 || P2Stateno != 811 || P2Stateno != 812 || P2Stateno != 813) {
+        HitOverride{
+            attr: SCA,NA,SA,NP,SP;
+            slot: 0;
+            stateno: 812;
+            time: 16
+        }
+    }
+
+    IgnoreHitPause persistent(0) {
+        Explod{
+            anim: F806;
+            ID: 806;
+            pos: 5,-25;
+            postype: p1;
+            facing: 1;
+            vfacing: 1;
+            bindtime: 1;
+            removetime: -2;
+            pausemovetime: 60;
+            scale: .3,.3;
+            sprpriority: 1;
+            ownpal: 1;
+            removeongethit: 0
+        }
+    }
+}
+
+if AnimElem = 1 {
+    Pause{time: 20}
+}
+
+if AnimElem = 3 {
+    PlaySnd{value: F800,4; volumescale: 200}  
+}
+
+if Time = 2 {
+    sprpriority{value: 2}
+}
+
+if time = 4 {
+    VelSet{x: 10}
+}
+
+if time >= 6 {
+    StateTypeSet{movetype: A}
+}
+
+if time >= 16 {
+    MapSet {map:"hitOverride"; value: 0}
+}
+
+if !movecontact && time = 17 {
+    MapSet {map:"defence"; value: 0.2}
+}
+
+if !movecontact {
+    HitDef{
+        getpower: 0,0;
+        attr: A, HP;
+        animtype: Heavy;
+        damage: 15;
+        Hitflag: MAF;
+        guardflag: HA;
+        pausetime: 12,12;
+        sparkno: 14000;
+        guard.sparkno: 13000;
+        sparkxy: -9,-30;
+        hitsound: 5,4;
+        guardsound: 6,0;
+        ground.type: High;
+        ground.slidetime: 12;
+        ground.hittime: 30;
+        ground.velocity: -30,0;
+        air.velocity: -30,3;
+        Fall: 0;
+        Envshake.time: 30;
+        Envshake.ampl: 8;
+        kill: 0
+    }
+}
+
+if AnimTime = 0 {
+    IgnoreHitPause{
+        RemoveExplod{id: 806}
+    }
+    if !movehit{
+        changeState{value: 815; ctrl: 0}
+    } else {
+        changeState{value: 50; ctrl: 0}
+    }
+}
+
+#===============================================================================
+#Counter - Push - FAST
+#===============================================================================
+[Statedef 812; 
+ type: A;
+ movetype: A;
+ physics: S;
+ juggle: 2;
+ ctrl: 0;
+ anim: 812;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+if movehit {
+    persistent(0) {
+        MapAdd{map: "juggle"; value: 200}
+    }
+    changeState{value: 814; ctrl: 0}
+}
+
+if Time = 2 {
+    sprpriority{value: 2}
+}
+
+if time = 4 {
+    VelSet{x: 10}
+}
+
+if AnimElem = 1 {
+    Pause{time: 5}
+}
+
+if pos y >= 0 {
+    PosSet{y: -5}
+}
+
+if time = 0 {
+
+    PlaySnd{value: F800,0; volumescale: 100}
+    MapSet{map:"hitOverride"; value: 1}
+    PosAdd{x: 5}
+
+    if p2statetype = A {
+        if (P2Stateno != 801 ||  P2Stateno != 802 || P2Stateno != 803 || P2Stateno != 811 ||  P2Stateno != 812 || P2Stateno != 813) {
+            HitOverride{
+                attr: SCA,NA,SA,NP,SP;
+                slot: 0;
+                stateno: 813;
+                time: 11
+             }
+        }
+    }
+
+    IgnoreHitPause persistent(0) {
+        Explod{
+            anim: F805;
+            ID: 803;
+            pos: 5,-10;
+            postype: p1;
+            facing: 1;
+            vfacing: 1;
+            bindtime: 1;
+            removetime: -2;
+            pausemovetime: 60;
+            scale: .7,.7;
+            sprpriority: -1;
+            ownpal: 1;
+            removeongethit: 0
+        }
+    }
+}
+
+if time >= 11 {
+    MapSet {map:"hitOverride"; value: 0}
+}
+
+if AnimElem = 3 {
+    PlaySnd{value: F800,4; volumescale: 200}
+}
+
+if !movecontact {
+    HitDef{
+        getpower: 0,0;
+        attr: A, HP;
+        animtype: Heavy;
+        damage: 4;
+        Hitflag: MAF;
+        guardflag: HA;
+        pausetime: 5,5;
+        sparkno: 14000;
+        guard.sparkno: 13000;
+        sparkxy: -9,-30;
+        hitsound: 5,4;
+        guardsound: 6,0;
+        ground.type: High;
+        ground.slidetime: 12;
+        ground.hittime: 30;
+        ground.velocity: -30,0;
+        air.velocity: -30,3;
+        Fall: 0;
+        Envshake.time: 30;
+        Envshake.ampl: 8;
+        kill: 0
+    }
+}
+
+if !movecontact && time = 12 {
+    MapSet {map:"defence"; value: 0.2}
+}
+
+if AnimTime = 0 {
+    IgnoreHitPause{
+        RemoveExplod{id: 803}
+    }
+    if !movehit{
+        changeState{value: 815; ctrl: 0}
+    } else {
+        changeState{value: 50; ctrl: 0}
+    }
+}
+
+#===============================================================================
+#Counter - Push - FASTEST
+#===============================================================================
+[Statedef 813; 
+ type: A;
+ movetype: A;
+ physics: S;
+ juggle: 2;
+ ctrl: 0;
+ anim: 813;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+if movehit {
+    persistent(0) {
+        MapAdd{map: "juggle"; value: 200}
+    }
+    changeState{value: 814; ctrl: 0}
+}
+
+if pos y >= 0 {
+    PosSet{y: -5}
+}
+
+ignorehitpause if p2bodydist x <= 80 {
+    NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP; time: 1}
+}
+
+if time = 0 {
+
+    PlaySnd{value: F800,0; volumescale: 100}
+    MapSet{map:"hitOverride"; value: 1}
+    PosAdd{x: 10}
+
+    if (P2Stateno != 801 ||  P2Stateno != 802 || P2Stateno != 803 || P2Stateno != 801 ||  P2Stateno != 802 || P2Stateno != 803) {
+        HitOverride{
+            attr: SCA,NA,SA,NP,SP;
+            slot: 0;
+            stateno: 813;
+            time: 10
+        }
+    }
+}
+
+if Time = 2 {
+    sprpriority{value: 2}
+}
+
+if time = 4 {
+    VelSet{x: 10}
+}
+
+if time >= 10 {
+    MapSet {map:"hitOverride"; value: 0}
+}
+
+if !movecontact && time = 11 {
+    MapSet {map:"defence"; value: 0.2}
+}
+
+if AnimElem = 3 {
+    PlaySnd{value: F800,4; volumescale: 200}
+}
+
+if !movecontact {
+    HitDef{
+        getpower: 0,0;
+        attr: A, HP;
+        animtype: Heavy;
+        damage: 2;
+        Hitflag: MAF;
+        guardflag: HA;
+        pausetime: 3,3;
+        sparkno: 14000;
+        guard.sparkno: 13000;
+        sparkxy: -9,-30;
+        hitsound: 5,4;
+        guardsound: 6,0;
+        ground.type: High;
+        ground.slidetime: 12;
+        ground.hittime: 30;
+        ground.velocity: -30,0;
+        air.velocity: -30,3;
+        Fall: 0;
+        Envshake.time: 30;
+        Envshake.ampl: 8;
+        kill: 0
+    }
+}
+
+
+if AnimTime = 0 {
+    if !movehit{
+        changeState{value: 815; ctrl: 0}
+    } else {
+        changeState{value: 50; ctrl: 0}
+    }
+}
+
+#===============================================================================
+#AIR Counter - Recovery On Hit
+#===============================================================================
+[Statedef 814; 
+ type: A;
+ movetype: A;
+ physics: S;
+ juggle: 0;
+ ctrl: 0;
+ anim: 814;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: -1;]
+
+AttackDist{value: -1}
+NotHitBy{time: 1; value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT}
+
+persistent(0) if enemynear, movetype = H {
+    poweradd{value:1000}
+}
+
+if p2movetype !=H || (enemy,!alive || !numenemy) {
+    ChangeState{value: 50; ctrl: 1}
+}
+
+
+#===============================================================================
+#AIR Counter - Endlag
+#===============================================================================
+[Statedef 815; 
+ type: A;
+ movetype: A;
+ physics: A;
+ juggle: 0;
+ ctrl: 0;
+ anim: 815;
+ poweradd: 0;
+ velset: 0.5,0;
+ sprpriority: -1;]
+
+AttackDist{value: -1}
+if Vel Y > 0 && Pos Y >= -10 {
+    ChangeState{value:816;ctrl:0}
+}
+
+if time = 15 {
+    ChangeState{value:50;ctrl:0}
+}
+
+
+#===============================================================================
+#AIR Counter - Endlag LAND
+#===============================================================================
+[Statedef 816; 
+ type: S;
+ movetype: A;
+ physics: S;
+ juggle: 0;
+ ctrl: 0;
+ anim: 816;
+ poweradd: 0;
+ velset: 0.5,0;
+ sprpriority: -1;]
+
+AttackDist{value: -1}
+if time = 0 {
+    PosSet{y:0}
+}
+
+#Only exists to cancel the hitoverride from a land cancelled counter
+HitOverride{
+    attr: SCA,NA,SA,NP,SP;
+    slot: 0;
+    stateno: 5000;
+    time: 0
+}
+
+if time >= 20 {
+    ChangeState{value:0; ctrl:1}
+}
+
+#===============================================================================
+#COUNTER OFF BLOCK
+#===============================================================================
+[Statedef 820; 
+ type: S;
+ movetype: A;
+ physics: N;
+ juggle: 0;
+ ctrl: 0;
+ anim: 820;
+ poweradd: -1000;
+ velset: 0,0;
+ sprpriority: 0;]
+
+NotHitBy{time: 1; value: SCA,NA,SA,HA,NP,SP,HP}
+
+if AnimTime = 0 {
+    if pos y >= 0 {
+        ChangeState{value: 821; ctrl: 0}
+    } else {
+        ChangeState{value: 822; ctrl: 0}
+    }
+}
+
+#===============================================================================
+#COUNTER OFF BLOCK - STAND
+#===============================================================================
+[Statedef 821; 
+ type: S;
+ movetype: A;
+ physics: S;
+ juggle: 2;
+ ctrl: 0;
+ anim: 821;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: -1;]
+
+NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP; time: 1}
+
+if AnimElem = 2 {
+    SprPriority{value: 2}
+}
+
+if movehit {
+    persistent(0) {
+        MapAdd{map: "juggle"; value: 200}
+    }
+    changeState{value: 804; ctrl: 0}
+}
+
+if time = 0 {
+    PlaySnd{value: F800,0; volumescale: 100}
+    PosAdd{x: 2}
+    IgnoreHitPause persistent(0) {
+        Explod{
+            anim: F806;
+            ID: 801;
+            pos: 5,-25;
+            postype: p1; 
+            facing: 1;
+            vfacing: 1;
+            bindtime: 1;
+            removetime: -2;
+            pausemovetime: 60;
+            scale: .7,.7;
+            sprpriority: 1;
+            ownpal: 1;
+            removeongethit: 0
+        }
+    }
+}
+
+if time = 10 {
+    PlaySnd{value: 800,4; volumescale: 200}
+}
+
+if !movecontact {
+    HitDef{
+        getpower: 0,0;
+        attr: S, HP;
+        animtype: Heavy;
+        damage: 15;
+        Hitflag: MAFD;
+        guardflag: MA;
+        pausetime: 12,12;
+        sparkno: 14000;
+        guard.sparkno: 13000;
+        sparkxy: -9,-30;
+        hitsound: 5,4;
+        guardsound: 6,0;
+        ground.type: High;
+        ground.slidetime: 12;
+        ground.hittime: 30;
+        ground.velocity: -30,0;
+        guard.velocity: -7;
+        air.velocity: -30,3;
+        airguard.velocity: -2.5,-1.5;
+        Fall: 0;
+        Envshake.time: 30;
+        Envshake.ampl: 8;
+        kill: 0
+    }
+}
+
+if AnimElem = 3 {
+    VelSet{x: 10}
+    PosAdd{x: 2}
+}
+
+if AnimTime = 0 {
+    IgnoreHitPause{RemoveExplod{id: 801}}
+    ChangeState{value: 805; ctrl: 1}
+}
+
+#===============================================================================
+#COUNTER OFF BLOCK - AIR
+#===============================================================================
+[Statedef 822; 
+ type: A;
+ movetype: A;
+ physics: S;
+ juggle: 2;
+ ctrl: 0;
+ anim: 822;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP; time: 1}
+
+if AnimElem = 2 {
+    SprPriority{value: 2}
+}
+
+if pos y >= 0 {
+    PosSet{y: -5}
+}
+
+if time = 4 {
+    VelSet{x: 10}
+}
+
+if AnimElem = 3 {
+    PlaySnd{value: 800,4; volumescale: 200}
+}
+
+if time = 0 {
+    PlaySnd{value: F800,0; volumescale: 100}
+    PosAdd{x: 2}
+    IgnoreHitPause persistent(0) {
+        Explod{
+            anim: F806;
+            ID: 806;
+            pos: 5,-25;
+            postype: p1;
+            facing: 1;
+            vfacing: 1;
+            bindtime: 1;
+            removetime: -2;
+            pausemovetime: 60;
+            scale: .7,.7;
+            sprpriority: 1;
+            ownpal: 1;
+            removeongethit: 0
+        }
+    }
+}
+
+if !movecontact {
+    HitDef{
+        getpower: 0,0;
+        attr: A, HP;
+        animtype: Heavy;
+        damage: 15;
+        Hitflag: MAFD;
+        guardflag: HA;
+        pausetime: 12,12;
+        sparkno: 14000;
+        guard.sparkno: 13000;
+        sparkxy: -9,-30;
+        hitsound: 5,4;
+        guardsound: 6,0;
+        ground.type: High;
+        ground.slidetime: 12;
+        ground.hittime: 30;
+        ground.velocity: -30,0;
+        guard.velocity: -7;
+        air.velocity: -30,3;
+        airguard.velocity: -2.5,-1.5;
+        Fall: 0;
+        Envshake.time: 30;
+        Envshake.ampl: 8;
+        kill: 0
+    }
+}
+
+if movehit {
+    persistent(0) {
+        MapAdd{map: "juggle"; value: 200}
+    }
+    changeState{value: 814; ctrl: 0}
+}
+
+if AnimTime = 0 {
+    IgnoreHitPause{RemoveExplod{id: 806}}
+    ChangeState{value: 815; ctrl: 1}
+}
+
+#===============================================================================
+#Red Counter
+#===============================================================================
+[Statedef 830; 
+ type: S;
+ movetype: A;
+ physics: S;
+ velset: -1.5,0;
+ ctrl: 0;
+ anim: 800;
+ poweradd: 0;
+ sprpriority: -1;]
+
+AttackDist{value: -1}
+
+if time = 0 {
+
+    MapSet{map:"hitOverride"; value: 1}
+    PlaySnd{value:s800,3; volumescale: 100}
+
+    if time <= 5 {
+        PalFX{time:2; add: 100,-100,-100; sinadd: 40,80,40,2}
+    }
+
+    #15 frames of oppurtunity, 15 frames of recovery.
+
+    if (P2Stateno != 801 || P2Stateno != 802 || P2Stateno != 803 || P2Stateno != 811 || P2Stateno != 812 || P2Stateno != 813) {
+        HitOverride {
+            attr: SCA,NA,SA,NP,SP;
+            slot: 0;
+            stateno: 831;
+            time: 5;
+        }
+    }
+
+}
+
+ignorehitpause if time = 1 {
+    Explod {
+        anim: F805;
+        ID: 805;
+        pos: 0,-20;
+        postype: p1;
+        facing: 1;
+        vfacing: 1;
+        bindtime: 1;
+        removetime: -2;
+        pausemovetime: 60;
+        scale: .2,.2;
+        sprpriority: 1;
+        ownpal: 1;
+        removeongethit: 0
+    }
+}
+
+if !movecontact && time >= 6 {
+    MapSet {map:"defence"; value: 0.2}
+    MapSet {map:"hitOverride"; value: 0}
+}
+
+#Slowdown
+if enemynear, hitpausetime > 15 && var(47) <= 1 {
+    ChangeAnim{value: 800; elem: 1}
+}
+
+if animtime = 0 {
+    powerAdd{value: -1000}
+    changeState{value: 806; ctrl: 1}
+}
+
+#===============================================================================
+#RED Counter - Push
+#===============================================================================
+[Statedef 831; 
+ type: S;
+ movetype: A;
+ physics: S;
+ juggle: 2;
+ ctrl: 0;
+ anim: 821;
+ poweradd: 0;
+ velset: 0,0;
+ sprpriority: 0;]
+
+NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP; time: 1}
+
+if Time = 2 {
+    SprPriority{value: 2}
+}
+
+if AnimElem = 1 {
+    Pause{time: 20}
+}
+
+if movehit {
+    persistent(0) {
+        MapAdd{map: "juggle"; value: 10}
+    }
+    changeState{value: 0; ctrl: 1}
+}
+
+if time = 0 {
+    PlaySnd{value: F800,0; volumescale: 100}
+    PosAdd{x: 2}
+    NotHitBy{time: 20; value: SCA}
+    IgnoreHitPause persistent(0) {
+        Explod{
+            anim: F806;
+            ID: 801;
+            pos: 5,-25;
+            postype: p1; 
+            facing: 1;
+            vfacing: 1;
+            bindtime: 1;
+            removetime: -2;
+            pausemovetime: 60;
+            scale: .7,.7;
+            sprpriority: 1;
+            ownpal: 1;
+            removeongethit: 0
+        }
+    }
+}
+
+if time = 4 {
+    VelSet{x: 10}
+}
+
+if AnimElem = 2 {
+    PlaySnd{value: 800,4; volumescale: 200}
+}
+
+if !movecontact {
+    HitDef{
+        attr: S, HP;
+        animtype: Heavy;
+        damage: 15;
+        Hitflag: MAF;
+        guardflag: MA;
+        pausetime: 20,20;
+        sparkno: 14000;
+        guard.sparkno: 13000;
+        sparkxy: -9,-30;
+        hitsound: 5,4;
+        guardsound: 6,0;
+        ground.type: High;
+        ground.slidetime: 12;
+        ground.hittime: 30;
+        ground.velocity: -1,-8;
+        air.velocity: -1,-8;
+        Fall: 1;
+        fall.recover: 0;
+        Envshake.time: 30;
+        Envshake.ampl: 8;
+        kill: 0
+    }
+}
+
+if AnimElem = 3 {
+    VelSet{x: 10}
+}
+
+if AnimTime = 0 {
+    IgnoreHitPause{RemoveExplod{id: 801}}
+    ChangeState{value: 805; ctrl: 1}
+}
+
+#===============================================================================
+#Star Burst
+#===============================================================================
+[Statedef 50000; 
+ type: A; 
+ movetype: A;
+ physics: N;
+ anim: 50000;
+ poweradd: 0;
+ sprpriority: 2;
+ juggle: -5;
+ facep2: 1;
+ velset: 0,0;]
+
+# Add to Juggle Map
+persistent(0) if movehit {
+    if enemynear,gethitvar(fall) {
+        MapAdd{map: "juggle"; value: -25}
+    }
+}
+
+persistent(0) ignorehitpause if movehit {
+    var(11) := var(11) + -20;
+}
+
+ignorehitpause {
+    MapSet{map: "busterable"; value: 1}
+}
+MapSet{map: "helperGuarded"; value: 0}
+MapSet{map: "helperHit"; value: 0}
+
+if pos y >= 0 {
+    PosSet{y: 0}
+}
+
+if time = 1 {
+    PalFX{time:35; add: 32,16,0; sinadd: 64,32,5,3;}
+    SuperPause{time:25; movetime: 25; sound: F20,1; anim: 500; pos: 0,-50; darken: 1; p2defmul: 1; poweradd: 0}
+}
+
+if time < 25 {
+    VelAdd{y: .1}
+}
+
+if AnimElem = 1 {
+
+    VelSet{y: -3}
+    PlaySnd{value: F32,0; volumescale: 999}
+    PlaySnd{value: F32,0; volumescale: 999}
+
+    Helper{
+        helpertype: normal;
+        name: "Starburst Cooldown";
+        ID: 50750;
+        stateno: 50750;
+        pos: 9999,9999;
+        postype: p1;
+        facing: 1;
+        keyctrl: 0;
+        ownpal: 1;
+        supermovetime: 999;
+        pausemovetime: 999;
+    }
+}
+
+if AnimElem = 2 {
+
+    StateTypeSet{statetype: A; movetype: A; physics: A}
+    EnvShake{time: 30; ampl: 16}
+    PlaySnd{value: F32,1; volumescale: 999}
+    PlaySnd{value: F32,2; volumescale: 999}
+    PlaySnd{value: F32,2; volumescale: 999}
+
+    Helper{
+        helpertype: normal;
+        name:"StarBurst Start";
+        ID: 51000;
+        stateno: 51000;
+        pos: 9999,9999;
+        postype: p1;
+        facing: 1;
+        keyctrl: 0;
+        ownpal: 1;
+        supermovetime: 0;
+        pausemovetime: 0;
+    }
+}
+
+if !movecontact {
+    HitDef{
+        getpower: 0;
+        attr: S, NA;
+        animtype: Heavy;
+        damage: 0;
+        numhits: 0;
+        hitflag: MAFD;
+        guardflag: MA;
+        pausetime: 24,24;
+        sparkno: s9999;
+        guard.sparkno: 13000;
+        sparkxy: -8,-25;
+        guardsound: 6,0;
+        ground.type: High;
+        ground.slidetime: 12;
+        ground.hittime: 15;
+        ground.velocity: 30,4;
+        air.velocity: 30,4;
+        ground.cornerpush.veloff: -15;
+        Fall: 1;
+        fall.recover: 0;
+        priority: 7;
+        p2stateno: 1025;
+    }
+}
+
+if power >= 500 && time > 4 {
+    if command = "FF" {
+        PowerAdd{value:-500}
+        ChangeState{value:65}
+    } else if command = "s" {
+        PowerAdd{value:-500}
+        ChangeState{value:66}
+    }
+}
+
+if AnimTime = 0 {
+    ChangeState{ctrl:0; value: 50}
+}
+
+#===============================================================================
+#Twinkle Cancel
+#===============================================================================
+[Statedef 50500; 
+ type: A; 
+ movetype: A;
+ physics: N;
+ anim: 50500;
+ poweradd: -1500;
+ sprpriority: 2;
+ facep2: 1;
+ velset: 0,0;]
+
+
+ignorehitpause {
+    MapSet{map: "busterable"; value: 1}
+}
+MapSet{map: "helperGuarded"; value: 0}
+MapSet{map: "helperHit"; value: 0}
+PlayerPush{value: 1}
+BGPalFX{time:35; add: 0,0,0; mul: 128,128,128; sinadd: 0,0,0,1; invertall: 0; color: 256}
+Pause{time:3; movetime: 3}
+
+if pos y >= 0 {
+    PosSet{y: 0}
+}
+
+if AnimElem = 1 {
+
+    Helper{
+        helpertype: normal;
+        name: "Starburst Cooldown";
+        ID: 50750;
+        stateno: 50750;
+        pos: 9999,9999;
+        postype: p1;
+        facing: 1;
+        keyctrl: 0;
+        ownpal: 1;
+        supermovetime: 999;
+        pausemovetime: 999;
+    }
+
+}
+
+if time = 1 {
+
+    PlaySnd{value: F20,1; volumescale: 999}
+    PlaySnd{value: F20,3; volumescale: 999}
+
+    Explod{
+        anim: F520;
+        ID: 520;
+        pos: -10,-20;
+        postype: P1;
+        facing: 1;
+        vfacing: 1;
+        bindtime: -1;
+        vel: 0,0;
+        accel: 0,0;
+        random: 0,0;
+        removetime: -2;
+        supermovetime: 999;
+        pausemovetime: 999;
+        scale: 0.6,0.6;
+        sprpriority: 4;
+        ontop: 1;
+        shadow: 0,0,0;
+        ownpal: 0;
+        removeongethit: 1;
+    }
+
+    AfterImage{time: 12; length: 8; trans: add; paladd: 255,150,0}
+}
+
+if time = 3 {
+    PlaySnd{value: F20,2; volumescale: 999}
+}
+
+if AnimTime = 0 {
+    ChangeState{ctrl:1; value: cond(pos y < 0, 50, 0)}
+}
+
+#velocities
+if time < 5 {
+
+    if ailevel = 0 {
+
+        #nodirection
+        if command != "holdup" && command != "holddown" && command != "holdback" && command != "holdfwd" {
+            VelSet{x: 0; y: 0}
+        }
+
+        #upforward
+        if command = "holdup" && command = "holdfwd" {
+            VelSet{x: 4; y: -4}
+        }
+
+        #upback
+        if command = "holdup" && command = "holdback" {
+            VelSet{x: -4; y: -4}
+        }
+
+        #up
+        if command = "holdup" && command != "holdback" && command != "holdfwd" {
+            VelSet{x: 0; y: -4}
+        }
+
+        #forward
+        if command = "holdfwd" && command != "holdup" && command != "holddown" {
+            VelSet{x: 4; y: 0}
+        }
+
+        #back
+        if command = "holdback" && command != "holdup" && command != "holddown" {
+            VelSet{x: -4; y: 0}
+        }
+
+    }
+
+    #downforward
+    if command = "holddown" && command = "holdfwd" {
+            VelSet{x: 4; y: 4}
+    }
+
+    #downback
+    if command = "holddown" && command = "holdback" {
+            VelSet{x: -4; y: 4}
+    }
+
+    #down
+    if (command = "holddown" && command != "holdback" && command != "holdfwd") || ailevel > 0 {
+        VelSet{x: 0; y: 4}
+    }
+}
+
+if time >= 5 {
+    if vel x <= -0.25 && vel x != 0 {
+        VelAdd{x: .14; y: 0}
+    }
+
+    if vel y <= -0.25 && vel y != 0 {
+        VelAdd{x: 0; y: .14}
+    }
+
+    if vel x >= 0.25 && vel x != 0 {
+        VelAdd{x: -.14; y: 0}
+    }
+
+    if vel y >= 0.25 && vel y != 0 {
+        VelAdd{x: 0; y: -.14}
+    }
+}
+
+#===============================================================================
+#StarBurst Helper
+#===============================================================================
+[Statedef 51000; 
+ type: S; 
+ movetype: I;
+ physics: S;
+ anim: 51000;
+ poweradd: 0;
+ sprpriority: 2;]
+
+if teammode = tag && time = 0 {
+    TeamMapSet{map: "tagStarburst"; value: 1; redirectID: root,id}
+}
+
+ignorehitpause persistent(0) if parent, numhelper(52000) = 1 {
+    parent, var(11) := parent, var(11) + 30;
+    DestroySelf{}
+}
+
+#===============================================================================
+#StarBurst Cooldown
+#===============================================================================
+[Statedef 50750; 
+ type: S; 
+ movetype: I;
+ physics: S;
+ anim: 51000;
+ poweradd: 0;
+ sprpriority: 2;]
+
+if root, stateno != 50000 && time >= 7 {
+    DestroySelf{}
+}
+
+#===============================================================================
+#StarBurst End
+#===============================================================================
+[Statedef 52000; 
+ type: S; 
+ movetype: I;
+ physics: S;
+ anim: 52000;
+ poweradd: 0;
+ sprpriority: 2;]
+
+if teammode = tag && time < 2 {
+    TeamMapSet{map: "tagStarburst"; value: 0; redirectID: root,id}
+}
+
+ignorehitpause persistent(0) if root, StateNo != 50000 && Time >= 1{
+    DestroySelf{}
+}
+
+#===============================================================================
+#Star Buster
+#===============================================================================
+[Statedef 54000; 
+ type: A; 
+ movetype: A;
+ physics: N;
+ anim: 50000;
+ poweradd: -2000;
+ sprpriority: 2;
+ velset: 0,0;]
+
+# Add to Juggle Map
+persistent(0) if movehit {
+    if enemynear,gethitvar(fall) {
+        MapAdd{map: "juggle"; value: 200}
+    }
+}
+
+persistent(0) ignorehitpause if movehit {
+    var(11) := var(11) + 100;
+}
+
+ignorehitpause {
+    MapSet{map: "busterable"; value: 1}
+}
+
+if time = 1 {
+    PalFX{time:35; add: 23,11,90; mul: 256,256,256; sinadd: 64,32,5,3;}
+    SuperPause{time:25; movetime: 25; sound: F20,1; anim: 550; pos: 0,-50; darken: 1; p2defmul: 1; poweradd: 0}
+}
+
+if pos y >= 0 {
+    PosSet{y: 0}
+}
+
+
+if time < 25 {
+    VelAdd{y: .1}
+}
+
+if time = 35 {
+    NotHitBy{value: SCA; time: 30}
+}
+
+if AnimElem = 1 {
+    VelSet{y: -3}
+    PlaySnd{value: F32,0; volumescale: 999}
+    PlaySnd{value: F32,0; volumescale: 999}
+}
+
+if MoveHit = 1 {
+    VelSet{x: -3; y: -2}
+}
+
+if AnimElem = 2 {
+
+    StateTypeSet{statetype: A; movetype: A; physics: A}
+    EnvShake{time: 30; ampl: 16}
+    PlaySnd{value: F32,1; volumescale: 999}
+    PlaySnd{value: F32,2; volumescale: 999}
+    PlaySnd{value: F32,2; volumescale: 999}
+    Helper{
+        helpertype: normal;
+        name:"StarBuster Start";
+        ID: 55000;
+        stateno: 55000;
+        pos: 9999,9999;
+        postype: p1;
+        facing: 1;
+        keyctrl: 0;
+        ownpal: 1;
+        supermovetime: 0;
+        pausemovetime: 0;
+    }
+}
+
+if !movecontact {
+    HitDef{
+        getpower: 0;
+        attr: S, NA;
+        animtype: Heavy;
+        damage: 0;
+        numhits: 0;
+        hitflag: MAFD;
+        guardflag: MA;
+        pausetime: 24,24;
+        sparkno: S9999;
+        guard.sparkno: 13000;
+        sparkxy: -8,-25;
+        guardsound: 6,0;
+        ground.type: High;
+        ground.slidetime: 12;
+        ground.hittime: 50;
+        air.hittime: 50;
+        ground.velocity: -6,-6;
+        air.velocity: -6,-6;
+        fall.recover: 1;
+        fall.recovertime: 50;
+        Fall: 1;
+        p2facing: 1;
+    }
+}
+
+if AnimTime = 0 {
+    ChangeState{ctrl:0; value: 50}
+}
+
+#===============================================================================
+#Star Buster Countdown
+#===============================================================================
+[Statedef 55000; 
+ type: S; 
+ movetype: I;
+ physics: S;
+ anim: 9999;
+ poweradd: 0;
+ sprpriority: 2;
+ velset: 0,0;]
+
+if time >= 540 {
+    DestroySelf{}
+}
+
+#===============================================================================
+#Star Burst (In Neutral & off Block)
+#===============================================================================
+[Statedef 54500; 
+ type: A; 
+ movetype: A;
+ physics: N;
+ anim: 54500;
+ poweradd: 0;
+ sprpriority: 2;
+ juggle: -5;
+ facep2: 1;
+ ctrl: 0;
+ velset: 0,0;]
+
+# Add to Juggle Map
+persistent(0) if movehit {
+    if enemynear,gethitvar(fall) {
+        MapAdd{map: "juggle"; value: -25}
+    }
+}
+
+#If enemy is not in a hurt state, adds 200 juggle
+persistent(0) if enemy,movetype != H {
+    if animelem = 2 {
+        MapAdd{map: "juggle"; value: 200}
+    }
+}
+
+ignorehitpause {
+    MapSet{map: "busterable"; value: 1}
+}
+MapSet{map: "helperGuarded"; value: 0}
+MapSet{map: "helperHit"; value: 0}
+
+if pos y >= 0 {
+    PosSet{y: 0}
+}
+
+if time = 0 {
+    PosAdd{y: -10}
+    PalFX{time:35; add: 32,16,0; sinadd: 64,32,5,3;}
+}
+
+persistent(0) ignorehitpause if movehit {
+    var(11) := var(11) + cond(enemynear, movetype = H, -20, 100);
+}
+
+if time < 13 {
+    VelAdd{y: .14} #original is .09
+}
+
+if time >= 13 {
+    VelSet{y: 0}
+}
+
+if time = 13 {
+    Explod{
+        anim: F575;
+        ID: 575;
+        pos: 0,-30;
+        postype: P1;
+        facing: 1;
+        vfacing: 1;
+        bindtime: -1;
+        vel: 0,0;
+        accel: 0,0;
+        random: 0,0;
+        removetime: -2;
+        pausemovetime: 9999;
+        scale: .75,.75;
+        sprpriority: 3;
+        ontop: 0;
+        shadow: 0,0,0;
+        ownpal: 1;
+        removeongethit: 0;
+        ignorehitpause: 0; 
+    }
+}
+
+if AnimElem = 1 {
+
+    VelSet{y: -2.7}
+    PlaySnd{value: F32,0; volumescale: 999}
+    PlaySnd{value: F32,0; volumescale: 999}
+
+    Helper{
+        helpertype: normal;
+        name: "Starburst Cooldown";
+        ID: 50750;
+        stateno: 50750;
+        pos: 9999,9999;
+        postype: p1;
+        facing: 1;
+        keyctrl: 0;
+        ownpal: 1;
+        supermovetime: 999;
+        pausemovetime: 999;
+    }
+
+}
+
+if AnimElem = 2 {
+
+    StateTypeSet{statetype: A; movetype: A; physics: A}
+    EnvShake{time: 15; ampl: -8}
+    PlaySnd{value: F32,1; volumescale: 999}
+    PlaySnd{value: F32,2; volumescale: 999}
+    PlaySnd{value: F32,2; volumescale: 999}
+
+    Helper{
+        helpertype: normal;
+        name:"StarBurst Start";
+        ID: 51000;
+        stateno: 51000;
+        pos: 9999,9999;
+        postype: p1;
+        facing: 1;
+        keyctrl: 0;
+        ownpal: 1;
+        supermovetime: 0;
+        pausemovetime: 0;
+    }
+}
+
+if !movecontact {
+    if enemynear, movetype = H {
+        HitDef{
+            attr: S, NA;
+            animtype: Heavy;
+            damage: 0;
+            numhits: 0;
+            kill: 0;
+            hitflag: MAFD;
+            guardflag: MA;
+            pausetime: 24,24;
+            sparkno: s9999;
+            guard.sparkno: 13000;
+            sparkxy: -8,-25;
+            guardsound: S2,0;
+            ground.type: High;
+            ground.slidetime: 12;
+            ground.hittime: 15;
+            ground.velocity: 30,4;
+            air.velocity: 30,4;
+            ground.cornerpush.veloff: -15;
+            Fall: 1;
+            fall.recover: 0;
+            priority: 7;
+            p2stateno: 1025;
+        }
+    } else {
+        HitDef{
+            attr: S, NA;
+            animtype: Heavy;
+            damage: 0;
+            numhits: 0;
+            kill: 0;
+            hitflag: MAFD;
+            guardflag: MA;
+            pausetime: 25,18;
+            guard.pausetime: 18,10;
+            sparkno: s9999;
+            guard.sparkno: 13000;
+            sparkxy: -8,-25;
+            guardsound: 6,0;
+            ground.type: High;
+            ground.velocity: -15,-1;
+            air.velocity: -15,-1;
+            guard.velocity: 1;
+            airguard.velocity: 0,0;
+            Fall: 1;
+            fall.recover: 0;
+            priority: 7;
+        }
+    }
+}
+
+if AnimTime = 0 {
+    ChangeState{ctrl:0; value: 50}
+}
+
+#===============================================================================
+#Star Burst ground dash proration cooldown
+#===============================================================================
+[Statedef 51001; 
+ type: S; 
+ movetype: I;
+ physics: S;
+ anim: 9999;
+ poweradd: 0;
+ sprpriority: 2;]
+
+persistent(0) ignorehitpause if time = 0 {
+    parent,var(11) := parent,var(11) + -5;
+}
+
+if time >= 500 || parent,numhelper(51002) != 0 {
+    DestroySelf{}
+}
+
+#===============================================================================
+#Star Burst air dash proration cooldown
+#===============================================================================
+[Statedef 51002; 
+ type: S; 
+ movetype: I;
+ physics: S;
+ anim: 9999;
+ poweradd: 0;
+ sprpriority: 2;]
+
+persistent(0) ignorehitpause if time = 0 {
+    parent,var(11) := parent,var(11) + -5;
+}
+
+if time >= 500 || parent,numhelper(51001) != 0 {
+    DestroySelf{}
+}
+
+
+
+
+#===============================================================================
+#Dont Mess With; Commands
+#===============================================================================
+
+[Statedef -1]
+
+if Const(KBB_Playable) = 1 {
+
+    #StarBurst In Neutral
+    if numhelper(51000) = 0 && numhelper(55000) = 0 && numhelper(56000) = 0 && numhelper(50750) = 0 {
+        if stateno != [800,832] && enemy,stateno != 4000 && life <= 700 && Power >= 1500 {
+            if ctrl || (movetype = H && stateno = [120,160]) {
+                if command = "hold_x" && command = "hold_y" {
+                    ChangeState{value: 54500; ctrl: 0}
+                }
+            }
+        }
+    }
+
+    if numhelper(51000) = 0 && numhelper(55000) = 0 && numhelper(56000) = 0 && numhelper(50750) = 0 &&  numhelper(3500) = 0 {
+        if StageVar(info.displayname) != "Halberd Run" && stateno != [800,832] && (enemy,stateno != [801,806]) && (enemy,stateno != [811,816]) && (enemy,stateno != [821,822]) && (enemy,stateno != 831) {
+            if enemy,stateno != 4000 && enemy,stateno != 4100 && Power >= 1500 && (!hitoverridden && !movereversed && !enemy, hitoverridden) {
+                #StarBurst Cancel
+                if life <= 700 && enemy,movetype = H && (movehit || map(helperHit) != 0) {
+                    if command = "hold_x" && command = "hold_y" {
+                        ChangeState{value: 50000; ctrl: 0}
+                    }
+                #Twinkle Cancel
+                } else if movetype = A && (moveguarded || map(helperGuarded) != 0) {
+                    ignorehitpause if command = "hold_x" && command = "hold_y" {
+                        ChangeState{value: 50500; ctrl: 0}
+                    }
+                }
+            }
+        }
+    }
+
+    #Star Cancel Command
+    if power >= 1000 || numhelper(51000) != 0 {
+        if alive && !ctrl && movetype = A && !ishelper && roundstate != 1 && command = "s" && time >= 3 {
+            #The exceptions
+            if stateno != 800 && stateno != 810 && stateno != [820, 829] && stateno != 830 &&
+            stateno != 150 && stateno != 152 && stateno != 154 &&
+            stateno != [1000, 1039] &&
+            !(GetHitVar(attr) = [129, 132] || GetHitVar(attr) = [1025, 1028] || GetHitVar(attr) = [8193,8196]) &&
+            !(enemy,movecountered != 0 && enemy,map(fatal) = 1) {
+                #Character exceptions
+                if !(name = "Leon" && stateno = [26000, 26999]) && 
+                    !(name = "Jodie" && ((stateno = 611 && movehit) || ((stateno = 401 || stateno = 292) && movecontact))) &&
+                    !(name != "Noll" && stateno = 900 && movehit) &&
+                    !(name != "Saito" && stateno = 300) {
+                    ChangeState{value: 67}
+                }
+            }
+        }
+    }
+
+    #StarBuster
+    if alive {
+        if numhelper(51000) = 0 && numhelper(55000) = 0 && numhelper(56000) = 0 && numhelper(50750) = 0 {
+            if enemynear,map(busterable) = 0 && stateno != 4100 && power >= 2000 {
+                if movetype = H && stateno != [120,160] {
+                    if command = "hold_x" && command = "hold_y" {
+                        ChangeState{value: 54000; ctrl: 0}
+                    }
+                }
+            }
+        }
+    }
+
+    #Counter
+    if command = "hold_x" && ailevel = 0 && ctrl {
+        #Air Counter
+        if statetype = A {
+            ChangeState{value: 810; ctrl: 0}
+        #Red Counter
+        } else if statetype != A && command = "holdfwd" {
+            ChangeState{value: 830; ctrl: 0}
+        #Counter
+        } else {
+            ChangeState{value: 800; ctrl: 0}
+        }
+    }
+}
+#===============================================================================
+#Dont Mess With; Always Executed
+#===============================================================================
+[Statedef -2]
+
+if Const(KBB_Playable) = 1 {
+
+    #Make StarBurst Un-Busterable
+    if !enemynear, numhelper(51000) = 1 {
+        ignorehitpause if numhelper(51000) = 1 && enemynear, movetype = H {
+            MapSet{map: "busterable"; value: 1}
+        }
+    }
+
+    #Reset helperGuarded and helperHit
+    if MoveType != A || (enemynear,movetype!=H && enemy,stateno != 52) {
+        ignorehitpause if map(helperGuarded) != 0 {
+            RootMapSet{map: "helperGuarded"; value: 0}
+        } else if map(helperHit) != 0 {
+           ignorehitpause {RootMapSet{map: "helperHit"; value: 0}}
+        }
+    }
+
+    if numhelper(51000) {
+
+
+        if MoveType = A && (movehit || helper, movehit || map(helperHit) != 0) && stateno != 50000 {
+            if command = "FF" || command = "BB" || (command = "WD" && command != "NotWD") {
+                SuperPause{
+                    time: 5;
+                    sound: F20,1;
+                    pos: 0,-20;
+                    movetime: 0;
+                    darken: 1;
+                    p2defmul: 1;
+                    poweradd: 0;
+                }
+                if !numexplod(1500) {
+                    Explod{
+                        anim: F1500;
+                        ID: 1500;
+                        pos: 0,-10;
+                        postype: p1;
+                        facing: 1;
+                        vfacing: 1;
+                        bindtime: 1;
+                        vel: 0,0;
+                        accel: 0,0;
+                        random: 0,0;
+                        removetime: -2;
+                        pausemovetime: 0;
+                        scale: 1,1;
+                        ontop: 0;
+                        shadow: 0,0,0;
+                        ownpal: 0;
+                        removeongethit: 0;
+                        ignorehitpause: 1;
+                        sprpriority: 3;
+                    }
+                }
+            }
+        }
+
+        #Ground Dash Cancel Proration
+        if numhelper(51001) = 0 { 
+            if movehit && (statetype = s || statetype = c) && movetype != H {
+                if command = "FF" || (command = "WD" && command != "NotWD") {
+                    Helper{
+                        helpertype: normal;
+                        name: "Ground Dash Proration";
+                        ID: 51001;
+                        stateno: 51001;
+                        postype: p1;
+                        facing: 1;
+                        keyctrl: 0;
+                        ownpal: 1;
+                    }
+                }
+            }
+        }
+
+        #Air Dash Cancel Proration
+        if numhelper(51002) = 0 {
+            if movehit && (statetype = a) && movetype != H {
+                if command = "FF" {
+                    Helper{
+                         helpertype: normal;
+                        name: "Air Dash Proration";
+                        ID: 51002;
+                        stateno: 51002;
+                        postype: p1;
+                        facing: 1;
+                        keyctrl: 0;
+                        ownpal: 1;
+                    }
+                }
+            }
+        }
+
+
+
+        if (movecontact || helper, movecontact || map(helperHit) || map(helperguarded)) && movetype != H {
+            if command = "FF" {
+                 PowerAdd{value: -250}
+                 ignorehitpause if (statetype = s || statetype = c) {
+					StateTypeSet{Statetype: S}
+                    ChangeState{value: 100; ctrl: 1}
+                 }else ignorehitpause if (statetype = a) {
+                    ChangeState{value: 65; ctrl: 1}
+                 }
+            }
+            if command = "BB" {
+                PowerAdd{value: -250}
+                ignorehitpause if (statetype = s || statetype = c) {
+					StateTypeSet{Statetype: S}
+                    ChangeState{value: 105; ctrl: 1}
+                 } else ignorehitpause if (statetype = a) {
+                    ChangeState{value: 70; ctrl: 1}
+                 }
+            }
+			if (command = "WD" && command != "NotWD" && time >= 3) {
+				ignorehitpause if (statetype = s || statetype = c) {
+					PowerAdd{value: -250}
+					StateTypeSet{Statetype: C}
+					ChangeState{value: 30; ctrl: 0}
+				}
+			}
+		}
+        
+        if gametime%100 = 1 {
+            AfterImage{
+                time: 200;
+                length: 20;
+                trans: add;
+                paladd: 255,150,0;
+            }
+        }
+        
+        if stateno != 5611 && stateno != 5610 {
+            PowerAdd{value: -5}
+            if gametime%4 = 1 {
+                LifeAdd{value:1}
+            }
+            if gametime%20 = 1 {
+                var(11) := var(11) - 1;
+            }
+        }
+
+        if !numexplod(1000) {
+            Explod{
+                anim: F1000;
+                ID: 1000;
+                pos: 0,-10;
+                postype: p1;
+                facing: 1;
+                vfacing: 1;
+                bindtime: -1;
+                vel: 0,0;
+                accel: 0,0;
+                random: 0,0;
+                removetime: -2;
+                pausemovetime: 0;
+                scale: 2,2;
+                sprpriority: 0;
+                ontop: 1;
+                shadow: 0,0,0;
+                ownpal: 1;
+                removeongethit: 0;
+                ignorehitpause: 1;
+            }
+        }
+
+        if power <= 0 || roundstate != 2 {
+            Helper{
+                name: "StarBurst End";
+                ID: 52000;
+                stateno: 52000;
+                pos: 9999,9999;
+                postype: p1;
+                facing: 1;
+                keyctrl: 0;
+                ownpal: 1;
+                supermovetime: 0;
+                pausemovetime: 0;
+            }
+        }
+
+
+
+
+
+
+    }
+
+    if teammode = tag {
+        if !numhelper(51000) && map(tagStarburst) = 1 {
+            Helper{
+                helpertype: normal;
+                name: "StarBurst Start";
+                ID: 51000;
+                stateno: 51000;
+                pos: 9999,9999;
+                postype: p1;
+                facing: 1;
+                keyctrl: 0;
+                ownpal: 1;
+                supermovetime: 0;
+                pausemovetime: 0;
+            }
+        }
+    }
+}

@@ -1744,7 +1744,7 @@ volumescale = 100
 type = VelSet
 trigger1 = Time = 0
 x = 3.8
-y = -2.8
+y = -3
 
 [State 0, VelAdd]
 type = VelAdd
@@ -1786,7 +1786,7 @@ animtype  = Up
 damage    = 30
 hitflag = MAF
 guardflag = HA
-pausetime = 16,22
+pausetime = 16,18
 guard.pausetime = 16,16
 sparkno = 1
 guard.sparkno = 13000
@@ -1804,7 +1804,7 @@ Envshake.time = 20
 
 [State 200, End]
 type = ChangeState
-Triggerall = movecontact && time > 19
+Triggerall = movehit
 trigger1 = command = "s"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 66
@@ -2217,7 +2217,8 @@ inheritjuggle = 1
 
 [State 200, End]
 type = ChangeState
-triggerall = helper(455),movehit || time >= 20
+;triggerall = helper(455),movehit
+triggerall = time = [26, 34] 
 trigger1 = command = "c"
 value = 452
 ctrl = 1
@@ -2349,7 +2350,7 @@ y = -0.9
 [state 450]
 type = veladd
 trigger1 = time > 6
-x = -0.70
+x = -0.6
 y = ifelse(pos y - root,pos y > -15, -0.1, 0.1)
 
 ;[State 0, TargetBind]
@@ -2401,6 +2402,16 @@ y = root, map(posy)
 ignorehitpause = 1
 persistent = 0
 
+[State 0, Disable Hitbox]
+type = ChangeAnim
+trigger1 = root,AnimElemTime(5) >= 2 && root,stateno = 452
+value = 492
+
+[State 0, Reenable Hitbox]
+type = ChangeAnim
+trigger1 = anim = 492 && AnimTime = 0
+value = 492
+
 [State 0, VelSet]
 type = VelSet
 trigger1 = root,AnimElemTime(5) >= 2 && root,stateno = 452
@@ -2424,6 +2435,7 @@ persistent = 0
 type = HitDef
 getpower = 0
 triggerall = root,map(juggle) < 100 || hitcount != 0
+triggerall = root,movetype != H
 triggerall = AnimElem = 1 || AnimElem = 2 || AnimElem = 3 || AnimElem = 4
 triggerall = time < 40
 trigger1 = 1
@@ -2433,7 +2445,7 @@ damage    = 8
 guard.kill = 0
 Hitflag = MAFD
 guardflag = MAF
-pausetime = 2,2
+pausetime = 0,2
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,0
@@ -2442,10 +2454,10 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 10 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = ifelse(vel x > 0, -3,3),-3
+ground.velocity = ifelse(vel x > 0, -3,3),-3.5
 ground.hittime  = 20
 air.hittime  = 25 + ifelse(enemy,movetype = A, 7,0)
-air.velocity = ifelse(vel x > 0, -3,3),ifelse(enemy,pos y < -10, -2.5, -3)
+air.velocity = ifelse(vel x > 0, -3,3),ifelse(enemy,pos y < -10, -3, -3.5)
 Fall = 1
 Fall.recovertime = 25
 Envshake.time = 5
@@ -2473,7 +2485,7 @@ movetype= I
 physics = S
 juggle  = 0
 ctrl = 0
-anim = 492
+anim = 495
 poweradd = -200
 sprpriority = 1
 
@@ -3344,7 +3356,7 @@ value = 750
 
 [State 200, End]
 type = ChangeState
-triggerall = command = "FF" || (command = "z" && command != "holddown")
+triggerall = command = "FF"
 trigger1 = Time >= 49
 value = 100
 ctrl = 1
@@ -5416,24 +5428,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-type = MapSet
-trigger1 = teammode != tag && enemy,teammode != tag
-map = "initialDefence"
-value = 1
-persistent = 0
-
-[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-type = MapSet
-trigger1 = roundstate = 1
-map = "defence"
-value = 0
-
-[State -2, Defense Set] ; Used to determine character defense
-type = defenceMulSet
-trigger1 = 1 
-value = map(initialDefence) + map(defence)
-onhit = 0
+;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+;type = MapSet
+;trigger1 = teammode != tag && enemy,teammode != tag
+;map = "initialDefence"
+;value = 1
+;persistent = 0
+;
+;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+;type = MapSet
+;trigger1 = roundstate = 1
+;map = "defence"
+;value = 0
+;
+;[State -2, Defense Set] ; Used to determine character defense
+;type = defenceMulSet
+;trigger1 = 1 
+;value = map(initialDefence) + map(defence)
+;onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

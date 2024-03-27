@@ -254,7 +254,7 @@ value = 30
 [State 200, AirDash]
 type = ChangeState
 triggerall = time >= 5
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 65
 
 [State 200, AirDash]

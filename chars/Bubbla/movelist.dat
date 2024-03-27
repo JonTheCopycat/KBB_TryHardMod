@@ -1,0 +1,77 @@
+<#f0f000>:PASSIVE ABILLITY:</>
+Bubbla has the abillity to blow and store up 
+to 10 bubbles! These bubbles can be used for 
+attacks/EX/Star Strikes as long as you have meter.
+
+<#f0f000>:EX ATTACKS:</>
+
+Bubble Blowing (1/4 Bar)				^C
+	"Bubbla blows a bubble 
+	adding a bubble to your meter.
+	If held longer, a bubble is blown,
+	trapping any nearby opponent."
+
+Bubblo Launch (1/4 Bar)				_B^C
+	"Bubbla charges a Bubblo and 
+	launches it at their opponent.
+	Three different sizes of Bubblo
+	can be summoned. Can be charged."
+
+Bubble Burst (1/4 Bar: 1 Bubble)		_D^C
+	"Bubbla spawns an explosive bubble burst
+	around herself, damaging the nearby opponent."
+	
+Bubble Burst Bounce (1/4 Bar,_AIR OK: 1 Bubble)					_AIR^C
+	"Bubbla spawns an explosive bubble burst
+	propelling her through the air,
+	damaging the opponent." 
+
+Drop Bubble Trap (1/4 Bar,_AIR OK: 1 Bubble)					_AIR_D^C
+	"Bubbla spawns a bubble trap 
+	hurtling to the ground. Anyone
+	caught will be damaged by the
+	explosion."
+ 
+
+<#f0f000>:STAR STRIKES!:</>
+
+Giant Bubble Ball (1 Bar: 1 Bubble)					_D_DF_F^A
+	 "Bubbla chucks a large bubble that 
+	bounces on the floor three times before
+	exploding.
+	 Catches any opponent nearby, trapping them
+	until the bubble explodes. Consumes 1 Bubble."
+
+Sudsplosion (1 Bar: 5 Bubbles)					_D_DB_B^A
+	 "Bubbla becomes a germaphobe and douses
+	herself and nearby opponents in a sudsy
+	explosion! Everything must be clean!"
+
+Triple Bubble Ball (1 Bar: 3 Bubbles) 			_D_DF_F^B
+	"Bubbla throws three mini bubble balls
+	that can trap the opponent until popping.
+	Otherwise, the bubbles will pop once it hits
+	a surface."
+ 
+"Giant Bubble Trap" (1 Bar: 3 Bubbles)					_D_DB_B^B		
+	"Bubbla plants a giant Bubble Trap on the
+	ground! Traps the opponent, forcing them
+	to rise into the air and explode, stunning
+	them even more."
+
+"Deady Bubble Blowing" (1 1/2 Bars)		_D_DF_F^C			
+	"Bubbla blows a giant bubble that rises
+	into the air before exploding. Any
+	opponent nearby will be caught and
+	blown up. This attack is positively 
+	modified by the number of bubbles stored."
+	
+"The Bubbla Bubblo Water Beam" (2 Bars)				_D_DB_B^C
+	"Bubbla launches the opponent into the
+	air, leading to a Bubblo slashing them
+	ninja-style repeatedly, adding
+	to the bubble count, while Bubbla goes
+	full DBZ. After the Bubblo has finished,
+	Bubblo lets loose a torrent of water, 
+	greatly damaging the opponent."
+	

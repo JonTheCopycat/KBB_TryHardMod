@@ -1,0 +1,273 @@
+;===============================================================================
+;----------------------Supers---------------------------------------------------
+;===============================================================================
+;-------------------------------------------------------------------------------
+; "Cease Flow"
+[Statedef 25000]
+type    = S
+movetype= I
+physics = S
+juggle  = 0
+velset = 0,0
+ctrl = 0
+anim = 29000
+poweradd = -3000
+sprpriority = 2
+
+[State 0, PowerAdd]
+type = PowerAdd
+trigger1 = Time = 41
+value = -1000 
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 1
+time = 40
+sound = S10,0
+pos = 0,-20
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+unhittable = 1
+pausebg = 1
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 2
+time = 40
+sound = S999,999
+pos = 0,-20
+movetime = 40
+darken = 1
+p2defmul = 1
+poweradd = 0
+unhittable = 1
+pausebg = 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = Time = 0
+anim = 32002
+ID = 32002
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+pausemovetime = 9999
+supermove = 9999
+
+[State 0, Helper]
+type = Helper
+trigger1 = Time = 0
+helpertype = normal ;player
+name = "Portrait"
+ID = 34000
+stateno = 34000
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 9999
+pausemovetime = 9999
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = time = 35
+time = 600
+color = 0
+ignorehitpause = 1
+
+[State 0, Helper]
+type = Helper
+trigger1 = Time = 40
+helpertype = normal ;player
+name = "Music Stopper"
+ID = 25010
+stateno = 25010
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 9999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 1
+value = S4,4
+volumescale = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 1
+value = S5,0
+volumescale = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 35
+value = S4,5
+volumescale = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 35
+value = S3,0
+volumescale = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 35
+value = S3,1
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = Time = 35
+anim = 25001
+ID =  25001
+pos = -50,-100
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 999
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+
+[State 25000]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; Explod Finishes:
+[Statedef 33000]
+type    = S
+movetype= I
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 9999
+velset = 0,0
+sprpriority = -1
+
+[State 200, End]
+type = Destroyself
+trigger1 = time = 0
+
+; "Time Stop" Portrait:
+;-------------------------------------------------------------------------------
+[Statedef 34000]
+type    = S
+movetype= I
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 33001
+velset = 0,0
+sprpriority = 2
+poweradd = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = Time = 1 
+anim = 34000
+ID = 34000
+pos = 125,80
+postype = Left  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = .5,0
+accel = 0,0
+random = 0,0
+removetime = 80
+pausemovetime = 0
+scale = 0.3,0.3
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+supermove = 9999
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 33000
+ctrl = 1
+;-------------------------------------------------------------------------------
+; Music Stopper
+[Statedef 25010]
+type    = S
+movetype= I
+physics = S
+juggle  = 1
+velset = 0,0
+ctrl = 0
+anim = 25002
+poweradd = -2500
+sprpriority = 2
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = nomusic
+flag = timerfreeze
+
+[State 0, PowerSet]
+type = PowerSet
+trigger1 = Time = [1,599]
+value = 500
+
+[State 0, PowerSet]
+type = PowerSet
+trigger1 = Time = 600
+value = 0
+
+[State 25000]
+type = ChangeState
+trigger1 = Time = 600
+value = 25011
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; Music Starter
+[Statedef 25011]
+type    = S
+movetype= I
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 9999
+velset = 0,0
+sprpriority = -1
+
+[State 200, End]
+type = Destroyself
+trigger1 = time = 1

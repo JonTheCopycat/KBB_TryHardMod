@@ -187,12 +187,17 @@ value = 1
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 0
-y = -3.2
+y = -0.2
+
+[State 0, VelSet]
+type = PosAdd
+trigger1 = time = 0
+y = -2
 
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = time > 0
-y = 0.20
+y = -0.075
 
 [State 0, Moving Forward]
 type = VelAdd
@@ -225,8 +230,8 @@ type = Helper
 trigger1 = time = 0
 helpertype = normal
 name = "HELPER"
-ID = 591
-stateno = 591
+ID = 31
+stateno = 31
 pos = pos x, pos y
 postype = p1
 size.xscale = 1
@@ -244,22 +249,15 @@ trigger4 = command = "b" && time > 0
 trigger5 = command = "c" && time > 0
 y = 0
 
-
-[State 200, Special 2 - Rapidslash DP]
+;---------------------------------------------------------------------------
+; Special 3
+[State -1, SPECIAL 3 - Spinner Cutters]
 type = ChangeState
-Triggerall = time >= 5
+value = 23000
 triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 2"
-trigger1 = power >= 1000
-value = 22000
-
-[State 200, SPECIAL 4 - Sleeper Move]
-type = ChangeState
-triggerall = time >= 5
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-Trigger1 = power >= 1000
-value = 24000
+triggerall = command = "SPECIAL 3"
+Triggerall = power >= 1000
+trigger1 = command = "holdfwd"
 
 ;[State 200, End]
 ;type = ChangeState
@@ -303,7 +301,7 @@ ctrl = 0
 [State 200, End]
 type = ChangeState
 triggerall = time >= 5
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 65
 ctrl = 1
 
@@ -351,8 +349,9 @@ y = root,vel y
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = root,statetype != S
-trigger2 = time >= 600
+trigger1 = root,statetype = A
+trigger2 = root,pos y > -1
+trigger3 = root,movetype = H
 value = 32
 ctrl = 0
 
@@ -398,7 +397,7 @@ trigger1 = animtime = 0
 
 ;---------------------------------------------------------------------------
 ;Standard Wavedash
-[Statedef 35]
+[Statedef 33]
 type = C
 movetype= I
 physics = S
@@ -464,8 +463,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 5 || command != "z"
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 

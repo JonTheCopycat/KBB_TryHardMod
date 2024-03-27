@@ -2772,7 +2772,7 @@ x = 2
 type = ChangeState
 triggerall = time < 8
 triggerall = numhelper(3500) = 0
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 2060
 
 [State 200, SPECIAL CANCEL]
@@ -3085,7 +3085,7 @@ value = 23000
 [State 200, Wavedash]
 type = ChangeState
 Triggerall = helper(2001),movecontact
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 2060
 
 [State 0, End]
@@ -3281,7 +3281,7 @@ value = 23000
 type = ChangeState
 triggerall = time >= 18
 Triggerall = helper(2006),movecontact
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 2060
 
 [State 0, End]
@@ -3556,7 +3556,7 @@ value = 23000
 [State 200, Wavedash]
 type = ChangeState
 Triggerall = movecontact
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 2060
 
 ;Stance cancels
@@ -3587,7 +3587,7 @@ ctrl = 1
 ; Wavedash C B 2
 ;-------------------------------------------------------------------------------
 [Statedef 2025]
-type    = A
+type    = S
 movetype = A
 physics = S
 juggle  = 1
@@ -3690,7 +3690,7 @@ value = 23000
 type = ChangeState
 triggerall = time >= 18
 Triggerall = movecontact
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 2060
 
 ;Stance cancels
@@ -3917,7 +3917,7 @@ value = 23000
 [State 200, Wavedash]
 type = ChangeState
 Triggerall = movecontact
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 2060
 
 ;Stance cancels
@@ -4046,7 +4046,7 @@ value = 23000
 [State 200, Wavedash]
 type = ChangeState
 Triggerall = movecontact
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 2060
 
 ;Stance cancels
@@ -7186,24 +7186,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-type = MapSet
-trigger1 = teammode != tag && enemy,teammode != tag
-map = "initialDefence"
-value = 1
-persistent = 0
-
-[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-type = MapSet
-trigger1 = roundstate = 1
-map = "defence"
-value = 0
-
-[State -2, Defense Set] ; Used to determine character defense
-type = defenceMulSet
-trigger1 = 1 
-value = map(initialDefence) + map(defence)
-onhit = 0
+;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+;type = MapSet
+;trigger1 = teammode != tag && enemy,teammode != tag
+;map = "initialDefence"
+;value = 1
+;persistent = 0
+;
+;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+;type = MapSet
+;trigger1 = roundstate = 1
+;map = "defence"
+;value = 0
+;
+;[State -2, Defense Set] ; Used to determine character defense
+;type = defenceMulSet
+;trigger1 = 1 
+;value = map(initialDefence) + map(defence)
+;onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

@@ -2387,13 +2387,13 @@ type = PowerAdd
 trigger1 = time = 10
 value = -200
 
-[State 0, CtrlSet]
-type = CtrlSet
-triggerall = time > 5
-trigger1 = !movecontact
-trigger2 = !prevstateno = 615
-value = 1
-ignorehitpause = 1
+;[State 0, CtrlSet]
+;type = CtrlSet
+;triggerall = time > 5
+;trigger1 = !movecontact
+;trigger2 = !prevstateno = 615
+;value = 1
+;ignorehitpause = 1
 
 [State 0, NotHitBy]
 type = NotHitBy
@@ -2519,6 +2519,48 @@ Fall.recovertime = ifelse(enemy,movetype = A, 80,40)
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = time > 5
+triggerall = !prevstateno = 615 || !movecontact
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = 1
+value = 30
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 20
+triggerall = !prevstateno = 615 || !movecontact
+triggerall = var(3) = 0
+trigger1 = command = "holdup"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 45
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 20 || movecontact
+triggerall = !prevstateno = 615 || !movecontact
+trigger1 = command = "FF"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 65
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 20 || movecontact
+triggerall = !prevstateno = 615 || !movecontact
+trigger1 = command = "BB"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 70
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 20 || movecontact
+triggerall = !prevstateno = 615 || !movecontact
+trigger1 = command = "s"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 66
+
 [State 200, End]
 type = ChangeState
 triggerall = movecontact
@@ -2527,6 +2569,40 @@ trigger1 = command = "holddown"
 trigger1 = command = "c"
 value = 470
 ctrl = 1
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 5 || movecontact
+triggerall = !prevstateno = 615 || !movecontact
+trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 600
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 5 || movecontact
+triggerall = !prevstateno = 615 || !movecontact
+trigger1 = command = "b"
+trigger1 = command = "holddown"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 610
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 5 || movecontact
+triggerall = !prevstateno = 615 || !movecontact
+trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 610
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 5 || movecontact
+triggerall = !prevstateno = 615 || !movecontact
+triggerall = numhelper(3500) = 0
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 620
 
 [State 200, End]
 type = ChangeState
@@ -5429,24 +5505,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-type = MapSet
-trigger1 = teammode != tag && enemy,teammode != tag
-map = "initialDefence"
-value = 1
-persistent = 0
-
-[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-type = MapSet
-trigger1 = roundstate = 1
-map = "defence"
-value = 0
-
-[State -2, Defense Set] ; Used to determine character defense
-type = defenceMulSet
-trigger1 = 1 
-value = map(initialDefence) + map(defence)
-onhit = 0
+;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+;type = MapSet
+;trigger1 = teammode != tag && enemy,teammode != tag
+;map = "initialDefence"
+;value = 1
+;persistent = 0
+;
+;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+;type = MapSet
+;trigger1 = roundstate = 1
+;map = "defence"
+;value = 0
+;
+;[State -2, Defense Set] ; Used to determine character defense
+;type = defenceMulSet
+;trigger1 = 1 
+;value = map(initialDefence) + map(defence)
+;onhit = 0
 
 
 ; ------ FatalCounter Check ------

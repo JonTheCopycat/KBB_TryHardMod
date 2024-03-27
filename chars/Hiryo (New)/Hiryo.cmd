@@ -624,8 +624,8 @@ flag3=nostandguard
 type = VelSet
 triggerall = statetype = A && movetype != H
 triggerall = command = "down"
-triggerall = vel y > 0 && vel y < 6
-triggerall = stateno != 900
+triggerall = vel y > -1 && vel y < 6
+triggerall = stateno != 900 && stateno != 390
 trigger1 = 1
 y = 6
 
@@ -650,6 +650,7 @@ triggerall = command = "SPECIAL 1"
 Triggerall = statetype = A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 2
 [State -1, SPECIAL 2]
@@ -660,6 +661,7 @@ triggerall = command = "SPECIAL 2"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 3
 [State -1, SPECIAL 3]
@@ -670,6 +672,7 @@ triggerall = command = "SPECIAL 3"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 4
 [State -1, SPECIAL 4]
@@ -681,6 +684,7 @@ Triggerall = statetype != A
 Triggerall = power >= 1000
 Triggerall = p2movetype!= H
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 5
 [State -1, SPECIAL 5]
@@ -691,6 +695,7 @@ triggerall = command = "SPECIAL 5"
 Triggerall = statetype != A
 Triggerall = power >= 2000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;===========================================================================
 ;---------------------------------------------------------------------------
 ; Power Charge
@@ -712,7 +717,7 @@ type = ChangeState
 value = 30
 trigger1 = command = "WD" && command != "NotWD"
 trigger1 = statetype = C || statetype = S
-trigger1 = ctrl
+trigger1 = ctrl || stateno = 100
 
 ;---------------------------------------------------------------------------
 ; backsway to Stance
@@ -721,7 +726,7 @@ type = ChangeState
 value = 31
 trigger1 = command = "BWD" && command != "NotBWD"
 trigger1 = statetype = C || statetype = S
-trigger1 = ctrl
+trigger1 = ctrl || stateno = 105
 
 ;---------------------------------------------------------------------------
 ; Run Fwd
@@ -729,7 +734,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -778,7 +783,7 @@ triggerall = stateno != 65
 triggerall = stateno != 70
 value = ifelse(pos y >= 0,52,65)
 triggerall = Statetype = A
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -901,34 +906,34 @@ Triggerall = statetype != A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Counter - Air
-[State -1, Counter]
-type = ChangeState
-value = 810
-triggerall = ailevel = 0
-triggerall = command = "hold_x"
-Triggerall = statetype = A
-trigger1 = ctrl
-
-;---------------------------------------------------------------------------
-; Counter - Red
-[State -1, Counter]
-type = ChangeState
-value = 830
-triggerall = ailevel = 0
-triggerall = command = "hold_x"
-triggerall = command = "holdfwd"
-Triggerall = statetype != A
-trigger1 = ctrl
-
-;---------------------------------------------------------------------------
-; Counter - Stand
-[State -1, Counter]
-type = ChangeState
-value = 800
-triggerall = ailevel = 0
-triggerall = command = "hold_x"
-Triggerall = statetype != A
-trigger1 = ctrl
+;[State -1, Counter]
+;type = ChangeState
+;value = 810
+;triggerall = ailevel = 0
+;triggerall = command = "hold_x"
+;Triggerall = statetype = A
+;trigger1 = ctrl
+;
+;;---------------------------------------------------------------------------
+;; Counter - Red
+;[State -1, Counter]
+;type = ChangeState
+;value = 830
+;triggerall = ailevel = 0
+;triggerall = command = "hold_x"
+;triggerall = command = "holdfwd"
+;Triggerall = statetype != A
+;trigger1 = ctrl
+;
+;;---------------------------------------------------------------------------
+;; Counter - Stand
+;[State -1, Counter]
+;type = ChangeState
+;value = 800
+;triggerall = ailevel = 0
+;triggerall = command = "hold_x"
+;Triggerall = statetype != A
+;trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Instant Airdash
 [State -1, Instant Airdash]

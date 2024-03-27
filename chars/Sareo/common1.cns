@@ -272,7 +272,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 

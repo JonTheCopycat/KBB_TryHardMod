@@ -610,8 +610,8 @@ flag3=nostandguard
 type = VelSet
 triggerall = statetype = A
 triggerall = command = "down" && movetype != H
-triggerall = vel y > 0 && vel y < 6
-triggerall = stateno != 900
+triggerall = vel y > -1 && vel y < 6
+triggerall = stateno != 900 && stateno != 24500
 trigger1 = 1
 y = 6
 
@@ -635,7 +635,7 @@ triggerall = stateno != 65
 triggerall = stateno != 70
 value = ifelse(pos y >= 0,52,65)
 triggerall = Statetype = A
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -678,7 +678,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -687,7 +687,7 @@ trigger1 = ctrl
 [State -1, Run Back]
 type = ChangeState
 value = 105
-trigger1 = command = "BB" && command != "holddown"
+trigger1 = command = "BB"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -729,6 +729,7 @@ triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 1"
 Triggerall = power >=1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 2
 [State -1, SPECIAL 2]
@@ -739,6 +740,7 @@ triggerall = command = "SPECIAL 2"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 3
 [State -1, SPECIAL 3]
@@ -749,6 +751,7 @@ triggerall = command = "SPECIAL 3"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 4
 [State -1, SPECIAL 4]
@@ -759,6 +762,7 @@ triggerall = command = "SPECIAL 4"
 Triggerall = statetype != A
 Triggerall = power >= 500
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 5
 [State -1, SPECIAL 5]
@@ -769,6 +773,7 @@ triggerall = command = "SPECIAL 5"
 Triggerall = statetype != A
 Triggerall = power >= 1500
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;===========================================================================
 ;--------------------------------Normal Attacks---------------------------
 ;---------------------------------------------------------------------------

@@ -228,6 +228,25 @@ Jay, order=1
 Bill, order=1
 Vei, order = 1
 
+;Row 4
+blank
+blank
+Takuya, order = 1
+Bubbla, order = 1
+Junichi, order = 1
+blank
+blank
+
+;Row 5
+blank
+blank
+blank
+Kaby, order = 1
+blank
+blank
+blank
+
+
 ;Bosses
 KBB MK, rounds=1, ordersurvival=0, single=1, hidden=2, boss=1, order=5, vsscreen=0, time = -1
 Dedede, rounds=1, ordersurvival=0, single=1, hidden=2, boss=1, order=5, vsscreen=0, time = -1

@@ -1736,6 +1736,7 @@ anim = 390
 poweradd = 0
 velset = 5,0
 sprpriority = 2
+attackdist = 50
 
 [State 0, Juggle Map]
 type = MapAdd
@@ -2081,7 +2082,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-guard.pausetime = 12, 24
+guard.pausetime = 12, 20
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2129,7 +2130,7 @@ animtype = Heavy
 damage  = 30 + ifelse(var(8) != 0, 30, 0)
 hitflag = MAF
 guardflag = MA
-pausetime = 12,30 + ifelse(var(8) != 0, 10, 0)
+pausetime = 12,24 + ifelse(var(8) != 0, 10, 0)
 ground.type = High
 ground.slidetime = 12
 ground.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
@@ -2454,7 +2455,7 @@ value = 0
 [State 310, End]
 type = ChangeState
 triggerall = helper(405),movehit
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -3240,7 +3241,7 @@ value = 0
 [State 310, End]
 type = ChangeState
 triggerall = helper,movehit = 1
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -5434,18 +5435,18 @@ sprpriority = 1
 type = SuperPause
 triggerall = enemy,movetype = H
 trigger1 = Time = 1
-anim = 92006
+anim = 9999
 time = 10
 pos = 0,-20
 movetime = 10
 darken = 0
 p2defmul = 1
 poweradd = 0
-endcmdbuftime = 7
+endcmdbuftime = 10
 
 [State 105, NotHitBy]
 type = NotHitBy
-trigger1 = Time = [1, 5]
+trigger1 = Time = [1, 4]
 value = SCA
 time = 1
 
@@ -5510,7 +5511,7 @@ ctrl = 0
 [State 200, End]
 type = ChangeState
 Triggerall = time >= 7
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -5642,8 +5643,8 @@ hitsound  = s0,5
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
-ground.velocity = -4,-5
-air.velocity = -4,-4.5
+ground.velocity = -4,-3
+air.velocity = -4,-2.5
 Envshake.time = 25
 
 [State 300, SPEEEEEEEN]
@@ -6787,7 +6788,7 @@ value = 0
 
 [State 310, End]
 type = ChangeState
-triggerall = command = "FF" || command = "z"
+triggerall = command = "FF"
 trigger1 = helper(624), movehit
 trigger2 = helper(626), movehit
 value = 65
@@ -9013,24 +9014,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-type = MapSet
-trigger1 = teammode != tag && enemy,teammode != tag
-map = "initialDefence"
-value = 1
-persistent = 0
-
-[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-type = MapSet
-trigger1 = roundstate = 1
-map = "defence"
-value = 0
-
-[State -2, Defense Set] ; Used to determine character defense
-type = defenceMulSet
-trigger1 = 1 
-value = map(initialDefence) + map(defence)
-onhit = 0
+;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+;type = MapSet
+;trigger1 = teammode != tag && enemy,teammode != tag
+;map = "initialDefence"
+;value = 1
+;persistent = 0
+;
+;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+;type = MapSet
+;trigger1 = roundstate = 1
+;map = "defence"
+;value = 0
+;
+;[State -2, Defense Set] ; Used to determine character defense
+;type = defenceMulSet
+;trigger1 = 1 
+;value = map(initialDefence) + map(defence)
+;onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

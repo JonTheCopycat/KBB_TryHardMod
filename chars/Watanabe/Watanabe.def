@@ -8,7 +8,7 @@ displayname = "Watanabe" ;Name of character to display
 versiondate = 3/12/2022   ;Version date of character
 mugenversion =  1.1 ;Version of M.U.G.E.N character works on
 ikemenVersion = 0.98
-author = "KBB Dev Team"       ;Character author name
+author = "Cyigga"       ;Character author name
 pal.defaults = 1,2,3,4,5,6,7,8  ;Default palettes in order of preference
 
 ; Files for the player

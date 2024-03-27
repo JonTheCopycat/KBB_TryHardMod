@@ -1,0 +1,37 @@
+; Definition file for player
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Aege"        ;Name of character
+displayname = "Aege" ;Name of character to display
+versiondate = 6/26/2022   ;Version date of character
+mugenversion = 1.1  ;Version of M.U.G.E.N character works on
+ikemenVersion = 0.98
+author = "KBB Dev Team"      ;Character author name
+pal.defaults = 1,2,3,4,5,6,7,8 ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = Aege.cmd   ;Command set
+cns     = Aege.cns   ;Constants
+st      = Aege.cns   ;States
+st1     = Supers.cns
+st2     = Specials.cns
+;st3     = StarBurst.cns
+;st4     = Power Delay.cns
+;st5     = StarStrike.cns
+;st6     = HurtStates.cns
+stcommon = common1.cns ;Common states
+sprite  = Aege.sff   ;Sprite
+anim    = Aege.air   ;Animation
+sound  = Aege.snd   ;Sound
+movelist = movelist.dat
+
+[Palette Keymap]
+a = 1
+b = 1
+c = 1
+x = 1
+y = 1
+z = 1

@@ -83,7 +83,7 @@ dhcAttackB = 24000 ;DHC Attack State when B+T is pressed
 dhcAttackC = 25000 ;DHC Attack State when C+T is pressed
 dhcMeterRequirementA = 1000 ;Meter Requirement for doing DHC A
 dhcMeterRequirementB = 1000 ;Meter Requirement for doing DHC B
-dhcMeterRequirementC = 2000 ;Meter Requirement for doing DHC C
+dhcMeterRequirementC = 1500 ;Meter Requirement for doing DHC C
 dhcAirA = 0 ;If DHC Attack A is aerial (1: Yes, 0: No)
 dhcAirB = 1 ;If DHC Attack B is aerial (1: Yes, 0: No)
 dhcAirC = 0 ;If DHC Attack C is aerial (1: Yes, 0: No)
@@ -910,7 +910,7 @@ ctrl = 1
 ; Wavedash A V2
 ;-------------------------------------------------------------------------------
 [Statedef 291]
-type    = A
+type    = S
 movetype= A
 physics = N 
 ctrl = 0
@@ -1874,7 +1874,7 @@ ctrl = 0
 type = ChangeState
 triggerall = helper(410), movehit >=1
 triggerall = numhelper(422) <= 0
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -2011,7 +2011,7 @@ ctrl = 0
 [State 200, Dash cancel I guess]
 type = ChangeState
 triggerall = time >= 20
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100 
 ctrl = 1
 
@@ -3029,7 +3029,7 @@ fall.recover = 0
 [State 200, End]
 type = ChangeState
 triggerall = movehit
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 65
 ctrl = 1
@@ -3516,7 +3516,7 @@ ctrl = 1
 ; C - 2C
 ;-------------------------------------------------------------------------------
 [Statedef 560]
-type    = A
+type    = S
 movetype= A
 physics = N 
 ctrl = 0
@@ -5740,24 +5740,24 @@ persistent = 0
 
 ; ------ Defense Set ------
 
-[State -2 Normal Defence] ; If not in tag mode, characters have normal life
-type = MapSet
-trigger1 = teammode != tag && enemy,teammode != tag
-map = "initialDefence"
-value = 1
-persistent = 0
-
-[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
-type = MapSet
-trigger1 = roundstate = 1
-map = "defence"
-value = 0
-
-[State -2, Defense Set] ; Used to determine character defense
-type = defenceMulSet
-trigger1 = 1 
-value = map(initialDefence) + map(defence)
-onhit = 0
+;[State -2 Normal Defence] ; If not in tag mode, characters have normal life
+;type = MapSet
+;trigger1 = teammode != tag && enemy,teammode != tag
+;map = "initialDefence"
+;value = 1
+;persistent = 0
+;
+;[State -2, Defense Reset] ; Resets character's defense modifier to 0 at round start
+;type = MapSet
+;trigger1 = roundstate = 1
+;map = "defence"
+;value = 0
+;
+;[State -2, Defense Set] ; Used to determine character defense
+;type = defenceMulSet
+;trigger1 = 1 
+;value = map(initialDefence) + map(defence)
+;onhit = 0
 
 ; ------ FatalCounter Check ------
 [State -2, FatalCounterCheck]

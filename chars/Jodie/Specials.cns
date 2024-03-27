@@ -1210,7 +1210,7 @@ Fall.recovertime = 40
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 24201
 

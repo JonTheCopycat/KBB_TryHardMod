@@ -216,13 +216,13 @@ trans = add
 
 [State 0, VelSet]
 type = VelAdd
-trigger1 = time = 0
+trigger1 = time = [0, 1]
 x = 13 * 0.6
 y = 0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = [1, 2]
+trigger1 = time = 2
 x = 13 * 1.25
 
 [State 0, VelSet]
@@ -268,7 +268,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -276,7 +276,7 @@ ctrl = 1
 type = ChangeState
 ;triggerall = time >= 5
 trigger1 = command = "back"
-value = 105
+value = 35
 
 [State 200, End]
 type = ChangeState
@@ -289,16 +289,16 @@ ctrl = 0
 type = ChangeState
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "b"
-value = 491
+value = 390
 ctrl = 0
 
 [State 200, C]
 type = ChangeState
 triggerall = numhelper(3500) = 0
-triggerall = power >=200
+triggerall = power >= 100
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "c"
-value = 408
+value = 491
 
 [State 200, End]
 type = ChangeState
@@ -387,7 +387,7 @@ ctrl = 0
 
 [State 0, 4] ;Dash fwd
 type = ChangeState
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -425,6 +425,78 @@ ctrl = 1
 
 
 ;---------------------------------------------------------------------------
+
+
+;---------------------------------------------------------------------------
+;Wavedash Stop
+[Statedef 35]
+type = C
+movetype= I
+physics = C
+anim = 35
+ctrl = 0
+sprpriority = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = 1
+x = vel x * 0.5
+
+[State 200, End]
+type = ChangeState
+;triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+;[State 200, End]
+;type = ChangeState
+;triggerall = time >= 10
+;trigger1 = command = "WD"
+;value = 30
+;ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "FF"
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "BB"
+value = 105
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = prevstateno != 52 || time > 3
+trigger1 = command = "a"
+value = 290
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = prevstateno != 52 || time > 3
+trigger1 = command = "b"
+value = 491
+ctrl = 0
+
+[State 200, C]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = power >=200
+triggerall = prevstateno != 52 || time > 3
+trigger1 = command = "c"
+value = 408
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+
 
 
 ;---------------------------------------------------------------------------
@@ -1123,12 +1195,6 @@ trigger1 = command = "a"
 value = 22
 ctrl = 0
 
-[State 105, 3]
-type = ChangeState
-trigger1 = command = "down"
-value = 10
-ctrl = 1
-
 [State 100, 4]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -1190,12 +1256,6 @@ sprpriority = 2
 ontop = 0
 shadow = 0,0,0
 ownpal = 0
-
-[State 105, 3]
-type = ChangeState
-trigger1 = command = "down"
-value = 10
-ctrl = 1
 
 [State 105, 3]
 type = ChangeState
