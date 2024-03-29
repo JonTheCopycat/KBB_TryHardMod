@@ -2566,3 +2566,14 @@ if roundstate = 1 {
 }
 
 DefenceMulSet{value: map(initialDefence) + map(defence); onhit: 0}
+
+[Statedef -4]
+#Fatal Counterhit
+ignorehitpause if (movehit = 1 && map(juggle) <= 0) && StateNo != 54000 && StateNo != [800, 832] && EnemyNear, StateNo != [800,832] && Map(_uni_actionMoveCounteredFlag) = 0 {
+    LifebarAction{spr: Const(MsgFatalCounter), 0; snd: 25, 1}
+    MapSet{map: "_uni_actionMoveCounteredFlag"; value: 1}
+    Pause{time: 5}
+    PlaySnd{value:F8, 1; volumescale: 999}
+} else if (movehit != 1 || map(juggle) > 0) && Map(_uni_actionMoveCounteredFlag) = 1 {
+    MapSet{map: "_uni_actionMoveCounteredFlag"; value: 0}
+}

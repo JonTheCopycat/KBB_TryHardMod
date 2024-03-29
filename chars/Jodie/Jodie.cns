@@ -2890,7 +2890,7 @@ ctrl = 0
 ; Fwd+C
 ;-------------------------------------------------------------------------------
 [Statedef 402]
-type    = A
+type    = S
 movetype= A
 physics = S
 juggle  = 1
@@ -3043,6 +3043,7 @@ Envshake.time = 20
 type = ChangeState
 trigger1 = AnimTime = 0
 trigger2 = pos y > 1
+trigger3 = AnimElem = 4
 value = 50
 ctrl = 1
 [State 200, Jump]

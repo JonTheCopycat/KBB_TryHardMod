@@ -3140,7 +3140,7 @@ channel = 0
 
 [State 0, Helper]
 type = Helper
-trigger1 = time = 15 && numhelper(401) < 2
+trigger1 = time = 15
 helpertype = normal ;player
 name = "green sword"
 ID = 401

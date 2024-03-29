@@ -32,7 +32,63 @@
 type = S
 physics = S
 sprpriority = 0
+ctrl = 1
 
+[State -2, Toughness var reset] ; Causes Vivienne to take damage when armoring through attacks again
+type = VarSet
+triggerall = anim != 290
+trigger1 = time = 0
+var(47) = 0
+ignorehitpause = 1
+
+[State 0, Blink Red]
+type = PalFX
+triggerall = anim = 290 && prevstateno != 290
+trigger1 = Time = 0
+time = 5
+add = 255,0,0
+mul = 255,0,0
+[State 0, Toughness Variable]
+type = varadd
+trigger1 = anim = 290 && prevstateno != 290
+trigger1 = time = 0
+v = 47
+value = 1
+[State 0, Hurt]
+type = LifeAdd
+triggerall = anim = 290 && prevstateno != 290
+trigger1 = time = 0
+value = ifelse(var(47) <= 30,-15 +(var(47)/2),0)
+;kill = 1
+absolute = 0
+[State 0, Hitpause]
+type = Pause
+triggerall = anim = 290 && prevstateno != 290
+trigger1 = time = 0
+time = 5
+movetime = 0
+
+
+
+[State 0, Super Armor Bootleg = Animelem = 3]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = stateno
+time = 3
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, ChangeAnimTo]
+type = ChangeAnim2
+trigger1 = anim != 0
+value = 0
+elem = 1
 
 
 [State 0, 1]

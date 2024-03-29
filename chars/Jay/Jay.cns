@@ -5364,8 +5364,8 @@ value = 620
 [State 610, Air Jump Cancel]
 type = ChangeState
 triggerall = movecontact
-trigger1 = command = "holdup" && var(3) = 0 
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && movecontact && var(3) = 0 
+trigger1 = command = "holdup"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && movecontact
 value = 45
 ctrl = 1
 
@@ -6102,14 +6102,14 @@ sprpriority = 0
 [State 0, BurnHeat] ; Every 30 frames, increases Jay's heat by his total burn stack
 type = rootMapAdd
 triggerall = time > 5
-trigger1 = (time%30) = 0
+trigger1 = (time%15) = 0
 map = "heat"
 value = root,map(burnStack)
 
 [State 0, BurnTimer] ; Every 5 seconds, lowers Jay's burn stack count by 1
 type = rootMapAdd
 triggerall = time > 5
-trigger1 = (time%300) = 0
+trigger1 = (time%150) = 0
 map = "burnStack"
 value = -1
 

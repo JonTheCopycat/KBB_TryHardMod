@@ -807,10 +807,10 @@ trigger1 = ctrl
 [State -1, C]
 type = ChangeState
 value = 400
-triggerall = numhelper(401) = 0
-triggerall = numhelper(440) = 0
-triggerall = numhelper(402) = 0
-triggerall = numhelper(623) = 0
+;triggerall = numhelper(401) = 0
+;triggerall = numhelper(440) = 0
+;triggerall = numhelper(402) = 0
+;triggerall = numhelper(623) = 0
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 200
 triggerall = command = "c"

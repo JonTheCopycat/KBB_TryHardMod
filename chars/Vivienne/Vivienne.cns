@@ -1352,7 +1352,7 @@ triggerall = anim = 292
 trigger1 = AnimElem = 12
 attr = S, AT
 animtype  = Heavy
-damage  = 80
+damage  = 800
 HitFlag = MAFD
 guardflag = 
 pausetime = 12,2
@@ -1567,7 +1567,7 @@ trigger1 = 1
 getpower = 0
 attr = A, NT
 animtype  = Medium
-damage    = 70
+damage    = 700
 hitflag = MAFDP
 guardflag = 
 pausetime = 12,12

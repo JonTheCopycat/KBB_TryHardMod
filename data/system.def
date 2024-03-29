@@ -200,7 +200,7 @@ cancel.snd = 100,2
 ;Full documentation of this feature is available on Ikemen GO features wiki
 
 menu.itemname.KBB = "STORY MODE"
-menu.itemname.KBB.prologue = "KIRBY BATTLE BLITZ"
+menu.itemname.KBB.prologue = "FATAL! BATTLE BLITZ"
 ;menu.itemname.KBB.blitz.prologue = "PROLOGUE"
 
 menu.itemname.KBB.storymode = "SCENARIO MODE"
@@ -239,7 +239,7 @@ menu.itemname.menuversus.versuscoop = "4 PLAYER VS"         ;Ikemen feature
 menu.itemname.menuversus.back = "BACK"                       ;Ikemen feature
 
 ;Make Easy,Normal,Hard Difficulties
-menu.itemname.duel = "KIRBY COMBAT"
+menu.itemname.duel = "FATAL! COMBAT"
 ;menu.itemname.kombat.arena = "ARENA COMBAT"
 ;menu.itemname.kombat.arena.solo = "SOLO COMBAT"
 ;menu.itemname.kombat.arena.team = "CO-OP COMBAT"
@@ -264,7 +264,7 @@ menu.itemname.menunetwork.serverjoin.back = "BACK"           ;Ikemen feature
 menu.itemname.server.netplayversus = "VERSUS MODE"             ;Ikemen feature
 menu.itemname.server.netplayteamcoop = "ARCADE MODE"        ;Ikemen feature
 menu.itemname.server.netplaysurvivalcoop = "SURVIVAL MODE"  ;Ikemen feature
-;menu.itemname.server.duel = "KIRBY COMBAT"  ;Ikemen feature
+;menu.itemname.server.duel = "FATAL! COMBAT"  ;Ikemen feature
 menu.itemname.server.back = "EXIT"                           ;Ikemen feature
 
 ; Submenu: Mission
@@ -372,7 +372,7 @@ overlay.alpha = 20, 100           ;Ikemen feature
 
 ;----------------------------
 [Infobox Text]
-WELCOME TO KIRBY BATTLE BLITZ!
+WELCOME TO FATAL! BATTLE BLITZ!
 
 * A project brought to you by JalenBrah, ZackAttack27, Kokorz, and Triea!
 * This game was powered by the childhood gifted to me by Kirby FCs!
