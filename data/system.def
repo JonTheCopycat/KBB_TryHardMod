@@ -206,37 +206,37 @@ menu.itemname.KBB.prologue = "FATAL! BATTLE BLITZ"
 menu.itemname.KBB.storymode = "SCENARIO MODE"
 ; story arcs menu items are automatically added before storymode.back
 
-menu.itemname.KBB.storymode.back = "BACK"                        ;Ikemen feature
+menu.itemname.KBB.storymode.back = "BATAL!"                        ;Ikemen feature
 
 ;Easy,Normal,Hard Difficulties
-menu.itemname.KBB.dcone = "DREAM CROSSER"
+menu.itemname.KBB.dcone = "DREAM FATAL!"
 ;menu.itemname.KBB.expansion.dcone = "EPISODE 1"
 ;menu.itemname.KBB.expansion.dctwo = "EPISODE 2"
 ;menu.itemname.KBB.expansion.back = "BACK"
 
-menu.itemname.KBB.back = "BACK"
+menu.itemname.KBB.back = "BATAL!"
 
-menu.itemname.menuarcade = "ARCADE MODE"                          ;Ikemen feature
-menu.itemname.menuarcade.teamarcade = "1P ARCADE"
-menu.itemname.menuarcade.teamcoop = "2P ARCADE"
-menu.itemname.menuarcade.back = "BACK"
+menu.itemname.menuarcade = "ARCADE FATAL!"                          ;Ikemen feature
+menu.itemname.menuarcade.teamarcade = "1P FATAL!"
+menu.itemname.menuarcade.teamcoop = "2P FATAL!"
+menu.itemname.menuarcade.back = "BATAL!"
 
-menu.itemname.survive = "SURVIVAL MODE"
-menu.itemname.survive.survival = "1P SURVIVAL"
+menu.itemname.survive = "SURFATAL! MODE"
+menu.itemname.survive.survival = "1P SURFATAL!"
 menu.itemname.survive.survivalcoop = "2P SURVIVAL"
-menu.itemname.survive.back = "BACK"
+menu.itemname.survive.back = "BATAL!"
 
 ; Submenu: Practice
-menu.itemname.menupractice = "SINGLE PLAYER"                      ;Ikemen feature
-menu.itemname.menupractice.training = "TRAINING MODE"             ;Ikemen feature
+menu.itemname.menupractice = "SINGLE FATAL!"                      ;Ikemen feature
+menu.itemname.menupractice.training = "FATAL! MODE"             ;Ikemen feature
 menu.itemname.menupractice.freebattle  = "P1 VS CPU"        ;Ikemen feature
-menu.itemname.menupractice.back = "BACK"                     ;Ikemen feature
+menu.itemname.menupractice.back = "BATAL!"                     ;Ikemen feature
 
 ; Submenu: Versus
-menu.itemname.menuversus = "VS MODE"
+menu.itemname.menuversus = "VS FATAL!"
 menu.itemname.menuversus.teamversus = "2 PLAYER VS"
 menu.itemname.menuversus.versuscoop = "4 PLAYER VS"         ;Ikemen feature
-menu.itemname.menuversus.back = "BACK"                       ;Ikemen feature
+menu.itemname.menuversus.back = "BATAL!"                       ;Ikemen feature
 
 ;Make Easy,Normal,Hard Difficulties
 menu.itemname.duel = "FATAL! COMBAT"
@@ -250,50 +250,50 @@ menu.itemname.duel = "FATAL! COMBAT"
 ;menu.itemname.kombat.duels.back = "BACK"
 ;menu.itemname.kombat.back = "BACK"
 ; Submenu: Network
-menu.itemname.menunetwork = "ONLINE MODE"                        ;Ikemen feature
-menu.itemname.menunetwork.serverhost = "HOST A BATTLE"           ;Ikemen feature
-menu.itemname.menunetwork.serverjoin = "JOIN A BATTLE"           ;Ikemen feature
-menu.itemname.menunetwork.back = "BACK"                      ;Ikemen feature
+menu.itemname.menunetwork = "ONLINE FATAL!"                        ;Ikemen feature
+menu.itemname.menunetwork.serverhost = "FATAL! A BATTLE"           ;Ikemen feature
+menu.itemname.menunetwork.serverjoin = "JOIN A FATAL!"           ;Ikemen feature
+menu.itemname.menunetwork.back = "BATAL!"                      ;Ikemen feature
 
 ; known IP addresses show up before serverjoin.back item
-menu.itemname.menunetwork.serverjoin.joinadd = "NEW FIGHTER" ;Ikemen feature
-menu.itemname.menunetwork.serverjoin.back = "BACK"           ;Ikemen feature
+menu.itemname.menunetwork.serverjoin.joinadd = "NEW FATAL!" ;Ikemen feature
+menu.itemname.menunetwork.serverjoin.back = "BATAL!"           ;Ikemen feature
 
 ; This group is hidden and should not be moved to other menus.
 ; It's opened automatically, after synchronization with online player.
-menu.itemname.server.netplayversus = "VERSUS MODE"             ;Ikemen feature
-menu.itemname.server.netplayteamcoop = "ARCADE MODE"        ;Ikemen feature
-menu.itemname.server.netplaysurvivalcoop = "SURVIVAL MODE"  ;Ikemen feature
+menu.itemname.server.netplayversus = "FATAL! MODE"             ;Ikemen feature
+menu.itemname.server.netplayteamcoop = "ARCADE FATAL!"        ;Ikemen feature
+menu.itemname.server.netplaysurvivalcoop = "SURFATAL! MODE"  ;Ikemen feature
 ;menu.itemname.server.duel = "FATAL! COMBAT"  ;Ikemen feature
-menu.itemname.server.back = "EXIT"                           ;Ikemen feature
+menu.itemname.server.back = "EXTAL!"                           ;Ikemen feature
 
 ; Submenu: Mission
 menu.itemname.menumission = "EXTRAS"                        ;Ikemen feature
-menu.itemname.menumission.bossrush = "BOSS RUSH"             ;Ikemen feature
-menu.itemname.menumission.timeattack = "TIME ATTACK"         ;Ikemen feature
-menu.itemname.menumission.bonusgames = "BONUS GAMES"         ;Ikemen feature
-menu.itemname.menumission.gallery = "GALLERY MODE"                        ;Ikemen feature
+menu.itemname.menumission.bossrush = "FATAL! RUSH"             ;Ikemen feature
+menu.itemname.menumission.timeattack = "TIME FATAL!"         ;Ikemen feature
+menu.itemname.menumission.bonusgames = "BONUS FATAL!"         ;Ikemen feature
+menu.itemname.menumission.gallery = "FATAL! GALLERY"                        ;Ikemen feature
 menu.itemname.menumission.credits = "CREDITS"         ;Ikemen feature
-menu.itemname.menumission.back = "BACK"                      ;Ikemen feature
+menu.itemname.menumission.back = "BATAL!"                      ;Ikemen feature
 
 ;menu.itemname.menumission.gallery.characters = "CHARACTERS"           ;Ikemen feature
 menu.itemname.menumission.gallery.fanart = "FAN ART"           ;Ikemen feature
 menu.itemname.menumission.gallery.bts = "BEHIND THE SCENES"           ;Ikemen feature
-menu.itemname.menumission.gallery.back = "BACK"                      ;Ikemen feature
+menu.itemname.menumission.gallery.back = "BATAL!"                      ;Ikemen feature
 
 ; Submenu: Mission => Bonus Games
 ; bonus characters menu items are automatically added before bonusgames.back
-menu.itemname.menumission.bonusgames.back = "BACK"           ;Ikemen feature
+menu.itemname.menumission.bonusgames.back = "BATAL!"           ;Ikemen feature
 
 ; Submenu: Watch Mode
-menu.itemname.menuwatch = "WATCH MODE"                       ;Ikemen feature
+menu.itemname.menuwatch = "WATCH FATALS!"                       ;Ikemen feature
 menu.itemname.menuwatch.watch = "CPU VS"
-menu.itemname.menuwatch.randomtest = "RANDOM BATTLE"                ;Ikemen feature
-menu.itemname.menuwatch.replay = "REPLAYS"                    ;Ikemen feature
-menu.itemname.menuwatch.back = "BACK"                        ;Ikemen feature
+menu.itemname.menuwatch.randomtest = "RANDOM FATAL!"                ;Ikemen feature
+menu.itemname.menuwatch.replay = "FATAL! REPLAY"                    ;Ikemen feature
+menu.itemname.menuwatch.back = "BATAL!"                        ;Ikemen feature
 
 ; Options
-menu.itemname.options = "SETTINGS"
+menu.itemname.options = "SETTAL!"
 
 ;Back
 menu.itemname.back = "GET OUT. NOW."
@@ -1902,7 +1902,7 @@ cursor.move.snd = 100, 0
 cursor.done.snd = 100, 1
 cancel.snd = 100, 2
 ;Ikemen feature
-menu.itemname.menuarcade = "Gameplay Settings"
+menu.itemname.menuarcade = "Gameplay SetTAL!"
 menu.itemname.menuarcade.roundtime = "Time Limit"
 menu.itemname.menuarcade.roundsnumsingle = "Rounds to Win (Single)"
 menu.itemname.menuarcade.roundsnumsimul = "Rounds to Win (Simul)"
@@ -1927,7 +1927,7 @@ menu.itemname.menuarcade.empty = ""
 ;menu.itemname.menuarcade.menustupid.back = "Back"
 menu.itemname.menuarcade.back = "Back"
 
-menu.itemname.menuaudio = "Audio Settings"
+menu.itemname.menuaudio = "Audio SetTAL!"
 menu.itemname.menuaudio.mastervolume = "Master Volume"
 menu.itemname.menuaudio.bgmvolume = "BGM Volume"
 menu.itemname.menuaudio.sfxvolume = "SFX Volume"
@@ -1935,7 +1935,7 @@ menu.itemname.menuaudio.audioducking = "Audio Ducking"
 menu.itemname.menuaudio.empty = ""
 menu.itemname.menuaudio.back = "Back"
 
-menu.itemname.menuvideo = "Video Settings"
+menu.itemname.menuvideo = "Video SetTAL!"
 menu.itemname.menuvideo.resolution = "Resolution" ;reserved submenu
 ; Resolution is assigned based on values used in itemname suffix (e.g. 320x240)
 menu.itemname.menuvideo.resolution.854x480 = "854x480   (16:9 SD)"
@@ -1956,7 +1956,7 @@ menu.itemname.menuvideo.shaders.back = "Back"
 menu.itemname.menuvideo.empty = ""
 menu.itemname.menuvideo.back = "Back"
 
-menu.itemname.menuinput = "Input Settings"
+menu.itemname.menuinput = "Input SetTAL!"
 menu.itemname.menuinput.keyboard = "Keyboard Mapping"
 menu.itemname.menuinput.gamepad = "Controller Mapping"
 menu.itemname.menuinput.players = "Number of Players"
@@ -1964,7 +1964,7 @@ menu.itemname.menuinput.empty = ""
 menu.itemname.menuinput.inputdefault = "Default"
 menu.itemname.menuinput.back = "Back"
 
-;menu.itemname.menuengine = "Engine Settings"
+;menu.itemname.menuengine = "Engine SetTAL!"
 ;menu.itemname.menuengine.debugkeys = "Debug Keys"
 ;menu.itemname.menuengine.empty = ""
 ;menu.itemname.menuengine.helpermax = "HelperMax"

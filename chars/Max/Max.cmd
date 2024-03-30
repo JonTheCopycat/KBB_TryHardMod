@@ -823,7 +823,7 @@ type = ChangeState
 value = 450
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 200
-triggerall = numhelper(452) + numhelper(632) < 1
+;triggerall = numhelper(452) + numhelper(632) < 1
 triggerall = command = "holddown"
 triggerall = command = "c"
 Triggerall = statetype != A
@@ -835,8 +835,8 @@ type = ChangeState
 value = 400
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 200
-triggerall = numhelper(402) = 0
-triggerall = numhelper(622) = 0
+;triggerall = numhelper(402) = 0
+;triggerall = numhelper(622) = 0
 triggerall = command = "c"
 Triggerall = statetype != A
 trigger1 = ctrl
@@ -964,7 +964,7 @@ type = ChangeState
 value = 630
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 200
-triggerall = numhelper(452) + numhelper(632) < 1
+;triggerall = numhelper(452) + numhelper(632) < 1
 triggerall = command = "holddown"
 triggerall = command = "c"
 Triggerall = statetype = A
@@ -975,8 +975,8 @@ trigger1 = ctrl
 type = ChangeState
 value = 620
 triggerall = numhelper(3500) = 0
-triggerall = numhelper(402) = 0
-triggerall = numhelper(622) = 0
+;triggerall = numhelper(402) = 0
+;triggerall = numhelper(622) = 0
 triggerall = power >= 200
 triggerall = command = "c"
 Triggerall = statetype = A

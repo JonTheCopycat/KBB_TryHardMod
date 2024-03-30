@@ -1390,7 +1390,7 @@ animtype  = Heavy
 damage    = ifelse(enemy,movetype = A,200,100),5
 hitflag = MAFD
 guardflag = MAF
-pausetime = ifelse(enemy,movetype = A,60,10),ifelse(enemy,movetype = A,90,30)
+pausetime = ifelse(enemy,movetype = A,60,10),ifelse(enemy,movetype = A,90,30)*3
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
