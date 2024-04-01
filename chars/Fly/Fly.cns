@@ -1189,12 +1189,12 @@ trigger1 = AnimElem = 1
 x = 8
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = [0, 4]
-x = ifelse(var(15) = 1, 10, 5)
+trigger1 = time = [0, 1]
+x = ifelse(var(15) = 1, 20, 10)
 
 [State 0, VelSet if coming from wavedash]
 type = VelSet
-trigger1 = time = 5
+trigger1 = time = 3
 x = 2
 
 [State 200, 1]
@@ -1743,7 +1743,7 @@ volumescale = 100
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = 0
-x = 3.8
+x = 5
 y = -3
 
 [State 0, VelAdd]

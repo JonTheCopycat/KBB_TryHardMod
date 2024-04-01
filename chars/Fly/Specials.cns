@@ -953,13 +953,13 @@ trigger1 = movehit = 1
 v = 33
 value = 1
 ignorehitpause = 1
-
-[State 0, ChangeAnim2]
-type = ChangeAnim2
-triggerall = time = 0
-trigger1 = enemy,movetype != H
-value = 23001
-elem = 1
+;
+;[State 0, ChangeAnim2]
+;type = ChangeAnim2
+;triggerall = time = 0
+;trigger1 = enemy,movetype != H
+;value = 23001
+;elem = 1
 ;ignorehitpause = 
 ;persistent = 
 

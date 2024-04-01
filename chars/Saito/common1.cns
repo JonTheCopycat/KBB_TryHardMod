@@ -217,7 +217,7 @@ volumescale = 500
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = [0, 1]
-x = const(velocity.run.fwd.x) * 1.25
+x = const(velocity.run.fwd.x) * 1.25 * 1.5
 y = -2
 
 [State 0, VelAdd]
@@ -504,7 +504,7 @@ trans = add
 [State 0, VelSet]
 type = VelSet
 Trigger1 = command = "holdfwd"
-x = 7
+x = 12
 y = 1
 
 [State 0, StateTypeSet]
@@ -576,14 +576,14 @@ trans = add
 type = VelSet
 Triggerall = prevstateno = 50||prevstateno = 80 || prevstateno = 61
 trigger1 = command = "holdback"
-x = -7
+x = -12
 y = 1
 
 [State 0, VelSet]
 type = VelSet
 Triggerall = prevstateno != 50 && prevstateno != 80 && prevstateno != 61
 trigger1 = command = "holdback"
-x = -7
+x = -12
 y = 1
 
 [State 0, StateTypeSet]

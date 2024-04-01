@@ -59,7 +59,7 @@ value = 0
 type = NotHitBy
 trigger1 = time = [1, 11]
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
-time = 1
+time = 30
 
 [State 0, EnvShake]
 type = EnvShake
@@ -1503,7 +1503,7 @@ value = 25
 
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = time > 25
+trigger1 = 1
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
 time = 1
 
@@ -1676,7 +1676,7 @@ value = 50
 
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = time > 25
+trigger1 = 1
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
 time = 1
 

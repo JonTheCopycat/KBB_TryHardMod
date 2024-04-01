@@ -3090,7 +3090,7 @@ sprpriority = 5
 
 [State 200, End]
 type = Changestate
-trigger1 = time = 140
+trigger1 = time = 1
 value = 470
 ;-------------------------------------------------------------------------------
 ;Spam Deny2
@@ -3105,7 +3105,7 @@ sprpriority = 5
 
 [State 200, End]
 type = Changestate
-trigger1 = time = 140
+trigger1 = time = 1
 value = 470
 ;-------------------------------------------------------------------------------
 ; Spam Allow
@@ -5070,7 +5070,7 @@ y = -1.5
 
 [State 0, DP INVINCIBILLITY BABY]
 type = NotHitBy
-trigger1 = time <= 10 && (prevstateno = 400 || prevstateno = 490)
+trigger1 = time <= 20
 value = ,NA,SA,NP,SP,NT,ST
 time = 1
 

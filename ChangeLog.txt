@@ -1,6 +1,429 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
-| Try-Hard Version 0.3.1 Changes:                    /
+| Try-Hard Version 0.6.5 Changes:                    /
+|---------------------------------------------------/
+
+After a small but fun tournament, these are the changes we thought were necessary to keep the game competitive and fair.
+
+
+Universal:
+1. Fixed bug where the "Fatal" Text would sometimes not work properly
+2. Fixed bug where Star Cancel was not usable.
+
+
+Aege: Some of his tools weren't working as intended
+1. 5c: Fixed bug where the move would sometimes miss
+2. 214A: Fixed bug where the counter wouldn't work properly sometimes.
+3. 5c.c: Improved knockback to ensure it is effective.
+4. 214B: Adjusted to match 214A.
+
+
+Bill: Some of his tools were underpreforming. We've buffed them accordingly.
+1. j.b hitbox improved slightly
+2. Reduced startup of some of his moves.
+
+
+Clutch: Some of his tools seemed to be inaccurate to the visuals. These adjustments seek to address this.
+1. 5b, 4b, j.5b, j.4b: Hitboxes now match the animation.
+2. 5c projectiles now connect more easily.
+
+
+Fly: Some of his comboes seemed inconsistent, so we've adjusted the hitboxes to be more leniant.
+1. 236B: Hitbox made more leniant for comboes.
+2. 214B: Hitbox madee more leniant for combeos.
+3. Wavedash A: Startup reduced.
+
+
+Hyrio: This character is underrepresented, so we've made him feel better to play.
+1. Reduced startup of most of his normals slightly.
+
+
+Jay: His burned mechanic seems underpowered and rarely makes a difference. We've adjusted the mechanic to be more noticable.
+1. Burn now does damage slightly faster and gains heat slightly faster.
+2. j.2c hitbox now matches animation.
+
+
+Jodie: This character seems to struggle to approach, so we've made his moves easier to use.
+1. Startup is now less interuptable.
+2. 6c startup reduced slightly.
+3. Sword mode recovery nerfs reverted.
+4. 236A: Invulnerability now more closely matches the animation.
+
+
+Leon: This is another character that is underrepresented, so we've emphasized his strengths.
+1. Increased Blockstun.
+2. Increased Starplatinum Damage on some moves.
+
+
+Max: This character has some glaring problems from the tournament. So we've addressed those problems while keeping him fair.
+1. 5c and j.5c, 2c and j.2c: Fixed bug where max could sometimes not spawn a cannon or a bomb
+2. 236B: Blockstun increased slightly.
+3. Wavedash B: hitbox adjusted to be more fair.
+
+
+Saito: This character is performing well, but there are some aspects that needed adjustment to remain fair.
+1. Airdash Speed adjusted to be more fair.
+2. 5c and j.5c startup adjusted to be more fair.
+
+
+Violet: This character is also underrepresented, but for this character we've added a few new things to her gameplay
+1. 5c and j.5c are now fullscreen
+2. Backward hitboxes of moves like j.5b have been adjusted to be more accurate.
+
+
+Vivienne: For being a grappler, this character struggled to get the damage they needed. We've rectified that here.
+1. Wavedash B and C damage increased
+2. Vivienne is now more fierce than before while idling.
+
+
+Vei: He was severely underpowered in the previous version, so we've added a few gameplay elements to his moveset.
+1. 5c portals now shoot projectiles.
+2. 214A projectiles now shoots more projectiles.
+
+
+Watanabe: This character struggled to get the pressure they need to survive, so we've made the character more leniant.
+1. Removed sword restriction.
+
+
+Yoru: On last tournament this character underperformed, so we've optimized his tools.
+1. 4a Startup and Recovery adjusted.
+2. 5c: Fixed bug where he could sometimes not use his projectile.
+3. 5b, 2c: Now hits the opponent more consistently.
+
+
+There were other minor changes that are not worth mentioning.
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
+| Try-Hard Version 0.6.4 Hotfix Changes:             /
+|---------------------------------------------------/
+
+Just some not so quick bugs that slid past me.
+
+
+Aege:
+1. You can no longer fastfall during 214B
+
+
+Bubbla:
+1. Fixed Bug where wavedash A was counted as a low
+2. Wavedash A:
+	* now has cancels
+	* has a normal amount of hitpause now.
+3. Fixed bug where wavedash B's vertical momentum was weird.
+4. Adjusted Hitpause of moves to be more consistent.\
+5. j.2c recovery increased drastically.
+
+
+Bill:
+1. Wavedash A Startup Increased (+1)
+2. 5c can no longer be fastfalled.
+
+
+Fly:
+1. You can no longer fastfall during 2c, j.236A and 214B
+
+
+Glitch:
+1. You can no longer fastfall during 236A and j.236B
+
+
+Jodie:
+1. You can no longer fastfall during j.236C
+
+
+Saito:
+1. Fixed bug with fastfalling during 5c
+2. You can no longer fastfall during a successful j.2c
+
+
+Sareo:
+1. Wavedash B:
+	* Reduced Blockstun Overall
+	* Fixed Bug Where it was sometimes impossible to block the move
+2. Wavedash C:
+	* Increased Recovery (+4)
+
+
+Stray:
+1. Fixed Bug where you could fast fall during the landing of j.236B
+2. Can no longer fastfall during startup of Wavedash A and 2c2c
+2. Wavedash A startup increased (+4)
+
+
+Noll:
+1. Adjusted the trajectory of wavedash.
+
+
+Watanabe:
+1. Phantom Sword:
+	* Can now go into a hurtstate when watanabe gets attacked.
+	* Sword 5b 1 blockstun increased and startup increased.
+	* Can no longer be used during Starburster (defensive burst)
+2. Wavedash A made less active (-4 frames)
+3. Wavedash C Bug Removed.
+
+
+ Violet:
+1. Can no longer fastfall during any of here supers.
+
+
+Vivienne:
+1. Can no longer fastfall during j.5y, 2y, and 4y
+2. Reduced speed of fastfall to match other characters.
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
+| Try-Hard Version 0.6.4 Changes:                    /
+|---------------------------------------------------/
+
+In this update, a few characters newer characters have received substantial changes and reworks, while some others have received slight balance changes for a more fun experience.
+
+Universal:
+1. Soft Fastfall has been made more leniant and permissive. There are more things you can fastfall, and you can fastfall sooner than before. Go crazy with this.
+
+
+Bubbla:
+The bubble master pops in.
+
+Junichi:
+1. Most Wavedash Moves Replaced and reworked.
+2. Backturned 5b no longer wavedash cancellable on block.
+3. Backturned 2a is now wavedash cancellable.
+4. 236A, 214A, 214B, and all 236Cs are no longer Star Burstable.
+5. 236A now has less invul on success.
+
+
+Metaknight:
+1. j.b nerfed:
+	* Increased startup
+	* This move now has upwards velocity at the start.
+2. j.2c cannot be fastfalled.
+
+
+Vei:
+1. 214A Projectiles Reworked Visually.
+2. Improved hitboxes of 5b, 4b, j.5a, and j.5b
+3. j.5c buffed:
+	* Now retains some horizontal velocity.
+	* Portal also retains the player's velocity.
+	* Increased Gravity while setting portal
+	* Reduced Recovery after placing portal.
+	* Now land cancellable after setting portal.
+4. Fixed 4c bug - You can no longer double dip on your portal.
+5. 4c Startup Reduced
+6. Bug Fix: Portals in the edge of the stage will now face towards the edge of the opponent is also at the edge.
+	* Portals are now properly usable at the corner.
+
+
+Watanabe:
+1. Phantom Blade Rework has been completed.
+2. Hitpause 5a and 5b adjusted.
+2. Movelist updated
+
+
+
+
+
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
+| Try-Hard Version 0.6.3 Changes:                    /
+|---------------------------------------------------/
+
+Thanks to people showing me what the dash macro was truly capable of, I've made the executive desicion that it is not part of my vision for this mod. Cry about it.
+Some Characters have seen some decent adjustments and bug fixes
+
+Universal:
+1. Dash Macro Removed from the game.
+
+
+Glitch:
+1. j.2c reworked to have cancels on wiff rather than being fully actionable:
+	* Attacks and wavedash can be done normally.
+	* Dashing and jumping can only be done after a delay.
+
+
+Vivienne:
+1. Wavedash B: Now only hits OTG.
+	* Damage drastically reduced
+2. Wavedash C: Made easier to combo out of by a little
+	* Damage drastically reduced
+
+
+Fly:
+1. 236B: In-neutral hitbox: reverted horizontal reach.
+
+
+Junichi:
+1. 236A: 
+	* Damage Increase by 20
+	* Cost increased to one bar
+2. 214A:
+	* Reduced "Start-up"
+	* Reduced invul
+3. 214B:
+	* Increased Damage
+	* Now hits OTG
+4. Phoenix 5c Animation Reworked
+	* Recovery slightly reduced
+5. Overall Reduced Hitpause of his moves.
+6. Redistributed frame data of all versions of Phoenix j.c
+	* j.c.a now is the most plus, while j.c.c is the most negative.
+	* None of them are punichable
+7. Feline 6c is now actionable 2 frames sooner
+
+
+Takuya:
+1. 5A, 5[B], 5BB and 4C all have wavedash cancels
+2. Wavedash A is less plus
+3. 2[B] (w/o spike) is slower f13 -> f17
+4. 2[B] (all versions) is now -6
+5. 2[B] (all versions) cannot cancel on block anymore
+6. 4C does more damage 2 -> 4
+7. 4C hits less now
+
+Watanabe:
+1. 5c Phantom Blade Reworked.
+
+Vei: This update sees a complete rework of his portals.
+1. 5c now sets up a portal based on how long you hold it.
+2. New move: 4c - Vei teleports to the portal that was on screen.
+3. 2c reworked to be a held move.
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
+| Try-Hard Version 0.6.2 Changes:                    /
+|---------------------------------------------------/
+
+While Junichi reaches close to his completion, I've started to look back at some of the old additions and cutting out the pointless ones.
+
+Universal:
+1. Star Cancel: Input changed to Double Charge, or "s, s"
+
+
+Junichi:
+1. Feline 236B Reworked
+2. New Super: 214B - Gundown
+3. 214A: 
+	* Damage Increased
+	* More consistently connects up close
+4. Baton Ready Stance 2a Replaced With Bomb Plant
+5. Baton j.C: Removed Endlag and slightly improved block frame data.
+6. Baton j.C.B velocity on hit adjusted.
+7. Baton 5c Jump Cancel returned.
+
+
+Hyrio:
+1. Wavedash B Replaced with Jump Kick
+2. Wavedash C Replaced with Alpha Blade
+3. Alpha Blade:
+	* Increased hitbox range and size
+	* Now hits otg
+	* Damage Increased
+	* Now costs 1/5 bar
+4. Removed Dash Crouch Cancel
+
+
+Sareo:
+1. Removed Backsway Special Effect
+2. Removed 6a and 66b
+
+
+Bill:
+1. Removed 4a and 6a
+
+
+Leon:
+1. Wavedash A:
+	* Startup Reduced
+	* Recovery Increased
+
+
+Vivienne:
+1. Removed 4b
+
+
+Yoru:
+1. Wavedash C Projectile Trajectory Reworked
+	* This projectile now goes full screen.
+
+
+Fly:
+1. j.236A: Now longer invul
+2. 226B: Hitbox reduced when outside of comboes
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
+| Try-Hard Version 0.6.1 Changes:                    /
+|---------------------------------------------------/
+
+Some balance changes, replaced moves, and bug fixes to keep things healthy.
+
+Junichi:
+1. Baton Ready Stance reworked
+2. Backturned 5b now jump cancellable
+3. Wavedash Moves Retouched and polished around the board
+4. Added wavedash cancel to:
+	* Phoenix 5bb
+	* Baton Ready 5a
+	* Punch 5c
+
+
+Max:
+1. New Wavedash B
+
+
+Fly:
+1. Nerfed Wavedash B
+
+
+Takuya:
+1. 5C is faster
+2. 2C is slower
+3. 4C jump cancel is instant if you hit shadow ball
+4. 2[B] with spike is slowwer
+5. 5AA gives less meter
+6. j.5b & j.5bb are no longer overheads
+7. J.5[B] does more damage
+8. 2C's first spike dissapears if Takuya gets hit (or blocks)
+9. J2C and J2[C] both are somewhat faster
+10. 236A does less damage
+11. 214B has less superpause time
+12. 214[B] is less minus than uncharged
+13. 236[C] with spike has a cut-in now 
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
+| Try-Hard Version 0.5.0/0.6.0 Changes:              /
+|---------------------------------------------------/
+
+Star Cancel was fun, but it was frankly broken. This updates revamps him as well as a few characters that were underwhelming last patch.
+
+Universal:
+1. Star Cancel Revamped:
+	* You can no longer star cancel out of comboes, however...
+	* You can now influence your trajectory when using star cancel.
+
+New Characters: Junichi and Takuya
+
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
+| Try-Hard Version 0.4.0 Changes:                    /
 |---------------------------------------------------/
 
 Some more adjustments to try improve the feel while also addressing some accidental comboes.
@@ -9,18 +432,33 @@ Universal:
 1. Adjusted Wavedash Speed Curve
 	* Faster at the start, but slows down faster
 	* Total distance remains approximately the same, maybe a bit further.
-***EXTREMELY EXPERIMENTAL***
 2. Added Star Cancel:
 	* you can cancel any move by pressing the powercharge button. Costs one bar.
+	* takes slightly longer when cancelling out of a combo
+3. Pressing back while 
 
 
 Aege:
 1. Removed WD A > A Loop
+2. Changed how his wavedash controls due to the addition of wavestop.
 
 
 Vei:
 1. 214B clone no longer stays on screen
 	* Cost lowered (1.5 Bar > 1 Bar)
+2. Changed how his wavedash controls, allowing him to actually move forward with the wavedash.
+3. Removed 5ba.
+4. 5b > 5bb is now counterable
+5. 2c now has more start up.
+6. Reduced his meter gain from his grounded normals
+7. 214B now initially counts as a special attack rather than a normal projectile.
+
+
+Violet:
+1. Buffed Wavedash B:
+	* Less Startup
+	* More Velocity
+	* Possible to continue comboes after it.
 
 
 Hyrio:
@@ -29,6 +467,7 @@ Hyrio:
 
 Stray:
 1. Lowered knockback of 5a, 5aa, 5aaa and 5b
+2. Increased Range and Reduced Cost of 236C
 
 
 Max:
@@ -38,6 +477,44 @@ Max:
 Bill:
 1. Wavedash C Nerfed:
 	* No longer detonates bombs planted on opponents.
+
+
+Fly:
+1. Adjusted 236B and 214B to better fit the new Star Cancel System.
+
+
+Jodie:
+1. New Wavedash A: Functions as an otg rekka.
+2. Increased Startup of Wavedash C; Animation Changed to compensate
+
+
+Leon:
+1. Removed 5b > 2a Cancel
+
+
+Noll:
+1. Wavedash C:
+	* Added jump cancel
+	* Fixed bug where it couldn't be used in certain scenarios
+2. New Wavedash A
+3. 214A no longer automatically does j.5c on hit.
+	* It can now be manually inputted along with a few more options.
+
+
+Saito:
+1. Increased Startup and Reduced Velocity of Wavedash A
+2. Adjusted Knockback of Wavedash C
+	* Fixed bug where proration wasn't properly applied to it and its followups.
+3. Wavedash C > 2C initial hitbox slightly reduced.
+
+
+Vivienne:
+1. Armor Walk B can now hit in comboes again with certain restrictions.
+
+
+Watanabe:
+1. Grounded Sword no longer follows the screen.
+
 
 
 ===================================================================================================================================

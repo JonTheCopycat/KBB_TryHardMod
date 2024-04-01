@@ -2084,6 +2084,10 @@ trigger1 = time = 9
 value = S400,0
 volumescale = 150
 
+[State 0, Homing]
+type = Turn	;After initial ease
+trigger1 = p2bodydist x < -10
+
 [State 0, VarSet]
 type = VarSet
 trigger1 = Time = 11
@@ -2276,6 +2280,15 @@ type = PlaySnd
 trigger1 = time = 9
 value = S400,2
 volumescale = 150
+
+[State 0, Homing]
+type = Turn	;After initial ease
+trigger1 = p2bodydist x < -10
+
+[State 0, Homing]
+type = PosSet	;After initial ease
+trigger1 = 1
+x = target,pos x
 
 [State 0, PowerAdd]
 type = PowerAdd
