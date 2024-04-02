@@ -61,6 +61,10 @@ Max: This character has some glaring problems from the tournament. So we've addr
 3. Wavedash B: hitbox adjusted to be more fair.
 
 
+Noll: We've optimized this characters play experience.
+1. Deleted Startup.
+
+
 Saito: This character is performing well, but there are some aspects that needed adjustment to remain fair.
 1. Airdash Speed adjusted to be more fair.
 2. 5c and j.5c startup adjusted to be more fair.

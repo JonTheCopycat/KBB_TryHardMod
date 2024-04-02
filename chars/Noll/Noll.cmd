@@ -848,7 +848,7 @@ value = 470
 triggerall = numhelper(3500) = 0
 triggerall = !numhelper(401) = 0
 triggerall = numhelper(401) > 0
-triggerall = helper(401),stateno != 406 && helper(401),prevstateno != 406 ; Disables use after switching
+;triggerall = helper(401),stateno != 406 && helper(401),prevstateno != 406 ; Disables use after switching
 triggerall = power >= 200
 triggerall = command = "holddown"
 triggerall = command = "c"
