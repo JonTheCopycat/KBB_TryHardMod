@@ -436,6 +436,14 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
+trigger1 = command = "holddown"
+trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 950
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
 trigger1 = command = "a"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 210
@@ -2273,16 +2281,24 @@ volumescale = 120
 
 [State 200, End]
 type = ChangeState
-Triggerall = AnimElem = 5 || AnimElem = 6 || AnimElem = 7
+Triggerall = AnimElem = 5 || AnimElem = 6 || AnimElem = 7 || AnimElem = 8
 trigger1 = command = "hyperhop"
 value = 60
 
 [State 200, End]
 type = ChangeState
-Triggerall = AnimElem = 5 || AnimElem = 6 || AnimElem = 7
+Triggerall = AnimElem = 5 || AnimElem = 6 || AnimElem = 7 || AnimElem = 8
 trigger1 = command = "holdup"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
+
+[State 200, Wavedash Cancel]
+type = ChangeState
+triggerall = AnimElem = 5 || AnimElem = 6 || AnimElem = 7 || AnimElem = 8
+Trigger1 = command = "WD" && command != "NotWD"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 30
+ctrl = 1
 
 
 [State 200, Special 1 - Smash Baby]

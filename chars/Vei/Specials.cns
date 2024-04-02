@@ -1411,7 +1411,7 @@ type = Changestate
 trigger1 = frontedgebodydist < -30
 trigger2 = time = 250
 trigger3 = movecontact || movereversed
-value = 416
+value = 411
 
 
 ;-------------------------------------------------------------------------------
@@ -1532,7 +1532,7 @@ type = Changestate
 trigger1 = frontedgebodydist < -30
 trigger2 = time = 250
 trigger3 = movecontact || movereversed
-value = 416
+value = 411
 
 
 

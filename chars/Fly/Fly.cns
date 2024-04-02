@@ -1152,21 +1152,35 @@ ignorehitpause = 1
 persistent = 0
 value = 5
 
+[State 1020, Blink Yellow]
+type = PalFX
+trigger1 = Time = 0
+time = 2
+add = 128,128,128
+color = 0
+
+[State 1020, Blink Yellow]
+type = PalFX
+trigger1 = Time = 1
+time = 6
+add = 255,255,255
+color = 0
+
 [State 0, Shock]
 type = PlaySnd
-trigger1 = time = 0
+trigger1 = time = 3
 value = S400,3
 volumescale = 100
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 4
 value = S1,0
 volumescale = 100
 
 [State 0, Explod]
 type = Explod
-trigger1 = AnimElem = 1
+trigger1 = AnimElem = 2
 anim = 550
 pos = 0,-15
 postype = p1  ;p2,front,back,left,right
@@ -1185,16 +1199,16 @@ value = 100
 
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = AnimElem = 1
+trigger1 = AnimElem = 2
 x = 8
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = [0, 4]
+trigger1 = time = [2, 6]
 x = ifelse(var(15) = 1, 10, 5)
 
 [State 0, VelSet if coming from wavedash]
 type = VelSet
-trigger1 = time = 5
+trigger1 = time = 7
 x = 2
 
 [State 200, 1]

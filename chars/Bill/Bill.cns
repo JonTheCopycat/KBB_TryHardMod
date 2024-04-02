@@ -973,14 +973,13 @@ value = 5
 
 [State 0, VelSet]
 type = VelSet
-triggerall = vel x < const(velocity.run.fwd.x)
 trigger1 = time = 0
-x = const(velocity.run.fwd.x)
+x = 4
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 3
-x = 3
+x = 2
 
 [State 0, AfterImage]
 type = AfterImage
