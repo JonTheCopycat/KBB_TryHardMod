@@ -1014,7 +1014,7 @@ ampl = -2
 type = VelSet
 trigger1 = AnimElem = 3
 x = -4
-y = -4
+y = -3
 
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -1053,7 +1053,7 @@ triggerall = map(juggle) < 100
 trigger1 = 1
 attr = S, NA
 animtype  = Heavy
-damage    = 25
+damage    = 35
 hitflag = MAF
 guardflag = MAF
 pausetime = 12,11
@@ -1067,9 +1067,10 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15
-ground.velocity = -2,-5
-air.velocity = -2,-4
+ground.velocity = -3,4
+air.velocity = -3,5
 Fall = 1
+Fall.yvelocity = -8
 Envshake.time = 10
 Fall.recovertime = 35 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
@@ -3118,9 +3119,9 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15
-ground.velocity = -4,ifelse(enemy,movetype = A, -8,-3)
-air.velocity = -4,ifelse(enemy,movetype = A, -7,-2)
-Fall = ifelse(enemy,movetype = A, 1, 0)
+ground.velocity = -3,ifelse(enemy,movetype = A, -8,-4)
+air.velocity = -3,ifelse(enemy,movetype = A, -7,-3.5)
+Fall = 1
 Envshake.time = ifelse(enemy,movetype = A, 30, 10)
 Fall.recovertime = 40 + ifelse(enemy,movetype = A, 14,0)
 guard.cornerpush.veloff = -5
@@ -3140,6 +3141,20 @@ keyctrl = 0
 ownpal = 1
 supermovetime = 0
 pausemovetime = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 4
+trigger1 = command = "hyperhop"
+value = 60
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 4
+trigger1 = command = "holdup"
+value = 40
+ctrl = 1
 
 [State 200, End]
 type = ChangeState

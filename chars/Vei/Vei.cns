@@ -2362,8 +2362,8 @@ volumescale = 50
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = 0
-x = 1
-y = -9
+x = -1
+y = -8
 
 [State 0, VelAdd]
 type = VelAdd
@@ -2659,7 +2659,7 @@ y = 0
 
 [State 0, Turn]
 type = Turn
-triggerall = p2dist x < -30
+triggerall = p2dist x < -10
 trigger1 = time % 10 = 1
 
 [State 0, Helper]
@@ -2711,7 +2711,7 @@ type = Changestate
 trigger1 = root,stateno = 450 && root,AnimElem = 5
 trigger2 = root,alive = 0
 trigger3 = root,stateno = 400 || root,stateno = 620
-trigger4 = root,stateno = 480 && root,time >= 9
+trigger4 = root,stateno = 480 && root,time >= 12
 value = 407
 
 ;[State 200, End]
@@ -2794,7 +2794,7 @@ inheritJuggle = 1
 
 [State 0, Turn]
 type = Turn
-triggerall = p2dist x < -30
+triggerall = p2dist x < -10
 trigger1 = time % 10 = 1
 
 [State 1010, Helper Attack Scale]
@@ -2827,7 +2827,7 @@ type = Changestate
 trigger1 = root,stateno = 450 && root,AnimElem = 5
 trigger2 = root,alive = 0
 trigger3 = root,stateno = 400 || root,stateno = 620
-trigger4 = root,stateno = 480 && root,time >= 9
+trigger4 = root,stateno = 480 && root,time >= 12
 value = 416
 
 ;[State 200, End]
@@ -2912,7 +2912,7 @@ inheritJuggle = 1
 
 [State 0, Turn]
 type = Turn
-triggerall = p2dist x < -30
+triggerall = p2dist x < -10
 trigger1 = time % 10 = 1
 
 [State 1010, Helper Attack Scale]
@@ -2945,7 +2945,7 @@ type = Changestate
 trigger1 = root,stateno = 450 && root,AnimElem = 5
 trigger2 = root,alive = 0
 trigger3 = root,stateno = 400 || root,stateno = 620
-trigger4 = root,stateno = 480 && root,time >= 9
+trigger4 = root,stateno = 480 && root,time >= 12
 value = 418
 
 ;[State 200, End]
@@ -3157,7 +3157,7 @@ sprpriority = 5
 
 [State 200, End]
 type = Changestate
-trigger1 = time = 50
+trigger1 = time = 40
 value = 430
 ;-------------------------------------------------------------------------------
 ; Spam Allow
@@ -3228,8 +3228,8 @@ type = VelSet
 triggerall = numhelper(405) != 0
 triggerall = helper(405),stateno = [406, 407]
 trigger1 = AnimElem = 5
-x = 4
-y = -2
+x = 5
+y = -1
 
 [State 0, VelSet]
 type = VelSet
@@ -3648,7 +3648,6 @@ inheritJuggle = 1
 type = Changestate
 triggerall = time >= 8
 trigger1 = command != "hold_c"
-trigger2 = numhelper(405) != 0 && helper(405),stateno != 485
 value = 481
 
 [State 1000, 6]
@@ -3699,10 +3698,37 @@ trigger1 = command = "holdup"
 value = 40
 ctrl = 0
 
+[State 210, Cancel into 2C]
+type = ChangeState
+triggerall = time >= 20
+Triggerall = helper(487),movehit
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(405) != 0
+trigger1 = command = "holdback"
+trigger1 = command = "c"
+value = 450
+
 [State 1000, 6]
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; C: Vei On Cooldown
+[Statedef 482]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 482
+sprpriority = 1
+
+[State 1000, 6]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 10
 ctrl = 1
 
 
@@ -3736,7 +3762,7 @@ value = movehit
 [State 0 , VelSet]
 type = VelSet
 trigger1 = time = 0
-x = 5
+x = 6
 
 [State 0 , VelSet]
 type = VelAdd
@@ -3784,18 +3810,21 @@ ownpal = 1
 ignorehitpause = 1
 persistent = 0
 
+[State 200, Special Case]
+type = DestroySelf
+trigger1 = root,stateno = 481 && time < 12 && numhelper(405) >= 2
+
+[State 200, End]
+type = Changestate
+trigger1 = root,stateno = 481
+value = 415
+
 [State 200, End]
 type = DestroySelf
 trigger1 = frontedgebodydist < -100
 trigger2 = time >= 140
 trigger3 = root,alive = 0
 trigger4 = root,stateno != [480, 481]
-trigger5 = root,stateno = 481 && time <= 9
-
-[State 200, End]
-type = Changestate
-trigger1 = root,stateno = 481
-value = 415
 
 
 
@@ -3845,9 +3874,8 @@ trigger2 = AnimTime = 0
 ;-------------------------------------------------------------------------------
 ; 2C Fire Up
 [Statedef 487]
-type    = S
 movetype= A
-physics = S
+physics = N
 juggle  = 2
 ctrl = 0
 anim = 486
@@ -4001,9 +4029,8 @@ trigger1 = Animtime = 0
 ;-------------------------------------------------------------------------------
 ; 2C Fire Side
 [Statedef 488]
-type    = S
 movetype= A
-physics = S
+physics = N
 juggle  = 2
 ctrl = 0
 anim = 487
@@ -4158,9 +4185,8 @@ trigger1 = Animtime = 0
 ;-------------------------------------------------------------------------------
 ; 2C Fire Down
 [Statedef 489]
-type    = S
 movetype= A
-physics = S
+physics = N
 juggle  = 2
 ctrl = 0
 anim = 488
@@ -4273,9 +4299,9 @@ guard.sparkno = 13000
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 8
-ground.velocity = 1.5 * p2bodydist x / abs(p2bodydist x),-1
-airguard.velocity = 1.5 * p2bodydist x / abs(p2bodydist x),-1
-air.velocity = 1.5 * p2bodydist x / abs(p2bodydist x),-2
+ground.velocity = 1.5 * p2bodydist x / abs(p2bodydist x),0
+airguard.velocity = 1.5 * p2bodydist x / abs(p2bodydist x),0
+air.velocity = 1.5 * p2bodydist x / abs(p2bodydist x),0
 air.fall = 1
 Getpower = 0,0
 Fall.recovertime = 30
@@ -4300,9 +4326,9 @@ guard.sparkno = 13000
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 8
-ground.velocity = -1.5,-3
-airguard.velocity = -1.5,-1
-air.velocity = -1.5,-3
+ground.velocity = -1.5,3
+airguard.velocity = -1.5,1
+air.velocity = -1.5,3
 air.fall = 1
 Getpower = 0,0
 Fall.recovertime = 30

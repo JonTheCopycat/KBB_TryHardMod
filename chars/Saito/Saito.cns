@@ -3843,13 +3843,6 @@ trigger1 = command = "holdup" && movecontact && var(3) = 0
 value = 45
 ctrl = 1
 
-[State 200, Wavedash]
-type = ChangeState
-triggerall = movecontact
-trigger1 = command = "WD"
-trigger1 = command != "NotWD"
-value = 30
-
 [State 200, Special 1 - windball]
 type = ChangeState
 Triggerall = movecontact

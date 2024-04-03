@@ -800,10 +800,9 @@ trigger1 = ctrl
 ; Down + C
 [State -1, Down + C]
 type = ChangeState
-value = 480
+value = ifelse(numhelper(420) = 0, 480, 482)
 Triggerall = power >= 250
 triggerall = numhelper(3500) = 0
-triggerall = numhelper(420) = 0
 triggerall = command = "holddown"
 triggerall = command = "c"
 Triggerall = statetype != A

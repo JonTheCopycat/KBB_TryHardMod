@@ -4947,19 +4947,19 @@ add = 0,32,72
 type = VelSet
 triggerall = var(10) = 0
 trigger1 = time = [0, 4]
-x = -5
+x = -6
+
+[State 1020, Darken]
+type = PalFX
+trigger1 = Time = 0
+time = 4
+mul = 100,100,128
 
 [State 0, DP Invul]
 type = NotHitBy
 trigger1 = time = [0, 4] 
 value = SCA,NA,SA,NP,SP,NT,ST
 time = 1
-
-;[State 1020, Darken]
-;type = PalFX
-;trigger1 = Time = [2, 6]
-;time = 2
-;mul = 128,128,128
 
 [State 1000, 6]
 type = ChangeState
