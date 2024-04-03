@@ -2711,6 +2711,7 @@ type = Changestate
 trigger1 = root,stateno = 450 && root,AnimElem = 5
 trigger2 = root,alive = 0
 trigger3 = root,stateno = 400 || root,stateno = 620
+trigger4 = root,stateno = 480 && root,time >= 9
 value = 407
 
 ;[State 200, End]
@@ -2826,6 +2827,7 @@ type = Changestate
 trigger1 = root,stateno = 450 && root,AnimElem = 5
 trigger2 = root,alive = 0
 trigger3 = root,stateno = 400 || root,stateno = 620
+trigger4 = root,stateno = 480 && root,time >= 9
 value = 416
 
 ;[State 200, End]
@@ -2943,6 +2945,7 @@ type = Changestate
 trigger1 = root,stateno = 450 && root,AnimElem = 5
 trigger2 = root,alive = 0
 trigger3 = root,stateno = 400 || root,stateno = 620
+trigger4 = root,stateno = 480 && root,time >= 9
 value = 418
 
 ;[State 200, End]
@@ -3627,7 +3630,6 @@ time = 10
 
 [State 0, Helper]
 type = Helper
-triggerall = numhelper(405) = 0
 trigger1 = AnimElem = 1
 helpertype = normal ;player
 name = "Glitch Bomb"
@@ -3783,16 +3785,17 @@ ignorehitpause = 1
 persistent = 0
 
 [State 200, End]
-type = Changestate
-trigger1 = root,stateno = 481
-value = 415
-
-[State 200, End]
 type = DestroySelf
 trigger1 = frontedgebodydist < -100
 trigger2 = time >= 140
 trigger3 = root,alive = 0
 trigger4 = root,stateno != [480, 481]
+trigger5 = root,stateno = 481 && time <= 9
+
+[State 200, End]
+type = Changestate
+trigger1 = root,stateno = 481
+value = 415
 
 
 
