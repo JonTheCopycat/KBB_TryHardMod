@@ -160,6 +160,7 @@ ground.hittime  = 15
 ground.velocity  = -10,-7
 air.velocity  = -10,-4
 Fall = 1
+Fall.recover = 0
 Envshake.time = 30
 
 [State 0, EnvShake]

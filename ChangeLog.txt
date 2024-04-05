@@ -1,5 +1,78 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.6.5 Changes:                    /
+|---------------------------------------------------/
+
+In this update, some crazy moves get knocked down a peg or two, and low-tier modded characters rise up.
+
+
+Bill:
+1. Wavedash A:
+	* startup increased (+1)
+	* reach decreased
+
+
+Fly:
+1. Wavedash A:
+	* Startup increased (+2)
+	* Recovery increased (+2)
+	* Added extra subtle effect.
+
+
+Clutch: Some much needed polish for his wavedash moves
+1. Wavedash A:
+	* Now puts the opponent in a high groundbounce
+	* Sends Clutch slightly lower.
+2. Wavedash C:
+	* Now jump cancellable, but he will not gain charge if he does this.
+	* Now sends opponets closer and higher.
+
+
+Junichi: Previously this character was too weak to be viable due to his flaws outweighting his strenghts significantly. I've aimed to revitalize some strengths while also reducing some of his overwhelming flaws.
+1. Phoenix 4c invulnerability period increased (from frames 1 to 3 -> from frames 0 to 4)
+	* Added a short effect to show the invulnerability.
+2. Phonix Backturned can transition to crouch block by pressing down-back during it.
+3. Phoenix j.5c - All Followups: Reduced Startup (2 - 3 frames less)
+4. Feline 6c initial speed increased, overall distance remains somewhat similar.
+	* Now immune to projetiles for a short moment.
+5. 236A is now juggleless.
+5. Overall improved hitboxes accross the board.
+
+
+Saito:
+1. Removed wavedash cancel from 2a
+2. Wavedash A: Improved Hitbox.
+
+
+Vei: As the weakest character in the mod, Vei received some heavy adjustments and even two small reworks.
+1. 5b has been revamped:
+	* Now can be cancelled on wiff
+	* Two new cancels: 5b > 4b and 5b > 2b
+2. 5c has been revamped:
+	* Portals can now be placed in face-up and face-down positions depending on the direction being held.
+3. 2c has been revamped:
+	* This move now spawns a face-up portals upon use.
+	* If used when a portal exist, flames will come out of the existing portal.
+	* Can be help to reset any already existing portal.
+	* Cost reduced to 1/4 bar
+	* If used during it's cooldown, a short failure animation plays.
+4. 4c Portal Use is now 6c. Functions similar to how it used to.
+5. j.2c hitbox slightly improved
+6. j.5bb hitpause on hit reduced to be consistent.
+7. 5c and 2c portal speed made faster and more consistent.
+8. Wavedash B: Temporarily reverted to clone divekick.
+
+
+Yoru:
+1. Wavedash A Reverted to Quick Slash
+	* With extra polish.
+
+
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
 | Try-Hard Version 0.6.4 Hotfix Changes:             /
 |---------------------------------------------------/
 
