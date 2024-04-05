@@ -1716,11 +1716,11 @@ ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
 guard.hittime = 12
-ground.velocity = -1,-7.5
-air.velocity = -1,-7
+ground.velocity = -1,-8
+air.velocity = -1,-7.5
 Fall = 1
 Envshake.time = 20
-Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 45 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -1971,10 +1971,10 @@ guardsound = 6,11
 ground.type = Low
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1,-5
-air.velocity = -1,-5
+ground.velocity = -2,-5
+air.velocity = -2,-5
 Fall = 1
-fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
+fall.recovertime = 50 + ifelse(enemy,movetype = A, 7,0)
 Envshake.time = 20
 guard.cornerpush.veloff = -10
 airguard.cornerpush.veloff = -10

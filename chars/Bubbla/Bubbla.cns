@@ -646,7 +646,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 3
 
 [State 0, Viento]
 type = Explod
@@ -818,7 +818,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 3
 
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -1164,7 +1164,7 @@ value = 100
 [State 0, VelSet]
 type = VelSet
 trigger1 = animelem = 3
-x = 5
+x = 3
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -1283,7 +1283,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 3
 
 [State 0, Juggle Map]
 type = MapAdd
@@ -4671,7 +4671,7 @@ sprpriority = 2
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 10
+value = 5
 persistent = 0
 
 [State 0, Damage Proration]
@@ -4680,7 +4680,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 10
+value = 5
 
 [State 0, PosSet]
 type = PosSet
@@ -5085,7 +5085,7 @@ sprpriority = 2
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5
+value = 10
 persistent = 0
 
 [State 0, Damage Proration]
@@ -5094,7 +5094,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 30
+value = 15
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -5119,7 +5119,7 @@ triggerall = AnimElem = 3
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 5
+damage    = 25
 guardflag = HA
 pausetime = 10,10
 guard.pausetime = 10,6

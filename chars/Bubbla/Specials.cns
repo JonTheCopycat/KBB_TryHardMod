@@ -321,7 +321,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 10
 ground.velocity = -2.5
-air.velocity = -3,-1
+air.velocity = -3,-2
 Fall = 0
 Fall.recovertime = 60
 guard.cornerpush.veloff = -5
@@ -1145,14 +1145,14 @@ ampl = -8
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 1
+triggerall = AnimElem = 2
 trigger1 = 1
 attr = S, SP
 animtype  = Light
-damage    = 25
+damage    = 30
 hitflag = MAFD
 guardflag = MAF
-pausetime = 18,18
+pausetime = 10,10
 guard.pausetime = 1,7
 sparkno = 0
 guard.sparkno = s13000
@@ -1164,7 +1164,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 10
 ground.velocity = -2.5
-air.velocity = -3,-1
+air.velocity = -3,-2
 Fall = 0
 Fall.recovertime = 60
 guard.cornerpush.veloff = -5
@@ -1173,14 +1173,14 @@ airguard.cornerpush.veloff = -4
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 4
+triggerall = AnimElem = 3
 trigger1 = 1
 attr = S, SP
 animtype  = Heavy
-damage    = 30
+damage    = 60
 hitflag = MAFD
 guardflag = MAF
-pausetime = 10,10
+pausetime = 18,18
 guard.pausetime = 0,6
 sparkno = 0
 guard.sparkno = s13000
@@ -1275,10 +1275,10 @@ triggerall = AnimElem = 1
 trigger1 = 1
 attr = S, NP
 animtype  = Light
-damage    = 30
+damage    = 40
 hitflag = MAFD
 guardflag = MAF
-pausetime = 18,18
+pausetime = 12,12
 guard.pausetime = 0,6
 sparkno = 0
 guard.sparkno = s13000
@@ -1725,7 +1725,7 @@ endcmdbuftime = 7
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 2
+trigger1 = AnimElemTime(2) = 1
 helpertype = normal ;player
 name = "Bubbloon"
 ID = 21501
@@ -1740,7 +1740,7 @@ pausemovetime = 0
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 2
+trigger1 = AnimElemTime(2) = 2
 helpertype = normal ;player
 name = "Bubbloon2"
 ID = 21502
@@ -1763,7 +1763,7 @@ persistent = 0
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 2
+trigger1 = AnimElemTime(2) = 3
 helpertype = normal ;player
 name = "Bubbloon3"
 ID = 21503

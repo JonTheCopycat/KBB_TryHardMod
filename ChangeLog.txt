@@ -12,6 +12,18 @@ Bill:
 	* reach decreased
 
 
+Bubbla: One simple flaw was holding this character back severely.
+1. 5aa, 5aaa, 5b, 5bb proration reduced (5 -> 3)
+2. 2a proration reduced (8 -> 5)
+3. 2a juggle reduced (10 -> 5)
+4. j.b proration reduced drastically (30 -> 15)
+5. j.b juggle increased (5 -> 10)
+6. j.b damage increased (5 -> 25)
+7. 236A damage increased (55 -> 90)
+	* Both hits will more consistently connect.
+8. 236B damage increased (30 -> 40 per bubble)
+
+
 Fly:
 1. Wavedash A:
 	* Startup increased (+2)
@@ -44,7 +56,7 @@ Saito:
 2. Wavedash A: Improved Hitbox.
 
 
-Vei: As the weakest character in the mod, Vei received some heavy adjustments and even two small reworks.
+Vei: As one of the weakest character in the mod, Vei received some heavy adjustments and even two small reworks.
 1. 5b has been revamped:
 	* Now can be cancelled on wiff
 	* Two new cancels: 5b > 4b and 5b > 2b
@@ -60,6 +72,8 @@ Vei: As the weakest character in the mod, Vei received some heavy adjustments an
 5. j.5bb hitpause on hit reduced to be consistent.
 6. 5c and 2c portal speed made faster and more consistent.
 7. Wavedash B: Temporarily reverted to clone divekick.
+8. 5b hitstun slightly increased.
+9. 4b hitstun increased.
 
 
 Yoru:
