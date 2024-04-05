@@ -4,7 +4,8 @@ his clone to dash at the opponent. It is repeatable
 and jump cancellable at any time.
 
 <#f0f000>:UNIQUE NORMALS:</>
-_AIR_D^B
+^B_B^B
+^B_D^B
 
 <#f0f000>:COMMAND DASH CANCELS:</>
 ^A_F_D_DF (Late on Block)
@@ -29,12 +30,13 @@ Clone Flurry (1/4 Bar)						_F_D_DF^C
 Portal Set (1/2 Bar, _AIR OK)						^C
 	"Vei Spawns a portal somewhere in front of him."
 
-Portal Traverse (_AIR OK)						_B^C
+Portal Traverse (_AIR OK)						_F^C
 	"Vei Uses a portal to travel to the any existing portal."
 
 Flame Portal (1/2 Bar)							_D^C
 	"Vei Spawns a portal full of flames under
-	the opponent. Can be held to go further"
+	the opponent. Can be held to go further.
+	Spawns a face-up portal."
 	
 Cloaked Saw (1/5 Bar, _AIR OK)					_AIR_D^C
 	"Spins his cloak and drags the opponent
