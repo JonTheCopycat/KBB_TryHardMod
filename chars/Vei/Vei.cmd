@@ -820,14 +820,14 @@ trigger1 = ctrl
 ;trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
-; Fwd C
+; Back C
 [State -1, C]
 type = ChangeState
 value = 450
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
 ;Triggerall = power >= 250
-triggerall = command = "holdfwd"
+triggerall = command = "holdback"
 triggerall = command = "c"
 trigger1 = ctrl && stateno != 450
 ;---------------------------------------------------------------------------

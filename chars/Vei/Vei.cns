@@ -548,7 +548,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 value = 450
 
@@ -707,7 +707,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 value = 450
 
@@ -832,7 +832,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 value = 450
 
@@ -1273,7 +1273,7 @@ type = ChangeState
 Triggerall = helper(31),movecontact
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 value = 450
 
@@ -1564,7 +1564,7 @@ type = ChangeState
 Triggerall = helper(31),movecontact
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 value = 450
 
@@ -1810,7 +1810,7 @@ type = ChangeState
 Triggerall = helper(31),movecontact
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 value = 450
 
@@ -2304,7 +2304,7 @@ type = ChangeState
 Triggerall = helper(31),movecontact
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 value = 450
 
@@ -3216,7 +3216,7 @@ volumescale = 500
 [State 105, 1]
 type = VelSet
 trigger1 = Time = 0
-x = -const(velocity.run.back.x)
+x = const(velocity.run.back.x)
 y = const(velocity.run.back.y)
 
 [State 0, VelSet]
@@ -3279,7 +3279,7 @@ helpertype = normal ;player
 name = "Entry Portal"
 ID = 451
 stateno = 451
-pos = 40,-20
+pos = -40,-20
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -3318,12 +3318,6 @@ type = RootMapSet
 trigger1 = 1 
 map = "helperHit"
 value = movehit
-;ignorehitpause = 
-;persistent = 
-
-[State 0, Turn]
-type = Turn
-trigger1 = time = 0
 ;ignorehitpause = 
 ;persistent = 
 
@@ -3369,6 +3363,7 @@ value = 407
 ;type = DestroySelf
 ;trigger1 = frontedgebodydist < -100
 ;trigger2 = AnimTime = 0
+
 
 ;-------------------------------------------------------------------------------
 ; C - End
@@ -3725,7 +3720,7 @@ triggerall = time >= 20
 Triggerall = helper(487),movehit
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 value = 450
 
@@ -4787,7 +4782,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 450
@@ -4898,7 +4893,7 @@ type = ChangeState
 Triggerall = helper(31),movecontact
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 value = 450
 
@@ -5697,7 +5692,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 450
@@ -5811,7 +5806,7 @@ type = ChangeState
 Triggerall = numhelper(612) != 0
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(405) != 0
-trigger1 = command = "holdfwd"
+trigger1 = command = "holdback"
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 450

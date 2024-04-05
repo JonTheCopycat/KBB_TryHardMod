@@ -56,11 +56,10 @@ Vei: As the weakest character in the mod, Vei received some heavy adjustments an
 	* Can be help to reset any already existing portal.
 	* Cost reduced to 1/4 bar
 	* If used during it's cooldown, a short failure animation plays.
-4. 4c Portal Use is now 6c. Functions similar to how it used to.
-5. j.2c hitbox slightly improved
-6. j.5bb hitpause on hit reduced to be consistent.
-7. 5c and 2c portal speed made faster and more consistent.
-8. Wavedash B: Temporarily reverted to clone divekick.
+4. j.2c hitbox slightly improved
+5. j.5bb hitpause on hit reduced to be consistent.
+6. 5c and 2c portal speed made faster and more consistent.
+7. Wavedash B: Temporarily reverted to clone divekick.
 
 
 Yoru:
