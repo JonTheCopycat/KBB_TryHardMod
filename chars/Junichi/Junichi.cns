@@ -6070,7 +6070,7 @@ triggerall = time >= 5
 triggerall = command = "holddown"
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
-value = 430
+value = 431
 ctrl = 1
 
 [State 200, B]
@@ -6078,7 +6078,7 @@ type = ChangeState
 triggerall = time >= 3
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
-value = 431
+value = 430
 ctrl = 1
 
 [State 210, Cancel into 5C]
@@ -6246,7 +6246,7 @@ triggerall = command = "holddown"
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
 trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 400)
-value = 430
+value = 431
 ctrl = 1
 
 [State 200, B]
@@ -6254,7 +6254,7 @@ type = ChangeState
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
 trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 400)
-value = 431
+value = 430
 ctrl = 0
 
 ;[State 210, Cancel into 5C]
@@ -7321,15 +7321,45 @@ ontop = 1
 shadow = 0,0,0
 ownpal = 1
 
+[State 210, Attack]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = AnimElem = 3 || AnimElem = 4 || AnimElem = 5 || AnimElem = 6
+trigger1 = 1
+attr = S, NA
+animtype  = Light
+damage    = 5
+hitflag = MAF
+guardflag = MAF
+pausetime = 4,4
+guard.pausetime = 4, 4
+guard.hittime = 15
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,1
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -1
+air.velocity = -1,-1
+Fall = 0
+Envshake.time = 10
+Fall.recovertime = 30
+guard.cornerpush.veloff = -7
+airguard.cornerpush.veloff = -7
+
 [State 200, 1]
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = !movecontact
+triggerall = AnimElem = 9
 trigger1 = 1
 attr = S, NA
 animtype  = Heavy
-damage    = 30
+damage    = 20
 hitflag = MAF
 guardflag = MAF
 pausetime = 12,12
