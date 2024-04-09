@@ -5466,7 +5466,7 @@ value = 0
 type = VelSet
 trigger1 = Time = 0
 x = 3.25
-y = -3.3
+y = -3.25
 
 [State 0, VelAdd]
 type = VelAdd
@@ -5605,7 +5605,7 @@ volumescale = 50
 [State 210, VelSet]
 type = VelSet
 trigger1 = animelem = 2 || AnimElem = 3
-x = 8
+x = 6
 
 [State 210, Explod]
 type = Explod
@@ -6066,7 +6066,7 @@ ctrl = 1
 
 [State 200, B]
 type = ChangeState
-triggerall = time >= 5
+triggerall = time >= 3
 triggerall = command = "holddown"
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
@@ -6313,6 +6313,12 @@ type = VarSet
 trigger1 = AnimElem = 1
 v = 10
 value = 1
+
+[State 0, DP INVINCIBILLITY BABY]
+type = NotHitBy
+trigger1 = time = [0, 8] 
+value = A,NA,SA,NP,SP
+time = 1
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -6986,14 +6992,14 @@ Triggerall = movecontact
 trigger1 = command = "holddown"
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 430
+value = 431
 
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 431
+value = 430
 
 ;[State 200, End]
 ;type = ChangeState
@@ -7260,10 +7266,10 @@ triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 100
+value = 50
 
 [State 200, Move Forward]
-type = VelAdd
+type = VelSet
 trigger1 = time = 0
 x = 5
 
@@ -7273,9 +7279,14 @@ x = 5
 ;x = 1.5
 
 [State 200, Move Forward]
-type = VelSet
+type = VelAdd
 trigger1 = time = 0
 x = 5
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Animelem = 2 || AnimElem = 3 || AnimElem = 4 || AnimElem = 5
+x = 4
 
 [State 200, Explod]
 type = Explod
@@ -7299,27 +7310,6 @@ shadow = 0,0,0
 ownpal = 1
 removeongethit = 1
 ignorehitpause = 1
-
-[State 0, Explod]
-type = Explod
-trigger1 = AnimElem = 3
-anim = 10002
-ID = 10002
-pos = 35,-25
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 9999
-scale = 0.10,0.10
-sprpriority = 2
-ontop = 1
-shadow = 0,0,0
-ownpal = 1
 
 [State 210, Attack]
 type = HitDef
@@ -7350,6 +7340,27 @@ Envshake.time = 10
 Fall.recovertime = 30
 guard.cornerpush.veloff = -7
 airguard.cornerpush.veloff = -7
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 8
+anim = 10002
+ID = 10002
+pos = 35,-25
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = 0.10,0.10
+sprpriority = 2
+ontop = 1
+shadow = 0,0,0
+ownpal = 1
 
 [State 200, 1]
 type = HitDef
@@ -13273,7 +13284,7 @@ volumescale = 50
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = moveguarded = 1
+trigger1 = movecontact = 1
 y = -2
 x = 2
 
