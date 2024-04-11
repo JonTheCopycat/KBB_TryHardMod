@@ -4039,6 +4039,14 @@ value = 605
 ;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 ;value = 610
 
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+trigger1 = command = "holddown"
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 445
+
 [State 0, ChangeState]
 type = ChangeState
 triggerall = movecontact
@@ -4452,6 +4460,14 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 611
 ctrl = 1
 
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+trigger1 = command = "holddown"
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 445
+
 [State 0, ChangeState]
 type = ChangeState
 triggerall = movecontact
@@ -4591,6 +4607,14 @@ trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 600
 ctrl = 1
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+trigger1 = command = "holddown"
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 445
 
 [State 0, ChangeState]
 type = ChangeState
@@ -4932,6 +4956,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 35
 ground.velocity = 0,-1
+guard.hittime  = 12
 air.hittime = 45
 air.velocity = 0,-1
 Fall = 1

@@ -768,6 +768,35 @@ value = 200
 triggerall = command = "a"
 Triggerall = statetype != A
 trigger1 = ctrl
+
+;---------------------------------------------------------------------------
+;The Clone is Present
+[State 200, 2B]
+type = ChangeState
+Triggerall = numhelper(31) != 0 && helper(31),stateno = [301, 305]
+triggerall = command = "holddown"
+triggerall = command = "b"
+Triggerall = statetype != A
+trigger1 = ctrl
+value = 910
+
+[State 200, 5BBB]
+type = ChangeState
+Triggerall = numhelper(31) != 0 && helper(31),stateno = [301, 305]
+triggerall = command = "holdback"
+triggerall = command = "b"
+Triggerall = statetype != A
+trigger1 = ctrl
+value = 320
+
+[State 200, 5BBB]
+type = ChangeState
+Triggerall = numhelper(31) != 0 && helper(31),stateno = [301, 305]
+triggerall = command = "b"
+Triggerall = statetype != A
+trigger1 = ctrl
+value = 310
+
 ;---------------------------------------------------------------------------
 ; Down + B
 [State -1, Down + B]
@@ -937,6 +966,17 @@ trigger1 = ctrl
 ;Triggerall = statetype = A
 ;trigger1 = ctrl
 ;---------------------------------------------------------------------------
+; Down + B
+[State -1, Down + B]
+type = ChangeState
+value = 460
+triggerall = numhelper(470) = 0
+triggerall = var(20) = 0
+triggerall = command = "holddown"
+triggerall = command = "b"
+Triggerall = statetype = A
+trigger1 = ctrl
+;---------------------------------------------------------------------------
 ; B Aire
 [State -1, B Aire]
 type = ChangeState
@@ -944,19 +984,6 @@ value = 610
 triggerall = command = "b"
 Triggerall = statetype = A
 trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Down + C
-;[State -1, Down + C]
-;type = ChangeState
-;value = 460
-;triggerall = numhelper(3500) = 0
-;Triggerall = power >= 200
-;triggerall = numhelper(420) < 1
-;triggerall = var(20) = 0
-;triggerall = command = "holddown"
-;triggerall = command = "c"
-;Triggerall = statetype = A
-;trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Down C Aire
 [State -1, C Aire]

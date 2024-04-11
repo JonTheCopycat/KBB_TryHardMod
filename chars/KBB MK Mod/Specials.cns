@@ -330,7 +330,7 @@ ground.hittime  = 15
 ground.velocity  = -3.5,-7
 air.velocity  = -3.5,-6
 Fall = 1
-Fall.recovertime = 50 + ifelse(enemy,movetype = A, 7, 0)
+Fall.recovertime = 70 + ifelse(enemy,movetype = A, 7, 0)
 
 [State 0, EnvShake]
 type = EnvShake
