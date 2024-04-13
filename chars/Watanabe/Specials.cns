@@ -273,7 +273,7 @@ map = "enableDHC"
 value = 1
 
 [State 0, VelAdd]
-type = VelAdd
+type = VelSet
 trigger1 = AnimElem = 1
 x = ifelse(prevstateno=310||prevstateno=220,8,3)
 

@@ -455,7 +455,7 @@ animtype  = Light
 damage    = 10
 hitflag = MAF
 guardflag = M
-pausetime = 8,12
+pausetime = 8,8
 ground.hittime  = 9 + ifelse(enemy,movetype = A, 7,0)
 guard.pausetime = 8,8
 guard.hittime = 7
@@ -466,9 +466,10 @@ hitsound   = S0,1
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
-ground.velocity = 2
+ground.velocity = -2
 guard.velocity = -2
-air.velocity = 2,-1
+air.velocity = -2,-1
+fall.recovertime = 20
 
 
 
@@ -607,7 +608,7 @@ animtype  = Heavy
 damage    = 10
 hitflag = MAFD
 guardflag = MA
-pausetime = 10,15
+pausetime = 10,10
 ground.hittime  = 14 + ifelse(enemy,movetype = A, 7,0)
 air.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
 guard.pausetime = 10,14
@@ -619,10 +620,10 @@ hitsound   = S0,2
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
-ground.velocity = -1.5,0
-air.velocity = 1.2,-2
+ground.velocity = -1
+air.velocity = -1,-2
 Envshake.time = 10
-Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
 fall.recover = 1
 fall = ifelse(enemy,movetype = A, 1,0)
 
@@ -1341,8 +1342,8 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 12
 guard.velocity = 0
-ground.velocity = -2
-air.velocity = -1,-1
+ground.velocity = -2,-2
+air.velocity = -2,-2
 Envshake.time = 5
 Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
@@ -2845,7 +2846,7 @@ trigger1 = AnimElemTime(2) > 0 && AnimElemTime(2) < 600
 ;Trigger1 = Pos x  < root,Pos x 
 ;trigger2 =  root,movetype != I
 trigger1 = rootdist X > -55  && rootdist X != [-55,75] && map(Main) = 1 || rootdist X > -25  && rootdist X != [-25,-55] && map(Main) = 0
-X = const(velocity.walk.fwd.x) + -.3
+X = const(velocity.walk.fwd.x) + .6
 ;
 [State 20, 23]
 Type = VelSet
@@ -2857,7 +2858,7 @@ trigger1 = AnimElemTime(2) > 0 && AnimElemTime(2) < 600
 ;Trigger1 = Pos x  + 45  > root,Pos x  
 ;trigger2 = root,movetype != I
 trigger1 = rootdist X < 75   && rootdist X != [-55,75] && map(Main) = 1 || rootdist X < -55  && rootdist X != [-25,-55] && map(Main) = 0
-X = const(velocity.walk.back.x) +.3
+X = const(velocity.walk.back.x) + .3
 
 [State 20, 23]
 Type = VelSet
@@ -2868,7 +2869,7 @@ trigger1 = AnimElemTime(2) > 0 && AnimElemTime(2) < 600
 ;Trigger1 = rootdist X = [-55,75] 
 ;Trigger1 = Pos x  + 45  > root,Pos x  
 ;trigger2 = root,movetype != I
-trigger1 = pos y >= root,pos y - 30
+trigger1 = pos y >= root,pos y - 25
 Y = -3
 
 [State 20, 23]
@@ -2880,7 +2881,7 @@ trigger1 = AnimElemTime(2) > 0 && AnimElemTime(2) < 600
 ;Trigger1 = rootdist X = [-55,75] 
 ;Trigger1 = Pos x  + 45  > root,Pos x  
 ;trigger2 = root,movetype != I
-trigger1 =  pos y <= root,pos y - 30
+trigger1 =  pos y <= root,pos y - 35
 Y = 3
 
 [State 20, 23]
@@ -2892,7 +2893,7 @@ trigger1 = AnimElemTime(2) > 0 && AnimElemTime(2) < 600
 ;Trigger1 = rootdist X = [-55,75] 
 ;Trigger1 = Pos x  + 45  > root,Pos x  
 ;trigger2 = root,movetype != I
-trigger1 = root,pos y - 30 = pos y 
+trigger1 = pos y < root,pos y - 25 && pos y > root,pos y - 35
 Y = 0
 
 [State 0, ChangeAnim]
@@ -3039,11 +3040,11 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 Envshake.time = 5
-ground.velocity = -1.5,-8
-airguard.velocity = -1.5,-2
-air.velocity = -1,-8
+ground.velocity = -1.5,-1
+airguard.velocity = -2,-1
+air.velocity = -1,-1
 Fall = 1
-fall.recovertime = 50
+fall.recovertime = 70
 
 [State 200, 1]
 type = HitDef
@@ -3195,7 +3196,7 @@ damage    = ifelse(enemy,movetype = A,70,35)
 hitflag = MAFD
 guardflag = MA
 pausetime = ifelse(enemy,movetype = A,24,12),ifelse(enemy,movetype = A,30,15)
-guard.pausetime = 5,10
+guard.pausetime = 12,16
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-55
@@ -3204,12 +3205,12 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-air.velocity = -2,6
-ground.velocity = -2,6
+air.velocity = -1,6
+ground.velocity = -1,6
 Fall = 1
 fall.recover = 0
 fall.yvelocity = -8
-down.velocity = -2,-8
+down.velocity = -1,-8
 down.bounce = 1
 Envshake.time = 10
 

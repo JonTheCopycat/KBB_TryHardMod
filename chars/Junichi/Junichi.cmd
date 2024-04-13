@@ -783,7 +783,6 @@ triggerall = var(10) = 0
 triggerall = command = "holddown"
 triggerall = command = "a"
 Triggerall = statetype != A
-triggerall = numhelper(315) = 0
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Kick A
