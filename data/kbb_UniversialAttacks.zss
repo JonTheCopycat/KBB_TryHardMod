@@ -53,7 +53,7 @@
             trans: add;
         }
 
-        PowerAdd{value: -1000}
+        PowerAdd{value: -1500}
     }
 
     var(11) := var(11) - 5;
@@ -2285,13 +2285,11 @@ if Const(KBB_Playable) = 1 {
     #archived exceptions
     #!(statetype = S && movetype = I)
     #Star Cancel Command
-    if (power >= 1000 || numhelper(51000) != 0) && command = "ss" {
+    if (power >= 1500 || numhelper(51000) != 0) && command = "ss" {
         if alive && !ctrl && movetype != H && !ishelper && roundstate != 1 && time >= 3 {
             #The exceptions
             if stateno != [700, 709] && stateno != 800 && stateno != 810 && stateno != [820, 829] && stateno != 830 &&
             stateno != [150, 155] {
-                #No Character Specific Exceptions
-                ChangeState{value: 67}
 
                 #Character exceptions
                 if !(name = "Leon" && stateno = [26000, 26999]) && 

@@ -607,7 +607,7 @@ Clsn2: 1
 0,1, 0,0, 10
 
 ; B - 2
-[Begin Action 311]
+[Begin Action 310]
 Clsn2: 1
   Clsn2[0] = -19, -42, 24, 1
 1,13, 0,0, 3
@@ -662,7 +662,7 @@ Clsn2: 1
 0,1, 0,0, 7
 
 ; B - 2
-[Begin Action 310]
+[Begin Action 311]
 Clsn2: 1
   Clsn2[0] = -19, -42, 24, 1
 1,13, 0,0, 3

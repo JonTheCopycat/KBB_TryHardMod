@@ -1231,10 +1231,10 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 10
 ground.hittime  = 12 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -3,-2
-air.velocity = -3,-2
+ground.velocity = -3,-3
+air.velocity = -3,-3
 Fall = 0
-Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 35 + ifelse(enemy,movetype = A, 7,0)
 Envshake.time = 10
 
 [State 0, ChangeState]
@@ -1531,7 +1531,7 @@ Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-Triggerall = AnimElem = 3||AnimElem = 4||AnimElem = 5||AnimElem = 6;||AnimElem = 7||AnimElem = 8
+Triggerall = AnimElem = 3||AnimElem = 4||AnimElem = 5||AnimElem = 6||AnimElem = 7||AnimElem = 8
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
@@ -3042,7 +3042,6 @@ Envshake.time = 20
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
-trigger2 = pos y > 1
 value = 50
 ctrl = 1
 [State 200, Jump]
