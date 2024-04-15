@@ -3316,7 +3316,7 @@ sprpriority = -1
 type = Destroyself
 trigger1 = time = 0 
 ;===============================================================================
-; Fwd C Teleport
+; Back C Teleport
 ;-------------------------------------------------------------------------------
 [Statedef 450]
 type    = A
@@ -3386,7 +3386,7 @@ triggerall = numhelper(405) != 0
 triggerall = helper(405),stateno = [417, 418]
 trigger1 = AnimElem = 5
 x = 1
-y = 7
+y = 4
 
 [State 0, CtrlSet]
 type = CtrlSet
@@ -7167,7 +7167,7 @@ value = palno
 
 [State 0, VarSet]
 type = VarSet
-trigger1 = var(52) > 14
+trigger1 = var(52) > 8
 v = 52    ;fv = 10
 value = 1
 
@@ -7175,7 +7175,7 @@ value = 1
 type = VarSet
 trigger1 = var(52) < 1
 v = 52    ;fv = 10
-value = 14
+value = 8
 ;-------------------------------------------------------
 
 [State 0, StopSnd]
