@@ -1831,12 +1831,12 @@ trigger1 = AnimElem = 7
 value = S0,6
 volumescale = 100
 
-[State 1000, 6]
-type = ChangeState
-triggerall = power >= 500
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 22000
+;[State 1000, 6]
+;type = ChangeState
+;triggerall = power >= 500
+;triggerall = numhelper(3500) = 0
+;trigger1 = command = "SPECIAL 4"
+;value = 22000
 
 [State 1000, 6]
 type = ChangeState

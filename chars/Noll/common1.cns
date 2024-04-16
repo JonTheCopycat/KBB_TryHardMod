@@ -295,7 +295,7 @@ ctrl = 0
 type = ChangeState
 triggerall = time >= 5 && var(3) = 0 
 trigger1 = command = "holdup"
-value = 45
+value = 60
 ctrl = 0
 
 [State 200, End]

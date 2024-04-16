@@ -1759,7 +1759,7 @@ ground.velocity = -3, -4
 air.hittime = 13 + ifelse(enemy,movetype = A, 7,0)
 air.velocity = -2,-3
 fall = 0
-fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
+fall.recovertime = 25 + ifelse(enemy,movetype = A, 7,0)
 Envshake.time = 10
 p2facing = 1
 givepower = 50,50
