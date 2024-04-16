@@ -1,5 +1,65 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.6.6 Changes:                    /
+|---------------------------------------------------/
+
+This update has some quality of life adjustments to a some characters as well as an overall nerf to star cancel.
+
+Bubbla: This character has been reworked by their creator. Enjoy the changes.
+
+
+Jodie:
+1. Can no longer fastfall during 6c
+2. Reverted 5bb to vanilla version
+3. Comboes out of wavedash a.a.b made more permissive.
+
+
+Junichi: Some moves have been replaced to make them less redundant. Inaddition, there have been some buffs to current moves.
+1. Backturned:
+	Forward Hop Removed, Junichi now simply dashes forward normally
+	2a startup reduced (-2), and active frames increased (+2)
+	2b startup reduced (-2), and active frames increased (+1)
+	5b animation changed
+	5b invul to aerial moves for a short moment.
+2. Peekaboo:
+	5b replaced with flurry uppercut
+	2b replaced with old 5b wall splat.
+3. Baton j.a replaced.
+4. Baton j.b now reaches slightly lower.
+5. 214A: Invulnerability Increased.
+6. Comboes made more permissive.
+7. Feline 2a animation adjusted.
+
+
+Noll:
+1. Wavedash A Replaced. Probably broken idk.
+2. Can Now Hyperhop out of wavedash.
+
+
+MK:
+1. 236A Hitstun increased
+2. Added cancels into j.2c from j.a, j.aa, j.b
+3. Slightly improved j.5c hitbox
+
+
+Max:
+1. Wavedash B Hurtbox extended
+
+
+Vei:
+1. 236A Made more consistent in comboes
+2. New move: j.2b
+3. 5b: Clone now idles for a moment before disappearing.
+4. Added Palletes
+
+
+Watanabe:
+1. Overall Comboes Made more permissive
+2. Fixed Bug where one sword thunder could destroy two swords.
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
 | Try-Hard Version 0.6.5 Changes:                    /
 |---------------------------------------------------/
 
