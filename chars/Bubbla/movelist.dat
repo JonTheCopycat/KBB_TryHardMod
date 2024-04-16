@@ -42,10 +42,28 @@ Giant Bubble Ball (1 Bar: 1 Bubble)					_D_DF_F^A
 	 Catches any opponent nearby, trapping them
 	until the bubble explodes. Consumes 1 Bubble."
 
-Sudsplosion (1 Bar: 5 Bubbles)					_D_DB_B^A
+SudsyChoice (1 Bar: 1 Bubble)					_D_DB_B^A
+	"Bubble charges for a quick second before
+	choosing one out of three bubble moves."
+
+	^A: Sudsplosion
 	 "Bubbla becomes a germaphobe and douses
 	herself and nearby opponents in a sudsy
-	explosion! Everything must be clean!"
+	explosion! Everything must be clean! 
+	Pressing C will summon an even bigger
+	explosion, consuming three bubbles."
+
+	^B: Sudsy Crash
+	 "Bubbla summons a large bubble, catching
+	nearby opponents and exploding once enough
+	time has passed. Pressing C will end the 
+	move by releasing a large bubble burst."
+
+	^C: Sudsy Surf
+	 "Bubbla launches herself forward with
+	a ton of bubbles, emptying the bubble count.
+	Pressing C will end the move by releasing a 
+	large explosion."
 
 Triple Bubble Ball (1 Bar: 3 Bubbles) 			_D_DF_F^B
 	"Bubbla throws three mini bubble balls

@@ -611,15 +611,16 @@ triggerall = var(21) = 0
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 1"
 Triggerall = power >= 1000
+
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Special 2 - Activation
 [State -1, Sudsplosion!]
 type = ChangeState
-value = 22000
+value = 21900
 triggerall = numhelper(3500) = 0
 triggerall = var(22) = 0
-triggerall = var(21) >= 3
+triggerall = var(21) >= 1
 triggerall = command = "SPECIAL 2"
 Triggerall = statetype != A
 Triggerall = power >= 1000
