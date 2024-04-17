@@ -2446,8 +2446,8 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 10
 ground.hittime  = 16
-ground.velocity = -1,-5
-air.velocity = ifelse(prevstateno = 621,-5,-1),-5 ; Launches away farther horizontally if from j.5c grenade
+ground.velocity = ifelse(root,stateno = 625,-3,-1),-5
+air.velocity = ifelse(root,stateno = 625,-3,-1),-5 ; Launches away farther horizontally if from j.5c grenade
 airguard.velocity = -5,-1
 Fall = 1
 Fall.recovertime = 40
