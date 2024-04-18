@@ -1194,17 +1194,10 @@ sprpriority = 1
 
 [State 0, PlaySnd]
 type = PlaySnd
-triggerall = numhelper(301) = 0
+triggerall = numhelper(31) = 0
 trigger1 = AnimElem = 2
-value = S1,3
-volumescale = 50
-
-[State 0, PlaySnd]
-type = PlaySnd
-triggerall = numhelper(301) = 0
-trigger1 = AnimElem = 2
-value = S0,6
-volumescale = 100
+value = S1,0
+volumescale = 500
 
 [State 0, AfterImage]
 type = AfterImage
@@ -1476,9 +1469,14 @@ value = 311
 
 [State 200, End]
 type = ChangeState
+triggerall = prevstateno != 305
 trigger1 = AnimTime = 0
 value = 305
 ctrl = 0
+
+[State 200, End]
+type = DestroySelf
+trigger1 = AnimTime = 0
 
 ;-------------------------------------------------------------------------------
 ; Clone Idle
@@ -1512,15 +1510,8 @@ persistent = 0
 
 [State 0, PlaySnd]
 type = PlaySnd
-triggerall = random < 600
 trigger1 = AnimElem = 1
-value = S200,0+(random<500)*1+(random<500)*1+(random<500)*1
-volumescale = 200
-
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = AnimElem = 1
-value = S1,1
+value = S3,2
 volumescale = 50
 
 [State 0, NotHitBy]
@@ -1537,38 +1528,6 @@ slot = 0
 stateno = 39
 time = 2
 forceair = 0
-
-[State 200, 1]
-type = HitDef
-getpower = 0
-triggerall = root,map(juggle) < 100 || hitcount != 0
-triggerall = !movecontact
-trigger1 = 1
-attr = C, NA
-animtype  = Medium
-damage    = 15
-hitflag = MAFD
-guardflag = MA
-pausetime = 10,10
-guard.pausetime = 10,4
-sparkno = 0
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = 5,1
-guardsound = 6,11
-ground.type = Low
-ground.slidetime = 12
-ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-guard.hittime = 12
-ground.velocity = -2,-3
-air.velocity = -2,-3
-down.velocity = -2,-3
-Fall = 0
-fall.recovertime = 25
-guard.cornerpush.veloff = -10
-airguard.cornerpush.veloff = -10
-;ground.cornerpush.veloff = -5
-;air.cornerpush.veloff = -5
 
 [State 200, C]
 type = ChangeState
@@ -1597,7 +1556,7 @@ type = ChangeState
 Triggerall = 1
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 311
+value = 301
 
 [State 200, End]
 type = DestroySelf
@@ -1619,17 +1578,10 @@ sprpriority = 1
 
 [State 0, PlaySnd]
 type = PlaySnd
-triggerall = numhelper(301) = 0
+triggerall = numhelper(31) = 0
 trigger1 = AnimElem = 2
-value = S1,3
-volumescale = 50
-
-[State 0, PlaySnd]
-type = PlaySnd
-triggerall = numhelper(301) = 0
-trigger1 = AnimElem = 2
-value = S0,6
-volumescale = 100
+value = S1,0
+volumescale = 500
 
 [State 0, AfterImage]
 type = AfterImage
@@ -1870,17 +1822,10 @@ sprpriority = 1
 
 [State 0, PlaySnd]
 type = PlaySnd
-triggerall = numhelper(301) = 0
+triggerall = numhelper(31) = 0
 trigger1 = AnimElem = 2
-value = S1,3
-volumescale = 50
-
-[State 0, PlaySnd]
-type = PlaySnd
-triggerall = numhelper(301) = 0
-trigger1 = AnimElem = 2
-value = S0,6
-volumescale = 100
+value = S1,0
+volumescale = 500
 
 [State 0, AfterImage]
 type = AfterImage
@@ -1950,11 +1895,11 @@ value = 400
 
 [State 1000, 6]
 type = ChangeState
-triggerall = time >= 10
-trigger1 = numhelper(31) = 0
-trigger2 = helper(31),stateno = 39
+trigger1 = time >= 35
+trigger2 = time >= 10 && numhelper(31) = 0
 value = 0
 ctrl = 1
+
 
 ;-------------------------------------------------------------------------------
 ; Back B Clone
@@ -2635,7 +2580,7 @@ sprpriority = 1
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = AnimElem = 1
-value = S0,6
+value = S1, 1
 volumescale = 100
 
 [State 1000, 6]
@@ -3377,7 +3322,7 @@ type = VelSet
 triggerall = numhelper(405) != 0
 triggerall = helper(405),stateno = [415, 416]
 trigger1 = AnimElem = 5
-x = 1
+x = 1.5
 y = -7
 
 [State 0, VelSet]
@@ -3385,7 +3330,7 @@ type = VelSet
 triggerall = numhelper(405) != 0
 triggerall = helper(405),stateno = [417, 418]
 trigger1 = AnimElem = 5
-x = 1
+x = 1.5
 y = 4
 
 [State 0, CtrlSet]
@@ -4305,7 +4250,7 @@ ground.type = High
 ground.slidetime = 8
 ground.velocity = -2
 airguard.velocity = -1.5,-1
-air.velocity = -2,-2
+air.velocity = -3,-3
 air.fall = 1
 Getpower = 0,0
 Fall.recovertime = 30
@@ -4936,24 +4881,17 @@ sprpriority = 1
 
 [State 0, Juggle Map]
 type = RootMapAdd
-trigger1 = helper(291),movehit && enemy,gethitvar(fall)
+trigger1 = helper(31),movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5
+value = 10
 persistent = 0
 
 [State 0, PlaySnd]
 type = PlaySnd
 triggerall = numhelper(31) = 0
-trigger1 = AnimElem = 2
-value = S1,3
-volumescale = 50
-
-[State 0, PlaySnd]
-type = PlaySnd
-triggerall = numhelper(31) = 0
-trigger1 = AnimElem = 2
-value = S0,6
-volumescale = 100
+trigger1 = AnimElem = 1
+value = S1, 0
+volumescale = 500
 
 [State 0, AfterImage]
 type = AfterImage
@@ -4962,7 +4900,7 @@ time = 10
 
 [State 0, Damage Proration]
 type = VarAdd
-trigger1 = helper(291),movehit
+trigger1 = helper(31),movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
@@ -5030,7 +4968,6 @@ value = 400
 type = ChangeState
 trigger1 = time >= 25
 trigger2 = numhelper(31) = 0
-trigger3 = helper(31),stateno = 39
 value = 0
 ctrl = 1
 
@@ -6383,6 +6320,12 @@ juggle  = 0
 ctrl = 0
 anim = 401
 sprpriority = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S1, 1
+volumescale = 100
 
 [State 0, VelAdd]
 type = VelAdd
