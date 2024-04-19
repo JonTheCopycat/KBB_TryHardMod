@@ -1298,6 +1298,16 @@ poweradd = 0
 velset = 0,0
 sprpriority = 2
 
+[State 0, ChangeAnim]
+type = ChangeAnim
+triggerall = prevstateno = 305
+trigger1 = time = 0
+value = 302
+elem = 1
+;ignorehitpause = 
+;persistent = 
+
+
 [State 0, AttackDist]
 type = AttackDist
 trigger1 = 1
@@ -1371,11 +1381,11 @@ x = -1
 [State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 2
-x = 10
+x = 12
 [State 0, VelSet]
 type = VelSet
 trigger1 = time >= 5
-x = ifelse(vel x - 0.22 >= 0, vel x - 0.22, 0)
+x = ifelse(vel x - 0.44 >= 0, vel x - 0.44, 0)
 
 ;On Hit
 [State 0, VelSet]
@@ -2582,6 +2592,15 @@ type = PlaySnd
 trigger1 = AnimElem = 1
 value = S1, 1
 volumescale = 100
+
+[State 210, Cancel into 2C]
+type = ChangeState
+triggerall = time >= 8
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(405) != 0
+trigger1 = command = "holddown"
+trigger1 = command = "c"
+value = 480
 
 [State 1000, 6]
 type = ChangeState
@@ -4083,7 +4102,7 @@ hitflag = MAFD
 guardflag = MA
 ground.hittime = 10
 pausetime = 0,4
-sparkno = 0
+sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound = S  5,1

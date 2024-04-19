@@ -3,7 +3,7 @@
 <#f0f000>:EX ATTACKS!:</>
 
 Summon (1/4 Bar)							^C
-	"Watanabe summons a sword and it lasts for 10 seconds.
+	"Watanabe summons a sword and it lasts for 8 seconds.
 	 Meter charge is halved when a sword is out."
 
 _! Two-Hit Combo				^B
@@ -76,6 +76,4 @@ Seed spread (1 Bar, _AIR OK)    						_D_DF_F^B
 "Moonlit Serenade" (1 1/2 Bars)				_D_DF_F^C
 	"Watanabe throws a summoned sword forward!
 	If it connects, the opponent gets BLASTED
-	TO DEATH. Summoned sword stays on whiff.
-	If a summoned sword already is hitting an
-	opponent this move becomes instant."
+	TO DEATH. Summoned sword stays on whiff."

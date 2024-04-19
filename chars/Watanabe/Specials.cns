@@ -1765,7 +1765,7 @@ triggerall = time%4 = 0
 trigger1 = 1
 attr = S, HA
 animtype  = Light
-damage    = 10 + var(11)
+damage    = 14 + var(11)
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,2
