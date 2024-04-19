@@ -5,7 +5,16 @@
 
 This update has some quality of life adjustments to a some characters as well as an overall nerf to star cancel.
 
-Bubbla: This character has been reworked by their creator. Enjoy the changes.
+
+Universal:
+1. Star Cancel:
+	* Normal Cost Increased to 1.5 Bar (from 1)
+	* Starburst Cost Increased to 0.5 Bar (from 0)
+
+
+Bubbla: This character has been reworked by their creator and me. 
+Since this character is in very early stages, I won't detail the many changes we do to this character untill they are in a more stable state. 
+For this update bubbla has gained new ways to use his bubbles, as well as polished up moves and comboes.
 
 
 Jodie:
@@ -40,6 +49,7 @@ MK:
 1. 236A Hitstun increased
 2. Added cancels into j.2c from j.a, j.aa, j.b
 3. Slightly improved j.5c hitbox
+4. Hitsounds Changed
 
 
 Max:
@@ -47,10 +57,12 @@ Max:
 
 
 Vei:
-1. 236A Made more consistent in comboes
-2. New move: j.2b
-3. 5b: Clone now idles for a moment before disappearing.
-4. Added Palletes
+1. Added Palletes
+2. 236A Made more consistent in comboes
+3. New move: j.2b
+4. 5b: Clone now idles for a moment before disappearing.
+5. Can now 2c sooner after 5c
+
 
 
 Watanabe:

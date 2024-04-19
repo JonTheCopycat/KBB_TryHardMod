@@ -54,6 +54,8 @@
         }
 
         PowerAdd{value: -1500}
+    } else {
+        PowerAdd{value: -500}
     }
 
     var(11) := var(11) - 5;
@@ -2290,6 +2292,8 @@ if Const(KBB_Playable) = 1 {
             #The exceptions
             if stateno != [700, 709] && stateno != 800 && stateno != 810 && stateno != [820, 829] && stateno != 830 &&
             stateno != [150, 155] {
+                #No Character Specific Exceptions
+                ChangeState{value: 67}
 
                 #Character exceptions
                 if !(name = "Leon" && stateno = [26000, 26999]) && 
