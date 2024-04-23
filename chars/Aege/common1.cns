@@ -1514,11 +1514,11 @@ trigger1 = command != "holdback"
 trigger2 = !inguarddist
 value = 140
 
-[State 150, Counter Cancel]
-type = ChangeState
-triggerall = (command = "hold_x" && command = "hold_s")
-trigger1 = power >= 1000
-value = 820
+;[State 150, Counter Cancel]
+;type = ChangeState
+;triggerall = (command = "hold_x" && command = "hold_s")
+;trigger1 = power >= 1000
+;value = 820
 
 ;---------------------------------------------------------------------------
 ; Crouch guard (guarding)
@@ -1542,11 +1542,11 @@ trigger1 = command != "holdback"
 trigger2 = !inguarddist
 value = 140
 
-[State 150, Counter Cancel]
-type = ChangeState
-triggerall = (command = "hold_x" && command = "hold_s")
-trigger1 = power >= 1000
-value = 820
+;[State 150, Counter Cancel]
+;type = ChangeState
+;triggerall = (command = "hold_x" && command = "hold_s")
+;trigger1 = power >= 1000
+;value = 820
 
 ;---------------------------------------------------------------------------
 ; Air guard (guarding)
@@ -1597,11 +1597,11 @@ trigger1 = command != "holdback"
 trigger2 = !inguarddist
 value = 140
 
-[State 150, Counter Cancel]
-type = ChangeState
-triggerall = (command = "hold_x" && command = "hold_s")
-trigger1 = power >= 1000
-value = 820
+;[State 150, Counter Cancel]
+;type = ChangeState
+;triggerall = (command = "hold_x" && command = "hold_s")
+;trigger1 = power >= 1000
+;value = 820
 
 ;---------------------------------------------------------------------------
 ; Guard (end)
@@ -1726,11 +1726,11 @@ trigger1 = gethitvar(damage) > 0
 value = gethitvar(damage)
 ignorehitpause = 1
 
- [State 150, Counter Cancel]
-type = ChangeState
-triggerall = (command = "hold_x" && command = "hold_s")
-trigger1 = power >= 1000
-value = 820
+ ;[State 150, Counter Cancel]
+;type = ChangeState
+;triggerall = (command = "hold_x" && command = "hold_s")
+;trigger1 = power >= 1000
+;value = 820
 
 ;---------------------------------------------------------------------------
 ; Stand guard hit (knocked back)
@@ -1786,11 +1786,11 @@ trigger1 = HitOver
 value = 130
 ctrl = 1
 
- [State 150, Counter Cancel]
-type = ChangeState
-triggerall = (command = "hold_x" && command = "hold_s")
-trigger1 = power >= 1000
-value = 820
+ ;[State 150, Counter Cancel]
+;type = ChangeState
+;triggerall = (command = "hold_x" && command = "hold_s")
+;trigger1 = power >= 1000
+;value = 820
 
 ;---------------------------------------------------------------------------
 ; Crouch guard hit (shaking)
@@ -1871,11 +1871,11 @@ trigger1 = gethitvar(damage) > 0
 value = gethitvar(damage)
 ignorehitpause = 1
 
- [State 150, Counter Cancel]
-type = ChangeState
-triggerall = (command = "hold_x" && command = "hold_s")
-trigger1 = power >= 1000
-value = 820
+ ;[State 150, Counter Cancel]
+;type = ChangeState
+;triggerall = (command = "hold_x" && command = "hold_s")
+;trigger1 = power >= 1000
+;value = 820
 
 ;---------------------------------------------------------------------------
 ; Crouch guard hit (knocked back)
@@ -1931,11 +1931,11 @@ trigger1 = HitOver
 value = 131
 ctrl = 1
 
- [State 150, Counter Cancel]
-type = ChangeState
-triggerall = (command = "hold_x" && command = "hold_s")
-trigger1 = power >= 1000
-value = 820
+ ;[State 150, Counter Cancel]
+;type = ChangeState
+;triggerall = (command = "hold_x" && command = "hold_s")
+;trigger1 = power >= 1000
+;value = 820
 
 ;---------------------------------------------------------------------------
 ; Air guard hit (shaking)
@@ -1999,11 +1999,11 @@ trigger1 = gethitvar(damage) > 0
 value = gethitvar(damage)
 ignorehitpause = 1
 
- [State 154, Counter Cancel]
-type = ChangeState
-triggerall = (command = "hold_x" && command = "hold_s")
-trigger1 = power >= 1000
-value = 820
+; [State 154, Counter Cancel]
+;type = ChangeState
+;triggerall = (command = "hold_x" && command = "hold_s")
+;trigger1 = power >= 1000
+;value = 820
 
 ;---------------------------------------------------------------------------
 ; Air guard hit (knocked away)
@@ -2065,11 +2065,11 @@ type = ChangeState
 trigger1 = sysvar(0)
 value = 52
 
- [State 150, Counter Cancel]
-type = ChangeState
-triggerall = (command = "hold_x" && command = "hold_s")
-trigger1 = power >= 1000
-value = 820
+ ;[State 150, Counter Cancel]
+;type = ChangeState
+;triggerall = (command = "hold_x" && command = "hold_s")
+;trigger1 = power >= 1000
+;value = 820
 
 ;---------------------------------------------------------------------------
 ; Lose (time over)
