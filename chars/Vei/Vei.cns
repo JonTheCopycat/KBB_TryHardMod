@@ -2705,6 +2705,12 @@ persistent = 0
 
 [State 200, End]
 type = Changestate
+triggerall = root,command = "holdfwd"
+trigger1 = root,stateno = 401 || root,stateno = 621
+value = ifelse(pos y >= -15,415,406)
+
+[State 200, End]
+type = Changestate
 triggerall = root,command = "holdup"
 trigger1 = root,stateno = 401 || root,stateno = 621
 value = 415
@@ -2717,7 +2723,6 @@ value = ifelse(pos y >= -15,415, ifelse(pos y >= -50, 406, 417))
 
 [State 200, End]
 type = Changestate
-triggerall = root,command != "holdup" || root,command != "holddown"
 trigger1 = root,stateno = 401 || root,stateno = 621
 value = ifelse(pos y >= -15,415,406)
 
@@ -3325,7 +3330,7 @@ y = helper(405),pos y + 10
 
 [State 0, Turn]
 type = Turn
-triggerall = p2dist x < 0
+triggerall = p2dist x < -30
 trigger1 = AnimElem = 5
 
 [State 0, VelSet]
