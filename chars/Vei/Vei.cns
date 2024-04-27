@@ -1484,6 +1484,12 @@ trigger1 = AnimTime = 0
 value = 305
 ctrl = 0
 
+[State 200, 5BBB]
+type = ChangeState
+Triggerall = 1
+trigger1 = root,stateno = [5000, 5210]
+value = 39
+
 [State 200, End]
 type = DestroySelf
 trigger1 = AnimTime = 0
@@ -1567,6 +1573,12 @@ Triggerall = 1
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 301
+
+[State 200, 5BBB]
+type = ChangeState
+Triggerall = 1
+trigger1 = root,stateno = [5000, 5210]
+value = 39
 
 [State 200, End]
 type = DestroySelf
@@ -2616,7 +2628,7 @@ physics = N
 juggle  = 1
 ctrl = 0
 anim = 405
-sprpriority = -1
+sprpriority = 1
 
 [State 0, Helper Guarded]
 type = RootMapSet

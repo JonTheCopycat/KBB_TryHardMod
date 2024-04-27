@@ -23,6 +23,8 @@ Vei:
 1. Fixed Bug where clone could sometimes go through the ground
 2. Made it easier to spawn a forward facing portal.
 3. Fixed Bug where Vei would unnecessarily turn around after teleporting with 4c.
+4. Vei Clone will now dissappear out of idle if Vei gets hit.
+5. Potential Portal is now in the foreground and more visible.
 
 
 Violet:
