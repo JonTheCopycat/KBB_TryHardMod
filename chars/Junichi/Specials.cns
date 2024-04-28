@@ -1388,7 +1388,7 @@ value = 0
 [State 0, DP INVINCIBILLITY BABY]
 type = NotHitBy
 trigger1 = time = [0, 25] 
-value = SC,NA,SA,NP,SP,NT,ST
+value = SC
 time = 1
 
 [State 0, SuperPause]

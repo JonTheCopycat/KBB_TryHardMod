@@ -543,6 +543,7 @@ buffer.time = 1
 [State -1, Soft Fast Fall]
 type = VelSet
 triggerall = statetype = A
+triggerall = IsHelper = 0
 triggerall = command = "down" && movetype != H
 triggerall = vel y > -1 && vel y < 6
 triggerall = stateno != 900

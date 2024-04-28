@@ -1,5 +1,39 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.6.6 Patch 1 Changes:            /
+|---------------------------------------------------/
+
+ Patching out a few bugs.
+
+Jodie:
+1. 5bb last hit reverted to vanilla
+2. Fixed Bug where 236A could go through the ground
+
+
+Junichi:
+1. Backturned 2b removed upper early hitboxes.
+2. 214A No longer invul to aerial moves
+
+
+Saito:
+1. Removed Bug where 5aa could go through the ground.
+
+
+Vei:
+1. Fixed Bug where clone could sometimes go through the ground
+2. Made it easier to spawn a forward facing portal.
+3. Fixed Bug where Vei would unnecessarily turn around after teleporting with 4c.
+4. Vei Clone will now dissappear out of idle if Vei gets hit.
+5. Potential Portal is now in the foreground and more visible.
+
+
+Violet:
+1. Increased Startup of Wavedash B
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
 | Try-Hard Version 0.6.6 Changes:                    /
 |---------------------------------------------------/
 

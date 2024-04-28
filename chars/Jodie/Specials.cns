@@ -5,7 +5,7 @@
 ; Speed Blitz
 ;-------------------------------------------------------------------------------
 [Statedef 21000]
-type    = A
+type    = S
 movetype= A
 physics = S
 juggle  = 0

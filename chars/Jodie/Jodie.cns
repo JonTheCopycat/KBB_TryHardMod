@@ -1555,7 +1555,7 @@ Envshake.time = 5
 [State 200, 1]
 type = HitDef
 getpower = 0
-Triggerall = AnimElem = 7 ;AnimElem = 9
+Triggerall = AnimElem = 9
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
