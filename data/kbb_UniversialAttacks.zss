@@ -2338,46 +2338,6 @@ if Const(KBB_Playable) = 1 {
             ChangeState{value: 800; ctrl: 0}
         }
     }
-
-    #Guard Cancel
-    # if stateno = [130, 132] && ailevel = 0 && power >= 1000 {
-    #     if (command = "hold_x" && command = "hold_s"){
-    #         ChangeState{value:820}
-    #     }
-    # }
-
-    #Push Block Implementation
-    if (stateno = [130, 132] || stateno = [150, 155]) && ailevel = 0 && time = 0 {
-        MapSet{map: "pushed"; value: 0}
-    }
-
-    ignorehitpause if (stateno = [130, 132] || stateno = [150, 155]) && ailevel = 0 
-    && power >= 250 && map(pushed) = 0 {
-        if (command = "hold_x" && command = "hold_s"){
-            MapSet{map: "pushed"; value: 1}
-            PowerAdd{value:-250}
-            Explod {
-                anim: F13000;
-                ID: 13000;
-                pos: 0,-20;
-                postype: p1;
-                facing: 1;
-                vfacing: 1;
-                bindtime: 1;
-                removetime: -2;
-                pausemovetime: 60;
-                scale: 1.5,1.5;
-                sprpriority: 1;
-                ownpal: 1;
-                removeongethit: 0;
-            }
-            if time < 3 {
-                TargetVelSet{x:-6;id:enemy,p}
-            } else {
-                TargetVelSet{x:-4;id:GetHitVar(ID)}
-            }
-        }
-    }
 }
 #===============================================================================
 #Dont Mess With; Always Executed
