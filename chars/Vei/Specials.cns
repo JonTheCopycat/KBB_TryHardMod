@@ -1619,11 +1619,11 @@ y = 0
 [State 200, Hit]
 type = HitDef
 getpower = 0
-triggerall = root,map(juggle) < 100 || hitcount != 0
+triggerall = map(juggle) < 100 || hitcount != 0
 trigger1 = AnimElem = 3 || AnimElem = 9
 attr = A, NP
 animtype  = Heavy 
-damage    = 25
+damage    = 20
 Hitflag = MAFD
 guardflag = MAFD
 getpower = 0
@@ -1673,6 +1673,14 @@ juggle  = 1
 ctrl = 0
 anim = 24001
 sprpriority = 1
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 0
+persistent = 0
+
 
 [State 0, Busterable]
 type = MapSet
@@ -1733,10 +1741,11 @@ time = 1
 [State 200, Hit]
 type = HitDef
 getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
 trigger1 = AnimElem = 6 || AnimElem = 12 || AnimElem = 18
 attr = A, NP
 animtype  = Heavy 
-damage    = 15
+damage    = 10
 Hitflag = MAFD
 guardflag = MAF
 getpower = 0
