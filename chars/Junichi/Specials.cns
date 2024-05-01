@@ -2168,10 +2168,6 @@ trigger1 = AnimElem = 1
 v = 10
 value = 1
 
-[State 0, Turn]
-type = Turn
-trigger1 = p2dist x < 0 && time = 0
-
 [State 0, SuperPause]
 type = SuperPause
 triggerall = prevstateno != [23000, 23999]
@@ -2259,16 +2255,14 @@ value = 0
 type = ChangeState
 triggerall = power >= 200
 triggerall = time >= 10
-trigger1 = command = "a"
+trigger1 = command = "SPECIAL 1"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 23000
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = time >= 6
-trigger1 = command = "b" || command = "c"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 60 && p2bodydist y > -30
+trigger1 = AnimElem = 5
 value = 23052
 ctrl = 1
 
@@ -2760,15 +2754,14 @@ value = 1
 [State 200, End]
 type = ChangeState
 trigger1 = power >= 200
-trigger1 = time >= 8
-trigger1 = command = "a"
+trigger1 = time >= 5
+trigger1 = command = "SPECIAL 1"
 value = 23000
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = time >= 5
-trigger1 = command = "b" || command = "c"
+trigger1 = AnimElem = 4
 value = 23052
 ctrl = 1
 
