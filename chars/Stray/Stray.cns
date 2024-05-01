@@ -83,7 +83,7 @@ dhcAttackB = 24000 ;DHC Attack State when B+T is pressed
 dhcAttackC = 25000 ;DHC Attack State when C+T is pressed
 dhcMeterRequirementA = 1000 ;Meter Requirement for doing DHC A
 dhcMeterRequirementB = 1000 ;Meter Requirement for doing DHC B
-dhcMeterRequirementC = 1500 ;Meter Requirement for doing DHC C
+dhcMeterRequirementC = 2000 ;Meter Requirement for doing DHC C
 dhcAirA = 0 ;If DHC Attack A is aerial (1: Yes, 0: No)
 dhcAirB = 1 ;If DHC Attack B is aerial (1: Yes, 0: No)
 dhcAirC = 0 ;If DHC Attack C is aerial (1: Yes, 0: No)
@@ -4763,7 +4763,7 @@ x = 15
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = (1,13)
-x = ifelse(command = "holdfwd", 3, ifelse(command = "holdback", -3, 0))
+x = 3
 y = 1
 [State 0, Go up on hit if prevstateno wasn't overhead]
 type = Veladd
@@ -4776,7 +4776,7 @@ y = -.65
 type = VelSet
 triggerall = Prevstateno !=900 && hitcount !=5
 trigger1 = Time = (13,30)
-x = ifelse(command = "holdfwd", 2, ifelse(command = "holdback", -2, 0))
+x = 2
 y = -2
 
 
