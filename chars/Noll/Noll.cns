@@ -7044,13 +7044,6 @@ ctrl = 0
 anim = 402
 sprpriority = 3
 
-[State 0, Juggle Map]
-type = RootMapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 2
-persistent = 0
-
 [State 0, Helper Guarded]
 type = RootMapSet
 trigger1 = 1 
@@ -7187,7 +7180,6 @@ value = 1
 [State 310, 1]
 type = HitDef
 getpower = 0
-triggerall = root,map(juggle) < 100 || hitcount != 0
 trigger1 = anim = 402 && (map(guardCount) + hitcount) <= 6
 triggerall = AnimElem = 3 || AnimElem = 4 || AnimElem = 5 || AnimElem = 6 || AnimElem = 7 || AnimElem = 8
 trigger1 = 1
