@@ -909,6 +909,7 @@ ownpal = 1
 
 [State 0, Helper]
 type = Helper
+triggerall = movehit
 trigger1 = AnimElem = 12
 helpertype = normal ;player
 name = "C Air: 2"

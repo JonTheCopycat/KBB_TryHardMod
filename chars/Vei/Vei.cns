@@ -3737,12 +3737,13 @@ time = 10
 
 [State 0, Helper]
 type = Helper
+triggerall = numhelper(405) = 0
 trigger1 = AnimElem = 1
 helpertype = normal ;player
 name = "Glitch Bomb"
 ID = 405
 stateno = 485
-pos = 10,0
+pos = 20,0
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -3754,7 +3755,7 @@ inheritJuggle = 1
 [State 200, End]
 type = Changestate
 triggerall = time >= 8
-trigger1 = command != "hold_c"
+trigger1 = 1
 value = 481
 
 [State 1000, 6]
@@ -3868,7 +3869,7 @@ value = movehit
 [State 0 , VelSet]
 type = VelSet
 trigger1 = time = 0
-x = 2
+x = 6
 
 [State 0 , VelSet]
 type = VelSet
@@ -6084,7 +6085,7 @@ animtype  = Medium
 damage    = 30
 hitflag = MAFD
 guardflag = MA
-pausetime = 12,16
+pausetime = 12,12
 guard.pausetime = 10,4
 sparkno = 0
 guard.sparkno = 13000
