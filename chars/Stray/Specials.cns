@@ -1059,7 +1059,7 @@ ctrl = 0
 anim = 25000
 velset = 0,0
 sprpriority = 2
-poweradd = -2000
+poweradd = -1500
 
 [State 0, I'm gonna do an unblockable attack!]
 type = Explod

@@ -588,7 +588,7 @@ flag3=nostandguard
 type = VelSet
 triggerall = statetype = A && movetype != H
 triggerall = command = "down"
-triggerall = vel y > -1 && vel y < 6
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
 triggerall = stateno != 900 && stateno != 292
 trigger1 = 1
 y = 6
@@ -648,7 +648,7 @@ value = 25000
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 5"
 Triggerall = statetype != A
-Triggerall = power >= 2000
+Triggerall = power >= 1500
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;===========================================================================
