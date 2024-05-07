@@ -1,0 +1,133 @@
+;---------------------- Integer variable list ----------------------
+
+; var(0):= 1003 - Hard Knockdown - hit ground from fall, 1005 - Hard Knockdown - Lying Down, 40 - Jump Start, 45 - AirJump Start, 50 - Jump Up, 132 - Air guard (guarding), 155 - Air guard hit (knocked away), 5080 - Downed get-hit (shaking), 5081 - Downed get-hit (knocked back), 5100 - Downed get-hit (hit ground from fall), 5110 - Downed get-hit (lying down)
+; var(3):= 450 - Down C:, 955 - Custom Jump Cancel, -3, 45 - AirJump Start
+; var(4):= -3, 66 - Instant Airdash:
+;var(11):= 200 - A - 1, 210 - A - 2, 300 - B:, 310 - B - 2, 320 - B - 3, 410 - C - Start, 470 - Down C - Air Finisher:, 700 - Grab, 950 - Low Attack, 600 - A - Aire, 610 - B - Aire, 615 - Down + B Aire, 620 - C - Aire, -3, 50000 - Star Burst, 51000 - Star Burst Start, 54000 - Star Buster, 54500 - Star Buster off Block, 51001 - Star Burst ground dash proration cooldown, 51002 - Star Burst air dash proration cooldown, -3 - StarBurst Negative Statedef Stuff
+;var(19):= 22000 - Glitch Out CrossUp:, -3
+;var(20):= 460 - Down C - Air:, -3
+;var(29):= -3 - Dont mess with; Executed when in self state
+;var(30):= -3
+;var(31):= 615 - Down + B Aire, -3
+;var(41):= 620 - C - Aire, -3
+;var(42):= 21000 - Glitch Smash:
+;var(52):= -3
+
+;---------------------- Float variable list ----------------------
+
+; Constants and state file.
+; There are comments scattered through this file, so you may like to
+; take a look if would like to learn more about the cns.
+
+[Data]
+life = 1000			;Amount of life to start with
+power = 3000		;Amount of maximum power
+attack = 100		;attack power (more is stronger)
+defence = 100		;defensive power (more is stronger)
+fall.defence_up = 0	;Percentage to increase defense everytime player is knocked down
+liedown.time = 45		;Time which player lies down for, before getting up
+airjuggle = 30		;Number of points for juggling
+sparkno = 2			;Default hit spark number for HitDefs
+guard.sparkno = 13000	;Default guard spark number
+KO.echo = 0			;1 to enable echo on KO
+volume = 0			;Volume offset (negative for softer)
+IntPersistIndex = 52	;Variables with this index and above will not have their values
+FloatPersistIndex = 40  ;reset to 0 between rounds or matches. There are 60 int variables,
+  				;indexed from 0 to 59, and 40 float variables, indexed from 0 to 39.
+  				;If omitted, then it defaults to 60 and 40 for integer and float
+  				;variables repectively, meaning that none are persistent, i.e. all
+  				;are reset. If you want your variables to persist between matches,
+  				;you need to override state 5900 from common1.cns.
+
+
+[Size]
+xscale = 1			;Horizontal scaling factor.
+yscale = 1			;Vertical scaling factor.
+ground.back = 15		;Player width (back, ground)
+ground.front = 16		;Player width (front, ground)
+air.back = 15		;Player width (back, air)
+air.front = 16		;Player width (front, air)
+height = 35			;Height of player (for opponent to jump over)
+attack.dist = 160		;Default attack distance
+proj.attack.dist = 90	;Default attack distance for projectiles
+proj.doscale = 0		;Set to 1 to scale projectiles too   
+head.pos = 0, -35	;Approximate position of head
+mid.pos = 0, -16		;Approximate position of midsection
+shadowoffset = 0		;Number of pixels to vertically offset the shadow
+draw.offset = 0,0		;Player drawing offset in pixels (x, y)
+
+[Velocity]
+walk.fwd  = 2.4		;Walk forward
+walk.back = -2.2		;Walk backward
+run.fwd  = 4.6, 0		;Run forward (x, y)
+run.back = -4.5,-3.8	;Hop backward (x, y)
+jump.neu = 0,-8.4		;Neutral jumping velocity (x, y)
+jump.back = -2.55		;Jump back Speed (x, y)
+jump.fwd = 2.5		;Jump forward Speed (x, y)
+runjump.back = -2.55,-8.1;Running jump speeds (opt)
+runjump.fwd = 4,-8.1	;.
+airjump.neu = 0,-8.1	;.
+airjump.back = -2.55	;Air jump speeds (opt)
+airjump.fwd = 2.5		;.
+
+[Movement]
+airjump.num = 1		;Number of air jumps allowed (opt)
+airjump.height = 35	;Minimum distance from ground before you can air jump (opt)
+yaccel = .44		;Vertical acceleration
+stand.friction = .85	;Friction coefficient when standing
+crouch.friction = .82	;Friction coefficient when crouching
+
+[Constants]
+KBB_Playable = 1 ;Allows characters to use KBB Exclusive States. (Star Burst, Wall Bounce, Instant Block, etc)
+DHC = 1 ;turn DHC off/on. Press T + A/B/C at the same time to get it.
+dhcAttackA = 23000 ;DHC Attack State when A+T is pressed
+dhcAttackB = 21000 ;DHC Attack State when B+T is pressed
+dhcAttackC = 24000 ;DHC Attack State when C+T is pressed
+dhcMeterRequirementA = 1000 ;Meter Requirement for doing DHC A
+dhcMeterRequirementB = 500 ;Meter Requirement for doing DHC B
+dhcMeterRequirementC = 1500 ;Meter Requirement for doing DHC C
+dhcAirA = 0 ;If DHC Attack A is aerial (1: Yes, 0: No)
+dhcAirB = 1 ;If DHC Attack B is aerial (1: Yes, 0: No)
+dhcAirC = 0 ;If DHC Attack C is aerial (1: Yes, 0: No)
+
+[Map]
+hitOverride = 0 ; Used to determine if the character is in a hitOverride state
+busterable = 0 ;Used to determine if the character's attacks can't be starbustered
+fatal = 0 ;Used to determine if the counter is using an attack with extra counter hit effects
+initialDefence = 1 ;Used to determine the character's initial defense
+defence = 0;Used to modify the character's defense during gameplay
+guardCount = 0 ;Used to determine how many hits of an attack was blocked. (on-block counterpart to hitcount)
+helperGuarded = 0 ;Used to determine if a helper's attack was guarded.
+helperHit = 0 ;Used to determine if a helper's attack hit successfully.
+roundCount = 0 ;GLITCH EXCLUSIVE - Keeps track of how many rounds Glitch has won.
+lowAttack = 0 ;Used to check if the attack is a low attack. Used for training mode, the dummy checks if it should block low or not.
+juggle = 0 ; Used in place of the built in juggle system
+staleMovesException = 0 ; Used to cancel the effect of stale moves on a state
+reversalMove = 0 ;Used to check if the move is an invincible-on-startup super move or counters
+
+tagProration = 0 ; Used to keep track of proration in tag mode
+tagSwitch = ; Used to keep track of if a character tagged during a combo in tag mode
+tagStarburst = ; Used if someone in a tag party activates starburst
+enableDHC = 0; used to enable DHC in tag mode. 0 disables DHC, 1 enables DHC.
+disableTag = 0 ; Disables tagging when this map is set to 1
+
+burn = 0 ; Tracks how many burn stacks this character has (Inflicted by Jay)
+
+
+;---------------------------------------------------------------------------
+; Format:
+; [Statedef STATENO]
+; type = ?      S/C/A/L  stand/crouch/air/liedown
+; movetype = ?  I/A/H    idle/attack/gethit
+; physics = ?   S/C/A/N  stand/crouch/air/none
+; juggle = ?             air juggle points move requires
+;
+; [State STATENO, ?]     ? - any number you choose
+; type = ?
+; ...
+
+[Quotes]
+victory0 = "Drop dead."
+victory1 = "What a waste of time."
+victory2 = "imagine reading these"
+;---------------------------------------------------------------------------

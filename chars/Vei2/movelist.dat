@@ -1,0 +1,64 @@
+<#f0f000>:Passive Abillity:</>
+Vei's Command Dash is replaced by him spawning
+his clone to dash at the opponent. It is repeatable
+and jump cancellable at any time.
+
+<#f0f000>:UNIQUE NORMALS:</>
+^B_B^B
+^B_D^B
+
+<#f0f000>:COMMAND DASH CANCELS:</>
+^A_F_D_DF (Late on Block)
+^A^A_F_D_DF
+
+<#f0f000>:COMMAND DASH ATTACKS:</>
+
+Clone Slide Kick							_F_D_DF^A
+	"Vei's clone does a slide kick, and can
+	follow it up."
+
+Clone Divekick								_F_D_DF^B
+	"Vei's clone jumps up and divekicks the
+	opponent"
+
+Clone Flurry (1/4 Bar)						_F_D_DF^C
+	"Vei's clone does a flurry of kicks"
+
+
+<#f0f000>:EX ATTACKS!:</>
+
+Portal Set (1/2 Bar, _AIR OK)						^C
+	"Vei Spawns a portal somewhere in front of him."
+
+Portal Traverse (_AIR OK)						_B^C
+	"Vei Uses a portal to travel to the any existing portal."
+
+Flame Portal (1/2 Bar)							_D^C
+	"Vei Spawns a portal full of flames under
+	the opponent. Can be held to go further.
+	Spawns a face-up portal."
+	
+Cloaked Saw (1/5 Bar, _AIR OK)					_AIR_D^C
+	"Spins his cloak and drags the opponent
+	against the ground."
+	
+The Air Clone Kicks - (_D^B Follow Up)			_AIR_D^C
+	"Vei sends a clone with a flurry of kicks."
+
+<#f0f000>:STAR STRIKES!:</>
+
+Clone Assists (1/2 Bar)								_D_DF_F^A
+	"Vei punches the opponent twice, and creates
+	a clone that continues punching the opponent."
+
+Triple Projectile Portal (1 1/2 Bar)				_D_DB_B^A
+	"Vei spawns a portal that shoots three
+	projectiles after some time."
+	
+Boosted Cloaked Saw (1 1/2 Bar, _AIR OK)			_D_DB_B^B
+	"Jumps up and spins his cloak, and a clone
+	drags them back down."
+	
+"It's a cloak, not a scarf" (1 1/2 Bar)				_D_DF_F^C
+	"Vei viciously attacks the opponent with his
+	cloak before slashing them."

@@ -1,0 +1,1615 @@
+[Function SpawnClone(cloneState, posX, posY)]
+Helper{
+	helpertype: normal;
+	name: "Vei Clone";
+	ID: 31;
+	stateno: $cloneState;
+	pos: $posX,$posY;
+	postype: p1;
+	facing: 1;
+	keyctrl: 1;
+	ownpal: 1;
+	supermovetime: 0;
+	pausemovetime: 0;
+	inheritJuggle: 1;
+}
+
+[Function CloneSetup(juggle, proration)]
+ignorehitpause {
+	if movehit = 1 && parent,map(helperHit) = 0 {
+		parent,var(11) := parent,var(11) + $proration;
+		if enemy, gethitvar(fall) {
+			rootMapAdd{map: "juggle"; value: $juggle; }
+		}
+	}
+
+	AttackMulSet{value: 1 * 0.99**root,var(11);  }
+}
+rootMapSet{map: "helperGuarded"; value: moveguarded; }
+rootMapSet{map: "helperHit"; value: movehit; }
+
+# Lose by  Time Over
+# ZSS DIFFICULTY CRAZY MODE
+[Statedef 170; type: S; anim: 170; velset: 0,0;]
+
+NotHitBy{value: SCA; time: 1;} 
+
+#----------------------------------------------------------------------
+#Win state decider
+# ZSS DIFFICULTY CRAZY GOD MODE
+[Statedef 180; type: S;]
+
+if Time = 0 {
+	ChangeState{value: 181;}
+}
+#---------------------------------------------#
+#Win pose 1
+#CNS difficulty: basic
+
+[Statedef 181; type: S; ctrl: 0; anim: 180; velset: 0,0;]
+
+if AnimElem = 1 {
+	PlaySnd{value: S200, 26; volumescale: 200;}
+}
+persistent(0) if Win && time = 1 {
+	Mapadd{map: "roundcount"; value: 1; }
+}
+NotHitBy{value: SCA; time: 1;} 
+
+#--------------------------------------------------------------------																																																																																																																																																																																																																																																																																																																																										#
+#Intro
+[Statedef 190; type: S; ctrl: 0; anim: 190; velset: 0,0; ]
+
+if  AnimElem = 6 {
+	PlaySnd{value: S200, 27; volumescale: 200;}
+}
+AssertSpecial{flag: Intro;}
+
+if AiLevel = 0 && TeamLeader = playerno && Animtime = 0{ 
+	ChangeState{value: 195;}	
+}
+if (AiLEVel > 0 || Teamleader != playerno) && Animtime = 0 {
+	Changestate{value: 0;}
+}
+
+# Pallate Section
+[Statedef 195; type: S; ctrl: 0; anim: 0; velset: 0,0; movetype: I; Physics: S; Sprpriority: 2; ] 
+
+if command = "hold_a" {
+	Playsnd{value: F100, 1; volumescale: 999; }
+	Playsnd{value: F100, 1; volumescale: 999; }
+	Playsnd{value: F100, 1; volumescale: 999; }
+}
+if facing = 1 && numexplod(516) = 0 {
+	Explod{
+		anim: F516;
+		ID: 516;
+		pos: -40,0;
+		postype: p1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: 1;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -1;
+		pausemovetime: 0;
+		scale: .5,.5;
+		sprpriority: 0;
+		ontop: 1;
+		shadow: 0,0,0;
+		ownpal: 1;
+		removeongethit: 0;
+	}
+}
+if facing = -1 && numexplod(516) = 0 {
+	Explod{
+		anim: F516;
+		ID: 516;
+		pos: -40,0;
+		postype: p1;
+		facing: -1;
+		vfacing: 1;
+		bindtime: 1;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -1;
+		pausemovetime: 0;
+		scale: .5,.5;
+		sprpriority: 0;
+		ontop: 1;
+		shadow: 0,0,0;
+		ownpal: 1;
+		removeongethit: 0;
+	}
+}
+if command = "hold_a" {
+	RemoveExplod{id: 516; }
+	ChangeState{value: 0; }
+}	
+AssertSpecial{flag: Intro; }
+
+# A - 1----------------------------------------------------------------------
+[Statedef 200; type: S; movetype: A; physics: S; juggle: 1; ctrl: 0; anim: 200; poweradd: 0; sprpriority: 2; ]
+
+Attackdist{value: 50; }
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+	Mapadd{map: "juggle"; value: 5 }
+}
+
+ignorehitpause persistent(0) if movehit {
+	var(11) := var(11) + 5;
+}
+
+if random < 600 && animElem = 1 {
+	Playsnd{value: S200,0+(random<500)*1+(random<500)*1+(random<500)*1; volumescale: 200; channel: 0; }
+}
+
+if numhelper(51000) = 0 && numhelper(55000) = 0 && numhelper(56000) = 0
+&& movecontact = 1 {
+	PowerAdd{value: 75}
+}
+
+if Animelem = 1 {
+	PlaySnd{value: S1,1; volumescale: 50; }
+}
+
+if animelem = 2 {
+	VelSet{x: 3; }
+}
+
+ignorehitpause if movecontact {
+	Explod{
+		anim: 40000;
+		ID: 40000;
+		pos: -10,-100;
+		postype: p1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: -2;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -2;
+		pausemovetime: 0;
+		scale: 1,1;
+		sprpriority: 0;
+		ontop: 0;
+		shadow: 0,0,0;
+		ownpal: 1;
+		removeongethit: 1;
+	}
+}
+
+if !movecontact && (map(juggle) < 100 || hitcount != 0) {
+	HitDef{
+		getpower: 0;
+		attr: S, NA;
+		animtype: Light;
+		damage: 10;
+		hitflag: MAF;
+		guardflag: M;
+		pausetime: 10,10;
+		sparkno: 0;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,1;
+		guardsound: 6,10;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 10 + ifelse(enemy, movetype = A, 7,0) ;
+		ground.velocity: -2.5;
+		air.velocity: -3,-1;
+		Fall: 0;
+		Fall.recovertime: 60 + ifelse(enemy, movetype = A, 7,0) ;
+		guard.cornerpush.veloff: -5;
+		airguard.cornerpush.veloff: -4; 
+	}
+}
+
+if command = "WD" && command != "NotWD" 
+&& (movehit || (movecontact && AnimTime > -7)) {
+	ChangeState{value: 30; ctrl: 1;}
+}
+	
+if command = "holddown" && command = "a" && movecontact {
+	ChangeState{value: 950; }
+}
+
+if command = "a" && movecontact {
+	ChangeState{value: 210; }
+}
+
+if movecontact && (command = "b" || roundstate = 2 && ailevel > 0 && random < (ailevel * 100)) {
+	ChangeState{value: 300; }
+}
+
+if movecontact && power >= 250 && numhelper(3500) = 0 && numhelper(420) = 0
+&& (command = "holddown" && command = "c") {
+	ChangeState{value: 480; }
+}
+
+if movecontact && numhelper(3500) = 0 && numhelper(405) != 0
+&& (command = "holdback" && command = "c") {
+	ChangeState{value: 450; }
+}
+
+if movecontact && power >= 250 && numhelper(3500) = 0
+&& (command = "c") {
+	ChangeState{value: 400; }
+}
+
+if AnimTime = 0 {
+	ChangeState{value: 0; ctrl: 1; }
+}
+
+#------------------------------------------------------------------------
+# A- 2
+[Statedef 210; type: S; movetype: A; physics: S; juggle: 1; ctrl: 0; 
+anim: 210; poweradd: 0; sprpriority: 2; ]
+
+persistent(0)if movehit && enemy, gethitvar(fall) {
+	Mapadd{map: "juggle"; value: 5; }
+}
+
+if random < 600 && AnimElem = 1 {
+	PlaySnd{value: S200,0+(random<500)*1+(random<500)*1+(random<500)*1; volumescale: 200; channel: 0; }
+}
+
+ignorehitpause persistent(0)if movehit {
+	var(11) := var(11) + 3;
+}
+
+if numhelper(51000) = 0 && numhelper(55000) = 0 && numhelper(56000) = 0
+&& movecontact = 1 {
+	PowerAdd{value: 75}
+}
+
+if Animelem = 1 {
+	PlaySnd{value: S1,2; volumescale: 50}
+}
+
+if animelem = 2 {
+	PosAdd{x: 8; }
+	Velset{x: 4; }
+}
+
+ignorehitpause if movecontact {
+	Explod{
+		anim: 40000;
+		ID: 40000;
+		pos: -10,-100;
+		postype: p1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: -2;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -2;
+		pausemovetime: 0;
+		scale: 1,1;
+		sprpriority: 0;
+		ontop: 0;
+		shadow: 0,0,0;
+		ownpal: 1;
+		removeongethit: 1;
+	}
+}
+
+if !movecontact && (map(juggle) < 100 || hitcount != 0) {
+	HitDef{
+		getpower: 0;
+		attr: S, NA;
+		animtype: Light;
+		damage: 15;
+		hitflag: MAF;
+		guardflag: MAF;
+		pausetime: 8,8;
+		sparkno: 0;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,3;
+		guardsound: 6,11;
+		ground.type: High;
+		ground.slidetime: 10;
+		ground.hittime: 12 + ifelse(enemy, movetype = A, 7,0) ;
+		ground.velocity: -2,-2.5;
+		air.velocity: -2,-2;
+		Fall: 0;
+		Envshake.time: 10;
+		Fall.recovertime: 20;
+		guard.cornerpush.veloff: -7;
+		airguard.cornerpush.veloff: -7; 
+	}
+}
+
+if command = "WD" && command != "NotWD" && prevstateno != 290 
+&& (movehit || (movecontact && AnimTime > -7)) {
+	ChangeState{value: 30; ctrl: 1;}
+}
+	
+if movecontact && (command = "b") ||  (roundstate = 2 && ailevel > 0 && random < (ailevel * 100)) {
+	ChangeState{value: ifelse(prevstateno = 300, 320, 300 ); }
+}
+
+if movecontact && power >= 250 && numhelper(3500) = 0 && numhelper(420) = 0
+&& (command = "holddown" && command = "c") {
+	ChangeState{value: 480; }
+}
+
+if movecontact && numhelper(3500) = 0 && numhelper(405) != 0
+&& (command = "holdback" && command = "c") {
+	ChangeState{value: 450; }
+}
+
+if movecontact && power >= 250 && numhelper(3500) = 0
+&& (command = "c") {
+	ChangeState{value: 400; }
+}
+
+if AnimTime = 0 {
+	ChangeState{value: 0; ctrl: 1; }
+}
+
+#--------------------------------------------------------------------
+# WAVEDASH A
+[Statedef 290; type: S; movetype: A; physics: S; juggle: 1; ctrl: 0; 
+anim: 290; velset: 2.5,0; sprpriority: 1; ]
+
+
+
+if AnimElem = 1 {
+	Afterimage{time: 10; }
+
+	if numhelper(31) = 0 {
+		call SpawnClone(31, 20, 0);
+		# Helper{
+		# 	helpertype: normal;
+		# 	name: "Vei Clone";
+		# 	ID: 31;
+		# 	stateno: 31;
+		# 	pos: 20,0;
+		# 	postype: p1;
+		# 	facing: 1;
+		# 	keyctrl: 1;
+		# 	ownpal: 1;
+		# 	supermovetime: 0;
+		# 	pausemovetime: 0;
+		# 	inheritJuggle: 1;
+		# }
+	}
+} else if AnimElem = 2 {
+	PlaySnd{value: S0,6; volumescale: 100; }
+
+	if numhelper(31) = 0 {
+		PlaySnd{value: S1,3; volumescale: 50; }
+		PlaySnd{value: S0,6; volumescale: 100; }
+	}
+}
+
+if time >= 5 && helper(31) , movecontact >= 2 && (command = "holdup") {
+	ChangeState{value: 60; ctrl: 0; }
+}
+if helper(31) , movecontact >= 2 && (command = "a") || (roundstate = 2 && ailevel > 0 && random < (ailevel * 100)) {
+	ChangeState{value: 290; }
+}
+if helper(31) , movecontact >= 2 && (command = "b") {
+	ChangeState{value: ifelse(prevstateno = 300, 310, 300); }
+}
+if helper(31), movecontact >= 2 && power >= 250 && numhelper(3500) = 0 && numhelper(420) = 0
+&& (command = "holddown" && command = "c") {
+	ChangeState{value: 480; }
+}
+if helper(31), movecontact >= 2 && numhelper(3500) = 0 && numhelper(405) != 0
+&& (command = "holdback" && command = "c") {
+	ChangeState{value: 450; }
+}
+if helper(31), movecontact >= 2 && power >= 250 && numhelper(3500) = 0
+&& (command = "c") {
+	ChangeState{value: 400; }
+}
+if ((time >= 15 ) || numhelper(31) = 0) || helper(31), stateno = 39 {
+	ChangeState{value: 0; ctrl: 1; }
+}
+
+#-------------------------------------------------------------------------
+#Low Attack Clone
+[Statedef 291; type: C; movetype: A; physics: C; ctrl: 0;
+anim: 291; poweradd: 0; velset: 0,0; sprpriority: 2; ]
+
+persistent(0)if movehit && enemy, gethitvar(fall) {
+	rootMapAdd{map: "juggle"; value: 5; }
+}
+
+Attackdist{value: 60; }
+PlayerPush{value: 1;}
+
+rootMapSet{map: "helperGuarded"; value: moveguarded; }
+
+rootMapSet{map: "helperHit"; value: movehit; }
+
+ignorehitpause {
+	AttackMulSet{value: 1 * 0.99**root,var(11);  }
+}
+
+ignorehitpause persistent(0)if movehit {
+	parent,var(11) := var(11) = 5;
+}
+
+if random < 600 && AnimElem = 1 {
+	Playsnd{value: S200,0+(random<500)*1+(random<500)*1+(random<500)*1; volumescale: 200; }
+}
+if prevstateno = 31 && time = 0 {
+	ChangeAnim2{value: 291; elem: 2; }
+}
+if numhelper(51000) = 0 && numhelper(55000) = 0 && numhelper(56000) = 0 && movecontact = 1 {
+	PowerAdd{value: 100; }
+}
+if AnimElem = 1 {
+	Playsnd{value: S1,1; volumescale: 50; }
+}
+if time = [8, 12] {
+	VelSet{x: 8}
+}
+if AnimElem = 7 {
+	PosAdd{x: 6;}
+	Velset{x: 2;}
+}
+NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT; time: 1}
+
+if root,(map(juggle) < 100 || hitcount != 0)  && ANimElem = 2 {
+	HitDef{
+		getpower: 0;
+		attr: C, NA;
+		animtype: Medium;
+		damage: 10;
+		hitflag: MAFD;
+		guardflag: MA;
+		pausetime: 8,8;
+		guard.pausetime: 8,8;
+		sparkno: 0;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,1;
+		guardsound: 6,11;
+		ground.type: Low;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy, movetype = A, 7,0) ;
+		ground.velocity: -2,-2;
+		air.velocity: -2,-2;
+		Fall: 0;
+		Fall.recovertime: 20;
+		guard.cornerpush.veloff: -10;
+		airguard.cornerpush.veloff: -10; 
+	}
+}
+if movecontact && (command = "a") || (roundstate = 2 && ailevel > 0 && random < (ailevel * 100)) {
+	ChangeState{value: 292; }
+}
+if movecontact && (command = "b") || (roundstate = 2 && ailevel > 0 && random < (ailevel * 100)) {
+	ChangeState{value: 301; }
+}
+if AnimTime = 0 {
+	Destroyself{}
+}
+
+#---------------------------------------------------------------
+#Clone A - 2
+[Statedef 292; type: S; movetype: A; physics: S; juggle: 1; ctrl: 0;
+anim: 211; poweradd: 0; sprpriority: 2; ]
+
+persistent(0)if movehit && enemy, gethitvar(fall) {
+	rootMapAdd{map: "juggle"; value: 5; }
+}
+PlayerPush{value: 1; }
+
+rootMapSet{map: "helperGuarded"; value: moveguarded; }
+
+rootMapSet{map: "helperHit"; value: movehit; }
+
+ignorehitpause {
+	AttackMulSet{value: 1 * 0.99**root,var(11);  }
+}
+
+ignorehitpause persistent(0)if movehit {
+	parent,var(11) := var(11) = 3;
+}
+if numhelper(51000) = 0 && numhelper(55000) = 0 && numhelper(56000) = 0 && movecontact = 1 {
+	PowerAdd{value: 100; }
+}
+
+if AnimElem = 1 {
+	PlaySnd{value: S1, 2; volumescale: 50; }
+}
+if AnimElem = 2 {
+	PosAdd{x: 8;}
+	Velset{x: 4;}
+}
+NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT; time: 1}
+
+ignorehitpause if movecontact {
+	Explod{
+		anim: 40000;
+		ID: 40000;
+		pos: -10, -100;
+		postype: p1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: -2;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -2;
+		pausemovetime: 0;
+		scale: 1,1;
+		sprpriority: 0;
+		ontop: 0;
+		shadow: 0,0,0;
+		ownpal: 1;
+		removeongethit: 1;
+	}
+}
+if !movecontact && root,(map(juggle) < 100 || hitcount != 0) {
+	HitDef{
+		getpower: 0;
+		attr: S, NA;
+		animtype: Light;
+		damage: 15;
+		hitflag: MAF;
+		guardflag: MAF;
+		pausetime: 8,8;
+		guard.pausetime: 0, 1;
+		sparkno: 0;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,3;
+		guardsound: 6,11;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy, movetype = A, 7,0) ;
+		ground.velocity: -3.5,-2.5;
+		air.velocity: -3.5,-2;
+		Fall: 0;
+		Envshake.time: 10;
+		Fall.recovertime: 20;
+		guard.cornerpush.veloff: -7;
+		airguard.cornerpush.veloff: -7;
+	}
+}
+if movecontact && (command = "b") || roundstate = 2 && ailevel > 0 && random < (ailevel * 100) {
+	ChangeState{value: ifelse(prevstateno = 301, 311, 301); }
+}
+
+if animtime = 0 {
+	Destroyself{}
+}
+
+#----------------------------------------------------------
+# B - 1 Spawn
+[Statedef 300; type: S; movetype: A; physics: S; juggle: 1; ctrl: 0; 
+anim: 300; velset: -2,0; sprpriority: 1; ]
+
+if numhelper(301) = 0 && AnimElem = 2 {
+	PlaySnd{value: S1,3; volumescale: 50; }
+	Playsnd{value: S0,6; volumescale: 100;}
+}
+if AnimElem = 1 {
+	Afterimage{time: 10; }
+}
+if (helper(31), movecontact = 1) && numhelper(51000) = 0 && numhelper(55000) = 0 && numhelper(56000) = 0 && movecontact = 1 {
+	PowerAdd{value: 100; }
+}
+if numhelper(31) = 0 && AnimElem = 2 {
+	call SpawnClone(301, 25, 0);
+}
+if helper(31), stateno = 292 {
+	Changestate{value: 290; }
+}
+else if helper(31), stateno = 911 {
+	Changestate{value: 390; }
+}
+else if helper(31), stateno = 321 {
+	Changestate{value: 320; }
+}
+else if helper(31), stateno = 311 {
+	Changestate{value: 310; }
+}
+if helper(31), movecontact && power >= 250 && numhelper(3500) = 0 && numhelper(420) = 0
+&& (command = "holddown" && command = "c") {
+	ChangeState{value: 480; }
+}
+if helper(31), movecontact && power >= 250 && numhelper(3500) = 0 && numhelper(405) != 0
+&& (command = "holdback" && command = "c") {
+	ChangeState{value: 450; }
+}
+if helper(31), movecontact && power >= 250 && numhelper(3500) = 0
+&& (command = "c") {
+	ChangeState{value: 400; }
+}
+if ((time >= 10 ) && ((numhelper(31) = 0) || helper(31), stateno != 301)
+|| helper(31), stateno = 39) {
+	ChangeState{value: 0; ctrl: 1; }
+}
+
+#---------------------------------------------------------
+#b-1 clone
+[Statedef 301; type: S; MoveType: A; physics: N; ctrl: 0;
+anim: 301; poweradd: 0; velset: 0,0; sprpriority: 2; ]
+
+if prevstateno = 305 && time = 0 {
+	ChangeAnim{value: 302; elem: 1; }
+}
+
+AttackDist{value: 40; }
+PlayerPush{value: 1; }
+call CloneSetup(5, 3);
+
+# persistent(0) if movehit && enemy, gethitvar(fall) {
+# 	rootMapAdd{map: "juggle"; value: 5; }
+# }
+
+
+# rootMapSet{map: "helperGuarded"; value: moveguarded; }
+
+# rootMapSet{map: "helperHit"; value: movehit; }
+
+# ignorehitpause {
+# 	AttackMulSet{value: 1 * 0.99**root,var(11);  }
+# }
+
+# ignorehitpause persistent(0)if movehit {
+# 	parent,var(11) := var(11) = 3;
+# }
+
+if AnimElem = 1 {
+	PlaySnd{value: S1,1; volumescale: 50; }
+	Velset{x: -1; }
+}
+if AnimElem = 2 {
+	PosAdd{x: 10; }
+	Velset{x: 10; }
+}
+if time >= 5 {
+	Velset{x: ifelse(vel x - 0.22 >= 0, vel x - 0.22, 0)}
+}
+if movecontact = 1 {
+	Velset{x: 2; }
+}
+if AnimElem = 7 {
+	Velset{x: 1; }
+}
+if AnimElem = 5 {
+	StateTypeSet{movetype: I; physics: S; }
+}
+NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT; }
+HitOverride{attr: SCA, AA, AP, AT; slot: 1; stateno: 39; time: 2; forceair: 0; }
+
+if !movecontact && (root,map(juggle) < 100 || hitcount != 0) {
+	HitDef{
+		getpower: 0;
+		attr: C, NA;
+		animtype: Medium;
+		damage: 15;
+		hitflag: MAFD;
+		guardflag: MA;
+		pausetime: 10,10;
+		guard.pausetime: 10, 4;
+		sparkno: 0;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,1;
+		guardsound: 6,11;
+		ground.type: Low;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy, movetype = A, 7,0) ;
+		guard.hittime: 12;
+		ground.velocity: -2,-3;
+		air.velocity: -2,-3;
+		down.velocity: -2,-3;
+		Fall: 0;
+		Fall.recovertime: 25;
+		guard.cornerpush.veloff: -10;
+		airguard.cornerpush.veloff: -10;
+	}
+}
+
+if (movecontact || time >= 16) && ((command = "holddown" && command = "b") || roundstate = 2 && ailevel > 0 && random < (ailevel * 100)) {
+	Changestate{value: 911; }
+}
+if (movecontact || time >= 16) && ((command = "holdback" && command = "b") || roundstate = 2 && ailevel > 0 && random < (ailevel * 100)) {
+	Changestate{value: 321; }
+}
+if (movecontact || time >= 16) && ((command = "b") || roundstate = 2 && ailevel > 0 && random < (ailevel * 100)) {
+	Changestate{value: 311; }
+}
+if animTime = 0 {
+	ChangeState{value: 305; ctrl: 0; }
+}
+
+if prevstateno != 305 && AnimTime = 0 {
+	ChangeState{value: 305; ctrl: 0; }
+}
+if root, stateno = [5000, 5210] {
+	Changestate{value: 39; }
+}
+
+if AnimTime = 0 {
+	Destroyself{}
+}
+
+#--------------------------------------------------------------------------
+#clone idle
+[Statedef 305; type: S; movetype: I; physics: N; ctrl: 0; 
+anim: 305; poweradd: 0; velset: 0,0; sprpriority: 2; ]
+
+persistent(0)if movehit && enemy, gethitvar(fall) {
+	rootMapAdd{map: "juggle"; value: 5; }
+}
+PlayerPush{value: 0; }
+
+ignorehitpause {
+	AttackMulSet{value: 1 * 0.99**root,var(11);  }
+}
+if AnimElem = 1 {
+	if random < 600 {
+		PlaySnd{value: S200,0+(random<500)*1+(random<500)*1+(random<500)*1; volumescale: 200; }
+	}
+	Playsnd{value: S1,1; volumescale: 50; }
+}
+NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT; time: 1; }
+hitOverride{attr: SCA, AA, AP, AT; slot: 0; stateno: 39; time: 2; forceair: 0; }
+
+if !movecontact && root,(map(juggle) < 100 || hitcount != 0) {
+	HitDef{
+		getpower: 0;
+		attr: C, NA;
+		animtype: Medium;
+		damage: 15;
+		hitflag: MAFD;
+		guardflag: MA;
+		pausetime: 10,10;
+		guard.pausetime: 10, 4;
+		sparkno: 0;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,1;
+		guardsound: 6,11;
+		ground.type: Low;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy, movetype = A, 7,0) ;
+		guard.hittime: 12;
+		ground.velocity: -2,-3;
+		air.velocity: -2,-3;
+		down.velocity: -2,-3;
+		Fall: 0;
+		Fall.recovertime: 25;
+		guard.cornerpush.veloff: -10;
+		airguard.cornerpush.veloff: -10;
+	}
+}
+
+if p2dist x > 0 && (command = "WD") {
+	Changestate{value: 31; }
+}
+
+if ((command = "holddown" && command = "b") || (roundstate = 2 && ailevel > 0 && random < (ailevel * 100))) {
+	Changestate{value: 911; }
+}
+if ((command = "holdback" && command = "b") || (roundstate = 2 && ailevel > 0 && random < (ailevel * 100))) {
+	Changestate{value: 321; }
+}
+if (command = "b" || (roundstate = 2 && ailevel > 0 && random < (ailevel * 100))) {
+	Changestate{value: 301; }
+}
+
+if Animtime = 0 {
+	Destroyself{}
+}
+
+#---------------------------------------------------------
+# B-2:
+[Statedef 310; type: S; MoveType: A; physics: S; juggle: 1; ctrl: 0;
+anim: 310; sprpriority: 1; ]
+
+persistent(0) if numhelper(51000) = 0 
+&& numhelper(55000) = 0 
+&& numhelper(56000) = 0
+&& helper(31),movecontact = 1 {
+	PowerAdd{value: 50; }
+}
+
+VelSet{x: 2.8; }
+
+if AnimElem = 1 {
+	AfterImage{time: 10; }
+
+	if numhelper(31) = 0 {
+		call SpawnClone(311, 10, 0);
+	}
+} else if AnimElem = 2 {
+	if numhelper(31) = 0 {
+		PlaySnd{value: S1, 0; volumescale: 500; }
+	}
+}
+
+if helper(31),movehit >= 2 && command = "holdup" {
+	ChangeState{value: 40; ctrl: 0; }
+}
+
+if time >= 10 && (numhelper(31) = 0 || helper(31),stateno = 39) {
+	ChangeState{value: 0; ctrl: 1; }
+}
+
+# Clone B - 2
+#-------------------------------------------------------------------------------
+[Statedef 311; type: A; movetype: A; physics: S; juggle: 1; ctrl: 0; 
+anim: 311; poweradd: 0; velset: 3, 0; sprpriority: 2; ]
+
+call CloneSetup(5, 5);
+
+HitOverride{
+	attr: SCA, AA, AP, AT;
+	slot: 0;
+	stateno: 39;
+	time: 2;
+	forceair: 0;
+}
+
+if AnimElem = 1 {
+	if random < 600 {
+		PlaySnd{
+			value: S200,0+(random<500)*1+(random<500)*1+(random<500)*1;
+			volumescale: 200;
+			channel: 0;
+		}
+	}
+	PlaySnd{value: S1, 0; volumescale: 50;}
+	PosSet{y: 0}
+	VelSet{x: 3}
+} else if Animelem = 3 {
+	VelSet{x: 1}
+}
+
+if (root,map(juggle) < 100 || hitcount != 0)
+&& !movecontact {
+	HitDef{
+		getpower: 0;
+		attr: S, NA;
+		animtype: Heavy;
+		damage: 25;
+		hitflag: MAF;
+		guardflag: MAF;
+		pausetime: 12,12;
+		guard.pausetime: 12, 6;
+		sparkno: 2;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,4;
+		guardsound: 6,11;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy, movetype = A, 7,0) ;
+		guard.hittime: 12;
+		ground.velocity: -1,-8;
+		air.velocity: -1,-7.5;
+		Fall: 1;
+		Envshake.time: 20;
+		Fall.recovertime: 45 + ifelse(enemy,movetype = A, 7,0);
+		guard.cornerpush.veloff: -5;
+		airguard.cornerpush.veloff: -4;
+	}
+}
+
+if AnimTime = 0 {
+	DestroySelf{}
+}
+
+
+# Back B:
+#-------------------------------------------------------------------------------
+[Statedef 320; type: S; MoveType: A; physics: S; juggle: 1; ctrl: 0;
+anim: 320; velset: -1, 0; sprpriority: 1; ]
+
+
+
+persistent(0) if numhelper(51000) = 0 
+&& numhelper(55000) = 0 
+&& numhelper(56000) = 0
+&& helper(31),movecontact = 1 {
+	PowerAdd{value: 100; }
+}
+
+if AnimElem = 1 {
+	AfterImage{time: 10}
+} else if AnimElem = 2 {
+	if numhelper(31) = 0 {
+		PlaySnd{value: S1, 0; volumescale: 500; }
+		call SpawnClone(321, 10, 0);
+	}
+}
+
+if helper(31),movehit && command = "holdup" {
+	ChangeState{value: 40; ctrl: 0; }
+}
+
+if time >= 35 || (time >= 10 && numhelper(31) = 0) {
+	ChangeState{value: 0; ctrl: 1; }
+}
+
+# back B Clone
+#-------------------------------------------------------------------------------
+[Statedef 321; type: S; movetype: A; physics: N; ctrl: 0; 
+anim: 321; poweradd: 0; velset: 0, 0; sprpriority: 2; ]
+
+call CloneSetup(5, 3);
+
+HitOverride{
+	attr: SCA, AA, AP, AT;
+	slot: 0;
+	stateno: 39;
+	time: 2;
+	forceair: 0;
+}
+
+VelAdd{y: 0.66}
+NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT; time: 1; }
+HitOverride{
+	attr: SCA, AA, AP, AT;
+	slot: 0;
+	stateno: 39;
+	time: 2;
+	forceair: 0;
+}
+
+if time < 10 {
+	VelSet{x: 2; y: 0; }
+} else if time = [10, 12] {
+	VelSet{x: 3.5; y: -8}
+} else if movecontact = 1 {
+	VelSet{x: 1; y: -3}
+}
+
+if AnimElem = 1 {
+	if random < 600 {
+		PlaySnd{
+			value: S200,0+(random<500)*1+(random<500)*1+(random<500)*1;
+			volumescale: 200;
+			channel: 0;
+		}
+	}
+	PlaySnd{value: S1, 1; volumescale: 50;}
+	PosAdd{x: 4; y: -5}
+	
+} else if Animelem = 3 {
+	VelSet{x: 1}
+}
+
+if (root,map(juggle) < 100 || hitcount != 0)
+&& !movecontact {
+	HitDef{
+		getpower: 0;
+		attr: S, NA;
+		animtype: Medium;
+		damage: 35;
+		hitflag: MAFD;
+		guardflag: MA;
+		pausetime: 12,12;
+		guard.pausetime: 12, 6;
+		sparkno: 0;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,4;
+		guardsound: 6,11;
+		ground.type: Low;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy, movetype = A, 7,0) ;
+		guard.hittime: 10;
+		ground.velocity: -2,-5;
+		air.velocity: -2,-5;
+		Fall: 1;
+		Fall.recovertime: 50 + ifelse(enemy,movetype = A, 7,0);
+		Envshake.time: 20;
+		guard.cornerpush.veloff: -10;
+		airguard.cornerpush.veloff: -10;
+	}
+}
+
+if AnimTime = 0 {
+	DestroySelf{}
+}
+
+# Wavedash B:
+#-------------------------------------------------------------------------------
+[Statedef 390; type: S; MoveType: A; physics: S; juggle: 1; ctrl: 0;
+anim: 290; velset: 2.5, 0; sprpriority: 1; ]
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+	Mapadd{map: "juggle"; value: 5 }
+}
+
+ignorehitpause persistent(0) if movehit {
+	var(11) := var(11) + 5;
+}
+
+persistent(0) if numhelper(51000) = 0 
+&& numhelper(55000) = 0 
+&& numhelper(56000) = 0
+&& helper(31),movecontact = 1 {
+	PowerAdd{value: 100; }
+}
+
+if AnimElem = 1 {
+	AfterImage{time: 10}
+} else if AnimElem = 2 {
+	if numhelper(31) = 0 {
+		PlaySnd{value: S1, 3; volumescale: 50; }
+		PlaySnd{value: S0, 6; volumescale: 100; }
+		call SpawnClone(391, 20, 0);
+	}
+}
+
+if time >= 5 && command = "holdup" {
+	ChangeState{value: 60; ctrl: 0; }
+}
+
+if time >= 20 || numhelper(31) = 0 || helper(31),stateno = 39 {
+	ChangeState{value: 0; ctrl: 1; }
+}
+
+# Wavedash B Clone
+#-------------------------------------------------------------------------------
+[Statedef 391; type: A; movetype: A; physics: N; ctrl: 0; 
+anim: 391; poweradd: 0; velset: 0, 0; sprpriority: 2; ]
+
+call CloneSetup(0, 0);
+
+VelAdd{y: 0.44}
+NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT; time: 1; }
+HitOverride{
+	attr: SCA, AA, AP, AT;
+	slot: 0;
+	stateno: 39;
+	time: 2;
+	forceair: 0;
+}
+
+if time = 0 {
+	VelSet{x: 1; y: -8; }
+} else if time >= 18 {
+	VelSet{x: 5.5; y: 7}
+}
+
+if AnimElem = 1 {
+	if random < 600 {
+		PlaySnd{
+			value: S200,0+(random<500)*1+(random<500)*1+(random<500)*1;
+			volumescale: 200;
+			channel: 0;
+		}
+	}
+	PlaySnd{value: S1, 0; volumescale: 50;}
+	
+}
+
+if !movecontact {
+	HitDef{
+		getpower: 0;
+		attr: S, NA;
+		animtype: Light;
+		damage: 30;
+		hitflag: MAF;
+		guardflag: HA;
+		pausetime: 12,12;
+		sparkno: 1;
+		guard.sparkno: 13000;
+		sparkxy: -8, -55;
+		hitsound: 5,1;
+		guardsound: 6,10;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy, movetype = A, 7,0);
+		ground.velocity: -2,4;
+		air.velocity: -2,4;
+		Fall: 1;
+		Fall.recover: 0;
+		Envshake.time: 10;
+	}
+}
+
+if pos y >= 0 && vel y > 0 {
+	ChangeState{value:912; ctrl:1; }
+}
+
+
+
+
+
+# Wavedash B Clone
+#-------------------------------------------------------------------------------
+[Statedef 912; type: S; movetype: I; physics: S; ctrl: 0; 
+anim: 912; ]
+
+if time = 0 {
+	VelSet{y: 0}
+	PosSet{y: 0}
+}
+
+if abs(vel x) < Const(movement.stand.friction.threshold) {
+	VelSet{x: 0}
+}
+
+if AnimElem = 1 {
+	PlaySnd{value: S3, 3; volumescale: 100; }
+}
+
+if AnimTime = 0 {
+	DestroySelf{}
+}
+
+
+#The bullshit-------------------------------------------------------
+[Statedef -2;]
+
+ignorehitpause if stateno = 950 && enemy, prevstateno = [120,160] && numexplod(31000) = 0 
+	&& enemy, movetype = H && enemy, stateno != [120,160] {
+	Explod{
+		anim: F36000;
+		ID: 31000;
+		pos: -30 + (cond(BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30, 60, 0)), -50;
+		postype: p2;
+		facing: enemy, facing;
+		vfacing: 1;
+		bindtime: -1;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -2;
+		pausemovetime: 999;
+		supermovetime: 999;
+		scale: .5,.5;
+		sprpriority: 5;
+		ontop: 0;
+		shadow: 0,0,0;
+		ownpal: 1;
+		removeongethit: 0;
+	}
+}
+
+if stateno = 950 {
+	MapSet{map: "lowAttack"; value: 1; }
+} else{
+	Mapset{map: "lowAttack"; value: 0; }
+}
+ignorehitpause if (stateno = [600, 620] || stateno = 900 || Stateno = 470 || Stateno = [21000, 21005]) 
+	&& enemy, prevstateno = [120,160] && numexplod(31000) = 0 
+	&& enemy, movetype = H && enemy, stateno != [120, 160] {
+	Explod{
+		anim: F35000;
+		ID: 31000;
+		pos: -30 + (cond(BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30, 60, 0)), -50;
+		postype: p2;
+		facing: enemy, facing;
+		vfacing: 1;
+		bindtime: -1;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -2;
+		pausemovetime: 999;
+		supermovetime: 999;
+		scale: .5,.5;
+		sprpriority: 5;
+		ontop: 0;
+		shadow: 0,0,0;
+		ownpal: 1;
+		removeongethit: 0;
+	}
+}
+ignorehitpause if  (stateno = 200 && enemy, statetype = A) 
+&& enemy, prevstateno = [120,160] && numexplod(31000) = 0 
+&& enemy, movetype = H && enemy, stateno != [120,160] {
+	Explod{
+		anim: F31000;
+		ID: 31000;
+		pos: -30 + (cond(BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30, 60, 0)), -50;
+		postype: p2;
+		facing: enemy, facing;
+		vfacing: 1;
+		bindtime: -1;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -2;
+		pausemovetime: 999;
+		supermovetime: 999;
+		scale: .5,.5;
+		sprpriority: 5;
+		ontop: 0;
+		shadow: 0,0,0;
+		ownpal: 1;
+		removeongethit: 0;
+	}
+	
+}
+ignorehitpause if (MoveType = A && (stateno != [420,440] && stateno != 23000 && stateno != [20000, 20005]))
+	|| (MoveType = A && (stateno != [800,832]))
+	|| (MoveType = I && time > 3)
+	|| (MoveType = H) {
+		MapSet{map: "reversalMove"; value: 0; }
+	}
+
+#----------------------------------------------------------------
+[Statedef -3]
+
+ignorehitpause if p2movetype != H {
+	var(31) := 0;
+}
+
+if pos y >= 0 {
+	if time = 0 {
+		PosSet{y: 0; }
+	} 
+	var(41) := 0;
+}
+
+# metergain
+
+if Movetype = H && Time = 1 {
+	if enemy,movecontact = 1 && enemy,hitcount = 1 || enemy, projcontact = 1 && enemy,hitcount = 1 {
+		poweradd{value: 50; }
+	}
+	if enemy,moveguarded = 1 || enemy, projguarded = 1 {
+		if enemy, stateno != var(30) {
+			poweradd{value: 25; }
+		}
+		var(30) := enemy, stateno;
+	}
+}
+
+if Movetype != H {
+	var(30) := 0;
+}
+#----------------------
+
+if numhelper(51000) = 0 {
+	RemoveExplod{id: 1000; }
+}
+
+if enemy, name = "Kabula" && statetype != A && gametime%1 = 0 {
+	VelAdd{x: -.8; }
+}
+
+if enemy, name = "Kabula" && Statetype = A && gametime%1 = 0 {
+	VelAdd{x: -.3; } 
+}
+#DS TEXT
+#----------------------------------------------
+
+ignorehitpause {
+	if stateno != 801 && time = 1 
+	&& (stateno = 150 || stateno = 152 || stateno = 154) {
+		let posX = ifelse(facing = 1, 30, -40);
+		let posY = ifelse(facing = 1, -30, -50);
+		let randX = ifelse(facing = 1, 50, 40);
+		let randY = ifelse(facing = 1, -40, -30);
+		Explod{
+			anim: F512 + (random<500)*1;
+			ID: 501;
+			pos: $posX,$posY;
+			postype: p1;
+			facing: facing;
+			vfacing: 1;
+			bindtime: 1;
+			vel: 0,0;
+			accel: 0,0;
+			random: $randX,$randY;
+			removetime: -2;
+			pausemovetime: 0;
+			scale: .7,.7;
+			sprpriority: 5;
+			ontop: 1;
+			shadow: 0,0,0;
+			ownpal: 1;
+			removeongethit: 1;
+		}
+	}
+
+	if stateno != 801 && time = 1 
+	&& anim = 5100 {
+		let posX = ifelse(facing = 1, 30, -40);
+		let posY = ifelse(facing = 1, -30, -50);
+		let randX = ifelse(facing = 1, 50, 40);
+		let randY = ifelse(facing = 1, -40, -30);
+		Explod{
+			anim: F514;
+			ID: 501;
+			pos: $posX,$posY;
+			postype: p1;
+			facing: facing;
+			vfacing: 1;
+			bindtime: 1;
+			vel: 0,0;
+			accel: 0,0;
+			random: $randX,$randY;
+			removetime: -2;
+			pausemovetime: 0;
+			scale: .7,.7;
+			sprpriority: 0;
+			ontop: 1;
+			shadow: 0,0,0;
+			ownpal: 1;
+			removeongethit: 1;
+		}
+	}
+
+	if numhelper > 0 && stateno != 801
+	&& helper, hitpausetime = 2 && helper, movehit {
+		Explod{
+			anim: F501 + (random<500)*1 + (random<400)*1 + (random<300)*2 + (random>400)*1;
+			ID: 501;
+			pos: 30,-30;
+			postype: p2;
+			facing: enemy, facing;
+			vfacing: 1;
+			bindtime: 1;
+			vel: 0,0;
+			accel: 0,0;
+			random: 50,-40;
+			removetime: -2;
+			pausemovetime: 0;
+			scale: .7,.7;
+			sprpriority: 0;
+			ontop: 1;
+			shadow: 0,0,0;
+			ownpal: 1;
+			removeongethit: 1;
+		}
+	}
+
+	if stateno != 801
+	&& ((hitpausetime = 2 && movehit) || projhit = 1) {
+		let posX = ifelse(facing = 1, 30, -40);
+		let posY = ifelse(facing = 1, -30, -50);
+		let randX = ifelse(facing = 1, 50, 0);
+		let randY = ifelse(facing = 1, -40, 0);
+		Explod{
+			anim: F501 + (random<500)*1 + (random<400)*1 + (random<300)*2 + (random>400)*1;
+			ID: 501;
+			pos: $posX,$posY;
+			postype: p1;
+			facing: facing;
+			vfacing: 1;
+			bindtime: 1;
+			vel: 0,0;
+			accel: 0,0;
+			random: $randX,$randY;
+			removetime: -2;
+			pausemovetime: 0;
+			scale: .7,.7;
+			sprpriority: 0;
+			ontop: 1;
+			shadow: 0,0,0;
+			ownpal: 1;
+			removeongethit: 1;
+		}
+	}
+
+	# if stateno != 801 && facing = -1 
+	# && ((hitpausetime = 2 && movehit) || projhit = 1) {
+	# 	Explod{
+	# 		anim: F501 + (random<500)*1 + (random<400)*1 + (random<300)*2 + (random>400)*1;
+	# 		ID: 501;
+	# 		pos: -40,-50;
+	# 		postype: p1;
+	# 		facing: -1;
+	# 		vfacing: 1;
+	# 		bindtime: 1;
+	# 		vel: 0,0;
+	# 		accel: 0,0;
+	# 		random: 0,0;
+	# 		removetime: -2;
+	# 		pausemovetime: 0;
+	# 		scale: .7,.7;
+	# 		sprpriority: 0;
+	# 		ontop: 1;
+	# 		shadow: 0,0,0;
+	# 		ownpal: 1;
+	# 		removeongethit: 1;
+	# 	}
+	# }
+
+	if stateno = 801
+	&& hitpausetime = 2 && movehit {
+		let posX = ifelse(facing = 1, 40, -40);
+		let posY = ifelse(facing = 1, -50, -10);
+		let randX = ifelse(facing = 1, 0, -40);
+		let randY = ifelse(facing = 1, 0, -10);
+		Explod{
+			anim: F515;
+			ID: 501;
+			pos: $posX,$posY;
+			postype: p1;
+			facing: facing;
+			vfacing: 1;
+			bindtime: 1;
+			vel: 0,0;
+			accel: 0,0;
+			random: $randX,$randY;
+			removetime: -2;
+			pausemovetime: 0;
+			scale: .7,.7;
+			sprpriority: 0;
+			ontop: 1;
+			shadow: 0,0,0;
+			ownpal: 1;
+			removeongethit: 1;
+		}
+	}
+
+	# if stateno = 801 && facing = -1 
+	# && hitpausetime = 2 && movehit {
+	# 	Explod{
+	# 		anim: F515;
+	# 		ID: 501;
+	# 		pos: -40,-10;
+	# 		postype: p1;
+	# 		facing: -1;
+	# 		vfacing: 1;
+	# 		bindtime: 1;
+	# 		vel: 0,0;
+	# 		accel: 0,0;
+	# 		random: -40,-10;
+	# 		removetime: -2;
+	# 		pausemovetime: 0;
+	# 		scale: .7,.7;
+	# 		sprpriority: 0;
+	# 		ontop: 1;
+	# 		shadow: 0,0,0;
+	# 		ownpal: 1;
+	# 		removeongethit: 1;
+	# 	}
+	# }
+}
+
+#----------------------------------------------------
+#power charge
+
+if anim != 500 {
+	if time = 3 {
+		ModifyExplod{ID: 130; trans: addalpha; alpha: 128,256; }
+	} else if time = 6 {
+		ModifyExplod{ID: 130; trans: addalpha; alpha: 64,256; }
+	} else if time = 8 {
+		RemoveExplod{id: 130; }
+	}
+}
+
+#-------------------------------
+
+if pos y >= 0 {
+	var(19) := 0;
+	var(20) := 0;
+}
+
+#-----------------------------
+# PALALTES
+
+AssertSpecial{flag: roundnotskip; }
+
+RemapPal{source: 1,1; dest: 1,var(52); }
+
+if Stateno != 0 && roundno = 1 && roundstate = 1 {
+	if command = "back" {
+		Playsnd{value: F52,0; }
+		var(52) := var(52) - 1;
+	}
+	if command = "fwd" {
+		Playsnd{value: F52,0; }
+		var(52) := var(52) + 1;
+	}
+}
+
+if roundno = 1 && roundstate = 0 && time = 1 {
+	var(52) := palno;
+}
+
+if var(52) > 8 {
+	var(52) := 1;
+}
+if var(52) < 1{
+	var(52) := 8;
+}
+
+#-----------------------------------------------
+
+if movetype = H || stateno != 500 {
+	StopSnd{channel: 6; }
+}
+
+if Time = 1 && (stateno = 52 || stateno = 106) {
+	PlaySnd{value: 40,0; }
+}
+
+if numhelper(666) = 0 && (roundstate = 2 || roundstate = 3) && hitover = 0
+&& life = 0 {
+	Helper{
+	helpertype: normal;
+	name: "Death Sound";
+	ID: 666;
+	stateno: 666;
+	pos: 9999,9999;
+	postype: p1;
+	facing: 1;
+	keyctrl: 0;
+	ownpal: 1;
+	supermovetime: 9999;
+	pausemovetime: 9999;
+	}
+}
+
+if pos Y >= 0 {
+	var(3) := 0;
+	var(4) := 0;
+}
+
+ignorehitpause {
+	AttackMulSet{value:  1 * 0.99**var(11); }
+	if numhelper(4020) = 0 && movecountered {
+		Helper{
+			helpertype: normal;
+			name: "Counterhit TSP";
+			ID: 4020;
+			stateno: 4020;
+			postype: p1;
+			facing: 1;
+			keyctrl: 0;
+			ownpal: 1;
+			supermovetime: 999999999999;
+			pausemovetime: 999999999999;
+		}
+	}
+	if (numenemy && enemynear,movetype!=H && enemy,stateno != 52) 
+	|| !numenemy {
+		var(11) := ifelse(numhelper(51000)!=0,-20,0);
+		Mapset{map: "juggle"; value: ifelse(numhelper(51000) !=0,-25,0); }
+	}
+}
+
+#---------------------------------------
+# fatalcounter check
+
+if map(fatal) = 1 && ((numenemy && enemynear,movetype!=H && enemy,stateno != 52)
+|| !numenemy) {
+	MapSet{map: "fatal"; value: 0; }
+}
+
+#-----------------------------------------------
+#HitOverride Check
+if movetype = H || (stateno != [800,803] && stateno != [810,813] && stateno != 830) {
+	MapSet{map: "hitOverride"; value: 0; }
+}
+
+#---------------------------------------
+#Bursterable check
+if numhelper(20005) = 0 && (movetype = H || (stateno != 700
+&& stateno != 24000 && stateno != 24500 && stateno != 23000 && stateno != 20000 && stateno != 21000 && stateno != 21005)) {
+	MapSet{map: "busterable"; value: 0; }
+}
+
+#-----------------------
+#tagging and DHC
+if teammode = tag && map(enableDHC) = 1 && (movetype = H || stateno != [20000,29999]) {
+	MapSet{map: "enableDHC"; value: 0; }
+}
+
+if teammode = tag {
+	if (command != "SPECIAL 1" && command != "SPECIAL 2" && command != "SPECIAL 3" 
+	&& command != "SPECIAL 4" && command != "SPECIAL 5" && command != "SPECIAL 6") {
+		Mapset{map: "disableTag"; value: 0; }
+	} else {
+		Mapset{map: "disableTag"; value: 1; }
+	}
+}
