@@ -3,7 +3,7 @@
 
 ignorehitpause {
     AttackMulSet{value: 1 * 0.99**root,var(11); }
-    if time = 0 &&  numhelper(4020) = 0 && movecountered  {
+    if numhelper(4020) = 0 && movecountered = 1  {
         Helper{
             helpertype: normal;
             name: "Counterhit TSP";

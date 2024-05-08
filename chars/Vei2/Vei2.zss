@@ -14,15 +14,8 @@ Helper{
 	inheritJuggle: 1;
 }
 
-[Function CloneSetup(juggle, proration)]
+[Function CloneSetup()]
 ignorehitpause {
-	if movehit = 1 && parent,map(helperHit) = 0 {
-		parent,var(11) := parent,var(11) + $proration;
-		if enemy, gethitvar(fall) {
-			rootMapAdd{map: "juggle"; value: $juggle; }
-		}
-	}
-
 	AttackMulSet{value: 1 * 0.99**root,var(11);  }
 }
 rootMapSet{map: "helperGuarded"; value: moveguarded; }
@@ -645,7 +638,13 @@ if prevstateno = 305 && time = 0 {
 
 AttackDist{value: 40; }
 PlayerPush{value: 1; }
-call CloneSetup(5, 3);
+call CloneSetup();
+ignorehitpause persistent(0) if movehit {
+	if enemy, gethitvar(fall) {
+		rootMapAdd{map: "juggle"; value: 5; }
+	}
+	parent,var(11) := parent,var(11) + 3;
+}
 
 # persistent(0) if movehit && enemy, gethitvar(fall) {
 # 	rootMapAdd{map: "juggle"; value: 5; }
@@ -848,7 +847,13 @@ if time >= 10 && (numhelper(31) = 0 || helper(31),stateno = 39) {
 [Statedef 311; type: A; movetype: A; physics: S; juggle: 1; ctrl: 0; 
 anim: 311; poweradd: 0; velset: 3, 0; sprpriority: 2; ]
 
-call CloneSetup(5, 5);
+call CloneSetup();
+ignorehitpause persistent(0) if movehit {
+	if enemy, gethitvar(fall) {
+		rootMapAdd{map: "juggle"; value: 5; }
+	}
+	parent,var(11) := parent,var(11) + 5;
+}
 
 HitOverride{
 	attr: SCA, AA, AP, AT;
@@ -944,7 +949,13 @@ if time >= 35 || (time >= 10 && numhelper(31) = 0) {
 [Statedef 321; type: S; movetype: A; physics: N; ctrl: 0; 
 anim: 321; poweradd: 0; velset: 0, 0; sprpriority: 2; ]
 
-call CloneSetup(5, 3);
+call CloneSetup();
+ignorehitpause persistent(0) if movehit {
+	if enemy, gethitvar(fall) {
+		rootMapAdd{map: "juggle"; value: 5; }
+	}
+	parent,var(11) := parent,var(11) + 3;
+}
 
 HitOverride{
 	attr: SCA, AA, AP, AT;
@@ -1064,7 +1075,7 @@ if time >= 20 || numhelper(31) = 0 || helper(31),stateno = 39 {
 [Statedef 391; type: A; movetype: A; physics: N; ctrl: 0; 
 anim: 391; poweradd: 0; velset: 0, 0; sprpriority: 2; ]
 
-call CloneSetup(0, 0);
+call CloneSetup();
 
 VelAdd{y: 0.44}
 NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT; time: 1; }
@@ -1123,6 +1134,205 @@ if pos y >= 0 && vel y > 0 {
 	ChangeState{value:912; ctrl:1; }
 }
 
+
+
+#===============================================================================
+# Power Charge:
+#-------------------------------------------------------------------------------
+# Power Charge - Start
+[Statedef 500; type: S; movetype: I; physics: S; ctrl: 0; 
+anim: 500; velset: 0, 0; sprpriority: 2; ]
+
+if AnimElem = 1 {
+	PlaySnd{value: F4, 0; volumescale: 200; channel: 6;}
+}
+
+if time = 7 {
+	if numexplod(130) = 0 {
+		Explod{
+			anim: F130;
+			ID: 130;
+			pos: 0, -100;
+			postype: p1;
+			facing: 1;
+			vfacing: 1;
+			bindtime: -1;
+			removetime: -1;
+			scale: 0.7, 0.7;
+			vel: 0,0;
+			sprpriority: 8;
+			ontop: 0;
+			ownpal: 1;
+			removeongethit: 1;
+			trans: add;
+		}
+	}
+} else if time >= 7 {
+	if time % 5 = 0 {
+		Envshake{
+			time: 5;
+			ampl: -4;
+		}
+	}
+}
+
+if ((ailevel = 0 && time >= 12) && (command != "hold_s" || power = 3000))
+|| ((time >= 12 && ailevel > 0) ) {
+	ChangeState{value: 501}
+}
+
+if time >= 12 {
+	if power = 3000 {
+		ChangeState{value: 501}
+	}
+	
+	if ailevel = 0{
+		if command != "hold_s" {
+			ChangeState{value: 501}
+		}
+	} else {
+		if inguarddist || p2bodydist x < 60 {
+			ChangeState{value: 501}
+		}
+
+		if enemy, ailevel = 0 {
+			if time > 110 {
+				ChangeState{value: 501}
+			}
+		} else {
+			time > 80 {
+				ChangeState{value: 501}
+			}
+		}
+	}
+}
+
+#-------------------------------------------------------------------------------
+# Power Charge - End
+[Statedef 501; type: S; movetype: I; physics: S; ctrl: 0; 
+anim: 501; velset: 0, 0; sprpriority: 2; ]
+
+if time = 0 {
+	StopSnd{channel: 6;}
+}
+
+if AnimTime = 0 {
+	ChangeState{value: 0; ctrl: 1; }
+}
+
+#-------------------------------------------------------------------------------
+# 
+[Statedef 700; type: S; movetype: A; physics: S; juggle: 5; ctrl: 0; 
+anim: 700; poweradd: 0; velset: 3, 0; sprpriority: 2; ]
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+	Mapadd{map: "juggle"; value: 25 }
+}
+
+if target, stateno = 4100 {
+	ChangeState{value: 4100;}
+}
+MapSet{map: "busterable"; value: 1;}
+
+ignorehitpause persistent(0) if hitcount = 2 {
+	var(11) := var(11) + 35;
+}
+
+if AnimElem = 1 {
+	AfterImage{time: 20; trans: add;}
+} else if AnimElem = 3 {
+	VelSet{x: 7;}
+} else if AnimElem = 4 {
+	if enemy,anim != 40 && p2movetype != H {
+		HitDef{
+			getpower: 0;
+			attr: S, AT;
+			animtype: Heavy;
+			damage: 0;
+			hitflag: M;
+			guardflag: ;
+			pausetime: 0,100;
+			sparkno: 0;
+			guard.sparkno: 13000;
+			sparkxy: -8, -25;
+			hitsound: 9,0;
+			ground.type: High;
+			ground.slidetime: 12;
+			ground.hittime: 15;
+			ground.velocity: -1, -2;
+			air.velocity: -1,-2;
+			p2facing: 1;
+			p2stateno: 4000;
+			p2getp1state: 0;
+		}
+	}
+} else if AnimElem = 6 {
+	HitDef{
+		getpower: 0;
+		attr: S, AT;
+		animtype: Heavy;
+		damage: 0;
+		hitflag: MAFD;
+		guardflag: MAFD;
+		pausetime: 18,18;
+		sparkno: 2;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,4;
+		guardsound: 6,10;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 15;
+		ground.velocity: 3,-2;
+		air.velocity: 3,-2;
+		Envshake.time: 25;
+		fall: 1;
+		fall.recover: 0;
+	}
+} else if AnimElem = 11 {
+	PlaySnd{value:S5,2; volumescale: 100;}
+	VelSet{x:5; y:-5;}
+	StateTypeSet{statetype: A; movetype: A; physics: A;}
+
+	Explod{
+		anim: 402;
+		ID: 302;
+		pos: -20, -20;
+		postype: p1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: -1;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -2;
+		pausemovetime: 0;
+		scale: 1,1;
+		sprpriority: 0;
+		ontop: 0;
+		shadow: 0,0,0;
+		ownpal: 1;
+		removeongethit: 0;
+	}
+}
+
+if time > 15 {
+	PlayerPush{value: 0;}
+}
+
+if movecontact {
+	if time >= 10 {
+		NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT; time: 1; }
+	}
+
+	if enemy,stateno != 4100 && time = 25 {
+		TargetBind{time: 1; id: -1; pos: -30; }
+	}
+}
+
+if AnimTime = 0 || (AnimTime = 5 && !movecontact) {
+	ChangeState{value: 0; ctrl: 1};
+}
 
 
 
