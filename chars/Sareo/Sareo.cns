@@ -2405,7 +2405,7 @@ triggerall = var(8) = 0
 trigger1 = AnimElem = 3
 helpertype = normal ;player
 name = "Ice"
-ID = 405
+ID = 410
 stateno = 410
 pos = 0,0
 postype = p1  ;p2,front,back,left,right
@@ -2424,7 +2424,7 @@ triggerall = var(8) = 2
 trigger1 = AnimElem = 3
 helpertype = normal ;player
 name = "Amped Ice"
-ID = 405
+ID = 409
 stateno = 409
 pos = 0,0
 postype = p1  ;p2,front,back,left,right
@@ -4401,7 +4401,7 @@ triggerall = var(8) = 0
 trigger1 = AnimElem = 5
 helpertype = normal ;player
 name = "Ice"
-ID = 405
+ID = 410
 stateno = 493
 pos = 90,0
 postype = p1  ;p2,front,back,left,right
@@ -4417,7 +4417,7 @@ triggerall = var(8) != 0
 trigger1 = AnimElem = 5
 helpertype = normal ;player
 name = "Ice"
-ID = 405
+ID = 409
 stateno = 494
 pos = 110,0
 postype = p1  ;p2,front,back,left,right

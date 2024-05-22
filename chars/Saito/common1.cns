@@ -218,7 +218,11 @@ volumescale = 500
 type = VelSet
 trigger1 = time = [0, 1]
 x = const(velocity.run.fwd.x) * 1.25
-y = -2
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+y = ifelse(pos y >= -0.5, -4, -2)
 
 [State 0, VelAdd]
 type = VelAdd
@@ -301,7 +305,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = vel y > 0 && pos y > 0
-value = 50
+value = 52
 ctrl = 1
 
 ;---------------------------------------------------------------------------

@@ -905,14 +905,6 @@ map = "busterable"
 value = 1
 ignorehitpause = 1
 
-[State 0, Damage Proration]
-type = VarAdd
-trigger1 = hitcount >= 8
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 10
-
 [State 0, Helper]
 type = Helper
 trigger1 = AnimTime = -1
@@ -1300,7 +1292,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 3
+value = 10
 
 [State 0, PlaySnd]
 type = PlaySnd
