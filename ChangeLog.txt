@@ -1,11 +1,12 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
-| Try-Hard Version Unstable Changes:                 /
+| Try-Hard Version 0.6.7 Changes:                    /
 |---------------------------------------------------/
 
 Universal:
 1. Fastfall leniancy change reverted
 2. Fastfall can now be used at any point during backdash and air skip.
+3. Bubbla No longer selectable. She had a good test period and I appreciate everyone for helping test the character. They may come back after some time when they are further developed.
 
 Junichi:
 1. 236A will now always trigger at the end.
@@ -34,7 +35,7 @@ Vei:
 	* Clone damage has been decreased
 
 Saito:
-1. Wavedash Has more upwards velocity when done from the ground
+1. Wavedash has more upwards velocity when done from the ground.
 2. Wavedash B Replaced with more tame move.
 
 
@@ -64,7 +65,7 @@ Vei:
 1. Fixed Bug where clone could sometimes go through the ground
 2. Made it easier to spawn a forward facing portal.
 3. Fixed Bug where Vei would unnecessarily turn around after teleporting with 4c.
-4. Vei Clone will now dissappear out of idle if Vei gets hit.
+4. Vei Clone will now disappear out of idle if Vei gets hit.
 5. Potential Portal is now in the foreground and more visible.
 
 

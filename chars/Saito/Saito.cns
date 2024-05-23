@@ -3638,13 +3638,7 @@ volumescale = 90
 type = VelSet
 trigger1 = AnimElem = 1
 x = 5
-y = 0
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 3
-x = 5
-y = -5
+y = -2
 
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -3652,8 +3646,6 @@ trigger1 = AnimElem = 3
 statetype = A       ;S,A,C,L
 movetype = A       ;I,A,H
 physics = A         ;A,C,S,N
-
-
 
 [State 200, 1]
 type = HitDef
@@ -3664,20 +3656,20 @@ trigger1 = 1
 attr = S, NA
 animtype  = Light
 damage    = 20
-hitflag = MAF
+hitflag = MAFD
 guardflag = MAF
 pausetime = 12,12
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = 5,3
+hitsound   = 5,4
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 guard.hittime = 11
-ground.velocity = -1, -6
-air.velocity = -2,-5
+ground.velocity = -3, -3
+air.velocity = -3,-3
 Fall = 0
 Envshake.time = 10
 
@@ -3739,6 +3731,21 @@ triggerall = numhelper(3500) = 0
 Trigger1 = power >= 1000
 value = 24000
 
+[State 200, j.5A]
+type = ChangeState
+triggerall = movecontact
+trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && time > 12
+value = 600
+ctrl = 1
+
+[State 200, j.5A]
+type = ChangeState
+triggerall = movecontact
+trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && time > 12
+value = 610
+ctrl = 1
 
 [State 200, j.2C]
 type = ChangeState
@@ -3748,12 +3755,6 @@ trigger1 = command = "holddown"
 triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 value = 630
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "b"
-value = 300
 
 [State 200, End]
 type = ChangeState
