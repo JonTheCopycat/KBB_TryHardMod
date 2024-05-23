@@ -1,5 +1,47 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.6.7 Changes:                    /
+|---------------------------------------------------/
+
+Universal:
+1. Fastfall leniancy change reverted
+2. Fastfall can now be used at any point during backdash and air skip.
+3. Bubbla No longer selectable. She had a good test period and I appreciate everyone for helping test the character. They may come back after some time when they are further developed.
+
+Junichi:
+1. 236A will now always trigger at the end.
+2. Repeating 236A Now requires another 236A input instead of mashing a.
+3. Wavedash B no longer an overhead
+4. Wavedash B no longer a fatal
+5. Dash B now sends further away
+6. Dash B proration increased (5 > 8)
+7. After that, Wavedash B and Dash B Swapped.
+8. Kicks j.b hitbox no longer reaches behind. Animation adjusted
+9. Peekaboo 5c juggle and proration increased. (10 juggle, 5 proration)
+
+Stray:
+1. Reverted 236C
+
+Vei:
+1. J.a: Hitbox is slightly bigger
+2. J.b: Fatal added
+3. J.2c: 2c hitbox matches animation more to make consistent for comboing out of portals
+4. 5c:  Speed of portal spawner has been increased to allow more setplay midscreen 
+5. 2a: Now is considerably less plus on block to prevent clone 2b from being a true unlockable and counterable
+6. Clone 2b: More startup
+7. 236c I'll bury you!
+	* Damage been decreased
+	* Is no longer juggless
+	* Clone damage has been decreased
+
+Saito:
+1. Wavedash has more upwards velocity when done from the ground.
+2. Wavedash B Replaced with more tame move.
+
+
+
+===================================================================================================================================
+|---------------------------------------- -------------/
 | Try-Hard Version 0.6.6 Patch 1 Changes:            /
 |---------------------------------------------------/
 
@@ -23,7 +65,7 @@ Vei:
 1. Fixed Bug where clone could sometimes go through the ground
 2. Made it easier to spawn a forward facing portal.
 3. Fixed Bug where Vei would unnecessarily turn around after teleporting with 4c.
-4. Vei Clone will now dissappear out of idle if Vei gets hit.
+4. Vei Clone will now disappear out of idle if Vei gets hit.
 5. Potential Portal is now in the foreground and more visible.
 
 

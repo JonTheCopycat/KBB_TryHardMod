@@ -2649,7 +2649,7 @@ value = movehit
 [State 0 , VelSet]
 type = VelSet
 trigger1 = time = 0
-x = 6 + root,vel x
+x = 8 + root,vel x
 
 [State 0 , VelSet]
 type = VelAdd
@@ -2668,7 +2668,7 @@ elem = 2
 [State 0 , VelSet]
 type = Velset
 trigger1 = 1
-y = ifelse(root,command = "holdup", -5, ifelse(root,command = "holddown", 5, 0))
+y = ifelse(root,command = "holdup", -8, ifelse(root,command = "holddown", 8, 0))
 
 [State 0, PosSet]
 type = PosSet
@@ -3737,12 +3737,13 @@ time = 10
 
 [State 0, Helper]
 type = Helper
+triggerall = numhelper(405) = 0
 trigger1 = AnimElem = 1
 helpertype = normal ;player
 name = "Glitch Bomb"
 ID = 405
 stateno = 485
-pos = 10,0
+pos = 20,0
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -3754,7 +3755,7 @@ inheritJuggle = 1
 [State 200, End]
 type = Changestate
 triggerall = time >= 8
-trigger1 = command != "hold_c"
+trigger1 = 1
 value = 481
 
 [State 1000, 6]
@@ -3868,7 +3869,7 @@ value = movehit
 [State 0 , VelSet]
 type = VelSet
 trigger1 = time = 0
-x = 2
+x = 6
 
 [State 0 , VelSet]
 type = VelSet
@@ -5097,7 +5098,7 @@ y = 0.44
 
 [State 0, VelAdd]
 type = VelSet
-trigger1 = Time >= 14 
+trigger1 = Time >= 16 
 x = 8
 y = 8
 
@@ -5250,7 +5251,7 @@ damage    = 10
 hitflag = MAFD
 guardflag = LA
 pausetime = 10,13
-guard.pausetime = 10,20
+guard.pausetime = 10,5
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -5709,6 +5710,21 @@ map = "juggle"
 value = 10
 persistent = 0
 
+[State 0, FatalCounter]
+type = MapSet
+trigger1 = 1
+map = "fatal"
+value = 1
+ignorehitpause = 1
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
 [State 0, PlaySnd]
 type = PlaySnd
 triggerall = random < 600
@@ -5763,7 +5779,7 @@ animtype  = Medium
 damage    = 25
 hitflag = MAF
 guardflag = HAF
-pausetime = 12,16
+pausetime = ifelse(enemy,movetype = A,12,16),ifelse(enemy,movetype = A,60,16)
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -6069,7 +6085,7 @@ animtype  = Medium
 damage    = 30
 hitflag = MAFD
 guardflag = MA
-pausetime = 12,16
+pausetime = 12,12
 guard.pausetime = 10,4
 sparkno = 0
 guard.sparkno = 13000

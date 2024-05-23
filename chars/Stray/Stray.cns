@@ -4763,7 +4763,7 @@ x = 15
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = (1,13)
-x = ifelse(command = "holdfwd", 3, ifelse(command = "holdback", -3, 0))
+x = 3
 y = 1
 [State 0, Go up on hit if prevstateno wasn't overhead]
 type = Veladd
@@ -4776,7 +4776,7 @@ y = -.65
 type = VelSet
 triggerall = Prevstateno !=900 && hitcount !=5
 trigger1 = Time = (13,30)
-x = ifelse(command = "holdfwd", 2, ifelse(command = "holdback", -2, 0))
+x = 2
 y = -2
 
 
@@ -4860,6 +4860,7 @@ type = ChangeState
 trigger1 = Time = 30
 value = 621
 ctrl = 0
+
 
 ;-------------------------------------------------------------------------------
 ; C - Aire Lag

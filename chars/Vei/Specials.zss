@@ -1,0 +1,904 @@
+# functions
+# [Function Helpersetup(juggle, proation)  ]
+# persistent(0) if movehit && enemy,gethitvar(fall) {
+#     RootMapAdd{map: "juggle"; value: $juggle; }
+# }
+
+# RootMapSet{map: "helperGuarded"; value: moveguarded; }
+
+# RootMapSet{map: "helperHit"; value: movehit; }
+
+# ignorehitpause persistent(0) if movehit {
+#     var(11) := var(11) + $proation;
+# }
+
+# ignorehitpause {
+#     AttackMulSet{value: 1 * 0.99**root,var(11); }
+#     persistent(0) if numhelper(4020) = 0 && movecountered  {
+#         Helper{
+#             helpertype: normal;
+#             name: "Counterhit TSP";
+#             ID: 4020;
+#             stateno: 4020;
+#             postype: p1;
+#             facing: 1;
+#             keyctrl: 0;
+#             ownpal: 1;
+#             supermovetime: 999999999999;
+#             pausemovetime: 999999999999;
+# 	    }
+#     }
+# }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#its a cloak not a scarf
+[Statedef 20000; type: S; movetype: A; physics: S; juggle: 2; ctrl: 0;
+anim: 20000; poweradd: -1500; sprpriority: 2; ]
+
+if time = 1 {
+    SuperPause{anim: 92006; time: 10; sound: 20,0; pos: 0,0; 
+    movetime: 0; darken: 1; p2defmul: 1; poweradd: 0; endcmdbuftime: 7; }
+} else if time = 0 {
+    PlaySnd{value: S2830,0; volumescale: 500; }
+    Mapset{map: "guardCount"; value: 0}
+    if prevstateno = 625 || prevstateno = 402 {
+        var(10) := var(10) + 1;
+    }
+}
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+    MapAdd{map: "juggle"; value: 10; }
+}
+
+ignorehitpause {
+    MapSet{map: "busterable"; value: 1; }
+}
+
+if moveguarded = 1 {
+    MapAdd{map: "guardCount"; value: 1; }
+}
+
+if Animelem = 1 {
+    PlaySnd{value: S7,9; volumescale: 500; }
+    Velset{y: 0; x: 1; }
+} else if AnimElem = 4 || AnimElem = 9 {
+    PlaySnd{value: S5,2; volumescale: 100; }
+} else if AnimElem = 23 {
+    PlaySnd{value: S200,19; volumescale: 300; }
+}
+
+if  (map(juggle) < 100 || hitcount != 0)
+&&  (time >= 3 && time  <= 64  &&  time % 3 = 0) {
+	HitDef{
+		attr: A, NA;
+		animtype: Medium;
+		damage: 10, 1;
+		hitflag: MAF;
+		guardflag: MAF;
+        getpower: 0;
+		pausetime: 2,2;
+        guard.pausetime: 2,2;
+		sparkno: 15000;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: S5,1;
+		guardsound: 6,10;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy,movetype = A, 7,0);
+        guard.hittime: 6;
+		ground.velocity: 2,-0.5;
+        guard.velocity: 1;
+        airguard.velocity: -3,-2;
+		air.velocity: 2,-0.5;
+        Fall: 1;
+        Envshake.time: 5;
+        Fall.recovertime: 50 + ifelse(enemy,movetype = A, 7,0);
+        guard.cornerpush.veloff: -5.25;
+        airguard.cornerpush.veloff: -5.25;
+	}
+
+}
+
+if  (map(juggle) < 100 || hitcount != 0)
+&&  AnimElem = 23 {
+	HitDef{
+		attr: A, NA;
+		animtype: Medium;
+		damage: 100;
+		hitflag: MAF;
+		guardflag: MAF;
+        getpower: 0;
+		pausetime: 12,12;
+        guard.pausetime: 12,12;
+		sparkno: 15000;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,4;
+		guardsound: 6,10;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy,movetype = A, 7,0);
+        guard.hittime: 6;
+		ground.velocity: -3,8;
+        guard.velocity: -4;
+        airguard.velocity: -3,-2;
+		air.velocity: -3,8;
+        Fall: 1;
+        Envshake.time: 20;
+        Fall.recovertime: 50 + ifelse(enemy,movetype = A, 7,0);
+        guard.cornerpush.veloff: -5.25;
+        airguard.cornerpush.veloff: -5.25;
+	}
+
+}
+
+if AnimTime = -40 {
+    Helper{
+		helpertype: normal;
+		name: "Power Delay";
+		ID: 56000;
+		stateno: 56000;
+		pos: 9999,9999;
+		postype: p1;
+		facing: 1;
+		keyctrl: 0;
+		ownpal: 0;
+		inheritJuggle: 1;
+        supermovetime: 0;
+        pausemovetime: 0;
+	}
+}
+
+if AnimELem = 23 {
+    Explod{
+		anim: 20001;
+		ID: 20001;
+		pos: -45, -10;
+		postype: p1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: -1;
+		removetime: -2;
+		scale: 0.15,0.15;
+        sprpriority: 3;
+        removeongethit: 1;
+	}
+}
+
+if animtime = 0 {
+    ChangeState{value: 0; ctrl: 1; }
+}
+
+#oooooooo claw
+[Statedef 20005; type: S; movetype: A; physics: S; juggle: 0; ctrl: 0;
+anim: 20005; velset: 0,0; sprpriority: 2; poweradd: 0; ]
+
+# ignorehitpause {
+#     Mapset{map: "reversalMove"; value: 1; }
+#     AttackMulSet{value: 1 * 0.99**root,var(11); }
+#     if movecontact {
+#         parentMapSet{map: "busterable"; value: 1; }
+#     }
+# }
+
+NotHitBy{value: SCA; time: 1; }
+
+ignorehitpause  {
+    Mapset{map: "reversalMove"; value: 1; }
+    AttackMulSet{value: 1 * 0.99**root,var(11); }
+    if movecontact {
+        parentMapSet{map: "busterable"; value: 1; }
+    }   persistent(0) if numhelper(4020) = 0 && movecountered  {
+        Helper{
+            helpertype: normal;
+            name: "Counterhit TSP";
+            ID: 4020;
+            stateno: 4020;
+            postype: p1;
+            facing: 1;
+            keyctrl: 0;
+            ownpal: 1;
+            supermovetime: 999999999999;
+            pausemovetime: 999999999999;
+            inheritJuggle: 1;
+        }
+    }
+}
+if time = 1 {
+    AfterImage{time: 10; trans: add; }
+    PlaySnd{value: S3,0; volumescale: 50; }
+} else if (time = (1,8) && !movecontact) || (Movecontact = 1 && time = (1,10)) {
+    VelSet{x: -4; }
+}
+
+if !movecontact {
+	HitDef{
+		attr: S, SP;
+		animtype: Light;
+		damage: 40,5;
+		hitflag: MAFD;
+		guardflag: MAF;
+        getpower: 0;
+		pausetime: 10,50;
+		sparkno: 0;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,1;
+		guardsound: 6,0;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 15;
+		ground.velocity: -5;
+		air.velocity: -2,-1;
+        Fall: 0;
+        envshake.time: 10;
+        kill: 0;
+	}
+}
+
+if time = 30 {
+    Changestate{value: 302; ctrl: 1; }
+}
+
+# clone landing lag
+[Statedef 302; type: S; movetype: A; physics: S; juggle: 0; ctrl: 0; 
+anim: 402; velset: 0,0; sprpriority: 2; poweradd: 0; ]
+
+ignorehitpause  {
+     parentMapSet{map: "busterable"; value: 1; }
+     AttackMulSet{value: 1 * 0.99**root,var(11); }
+}
+
+if AnimElem = 1 {
+    PlaySnd{value: S5,1; volumescale: 999; }
+}
+
+if time = 1 {
+    PosAdd{y: -30; }
+}
+
+if !movecontact {
+	HitDef{
+		attr: S, SA;
+		animtype: Heavy;
+		damage: 120+ parent,var(11),30;
+		hitflag: MAFD;
+		guardflag: MAF;
+        getpower: 0;
+		pausetime: 12,12;
+		sparkno: 0;
+		guard.sparkno: 13000;
+		sparkxy: -8, -25;
+		hitsound: 5,4;
+		guardsound: 6,0;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 15;
+		ground.velocity: -5,-3;
+		air.velocity: -5,-3;
+		Fall: 1;
+        fall.recover: 0;
+        Envshake.time: 30;
+	}
+}
+
+if AnimTime = 0 {
+    ChangeState{value: 303; ctrl: 1; }
+}
+
+
+#clone landing lag 2 
+[Statedef 303; type: S; movetype: I; physics: S; juggle: 0; ctrl: 0;
+anim: 9999; velset: 0,0; sprpriority: 2; poweradd: 0; ]
+
+if time = 6 {
+    Destroyself{}
+}
+
+
+# Scarf spinny
+[Statedef 22000; type: S; movetype: A; physics: S; juggle: 0; ctrl: 0;
+anim: 22000; poweradd: -1000; sprpriority: 2; ]
+
+ignorehitpause {
+    MapSet{map: "Busterable"; value: 1; }
+}
+
+if time = 1 {
+    SuperPause{anim: 92006; time: 10; sound: 20,0; pos: 0,0; 
+    movetime: 0; darken: 1; p2defmul: 1; poweradd: 0; endcmdbuftime: 7; }
+} else if time = 0 {
+    notHitBy{value: A; time: 9; }
+}
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+    MapAdd{map: "juggle"; value: 0}
+}
+
+if time = [0, 7] {
+    NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT; time: 1; }
+}
+
+if time = [6, 23] {
+    Velset{x: 4; y: -5; }
+} else if time >= 23 {
+    VelAdd{y: 0.22; }
+}
+
+if AnimElem = 1 {
+    Velset{x: 0; y: 0; }
+} else if AnimElem = 2 {
+    PlaySnd{value: S5,2; volumescale: 100; }
+} else if AnimElem = 4 {
+    StateTypeSet{statetype: A; movetype: A; physics: N; }
+}
+
+
+
+if time >= 3 && time  <= 36  &&  time % 3 = 0  {
+	HitDef{
+		attr: A, SA;
+		animtype: Heavy;
+		damage: 15;
+		hitflag: MAFD;
+		guardflag: MAFD;
+        getpower: 0;
+		pausetime: 4,4;
+		guard.pausetime: 2, 2;
+		sparkno: 1;
+		guard.sparkno: 13000;
+		sparkxy: -8, -35;
+		hitsound: 5,4;
+		guardsound: 6,10;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 20 + ifelse(enemy, movetype = A, 7,0) ;
+		ground.velocity: -1,-4;
+		air.velocity: -1,-3.5;
+		Fall: 0;
+        Envshake.time: 5;
+	}
+}
+
+if AnimELem = 24 {
+    Explod{
+		anim: 22002;
+		ID: 22002;
+		pos: 0, 0;
+		postype: p1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: 1;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -2;
+		pausemovetime: 0;
+		scale: 0.75,0.75;
+		sprpriority: 2;
+		ontop: 0;
+		shadow: 0,0,0;
+		ownpal: 1;
+	}
+}
+
+if movehit && AnimElem = 12 {
+    Helper{
+		helpertype: normal;
+		name: "C Air: 2";
+		ID: 22001;
+		stateno: 22001;
+		pos: 0,0;
+		postype: p1;
+		facing: 1;
+		keyctrl: 0;
+		ownpal: 1;
+		inheritJuggle: 1;
+	}
+}
+if AnimTime = 0 {
+    ChangeState{value: 0; ctrl: 1; }
+}
+
+
+# Scarf spinny clone
+[Statedef 22001; type: S; movetype: A; physics: N; juggle: 0; ctrl: 0;
+anim: 22001; sprpriority: 1; ]
+
+AttackDist{value: 60; }
+
+HitOverride{attr: SCA,AA,AP,AT; slot: 0; stateno: 39; time: 2; forceair: 0; }
+
+Velset{x: 6; y: 3; }
+
+ignorehitpause {
+    MapSet{map: "busterable"; value: 1; }
+} 
+
+# call Helpersetup(0,3);
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+    RootMapAdd{map: "juggle"; value: 0; }
+}
+
+RootMapSet{map: "helperGuarded"; value: moveguarded; }
+RootMapSet{map: "helperHit"; value: movehit; }
+
+ignorehitpause persistent(0) if movehit {
+    parent,var(11) := var(11) + 3;
+}
+
+if  root,(map(juggle) < 100 || hitcount != 0)
+ && (time % 3  = 0  && time >= 3) {
+	HitDef{
+		getpower: 0;
+		attr: A, NP;
+		animtype: Heavy;
+		damage: 15;
+		hitflag: MAF;
+		guardflag: MAF;
+		pausetime: 10,8;
+		sparkno: 1;
+		guard.sparkno: 13000;
+		sparkxy: -8, -35;
+		hitsound: 5,4;
+		guardsound: 6,10;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy, movetype = A, 7,0) ;
+		ground.velocity: -3,3.5;
+		air.velocity: -3,3.5;
+		Fall: 1;
+        Fall.recovertime: 100;
+        Envshake.time: 5;
+	}
+}
+
+if pos Y >= 0 && Vel Y > 0 {
+    ChangeState{value: 912; ctrl: 1; }
+}
+
+
+# Portal jump and kick
+[Statedef 23000; type: S; movetype: A; physics: S; juggle: 0; ctrl: 0; 
+anim: 23000; poweradd: -1500; velset: -2.5,0; sprpriority: 1; ]
+
+if time = 1 {
+    SuperPause{anim: 92006; time: 10; sound: 20,0; pos: 0,-20;
+movetime: 10; darken: 1; p2defmul: 1; poweradd: 0; endcmdbuftime: 7; }
+}
+
+if AnimElem = 1 {
+    Playsnd{value: S200,28; volumescale: 100; }
+    Afterimage{time: 15; }
+} else if AnimElem = 7 {
+    PlaySnd{value: S1,3; volumescale: 50; }
+} else if AnimElem = 9 {
+    VelSet{x: -6; }
+}
+
+ignorehitpause persistent(0) if time > 15 && AnimELem = 5 {
+    Explod{
+		anim: F580;
+		ID: 580;
+		pos: -10, -20;
+		postype: P1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: -1;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -2;
+		pausemovetime: 9999;
+		scale: .3,.3;
+		sprpriority: 3;
+		ontop: 0;
+		shadow: 0,0,0;
+		ownpal: 1;
+        removeongethit: 1;
+	}
+}
+
+if AnimElem = 9 {
+    Helper{
+		helpertype: normal;
+		name: "Glitch Bomb";
+		ID: 23002;
+		stateno: 23002;
+		pos: 0,-20;
+		postype: p1;
+		facing: 1;
+		keyctrl: 0;
+		ownpal: 1;
+        supermovetime: 0;
+        pausemovetime: 0;
+		inheritJuggle: 1;
+	}
+    PlaySnd{value: S0,6; volumescale: 100; }
+}
+
+ if  AnimTime = 0  {
+    Changestate{value: 0; ctrl: 1; }
+}
+
+# Portal dickhead
+[Statedef 23002; type: S; movetype: A; physics: S; juggle: 1; ctrl: 0; 
+anim: 406; sprpriority: -1; ]
+
+AttackDist{value: 60; }
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+    RootMapAdd{map: "juggle"; value: 5; }
+}
+
+RootMapSet{map: "helperGuarded"; value: moveguarded;}
+RootMapSet{map: "helperHit"; value: movehit; }
+
+ignorehitpause persistent(0) if movehit {
+    var(11) := var(11) + 8;
+}
+Velset{x: 0; }
+
+ignorehitpause {
+    AttackMulSet{value: 1 * 0.99**root,var(11); }
+    persistent(0) if numhelper(4020) = 0 && movecountered  {
+        Helper{
+            helpertype: normal;
+            name: "Counterhit TSP";
+            ID: 4020;
+            stateno: 4020;
+            postype: p1;
+            facing: 1;
+            keyctrl: 0;
+            ownpal: 1;
+            supermovetime: 999999999999;
+            pausemovetime: 999999999999;
+            inheritJuggle: 1;
+        }
+    }
+}
+if AnimElem = 11  {
+    Helper{
+		helpertype: normal;
+		name: "Glitch Bomb";
+		ID: 23005;
+		stateno: 23005;
+        pos: 0,0;
+		postype: p1;
+		facing: 1;
+		keyctrl: 0;
+		ownpal: 1;
+        supermovetime: 0;
+        pausemovetime: 0;
+		inheritJuggle: 1;
+	}
+}
+
+if AnimElemTime(11) = 1 {
+    Helper{
+		helpertype: normal;
+		name: "Glitch Bomb";
+		ID: 23006;
+		stateno: 23006;
+        pos: 0,0;
+		postype: p1;
+		facing: 1;
+		keyctrl: 0;
+		ownpal: 1;
+        supermovetime: 0;
+        pausemovetime: 0;
+		inheritJuggle: 1;
+	}
+}
+
+if (FrontEdgeBodyDist < - 100 || time = 250 || movecontact || movereversed) {
+    ChangeState{value: 23003; }
+}
+
+# Portal end
+[Statedef 23003; type: S; movetype: I; physics: S; juggle: 0; ctrl: 0;
+anim: 407; sprpriority: 1; ]
+
+velSet{x: 0; y: 0;}
+
+if AnimTime = 0 {
+    Destroyself{}
+}
+
+
+# Portal Projectile
+[Statedef 23005; type: S; movetype: A; physics: S; juggle: 1; ctrl: 0;
+anim: 410; sprpriority: 1; ]
+
+AttackDist{value: 60; }
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+    RootMapAdd{map: "juggle"; value: 5; }
+}
+
+RootMapSet{map: "helperGuarded"; value: moveguarded; }
+RootMapSet{map: "helperHit"; value: movehit; }
+
+ignorehitpause persistent(0) if movehit {
+    var(11) := var(11) + 3;
+}
+
+Velset{x: 13; }
+
+ignorehitpause {
+    AttackMulSet{value: 1 * 0.99**root,var(11); }
+    persistent(0) if numhelper(4020) = 0 && movecountered  {
+        Helper{
+            helpertype: normal;
+            name: "Counterhit TSP";
+            ID: 4020;
+            stateno: 4020;
+            postype: p1;
+            facing: 1;
+            keyctrl: 0;
+            ownpal: 1;
+            supermovetime: 999999999999;
+            pausemovetime: 999999999999;
+        }
+    }
+}
+
+if  (map(juggle) < 100 || hitcount != 0)
+ && (!movecontact && !movereversed ) {
+	HitDef{
+		attr: S, NP;
+		animtype: Heavy;
+		damage: 40;
+		hitflag: MAF;
+		guardflag: MA;
+        getpower: 0;
+		pausetime: 0,8;
+		sparkno: 2;
+		guard.sparkno: 13000;
+		sparkxy: -8, -35;
+		hitsound: S3,1;
+		guardsound: 6,11;
+		ground.type: High;
+		ground.slidetime: 25;
+		ground.hittime: 22;
+		ground.velocity: -3;
+        airguard.velocity: -1.5, 1.75;
+		air.velocity: -1.5,-1.5;
+		air.fall: 1;
+        Fall.recover: 0;
+	}
+}
+
+if (FrontEdgeBodyDist < - 30 || time = 250 || movecontact || movereversed) {
+    ChangeState{value: 411; }
+}
+
+# Portal Projectile afterimage
+[Statedef 23006; type: S; movetype: A; physics: S; juggle: 1; ctrl: 0;
+anim: 23005; sprpriority: 1; ]
+
+AttackDist{value: 60;}
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+    RootMapAdd{map: "juggle"; value: 5; }
+}
+
+RootMapSet{map: "helperGuarded"; value: moveguarded; }
+RootMapSet{map: "helperHit"; value: movehit; }
+
+ignorehitpause persistent(0) if movehit {
+    var(11) := var(11) + 3;
+}
+
+Velset{x: 13; }
+
+ignorehitpause {
+    AttackMulSet{value: 1 * 0.99**root,var(11); }
+    persistent(0) if numhelper(4020) = 0 && movecountered  {
+        Helper{
+            helpertype: normal;
+            name: "Counterhit TSP";
+            ID: 4020;
+            stateno: 4020;
+            postype: p1;
+            facing: 1;
+            keyctrl: 0;
+            ownpal: 1;
+            supermovetime: 999999999999;
+            pausemovetime: 999999999999;
+	    }
+    }
+}
+if numhelper(51000) = 0 && AnimElem = 1 {
+    Afterimage{time: 10; trans: add; }
+}
+
+if  (map(juggle) < 100 || hitcount != 0)
+ && (!movecontact && !movereversed ) {
+	HitDef{
+		attr: S, NP;
+		animtype: Heavy;
+		damage: 40;
+        guard.kill: 0;
+		hitflag: MAF;
+		guardflag: MA;
+        getpower: 0;
+		pausetime: 0,8;
+		sparkno: 2;
+		guard.sparkno: 13000;
+		sparkxy: 0,0;
+		hitsound: S3,1;
+		guardsound: 6,11;
+		ground.type: High;
+		ground.slidetime: 25;
+		ground.hittime: 22;
+		ground.velocity: -3;
+        airguard.velocity: -1.5, 1.75;
+		air.velocity: -1.5,-1.5;
+		air.fall: 1;
+        Fall.recover: 0;
+	}
+}
+
+if (FrontEdgeBodyDist < - 30 || time = 250 || movecontact || movereversed) {
+    ChangeState{value: 411; }
+}
+
+
+
+#il bury you
+[Statedef 24000; type: S; movetype: A; physics: S; juggle: 1; ctrl: 0; 
+anim: 24000; poweradd: -500; sprpriority: 2; ]
+
+ignorehitpause {
+    MapSet{map: "busterable"; value: 1; }
+}
+
+if Time = 1 {
+    SuperPause{anim: 92006; time: 10; sound: 20,0; pos: 0,-20; 
+    movetime: 0; darken: 1; p2defmul: 1; poweradd: 0; endcmdbuftime: 7; }
+} else if time = 0 {
+    notHitBy{value: A; time: 9; }
+} else if time >= 3 {
+        Velset{x: 4; y: 0; }
+}
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+    MapAdd{map: "juggle"; value: 0; }
+}
+
+If Animelem = 1 && pos Y <= 0 {
+    var(3) := 1;
+}
+
+If AnimELem = 3 && movecontact {
+    VelSet{x: 0; y: 0; }
+}
+
+if Animelem = 2 {
+    PlaySnd{value: S200,21; volumescale: 300; }
+}
+
+
+if  (map(juggle) < 100 || hitcount != 0)
+ && (AnimElem = 3 || AnimElem = 9)  {
+	HitDef{
+		attr: A, NP;
+		animtype: Heavy;
+		damage: 20;
+		hitflag: MAFD;
+		guardflag: MAFD;
+        getpower: 0;
+		pausetime: 12,20;
+        guard.pausetime: 12,12;
+		sparkno: 1;
+		guard.sparkno: 13000;
+		sparkxy: -8, -35;
+		hitsound: 5,4;
+		guardsound: 6,10;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 20 + ifelse(enemy, movetype = A, 7,0) ;
+		ground.velocity: -2,-2;
+		air.velocity: -2,-2;
+		Fall: 1;
+        Fall.recovertime: 50;
+        Envshake.time: 5;
+	}
+}
+if AnimElem = 10 {
+    Helper{
+		helpertype: normal;
+		name: "C Air: 2";
+		ID: 24001;
+		stateno: 24001;
+		pos: 0,0;
+		postype: p1;
+		facing: 1;
+		keyctrl: 0;
+		ownpal: 1;
+		inheritJuggle: 1;
+	}
+}
+
+if Animtime = 0 {
+    Changestate{value: 0; ctrl: 1; }
+}
+
+# Il bury you clone
+[Statedef 24001; type: S; movetype: A; physics: N; juggle: 1; ctrl: 0; 
+anim: 24001; sprpriority: 1; ]
+
+ignorehitpause {
+    MapSet{map: "busterable"; value: 1; }
+}
+
+persistent(0) if movehit && enemy,gethitvar(fall) {
+    MapAdd{map: "juggle"; value: 0; }
+}
+
+if time = 0 {
+    notHitBy{value: A; time: 9; }
+}
+
+AttackDist{value: 60; }
+
+RootMapset{map: "helperGuarded"; value: moveguarded; }
+RootMapSet{map: "helperHit"; value: movehit; }
+
+ignorehitpause persistent(0) if movehit {
+    var(11) := var(11) + 3;
+}
+
+Velset{x: 3; y: 0; }
+
+NotHitBy{value: SCA; time: 1;}
+
+if  (map(juggle) < 100 || hitcount != 0)
+ && (AnimElem = 6 || AnimElem = 12 || AnimElem = 18)  {
+	HitDef{
+		attr: A, NP;
+		animtype: Heavy;
+		damage: 10;
+		hitflag: MAFD;
+		guardflag: MAF;
+        getpower: 0;
+		pausetime: 4,6;
+        guard.pausetime: 4,4;
+		sparkno: 1;
+		guard.sparkno: 13000;
+		sparkxy: -8, -35;
+		hitsound: 5,4;
+		guardsound: 6,10;
+		ground.type: High;
+		ground.slidetime: 12;
+		ground.hittime: 15 + ifelse(enemy, movetype = A, 7,0) ;
+		ground.velocity: -3,-2.5;
+		air.velocity: -3,-2.5;
+		Fall: 0;
+        Fall.recovertime: 40;
+        Envshake.time: 5;
+	}
+}
+
+if time = [1,100] {
+    ScreenBound{value: 1; movecamera: 0,0; }
+}
+if animtime = 0 {
+    Destroyself{}
+}
