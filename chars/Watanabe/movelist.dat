@@ -44,8 +44,8 @@ _! Swing					^B
 Seed Throw (1/4 Bar)							_F^C
 	"Watanabe throws a seed that will wrap around the
 	 opponent. When this lands it will grow into a plant
-	 that will wrap on contact. Holding your Charge key
-	will make the seed miss."
+	 that will wrap on contact. Holding the input will 
+	 make the seed miss."
 
 _! Dash	(1/2 Bar)				_F_F
 	

@@ -1,5 +1,75 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.6.7 Patch Changes:              /
+|---------------------------------------------------/
+
+I discovered some shit that I had to account for...
+
+Hyrio:
+1. 5a, 5aa:
+	* Wavedash Cancels are now delayed on block.
+
+
+Jodie: I was a fool to allow a wavedash cancel out of the moves with the most blockstun in his kit.
+1. 5bb: Wavedash Cancel is now on block as well
+2. 5bbb: Wavedash cancel removed on block.
+
+
+Junichi: Heavily Requested feature
+1. You can now switch stances during roundstart without meter.
+
+
+Leon: The wavedash cancel out of 4b is INSANE after discoveries. Had to replace it entirely.
+1. 4b: removed wavedash cancel.
+2. 5b is now wavedash cancellable
+3. 5bb is now wavedash cancellable on hit.
+
+
+Noll: A make shift wavedash stop just for you.
+1. Pressing down again after wavedashing will let noll fall down.
+
+
+Sareo: Preventing infinite blockstrings
+1.  Bonus stun from backsway no longer applies during block.
+
+
+Violet: Let her try-hard too.
+1. 5aaa: Added a delayed wavedash cancel.
+2. 5b: Added a delayed wavedash cancel.
+3. Prevented fastfalling from 2b and wavedash b.
+4. Wavedash A Reworked Slightly:
+	* Now Sends Down and Further Away.
+	* Can no longer cancel into 5a or 5b.
+
+
+Vivienne: The Catalyst behind the discovery
+1. 5aa: Removed wavedash cancel out.
+2. Wavedash: Now takes longer to return to idle.
+
+
+Watanabe: Sprout must die
+1. 6C: 
+	* plant hurtbox & hitbox made smaller
+	* Enemy can now hit 6C plant at any time
+	* plant now has a 2frame window before it hits the opponent
+	* Forcing 6C to miss now requires you to hold the input (C) instead of the charge button
+2. 2C: 
+	* hitbox made vertically larger
+	* can now cancel into wavedash
+3. J2C:
+	* has less startup and less recovery
+	* doesn't send as high anymore
+4. 2A is now jump-cancellable on hit
+5. Wavedash A: 
+	* now creates a plant on whiff
+	* has way more recovery on whiff
+	* now has cancels into 5AA and 5B on hit
+
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
 | Try-Hard Version 0.6.7 Changes:                    /
 |---------------------------------------------------/
 

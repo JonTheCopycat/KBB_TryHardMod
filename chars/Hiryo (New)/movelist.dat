@@ -32,10 +32,10 @@ _F_F^A
 _AIR_D^B
 
 <#f0f000>:COMMAND DASH CANCELS:</>
-^A_F_D_DF
-^A_B_D_DB
-^A^A_F_D_DF
-^A^A_B_D_DB
+^A_F_D_DF (Late On Block)
+^A_B_D_DB (Late On Block)
+^A^A_F_D_DF (Late On Block)
+^A^A_B_D_DB (Late On Block)
 ^B_F_D_DF
 ^B_B_D_DB
 ^C_F_D_DF

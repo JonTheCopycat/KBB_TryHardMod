@@ -764,7 +764,6 @@ trigger1 = ctrl
 [State -1, C]
 type = ChangeState
 value = 405
-Triggerall = power >= 100
 triggerall = command = "holddown"
 triggerall = command = "c"
 Triggerall = statetype != A

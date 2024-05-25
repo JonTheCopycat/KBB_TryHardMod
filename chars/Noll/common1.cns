@@ -167,6 +167,12 @@ anim = 590
 ctrl = 0
 sprpriority = 1
 
+[State 0, MapSet]
+type = MapSet
+trigger1 = time = 0
+map = "letGo"
+value = 0
+
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = time = 0
@@ -249,7 +255,6 @@ trigger4 = command = "b" && time > 0
 trigger5 = command = "c" && time > 0
 y = 0
 
-;---------------------------------------------------------------------------
 ; Special 3
 [State -1, SPECIAL 3 - Spinner Cutters]
 type = ChangeState
@@ -318,6 +323,19 @@ triggerall = time >= 5
 trigger1 = command = "s"
 value = 66
 ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "down" && map(letGo) != 0
+value = 50
+ctrl = 1
+
+[State 0, MapSet]
+type = MapSet
+trigger1 = command != "holddown"
+map = "letGo"
+value = 1
 
 [State 200, End]
 type = ChangeState

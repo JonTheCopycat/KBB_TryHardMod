@@ -1072,7 +1072,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = pos y >= 0
-value = 22015
+value = 451
 
 ;===============================================================================
 ; Seed spread: Seed got hit
@@ -1188,7 +1188,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = pos y >= 0
-value = 22015
+value = 451
 
 ;===============================================================================
 ; Seed spread: Plant spawn

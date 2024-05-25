@@ -1581,7 +1581,7 @@ Fall.recovertime = 10 + ifelse(enemy,movetype = A, 7,0)
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit
+trigger1 = movecontact
 value = 30
 ctrl = 1
 
@@ -1804,9 +1804,8 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 630
 [State 200, Wavedash Cancel]
 type = ChangeState
-triggerall = prevstateno != 400 && prevstateno != 490
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
+trigger1 = movehit
 value = 30
 ctrl = 1
 

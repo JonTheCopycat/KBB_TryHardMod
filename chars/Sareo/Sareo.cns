@@ -5431,17 +5431,12 @@ anim = 590
 poweradd = -100
 sprpriority = 1
 
-[State 0, SuperPause]
-type = SuperPause
-triggerall = enemy,movetype = H
+[State 0, Pause]
+type = Pause
+triggerall = enemy,stateno = [5000, 5299]
 trigger1 = Time = 1
-anim = 9999
 time = 10
-pos = 0,-20
 movetime = 10
-darken = 0
-p2defmul = 1
-poweradd = 0
 endcmdbuftime = 10
 
 [State 105, NotHitBy]

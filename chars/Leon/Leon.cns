@@ -2819,6 +2819,13 @@ triggerall = var(53) > 30
 trigger1 = command = "SPECIAL 4"
 value = 24000
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
+value = 30
+ctrl = 1
+
 [State 0, Special Backdash Cancel]
 type = ChangeState
 triggerall = numhelper(51000) = 0
@@ -2968,6 +2975,13 @@ triggerall = numhelper(3500) = 0
 Triggerall = power >= 500
 trigger1 = command = "SPECIAL 1"
 value = 21000
+
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movehit
+value = 30
+ctrl = 1
 
 [State 300, 4B Cancel]
 type = ChangeState
@@ -3694,13 +3708,6 @@ envshake.time = 36
 envshake.ampl = -4
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
-
-[State 200, Wavedash Cancel]
-type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
-value = 30
-ctrl = 1
 
 [State 0, Special Backdash Cancel]
 type = ChangeState

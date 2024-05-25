@@ -20,10 +20,10 @@ _D^A_-^B
 _D^A_-^C
 
 <#f0f000>:ARMOR WALK CANCELS:</>
-^A_F_D_DF^A (Late on Block)
-^A^A_F_D_DF^A
-^B_F_D_DF^A
-_D^A^A_F_D_DF^A
+^A_F_D_DF (Late on Block)
+^B_F_D_DF
+_D^A^A_F_D_DF
+^C_F_D_DF
 
 <#f0f000>:ARMOR WALK ATTACKS:</>
 
