@@ -4127,7 +4127,7 @@ sprpriority = 1
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 0
-x = 8  + ceil(map(where)/50) 
+x = 7  + ceil(map(where)/50) 
 y = 0
 ;ignorehitpause = 
 ;persistent = 
@@ -5400,9 +5400,9 @@ ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
 triggerall = numhelper(3500) = 0
-trigger1 = power >= 200 && command = "c" && command = "holddown" && movehit && time >= 31
+trigger1 = power >= 200 && command = "c" && command = "holddown" && movecontact && time >= 31
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && movehit && time >= 31 && power >= 200
-value = ifelse(pos y<0,670,450)
+value = ifelse(pos y<0,670,ifelse(movehit,450,670))
 ctrl = 0
 
 [State 0, ChangeState]
@@ -5522,7 +5522,7 @@ y = 0
 type = HitDef
 getpower = 0
 trigger1 = AnimElem = 4 && !movecontact
-triggerall = map(juggle) < 100 ; I think hitting this Post-Juggle would be crazy
+triggerall = 1 ; I think hitting this Post-Juggle would be crazy
 attr = S, NA
 animtype  = Light
 damage    = 25
@@ -6647,7 +6647,7 @@ helpertype = normal
 name = "space Daniel"
 ID = 705
 stateno = 705
-pos = -200,-130
+pos = 200,-130
 postype = p1
 facing = 1
 keyctrl = 0
@@ -6681,6 +6681,70 @@ ctrl = 0
 anim = 705
 poweradd = 0
 sprpriority = 1
+
+[State 0, Turn]
+type = Turn
+trigger1 = time = 0
+;ignorehitpause = 
+;persistent = 
+
+[State 0, PalFXWiz]
+type = BGPalFX
+trigger1 = time = 1
+time = 999
+add = 0,0,0
+mul = 0,0,0
+sinadd = 0,0,0,1
+invertall = 0
+color = 256
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = Time = 30
+time = 1
+add = 0,0,0
+mul = 32,32,32
+sinadd = 0,0,0,1 
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = Time = 31
+time = 1
+add = 0,0,0
+mul = 64,64,64
+sinadd = 0,0,0,1
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = Time = 32
+time = 1
+add = 0,0,0
+mul = 128,128,128
+sinadd = 0,0,0,1
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = Time = 33
+time = 1
+add = 0,0,0
+mul = 192,192,192
+sinadd = 0,0,0,1
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = Time = 34
+time = 1
+add = 0,0,0
+mul = 225,225,225
+sinadd = 0,0,0,1
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = Time = 35
+time = 1
+add = 0,0,0
+mul = 256,256,256
+sinadd = 0,0,0,1
 
 [State 0, AfterImage]
 type = AfterImage
@@ -6805,7 +6869,7 @@ triggerall = AnimElem = 2
 trigger1 = 1
 attr = S, AT
 animtype  = Heavy
-damage  = 100
+damage  = 150
 HitFlag = MAFD
 guardflag = MA
 pausetime = 0,3
@@ -8309,7 +8373,7 @@ pos = 30,-5
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = Animelem = 3||Animelem = 4||Animelem = 5||Animelem = 6||Animelem = 7||Animelem = 8||Animelem = 9||Animelem = 10||Animelem = 11||Animelem = 12||Animelem = 13
+triggerall = Animelem = 3||Animelem = 4||Animelem = 5||Animelem = 6||Animelem = 7||Animelem = 8||Animelem = 9||Animelem = 10||Animelem = 11||Animelem = 12||Animelem = 13||Animelem = 14||Animelem = 15||Animelem = 16||Animelem = 17
 trigger1 = hitcount <= 15
 trigger1 = 1
 attr = A, NA
@@ -8851,11 +8915,11 @@ trigger1 = command = "holdup" && helper(640),movehit && var(3) = 0 && time >= 3
 value = 45
 ctrl = 1 
 
-;[State 0, ChangeState]
-;type = ChangeState
-;trigger1 = power >= 200 && command = "c" && command = "holddown" && time >= 3 ;NO
-;value = 670
-;ctrl = 0
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = power >= 200 && command = "c" && command = "holddown" && time >= 3 ;NO
+value = 670
+ctrl = 0
 
 
 [State 0, ChangeState]

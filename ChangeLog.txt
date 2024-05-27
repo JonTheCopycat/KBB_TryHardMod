@@ -28,7 +28,11 @@ Junichi: Heavily Requested feature and some much needed polish
 	* Now is a large swing downwards that covers more area.
 9. 236A increased proration (5 -> 15)
 10. 214A increased proration (0 -> 15)
-11. 214B increased proration (5 -> 15
+11. 214B increased proration (5 -> 15)
+12. Kick 236B increased proration (0 -> 8)
+13. Baton Ready 2a can now cancel into supers
+14. Fixed bug where grab would play an unintended sound.
+
 
 
 
@@ -44,6 +48,26 @@ Noll: A make shift wavedash stop just for you.
 
 Sareo: Preventing infinite blockstrings
 1.  Bonus stun from backsway no longer applies during block.
+
+
+Takuya:
+1. 5A has slightly less recovery (27f -> 25f)
+2. 2A has slightly less recovery (37f -> 33f)
+3. 5B has slightly less recovery (28f -> 25f)
+4. 5B has slightly less startup (11f -> 10f)
+5. 2[B] has slightly less startup (16f -> 14f)
+6. 5C explosion hitbox bigger due to it missing sometimes
+7. 6C now can cancels into J2C on block
+8. 6[C] now hits post-juggle
+9. J.5[B] has more recovery (76f -> 81f)
+10. J.5A has less recovery (29f -> 24f)
+11. J.5[B] has more hits, due to this, more damage, more active and more chip dmg (8 hits -> 12 hits)
+12. J5C and J5[C] can now cancel into J2C
+13. J5C/J5[C] now has a consistent hitbox
+14. 236[C] hitbox vertically reduced
+15. Grab now sends in the other direction
+16. Grab now does 150 damage (100 -> 150)
+17. Grab has less recovery on hit
 
 
 Violet: Let her try-hard too.
