@@ -3962,7 +3962,7 @@ damage    = 5
 Hitflag = MAF
 guardflag = MAF
 pausetime = 4,2
-guard.pausetime = 3,2
+guard.pausetime = 4,2
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-35
@@ -3972,6 +3972,8 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = .5,-2
+guard.slidetime = 10
+;guard.hittime = 10
 guard.velocity = .5
 air.velocity = -.15,-2
 airguard.velocity = -.5,-2
