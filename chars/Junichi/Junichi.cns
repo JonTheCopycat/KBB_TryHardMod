@@ -5920,7 +5920,7 @@ damage    = 20
 hitflag = MAFD
 guardflag = MAF
 pausetime = 12,12
-guard.pausetime = 12, 14
+guard.pausetime = 12, 12
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -8366,9 +8366,15 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 460
-poweradd = -100
+poweradd = 0
 sprpriority = 1
 velset = -4, 0
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = !time
+trigger1 = prevstateno != 480
+value = -100
 
 [State 0, VarSet]
 type = VarSet
@@ -8767,6 +8773,46 @@ ownpal = 1
 size.xscale = 1
 size.yscale = 1
 
+[State 200, Special 2 - Big Kick]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1500
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 5"
+value = 20010
+
+[State 200, Special 2 - Weave]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 1"
+value = 23000
+
+[State 200, Special 2 - Skyfall Kick]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 2"
+value = 21000
+
+[State 200, Special 4 - Gundown]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
+[State -1, SPECIAL 3]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = command = "SPECIAL 3"
+Triggerall = power >= 1000
+trigger1 = movecontact
+value = 22020
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -9036,7 +9082,7 @@ ctrl = 1
 
 ;-------------------------------------------------------------------------------
 ; Baton Stance Smack
-[Statedef 461]
+[Statedef 467]
 type    = S
 movetype= A
 physics = S
@@ -9214,7 +9260,7 @@ ctrl = 1
 
 ;-------------------------------------------------------------------------------
 ; Baton Stance Tazer
-[Statedef 467]
+[Statedef 461]
 type    = S
 movetype= A
 physics = S
@@ -9265,8 +9311,13 @@ volumescale = 50
 
 [State 200, Move Forward]
 type = VelSet
-trigger1 = animelem = 1
-x = 4
+trigger1 = animelem = 2, <= 0
+x = 5
+
+[State 200, Move Forward]
+type = VelSet
+trigger1 = animelem = 4
+x = 2
 
 [State 200, Explod]
 type = Explod
@@ -9291,11 +9342,63 @@ ownpal = 1
 removeongethit = 1
 ignorehitpause = 1
 
+[State 200, Explod]
+type = Explod
+trigger1 = AnimElem = 4
+anim = 468
+ID = 468
+pos = 35,-15
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -2
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+sprpriority = 4
+ontop = 1
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+ignorehitpause = 1
+
 [State 200, Attack!]
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = AnimElem = 4 || AnimElem = 5 || AnimElem = 6 || AnimElem = 7
+triggerall = AnimElem = 4 || AnimElem = 5 || AnimElem = 6
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy
+damage    = 10
+hitflag = MAF
+guardflag = MA
+pausetime = 3,8
+guard.pausetime = 3,1
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = 1, -2
+air.velocity = 1, -2
+fall = 1
+Fall.recovertime = 25 + ifelse(enemy,movetype = A, 7,0)
+envshake.time = 5
+guard.cornerpush.veloff = -2
+airguard.cornerpush.veloff = -3
+
+[State 200, Attack!]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = AnimElem = 7
 trigger1 = 1
 attr = S, NA
 animtype  = Heavy
@@ -9307,16 +9410,16 @@ guard.pausetime = 3,3
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = 5,1
+hitsound   = 5,3
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1, -2
-air.velocity = -1, -2
+ground.velocity = -1, -3
+air.velocity = -1, -3
 fall = 1
-Fall.recovertime = 25 + ifelse(enemy,movetype = A, 7,0)
-envshake.time = 5
+Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+envshake.time = 10
 guard.cornerpush.veloff = -2
 airguard.cornerpush.veloff = -3
 
@@ -9359,20 +9462,6 @@ triggerall = power >= 1500
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 5"
 value = 20020
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "holddown"
-trigger1 = command = "b"
-value = 461
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 466
 
 ;[State 200, End]
 ;type = ChangeState
@@ -10086,8 +10175,8 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 guard.velocity = -8
-ground.velocity = -1,-5
-air.velocity = -1,-4
+ground.velocity = -2,-5
+air.velocity = -2,-4
 Fall = 1
 Fall.recovertime = 50 + ifelse(enemy,movetype = A, 7,0)
 envshake.time = 10
@@ -10211,6 +10300,7 @@ value = 22020
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
+trigger2 = movehit
 value = 460
 ctrl = 1
 
@@ -11469,12 +11559,6 @@ ignorehitpause = 1
 persistent = 0
 value = 35
 
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = AnimElem = 11
-value = S5,2
-volumescale = 100
-
 [State 0, AfterImage]
 type = AfterImage
 trigger1 = AnimElem = 1
@@ -11636,12 +11720,6 @@ v = 11
 ignorehitpause = 1
 persistent = 0
 value = 30
-
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = AnimElem = 11
-value = S5,2
-volumescale = 100
 
 
 [State 0, VelSet]
@@ -14751,11 +14829,11 @@ type = Explod
 trigger1 = AnimElem = 2
 anim = 10000
 ID = 10000
-pos = 35,-15
+pos = 25,-25
 postype = p1  ;p2,front,back,left,right
 facing = 1
 vfacing = 1
-bindtime = 1
+bindtime = 2
 vel = 0,0
 accel = 0,0
 random = 0,0
@@ -14931,7 +15009,7 @@ movetype= A
 physics = N
 juggle  = 2
 ctrl = 0
-anim = 641
+anim = 642
 poweradd = 0
 sprpriority = 2
 
@@ -14984,6 +15062,7 @@ y = 0.44
 [State 200, Move Forward]
 type = VelSet
 trigger1 = movecontact = 1
+x = 3
 y = -1
 
 [State 200, Explod]
@@ -15119,7 +15198,7 @@ movetype= A
 physics = N
 juggle  = 1
 ctrl = 0
-anim = 642
+anim = 641
 poweradd = 0
 sprpriority = 2
 

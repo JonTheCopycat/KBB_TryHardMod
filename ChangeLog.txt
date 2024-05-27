@@ -15,8 +15,21 @@ Jodie: I was a fool to allow a wavedash cancel out of the moves with the most bl
 2. 5bbb: Wavedash cancel removed on block.
 
 
-Junichi: Heavily Requested feature
+Junichi: Heavily Requested feature and some much needed polish
 1. You can now switch stances during roundstart without meter.
+2. Kick 5c now less plus on block (2 frames less)
+3. Punch Stance j.5cc hitbox and animation adjusted to match more closely
+4. Baton 5b: Animation and hitbox changed. less horizontal reach, but covers further up.
+5. Baton 5c: Now cancels directly into Ready Stance on hit.
+6. Fixed bug where 5c would cost meter a second time when entering stance.
+7. Replaced Baton Ready Stance 2b:
+	* Taser is back and has been polished up since last time.
+8. Baton j.c.b hitbox and animation changed (buffed).
+	* Now is a large swing downwards that covers more area.
+9. 236A increased proration (5 -> 15)
+10. 214A increased proration (0 -> 15)
+11. 214B increased proration (5 -> 15
+
 
 
 Leon: The wavedash cancel out of 4b is INSANE after discoveries. Had to replace it entirely.
