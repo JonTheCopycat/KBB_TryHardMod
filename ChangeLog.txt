@@ -1,9 +1,17 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
-| Try-Hard Version 0.6.7 Patch Changes:              /
+| Try-Hard Version 0.6.8 Changes:                    /
 |---------------------------------------------------/
 
 I discovered some shit that I had to account for...
+And then 10000 years passed without any updates. Here's a bit of something.
+
+
+Aege:
+1. Wavedash C Slowed down:
+	* takes 1 more frame to teleport
+	* takes 2 more frames to become actionable
+
 
 Hyrio:
 1. 5a, 5aa:
@@ -17,7 +25,7 @@ Jodie: I was a fool to allow a wavedash cancel out of the moves with the most bl
 
 Junichi: Heavily Requested feature and some much needed polish
 1. You can now switch stances during roundstart without meter.
-2. Kick 5c now less plus on block (2 frames less)
+2. Kick 5c no longer plus on block.
 3. Punch Stance j.5cc hitbox and animation adjusted to match more closely
 4. Baton 5b: Animation and hitbox changed. less horizontal reach, but covers further up.
 5. Baton 5c: Now cancels directly into Ready Stance on hit.
@@ -32,8 +40,12 @@ Junichi: Heavily Requested feature and some much needed polish
 12. Kick 236B increased proration (0 -> 8)
 13. Baton Ready 2a can now cancel into supers
 14. Fixed bug where grab would play an unintended sound.
-
-
+15. Kick 2a now has a unique set of moves to cancel into: 2aa, and 2ab.
+16. Backturned 2b Now less safe on block
+	* No longer stays in backturned.
+17. Kick Wavedash B Replaced for now. Subject to change.
+18. Punch j.5bb launch angle adjusted.
+19. Movelist Updated.
 
 
 Leon: The wavedash cancel out of 4b is INSANE after discoveries. Had to replace it entirely.
@@ -68,6 +80,44 @@ Takuya:
 15. Grab now sends in the other direction
 16. Grab now does 150 damage (100 -> 150)
 17. Grab has less recovery on hit
+
+Takuya Later Changes:
+1. Hurtbox/Hitbox adjustments
+
+2. 5A and 5B autocombos changed a bit
+3. 2[B] gives slightly less proration and juggle
+4. J.5[B] chip damage reduced to 1 per hit
+
+5. 4C speed now mainly depends on how long its charged
+6. 4C charge no longer does true damage
+7. 5C explosions can be recovered out of sooner
+8. 5[C] no longer has power delay
+9. 5[C] spikes now explode in 30f intervals when they're stuck in the opponent
+10. Enhanced 5[C] no longer wallbounces, and instead is bigger and faster
+11. 6C is faster
+12. 6[C] is now hittable post-juggle
+13. Takuya can't combo off 2[C] unless it is enhanced
+14. 2C spikes after the first one come out faster
+15. 2[C] no longer has cancels from it
+16. 2[C] does more damage
+17. Enhanced 2[C] was changed to not be an airgrab
+18. Enhanced J.5[C] was changed to a projectile
+19. J.2[C] has more Invul
+20. Enhanced J.2[C] acts more like a spotdodge now
+
+21. 214A missile explosion goes higher
+22. 214[B]  does less damage
+23. 236[C] now properly does 475 damage
+
+24. Addded 214C, an install that enhances Takuya till he has no more meter. When charged, his charged moves become faster.
+
+25. Wavedash C is an overhead now, and has more hitpause on the last hit
+26. Grab damage reverted back to 100
+27. Fastfall now retains his X velocity
+28. Death animation added back
+29. Movelist updated
+
+don't blame me
 
 
 Violet: Let her try-hard too.

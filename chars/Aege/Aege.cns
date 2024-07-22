@@ -3184,7 +3184,7 @@ volumescale = 500
 [State 0, Turn]
 type = Turn
 triggerall = p2dist x < 0
-trigger1 = time > 2
+trigger1 = time > 3
 
 [State 0, Pause]
 type = Pause
@@ -3194,30 +3194,30 @@ movetime = 10
 
 [State 0, CtrlSet]
 type = CtrlSet
-trigger1 = time = 10
+trigger1 = time = 12
 value = 1
 
 [State 0, PosAdd]
 type = PosAdd
 triggerall = prevstateno != 50000
-trigger1 = time = 2
+trigger1 = time = 3
 x = 75
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = time = 2
+trigger1 = time = 3
 value = S3,0
 volumescale = 100
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = time = 2
+trigger1 = time = 3
 value = S3,1
 volumescale = 100
 
 [State 0, Explod]
 type = Explod
-trigger1 = time = 2
+trigger1 = time = 3
 anim = 5400
 ID = 5400
 pos = -75,0

@@ -812,7 +812,7 @@ triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = movecontact
-trigger2 = stateno = [200, 289] || stateno = [900, 999]
+trigger2 = stateno = [200, 289]
 trigger2 = stateno != 201 && stateno != 210
 
 ;---------------------------------------------------------------------------
