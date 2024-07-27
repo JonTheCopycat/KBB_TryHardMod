@@ -2941,7 +2941,7 @@ ctrl = 1
 
 [State 200, End]
 type = ChangeState
-Triggerall = movecontact
+Triggerall = movehit
 triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 value = 450
@@ -5956,13 +5956,13 @@ value = 0
 ;x = 8
 [State 210, VelSet]
 type = VelSet
-trigger1 = time = [0, 3]
+trigger1 = time = [0, 2]
 x = 8
 
 [State 210, VelSet]
 type = VelSet
-trigger1 = animelem = 6
-x = -1
+trigger1 = animelem = 4
+x = 2
 
 [State 210, Explod]
 type = Explod
@@ -7607,7 +7607,7 @@ sprpriority = 2
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5
+value = 10
 persistent = 0
 
 [State 0, PlaySnd]
@@ -8454,13 +8454,18 @@ ctrl = 0
 anim = 460
 poweradd = 0
 sprpriority = 1
-velset = -4, 0
 
 [State 0, PowerAdd]
 type = PowerAdd
 triggerall = !time
 trigger1 = prevstateno != 480
 value = -100
+
+[State 0, VelSet]
+type = VelSet
+triggerall = prevstateno != 480
+trigger1 = time = 0
+x = -3
 
 [State 0, VarSet]
 type = VarSet
@@ -8655,7 +8660,7 @@ animtype  = Heavy
 damage    = 20
 hitflag = MAF
 guardflag = MA
-pausetime = 10,28
+pausetime = 10,20
 guard.pausetime = 10,14
 sparkno = 2
 guard.sparkno = 13000
@@ -10126,7 +10131,7 @@ ctrl = 0
 anim = 480
 poweradd = -200
 sprpriority = 2
-velset = 5, 0
+velset = 6, 0
 
 [State 0, Juggle Map]
 type = MapAdd
@@ -10264,7 +10269,7 @@ guard.velocity = -8
 ground.velocity = -2,-5
 air.velocity = -2,-4
 Fall = 1
-Fall.recovertime = 50 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 envshake.time = 10
 guard.cornerpush.veloff = -10
 airguard.cornerpush.veloff = -8

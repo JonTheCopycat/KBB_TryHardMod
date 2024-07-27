@@ -280,7 +280,7 @@ x = ifelse(prevstateno=310||prevstateno=220,8,3)
 [State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 1
-y = -7
+y = -5
 
 [State 0, VelSet]
 type = VelSet
@@ -865,6 +865,12 @@ velset = 0,0
 sprpriority = 2
 poweradd = -1000
 
+
+[State 0, NotHitBy]
+type = NotHitBy 
+trigger1 = animelemtime(9) < 0 
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 1
 
 [State 0, Busterable]
 type = MapSet

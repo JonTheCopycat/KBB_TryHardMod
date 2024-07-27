@@ -26,7 +26,7 @@ Summon: Air (1/2 Bar)							_AIR^C
 	"Watanabe summons a sword and rides it. Hold up,
 	down or C for Watanabe to abandon it, and make
 	it attach to the wall.
-	This summons a thunder after a while.""
+	This summons a thunder after a while."
 
 _! Jumpoff					_U
 
@@ -67,8 +67,7 @@ _! Ether Drive: Ride						^C
 
 
 Seed spread (1 Bar, _AIR OK)    						_D_DF_F^B
-	"Watanabe throws seeds around him, these have
-	different properties than the normal seed."
+	"Watanabe throws 2 seeds around him."
 
 "Storm Wolf" (1/2 Bar, _AIR OK)    						D_DB_B^B
 	"sideswitches the opponent"
