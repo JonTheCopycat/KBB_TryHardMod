@@ -4130,7 +4130,7 @@ ctrl = 1
 
 ;-------------------------------------------------------------------------------
 ; Kicks Wavedash B
-[Statedef 390]
+[Statedef 391]
 type    = A
 physics = A
 ctrl = 0
@@ -4202,7 +4202,7 @@ ctrl = 1
 
 ;-------------------------------------------------------------------------------
 ; Kicks Wavedash B
-[Statedef 391]
+[Statedef 390]
 type    = A
 movetype= I
 physics = N
@@ -4211,7 +4211,6 @@ ctrl = 0
 anim = 390
 poweradd = 0
 sprpriority = 2
-velset = 3.6, -7
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -4224,7 +4223,13 @@ channel = 0
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = 1 
-y = 0.48
+y = 0.44
+
+[State 0, VelAdd]
+type = VelSet
+trigger1 = time = 0
+y = -5
+x = ifelse(vel x > 4.5, 4.5, vel x)
 
 [State 0, AfterImage]
 type = AfterImage
@@ -5356,10 +5361,10 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 value = 450
 
-[State 0, StateTypeSet]
-type = CtrlSet
-trigger1 = time >= 6
-value = 1
+;[State 0, StateTypeSet]
+;type = CtrlSet
+;trigger1 = time >= 6
+;value = 1
 
 [State 200, C]
 type = ChangeState
@@ -13150,14 +13155,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
-
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
 Triggerall = movecontact
@@ -13291,14 +13288,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
-
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
 Triggerall = movecontact
@@ -13427,14 +13416,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
-
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -13562,14 +13543,6 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
-
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -13708,14 +13681,6 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
-
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -13904,14 +13869,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
-
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -14093,14 +14050,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
-
 
 [State 200, End]
 type = ChangeState
@@ -14243,14 +14192,6 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
-
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -14414,14 +14355,6 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
-
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -15345,14 +15278,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
-
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
 Triggerall = movecontact
@@ -15540,14 +15465,6 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
-
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState
@@ -15742,14 +15659,6 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
-
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
 
 [State -1, SPECIAL 3 - Super Dive Kick]
 type = ChangeState

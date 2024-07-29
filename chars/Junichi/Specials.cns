@@ -1405,8 +1405,8 @@ y = -5
 [State 21000, VelSet]
 type = VelSet
 trigger1 = AnimElem = 1
-x = 1.5 + ifelse(p2bodydist x * 0.01 <= 2, p2bodydist x * 0.01, 2)
-y = -7.25
+x = 1.8
+y = -7.3
 
 [State 21000, VelSet]
 type = VelAdd

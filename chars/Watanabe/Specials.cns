@@ -805,7 +805,7 @@ poweradd = 0
 type = HitDef
 getpower = 0
 triggerall = !movecontact
-triggerall = map(juggle) < 108 || hitcount != 0
+triggerall = map(juggle) < 100 || hitcount != 0
 trigger1 = 1
 attr = S,SA
 animtype  = Medium
@@ -822,15 +822,15 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 Envshake.time = 5
-ground.velocity = 1,-9
-air.velocity = .5,-9
+ground.velocity = 1,-8
+air.velocity = .5,-8
 Fall = 1
 fall.recovertime = 90
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = (15,21) && !movehit
-x = 18
+x = 14
 
 [State 0, VelSet]
 type = VelSet
@@ -897,7 +897,7 @@ helpertype = normal ;player
 name = "plantTHROWSuper"
 ID = 5465
 stateno = 22005
-pos = 0,-40
+pos = 0,-10
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -917,7 +917,7 @@ helpertype = normal ;player
 name = "plantTHROWSuper"
 ID = 5466
 stateno = 22005
-pos = 0,-40
+pos = 0,-10
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -973,7 +973,7 @@ y = 0
 type = VelAdd 
 trigger1 = time = 1 && IsHelper(5465)
 x = 4
-y = -4
+y = -6
 ;ignorehitpause = 
 ;persistent = 
 
@@ -981,7 +981,7 @@ y = -4
 type = VelAdd 
 trigger1 = time = 1 && IsHelper(5466)
 x = -4
-y = -4
+y = -6
 
 ;[State 0, VelAdd]
 ;type = VelAdd 
@@ -1416,7 +1416,7 @@ facing = 1
 ownpal = 0
 supermovetime = 0
 pausemovetime = 0
-inheritJuggle = 1
+inheritJuggle = 0
 keyctrl = 0
 persistent = 0
 

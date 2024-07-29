@@ -45,7 +45,9 @@ Junichi: Heavily Requested feature and some much needed polish
 	* No longer stays in backturned.
 17. Kick Wavedash B Replaced for now. Subject to change.
 18. Punch j.5bb launch angle adjusted.
-19. Movelist Updated.
+19. 214A Effective Range reduced.
+20. 214B Startup Increased.
+21. Backturned Crouch block is no longer actionable after the first 5 buffer frames.
 
 
 Leon: The wavedash cancel out of 4b is INSANE after discoveries. Had to replace it entirely.
@@ -115,7 +117,8 @@ Takuya Later Changes:
 26. Grab damage reverted back to 100
 27. Fastfall now retains his X velocity
 28. Death animation added back
-29. Movelist updated
+29. Many Other Tweaks
+30. Movelist updated
 
 don't blame me
 
