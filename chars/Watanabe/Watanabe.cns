@@ -1985,7 +1985,7 @@ palbright = 0,256,0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = helper(311),moveguarded
+trigger1 = helper(311),moveguarded = 1
 x = 0
 ;ignorehitpause = 
 persistent = 0
@@ -2292,6 +2292,22 @@ pausemovetime = 0
 inheritJuggle = 1
 keyctrl = 0
 
+[State 0, Helper]
+type = Helper
+trigger1 = time = 7
+helpertype = normal ;player
+name = "plant 2"
+ID = 392
+stateno = 392
+pos = 30,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+ownpal = 0
+supermovetime = 0
+pausemovetime = 0
+inheritJuggle = 1
+keyctrl = 0
+
 
 [State 0, VelSet]
 type = VelAdd
@@ -2510,7 +2526,7 @@ triggerall = enemy,movetype != A
 trigger1 = 1
 attr = S, NA
 animtype  = Heavy
-damage    = 40
+damage    = 25
 Hitflag = MAF
 guardflag = MAF
 pausetime = 16,18
@@ -2527,7 +2543,7 @@ air.hittime = 15
 ground.velocity = -2,-8
 guard.velocity = -1
 airguard.velocity = -3,-2
-air.velocity = -2,-5 
+air.velocity = -2,ifelse(p2bodydist y < -50, -4, -6) 
 fall = 1
 fall.recovertime = 60 ; im evil.
 Envshake.time = 16
@@ -2541,7 +2557,7 @@ triggerall = enemy,movetype = A
 trigger1 = 1
 attr = S, NA
 animtype  = Heavy
-damage    = 80
+damage    = 50
 Hitflag = MAF
 guardflag = MAF
 pausetime = 18,18
@@ -2563,6 +2579,153 @@ fall.recover = 0
 Envshake.time = 30
 
 
+
+[State 200, End]
+type = Destroyself
+trigger1 = AnimTime = 0
+
+; Wavedash B plant summon 2
+;-------------------------------------------------------------------------------
+[Statedef 392]
+type    = S
+movetype= A
+physics = S
+juggle  = 1
+ctrl = 0
+anim = 392
+sprpriority = 1
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 0, Damage Proration]
+type = ParentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 8
+
+[State 0, FatalCounter]
+type = MapSet
+trigger1 = 1
+map = "fatal"
+value = 1
+ignorehitpause = 1
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = movecontact = 1
+value = 100
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = moveguarded
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = movehit
+;ignorehitpause = 
+;persistent = 
+
+[State 310, Normal]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+triggerall = enemy,movetype != A
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy
+damage    = 20
+Hitflag = MAF
+guardflag = MAF
+pausetime = 16,18
+guard.pausetime = 16,4
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = S0,5
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+air.hittime = 15
+ground.velocity = -2,-8
+guard.velocity = -1
+airguard.velocity = -3,-2
+air.velocity = -2,ifelse(p2bodydist y < -50, -4, -6)
+fall = 1
+fall.recovertime = 60 ; im evil.
+Envshake.time = 16
+
+[State 310, Fatal]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+triggerall = enemy,movetype = A
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy
+damage    = 40
+Hitflag = MAF
+guardflag = MAF
+pausetime = 18,18
+guard.pausetime = 18,4
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = S0,5
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -3,-12
+guard.velocity = -2
+airguard.velocity = -3,-2
+air.velocity = -3,-8
+Fall = 1
+fall.recover = 0
+Envshake.time = 30
 
 [State 200, End]
 type = Destroyself
@@ -3509,28 +3672,28 @@ ownpal = 1
 ignorehitpause = 1
 persistent = 0
 
-;[State 200, 1]
-;type = HitDef
-;getpower = 0
-;triggerall = !movecontact && root,command != "hold_c"
-;trigger1 = 1
-;attr = A,NP
-;animtype  = Medium
-;damage    = 0
-;hitflag = MAFD
-;guardflag =  MA
-;sparkno = 0
-;pausetime = 0,45
-;guard.pausetime = 0,5
-;guard.sparkno = 13000
-;sparkxy = -8,-25
-;hitsound   = 5,1
-;guardsound = 6,10
-;ground.velocity = 0,0
-;air.velocity = 0,0
-;ground.type = High
-;ground.slidetime = 12
-;Envshake.time = 5
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact && root,command != "hold_c"
+trigger1 = 1
+attr = A,NP
+animtype  = Medium
+damage    = 0
+hitflag = MAFD
+guardflag =  MA
+sparkno = 0
+pausetime = 0,45
+guard.pausetime = 0,5
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,1
+guardsound = 6,10
+ground.velocity = 0,0
+air.velocity = 0,0
+ground.type = High
+ground.slidetime = 12
+Envshake.time = 5
 
 [State 200, Gravity]
 type = VelAdd
@@ -4349,18 +4512,18 @@ guard.pausetime = 10,4
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -9,-30
-hitsound   = S0,3
+hitsound   = S0,5
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 12 + ifelse(enemy,movetype = A, 7,0)
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2,-5
+ground.velocity = -1,-6
 guard.velocity = -1
 airguard.velocity = -1,-2
-air.velocity = -2,-5
+air.velocity = -1,-6
 fall = 1
-fall.recovertime = 35 + ifelse(enemy,movetype = A, 7,0)
+fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 Envshake.time = 16
 
 [State 200, End]
