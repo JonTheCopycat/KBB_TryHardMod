@@ -21,6 +21,12 @@ Hyrio:
 Jodie: I was a fool to allow a wavedash cancel out of the moves with the most blockstun in his kit.
 1. 5bb: Wavedash Cancel is now on block as well
 2. 5bbb: Wavedash cancel removed on block.
+3. Wavedash B & Follow Up:
+	* Juggle Increased (0 -> 10)
+	* Proration Decreased (13 -> 8)
+4. Wavedash C:
+	* Proration Increased (0 -> 5)
+	* Distance Decreased
 
 
 Junichi: Heavily Requested feature and some much needed polish
@@ -58,6 +64,10 @@ Leon: The wavedash cancel out of 4b is INSANE after discoveries. Had to replace 
 
 Noll: A make shift wavedash stop just for you.
 1. Pressing down again after wavedashing will let noll fall down.
+
+
+Saito:
+1. Wavedash B Juggle Increased (0 -> 5)
 
 
 Sareo: Preventing infinite blockstrings
@@ -135,6 +145,12 @@ Violet: Let her try-hard too.
 Vivienne: The Catalyst behind the discovery
 1. 5aa: Removed wavedash cancel out.
 2. Wavedash: Now takes longer to return to idle.
+
+
+Noll: Small Proration and Juggle Adjustment
+1. Wavedash B:
+	* Increased Juggle (0 -> 10)
+	* Increased Proration (0 -> 8)
 
 
 Watanabe: Sprout must die

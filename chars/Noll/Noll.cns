@@ -4183,6 +4183,21 @@ anim = 390
 poweradd = 0
 sprpriority = 0
 
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 8
+
 [State 0, PowerAdd]
 type = PowerAdd
 triggerall = numhelper(51000) = 0
