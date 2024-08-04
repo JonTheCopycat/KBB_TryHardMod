@@ -6275,12 +6275,12 @@ elem = 3
 [State 0, VelSet]
 type = VelSet
 trigger1 = time >= 9
-x = 8
+x = 6
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = time >= 9 && movecontact && prevstateno != 19000 
-x = 12
+x = 8
 
 [State 0, TargetBind]
 type = TargetBind
@@ -6383,7 +6383,7 @@ physics = S
 juggle  = 1
 ctrl = 0
 anim = 401
-velset = 6,0
+velset = 4,0
 
 [State 0, ChangeState]
 type = ChangeState
@@ -6424,7 +6424,7 @@ elem = 3
 [State 0, VelSet]
 type = VelSet
 trigger1 = time >= 9
-x = 7
+x = 6
 
 [State 1010, Helper Attack Scale]
 type = AttackMulSet

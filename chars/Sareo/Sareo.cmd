@@ -180,6 +180,16 @@ command = D, D
 time = 10
 buffer.time = 1
 
+[Command]
+name = "BWD"
+command = ~B, D, DB
+time = 20
+
+[Command]
+name = "NotBWD"
+command = F, D, DB
+time = 20
+
 ;-| 2/3 Button Combination |-----------------------------------------------
 [Command]
 name = "recovery" ;Required (do not remove)
@@ -606,7 +616,6 @@ triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 1"
 Triggerall = power >= 2000
 trigger1 = ctrl
-trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 2 - SPEEEEEN
 [State -1, SPECIAL 2]
@@ -627,7 +636,6 @@ triggerall = command = "SPECIAL 3"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
-trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 4 - CURE
 [State -1, SPECIAL 4]
@@ -650,7 +658,6 @@ triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 5"
 Triggerall = power >= 2000
 trigger1 = ctrl
-trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 6 - REFLECT
 [State -1, SPECIAL 5]
@@ -683,7 +690,7 @@ trigger1 = ctrl
 [State -1, Wavedash]
 type = ChangeState
 value = 30
-trigger1 = command = "WD" && command != "NotWD"
+trigger1 = command = "BWD" && command != "NotBWD"
 trigger1 = statetype = C || statetype = S
 trigger1 = ctrl
 

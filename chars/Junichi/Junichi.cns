@@ -11989,14 +11989,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
-
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -12089,14 +12081,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
 
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
-
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -12188,14 +12172,6 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 21000
-
-[State 200, Special 4 - Gundown]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1000
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-value = 24000
 
 [State 200, End]
 type = ChangeState
@@ -14867,8 +14843,8 @@ physics = A
 [State 0, Dash Velocity]
 type = VelSet
 trigger1 = time = 2
-x = 5
-y = -3
+x = 5.5
+y = -2.5
 
 [State 200, Return to Idle]
 type = ChangeState
@@ -15060,7 +15036,6 @@ ctrl = 0
 anim = 640
 poweradd = -200
 sprpriority = 1
-velset = 3.5, -3
 
 ;[State 0, PlaySnd]
 ;type = PlaySnd
@@ -15087,6 +15062,17 @@ type = PlaySnd
 trigger1 = time % 5 = 0
 value = S1,0
 volumescale = 50
+
+[State 0, Dash Velocity]
+type = VelSet
+trigger1 = time = 0
+x = vel x * 0.2
+y = -3
+
+[State 200, Move Forward]
+type = VelAdd
+trigger1 = time = [2, 10]
+y = -0.22
 
 [State 200, Jump]
 type = ChangeState
@@ -15151,13 +15137,6 @@ persistent = 0
 ;volumescale = 200
 ;channel = 0
 
-[State 0, FatalCounter]
-type = MapSet
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
-
 [State 200, Damage Proration]
 type = VarAdd
 trigger1 = movehit
@@ -15173,9 +15152,15 @@ value = S1,1
 volumescale = 50
 
 [State 200, Move Forward]
-type = VelAdd
-trigger1 = animelem = 2
-x = 2
+type = VelSet
+trigger1 = animelem = 1
+x = 6
+y = -2
+
+[State 200, Slow Down]
+type = VelSet
+trigger1 = time > 10
+x = vel x * 0.95
 
 [State 200, Move Forward]
 type = VelAdd
@@ -15215,14 +15200,13 @@ ignorehitpause = 1
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = enemy,movetype != A
 triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Heavy
 damage    = 30
 hitflag = MAF
-guardflag = MA
+guardflag = HA
 pausetime = 16,16
 guard.pausetime = 16,12
 sparkno = 2
@@ -15238,35 +15222,6 @@ air.velocity = -3,4
 Fall = 1
 Fall.recover = 0
 envshake.time = 10
-guard.cornerpush.veloff = -5
-airguard.cornerpush.veloff = -4
-
-[State 200, Fatal!]
-type = HitDef
-getpower = 0
-triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = enemy,movetype = A
-triggerall = !movecontact
-trigger1 = 1
-attr = S, NA
-animtype  = Heavy
-damage    = 60
-hitflag = MAF
-guardflag = MA
-pausetime = 30,30
-sparkno = 2
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = 8,0
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 12
-ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -4,5
-air.velocity = -4,5
-Fall = 1
-Fall.recover = 0
-envshake.time = 30
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -15362,9 +15317,15 @@ value = S1,1
 volumescale = 50
 
 [State 200, Move Forward]
-type = VelAdd
-trigger1 = animelem = 2
-x = 1
+type = VelSet
+trigger1 = animelem = 1
+x = 6.25
+y = -1.5
+
+[State 200, Slow Down]
+type = VelSet
+trigger1 = time > 10
+x = vel x * 0.95
 
 [State 200, Move Forward]
 type = VelAdd
@@ -15453,7 +15414,7 @@ ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -4,-7
 air.velocity = -4,-6
 Fall = 1
-Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 90 + ifelse(enemy,movetype = A, 7,0)
 envshake.time = 30
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
@@ -15539,13 +15500,12 @@ map = "juggle"
 value = 10
 persistent = 0
 
-;[State 0, PlaySnd]
-;type = PlaySnd
-;triggerall = random < 600
-;trigger1 = AnimElem = 1
-;value = S200,0+(random<500)*1+(random<500)*1+(random<500)*1
-;volumescale = 200
-;channel = 0
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S200,0+(random<500)*1+(random<500)*1+(random<500)*1
+volumescale = 200
+channel = 0
 
 [State 200, Damage Proration]
 type = VarAdd
@@ -15562,9 +15522,20 @@ value = S1,1
 volumescale = 50
 
 [State 200, Move Forward]
-type = VelAdd
-trigger1 = time = [8, 29]
-y = -0.22
+type = VelSet
+trigger1 = animelem = 1
+x = 5.5
+y = -3
+
+[State 200, Slow Down]
+type = VelSet
+trigger1 = time > 20
+x = vel x * 0.95
+
+;[State 200, Move Forward]
+;type = VelAdd
+;trigger1 = time = [8, 29]
+;y = -0.22
 
 [State 200, Move Forward]
 type = VelAdd

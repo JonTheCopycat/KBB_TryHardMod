@@ -115,7 +115,7 @@ poweradd = 0
 [State 0, Helper]
 type = Helper
 trigger1 = time%3 = 0
-trigger1 = time >= 30 && time <= 81
+trigger1 = time >= 30 && time <= 65
 trigger1 = root,movetype != H 
 helpertype = normal ;player
 name = "Ether Drive"
@@ -198,7 +198,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SP
 animtype  = Light
-damage    = 7
+damage    = 10
 hitflag = MAF
 guardflag = MAF
 pausetime = 0,10
@@ -1460,7 +1460,7 @@ type = MapSet
 trigger1 = 1
 map = "busterable"
 value = 1
-persistent = 0
+
 
 [State 0, PlayerPush]
 type = PlayerPush
@@ -1607,6 +1607,12 @@ value = movehit
 ;ignorehitpause = 
 ;persistent = 
 
+[State 0, Busterable]
+type = RootMapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+
 [State -2, Counterhit TSP]
 type = Helper
 Triggerall = numhelper(4020) = 0
@@ -1724,6 +1730,12 @@ map = "helperHit"
 value = movehit
 ;ignorehitpause = 
 ;persistent = 
+
+[State 0, Busterable]
+type = RootMapSet
+trigger1 = 1
+map = "busterable"
+value = 1
 
 [State 1010, Helper Attack Scale]
 type = AttackMulSet

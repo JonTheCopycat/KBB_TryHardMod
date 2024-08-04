@@ -3940,14 +3940,39 @@ trigger1 = movecontact = 1
 y = -2
 x = 2
 
+[State 0, MapSet]
+type = MapSet
+triggerall = var(43) != 1
+triggerall = movehit
+trigger1 = AnimElem = 6, >= 0 && AnimElem = 7, <= 0
+map = "distX"
+value = (pos x + 65 * facing) - enemy,pos x
+
+[State 0, MapSet]
+type = MapSet
+triggerall = var(43) != 1
+triggerall = movehit
+trigger1 = AnimElem = 6, >= 0 && AnimElem = 7, <= 0
+map = "distY"
+value = (pos y + -8) - enemy,pos y
+
 [State 0, TargetBind]
 type = TargetBind
 triggerall = var(43) != 1
 triggerall = movehit
-trigger1 = AnimElem = 6 || AnimElem = 7
+trigger1 = AnimElem = 6, >= 0 && AnimElem = 7, <= 0
 time = 1
 id = -1
-pos = 65,-8
+pos = ifelse(abs(map(distX)) < 10,  65, ((enemy,pos x + 10 * map(distX) / abs(map(distX))) - pos x) * facing),    ifelse(abs(map(distY)) < 10, -8, ((enemy,pos y + 10 * map(distY) / abs(map(distY))) - pos y))
+
+;[State 0, TargetBind]
+;type = TargetBind
+;triggerall = var(43) != 1
+;triggerall = movehit
+;trigger1 = AnimElem = 6 || AnimElem = 7
+;time = 1
+;id = -1
+;pos = 65,-8
 
 [State 200, 1]
 type = HitDef

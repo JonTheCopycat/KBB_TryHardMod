@@ -189,13 +189,36 @@ ownpal = 1
 supermovetime = 0
 pausemovetime = 0
 
+[State 0, MapSet]
+type = MapSet
+triggerall = !moveguarded
+trigger1 = movehit
+map = "distX"
+value = (pos x + 0 * facing) - enemy,pos x
+
+[State 0, MapSet]
+type = MapSet
+triggerall = !moveguarded
+trigger1 = movehit
+map = "distY"
+value = (pos y + 10) - enemy,pos y
+
 [State 0, TargetBind]
 type = TargetBind
 triggerall = !moveguarded
 trigger1 = movehit
 time = 1
 id = -1
-pos = 0,10
+pos = ifelse(abs(map(distX)) < 10,  0, ((enemy,pos x + 10 * map(distX) / abs(map(distX))) - pos x) * facing),    ifelse(abs(map(distY)) < 10, 10, ((enemy,pos y + 10 * map(distY) / abs(map(distY))) - pos y))
+
+
+;[State 0, TargetBind]
+;type = TargetBind
+;triggerall = !moveguarded
+;trigger1 = movehit
+;time = 1
+;id = -1
+;pos = 0,10
 
 [State 0, VelSet]
 type = VelSet
@@ -313,14 +336,36 @@ type = ScreenBound
 trigger1 = 1
 value = 1
 
+[State 0, MapSet]
+type = MapSet
+triggerall = !moveguarded
+trigger1 = movehit
+map = "distX"
+value = (pos x + 0 * facing) - enemy,pos x
+
+[State 0, MapSet]
+type = MapSet
+triggerall = !moveguarded
+trigger1 = movehit
+map = "distY"
+value = (pos y + 5) - enemy,pos y
+
 [State 0, TargetBind]
 type = TargetBind
-;Trigger1 = Time < 22
 triggerall = !moveguarded
 trigger1 = movehit
 time = 1
 id = -1
-pos = 0,5
+pos = ifelse(abs(map(distX)) < 10,  0, ((enemy,pos x + 10 * map(distX) / abs(map(distX))) - pos x) * facing),    ifelse(abs(map(distY)) < 10, 5, ((enemy,pos y + 10 * map(distY) / abs(map(distY))) - pos y))
+
+;[State 0, TargetBind]
+;type = TargetBind
+;;Trigger1 = Time < 22
+;triggerall = !moveguarded
+;trigger1 = movehit
+;time = 1
+;id = -1
+;pos = 0,5
 
 [State 200, 1]
 type = HitDef
@@ -681,12 +726,31 @@ Fall = 1
 Envshake.time = 30
 fall.recover = 0
 
+[State 0, MapSet]
+type = MapSet
+trigger1 = hitcount <= 2 && movehit
+map = "distX"
+value = (pos x + 30 * facing) - enemy,pos x
+
+[State 0, MapSet]
+type = MapSet
+trigger1 = hitcount <= 2 && movehit
+map = "distY"
+value = (pos y + 20) - enemy,pos y
+
 [State 0, TargetBind]
 type = TargetBind
-trigger1 = hitcount = 1 && movehit
+trigger1 = hitcount <= 2 && movehit
 time = 1
 id = -1
-pos = 30,20
+pos = ifelse(abs(map(distX)) < 15,  30, ((enemy,pos x + 15 * map(distX) / abs(map(distX))) - pos x) * facing),    ifelse(abs(map(distY)) < 15, 20, ((enemy,pos y + 15 * map(distY) / abs(map(distY))) - pos y))
+
+;[State 0, TargetBind]
+;type = TargetBind
+;trigger1 = hitcount = 1 && movehit
+;time = 1
+;id = -1
+;pos = 30,20
 ;ignorehitpause = 
 ;persistent = 
 

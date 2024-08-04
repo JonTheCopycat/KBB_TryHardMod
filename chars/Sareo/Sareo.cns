@@ -458,7 +458,7 @@ value = 60
 
 [State 200, Wavedash Cancel]
 type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
+Triggerall = command = "BWD" && command != "NotBWD"
 trigger1 = movehit || (movecontact && AnimTime > -7)
 value = 30
 ctrl = 1
@@ -859,11 +859,12 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 6"
 value = 25000
 
-[State 310, End]
+[State 200, Wavedash Cancel]
 type = ChangeState
-triggerall = movehit
-trigger1 = command = "WD" && command != "NotWD"
+Triggerall = command = "BWD" && command != "NotBWD"
+trigger1 = movecontact
 value = 30
+ctrl = 1
 
 [State 300, 5BB]
 type = ChangeState
@@ -904,14 +905,6 @@ Triggerall = power >= 200
 triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 value = 400
-
-[State 300, 5BB]
-type = ChangeState
-Triggerall = movecontact = 1
-triggerall = power >= 100
-trigger1 = ailevel = 0 && command = "holdback"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 590
 
 [State 300, End]
 type = ChangeState
@@ -1072,13 +1065,12 @@ trigger1 = command = "SPECIAL 6"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 25000
 
-[State 300, 5BB]
+[State 200, Wavedash Cancel]
 type = ChangeState
-Triggerall = movecontact = 1
-triggerall = power >= 100
-trigger1 = ailevel = 0 && command = "holdback"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 590
+Triggerall = command = "BWD" && command != "NotBWD"
+trigger1 = movecontact
+value = 30
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
@@ -1677,6 +1669,13 @@ trigger1 = command = "up"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = command = "BWD" && command != "NotBWD"
+trigger1 = movecontact
+value = 30
+ctrl = 1
+
 [State 200, 4C - ICE AMP]
 type = ChangeState
 Triggerall = movecontact
@@ -1710,14 +1709,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 value = 400
 
-[State 300, 5BB]
-type = ChangeState
-Triggerall = movecontact = 1
-triggerall = power >= 100
-trigger1 = ailevel = 0 && command = "holdback"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 590
-
 [State 310, End]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -1725,7 +1716,7 @@ value = 0
 ctrl = 1
 
 ;-------------------------------------------------------------------------------
-; Wavedash C
+; Wavedash B
 [Statedef 390]
 type  = S
 movetype= A
@@ -1734,7 +1725,7 @@ juggle = 2
 ctrl = 0
 anim = 390
 poweradd = 0
-velset = 5,0
+velset = 6,0
 sprpriority = 2
 attackdist = 50
 
@@ -1813,7 +1804,7 @@ volumescale = 200
 [State 0, VelSet]
 type = VelSet
 trigger1 = time < 5
-x = 5
+x = 6
 
 ;element trail
 [State 0, trail 1]
@@ -5565,7 +5556,7 @@ ctrl = 0
 anim = 591
 poweradd = 0
 sprpriority = 2
-velset = ifelse(enemy,movetype = H, 16, 12),0
+velset = 16,0
 
 [State 0, Juggle Map]
 type = MapAdd
@@ -5664,11 +5655,12 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 6"
 value = 25000
 
-[State 310, End]
+[State 200, Wavedash Cancel]
 type = ChangeState
-triggerall = movehit
-trigger1 = command = "WD" && command != "NotWD"
+Triggerall = command = "BWD" && command != "NotBWD"
+trigger1 = movecontact
 value = 30
+ctrl = 1
 
 [State 300, 5BB]
 type = ChangeState

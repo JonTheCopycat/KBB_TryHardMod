@@ -1,16 +1,25 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
-| Try-Hard Version 0.6.8 Changes:                    /
+| Try-Hard Version 0.7.0 Changes:                    /
 |---------------------------------------------------/
 
 I discovered some shit that I had to account for...
 And then 10000 years passed without any updates. Here's a bit of something.
 
 
+Universal:
+1. Some moves with the vortex property have been made smoother. The vortex effect of pulling opponents towards a move now applies gradually instead of instantly.
+
+
 Aege:
 1. Wavedash C Slowed down:
 	* takes 1 more frame to teleport
 	* takes 2 more frames to become actionable
+2. j.b vortex effect smoothened
+
+
+Fly:
+1. 236B and 214B: No longer jump cancellable on block.
 
 
 Hyrio:
@@ -27,6 +36,7 @@ Jodie: I was a fool to allow a wavedash cancel out of the moves with the most bl
 4. Wavedash C:
 	* Proration Increased (0 -> 5)
 	* Distance Decreased
+5. j.c and 5c.c: vortex effect smoothened
 
 
 Junichi: Heavily Requested feature and some much needed polish
@@ -40,9 +50,16 @@ Junichi: Heavily Requested feature and some much needed polish
 	* Taser is back and has been polished up since last time.
 8. Baton j.c.b hitbox and animation changed (buffed).
 	* Now is a large swing downwards that covers more area.
-9. 236A increased proration (5 -> 15)
-10. 214A increased proration (0 -> 15)
-11. 214B increased proration (5 -> 15)
+9. 236A:
+	* increased proration (5 -> 15)
+	* No longer vulnerable to low attacks
+10. 214A: 
+	* increased proration (0 -> 15)
+	* Effective Range reduced.
+	* Now only invul during superpause
+11. 214B: 
+	* increased proration (5 -> 15)
+	* Startup Increased
 12. Kick 236B increased proration (0 -> 8)
 13. Baton Ready 2a can now cancel into supers
 14. Fixed bug where grab would play an unintended sound.
@@ -51,9 +68,18 @@ Junichi: Heavily Requested feature and some much needed polish
 	* No longer stays in backturned.
 17. Kick Wavedash B Replaced for now. Subject to change.
 18. Punch j.5bb launch angle adjusted.
-19. 214A Effective Range reduced.
-20. 214B Startup Increased.
-21. Backturned Crouch block is no longer actionable after the first 5 buffer frames.
+19. Backturned Crouch block is no longer actionable after the first 5 buffer frames.
+20. Punch j.c:
+	* Horizontal Velocity increased slightly
+	* Vertical velocity decreased slightly
+21. Baton j.a reverted
+22. Baton j.b hitbox size sliglty increased.
+23. Baton j.c:
+	* Stance Velocity Changed from jumping forward to jumping in place.
+	* All Stance moves given horizontal velocity.
+24. j.c.a Fatal combo time increased drastically.
+	* Hitbox size slightly reduced.
+25. j.c.b no longer a fatal. Now counts as an overhead.
 
 
 Leon: The wavedash cancel out of 4b is INSANE after discoveries. Had to replace it entirely.
@@ -72,6 +98,12 @@ Saito:
 
 Sareo: Preventing infinite blockstrings
 1.  Bonus stun from backsway no longer applies during block.
+2. Backsway has been repurposed as his new unique wavedash, and will be replacing his wavedash
+	* can no longer wavedash forward
+	* Backsways by inputting a backwards wavedash.
+	* All previous backsway cancels are now done with a backwards wavedash input
+	* Has Two Bonus Wavedash Moves by pressing forward + A or B. These are his old backsway moves.
+	* Tweaked some wavedash Moves to work better with the backwards wavedash.
 
 
 Takuya:
@@ -129,6 +161,7 @@ Takuya Later Changes:
 28. Death animation added back
 29. Many Other Tweaks
 30. Movelist updated
+31. Too many other changes
 
 don't blame me
 
@@ -170,7 +203,15 @@ Watanabe: Sprout must die
 	* now creates a plant on whiff
 	* has way more recovery on whiff
 	* now has cancels into 5AA and 5B on hit
+6. Phantom Sword 5cc is now faster
+7. Phantom Swords are no longer translucent
+8. Phantom Sword j.5cc is now slower
+9. 236A length reduced
+10. 236C is no longer burstable.
 
+
+Yoru:
+1. Fixed Bug Where Yoru could charge while Metastar is doing 236A
 
 
 

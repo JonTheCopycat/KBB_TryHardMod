@@ -7171,13 +7171,35 @@ type = NotHitBy
 trigger1 = 1
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
 
+[State 0, MapSet]
+type = MapSet
+triggerall = hitcount < 6
+trigger1 = movehit
+map = "distX"
+value = (pos x + 15 * facing) - enemy,pos x
+
+[State 0, MapSet]
+type = MapSet
+triggerall = hitcount < 6
+trigger1 = movehit
+map = "distY"
+value = (pos y + 25) - enemy,pos y
+
 [State 0, TargetBind]
 type = TargetBind
 triggerall = hitcount < 6
 trigger1 = movehit
 time = 1
 id = -1
-pos = 15,25
+pos = ifelse(abs(map(distX)) < 12,  15, ((enemy,pos x + 12 * map(distX) / abs(map(distX))) - pos x) * facing),    ifelse(abs(map(distY)) < 12, 25, ((enemy,pos y + 12 * map(distY) / abs(map(distY))) - pos y))
+
+;[State 0, TargetBind]
+;type = TargetBind
+;triggerall = hitcount < 6
+;trigger1 = movehit
+;time = 1
+;id = -1
+;pos = 15,25
 
 [State 0, Guard Count Reset]
 type = MapSet
