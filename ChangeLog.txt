@@ -86,6 +86,7 @@ Leon: The wavedash cancel out of 4b is INSANE after discoveries. Had to replace 
 1. 4b: removed wavedash cancel.
 2. 5b is now wavedash cancellable
 3. 5bb is now wavedash cancellable on hit.
+4. Fixed Bug where fast falling his Supers would break them.
 
 
 Noll: A make shift wavedash stop just for you.
