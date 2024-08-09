@@ -95,6 +95,7 @@ Metaknight:
 	* Hurtbox adjusted
 	* Animation adjusted
 	* Startup reduced (f18 -> f16)
+3. Fixed bug where MetaKnight groundbounce was fucked up.
 
 
 Noll: A make shift wavedash stop just for you.
