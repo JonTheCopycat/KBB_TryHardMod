@@ -5,7 +5,7 @@
 [Info]
 name = "MetaKnight"        ;Name of character
 displayname = "MetaKnight" ;Name of character to display
-versiondate =10/25/2020    ;Version date of character
+versiondate = 8/8/2024    ;Version date of character
 mugenversion =  1.1 ;Version of M.U.G.E.N character works on
 ikemenVersion = 0.98
 author = "KBB Dev Team & JonTheCopycat"      ;Character author name

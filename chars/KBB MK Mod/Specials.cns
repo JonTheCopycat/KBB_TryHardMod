@@ -339,6 +339,14 @@ time = 25
 freq = 5
 ampl = -4
 
+[State 200, Special 5 - Smash Ultra]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 5"
+Trigger1 = power >= 2000
+value = 21000
+
 [State 200, End]
 type = ChangeState
 triggerall = movehit
@@ -656,16 +664,17 @@ type = PlaySnd
 trigger1 = animelem = 2
 value = S23000,1
 
-[State 0, BindToTarget]	;Positions behind p2
-type = BindToTarget
-trigger1 = animelem = 2
-time = 1
-pos = -35,0, Foot
+;[State 0, BindToTarget]	;Positions behind p2
+;type = BindToTarget
+;trigger1 = animelem = 2
+;time = 1
+;pos = -35,0, Foot
 
 [State 0, PosSet]
 type = PosSet
-trigger1 = pos y >= 0
+trigger1 = AnimElem = 2
 y = 0
+x = target,pos x - 35 * target,facing
 ;ignorehitpause = 
 ;persistent = 
 

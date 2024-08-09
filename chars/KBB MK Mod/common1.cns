@@ -2498,6 +2498,12 @@ type = PosAdd
 trigger1 = Time = 0
 x = Const(movement.down.bounce.offset.x)
 
+[State 5101, 5]
+type = PosAdd
+triggerall = pos y >= 10
+trigger1 = Time = 0
+y = -10
+
 [State 5101, 6] ;Acceleration
 type = VelAdd
 trigger1 = 1

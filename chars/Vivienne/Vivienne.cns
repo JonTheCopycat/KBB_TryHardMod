@@ -834,14 +834,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = ailevel = 0 && command = "SPECIAL 7"
 value = 27000
 
-[State 200, WD Cancel]
-type = ChangeState
-trigger1 = movecontact
-trigger1 = command = "WD"
-trigger1 = power >= 250
-value = 290
-ctrl = 1
-
 [State 200, 5B]		;She can cancel into these stand attacks if you hit B or C on movecontact.
 type = ChangeState
 triggerall = prevstateno != 305
@@ -961,7 +953,7 @@ value = 1
 [State 0, Super Armor Bootleg = Animelem = 3]
 type = HitOverride
 triggerall = power >= 250
-trigger1 = time > 2
+trigger1 = time >= 3
 attr = SCA,NA,SA,NP,SP
 slot = 0
 stateno = 291
@@ -993,7 +985,28 @@ time = 1
 
 [State 0, End]
 type = ChangeState
-trigger1 = time = 2
+triggerall = time >= 3
+trigger1 = command = "b"
+value = 292
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 3
+trigger1 = command = "c"
+value = 293
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 3
+trigger1 = command = "a"
+value = 295
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+trigger1 = time = 5
 value = 291
 ctrl = 1
 
@@ -1161,27 +1174,24 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 triggerall = time >= 0
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
 [State 0, End]
 type = ChangeState
-triggerall = time >= 0
 trigger1 = command = "b"
 value = 292
 ctrl = 1
 
 [State 0, End]
 type = ChangeState
-triggerall = time >= 0
 trigger1 = command = "c"
 value = 293
 ctrl = 1
 
 [State 0, End]
 type = ChangeState
-triggerall = time >= 0
 trigger1 = command = "a"
 value = 295
 ctrl = 1

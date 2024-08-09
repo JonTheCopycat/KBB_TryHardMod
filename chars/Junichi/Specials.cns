@@ -905,14 +905,6 @@ map = "busterable"
 value = 1
 ignorehitpause = 1
 
-[State 0, Damage Proration]
-type = VarAdd
-trigger1 = hitcount >= 8
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 10
-
 [State 0, Helper]
 type = Helper
 trigger1 = AnimTime = -1
@@ -1300,7 +1292,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 3
+value = 10
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -1387,18 +1379,18 @@ value = 0
 
 [State 0, DP INVINCIBILLITY BABY]
 type = NotHitBy
-trigger1 = time = [0, 25] 
-value = SC
+trigger1 = time = [0, 10] 
+value = SCA
 time = 1
 
 [State 0, SuperPause]
 type = SuperPause
 trigger1 = Time = 1
 anim = 92006
-time = 15
+time = 10
 sound = 20,0
 pos = 0,-20
-movetime = 15
+movetime = 10
 darken = 1
 p2defmul = 1
 poweradd = 0
@@ -1407,19 +1399,19 @@ endcmdbuftime = 7
 [State 21000, PosSet]
 type = PosAdd
 trigger1 = AnimElem = 1
-y = -5
+y = -8
 
 
 [State 21000, VelSet]
 type = VelSet
 trigger1 = AnimElem = 1
-x = 1.5 + ifelse(p2bodydist x * 0.01 <= 2, p2bodydist x * 0.01, 2)
-y = -7.25
+x = 1.8
+y = -7.5
 
 [State 21000, VelSet]
 type = VelAdd
 trigger1 = 1
-y = 0.55
+y = 0.66
 
 [State 200, End]
 type = ChangeState
@@ -1455,6 +1447,14 @@ triggerall = teammode = tag
 trigger1 = 1
 map = "enableDHC"
 value = 1
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 15
 
 [State 0, Helper]
 type = Helper
@@ -1528,6 +1528,14 @@ trigger1 = 1
 map = "busterable"
 value = 1
 ignorehitpause = 1
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 8
 
 [State 0, SuperPause]
 type = SuperPause
@@ -1617,7 +1625,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = pos Y >= 0 && Vel Y > 0
-value = 52
+value = 53
 ctrl = 1
 
 
@@ -1964,6 +1972,14 @@ trigger1 = 1
 map = "enableDHC"
 value = 1
 
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 8
+
 [State 0, SuperPause]
 type = SuperPause
 trigger1 = Time = 1
@@ -2234,7 +2250,7 @@ pausemovetime = 0
 type = HitOverride
 trigger1 = prevstateno = 23000 && time = [0, 15]
 trigger2 =  time = [2,15]
-attr = SA,NA,SA,NP,SP
+attr = SCA,NA,SA,NP,SP
 slot = 1
 stateno = ifelse(p2bodydist x < 100 && abs(p2bodydist y) < 30, 23050, 23051)
 time = 1
@@ -2328,11 +2344,11 @@ time = 1
 
 [State 0, Damage Proration]
 type = VarAdd
-trigger1 = hitcount = 3
+trigger1 = hitcount = 5
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 15
 
 [State 0, FatalCounter]
 type = MapSet
@@ -2821,7 +2837,7 @@ trigger1 = hitcount = 5
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 15
 
 [State 0, FatalCounter]
 type = MapSet
@@ -3212,7 +3228,7 @@ trigger1 = hitcount = 4
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 15
 
 [State 0, VarSet]
 type = VarSet

@@ -525,14 +525,14 @@ value = 25000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
+trigger1 = movehit || (movecontact && AnimTime > -7)
 value = 30
 ctrl = 1
 
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "BWD" && command != "NotBWD"
-trigger1 = movecontact
+trigger1 = movehit || (movecontact && AnimTime > -7)
 value = 31
 ctrl = 1
 
@@ -678,14 +678,14 @@ value = 25000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
+trigger1 = movehit || (movecontact && AnimTime > -7)
 value = 30
 ctrl = 1
 
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "BWD" && command != "NotBWD"
-trigger1 = movecontact
+trigger1 = movehit || (movecontact && AnimTime > -7)
 value = 31
 ctrl = 1
 

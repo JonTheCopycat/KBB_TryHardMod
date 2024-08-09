@@ -5,7 +5,8 @@ _F_F^B
 ^A_F_D_DF (Late on Block)
 ^A^A_F_D_DF (Late on Block)
 ^B_F_D_DF
-^B^B^B_F_D_DF
+^B^B_F_D_DF
+^B^B^B_F_D_DF (On Hit Only)
 ^C_F_D_DF
 
 <#f0f000>:COMMAND DASH ATTACKS:</>

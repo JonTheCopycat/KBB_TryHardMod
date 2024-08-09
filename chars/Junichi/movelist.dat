@@ -1,5 +1,8 @@
 <#f0f000>:UNIQUE NORMALS:</>
 
+PHOENIX _D^A^A
+PHOENIX _D^A^B
+
 FELINE _F_F^B
 
 BATON _B^B
@@ -93,11 +96,11 @@ Weave - (1/2 Bar)    							_D_DF_F^A
 	opponent, evading any attacks in the process.
 	Shifts to Feline Stance"
 
-_!	Keep Weaving - (1/4 Bar, Follow Up)			^A
+_!	Keep Weaving - (1/4 Bar, Follow Up)			_D_DF_F^A
 	"Junichi will keep going if you keep pressing A."
 	
-_!	Go! - (Follow Up)
-	"Junichi takes the momentum from weaving to claw
+_!	Go! - (Automatic Follow Up)
+	"Junichi takes the momentum to claw
 	at the opponent over and over."
 
 Skyfall Kick (1 Bar)							_D_DB_B^A

@@ -780,6 +780,13 @@ trigger1 = command = "SPECIAL 5"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 25000
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movehit || (movecontact && AnimTime > -10)
+value = 30
+ctrl = 1
+
 [State 200, 2C]
 type = ChangeState
 Triggerall = movecontact
@@ -890,11 +897,11 @@ guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,3
 guardsound = 6,10
-ground.type = High
+ground.type = Low
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2, -3.5
-air.velocity = -2,-2
+ground.velocity = -3, -3
+air.velocity = -3,-3
 Fall = 0
 fall.recovertime = 5 + ifelse(enemy,movetype = A, 7,0)
 
@@ -916,12 +923,13 @@ guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,10
-ground.type = High
+ground.type = Low
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2, -2
-air.velocity = -2,-1
+ground.velocity = -4, 0
+air.velocity = -4,2
 Fall = 1
+fall.yvelocity = -5
 fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 
 [State 200, UNBLOCKABLE]
@@ -934,26 +942,12 @@ trigger1 = command = "SPECIAL 5"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 25000
 
-[State 200, End]
-type = ChangeState
-triggerall = prevstateno != 210
-triggerall = prevstateno != 210
-Triggerall = movecontact
-trigger1 = command = "a"
-value = 210
-
 [State 200, 2C]
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "holddown"
 trigger1 = command = "c"
 value = 450
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "b"
-value = 300
 
 [State 200, End]
 type = ChangeState
@@ -1075,6 +1069,12 @@ trigger1 = command = "SPECIAL 5"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 25000
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movehit || (movecontact && AnimTime > -10)
+value = 30
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
@@ -1221,6 +1221,13 @@ Triggerall = movehit
 trigger1 = command = "up"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
+
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movehit
+value = 30
+ctrl = 1
 
 [State 200, GRAB AND DUNK]
 type = ChangeState

@@ -4183,6 +4183,21 @@ anim = 390
 poweradd = 0
 sprpriority = 0
 
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 8
+
 [State 0, PowerAdd]
 type = PowerAdd
 triggerall = numhelper(51000) = 0
@@ -4677,6 +4692,22 @@ trigger1 = 1
 value = 1 * 0.99**root,var(11)
 ignorehitpause = 1
 
+[State 0, MapSet]
+type = MapSet
+triggerall = !moveguarded
+triggerall = hitcount < 8
+trigger1 = movecontact
+map = "distX"
+value = (pos x + 0 * facing) - enemy,pos x
+
+[State 0, MapSet]
+type = MapSet
+triggerall = !moveguarded
+triggerall = hitcount < 8
+trigger1 = movecontact
+map = "distY"
+value = (pos y + 0) - enemy,pos y
+
 [State 0, TargetBind]
 type = TargetBind
 triggerall = !moveguarded
@@ -4684,7 +4715,17 @@ triggerall = hitcount < 8
 trigger1 = movecontact
 time = 1
 id = -1
-pos = 0,0
+pos = ifelse(abs(map(distX)) < 20,  0, ((enemy,pos x + 20 * map(distX) / abs(map(distX))) - pos x) * facing),    ifelse(abs(map(distY)) < 15, 0, ((enemy,pos y + 15 * map(distY) / abs(map(distY))) - pos y))
+
+
+;[State 0, TargetBind]
+;type = TargetBind
+;triggerall = !moveguarded
+;triggerall = hitcount < 8
+;trigger1 = movecontact
+;time = 1
+;id = -1
+;pos = 0,0
 
 [State 0, VelSet]
 type = VelSet
@@ -5150,6 +5191,22 @@ trigger1 = 1
 value = 1 * 0.99**root,var(11)
 ignorehitpause = 1
 
+[State 0, MapSet]
+type = MapSet
+triggerall = !moveguarded
+triggerall = hitcount < 8
+trigger1 = movecontact
+map = "distX"
+value = (pos x + 0 * facing) - enemy,pos x
+
+[State 0, MapSet]
+type = MapSet
+triggerall = !moveguarded
+triggerall = hitcount < 8
+trigger1 = movecontact
+map = "distY"
+value = (pos y + 10) - enemy,pos y
+
 [State 0, TargetBind]
 type = TargetBind
 triggerall = !moveguarded
@@ -5157,7 +5214,16 @@ triggerall = hitcount < 8
 trigger1 = movecontact
 time = 1
 id = -1
-pos = 0,10
+pos = ifelse(abs(map(distX)) < 20,  0, ((enemy,pos x + 20 * map(distX) / abs(map(distX))) - pos x) * facing),    ifelse(abs(map(distY)) < 20, 10, ((enemy,pos y + 20 * map(distY) / abs(map(distY))) - pos y))
+
+;[State 0, TargetBind]
+;type = TargetBind
+;triggerall = !moveguarded
+;triggerall = hitcount < 8
+;trigger1 = movecontact
+;time = 1
+;id = -1
+;pos = 0,10
 
 [State 0, VelSet]
 type = VelSet

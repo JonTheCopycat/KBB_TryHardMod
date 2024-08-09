@@ -1143,7 +1143,7 @@ Fall.recovertime = 50
 
 [State 200, Varadd]
 type = VarAdd
-Triggerall = movecontact
+Triggerall = movehit
 trigger1 = command = "up"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 v = 3
@@ -1151,7 +1151,7 @@ value = 1
 
 [State 200, End]
 type = ChangeState
-Triggerall = movecontact
+Triggerall = movehit
 triggerall = var(3) <= 1
 trigger1 = ailevel = 0 && command = "up"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
@@ -1463,7 +1463,7 @@ Envshake.time = 30
 
 [State 200, End]
 type = ChangeState
-Triggerall = movecontact
+Triggerall = movehit
 trigger1 = ailevel = 0 && command = "up"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
