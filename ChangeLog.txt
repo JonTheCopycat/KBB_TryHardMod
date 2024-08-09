@@ -89,6 +89,14 @@ Leon: The wavedash cancel out of 4b is INSANE after discoveries. Had to replace 
 4. Fixed Bug where fast falling his Supers would break them.
 
 
+Metaknight:
+1. 214B now sticks to the ground.
+2. 236B hitbox slightly improved
+	* Hurtbox adjusted
+	* Animation adjusted
+	* Startup reduced (f18 -> f16)
+
+
 Noll: A make shift wavedash stop just for you.
 1. Pressing down again after wavedashing will let noll fall down.
 
@@ -105,6 +113,7 @@ Sareo: Preventing infinite blockstrings
 	* All previous backsway cancels are now done with a backwards wavedash input
 	* Has Two Bonus Wavedash Moves by pressing forward + A or B. These are his old backsway moves.
 	* Tweaked some wavedash Moves to work better with the backwards wavedash.
+3. j.5c now properly requires meter.
 
 
 Takuya:
