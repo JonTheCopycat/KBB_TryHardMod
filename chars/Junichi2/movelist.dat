@@ -1,0 +1,126 @@
+<#f0f000>:UNIQUE NORMALS:</>
+
+FELINE _F_F^B
+
+BATON _B^B
+
+<#f0f000>:EX ATTACKS!:</>
+
+Technique Shift (1/10 Bar)				_D^C
+	"James changes his stance and begins to fight
+	differently. These stances are on a cycle."
+	
+Hellspin Kick (1/5 Bar)				PHOENIX ^C
+	"James unleashes a wild circular kick.
+	Enters Backturned."
+
+Fade Back (1/10 Bar)				PHOENIX _B^C
+	"James quickly dashes back and turns his back
+	on his opponent. He gains unique moves once
+	he is facing away
+	The dash back has evasive properties"
+
+_! Jump Kick (1/5 Bar)				^C
+	"James performs a fast flying kick at
+	the opponent."
+	
+Ground Smash (1/5 Bar)						FELINE ^C
+	"James smashes the ground, causing a shockwave.
+	Enters Peekaboo."
+
+Peekaboo (1/10 Bar)							FELINE _F^C
+	"James rushes at the opponent,
+	gaining access to unique moves."
+	
+_! Double Upper (1/5 Bar) - (Follor Up)				^C
+	"Junichi Throws an upppercut with both his
+	hands."
+
+Battering Ram (1/5 Bar)						BATON ^C
+	"Junichi rams the opponent with his
+	baton.
+	Enters Arsenal."
+
+Arsenal Stance (1/10 Bar)					BATON _B^C
+	"Junichi rumages through this equipment
+	and gains access to unique moves."
+
+Gun (1/5 Bar)								^C
+	"He wields a gun.
+	This move is repeatable 2 more times."
+	
+Air Flip (PHOENIX) (1/5 Bar)						PHOENIX _AIR^C
+	"James flips backwards in the air and gains
+	access to three different dive kicks
+	This has evasive properties"
+	
+_! Straight Down! - (Follow Up)						^A
+	"James drops straight down with a kick"
+	
+_! Close Dive - (Follow Up)							^B
+	"James dive kicks aiming closer to him"
+	
+_! Far Dive - (Follor Up)							^C
+	"James dive kicks aiming far away from him"
+	
+Air Flip (BOXER) (1/5 Bar)							FELINE _AIR^C
+	"James flips forward in the air 
+	This has evasive properties"
+	
+_! Smash! - (Follow Up)								^A or ^B or ^C
+	"James smashes the opponent straight down.
+	Delayable"
+	
+Air Baton Wind-up (1/10 Bar)						BATON _AIR^C
+	"James prepares for to perform a strong attack
+	Dash cancellable"
+
+_! Straight Smack - (Follow Up)						^A
+	"Junichi unleashes a wide horizontal smack"
+
+_! Downwards Smack - (Follow Up)					^B
+	"Junichi aims below him to unleash a wide
+	diagonal smack"
+	
+_! Smack Hurricane - (1/5 Bar)(Follow Up)			^C
+	"Junichi spins with his baton, smacking
+	anyone in the way."
+
+<#f0f000>:STAR STRIKES!:</>
+
+Weave - (1/2 Bar)    							_D_DF_F^A
+	"Junichi starts to quickly weave towards the
+	opponent, evading any attacks in the process.
+	Shifts to Feline Stance"
+
+_!	Keep Weaving - (1/4 Bar, Follow Up)			^A
+	"Junichi will keep going if you keep pressing A."
+	
+_!	Go! - (Follow Up)
+	"Junichi takes the momentum from weaving to claw
+	at the opponent over and over."
+
+Skyfall Kick (1 Bar)							_D_DB_B^A
+	"Junichi launches upwards and lands with a
+	powerful kick.
+	Shifts to Phoenix Stance"
+
+Super Dive Kick (1 Bar)    						PHOENIX _D_DF_F^B
+	"Junichi does a super fast dive kick.
+	Enters Backturned"
+
+Super Dash (1 Bar)    							FELINE _D_DF_F^B
+	"Junichi dashes forward as fast as possible.
+	Boosts the damage of any move he does after
+	performing a Super Dash."
+
+Super Smacker (1 Bar)    						BATON _D_DF_F^B
+	"Junichi jumps up and spins with his baton."
+
+To be determined (1/2 Bar, _AIR OK)				 	_D_DB_B^B
+	"This move doesn't exist"
+
+Killer Combo (1 1/2 Bar)							_D_DF_F^C
+	"James unleashes a flurry of powerful attacks.
+	The combo changes based on what stance james
+	is on."
