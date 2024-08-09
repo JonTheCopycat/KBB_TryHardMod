@@ -1314,12 +1314,7 @@ poweradd = 0
 velset = 0,0
 sprpriority = 2
 
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 5
-persistent = 0
+
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -1329,7 +1324,12 @@ value = S200,0+(random<500)*1+(random<500)*1+(random<500)*1
 volumescale = 200
 channel = 0
 
-
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
 
 [State 0, Damage Proration]
 type = VarAdd
@@ -1624,7 +1624,7 @@ getpower = 0
 triggerall = !movecontact
 triggerall = root,map(juggle) < 100
 trigger1 = 1
-attr = S, NA
+attr = S, NP
 animtype  = Medium
 damage    = 20
 hitflag = MAF
@@ -1693,7 +1693,7 @@ velset = 0,0
 
 [State -2, Counterhit TSP]
 type = Helper
-Trigger1 = Time = 15
+Trigger1 = AnimTime = 0
 helpertype = normal 
 name = "Spam Deny"
 supermovetime = 999999999999
@@ -1708,7 +1708,7 @@ persistent = 0
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = root,movetype = H && root,stateno != [150,155]
+trigger1 = root,movetype = H && root,stateno != [150,155] 
 value = 633
 ctrl = 0
 
@@ -1797,7 +1797,6 @@ hitflag = MAFD
 guardflag = MA
 pausetime = 15,ifelse(root,stateno=[23000,24500],180,10)
 guard.pausetime = 10,10
-guard.hittime = 7
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -1930,7 +1929,6 @@ ctrl = 1
 type    = S
 movetype= A
 physics = S
-juggle  = 0
 ctrl = 0
 anim = 310
 poweradd = 0
@@ -1965,7 +1963,7 @@ facing = 1
 ownpal = 0
 supermovetime = 0
 pausemovetime = 0
-inheritJuggle = 1
+inheritJuggle = 0
 keyctrl = 0
 
 
@@ -2102,7 +2100,6 @@ ctrl = 1
 type    = S
 movetype= A
 physics = S
-juggle  = 1
 ctrl = 0
 anim = 311
 sprpriority = 1
@@ -3003,7 +3000,7 @@ ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState 
-triggerall = root,command = "hold_c" && root,command = "holddown" && root,movetype != H && root,stateno != [120,140] && root,stateno != 54000  && map(Timer) <= 450
+triggerall = root,command = "hold_c" && root,command = "holddown" && root,movetype != H && root,stateno != [120,140] && root,stateno != 54000  && map(Timer) <= 300
 trigger1 = numhelper(5465) = 0 && root,stateno != [5040,5210]  && map(Main) = 1 && command != "hold_s"
 trigger2 = numhelper(5465) > 0 && root,stateno != [5040,5210] && map(Main) = 1 && command != "hold_s"
 trigger3 = root,command != "holdfwd" && numhelper(5465) = 0 && root,command != "SPECIAL 5" && map(Main) = 0 && command = "hold_s"
@@ -3014,7 +3011,7 @@ ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
-triggerall = root,command = "hold_c" && root,movetype != H && root,stateno != [120,140] && numhelper(4444) = 0 && root,stateno != [500,501] && root,stateno != 54000  && map(Timer) <= 450
+triggerall = root,command = "hold_c" && root,movetype != H && root,stateno != [120,140] && numhelper(4444) = 0 && root,stateno != [500,501] && root,stateno != 54000  && map(Timer) <= 300
 trigger1 = numhelper(5465) = 0 && root,stateno != [5040,5210]  && map(Main) = 1 && command != "hold_s"
 trigger2 = numhelper(5465) > 0 && root,stateno != [5040,5210] && map(Main) = 1 && command != "hold_s"
 trigger3 = root,command != "holdfwd" && numhelper(5465) = 0 && root,command != "SPECIAL 5" && map(Main) = 0 && command = "hold_s"
@@ -3026,7 +3023,7 @@ ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
-triggerall = map(BUsed) = 1 && map(Timer) <= 450
+triggerall = map(BUsed) = 1 && map(Timer) <= 300
 triggerall = root,command = "hold_b" && root,movetype != H && root,stateno != [120,140] && numhelper(4445) = 0 && root,stateno != [500,501] && root,stateno != 54000
 trigger1 = numhelper(5465) = 0 && root,stateno != [5040,5210]  && map(Main) = 0 && command != "hold_s"
 trigger2 = numhelper(5465) > 0 && root,stateno != [5040,5210] && map(Main) = 0 && command != "hold_s"
@@ -3038,7 +3035,7 @@ ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
-triggerall = map(BUsed) = 0 && map(Timer) <= 450
+triggerall = map(BUsed) = 0 && map(Timer) <= 300
 triggerall = root,command = "hold_b" && root,movetype != H && root,stateno != [120,140] && numhelper(4445) = 0 && root,stateno != [500,501] && root,stateno != 54000
 trigger1 = numhelper(5465) = 0 && root,stateno != [5040,5210]  && map(Main) = 1 && command != "hold_s"
 trigger2 = numhelper(5465) > 0 && root,stateno != [5040,5210] && map(Main) = 1 && command != "hold_s"
@@ -3143,7 +3140,7 @@ type = ChangeAnim
 ;;trigger1 = !movecontact
 ;trigger3 = AnimElem = 3 && prevstateno != 623
 ;trigger2 = root,movetype = H && Time > 600
-trigger1 = map(Timer) >= 450
+trigger1 = map(Timer) >= 300
 ;trigger3 = enemy,stateno = [801,803] && movecontact
 ;trigger4 = movecontact && p2dist x != [-80,80]  ; Well, I'm just glad I made a new friend
 value = 401
@@ -3404,6 +3401,21 @@ type = EnvShake
 trigger1 = time = 16
 time = 15
 ampl = 6
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
 
 
 [State 200, 1]
@@ -8008,7 +8020,7 @@ type = HitDef
 getpower = 0
 triggerall = !movecontact
 trigger1 = 1
-attr = S,SA
+attr = S,NP
 animtype  = Medium
 damage    = ifelse(enemy,movetype = A,ifelse(parent,stateno=462,120,80),ifelse(parent,stateno=462,60,40))
 hitflag = MAFD
@@ -8886,7 +8898,7 @@ value = 0
 type = MapSet
 trigger1 = movetype = H
 trigger2 = stateno != 700
-trigger2 = stateno != [19000,24000]
+trigger2 = stateno != [19000,25000] && numhelper(24000) = 0
 map = "busterable"
 value = 0
 

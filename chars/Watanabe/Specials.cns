@@ -1705,6 +1705,13 @@ movetype= A
 physics = S
 anim = 23500
 
+[State 0, VelSet]
+type = VelSet
+trigger1 = 1
+x = 0
+y = 0
+;ignorehitpause = 
+;persistent = 
 
 
 [State 0, PosSet]
