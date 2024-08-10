@@ -555,14 +555,14 @@ sparkxy = -8,-25
 hitsound   = S5,0
 guardsound = S2,0
 ground.type = High
-ground.slidetime = 12
+ground.slidetime = 15
 ground.hittime  = 15
 ground.velocity = 1
 air.hittime  = 20
 air.velocity = 1,-2
 guard.velocity = -2
 Fall = 0
-Fall.recovertime = 20
+Fall.recovertime = 25
 mindist = 45,-55
 maxdist = 85, 0
 Envshake.time = 5
@@ -722,11 +722,11 @@ hitsound   = S8,3
 guardsound = S2,0
 ground.type = High
 ground.slidetime = 12
-ground.hittime  = 15
+ground.hittime  = 20
 ground.velocity = -4,-1
 air.hittime  = 22
 air.velocity = -4,-2
-Fall.recovertime = 20
+Fall.recovertime = 27
 Envshake.time = 15
 
 [State 200, Special 1 - Smash Baby]
@@ -1044,9 +1044,9 @@ guardsound = S2,0
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 20
-ground.velocity = -1.5,-2
+ground.velocity = -1.5,-1
 air.hittime  = 25
-air.velocity = -1.5,-1.5
+air.velocity = -1.5,-.5
 Fall = 0
 Fall.recovertime = 40
 mindist = 45,-55
@@ -1698,12 +1698,12 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15
 ground.velocity = -2, -3
-air.hittime  = 15
+air.hittime  = 20
 air.velocity = -2,-3
 guard.hittime = 10
 guard.slidetime = 12
 guard.velocity = -5
-Fall.recovertime = 20
+Fall.recovertime = 25
 Envshake.time = 10
 
 [State 200, Special 1 - Smash Baby]
@@ -3608,34 +3608,6 @@ value = 1
 [State 200, 1]
 type = HitDef
 getpower = 0
-givepower = 0
-triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = !movecontact
-trigger1 = 1
-attr = S, NA
-animtype  = Heavy
-damage    = 30
-hitflag = MAFD
-guardflag = MAF
-pausetime = 8,9
-sparkno = 1
-guard.sparkno = 13000
-sparkxy = -8,-15
-hitsound   = S0,2
-guardsound = S2,0
-ground.type = High
-ground.slidetime = 12
-ground.hittime  = 25
-ground.velocity = .85, -5
-air.hittime  = 30
-air.velocity = -.5, -4
-guard.velocity = -2
-fall = 0
-Envshake.time = 5
-
-[State 200, 1]
-type = HitDef
-getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 trigger1 = 1
@@ -3645,7 +3617,7 @@ damage    = 15
 hitflag = MAFD
 guardflag = LAF
 pausetime = 8,8
-guard.pausetime = 6,9
+guard.pausetime = 8,9
 guard.hittime  = 15
 guard.slidetime = 10
 sparkno = 0
@@ -3654,13 +3626,13 @@ sparkxy = -8,-25
 hitsound   = S5,0
 guardsound = 6,10
 ground.type = Low
-ground.slidetime = 12
+ground.slidetime = 15
 ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2,-3
-air.velocity = -2,-2
-fall = ifelse(enemy,movetype = A, 1, 0)
-fall.recover = ifelse(enemy,movetype = A, 0, 1)
+ground.velocity = -1, -5
+air.velocity = -1, -4
+fall = 0
 fall.recover = 25 + ifelse(enemy,movetype = A, 7,0)
+Envshake.time = 5
 
 [State 200, Special 1 - Smash Baby]
 type = ChangeState

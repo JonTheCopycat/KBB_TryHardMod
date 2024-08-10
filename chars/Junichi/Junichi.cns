@@ -673,8 +673,8 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 12 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -5
-air.velocity = -2,-3
+ground.velocity = -4
+air.velocity = -2,-2
 Fall = 0
 Envshake.time = 10
 Fall.recovertime = 20
@@ -876,7 +876,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2
-air.velocity = -2,-3
+air.velocity = -2,-2
 Fall = 0
 Envshake.time = 10
 Fall.recovertime = 20
@@ -1387,7 +1387,7 @@ ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2.5
 air.velocity = -3,-2
 Fall = 0
-Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -1556,7 +1556,7 @@ ground.velocity = -2,
 air.velocity = -2,-2
 Fall = 0
 Envshake.time = 10
-Fall.recovertime = 30
+Fall.recovertime = 25
 guard.cornerpush.veloff = -7
 airguard.cornerpush.veloff = -7
 
@@ -2010,7 +2010,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -1
-air.velocity = -1,-1
+air.velocity = -1,-1.25
 Fall = 0
 Envshake.time = 10
 Fall.recovertime = 30
@@ -2040,10 +2040,10 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2
-air.velocity = -2,-3
+air.velocity = -2,-2
 Fall = 0
 Envshake.time = 10
-Fall.recovertime = 20
+Fall.recovertime = 25
 guard.cornerpush.veloff = -7
 airguard.cornerpush.veloff = -7
 
@@ -2395,11 +2395,11 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -0.5,-2.5
-air.velocity = -0.5,-2.5
+ground.velocity = -0.5,-2
+air.velocity = -0.5,-2
 Envshake.time = 10
 Fall = 0
-Fall.recovertime = 26 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 25 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -3089,7 +3089,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2
-air.velocity = -1,-2
+air.velocity = -1,ifelse(target,pos y > -35, -2, 1)
 Envshake.time = 10
 Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
@@ -3706,7 +3706,7 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2
+ground.velocity = -2,-3
 air.velocity = -2,-2
 Fall = 0
 Fall.recovertime = 22 + ifelse(enemy,movetype = A, 7,0)
@@ -3877,10 +3877,10 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1,-3
+ground.velocity = -1,-4
 air.velocity = -1,-3
 Fall = 1
-Fall.recovertime = 25 + ifelse(enemy,movetype = A, 7,0) - ifelse(enemy,statetype = A, 5, 0)
+Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0) - ifelse(enemy,statetype = A, 5, 0)
 Envshake.time = 10
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
@@ -6825,7 +6825,7 @@ ground.velocity = -4
 air.velocity = -3,-1
 guard.velocity = -4
 Envshake.time = 15
-Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
 ;forcenofall = 1
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
@@ -8676,7 +8676,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2, -2
-air.velocity = -2, -2
+air.velocity = -2, -1
 fall = 1
 Fall.recovertime = 25 + ifelse(enemy,movetype = A, 7,0)
 envshake.time = 5
@@ -12463,7 +12463,7 @@ ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2
 air.velocity = -2,-2
 Fall = 0
-Fall.recovertime = 25 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 

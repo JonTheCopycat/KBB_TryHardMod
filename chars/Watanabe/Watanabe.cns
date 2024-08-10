@@ -1496,6 +1496,11 @@ anim = 301
 sprpriority = 0
 velset = 0,0
 
+[State 20, 2]
+type = Turn
+trigger1 = time = 0
+trigger1 = P2BodyDist X < -10
+
 [State 0, SwordAmmCheck]
 type = MapSet
 trigger1 = 1 
@@ -1690,6 +1695,11 @@ ctrl = 0
 anim = 302
 sprpriority = 0
 velset = 0,0
+
+[State 20, 2]
+type = Turn
+trigger1 = time = 0
+trigger1 = P2BodyDist X < -10
 
 [State -2, Counterhit TSP]
 type = Helper
@@ -2187,13 +2197,13 @@ type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
-triggerall = enemy,map(hitOverride) = 1
+triggerall = enemy,map(hitOverride) = 0
 trigger1 = root,var(31)!= 0
 attr = S, NA
 animtype  = Heavy
 damage    = 25
-Hitflag = MAF
-guardflag = MAF
+Hitflag = MAFD
+guardflag = MA
 pausetime = 18,20
 guard.pausetime = 18,4
 sparkno = 2
@@ -2216,14 +2226,13 @@ type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
-triggerall = root,var(31) = 0
-triggerall = enemy,map(hitOverride) = 0
-trigger1 = 1
+trigger1 = root,var(31) = 0
+trigger2 = enemy,map(hitOverride) = 1
 attr = S, NA
 animtype  = Heavy
 damage    = 30
-Hitflag = MAF
-guardflag = MAF
+Hitflag = MAFD
+guardflag = MA
 pausetime = 18,18
 guard.pausetime = 18,4
 sparkno = 2
@@ -5139,7 +5148,7 @@ value = 100
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = AnimElem = 2
-x = 5.5
+x = 3
 
 
 
@@ -5153,7 +5162,7 @@ volumescale = 50
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 3
+triggerall = !movecontact
 triggerall = map(juggle) < 100
 trigger1 = 1
 attr = C, NA
@@ -5161,23 +5170,24 @@ animtype  = Medium
 damage    = 15
 hitflag = MAFD
 guardflag = LA
-pausetime = 10,13
+pausetime = 5,10
 guard.pausetime = 7,5
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = 5,1
+hitsound   = S0,3
 guardsound = 6,11
 ground.type = Low
 ground.slidetime = 12
 ground.hittime  = 20
 ground.velocity = 2,-3
+guard.velocity = -3
 air.velocity = 2,-2
 down.velocity = 2,-3
 Fall = 0
 fall.recover = 0
-guard.cornerpush.veloff = -10
-airguard.cornerpush.veloff = -10
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -5
 ;ground.cornerpush.veloff = -5
 ;air.cornerpush.veloff = -5
 [State -1, not Ether Drive]
@@ -5982,7 +5992,6 @@ type = ChangeState
 trigger1 = pos y >= 0
 value = 626
 ctrl = 1
-
 ;-------------------------------------------------------------------------------
 ; C - Aire
 [Statedef 620]
@@ -6148,6 +6157,11 @@ type = MapSet
 trigger1 = 1 
 map = "Main"
 value = ifelse(parent,numhelper(401) > 1 && helper(401),ID != ID,0,1)
+
+[State 20, 2]
+type = Turn
+trigger1 = time = 0
+trigger1 = P2BodyDist X < -10
 
 [State 0, ChangeState]
 type = ChangeState
@@ -6342,6 +6356,11 @@ trigger1 = root,movetype = H && root,stateno != [150,155]
 value = 633
 ctrl = 0
 
+[State 20, 2]
+type = Turn
+trigger1 = time = 0
+trigger1 = P2BodyDist X < -10
+
 [State 0, ChangeAnim]
 type = ChangeAnim
 trigger1 = time >= 0
@@ -6468,6 +6487,11 @@ type = ChangeState
 trigger1 = root,movetype = H && root,stateno != [150,155]
 value = 633
 ctrl = 0
+
+[State 20, 2]
+type = Turn
+trigger1 = time = 0
+trigger1 = P2BodyDist X < -10
 
 [State 0, Juggle Map]
 type = RootMapAdd
