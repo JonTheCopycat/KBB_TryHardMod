@@ -2067,7 +2067,7 @@ ctrl = 0
 anim = 23000
 poweradd = -1000
 velset = 0,0
-sprpriority = 2
+sprpriority = 1
 
 [State 0, Explod]
 type = Explod
@@ -2085,7 +2085,7 @@ random = 0,0
 removetime = 13
 pausemovetime = 9999
 scale = 1,1
-sprpriority = 1
+sprpriority = 0
 ontop = 0
 shadow = 0,0,0
 ownpal = 1
@@ -2188,8 +2188,8 @@ animtype  = Up
 damage    = 100
 Hitflag = MAFD
 guardflag = MA
-pausetime = 20,20
-guard.pausetime = 20,10
+pausetime = 10,20
+guard.pausetime = 10,5
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2368,7 +2368,7 @@ animtype  = Up
 damage    = 180
 Hitflag = MAFD
 guardflag = MA
-pausetime = 40,64
+pausetime = 20,10
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2396,7 +2396,7 @@ animtype  = Up
 damage    = 110
 Hitflag = MAFD
 guardflag = MA
-pausetime = 20,20
+pausetime = 10,5
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2511,22 +2511,22 @@ size.yscale = 1.25
 supermovetime = 0
 pausemovetime = 0
 
-[State 0, Helper]
-type = Helper
-trigger1 = AnimElem = 3
-helpertype = normal ;player
-name = "Spike"
-ID = 23406
-stateno = 23406
-pos = 0,0
-postype = p1    ;p2,front,back,left,right
-facing = 0
-keyctrl = 0
-ownpal = 0
-size.xscale = 1.25
-size.yscale = 1.25
-supermovetime = 0
-pausemovetime = 0
+;[State 0, Helper]
+;type = Helper
+;trigger1 = AnimElem = 3
+;helpertype = normal ;player
+;name = "Spike"
+;ID = 23406
+;stateno = 23406
+;pos = 0,0
+;postype = p1    ;p2,front,back,left,right
+;facing = 0
+;keyctrl = 0
+;ownpal = 0
+;size.xscale = 1.25
+;size.yscale = 1.25
+;supermovetime = 0
+;pausemovetime = 0
 
 [State 0, Helper]
 type = Helper
@@ -2688,14 +2688,14 @@ Fall = 1
 fall.recover = 0
 Envshake.time = 30
 p2getp1state = 0
-p2facing = 1        ;Force to face p1
+
 
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 10
 trigger2 = time = 75
 trigger3 = movecontact || movereversed
-value = ifelse(root,map(Shut)=1,410,405)
+value = ifelse(root,map(Shut)=1,410,23415)
 ctrl = 0
 ;anim =
 ;ignorehitpause = 
@@ -2788,14 +2788,14 @@ Fall = 1
 fall.recover = 0
 Envshake.time = 30
 p2getp1state = 0
-p2facing = 1        ;Force to face p1
+
 
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 10
 trigger2 = time = 75
 trigger3 = movecontact || movereversed
-value = ifelse(root,map(Shut)=1,410,405)
+value = ifelse(root,map(Shut)=1,410,23415)
 ctrl = 0
 
 ;===============================================================================
@@ -2881,14 +2881,14 @@ Fall = 1
 fall.recover = 0
 Envshake.time = 30
 p2getp1state = 0
-p2facing = 1        ;Force to face p1
+
 
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 10
 trigger2 = time = 75
 trigger3 = movecontact || movereversed
-value = ifelse(root,map(Shut)=1,410,405)
+value = ifelse(root,map(Shut)=1,410,23415)
 ctrl = 0
 
 ;===============================================================================
@@ -2981,14 +2981,13 @@ Fall = 1
 fall.recover = 0
 Envshake.time = 30
 p2getp1state = 0
-p2facing = 1        ;Force to face p1
 
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 10
 trigger2 = time = 75
 trigger3 = movecontact || movereversed
-value = ifelse(root,map(Shut)=1,410,405)
+value = ifelse(root,map(Shut)=1,410,23415)
 ctrl = 0
 ;anim =
 ;ignorehitpause = 
@@ -3085,14 +3084,13 @@ Fall = 1
 fall.recover = 0
 Envshake.time = 30
 p2getp1state = 0
-p2facing = 1        ;Force to face p1
 
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 10
 trigger2 = time = 75
 trigger3 = movecontact || movereversed
-value = ifelse(root,map(Shut)=1,410,405)
+value = ifelse(root,map(Shut)=1,410,23415)
 ctrl = 0
 
 ;===============================================================================
@@ -3182,14 +3180,13 @@ Fall = 1
 fall.recover = 0
 Envshake.time = 30
 p2getp1state = 0
-p2facing = 1        ;Force to face p1
 
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 10
 trigger2 = time = 75
 trigger3 = movecontact || movereversed
-value = ifelse(root,map(Shut)=1,410,405)
+value = ifelse(root,map(Shut)=1,410,23415)
 ctrl = 0
 
 ;===============================================================================
@@ -3276,14 +3273,13 @@ Fall = 1
 fall.recover = 0
 Envshake.time = 30
 p2getp1state = 0
-p2facing = 1        ;Force to face p1
 
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 10
 trigger2 = time = 75
 trigger3 = movecontact || movereversed
-value = ifelse(root,map(Shut)=1,410,405)
+value = ifelse(root,map(Shut)=1,410,23415)
 ctrl = 0
 
 ;===============================================================================
@@ -3369,14 +3365,13 @@ Fall = 1
 fall.recover = 0
 Envshake.time = 30
 p2getp1state = 0
-p2facing = 1        ;Force to face p1
 
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 10
 trigger2 = time = 75
 trigger3 = movecontact || movereversed
-value = ifelse(root,map(Shut)=1,410,405)
+value = ifelse(root,map(Shut)=1,410,23415)
 ctrl = 0
 
 ;===============================================================================
@@ -3467,14 +3462,13 @@ Fall = 1
 fall.recover = 0
 Envshake.time = 30
 p2getp1state = 0
-p2facing = 1        ;Force to face p1
 
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 10
 trigger2 = time = 75
 trigger3 = movecontact || movereversed
-value = ifelse(root,map(Shut)=1,410,405)
+value = ifelse(root,map(Shut)=1,410,23415)
 ctrl = 0
 
 ;===============================================================================
@@ -3564,15 +3558,128 @@ Fall = 1
 fall.recover = 0
 Envshake.time = 30
 p2getp1state = 0
-p2facing = 1        ;Force to face p1
 
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 10
 trigger2 = time = 75
 trigger3 = movecontact || movereversed
-value = ifelse(root,map(Shut)=1,410,405)
+value = ifelse(root,map(Shut)=1,410,23415)
 ctrl = 0
+
+;===============================================================================
+; SAP-uya explosion
+;-------------------------------------------------------------------------------
+[Statedef 23415]
+type    = S
+movetype= A
+physics = N
+juggle  = 1
+ctrl = 0
+anim = 405
+velset = 0,0
+sprpriority = 5
+
+[State 0, Turn]
+type = Turn
+trigger1 = prevstateno = [23404,23406] || prevstateno = [23409,23410]
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = moveguarded
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = movehit
+;ignorehitpause = 
+;persistent = 
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = 1
+value = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S400,0
+volume = 150
+channel = -1
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = time = 0
+time = 10
+freq = 60
+ampl = -4
+phase = 90
+;ignorehitpause = 
+;persistent = 
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = root,map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+trigger1 = 1
+attr = A, NP
+animtype  = Hard
+damage    = 5
+hitflag = MAFD
+guardflag = MA
+pausetime = 0,0
+guard.pausetime = 0,15
+guard.hittime = 0
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30 + ifelse(enemy,movetype = A, 7,0)
+air.hittime = 30 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -3,-6
+air.velocity = -3,-6
+Fall = 1
+Fall.recovertime = 25
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
 ;===============================================================================
 ; Starslammer
 ;-------------------------------------------------------------------------------

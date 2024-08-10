@@ -21,14 +21,13 @@ _D [^B]
 
 <#f0f000>:EX ATTACKS:</>
 
-"Maids Knife" (1/4 Bar)							^C
+"Maids Knife" (1/2 Bar)							^C
 	"Takuya throws two spikes."
 
 _! Charged								[^C]
-	"Takuya throws an extra spike.
 	Spikes stay stuck in the opponent and explode 
 	shortly after.
-	If Takuya is Enhanced, the spikes are bigger and faster."
+	If Takuya is Enhanced, Takuya throws an extra spike."
 
 
 "November 11th 2008" (1/2 Bar)							_AIR^C
@@ -39,7 +38,7 @@ _! Charged								[^C]
 	faster.
 	If Takuya is Enhanced, Takuya instead shoots a missile."
 
-"Dark Shatterer" (1/4 Bar)							_D^C
+"Dark Shatterer" (1/2 Bar)							_D^C
 	"Takuya summons spikes under the opponent."
 
 _! Charged								[^C]
@@ -111,8 +110,8 @@ _! Charged								[^C]
 	landing ontop of the opponent."
 
 "Power Transfer." (1 1/2 Bars)						_D_DB_B^C
-	"Space Daniel gives Takuya a bit of his power, Enhancing 
-	Takuya until meter runs out."
+	"Space Daniel gives Takuya a bit of his power, this 
+	Enhances Takuya until meter runs out."
 
 _! Charged								[^C]
 	"Takuya's charged moves become faster."

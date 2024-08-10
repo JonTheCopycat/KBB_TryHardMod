@@ -588,7 +588,7 @@ flag3=nostandguard
 [State -1, Soft Fast Fall]
 type = VelSet
 triggerall = statetype = A && movetype != H
-triggerall = stateno != [900,910] && stateno != 390 && stateno != [620,651] && stateno != [700,705] ;Moves that have been nerfed to not allow fastfall during them
+triggerall = stateno != [900,910] && stateno != 390 && stateno != [620,651] && stateno != [700,705] && stateno != 615 ;Moves that have been nerfed to not allow fastfall during them
 triggerall = command = "down" 
 triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
 trigger1 = 1
@@ -678,7 +678,7 @@ trigger1 = ctrl
 [State -1, Run Fwd]
 type = ChangeState
 value = 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF" 
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -719,7 +719,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF" 
 trigger1 = statetype = S
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
@@ -864,7 +864,7 @@ type = ChangeState
 value = 400
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(425) = 0
-Triggerall = power >= 200
+Triggerall = power >= 500
 triggerall = command = "c"
 Triggerall = statetype != A
 trigger1 = ctrl
