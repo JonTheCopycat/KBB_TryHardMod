@@ -6356,10 +6356,10 @@ trigger1 = root,movetype = H && root,stateno != [150,155]
 value = 633
 ctrl = 0
 
-[State 20, 2]
-type = Turn
-trigger1 = time = 0
-trigger1 = P2BodyDist X < -10
+;[State 20, 2]
+;type = Turn
+;trigger1 = time = 0
+;trigger1 = P2BodyDist X < -10
 
 [State 0, ChangeAnim]
 type = ChangeAnim

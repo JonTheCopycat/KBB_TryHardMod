@@ -9,7 +9,7 @@ Enhanced
 	"5[B] wallsplats."
 	"Metercharge speed is increased"
 	"2[B] does a sideswitch instead"
-	"J.5[B] goes higher"
+	"J.5[B] divekicks down"
 
 Charge Cancel
 	"Takuya stops using the charged version."
@@ -22,11 +22,11 @@ _D [^B]
 <#f0f000>:EX ATTACKS:</>
 
 "Maids Knife" (1/2 Bar)							^C
-	"Takuya throws two spikes."
+	"Takuya throws a spikes."
 
 _! Charged								[^C]
-	Spikes stay stuck in the opponent and explode 
-	shortly after.
+	"Takuya throws another spike, and spikes stay stuck
+	in the opponent and explode shortly after.
 	If Takuya is Enhanced, Takuya throws an extra spike."
 
 
