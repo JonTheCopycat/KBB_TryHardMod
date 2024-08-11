@@ -2491,18 +2491,12 @@ trigger1 = Time = 0
 [State 5101, 4]
 type = PosSet
 trigger1 = Time = 0
-y = Const(movement.down.bounce.offset.y)
+y = 14
 
 [State 5101, 5]
 type = PosAdd
 trigger1 = Time = 0
 x = Const(movement.down.bounce.offset.x)
-
-[State 5101, 5]
-type = PosAdd
-triggerall = pos y >= 10
-trigger1 = Time = 0
-y = -10
 
 [State 5101, 6] ;Acceleration
 type = VelAdd
