@@ -952,7 +952,7 @@ value = 1
 ;failsafe
 [State 0, Super Armor Bootleg = Animelem = 3]
 type = HitOverride
-triggerall = power >= 250
+triggerall = power >= 500
 trigger1 = time >= 3
 attr = SCA,NA,SA,NP,SP
 slot = 0
@@ -1099,7 +1099,7 @@ movetime = 0
 [State 0, Super Armor Bootleg = Animelem = 3]
 type = HitOverride
 trigger1 = power >= 500
-attr = SCA,NA,SA,NP,SP
+attr = SCA,NA,SA,HA,NP,SP,HP
 slot = 0
 stateno = stateno
 time = 3

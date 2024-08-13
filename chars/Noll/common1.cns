@@ -1567,12 +1567,6 @@ type = ChangeState
 trigger1 = pos Y < 0
 value = 154
 
-[State 150, Unblockable protection]
-type = NotHitBy
-trigger1 = time <= 1
-value = C
-time = 1
-
 [State 150, Instant Block]
 type = poweradd
 triggerall = numhelper(4300) >= 1
@@ -1717,12 +1711,6 @@ time = 4
 type = ChangeState
 trigger1 = pos Y < 0
 value = 154
-
-[State 152, Unblockable protection]
-type = NotHitBy
-trigger1 = time <= 1
-value = SA
-time = 1
 
 [State 152, Instant Block]
 type = poweradd

@@ -1350,6 +1350,38 @@ trigger1 = time = 0
 waveform = square
 time = 3
 
+[State 150, Instant Block]
+type = poweradd
+triggerall = numhelper(4300) >= 1
+triggerall = helper(4300),stateno = 4300
+trigger1 = time = 1
+value = 50
+
+[State 150, IB Blink] 
+type = PalFX
+triggerall = numhelper(4300) >= 1
+triggerall = helper(4300),stateno = 4300
+trigger1 = time = 1
+time = 8
+add = 128,128,200
+
+[State 150, IB Reduced Hitshake] 
+type = ChangeState
+triggerall = numhelper(4300) >= 1
+triggerall = helper(4300),stateno = 4300
+trigger1 = time >= 8
+value = 151
+
+[State 150, IB Prevent Chip] ;If a player takes damage while in instant block (Aka chip) then it is immediately healed.
+type = lifeadd
+triggerall = numhelper(4300) >= 1
+triggerall = helper(4300),stateno = 4300
+trigger1 = time = 0
+trigger1 = numenemy
+trigger1 = gethitvar(damage) > 0
+value = gethitvar(damage)
+ignorehitpause = 1
+
  [State 150, Counter Cancel]
 type = ChangeState
 triggerall = (command = "hold_x" && command = "hold_s")
@@ -1439,6 +1471,44 @@ type = ForceFeedback
 trigger1 = time = 0
 waveform = square
 time = 4
+
+[State 152, Instant Block]
+type = poweradd
+triggerall = numhelper(4300) >= 1
+triggerall = helper(4300),stateno = 4300
+trigger1 = time = 1
+value = 50
+
+[State 152, IB Blink] 
+type = PalFX
+triggerall = numhelper(4300) >= 1
+triggerall = helper(4300),stateno = 4300
+trigger1 = time = 1
+time = 8
+add = 128,128,200
+
+[State 152, IB Reduced Hitshake] 
+type = ChangeState
+triggerall = numhelper(4300) >= 1
+triggerall = helper(4300),stateno = 4300
+trigger1 = time >= 8
+value = 153
+
+[State 152, IB Prevent Chip] ;If a player takes damage while in instant block (Aka chip) then it is immediately healed.
+type = lifeadd
+triggerall = numhelper(4300) >= 1
+triggerall = helper(4300),stateno = 4300
+trigger1 = time = 0
+trigger1 = numenemy
+trigger1 = gethitvar(damage) > 0
+value = gethitvar(damage)
+ignorehitpause = 1
+
+[State 150, Counter Cancel]
+type = ChangeState
+triggerall = (command = "hold_x" && command = "hold_s")
+trigger1 = power >= 1000
+value = 820
 
 ;---------------------------------------------------------------------------
 ; Crouch guard hit (knocked back)

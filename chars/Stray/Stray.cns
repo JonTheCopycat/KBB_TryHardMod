@@ -935,9 +935,9 @@ value = 10
 
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = time = 0
+trigger1 = time = [0, 35]
 value = C
-time = 35
+time = 1
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -978,7 +978,12 @@ trigger2 = time = 200
 
 [State 200, VelSet]
 type = VelSet
-trigger1 = AnimElem = 2
+trigger1 = AnimElem = 3, < 0
+x = 6
+
+[State 200, VelSet]
+type = VelSet
+trigger1 = AnimElem = 3
 x = 0
 
 [State 200, 1]

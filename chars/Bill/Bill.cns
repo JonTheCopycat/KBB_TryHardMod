@@ -2062,7 +2062,7 @@ value = 21000
 
 [State 200, ChangeState]
 type = ChangeState
-trigger1 = command = "holdup" && movecontact && var(3) = 0 
+trigger1 = command = "holdup" && movehit && var(3) = 0 
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && movecontact && var(3) = 0 
 value = 45
 ctrl = 1
