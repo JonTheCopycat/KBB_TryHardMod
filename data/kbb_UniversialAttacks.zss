@@ -2445,7 +2445,7 @@ if Const(KBB_Playable) = 1 {
 
 
 
-        if (movecontact || helper, movecontact || map(helperHit) || map(helperguarded)) && movetype != H {
+        if (movecontact || helper, movecontact || map(helperHit) || map(helperguarded)) && !ctrl && movetype != H {
             if command = "FF" {
                  PowerAdd{value: -250}
                  ignorehitpause if (statetype = s || statetype = c) {
