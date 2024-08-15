@@ -6158,10 +6158,10 @@ trigger1 = 1
 map = "Main"
 value = ifelse(parent,numhelper(401) > 1 && helper(401),ID != ID,0,1)
 
-[State 20, 2]
-type = Turn
-trigger1 = time = 0
-trigger1 = P2BodyDist X < -10
+;[State 20, 2]
+;type = Turn
+;trigger1 = time = 0
+;trigger1 = P2BodyDist X < -10
 
 [State 0, ChangeState]
 type = ChangeState
@@ -7091,7 +7091,7 @@ channel = -1
 
 [State 0, PosSet]
 type = PosSet
-trigger1 = time <= 17 && root,stateno = 460 
+trigger1 = time <= 12 && root,stateno = 460 
 x = root,pos x
 ;ignorehitpause = 
 ;persistent = 
@@ -7291,7 +7291,7 @@ pausemovetime = 9999
 [State 0, AttackDist]
 type = AttackDist
 trigger1 = 1
-value = 20
+value = 5
 ;[State 0, ChangeAnim]
 ;type = ChangeAnim
 ;trigger1 = prevstateno != 461 && root,stateno != 450
@@ -7509,7 +7509,7 @@ sprpriority = 2
 
 [State 0, PosSet]
 type = PosSet
-trigger1 = time <= 20 && root,stateno = 460 
+trigger1 = time <= 12 && root,stateno = 460 
 x = root,pos x
 
 [State 0, Helper]
@@ -7528,6 +7528,10 @@ pausemovetime = 0
 inheritJuggle = 1
 keyctrl = 0
 
+[State 0, AttackDist]
+type = AttackDist
+trigger1 = 1
+value = 5
 
 ;[State 0, ChangeState] hmmm
 ;type = ChangeState
@@ -7588,6 +7592,11 @@ pausemovetime = 0
 inheritJuggle = 1
 keyctrl = 0
 
+[State 0, AttackDist]
+type = AttackDist
+trigger1 = 1
+value = 5
+
 [State 0, Juggle Map]
 type = MapAdd
 trigger1 = root,command != "hold_b" && root,movetype != H  && root,stateno != [120,140] && root,stateno != [5040,5210] && time >= 25
@@ -7615,6 +7624,7 @@ ctrl = 0
 anim = 467
 sprpriority = 0
 velset = 0,0
+attackdist = 45
 
 [State 20, 2]
 type = Turn
@@ -7813,6 +7823,12 @@ pausemovetime = 0
 inheritJuggle = 1
 keyctrl = 0
 
+
+[State 0, AttackDist]
+type = AttackDist
+trigger1 = 1
+value = 5
+
 [State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 1
@@ -7860,6 +7876,7 @@ ctrl = 0
 anim = 469
 sprpriority = 0
 velset = 0,0
+attackdist = 45
 
 [State 20, 2]
 type = Turn
