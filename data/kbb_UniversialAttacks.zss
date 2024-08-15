@@ -282,7 +282,7 @@ if !movecontact {
     if enemy,!ishelper && enemy,movetype != H {
         HitDef{
             getpower: 1000,0; #get a bar. Nice!
-            attr: S, HP;
+            attr: S, HA;
             animtype: Heavy;
             damage: 15;
             Hitflag: MAF;
@@ -306,7 +306,7 @@ if !movecontact {
     } else { #if enemy,ishelper || enemy,movetype = H
         HitDef{
             getpower: 0,0; #get NO power
-            attr: S, HP;
+            attr: S, HA;
             animtype: Heavy;
             damage: 15;
             Hitflag: MAF;
@@ -423,7 +423,7 @@ if !movecontact {
     if enemy,!ishelper && enemy,movetype != H {
         HitDef{
             getpower: 1000,0; #get a bar. Nice!
-            attr: S, HP;
+            attr: S, HA;
             animtype: Heavy;
             damage: 15;
             Hitflag: MAF;
@@ -447,7 +447,7 @@ if !movecontact {
     } else { #if enemy,ishelper || enemy,movetype = H
         HitDef{
             getpower: 0,0; #get NO power
-            attr: S, HP;
+            attr: S, HA;
             animtype: Heavy;
             damage: 15;
             Hitflag: MAF;
@@ -554,7 +554,7 @@ if !movecontact {
     if enemy,!ishelper && enemy,movetype != H {
         HitDef{
             getpower: 1000,0; #get a bar. Nice!
-            attr: S, HP;
+            attr: S, HA;
             animtype: Heavy;
             damage: 15;
             Hitflag: MAF;
@@ -578,7 +578,7 @@ if !movecontact {
     } else { #if enemy,ishelper || enemy,movetype = H
         HitDef{
             getpower: 0,0; #get NO power
-            attr: S, HP;
+            attr: S, HA;
             animtype: Heavy;
             damage: 15;
             Hitflag: MAF;
@@ -850,7 +850,7 @@ if !movecontact && time = 17 {
 if !movecontact {
     HitDef{
         getpower: 0,0;
-        attr: A, HP;
+        attr: A, HA;
         animtype: Heavy;
         damage: 15;
         Hitflag: MAF;
@@ -968,7 +968,7 @@ if AnimElem = 3 {
 if !movecontact {
     HitDef{
         getpower: 0,0;
-        attr: A, HP;
+        attr: A, HA;
         animtype: Heavy;
         damage: 4;
         Hitflag: MAF;
@@ -1074,7 +1074,7 @@ if AnimElem = 3 {
 if !movecontact {
     HitDef{
         getpower: 0,0;
-        attr: A, HP;
+        attr: A, HA;
         animtype: Heavy;
         damage: 2;
         Hitflag: MAF;
@@ -1267,7 +1267,7 @@ if time = 10 {
 if !movecontact {
     HitDef{
         getpower: 0,0;
-        attr: S, HP;
+        attr: S, HA;
         animtype: Heavy;
         damage: 15;
         Hitflag: MAFD;
@@ -1359,7 +1359,7 @@ if time = 0 {
 if !movecontact {
     HitDef{
         getpower: 0,0;
-        attr: A, HP;
+        attr: A, HA;
         animtype: Heavy;
         damage: 15;
         Hitflag: MAFD;
@@ -1530,7 +1530,7 @@ if AnimElem = 2 {
 
 if !movecontact {
     HitDef{
-        attr: S, HP;
+        attr: S, HA;
         animtype: Heavy;
         damage: 15;
         Hitflag: MAF;
@@ -2288,12 +2288,12 @@ if Const(KBB_Playable) = 1 {
     #!(statetype = S && movetype = I)
     #Star Cancel Command
     if (power >= 1500 || numhelper(51000) != 0) && command = "ss" {
-        if alive && !ctrl && movetype != H && !ishelper && roundstate != 1 && time >= 3 {
+        if alive && !ctrl && movetype != H && !ishelper && roundstate = 2 && time >= 3 {
             #The exceptions
             if stateno != [700, 709] && stateno != 800 && stateno != 810 && stateno != [820, 829] && stateno != 830 &&
-            stateno != [150, 155] {
+            stateno != [150, 155] && stateno != [500, 501] {
                 #No Character Specific Exceptions
-                ChangeState{value: 67}
+                # ChangeState{value: 67}
 
                 #Character exceptions
                 if !(name = "Leon" && stateno = [26000, 26999]) && 
