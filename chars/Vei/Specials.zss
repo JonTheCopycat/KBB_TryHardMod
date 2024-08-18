@@ -353,7 +353,7 @@ if time >= 3 && time  <= 36  &&  time % 3 = 0  {
 	HitDef{
 		attr: A, SA;
 		animtype: Heavy;
-		damage: 15;
+		damage: 10;
 		hitflag: MAFD;
 		guardflag: MAFD;
         getpower: 0;
