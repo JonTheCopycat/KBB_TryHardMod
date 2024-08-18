@@ -2202,7 +2202,7 @@ ground.velocity = -3,-8
 air.velocity = -3,-8
 Fall = 1
 Envshake.time = 30
-Fall.recovertime = 60
+Fall.recovertime = 45
 
 
 [State 200, End]

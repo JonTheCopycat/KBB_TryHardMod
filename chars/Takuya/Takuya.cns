@@ -3860,7 +3860,8 @@ ctrl = 1
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "c" && time >= 12 || (win || lose) || enemy, life <= 0
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && time >= 12 && map(charge) >= 75 && facing = enemy,facing
+trigger3 = helper(445),movehit && command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && time >= 12 && map(charge) >= 65 && facing = enemy,facing
 value = 442
 ctrl = 0
 
@@ -3885,6 +3886,14 @@ sprpriority = 1
 type = VelSet
 trigger1 = AnimElem = 4
 x = -3.5
+
+[State 0, Juggle Map]
+type = MapSet
+trigger1 = time = 0
+map = "where"
+value = map(charge)
+ignorehitpause = 1
+
 
 [State 0, Juggle Map]
 type = MapSet
@@ -4091,18 +4100,20 @@ scale = 1 + root,map(charge)/95,1 + root,map(charge)/95
 ignorehitpause = 1
 ;persistent = 
 
-[State 0, ChangeState]
-type = ChangeState
-trigger1 = root,stateno = 442 && root,time >= 2
-value = 446
-ctrl = 0
-ignorehitpause = 1
+
 
 [State 0, Juggle Map]
 type = MapSet
 trigger1 = root,stateno = 442
 map = "where"
 value = root,map(charge)
+ignorehitpause = 1
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = root,stateno = 442 && root,time >= 5 || root,stateno = 442 && movehit >= 1 && enemynear,stateno = [5000,5150]
+value = 446
+ctrl = 0
 ignorehitpause = 1
 
 [State 0, BindToRoot]
@@ -4153,6 +4164,7 @@ persistent = 0
 type = HitDef
 getpower = 0
 triggerall = root,map(juggle) < 100 || hitcount != 0
+triggerall = root,stateno != 442
 trigger1 = time%7 = 0; yo FUUUCK vivi
 attr = A, NP
 animtype  = Heavy 
@@ -4171,12 +4183,12 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = 0,-2 - root,map(charge)/100
+ground.velocity = 0,-4
 guard.velocity = -2
 airguard.velocity = -2,-4
 ground.hittime  = 20
 air.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
-air.velocity = 0,-3 - root,map(charge)/100
+air.velocity = 0,-4
 Fall = 1
 fall.recovertime = 24
 Envshake.time = 5
@@ -4201,7 +4213,7 @@ sprpriority = 1
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 0
-x = 1  + ceil(map(where)/13) 
+x = 1  + ceil(root,map(where)/14) 
 y = 0
 ;ignorehitpause = 
 ;persistent = 
@@ -4220,7 +4232,7 @@ time = 1
 type = AngleDraw
 trigger1 = 1
 value = 0
-scale = 1 + map(where)/95,1 + map(where)/95
+scale = 1 + root,map(where)/95,1 + root,map(where)/95
 ignorehitpause = 1
 ;persistent = 
 
@@ -4273,7 +4285,7 @@ damage    = 1
 guard.kill = 0
 Hitflag = MAF
 guardflag = MAF
-pausetime = 0,15 + root,map(charge)/100
+pausetime = 0,15
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,0
@@ -4282,12 +4294,12 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 10 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = 0,-4 - root,map(charge)/100
+ground.velocity = 0,-4
 guard.velocity = 2
 airguard.velocity = 2,-4
 ground.hittime  = 20
 air.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
-air.velocity = 0,-3 - root,map(charge)/100
+air.velocity = 0,-3
 Fall = 1
 Envshake.time = 5
 Getpower = 0,0
@@ -4295,7 +4307,7 @@ guard.cornerpush.veloff = -2
 
 [State 0, DestroySelf]
 type = DestroySelf
-trigger1 = root,movetype = H && map(where) < 50
+trigger1 = root,movetype = H && root,map(where) < 50
 
 [State 200, End]
 type = Changestate
@@ -4321,13 +4333,13 @@ sprpriority = 5
 type = AngleDraw
 trigger1 = 1
 value = 0
-scale = 1 + root,map(charge)/95,1 + root,map(charge)/95
+scale = 1 + root,map(where)/95,1 + root,map(where)/95
 ignorehitpause = 1
 
 [State 0, EnvShake]
 type = EnvShake
 trigger1 = time = 0
-time = 10 + map(where)/10
+time = 10 + root,map(where)/10
 ;freq = 60
 ;ampl = -4
 ;phase = 90
@@ -4343,7 +4355,7 @@ value = 60
 type = RootMapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = ceil(map(where)/10) 
+value = ceil(root,map(where)/10) 
 persistent = 0
 
 [State 0, Helper Guarded]
@@ -4369,7 +4381,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 10 + ceil(map(where)/10)
+value = 10 + ceil(root,map(where)/10)
 
 [State 1010, Helper Attack Scale]
 type = AttackMulSet
@@ -4408,14 +4420,14 @@ type = HitDef
 trigger1 = !movecontact && !movereversed
 animtype  = Heavy
 attr = A, NP
-damage = ceil(map(where))
+damage = ceil(root,map(where))
 guard.kill = 0
 hitflag = MAF
 guardflag = MA
 ground.hittime = 11
 guard.hittime = 0
-pausetime = 0,ceil(map(where) /10) + 5
-guard.pausetime = 0,(map(where))/11
+pausetime = 0,ceil(root,map(where) /10) + 5
+guard.pausetime = 0,(root,map(where))/11
 sparkno = 2
 sparkxy = 0, 0
 hitsound = S ifelse(enemy,movetype = A,5,3), 1
@@ -4428,7 +4440,7 @@ airguard.velocity = -3.5,-2.75
 air.velocity = -2.5,-5.5
 fall = 1
 Getpower = 0,0
-Fall.recovertime = ceil(map(where)/2.5) + 20
+Fall.recovertime = ceil(root,map(where)/2.5) + 20
 
 [State 411, End]
 type = Destroyself
@@ -8493,8 +8505,8 @@ hitsound   = 8,1
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
-ground.velocity = -3,-6
-air.velocity = -3,-6
+ground.velocity = -3,-10
+air.velocity = -3,-10
 Fall = 1
 Envshake.time = 20
 fall.recover = 0
@@ -8524,7 +8536,7 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.velocity = -3,-6
-air.velocity = -3,-6
+air.velocity = -3,-5
 Fall = 1
 Envshake.time = 20
 fall.recovertime = 80
@@ -8731,7 +8743,7 @@ pausetime = 20,20
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 guard.pausetime = 15,10
 guard.hittime  = 5
-airguard.hittime  = 13
+airguard.hittime  = 15
 sparkno = 2
 guard.sparkno = s7000
 sparkxy = -8,-25
