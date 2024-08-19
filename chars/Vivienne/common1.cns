@@ -1136,17 +1136,17 @@ trigger1 = statetype = C && command != "holddown"
 statetype = S
 physics = S
 
-[State 120, Unblockable protection]
-type = NotHitBy
-trigger1 = statetype = S && time <= 1
-value = C
-time = 1
-
-[State 120, Unblockable protection]
-type = NotHitBy
-trigger1 = statetype = C && time <= 1
-value = SA
-time = 1
+;[State 120, Unblockable protection]
+;type = NotHitBy
+;trigger1 = statetype = S && time <= 1
+;value = C
+;time = 1
+;
+;[State 120, Unblockable protection]
+;type = NotHitBy
+;trigger1 = statetype = C && time <= 1
+;value = SA
+;time = 1
 
 [State 120, 5]
 type = ChangeState
