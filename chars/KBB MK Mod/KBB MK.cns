@@ -2490,7 +2490,7 @@ volumescale = 500
 [State 0, Turn]
 type = Turn
 triggerall = p2dist x < 0
-trigger1 = time > 2
+trigger1 = time > 16
 
 [State 0, Pause]
 type = Pause
@@ -2498,31 +2498,44 @@ trigger1 = prevstateno = 24500
 time = 10
 movetime = 10
 
+[State 40, 1]
+type = VarSet
+triggerall = time = [0, 2]
+trigger1 = ailevel = 0
+trigger2 = abs(P2Bodydist X) <= 30 
+trigger2 = ailevel > 0 && random < 200 && p2movetype != H
+sysvar(1) = 0
+
+[State 40, 2]
+type = VarSet
+triggerall = time = [0, 2]
+trigger1 = command = "holdfwd" && ailevel = 0
+trigger2 = abs(P2Bodydist X) > 100 
+trigger2 = ailevel > 0 && random < 300 && random >= 200 && p2movetype != H
+sysvar(1) = 1
+
+[State 40, 3]
+type = VarSet
+triggerall = time = [0, 2]
+trigger1 = command = "holdback" && ailevel = 0
+trigger2 = p2movetype = A && abs(P2Bodydist X) < 50 
+trigger2 = ailevel > 0 && random < 400 && random >= 300 && p2movetype != H
+sysvar(1) = -1
+
 [State 0, Moving Forward]
-type = VelAdd
-triggerall = time > 5 && time < 15
-triggerall = vel x < 12
-trigger1 = command = "holdfwd"
-x = 2
+type = VelSet
+trigger1 = time = [0, 5]
+x = 3 * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
-triggerall = time > 5 && time < 15
-trigger1 = vel x > 12
-x = 12
+trigger1 = time = [6, 14]
+x = 7 * sysvar(1)
 
-[State 0, Moving Back]
-type = VelAdd
-triggerall = time > 5 && time < 15
-triggerall = vel x > -12
-trigger1 = command = "holdback"
-x = -2
-
-[State 0, Speed Cap Back]
+[State 0, Speed Cap Forward]
 type = VelSet
-triggerall = time > 5 && time < 15
-trigger1 = vel x < -12
-x = -12
+trigger1 = time = [15, 16]
+x = 4 * sysvar(1)
 
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -2531,10 +2544,10 @@ statetype = S
 movetype = A
 physics = S
 
-[State 0, Speed Cap Back]
-type = VelSet
-trigger1 = AnimElem = 6
-x = vel x * 0.33
+;[State 0, Speed Cap Back]
+;type = VelSet
+;trigger1 = AnimElem = 6
+;x = vel x * 0.33
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -2602,7 +2615,7 @@ volumescale = 500
 [State 0, Turn]
 type = Turn
 triggerall = p2dist x < 0
-trigger1 = time > 2
+trigger1 = time > 17
 
 [State 0, Pause]
 type = Pause
@@ -2615,31 +2628,44 @@ type = VelSet
 trigger1 = time = 0
 y = 0
 
+[State 40, 1]
+type = VarSet
+triggerall = time = [0, 2]
+trigger1 = ailevel = 0
+trigger2 = abs(P2Bodydist X) <= 30 
+trigger2 = ailevel > 0 && random < 200 && p2movetype != H
+sysvar(1) = 0
+
+[State 40, 2]
+type = VarSet
+triggerall = time = [0, 2]
+trigger1 = command = "holdfwd" && ailevel = 0
+trigger2 = abs(P2Bodydist X) > 100 
+trigger2 = ailevel > 0 && random < 300 && random >= 200 && p2movetype != H
+sysvar(1) = 1
+
+[State 40, 3]
+type = VarSet
+triggerall = time = [0, 2]
+trigger1 = command = "holdback" && ailevel = 0
+trigger2 = p2movetype = A && abs(P2Bodydist X) < 50 
+trigger2 = ailevel > 0 && random < 400 && random >= 300 && p2movetype != H
+sysvar(1) = -1
+
 [State 0, Moving Forward]
-type = VelAdd
-triggerall = time > 5 && time < 15
-triggerall = vel x < 12
-trigger1 = command = "holdfwd"
-x = 4
+type = VelSet
+trigger1 = time = [0, 5]
+x = 3 * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
-triggerall = time > 5 && time < 15
-trigger1 = vel x > 12
-x = 12
+trigger1 = time = [6, 14]
+x = 7 * sysvar(1)
 
-[State 0, Moving Back]
-type = VelAdd
-triggerall = time > 5 && time < 15
-triggerall = vel x > -12
-trigger1 = command = "holdback"
-x = -4
-
-[State 0, Speed Cap Back]
+[State 0, Speed Cap Forward]
 type = VelSet
-triggerall = time > 5 && time < 15
-trigger1 = vel x < -12
-x = -12
+trigger1 = time = [15, 16]
+x = 4 * sysvar(1)
 
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -4833,7 +4859,7 @@ triggerall = time <= 16
 trigger1 = movehit
 time = 1
 id = -1
-pos = 25,-10
+pos = 25 * ((p2bodydist x + 10) / abs(p2bodydist x + 10)),-10
 
 ;[State 0, Moving Forward]
 ;type = VelAdd

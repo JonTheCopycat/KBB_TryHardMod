@@ -537,8 +537,8 @@ animtype  = Medium
 damage    = 25
 hitflag = MAFD
 guardflag = MAF
-pausetime = 10,10
-guard.pausetime = 10,8
+pausetime = 8,8
+guard.pausetime = 8,6
 guard.dist = 60
 sparkno = 1
 guard.sparkno = 13000
@@ -585,7 +585,7 @@ ctrl = 1
 
 [State 0, ChangeState]
 type = ChangeState
-triggerall = time >= 2
+triggerall = time >= 5
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 600
@@ -593,7 +593,7 @@ ctrl = 1
 
 [State 0, ChangeState]
 type = ChangeState
-triggerall = time >= 2
+triggerall = time >= 5
 trigger1 = command = "a"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 610
@@ -610,7 +610,7 @@ trigger1 = command = "c"
 
 [State 0, ChangeState]
 type = ChangeState
-triggerall = time >= 2
+triggerall = time >= 5
 triggerall = numhelper(3500) = 0
 trigger1 = command = "c" && var(12) < const(movement.airjump.num)
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
@@ -619,7 +619,7 @@ ctrl = 1
 
 [State 200, End]		
 type = ChangeState
-triggerall = time > 2
+triggerall = time > 5
 trigger1 = pos y >= -1
 value = 52
 ctrl = 1
