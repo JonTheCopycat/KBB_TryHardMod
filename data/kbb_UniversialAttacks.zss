@@ -2409,7 +2409,7 @@ if Const(KBB_Playable) = 1 {
 
         #Ground Dash Cancel Proration
         if numhelper(51001) = 0 { 
-            if movehit && (statetype = s || statetype = c) && movetype != H {
+            ignorehitpause if movehit && (statetype = s || statetype = c) && movetype != H {
                 if command = "FF" || (command = "WD" && command != "NotWD") {
                     Helper{
                         helpertype: normal;
@@ -2427,7 +2427,7 @@ if Const(KBB_Playable) = 1 {
 
         #Air Dash Cancel Proration
         if numhelper(51002) = 0 {
-            if movehit && (statetype = a) && movetype != H {
+            ignorehitpause if movehit && (statetype = a) && movetype != H {
                 if command = "FF" {
                     Helper{
                          helpertype: normal;
@@ -2445,27 +2445,27 @@ if Const(KBB_Playable) = 1 {
 
 
 
-        if (movecontact || helper, movecontact || map(helperHit) || map(helperguarded)) && !ctrl && movetype != H {
+        ignorehitpause if (movecontact || helper, movecontact || map(helperHit) || map(helperguarded)) && !ctrl && movetype != H {
             if command = "FF" {
                  PowerAdd{value: -250}
-                 ignorehitpause if (statetype = s || statetype = c) {
+                 if (statetype = s || statetype = c) {
 					StateTypeSet{Statetype: S}
                     ChangeState{value: 100; ctrl: 1}
-                 }else ignorehitpause if (statetype = a) {
+                 }else if (statetype = a) {
                     ChangeState{value: 65; ctrl: 1}
                  }
             }
             if command = "BB" {
                 PowerAdd{value: -250}
-                ignorehitpause if (statetype = s || statetype = c) {
+                if (statetype = s || statetype = c) {
 					StateTypeSet{Statetype: S}
                     ChangeState{value: 105; ctrl: 1}
-                 } else ignorehitpause if (statetype = a) {
+                 } else if (statetype = a) {
                     ChangeState{value: 70; ctrl: 1}
                  }
             }
 			if (command = "WD" && command != "NotWD" && time >= 3) {
-				ignorehitpause if (statetype = s || statetype = c) {
+				if (statetype = s || statetype = c) {
 					PowerAdd{value: -250}
 					StateTypeSet{Statetype: C}
 					ChangeState{value: 30; ctrl: 0}

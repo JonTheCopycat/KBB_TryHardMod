@@ -482,21 +482,6 @@ ctrl = 0
 anim = 196
 sprpriority = 2
 
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 5
-persistent = 0
-
-[State 0, Damage Proration]
-type = VarAdd
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 3
-
 [State 0, CtrlSet]
 type = CtrlSet
 trigger1 = time >= 15
@@ -560,6 +545,21 @@ air.cornerpush.veloff = 0
 ground.cornerpush.veloff = 0
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -5
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 3
 
 [State 200, End]
 type = ChangeState
