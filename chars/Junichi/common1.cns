@@ -176,6 +176,11 @@ time = 10
 paladd = 140, 0, 255
 trans = add
 
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = A, AA
+time = 1
 
 [State 100, 1]
 type = VarSet
@@ -199,14 +204,8 @@ x = sysvar(1) * (1.7 + 0.1 * var(10)) * 0.6
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = 2
+trigger1 = time = [2, 4]
 x = sysvar(1) * (1.7 + 0.1 * var(10)) * 1.25
-
-[State 0, VelSet]
-type = VelAdd
-trigger1 = time > 5
-trigger1 = vel x > 1
-x = -0.25
 
 [State 0, Explod]
 type = Explod

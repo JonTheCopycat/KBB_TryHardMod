@@ -232,7 +232,7 @@ x = -0.02
 
 [State 450, NotHitBy]
 type = notHitBy
-trigger1 = time = [2,12]
+trigger1 = time = [2,10]
 value = C
 time = 1
 

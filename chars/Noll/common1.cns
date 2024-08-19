@@ -179,6 +179,12 @@ trigger1 = time = 0
 value = F65,0
 volumescale = 500
 
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = C
+time = 1
+
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = [0, 1]

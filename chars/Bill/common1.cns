@@ -181,6 +181,12 @@ type = PosSet
 trigger1 = AnimElem = 1
 y = 0
 
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = A, AA
+time = 1
+
 [State 0, VelSet]
 type = VelAdd
 trigger1 = time = [0, 1]
@@ -188,7 +194,7 @@ x = const(velocity.run.fwd.x) * 1.8 * 0.6
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = 2
+trigger1 = time = [2, 4]
 x = const(velocity.run.fwd.x) * 1.8 * 1.25
 y = 0
 
