@@ -3654,8 +3654,8 @@ guardsound = 6,10
 ground.type = Low
 ground.slidetime = 15
 ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1, -5
-air.velocity = -1, -4
+ground.velocity = -1, -4
+air.velocity = -1, -3
 fall = 0
 fall.recover = 25 + ifelse(enemy,movetype = A, 7,0)
 Envshake.time = 5
@@ -3883,7 +3883,7 @@ value = 0
 ctrl = 1
 
 ;-------------------------------------------------------------------------------
-; A - Air
+; B - Air
 [Statedef 600]
 type    = A
 movetype= A
@@ -3970,7 +3970,7 @@ y = -2
 [State 0, TargetBind]
 type = TargetBind
 triggerall = target,pos y - pos y < 0
-trigger1 = movecontact = 1
+trigger1 = movehit = 1
 time = 1
 id = -1
 pos = facing * (target,pos x - pos x), -15
@@ -4295,7 +4295,7 @@ ctrl = 1
 
 
 ;-------------------------------------------------------------------------------
-; B - Air
+; A - Air
 [Statedef 610]
 type    = A
 movetype= A
@@ -4493,7 +4493,7 @@ ctrl = 1
 
 
 ;-------------------------------------------------------------------------------
-; B - Air 2
+; A - Air 2
 [Statedef 611]
 type    = A
 movetype= A
