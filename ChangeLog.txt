@@ -99,6 +99,8 @@ Metaknight:
 	* Startup reduced (f18 -> f15)
 3. Fixed bug where MetaKnight groundbounce was fucked up.
 4. 236A startup reduced (f14 -> f11)
+5. 214A made more consistent.
+6. 236C Startup reduced (f46 -> f38)
 
 
 Noll: A make shift wavedash stop just for you.
