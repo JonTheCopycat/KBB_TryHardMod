@@ -96,8 +96,9 @@ Metaknight:
 2. 236B hitbox slightly improved
 	* Hurtbox adjusted
 	* Animation adjusted
-	* Startup reduced (f18 -> f16)
+	* Startup reduced (f18 -> f15)
 3. Fixed bug where MetaKnight groundbounce was fucked up.
+4. 236A startup reduced (f14 -> f11)
 
 
 Noll: A make shift wavedash stop just for you.
