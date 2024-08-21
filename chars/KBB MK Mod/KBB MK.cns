@@ -2263,10 +2263,10 @@ type = AttackDist
 trigger1 = 1
 value = 10
 
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 1
-x = -2
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = AnimElem = 1
+;x = -2
 
 [State 0, VelSet]
 type = VelSet
@@ -2281,25 +2281,24 @@ volumescale = 120
 
 [State 200, End]
 type = ChangeState
-Triggerall = AnimElem = 5 || AnimElem = 6 || AnimElem = 7 || AnimElem = 8
+Triggerall = AnimElem = 5, >= 5
 trigger1 = command = "hyperhop"
 value = 60
 
 [State 200, End]
 type = ChangeState
-Triggerall = AnimElem = 5 || AnimElem = 6 || AnimElem = 7 || AnimElem = 8
+Triggerall = AnimElem = 5, >= 5
 trigger1 = command = "holdup"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
 
 [State 200, Wavedash Cancel]
 type = ChangeState
-triggerall = AnimElem = 5 || AnimElem = 6 || AnimElem = 7 || AnimElem = 8
+triggerall = AnimElem = 5, >= 5
 Trigger1 = command = "WD" && command != "NotWD"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 30
 ctrl = 1
-
 
 [State 200, Special 1 - Smash Baby]
 type = ChangeState
@@ -2459,6 +2458,29 @@ Fall.recovertime = 25
 ;guard.hittime = 15
 ;Fall = 1
 ;Fall.recovertime = 40
+
+[State 200, End]
+type = ChangeState
+trigger1 = movecontact
+value = 422
+
+[State 200, End]
+type = Destroyself
+trigger1 = animtime = 0
+
+
+;-------------------------------------------------------------------------------
+; A - 3 PROJECTILE Destroy
+[Statedef 422]
+type    = S
+movetype= A
+physics = N
+juggle  = 0
+ctrl = 0
+anim = 422
+poweradd = 0
+sprpriority = 2
+velset = 0, 0
 
 [State 200, End]
 type = Destroyself
@@ -3857,24 +3879,26 @@ value = 22000
 
 [State 200, End]
 type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "a"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 210
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact || time >= 10
+Triggerall = movehit
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 300
+value = 320
 
 [State 200, End]
 type = ChangeState
+Triggerall = movecontact
+trigger1 = command = "holddown"
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 440
+
+[State 200, End]
+type = ChangeState
+triggerall = prevstateno = 420
 Triggerall = movecontact
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 400
+value = 420
 
 [State 200, End]
 type = ChangeState

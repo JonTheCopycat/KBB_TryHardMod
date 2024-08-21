@@ -11,6 +11,8 @@ Universal:
 1. Some moves with the vortex property have been made smoother. The vortex effect of pulling opponents towards a move now applies gradually instead of instantly.
 2. Fixed Bug Where you could star cancel before and after the fight.
 3. Fixed Bug where moving during starburst with helpers out would sometimes drain meter.
+4. Reduced speed loss throughout grounded wavedash.
+5. All standard wavedashes are now invul to aerial physical attacks.
 
 
 Aege:
@@ -97,10 +99,16 @@ Metaknight:
 	* Hurtbox adjusted
 	* Animation adjusted
 	* Startup reduced (f18 -> f15)
+	* Removed the ability to combo after it under certain situations.
 3. Fixed bug where MetaKnight groundbounce was fucked up.
 4. 236A startup reduced (f14 -> f11)
 5. 214A made more consistent.
 6. 236C Startup reduced (f46 -> f38)
+7. 5c jump cancel window delayed by 5 frames
+8. 66b Cancels Reworked:
+	* No A Cancels
+	* B Cancels only on hit
+	* Now has a cancel into 2c
 
 
 Noll: A make shift wavedash stop just for you.
