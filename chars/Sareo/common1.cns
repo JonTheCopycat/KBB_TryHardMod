@@ -324,13 +324,13 @@ ctrl = 0
 anim = 30
 sprpriority = 1
 
-[State 0, Pause]
-type = Pause
-triggerall = enemy,stateno = [5000, 5299]
-trigger1 = Time = 1
-time = 10
-movetime = 10
-endcmdbuftime = 10
+;[State 0, Pause]
+;type = Pause
+;triggerall = enemy,stateno = [5000, 5299]
+;trigger1 = Time = 1
+;time = 10
+;movetime = 10
+;endcmdbuftime = 10
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -361,7 +361,7 @@ volumescale = 200
 [State 105, 1]
 type = VelSet
 trigger1 = Time = 0
-x = -14
+x = -12
 y = 0
 
 [State 105, 1]
@@ -399,35 +399,35 @@ volumescale = 100
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 5
+triggerall = time >= 2
 trigger1 = command = "holdup"
 value = 60
 ctrl = 0
 
 [State 200, End]
 type = ChangeState
-Triggerall = time >= 5
+Triggerall = time >= 2
 trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
-Triggerall = time >= 5
+Triggerall = time >= 2
 trigger1 = command = "BB"
 value = 105
 ctrl = 1
 
 [State 300, 5BB]
 type = ChangeState
-Triggerall = time >= 5
+Triggerall = time >= 2
 trigger1 = ailevel = 0 && command = "a" && command = "holdfwd"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 591
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 5
+triggerall = time >= 2
 trigger1 = ailevel = 0 && command = "a"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 290
@@ -442,14 +442,14 @@ ctrl = 0
 
 [State 300, 5BB]
 type = ChangeState
-Triggerall = time >= 5
+Triggerall = time >= 2
 trigger1 = ailevel = 0 && command = "b" && command = "holdfwd"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 320
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 5
+triggerall = time >= 2
 trigger1 = ailevel = 0 && command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 390
@@ -457,7 +457,7 @@ ctrl = 0
 
 [State 200, C]
 type = ChangeState
-triggerall = time >= 5
+triggerall = time >= 2
 triggerall = power >= 250
 triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
@@ -1140,7 +1140,7 @@ flag = NoAutoTurn
 [State 100, 4]
 type = ChangeState
 triggerall = ailevel = 0
-trigger1 = command != "holdfwd" && command != "hold_z"
+trigger1 = command != "holdfwd"
 value = 0
 
 [State 100, 4]

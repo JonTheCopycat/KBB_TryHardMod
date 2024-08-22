@@ -504,7 +504,7 @@ x = 6.5
 type = VelSet
 triggerall = time >= 2
 trigger1 = time <= 14
-y = 0.75
+y = 0.5
 
 [State 0, VelAdd]
 type = VelAdd
@@ -533,7 +533,7 @@ guardsound = S2,0
 ground.type = High
 ground.slidetime = 18
 ground.hittime  = 22
-ground.velocity = -5, -1
+ground.velocity = -5
 air.hittime  = 22
 air.velocity = -5,-1
 ;Fall.recovertime = 40

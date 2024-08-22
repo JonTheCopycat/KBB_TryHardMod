@@ -865,7 +865,7 @@ trigger1 = ctrl
 ; C
 [State -1, C]
 type = ChangeState
-value = 420
+value = 400
 Triggerall = numhelper(9999) = 0
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 100
