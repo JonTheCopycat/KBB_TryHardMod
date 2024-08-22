@@ -602,6 +602,7 @@ ctrl = 1
 [State -1, Down + C]
 type = ChangeState
 value = 445
+triggerall = time >= 5
 triggerall = numhelper(450) = 0
 triggerall = numhelper(3500) = 0
 triggerall = power >= 200
