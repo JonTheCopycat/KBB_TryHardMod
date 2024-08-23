@@ -57,7 +57,7 @@ value = 0
 
 [State 0, DP INVINCIBILLITY BABY]
 type = NotHitBy
-trigger1 = time = [1, 11]
+trigger1 = time = [2, 9]
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
 time = 1
 

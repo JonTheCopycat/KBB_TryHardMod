@@ -3144,6 +3144,7 @@ value = 24000
 
 [State 200, End]
 type = ChangeState
+triggerall = AnimElem = 7, >= 0
 Triggerall = movecontact
 trigger1 = command = "holddown"
 trigger1 = command = "a"
@@ -3158,6 +3159,7 @@ value = 951
 
 [State 200, End]
 type = ChangeState
+triggerall = AnimElem = 7, >= 0
 Triggerall = movecontact
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
@@ -5181,7 +5183,7 @@ y = 0
 type = ChangeState
 triggerall = time >= 5
 trigger1 = command = "BB"
-value = 105
+value = 409
 ctrl = 0
 [State 200, SPRINT]
 type = ChangeState

@@ -829,7 +829,6 @@ Triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = movecontact
 trigger2 = stateno = [200, 399] || stateno = [412, 414] || stateno = [900, 999]
-trigger3 = stateno = 410
 
 ;For AI In Comboes
 [State -1, C]

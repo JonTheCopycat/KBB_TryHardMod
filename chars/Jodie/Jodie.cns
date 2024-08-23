@@ -3202,7 +3202,7 @@ hitsound   = 5,3
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 8
-ground.hittime  = 10 + ifelse(enemy,movetype = A, 7,0)
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2,-2
 air.velocity = -2,-1
 Fall = 0
@@ -5498,14 +5498,17 @@ ignorehitpause = 1
 persistent = 0
 value = 3
 
+
+
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = animelem = 3||animelem = 4||animelem = 5
-x = 4
+trigger1 = animelem = 3
+x = 5
+y = 0
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 5
-x = 4.5
+x = 5.5
 
 
 [State 0, PowerAdd]
@@ -5533,7 +5536,7 @@ attr = S, NA
 animtype  = Light
 damage    = 15
 hitflag = MAF
-guardflag = MAF
+guardflag = M
 
 pausetime = 10,10
 ground.hittime  = 16 + ifelse(enemy,movetype = A, 7,0)
@@ -5960,19 +5963,22 @@ channel = 0
 
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = animelem = 3
-x = 5
-y = 0
+trigger1 = animelem = 3||animelem = 4||animelem = 5
+x = 4
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 5
-x = 5.5
+x = 4.5
 
-[State 0, VelSet if coming from wavedash]
-type = VelSet
-triggerall = vel x < const(velocity.run.fwd.x)
-trigger1 = prevstateno = 30 && time = 0
-x = const(velocity.run.fwd.x)
+;[State 0, PosAdd]
+;type = PosAdd
+;trigger1 = animelem = 3
+;x = 5
+;y = 0
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = time = 5
+;x = 5.5
 
 [State 200, 1]
 type = HitDef
@@ -8322,7 +8328,7 @@ persistent = 0
 
 [State 0, Failed to block an air unblockable!]
 type = Explod
-triggerall = ((stateno = 200 || stateno = 24200) && enemy, statetype = A) ;Edit this trigger as necessary
+triggerall = ((stateno = 200 || stateno = 2500 || stateno = 24200) && enemy, statetype = A) ;Edit this trigger as necessary
 triggerall = enemy, prevstateno = [120,160] && numexplod(31000) = 0
 trigger1 = enemy, movetype = H && enemy, stateno != [120,160]
 anim = F31000

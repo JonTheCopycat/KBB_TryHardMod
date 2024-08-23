@@ -913,10 +913,10 @@ animtype  = Medium
 damage    = 20
 hitflag = MAFD
 guardflag = MA
-pausetime = 10,10
+pausetime = 10,8
 ground.hittime  = 25 + ifelse(enemy,movetype = A || movecountered, 7,0)
 air.hittime  = 15
-guard.pausetime = 10,10
+guard.pausetime = 10,8
 guard.hittime = 12
 sparkno = 0
 guard.sparkno = 13000
@@ -4070,6 +4070,7 @@ animtype  = Light
 damage    = 15
 guardflag = HAF
 pausetime = 10,10
+guard.pausetime = 10, 8
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -4080,6 +4081,7 @@ ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2
 air.velocity = -2,-1
+airguard.velocity = -2, -2
 Fall = 0
 Envshake.time = 5
 Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
@@ -4213,6 +4215,7 @@ animtype  = Medium
 damage    = 20
 guardflag = HAF
 pausetime = 10,10
+guard.pausetime = 10, 8
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -4223,6 +4226,7 @@ ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2, -5
 air.velocity = -2,-2
+airguard.velocity = -2, -3
 Fall = 0
 Envshake.time = 5
 Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
@@ -4749,7 +4753,7 @@ animtype  = Up
 damage    = ifelse(enemy,movetype = A,60,30)
 hitflag = MAF
 guardflag = HAF
-pausetime = ifelse(enemy,movetype = A,24,12),ifelse(enemy,movetype = A,24,12)
+pausetime = ifelse(enemy,movetype = A,24,12),ifelse(enemy,movetype = A,24,10)
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
