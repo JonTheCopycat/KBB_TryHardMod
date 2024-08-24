@@ -4694,12 +4694,6 @@ ignorehitpause = 1
 
 [State 0, MapSet]
 type = MapSet
-trigger1 = time = 0
-map = "initialRootY"
-value = (pos y + 0) - enemy,pos y
-
-[State 0, MapSet]
-type = MapSet
 triggerall = !moveguarded
 triggerall = hitcount < 8
 trigger1 = movecontact
@@ -4801,7 +4795,7 @@ ctrl = 0
 type = Changestate
 trigger1 = hitcount >= 5
 trigger2 = (map(guardCount) + hitcount) >= 5
-trigger3 = (pos y - map(initialRootY)) <= -45
+trigger3 = (pos y - root,pos y) <= -45
 value = 452
 ctrl = 0
 
