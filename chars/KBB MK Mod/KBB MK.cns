@@ -2705,17 +2705,17 @@ sysvar(1) = -1
 
 [State 0, Moving Forward]
 type = VelSet
-trigger1 = time = [0, 5]
+trigger1 = AnimElem = 3, < 0
 x = 2 * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
-trigger1 = time = [6, 12]
+trigger1 = AnimElem = 3, >= 0 && AnimElem = 7, < 0
 x = ifelse(sysvar(1) < 0, 4.5, 8.5) * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
-trigger1 = time = [13, 14]
+trigger1 = AnimElem = 7
 x = 3 * sysvar(1)
 
 [State 0, StateTypeSet]
@@ -2835,17 +2835,17 @@ sysvar(1) = -1
 
 [State 0, Moving Forward]
 type = VelSet
-trigger1 = time = [0, 5]
+trigger1 = AnimElem = 3, < 0
 x = 2 * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
-trigger1 = time = [6, 12]
+trigger1 = AnimElem = 3, >= 0 && AnimElem = 7, < 0
 x = ifelse(sysvar(1) < 0, 4.5, 8.5) * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
-trigger1 = time = [13, 14]
+trigger1 = AnimElem = 7
 x = 2 * sysvar(1)
 
 [State 0, StateTypeSet]
