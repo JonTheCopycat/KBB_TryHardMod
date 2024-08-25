@@ -826,12 +826,26 @@ value = 300
 triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl
+
 ;---------------------------------------------------------------------------
-; Down + C
+; Down + C Portalless
+[State -1, Down + C]
+type = ChangeState
+value = 470
+triggerall = numhelper(405) = 0
+Triggerall = power >= 500
+triggerall = numhelper(3500) = 0
+triggerall = command = "holddown"
+triggerall = command = "c"
+Triggerall = statetype != A
+trigger1 = ctrl
+;---------------------------------------------------------------------------
+; Down + C With Portal
 [State -1, Down + C]
 type = ChangeState
 value = ifelse(numhelper(420) = 0, 480, 482)
-Triggerall = power >= 250
+triggerall = numhelper(405) != 0
+Triggerall = power >= 500
 triggerall = numhelper(3500) = 0
 triggerall = command = "holddown"
 triggerall = command = "c"
@@ -966,17 +980,6 @@ trigger1 = ctrl
 ;triggerall = command = "b"
 ;Triggerall = statetype = A
 ;trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Down + B
-[State -1, Down + B]
-type = ChangeState
-value = 460
-triggerall = numhelper(470) = 0
-triggerall = var(20) = 0
-triggerall = command = "holddown"
-triggerall = command = "b"
-Triggerall = statetype = A
-trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; B Aire
 [State -1, B Aire]

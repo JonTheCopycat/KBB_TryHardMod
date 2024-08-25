@@ -509,7 +509,7 @@ y = 0.5
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = time > 14
-y = .11
+y = .22
 
 [State HITDEF]
 type = HitDef

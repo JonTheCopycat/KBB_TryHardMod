@@ -351,7 +351,7 @@ value = 36
 type = ChangeState
 trigger1 = command = "a"
 trigger2 = root,stateno = 290
-value = 291
+value = 292
 ctrl = 0
 
 [State 200, End]
@@ -364,7 +364,7 @@ ctrl = 0
 [State 200, End]
 type = ChangeState
 trigger1 = command = "c"
-value = 470
+value = 491
 ctrl = 0
 
 [State 200, C]
@@ -373,6 +373,12 @@ triggerall = p2dist x > 0
 triggerall = time >= 5
 trigger1 = command = "WD"
 value = 31
+
+[State 200, Hurt]
+type = ChangeState
+Triggerall = 1
+trigger1 = root,stateno = [5000, 5210]
+value = 39
 
 [State 200, End]
 type = DestroySelf

@@ -2098,31 +2098,31 @@ ignorehitpause = 1
 persistent = 0
 
 
-[State 400, 4]
-type = HitDef
-triggerall = root,map(juggle) < 100 || hitcount != 0
-trigger1 = !movecontact && !movereversed
-animtype  = Heavy
-attr = S, NP
-damage = ifelse(enemy,movetype = A,80,40),40
-guard.kill = 0
-hitflag = MAF
-guardflag = MA
-ground.hittime = ifelse(enemy,movetype = A,44,22)
-pausetime = 0,5
-sparkno = 2
-sparkxy = 0, 0
-hitsound = S ifelse(enemy,movetype = A,5,3), 1
-guard.sparkno = 13000
-guardsound = 6,11
-ground.type = High
-ground.slidetime = 25
-ground.velocity = 5
-airguard.velocity = 1.5,1.75
-air.velocity = 1.5,1.5
-air.fall = 1
-Getpower = 0,0
-Fall.recovertime = ifelse(enemy,movetype = A,120,60)
+;[State 400, 4]
+;type = HitDef
+;triggerall = root,map(juggle) < 100 || hitcount != 0
+;trigger1 = !movecontact && !movereversed
+;animtype  = Heavy
+;attr = S, NP
+;damage = ifelse(enemy,movetype = A,80,40),40
+;guard.kill = 0
+;hitflag = MAF
+;guardflag = MA
+;ground.hittime = ifelse(enemy,movetype = A,44,22)
+;pausetime = 0,5
+;sparkno = 2
+;sparkxy = 0, 0
+;hitsound = S ifelse(enemy,movetype = A,5,3), 1
+;guard.sparkno = 13000
+;guardsound = 6,11
+;ground.type = High
+;ground.slidetime = 25
+;ground.velocity = 5
+;airguard.velocity = 1.5,1.75
+;air.velocity = 1.5,1.5
+;air.fall = 1
+;Getpower = 0,0
+;Fall.recovertime = ifelse(enemy,movetype = A,120,60)
 
 [State 200, End]
 type = Changestate
@@ -2148,30 +2148,30 @@ trigger1 = 1
 x = 0
 y = 0
 
-[State 400, 4]
-type = HitDef
-trigger1 = animelem = 3
-animtype  = Heavy
-attr = S, NP
-damage = 40
-guard.kill = 0
-hitflag = MAF
-guardflag = MA
-ground.hittime = ifelse(enemy,movetype = A,44,22)
-pausetime = 0,ifelse(enemy,movetype = A,24,12)
-sparkno = 2
-sparkxy = 0, 0
-hitsound = S ifelse(enemy,movetype = A,5,3), 1
-guard.sparkno = 13000
-guardsound = 6,11
-ground.type = High
-ground.slidetime = 25
-ground.velocity = -4,-8
-airguard.velocity = -2.5,-3.75
-air.velocity = -2.5,-3.5 
-fall = 1
-Getpower = 0,0
-Fall.recover = 0
+;[State 400, 4]
+;type = HitDef
+;trigger1 = animelem = 3
+;animtype  = Heavy
+;attr = S, NP
+;damage = 40
+;guard.kill = 0
+;hitflag = MAF
+;guardflag = MA
+;ground.hittime = ifelse(enemy,movetype = A,44,22)
+;pausetime = 0,ifelse(enemy,movetype = A,24,12)
+;sparkno = 2
+;sparkxy = 0, 0
+;hitsound = S ifelse(enemy,movetype = A,5,3), 1
+;guard.sparkno = 13000
+;guardsound = 6,11
+;ground.type = High
+;ground.slidetime = 25
+;ground.velocity = -4,-8
+;airguard.velocity = -2.5,-3.75
+;air.velocity = -2.5,-3.5 
+;fall = 1
+;Getpower = 0,0
+;Fall.recover = 0
 
 [State 411, End]
 type = Destroyself

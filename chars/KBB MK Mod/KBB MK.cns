@@ -4141,13 +4141,13 @@ y = -2
 ;trigger1 =  movecontact = 1
 ;y = -0.44
 
-[State 0, TargetBind]
-type = TargetBind
-triggerall = target,pos y - pos y < 0
-trigger1 = movehit = 1
-time = 1
-id = -1
-pos = facing * (target,pos x - pos x), -15
+;[State 0, TargetBind]
+;type = TargetBind
+;triggerall = target,pos y - pos y < 0
+;trigger1 = movehit = 1
+;time = 1
+;id = -1
+;pos = facing * (target,pos x - pos x), -15
 
 [State 200, 1]
 type = HitDef
@@ -4161,7 +4161,7 @@ animtype  = Up
 damage    = 7
 hitflag = MAF
 guardflag = HAF
-pausetime = 2,2
+pausetime = 4,4
 guard.pausetime = 2,2
 sparkno = 0
 guard.sparkno = 13000
@@ -4173,6 +4173,7 @@ ground.slidetime = 12
 ground.hittime  = 15
 ground.velocity = -2,-3
 air.velocity = -vel x * 0.5, -1
+airguard.velocity = -2, -1
 air.hittime  = 30
 guard.slidetime = 8
 guard.hittime = 10
@@ -4235,7 +4236,7 @@ value = 620
 [State 0, End]
 type = ChangeState
 trigger1 = pos y >= 0
-value = 612
+value = ifelse(movehit, 52, 612)
 
 [State 0, End]
 type = ChangeState
@@ -4553,7 +4554,7 @@ animtype  = Up
 damage    = 10
 hitflag = MAF
 guardflag = HAF
-pausetime = 6,6
+pausetime = 8,8
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
