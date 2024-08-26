@@ -2252,7 +2252,7 @@ trigger1 = prevstateno = 23000 && time = [0, 15]
 trigger2 =  time = [2,15]
 attr = SCA,NA,SA,NP,SP
 slot = 1
-stateno = ifelse(p2bodydist x < 100 && abs(p2bodydist y) < 30, 23050, 23051)
+stateno = 23051
 time = 1
 
 [State 0, HitOverrideCheck]
@@ -2753,19 +2753,14 @@ value = -1
 
 [State 0, Turn]
 type = Turn
-triggerall = p2dist x < 0
+triggerall = p2dist x < -10
 trigger1 = time <= 15
 
 [State 0, DP INVINCIBILLITY BABY]
 type = NotHitBy
-trigger1 = time = 0 
+trigger1 = 1
 value = SCA,NA,SA,NP,SP,NT,ST
-time = 20
-
-[State 0, CtrlSet]
-type = CtrlSet
-trigger1 = time = 15
-value = 1
+time = 1
 
 [State 200, End]
 type = ChangeState
@@ -2777,14 +2772,8 @@ ctrl = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = AnimElem = 4
-value = 23052
-ctrl = 1
-
-[State 200, End]
-type = ChangeState
 trigger1 = AnimTime = 0
-value = 0
+value = 23052
 ctrl = 1
 
 
@@ -2827,7 +2816,7 @@ channel = 0
 [State 0, DP INVINCIBILLITY BABY]
 type = NotHitBy
 triggerall = prevstateno = 23051
-trigger1 = time = [0, 10] 
+trigger1 = time = [0, 5] 
 value = SCA,NA,SA,NP,SP,NT,ST
 time = 1
 

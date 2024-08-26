@@ -15068,13 +15068,12 @@ volumescale = 50
 [State 0, Dash Velocity]
 type = VelSet
 trigger1 = time = 0
-x = vel x * 0.2
 y = -3
 
 [State 200, Move Forward]
 type = VelAdd
-trigger1 = time = [2, 10]
-y = -0.22
+trigger1 = time = [0, 10]
+y = -0.44 * 0.5
 
 [State 200, Jump]
 type = ChangeState
@@ -15153,16 +15152,16 @@ trigger1 = AnimElem = 1
 value = S1,1
 volumescale = 50
 
-[State 200, Move Forward]
-type = VelSet
-trigger1 = animelem = 1
-x = 6
-y = -2
+;[State 200, Move Forward]
+;type = VelSet
+;trigger1 = animelem = 1
+;x = 6
+;y = -2
 
-[State 200, Slow Down]
-type = VelSet
-trigger1 = time > 10
-x = vel x * 0.95
+;[State 200, Slow Down]
+;type = VelSet
+;trigger1 = time > 10
+;x = vel x * 0.95
 
 [State 200, Move Forward]
 type = VelAdd
@@ -15318,16 +15317,16 @@ trigger1 = AnimElem = 1
 value = S1,1
 volumescale = 50
 
-[State 200, Move Forward]
-type = VelSet
-trigger1 = animelem = 1
-x = 6.25
-y = -1.5
+;[State 200, Move Forward]
+;type = VelSet
+;trigger1 = animelem = 1
+;x = 6.25
+;y = -1.5
 
-[State 200, Slow Down]
-type = VelSet
-trigger1 = time > 10
-x = vel x * 0.95
+;[State 200, Slow Down]
+;type = VelSet
+;trigger1 = time > 10
+;x = vel x * 0.95
 
 [State 200, Move Forward]
 type = VelAdd
@@ -15523,16 +15522,16 @@ trigger1 = AnimElem = 1
 value = S1,1
 volumescale = 50
 
-[State 200, Move Forward]
-type = VelSet
-trigger1 = animelem = 1
-x = 5.5
-y = -3
+;[State 200, Move Forward]
+;type = VelSet
+;trigger1 = animelem = 1
+;x = 5.5
+;y = -3
 
-[State 200, Slow Down]
-type = VelSet
-trigger1 = time > 20
-x = vel x * 0.95
+;[State 200, Slow Down]
+;type = VelSet
+;trigger1 = time > 20
+;x = vel x * 0.95
 
 ;[State 200, Move Forward]
 ;type = VelAdd
