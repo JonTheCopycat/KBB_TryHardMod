@@ -5,8 +5,6 @@ _F_F^B
 
 _AIR_D^B
 
-^A^B
-
 <#f0f000>:COMMAND DASH CANCELS:</>
 ^A_F_D_DF (Late on Block)
 ^A^A_F_D_DF (Late on Block)
@@ -19,32 +17,28 @@ Slide Thrust							_F_D_DF^A
 	the ground while sliding."
 
 Air Thrust								_F_D_DF^B
-	"Metaknight jumps up and thrusts his
-	sword straight in the the opponent's
+	"Metaknight jumps up and slices his
+	sword straight at the opponent's
 	head."
 
-Dimensional Cape (1/5 Bar)				_F_D_DF^C
+Dimensional Cape Attack (1/5 Bar)				_F_D_DF^C
 	"Metaknight disappears into his cape,
-	reappearing moments later further ahead
-	than normal.
+	reappearing moments later to attack.
 	He cannot change trajectory in this version."
 
 <#f0f000>:EX ATTACKS:</>
 
 Mach Tornado (1/4 Bar, _AIR OK)					^C
 	"Metaknight spins himself into a tornado."
-
-Sword Beam (1/10 Bar)						_F^C
-	"Metaknight throws a beam from his sword."
 	
-Dimensional Cape (1/5 Bar)						_F^C
+Dimensional Cape (1/4 Bar, _AIR OK)						_D^C
 	"Metaknight disappears into his cape,
 	reappearing moments later.
 	He can move while in his cape."
-	
-Aerial Sword Beam (1/10 Bar)				_AIR_D^C
-	"Metaknight throws a beam from his sword
-	diagonally down."
+
+Watching Closely (1/4 Bar)						_B^C
+	"Metaknight prepares himself for an upcomming
+	attack, and dodges it just in time."
 
 <#f0f000>:SPECIAL MOVES!:</>
 
@@ -66,5 +60,5 @@ Invinsible Slash (1 1/2 Bar) 					_D_DF_F^B
 
 Wind Blade Ultra (2 Bars)						_D_DF_F^C				
 	"Metaknight changes a slash so strong that
-	it covers entire ground in a very damagine
-	gust!"
+	it covers entire ground in a very damaging
+	gust! It cannot be blocked."

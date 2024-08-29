@@ -1411,7 +1411,7 @@ value = 610
 
 [State 200, Airdash fwd]
 type = ChangeState
-Trigger1 = command = "FF" || command = "z"
+Trigger1 = command = "FF"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 65
 ctrl = 0
@@ -2008,17 +2008,10 @@ ctrl = 1
 type    = S
 movetype= A
 physics = S
-juggle  = 1
+juggle  = 0
 ctrl = 0
 anim = 251
 sprpriority = 2
-
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 5
-persistent = 0
 
 [State 0, staleMovesException] ;Negates stale moves
 type = MapSet
@@ -2066,7 +2059,6 @@ scale = 0.4,0.4
 
 [State 200, 1]
 type = HitDef
-triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 trigger1 = 1
 attr = S, NP
@@ -2428,6 +2420,14 @@ ontop = 0
 shadow = 0,0,0
 ownpal = 1
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+triggerall = movehit
+Trigger1 = command = "WD" && command != "NotWD"
+trigger2 = roundstate = 2 && ailevel > 5 && random < (ailevel * 100)
+value = 30
+ctrl = 1
+
 [State 230, Jump Cancel]
 type = ChangeState
 triggerall = Movehit
@@ -2474,15 +2474,233 @@ trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
+;-------------------------------------------------------------------------------
+; Wavedash B: Sword Uppercut
+[Statedef 390]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+juggle = 2
+anim = 390
+sprpriority = 2
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 15
+
+[State 0, Voice]
+type = PlaySnd
+triggerall = random < 500
+trigger1 = AnimElem = 1
+value = S250,2+(random<500)*1+(random<500)*1+(random<500)*1+(random<500)*1
+volumescale = 200
+channel = 0
+
+[State 0, FatalCounter]
+type = MapSet
+trigger1 = 1
+map = "fatal"
+value = 1
+ignorehitpause = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S4,0
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = movecontact = 1
+value = 100
+
+[State 0, Swing 1]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = S300,0
+volumescale = 150
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = Animelem = 4
+x = 4
+
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 4
+anim = 20004
+ID = 20004
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+sprpriority = 3
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 0
+
+
+[State 200, 1]
+type = HitDef
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+triggerall = enemy,movetype = A 
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 140
+hitflag = MAFD
+guardflag = MA
+pausetime = 30,38
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 8,1
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -1, -7
+air.velocity = -1,-7
+guard.velocity = -2
+airguard.velocity = -2, -3.5
+fall = 1
+fall.recover = 0
+Envshake.time = 5
+
+[State 200, 1]
+type = HitDef
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+triggerall = enemy,movetype != A
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 70
+hitflag = MAFD
+guardflag = MA
+pausetime = 10,12
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S4,1
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -1, -6
+air.velocity = -1,-6
+guard.velocity = -2
+airguard.velocity = -2, -3.5
+fall = 1
+fall.recovertime = 40
+Envshake.time = 10
+
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Animelem = 12 && movecontact 
+trigger1 = FrontEdgeDist <= 60
+x = -5
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = 5400
+ID = 5400
+pos = 10, -10
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = -0.4,.4
+sprpriority = 3
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+
+[State 230, Jump Cancel]
+type = ChangeState
+triggerall = Movehit
+Trigger1 = command = "holdup"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 40
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+Triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 3"
+value = 23000
+
+[State 200, GRENADE SPAWN]
+type = ChangeState
+triggerall = Movecontact	
+triggerall = power >= 200	
+triggerall = command = "c"
+triggerall = numhelper(452) = 0
+triggerall = numhelper(632) = 0
+triggerall = hitcount = 3
+trigger1 = command = "holddown"
+value = 450
+[State 200, CANNON]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 200
+triggerall = numhelper(402) = 0
+triggerall = numhelper(622) = 0
+triggerall = hitcount = 3
+triggerall = numhelper(3500) = 0
+trigger1 = command = "c"
+value = 400
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
 ;Wavedash B
 ;-------------------------------------------------------------------------------
-[Statedef 390]
+[Statedef 391]
 type    = A
 movetype= I
 physics = N
 juggle  = 0
 ctrl = 0
-anim = 390
+anim = 391
 sprpriority = 2
 
 [State 0, Voice]

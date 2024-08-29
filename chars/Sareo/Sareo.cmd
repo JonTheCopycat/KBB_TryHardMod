@@ -180,6 +180,16 @@ command = D, D
 time = 10
 buffer.time = 1
 
+[Command]
+name = "BWD"
+command = ~B, D, DB
+time = 20
+
+[Command]
+name = "NotBWD"
+command = F, D, DB
+time = 20
+
 ;-| 2/3 Button Combination |-----------------------------------------------
 [Command]
 name = "recovery" ;Required (do not remove)
@@ -589,8 +599,8 @@ flag3=nostandguard
 type = VelSet
 triggerall = statetype = A && movetype != H
 triggerall = command = "down"
-triggerall = vel y > 0 && vel y < 6
-triggerall = stateno != 900
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
+triggerall = stateno != 900 && stateno != 460
 trigger1 = 1
 y = 6
 
@@ -606,7 +616,6 @@ triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 1"
 Triggerall = power >= 2000
 trigger1 = ctrl
-trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 2 - SPEEEEEN
 [State -1, SPECIAL 2]
@@ -627,7 +636,6 @@ triggerall = command = "SPECIAL 3"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
-trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 4 - CURE
 [State -1, SPECIAL 4]
@@ -650,7 +658,6 @@ triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 5"
 Triggerall = power >= 2000
 trigger1 = ctrl
-trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 6 - REFLECT
 [State -1, SPECIAL 5]
@@ -683,7 +690,7 @@ trigger1 = ctrl
 [State -1, Wavedash]
 type = ChangeState
 value = 30
-trigger1 = command = "WD" && command != "NotWD"
+trigger1 = command = "BWD" && command != "NotBWD"
 trigger1 = statetype = C || statetype = S
 trigger1 = ctrl
 
@@ -693,7 +700,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -702,7 +709,7 @@ trigger1 = ctrl
 [State -1, Run Back]
 type = ChangeState
 value = 105
-trigger1 = command = "BB" && command != "holddown"
+trigger1 = command = "BB"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -736,7 +743,7 @@ triggerall = stateno != 65
 triggerall = stateno != 70
 value = ifelse(pos y >= 0,52,65)
 triggerall = Statetype = A
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -763,15 +770,6 @@ triggerall = command = "a"
 Triggerall = statetype != A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
-; Fwd + A
-[State -1, Fwd + A]
-type = ChangeState
-value = 220
-triggerall = command = "holdfwd"
-triggerall = command = "a"
-Triggerall = statetype != A
-trigger1 = ctrl
-;---------------------------------------------------------------------------
 ; Back + A
 [State -1, Back + A]
 type = ChangeState
@@ -794,15 +792,6 @@ trigger1 = ctrl
 type = ChangeState
 value = 900
 triggerall = command = "holddown"
-triggerall = command = "b"
-Triggerall = statetype != A
-trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Dash + A
-[State -1, Dash + A]
-type = ChangeState
-value = 320
-triggerall = stateno = 100
 triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl
@@ -981,6 +970,7 @@ type = ChangeState
 value = 620
 triggerall = prevstateno != 620
 triggerall = numhelper(3500) = 0
+Triggerall = power >= 200
 triggerall = command = "c"
 Triggerall = statetype = A
 trigger1 = ctrl

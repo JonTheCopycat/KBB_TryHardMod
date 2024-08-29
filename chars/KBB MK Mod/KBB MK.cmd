@@ -564,8 +564,8 @@ flag3=nostandguard
 type = VelSet
 triggerall = statetype = A && movetype != H
 triggerall = command = "down"
-triggerall = vel y > 0 && vel y < 6
-triggerall = stateno != 900 && stateno != 910
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
+triggerall = stateno != 900 && stateno != 910 && stateno != [440,445]
 trigger1 = 1
 y = 6
 
@@ -656,7 +656,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -665,7 +665,7 @@ trigger1 = ctrl
 [State -1, Run Back]
 type = ChangeState
 value = 105
-trigger1 = command = "BB" && command != "holddown"
+trigger1 = command = "BB"
 trigger1 = statetype = S
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
@@ -709,7 +709,7 @@ triggerall = stateno != 70
 triggerall = prevstateno != 65
 value = 65
 triggerall = Statetype = A
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -865,7 +865,7 @@ trigger1 = ctrl
 ; C
 [State -1, C]
 type = ChangeState
-value = 420
+value = 400
 Triggerall = numhelper(9999) = 0
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 100

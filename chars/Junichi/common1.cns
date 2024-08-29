@@ -176,6 +176,11 @@ time = 10
 paladd = 140, 0, 255
 trans = add
 
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = A, AA
+time = 1
 
 [State 100, 1]
 type = VarSet
@@ -199,14 +204,8 @@ x = sysvar(1) * (1.7 + 0.1 * var(10)) * 0.6
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = 2
+trigger1 = time = [2, 4]
 x = sysvar(1) * (1.7 + 0.1 * var(10)) * 1.25
-
-[State 0, VelSet]
-type = VelAdd
-trigger1 = time > 5
-trigger1 = vel x > 1
-x = -0.25
 
 [State 0, Explod]
 type = Explod
@@ -245,7 +244,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -259,6 +258,7 @@ value = 35
 type = ChangeState
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 290 + var(10) * 3
 ctrl = 0
 
@@ -266,6 +266,7 @@ ctrl = 0
 type = ChangeState
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 390 + var(10) * 3
 ctrl = 0
 
@@ -274,6 +275,7 @@ type = ChangeState
 triggerall = power >= 200
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 490 + var(10) * 3
 
 [State 200, End]
@@ -313,7 +315,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -411,8 +413,8 @@ sysvar(1) = 0
 [State 40, 2]
 type = VarSet
 trigger1 = command = "holdfwd" && ailevel = 0
-trigger2 = abs(P2Bodydist X) > 100 
-trigger2 = ailevel > 0 && time = 0 && random < 300 && random >= 200 && p2movetype != H
+trigger2 = abs(P2Bodydist X) > 100 || p2movetype = H
+trigger2 = ailevel > 0 && time = 0 && random < 300 && random >= 200
 sysvar(1) = 1
 
 [State 40, 3]
@@ -1256,99 +1258,6 @@ type = ChangeState
 trigger1 = Time = 7
 value = 0
 ctrl = 1
-
-;---------------------------------------------------------------------------
-; Hop forward
-[Statedef 107]
-type    = A
-physics = A
-ctrl = 0
-anim = 418
-sprpriority = 1
-
-[State 105, NotHitBy]
-type = NotHitBy
-trigger1 = Animelem = 1
-value = SCA
-time = 4
-
-[State 0, PlayerPush]
-type = PlayerPush
-trigger1 = 1
-value = 0
-
-[State 40, Disable Jump Block Helper]
-type = helper
-name = "Disable Jump Block"
-trigger1 = time = 1 ; Time is 1 to extend the vulnerability period 1 frame
-ID = 4200
-stateno = 4200
-pos = 9999,9999
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-supermovetime = 0
-pausemovetime = 0
-
-;6 frames after the character backdashes, guarding is disabled. This is to prevent the player from backdashing into block
-[State 50, 4]
-type = AssertSpecial
-trigger1 = numhelper(4200) > 0
-flag = NoAirGuard
-
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = time = 0
-value = F100,0
-volumescale = 500
-
-[State 105, 1]
-type = VelSet
-trigger1 = Time = 0
-x = 5
-y = -2.5
-
-[State 0, Explod]
-type = Explod
-trigger1 = AnimElem = 1
-anim = F16100
-ID = 16100
-pos = 30,5
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = 0.75,0.75
-sprpriority = 2
-ontop = 0
-shadow = 0,0,0
-ownpal = 1
-
-[State 105, 2]
-type = CtrlSet
-trigger1 = Time = 8
-value = 1
-
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = AnimElem = 1
-value = 7,0
-volumescale = 100
-
-[State 105, 3]
-type = ChangeState
-trigger1 = Vel Y > 0
-trigger1 = Pos Y >= 0
-value = 106
-
-
-
-
 
 ;---------------------------------------------------------------------------
 ; GUARD (start)

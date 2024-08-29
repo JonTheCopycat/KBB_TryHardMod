@@ -585,9 +585,9 @@ flag3=nostandguard
 [State -1, Soft Fast Fall]
 type = VelSet
 triggerall = statetype = A && movetype != H
-triggerall = stateno != [900,910] && stateno != 413 ;Moves that have been nerfed to not allow fastfall during them
+triggerall = stateno != [900,910] && stateno != 413 && stateno != 971 ;Moves that have been nerfed to not allow fastfall during them
 triggerall = command = "down"
-triggerall = vel y > 0 && vel y < 6
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
 trigger1 = 1
 y = 6
 
@@ -664,14 +664,15 @@ trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Special 4
-;[State -1, SPECIAL 4]
-;type = ChangeState
-;value = 23000
-;triggerall = var(19) = 0
-;triggerall = numhelper(3500) = 0
-;triggerall = command = "SPECIAL 4"
-;Triggerall = power >= 500
-;trigger1 = ctrl
+[State -1, SPECIAL 4]
+type = ChangeState
+value = 24000
+triggerall = numhelper(3500) = 0
+triggerall = command = "SPECIAL 4"
+Triggerall = statetype != A
+Triggerall = power >= 1000
+trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 5
 [State -1, SPECIAL 5]
@@ -683,6 +684,8 @@ Triggerall = statetype != A
 Triggerall = power >= 1500
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
+trigger3 = movecontact
+trigger3 = stateno = [200, 499] || stateno = [900, 999]
 
 ;===========================================================================
 ;---------------------------------------------------------------------------
@@ -698,7 +701,7 @@ trigger1 = ctrl
 [State -1, Run Fwd]
 type = ChangeState
 value = 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -739,7 +742,7 @@ triggerall = stateno != 60
 triggerall = stateno != 65
 triggerall = stateno != 70
 value = ifelse(pos y >= 0,52,65)
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -755,22 +758,6 @@ trigger1 = ctrl
 
 ;===========================================================================
 ;--------------------------------Normal Attacks---------------------------
-
-
-;---------------------------------------------------------------------------
-; Stance Switch Down C
-[State -1, C]
-type = ChangeState
-value = 400
-triggerall = numhelper(3500) = 0
-Triggerall = power >= 100
-triggerall = command = "holddown"
-triggerall = command = "c"
-Triggerall = statetype != A
-trigger1 = ctrl
-trigger2 = movecontact
-trigger2 = stateno = [200, 499]
-trigger2 = stateno != 412
 
 ;---------------------------------------------------------------------------
 ; Stance Switch Down C - Round Start
@@ -795,7 +782,6 @@ triggerall = var(10) = 0
 triggerall = command = "holddown"
 triggerall = command = "a"
 Triggerall = statetype != A
-triggerall = numhelper(315) = 0
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Kick A
@@ -826,7 +812,7 @@ triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = movecontact
-trigger2 = stateno = [200, 299] || stateno = [900, 999]
+trigger2 = stateno = [200, 289]
 trigger2 = stateno != 201 && stateno != 210
 
 ;---------------------------------------------------------------------------
@@ -843,23 +829,22 @@ Triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = movecontact
 trigger2 = stateno = [200, 399] || stateno = [412, 414] || stateno = [900, 999]
-trigger3 = stateno = 410
 
-;---------------------------------------------------------------------------
-; Fwd C
+;For AI In Comboes
 [State -1, C]
 type = ChangeState
-value = 415
+value = 409
 triggerall = var(10) = 0
-Triggerall = power >= 200
+Triggerall = power >= 100
 triggerall = numhelper(3500) = 0
-;triggerall = command = "holdfwd"
-triggerall = command = "c"
+triggerall = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 Triggerall = statetype != A
-trigger1 = ctrl
-trigger2 = movecontact
-trigger2 = stateno = [200, 399] || stateno = [900, 999]
-trigger2 = stateno != 201
+trigger1 = movecontact
+trigger1 = stateno = [200, 399] || stateno = [412, 414] || stateno = [900, 999]
+trigger1 = stateno = 410
+
+
+
 
 
 ;---------------------------------------------------------------------------
@@ -897,7 +882,7 @@ trigger2 = stateno != 201
 type = ChangeState
 value = 971
 triggerall = var(10) = 1
-triggerall = stateno = 100
+triggerall = stateno = 100 || stateno = 22010
 triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl
@@ -957,20 +942,21 @@ trigger1 = ctrl
 trigger2 = movecontact
 trigger2 = stateno = [200, 399] || stateno = [900, 999] || stateno = 423
 
-;---------------------------------------------------------------------------
-; Back C
-[State -1, Back C]
+
+
+;For AI In Comboes
+[State -1, Fwd C]
 type = ChangeState
-value = 423
+value = 420
 triggerall = var(10) = 1
-Triggerall = power >= 200
 triggerall = numhelper(3500) = 0
-;triggerall = command = "holdback"
-triggerall = command = "c"
+Triggerall = power >= 100
+triggerall = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 Triggerall = statetype != A
-trigger1 = ctrl
-trigger2 = movecontact
-trigger2 = stateno = [200, 399] || stateno = [900, 999]
+trigger1 = movecontact
+trigger1 = stateno = [200, 399] || stateno = [900, 999] || stateno = 423
+
+
 
 
 ;---------------------------------------------------------------------------
@@ -1005,8 +991,8 @@ triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
-; Down + B
-[State -1, Down + B]
+; Back + B
+[State -1, Back + B]
 type = ChangeState
 value = 380
 triggerall = var(10) = 2
@@ -1038,20 +1024,19 @@ trigger1 = ctrl
 trigger2 = movecontact
 trigger2 = stateno = [200, 399] || stateno = [900, 999]
 
-;---------------------------------------------------------------------------
-; C
+;For AI
 [State -1, C]
 type = ChangeState
-value = 480
+value = 460
 triggerall = var(10) = 2
 triggerall = numhelper(3500) = 0
-Triggerall = power >= 200
-;triggerall = command = "holdfwd"
-triggerall = command = "c"
+Triggerall = power >= 100
+triggerall = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 Triggerall = statetype != A
-trigger1 = ctrl
-trigger2 = movecontact
-trigger2 = stateno = [200, 399] || stateno = [900, 999]
+trigger1 = movecontact
+trigger1 = stateno = [200, 399] || stateno = [900, 999]
+
+
 ;---------------------------------------------------------------------------
 ; Down + C
 ;[State -1, Down + C]
@@ -1072,19 +1057,101 @@ trigger2 = stateno = [200, 399] || stateno = [900, 999]
 
 
 ;---------------------------------------------------------------------------
-; DownBack C
-;[State -1, C]
-;type = ChangeState
-;value = 403
-;Triggerall = power >= 100
-;triggerall = numhelper(3500) = 0
-;triggerall = command = "holddownback"
-;triggerall = command = "c"
-;Triggerall = statetype != A
-;trigger1 = ctrl
+; Stance Switch Down C
+[State -1, C]
+type = ChangeState
+value = 400
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 100
+triggerall = command = "holddown"
+triggerall = command = "c"
+Triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = movecontact
+trigger2 = stateno = [200, 499]
+trigger2 = stateno != 412
 
+;---------------------------------------------------------------------------
+; Neutral C
+[State -1, C]
+type = ChangeState
+value = 415
+triggerall = var(10) = 0
+Triggerall = power >= 200
+triggerall = numhelper(3500) = 0
+triggerall = command = "c"
+Triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = movecontact
+trigger2 = stateno = [200, 399] || stateno = [900, 999]
+trigger2 = stateno != 201
 
+;For AI in Comboes
+[State -1, C]
+type = ChangeState
+value = 415
+triggerall = var(10) = 0
+Triggerall = power >= 200
+triggerall = numhelper(3500) = 0
+triggerall = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+Triggerall = statetype != A
+trigger1 = movecontact
+trigger1 = stateno = [200, 399] || stateno = [900, 999]
+trigger1 = stateno != 201
 
+;---------------------------------------------------------------------------
+; Punch C
+[State -1, C]
+type = ChangeState
+value = 423
+triggerall = var(10) = 1
+Triggerall = power >= 200
+triggerall = numhelper(3500) = 0
+triggerall = command = "c"
+Triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = movecontact
+trigger2 = stateno = [200, 399] || stateno = [900, 999]
+
+;For AI in Comboes
+[State -1, C]
+type = ChangeState
+value = 423
+triggerall = var(10) = 1
+Triggerall = power >= 200
+triggerall = numhelper(3500) = 0
+triggerall = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+Triggerall = statetype != A
+trigger1 = movecontact
+trigger1 = stateno = [200, 399] || stateno = [900, 999]
+
+;---------------------------------------------------------------------------
+; Baton C
+[State -1, C]
+type = ChangeState
+value = 480
+triggerall = var(10) = 2
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 200
+triggerall = command = "c"
+Triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = movecontact
+trigger2 = stateno = [200, 399] || stateno = [900, 999]
+
+;For AI
+[State -1, C]
+type = ChangeState
+value = 480
+triggerall = var(10) = 2
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 200
+triggerall = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+Triggerall = statetype != A
+trigger1 = movecontact
+trigger1 = stateno = [200, 399] || stateno = [900, 999]
+;---------------------------------------------------------------------------
+;For All Stances Conditional C Moves
 ;---------------------------------------------------------------------------
 ; Kick C
 [State -1, Kick C]
@@ -1334,83 +1401,140 @@ trigger2 = stateno = [600, 619]
 [state -1, A AI]
 Type = Changestate
 Triggerall=var(59)>0 ; Use this only if the AI is ON
-Triggerall= Statetype = S ; Game rules still apply to the AI
-Triggerall=abs(P2Bodydist X)<40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Triggerall=P2StateType=S; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Triggerall= statetype != A ; Game rules still apply to the AI
+Triggerall=abs(P2Bodydist X)<40 + ifelse(var(10) = 2, 30, 0) ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+Triggerall=P2movetype != A; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
 Triggerall=random<var(50)*1.1
 Trigger1 = ctrl
-value = 200
-
-[state -1, A-2 AI]
-Type = Changestate
-Triggerall = stateno = 310 && movehit = 1
-Triggerall =var(59)>0 ; Use this only if the AI is ON
-Triggerall = Statetype = S ; Game rules still apply to the AI
-Triggerall =abs(P2Bodydist X)<40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Triggerall =P2StateType=S; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
-Triggerall =random<var(50)*1.1; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
-Trigger1 = Stateno = 310 && movehit = 1
-value = 210
+value = 200 + 30 * var(10)
 
 [state -1, B AI]
 Type = Changestate
 Triggerall=var(59)>0 ; Use this only if the AI is ON
-Triggerall= Statetype = S ; Game rules still apply to the AI
+Triggerall= statetype != A ; Game rules still apply to the AI
 Triggerall=abs(P2Bodydist X)<40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Triggerall=P2StateType=S; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Triggerall=P2movetype != A; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
 Triggerall=random<var(50)*1.1; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
 Trigger1 = ctrl
-value = 300
-
-[state -1, B-2 AI]
-Type = Changestate
-Triggerall = stateno = 300 && movehit = 1
-Triggerall=var(59)>0 ; Use this only if the AI is ON
-Triggerall= Statetype = S ; Game rules still apply to the AI
-Triggerall=abs(P2Bodydist X)<40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Triggerall=P2StateType=S; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
-Triggerall=random<var(50)*1.1; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
-Trigger1 = Stateno = 300  && movehit = 1
-value = 310
+value = 300 + 30 * var(10)
 
 [state -1, B-3 AI]
 Type = Changestate
 Triggerall = stateno = 210 && movehit = 1
 Triggerall=var(59)>0 ; Use this only if the AI is ON
-Triggerall= Statetype = S ; Game rules still apply to the AI
+Triggerall= statetype != A ; Game rules still apply to the AI
 Triggerall=abs(P2Bodydist X)<40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Triggerall=P2StateType=S; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Triggerall=P2movetype != A; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
 Triggerall=random<var(50)*1.1; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
+triggerall=SelfAnimExist(320 + 30 * var(10))
 Trigger1 = Stateno = 210  && movehit = 1
-value = 320
+value = 320 + 30 * var(10)
 
+;Switch AI
 [state -1, C AI]
 Type = Changestate
 Triggerall = var(59)>0 ; Use this only if the AI is ON
-Triggerall = power >= 1000
-Triggerall= Statetype = S ; Game rules still apply to the AI
-Triggerall= abs(P2Bodydist X)>40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Triggerall= P2StateType = S; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Triggerall = power >= 100
+Triggerall= statetype != A ; Game rules still apply to the AI
+Triggerall= abs(P2Bodydist X)>80 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+Triggerall= enemy,movetype != A; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
 Triggerall= random<var(50)*1.5 = 5; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
 Trigger1 = ctrl
 value = 400
 
+;Kick Stance C AI
+[state -1, C AI]
+Type = Changestate
+triggerall = var(10) = 0
+Triggerall = var(59)>0 ; Use this only if the AI is ON
+Triggerall = power >= 200
+Triggerall= statetype != A ; Game rules still apply to the AI
+Triggerall= abs(P2Bodydist X)<60 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+Triggerall= abs(P2Bodydist Y)<40; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Triggerall= random<var(50)*1.5 = 5; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
+Trigger1 = ctrl
+value = 415
+
+[state -1, C AI]
+Type = Changestate
+triggerall = var(10) = 0
+Triggerall = var(59)>0 ; Use this only if the AI is ON
+Triggerall = power >= 100
+Triggerall= statetype != A ; Game rules still apply to the AI
+Triggerall= abs(P2Bodydist X)<40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+;Triggerall= P2StateType = S; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+triggerall = enemy,movetype = A ;If they are attacking you right now
+Triggerall= random<var(50)*1.5 = 5; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
+Trigger1 = ctrl
+value = 409
+
+;Punch Stance C AI
+[state -1, C AI]
+Type = Changestate
+triggerall = var(10) = 0
+Triggerall = var(59)>0 ; Use this only if the AI is ON
+Triggerall = power >= 200
+Triggerall= statetype != A ; Game rules still apply to the AI
+Triggerall= abs(P2Bodydist X)<50 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+Triggerall= P2movetype != A; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Triggerall= random<var(50)*1.5 = 5; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
+Trigger1 = ctrl
+value = 423
+
+[state -1, C AI]
+Type = Changestate
+triggerall = var(10) = 0
+Triggerall = var(59)>0 ; Use this only if the AI is ON
+Triggerall = power >= 100
+Triggerall= statetype != A ; Game rules still apply to the AI
+Triggerall= abs(P2Bodydist X)>40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+Triggerall= P2movetype != A; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+triggerall = enemy,movetype != A || enemy,time >= 16 ;If they are not attacking of if the move probably wiffed
+Triggerall= random<var(50)*1.5 = 5; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
+Trigger1 = ctrl
+value = 420
+
+;Baton Stance C AI
+[state -1, C AI]
+Type = Changestate
+triggerall = var(10) = 0
+Triggerall = var(59)>0 ; Use this only if the AI is ON
+Triggerall = power >= 200
+Triggerall= statetype != A ; Game rules still apply to the AI
+Triggerall= abs(P2Bodydist X)<70 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+Triggerall= abs(P2Bodydist Y)<40; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Triggerall= random<var(50)*1.5 = 5; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
+Trigger1 = ctrl
+value = 480
+
+[state -1, C AI]
+Type = Changestate
+triggerall = var(10) = 0
+Triggerall = var(59)>0 ; Use this only if the AI is ON
+Triggerall = power >= 100
+Triggerall= statetype != A ; Game rules still apply to the AI
+Triggerall= abs(P2Bodydist X)>40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+Triggerall= abs(P2Bodydist Y)<40; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Triggerall= random<var(50)*1.5 = 5; 1-1.5="" a="" ai="" and="" around="" attack="" attack.="" attacks="" attacks.="" be="" br="" by="" can="" chance="" combo="" controlled="" determines="" difficulty="" dodging="" easy="" for="" from="" higher="" how="" in="" is="" it="" level.="" likely="" line="" long="" lower="" most="" multiplier="" of="" on="" only="" or="" powerful="" recommended="" reduces="" s="" so="" starter="" t="" that="" the="" this="" to="" triggerall="AILevel>=3;" use="" used="" using="" value="" values="" want="" we="" what=""> Trigger1 = ctrl
+Trigger1 = ctrl
+value = 460
+
 [state -1, Low Attack AI]
 Type = Changestate
 Triggerall=var(59)>0 ; Use this only if the AI is ON
-Triggerall= Statetype = S ; Game rules still apply to the AI
-Triggerall=abs(P2Bodydist X)<20 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Triggerall=P2StateType=L; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Triggerall= statetype != A ; Game rules still apply to the AI
+Triggerall=abs(P2Bodydist X)<30 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+Triggerall=P2StateType=L || P2Statetype = S; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
 Triggerall=random<var(50)*1.1
 Trigger1 = ctrl
-value = 950
+value = 950 + 1 * var(10)
 
 [state -1, Counter AI]
 Type = Changestate
 Triggerall=var(59)>0 ; Use this only if the AI is ON
 triggerall = prevstateno != 800
 triggerall = power > 1500
-Triggerall= Statetype = S ; Game rules still apply to the AI
+Triggerall= statetype != A ; Game rules still apply to the AI
 Trigger1 = p2movetype = A
 Triggerall=Inguarddist
 Triggerall=random<var(50)*1.2
@@ -1432,9 +1556,9 @@ value = 810
 [state -1, Unblockable AI]
 Type = Changestate
 Triggerall=var(59)>0 ; Use this only if the AI is ON
-Triggerall= Statetype = S ; Game rules still apply to the AI
+Triggerall= statetype != A ; Game rules still apply to the AI
 Triggerall=abs(P2Bodydist X)<40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Triggerall=P2StateType=S; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Triggerall=P2StateType!=A; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
 Triggerall=random<var(50)*0.5
 Trigger1 = ctrl
 value = 700
@@ -1455,7 +1579,7 @@ Type = Changestate
 trigger1 = stateno = 500
 Triggerall = power > 3000
 Triggerall=var(59)>0 ; Use this only if the AI is ON
-Triggerall= Statetype = S ; Game rules still apply to the AI
+Triggerall= statetype != A ; Game rules still apply to the AI
 value = 501
 
 [state -1, A-Air AI]
@@ -1466,7 +1590,7 @@ Triggerall=abs(P2Bodydist X)<40 ; use this move only when the opponent is close 
 Triggerall=P2StateType=A; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
 Triggerall=random<var(50)*1.1
 Trigger1 = ctrl
-value = 600
+value = 600 + 3 * var(10)
 
 [state -1, B-Air AI]
 Type = Changestate
@@ -1477,7 +1601,7 @@ Triggerall=abs(P2Bodydist X)<40 ; use this move only when the opponent is close 
 Triggerall=P2StateType=A; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
 Triggerall=random<var(50)*1.1
 Trigger1 = Stateno = 600  && movehit = 1
-value = 610
+value = 610 + 3 * var(10)
 
 [state -1, C-Air AI]
 Type = Changestate
@@ -1489,4 +1613,4 @@ Triggerall=P2StateType=A; use it only if the opponent is standing. This way, we 
 Triggerall=!Inguarddist; Don't use it if in guard distance. We don't want to run into a hit and get our super interrupted. This line is unnecessary if the super cannot be interrupted by hits.
 Triggerall=random<var(50)*1.1
 Trigger1 = Stateno = 610  && movehit = 1
-value = 620
+value = 620 + 10 * var(10)

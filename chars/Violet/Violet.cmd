@@ -365,11 +365,6 @@ command = y
 time = 1
 
 [Command]
-name = "z"
-command = z
-time = 1
-
-[Command]
 name = "s"
 command = s
 time = 1
@@ -593,8 +588,9 @@ flag3=nostandguard
 [State -1, Soft Fast Fall]
 type = VelSet
 triggerall = statetype = A && movetype != H
+triggerall = stateno != [900, 905] && stateno != [350, 355] && stateno != [21000, 25999]
 triggerall = command = "down"
-triggerall = vel y > 0 && vel y < 6
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
 trigger1 = 1
 y = 6
 
@@ -701,7 +697,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -710,7 +706,7 @@ trigger1 = ctrl
 [State -1, Run Back]
 type = ChangeState
 value = 105
-trigger1 = command = "BB" && command != "holddown"
+trigger1 = command = "BB"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -753,7 +749,7 @@ triggerall = stateno != 65
 triggerall = stateno != 70
 value = ifelse(pos y >= 0,60,65)
 triggerall = Statetype = A
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -940,6 +936,17 @@ triggerall = command = "a"
 Triggerall = statetype = A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
+; Down + B Air
+[State -1, C]
+type = ChangeState
+value = 640
+triggerall = numhelper(3500) = 0
+Triggerall = var(47) > 0
+triggerall = command = "holddown"
+triggerall = command = "b"
+Triggerall = statetype = A
+trigger1 = ctrl
+;---------------------------------------------------------------------------
 ; B Aire
 [State -1, B Aire]
 type = ChangeState
@@ -952,19 +959,6 @@ trigger1 = ctrl
 [State -1, C]
 type = ChangeState
 value = 630
-triggerall = numhelper(3500) = 0
-triggerall = power >= 200
-Triggerall = var(47) > 0
-triggerall = command = "holddownfwd"
-triggerall = command = "c"
-Triggerall = statetype = A
-trigger1 = ctrl
-
-;---------------------------------------------------------------------------
-; Down + C Air
-[State -1, C]
-type = ChangeState
-value = 640
 triggerall = numhelper(3500) = 0
 triggerall = power >= 200
 Triggerall = var(47) > 0

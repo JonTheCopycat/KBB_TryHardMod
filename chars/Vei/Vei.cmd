@@ -543,8 +543,9 @@ buffer.time = 1
 [State -1, Soft Fast Fall]
 type = VelSet
 triggerall = statetype = A
+triggerall = IsHelper = 0
 triggerall = command = "down" && movetype != H
-triggerall = vel y > 0 && vel y < 6
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
 triggerall = stateno != 900
 trigger1 = 1
 y = 6
@@ -605,7 +606,7 @@ Triggerall = power >= 500
 trigger1 = ctrl
 trigger2 = !isHelper
 trigger2 = movecontact || helper(31),movecontact
-trigger2 = stateno = [200, 499] || stateno = [900, 950]
+trigger2 = stateno = [200, 499] || stateno = [900, 952]
 ;trigger2 = stateno != [291, 292] && stateno != 301 && stateno != 311 && stateno != 321
 trigger3 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
@@ -621,7 +622,7 @@ Triggerall = power >= 1500
 trigger1 = ctrl
 trigger2 = !isHelper
 trigger2 = movecontact || helper(31),movecontact
-trigger2 = stateno = [200, 499] || stateno = [900, 950]
+trigger2 = stateno = [200, 499] || stateno = [900, 952]
 ;trigger2 = stateno != [291, 292] && stateno != 301 && stateno != 311 && stateno != 321
 trigger3 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
@@ -660,7 +661,7 @@ Triggerall = power >= 1000
 trigger1 = ctrl
 trigger2 = !isHelper
 trigger2 = movecontact || helper(31),movecontact
-trigger2 = stateno = [200, 499] || stateno = [600, 639] || stateno = [900, 950]
+trigger2 = stateno = [200, 499] || stateno = [600, 639] || stateno = [900, 952]
 ;trigger2 = stateno != [291, 292] && stateno != 301 && stateno != 311 && stateno != 321
 trigger3 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
@@ -675,7 +676,7 @@ Triggerall = power >= 1500
 trigger1 = ctrl
 trigger2 = !isHelper
 trigger2 = movecontact || helper(31),movecontact
-trigger2 = stateno = [200, 499] || stateno = [900, 950]
+trigger2 = stateno = [200, 499] || stateno = [900, 952]
 ;trigger2 = stateno != [291, 292] && stateno != 301 && stateno != 311 && stateno != 321
 trigger3 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;===========================================================================
@@ -693,7 +694,7 @@ trigger1 = ctrl
 [State -1, Run Fwd]
 type = ChangeState
 value = 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -735,7 +736,7 @@ triggerall = stateno != 60
 triggerall = stateno != 65
 triggerall = stateno != 70
 value = ifelse(pos y >= 0,52,65)
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -768,6 +769,35 @@ value = 200
 triggerall = command = "a"
 Triggerall = statetype != A
 trigger1 = ctrl
+
+;---------------------------------------------------------------------------
+;The Clone is Present
+[State 200, 2B]
+type = ChangeState
+Triggerall = numhelper(31) != 0 && helper(31),stateno = [301, 305]
+triggerall = command = "holddown"
+triggerall = command = "b"
+Triggerall = statetype != A
+trigger1 = ctrl
+value = 910
+
+[State 200, 5BBB]
+type = ChangeState
+Triggerall = numhelper(31) != 0 && helper(31),stateno = [301, 305]
+triggerall = command = "holdback"
+triggerall = command = "b"
+Triggerall = statetype != A
+trigger1 = ctrl
+value = 320
+
+[State 200, 5BBB]
+type = ChangeState
+Triggerall = numhelper(31) != 0 && helper(31),stateno = 301
+triggerall = command = "b"
+Triggerall = statetype != A
+trigger1 = ctrl
+value = 310
+
 ;---------------------------------------------------------------------------
 ; Down + B
 [State -1, Down + B]
@@ -796,14 +826,27 @@ value = 300
 triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl
+
 ;---------------------------------------------------------------------------
-; Down + C
+; Down + C Portalless
 [State -1, Down + C]
 type = ChangeState
-value = 480
-Triggerall = power >= 250
+value = 470
+triggerall = numhelper(405) = 0
+Triggerall = power >= 500
 triggerall = numhelper(3500) = 0
-triggerall = numhelper(420) = 0
+triggerall = command = "holddown"
+triggerall = command = "c"
+Triggerall = statetype != A
+trigger1 = ctrl
+;---------------------------------------------------------------------------
+; Down + C With Portal
+[State -1, Down + C]
+type = ChangeState
+value = ifelse(numhelper(420) = 0, 480, 482)
+triggerall = numhelper(405) != 0
+Triggerall = power >= 500
+triggerall = numhelper(3500) = 0
 triggerall = command = "holddown"
 triggerall = command = "c"
 Triggerall = statetype != A
@@ -819,13 +862,24 @@ trigger1 = ctrl
 ;triggerall = command = "c"
 ;Triggerall = statetype != A
 ;trigger1 = ctrl
+
+;---------------------------------------------------------------------------
+; Back C
+[State -1, C]
+type = ChangeState
+value = 450
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(405) != 0
+;Triggerall = power >= 250
+triggerall = command = "holdback"
+triggerall = command = "c"
+trigger1 = ctrl && stateno != 450
 ;---------------------------------------------------------------------------
 ; C
 [State -1, C]
 type = ChangeState
 value = 400
 triggerall = numhelper(3500) = 0
-triggerall = numhelper(410) < 2
 Triggerall = power >= 250
 triggerall = command = "c"
 Triggerall = statetype != A
@@ -934,19 +988,6 @@ value = 610
 triggerall = command = "b"
 Triggerall = statetype = A
 trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Down + C
-;[State -1, Down + C]
-;type = ChangeState
-;value = 460
-;triggerall = numhelper(3500) = 0
-;Triggerall = power >= 200
-;triggerall = numhelper(420) < 1
-;triggerall = var(20) = 0
-;triggerall = command = "holddown"
-;triggerall = command = "c"
-;Triggerall = statetype = A
-;trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Down C Aire
 [State -1, C Aire]

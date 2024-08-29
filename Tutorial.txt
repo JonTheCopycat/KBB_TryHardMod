@@ -29,7 +29,7 @@ Inputs to hyperhop:
 You can also do a soft fastfall with every character. When ever you're not going up in the air, you can press down at ANY time and you will fall faster.
 
 Input to Star Cancel:
-	Hold Attack (A, B, or C) + PowerCharge
+	Pressing Charge Twice
 	You can star cancel any move pretty much.
 	Press a direction while star cancelling to move slightly in that direction.
 

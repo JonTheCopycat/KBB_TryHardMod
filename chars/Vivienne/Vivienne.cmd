@@ -602,10 +602,11 @@ flag3=nostandguard
 [State -1, Soft Fast Fall]
 type = VelSet
 triggerall = statetype = A && movetype != H
+triggerall = stateno != 23000 && stateno != 472 && stateno != [3010, 3039] 
 triggerall = command = "down"
-triggerall = vel y > 0 && vel y < 8
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
 trigger1 = 1
-y = 8
+y = 6
 
 ;===========================================================================
 ;SPECIALS:
@@ -733,7 +734,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -742,7 +743,7 @@ trigger1 = ctrl
 [State -1, Run Back]
 type = ChangeState
 value = 105
-trigger1 = command = "BB" && command != "holddown"
+trigger1 = command = "BB"
 trigger1 = statetype = S
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
@@ -774,7 +775,7 @@ triggerall = stateno != 65
 triggerall = stateno != 70
 value = ifelse(pos y >= 0,52,65)
 triggerall = Statetype = A
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -867,15 +868,6 @@ trigger1 = ctrl
 type = ChangeState
 value = 900
 triggerall = command = "holddown"
-triggerall = command = "b"
-Triggerall = statetype != A
-trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Back + B
-[State -1, Back + B]
-type = ChangeState
-value = 310
-triggerall = command = "holdback"
 triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl

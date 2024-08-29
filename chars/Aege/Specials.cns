@@ -1100,7 +1100,7 @@ Fall.recover = 0
 [State 200, End]
 type = ChangeState
 triggerall = movecontact
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 value = 65
 ctrl = 1
 

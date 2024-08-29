@@ -181,6 +181,12 @@ time = 5
 paladd = 200, 200, 200
 trans = add
 
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = A, AA
+time = 1
+
 [State 0, VelSet]
 type = VelAdd
 trigger1 = time = [0, 1]
@@ -189,14 +195,8 @@ y = 0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = 2
+trigger1 = time = [2, 4]
 x = ifelse(prevstateno = 21000,const(velocity.run.fwd.x) * 1.85, const(velocity.run.fwd.x) * 1.65) * 1.25
-
-[State 0, VelSet]
-type = VelAdd
-trigger1 = time > 5
-trigger1 = vel x > 1
-x = -0.25
 
 [State 0, Explod]
 type = Explod
@@ -235,7 +235,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -320,7 +320,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 

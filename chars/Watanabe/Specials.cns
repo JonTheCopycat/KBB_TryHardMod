@@ -115,7 +115,7 @@ poweradd = 0
 [State 0, Helper]
 type = Helper
 trigger1 = time%3 = 0
-trigger1 = time >= 30 && time <= 81
+trigger1 = time >= 30 && time <= 65
 trigger1 = root,movetype != H 
 helpertype = normal ;player
 name = "Ether Drive"
@@ -198,7 +198,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SP
 animtype  = Light
-damage    = 7
+damage    = 10
 hitflag = MAF
 guardflag = MAF
 pausetime = 0,10
@@ -273,14 +273,14 @@ map = "enableDHC"
 value = 1
 
 [State 0, VelAdd]
-type = VelAdd
+type = VelSet
 trigger1 = AnimElem = 1
-x = ifelse(prevstateno=310,12,3)
+x = ifelse(prevstateno=310||prevstateno=220,8,3)
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 1
-y = -7
+y = -5
 
 [State 0, VelSet]
 type = VelSet
@@ -501,7 +501,7 @@ ownpal = 0
 supermovetime = 0
 pausemovetime = 0
 inheritJuggle = 1
-keyctrl = 1
+keyctrl = 0
 
 [State 0, Explod]
 type = Explod
@@ -805,7 +805,7 @@ poweradd = 0
 type = HitDef
 getpower = 0
 triggerall = !movecontact
-triggerall = map(juggle) < 108 || hitcount != 0
+triggerall = map(juggle) < 100 || hitcount != 0
 trigger1 = 1
 attr = S,SA
 animtype  = Medium
@@ -822,15 +822,15 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 Envshake.time = 5
-ground.velocity = 1,-9
-air.velocity = .5,-9
+ground.velocity = 1,-8
+air.velocity = .5,-8
 Fall = 1
 fall.recovertime = 90
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = (15,21) && !movehit
-x = 18
+x = 14
 
 [State 0, VelSet]
 type = VelSet
@@ -866,6 +866,12 @@ sprpriority = 2
 poweradd = -1000
 
 
+[State 0, NotHitBy]
+type = NotHitBy 
+trigger1 = animelemtime(9) < 0 
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 1
+
 [State 0, Busterable]
 type = MapSet
 trigger1 = 1
@@ -891,7 +897,7 @@ helpertype = normal ;player
 name = "plantTHROWSuper"
 ID = 5465
 stateno = 22005
-pos = 0,-40
+pos = 0,-10
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -911,7 +917,7 @@ helpertype = normal ;player
 name = "plantTHROWSuper"
 ID = 5466
 stateno = 22005
-pos = 0,-40
+pos = 0,-10
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -967,7 +973,7 @@ y = 0
 type = VelAdd 
 trigger1 = time = 1 && IsHelper(5465)
 x = 4
-y = -4
+y = -6
 ;ignorehitpause = 
 ;persistent = 
 
@@ -975,7 +981,7 @@ y = -4
 type = VelAdd 
 trigger1 = time = 1 && IsHelper(5466)
 x = -4
-y = -4
+y = -6
 
 ;[State 0, VelAdd]
 ;type = VelAdd 
@@ -1072,7 +1078,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = pos y >= 0
-value = 22015
+value = 451
 
 ;===============================================================================
 ; Seed spread: Seed got hit
@@ -1188,7 +1194,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = pos y >= 0
-value = 22015
+value = 451
 
 ;===============================================================================
 ; Seed spread: Plant spawn
@@ -1349,14 +1355,14 @@ value = S5464,0+(random<500)*1
 volumescale = 200
 channel = 0
 
-[State 0, ChangeAnim]
-type = ChangeAnim
-trigger1 = helper(401),movehit
-trigger1 = helper(401),stateno = 401
-value = 23000
-elem = 5
-;ignorehitpause = 
-persistent = 0
+;[State 0, ChangeAnim]
+;type = ChangeAnim ; so sad
+;trigger1 = helper(401),movehit
+;trigger1 = helper(401),stateno = 401
+;value = 23000
+;elem = 5
+;;ignorehitpause = 
+;persistent = 0
 
 [State 0, SuperPause]
 type = SuperPause
@@ -1410,8 +1416,8 @@ facing = 1
 ownpal = 0
 supermovetime = 0
 pausemovetime = 0
-inheritJuggle = 1
-keyctrl = 1
+inheritJuggle = 0
+keyctrl = 0
 persistent = 0
 
 [State 0, Helper]
@@ -1454,7 +1460,7 @@ type = MapSet
 trigger1 = 1
 map = "busterable"
 value = 1
-persistent = 0
+
 
 [State 0, PlayerPush]
 type = PlayerPush
@@ -1601,6 +1607,12 @@ value = movehit
 ;ignorehitpause = 
 ;persistent = 
 
+[State 0, Busterable]
+type = RootMapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+
 [State -2, Counterhit TSP]
 type = Helper
 Triggerall = numhelper(4020) = 0
@@ -1693,6 +1705,13 @@ movetype= A
 physics = S
 anim = 23500
 
+[State 0, VelSet]
+type = VelSet
+trigger1 = 1
+x = 0
+y = 0
+;ignorehitpause = 
+;persistent = 
 
 
 [State 0, PosSet]
@@ -1718,6 +1737,12 @@ map = "helperHit"
 value = movehit
 ;ignorehitpause = 
 ;persistent = 
+
+[State 0, Busterable]
+type = RootMapSet
+trigger1 = 1
+map = "busterable"
+value = 1
 
 [State 1010, Helper Attack Scale]
 type = AttackMulSet
@@ -1765,7 +1790,7 @@ triggerall = time%4 = 0
 trigger1 = 1
 attr = S, HA
 animtype  = Light
-damage    = 10 + var(11)
+damage    = 14 + var(11)
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,2

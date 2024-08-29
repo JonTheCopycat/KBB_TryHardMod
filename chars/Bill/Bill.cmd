@@ -589,8 +589,8 @@ flag3=nostandguard
 type = VelSet
 triggerall = statetype = A
 triggerall = command = "down" && movetype != H
-triggerall = vel y > 0 && vel y < 6
-triggerall = stateno != 900
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
+triggerall = stateno != 900 && stateno != 390 && stateno != 400
 trigger1 = 1
 y = 6
 
@@ -709,7 +709,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -718,7 +718,7 @@ trigger1 = ctrl
 [State -1, Run Back]
 type = ChangeState
 value = 105
-trigger1 = command = "BB" && command != "holddown"
+trigger1 = command = "BB"
 trigger1 = statetype = S
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
@@ -750,7 +750,7 @@ triggerall = stateno != 60
 triggerall = stateno != 65
 triggerall = stateno != 70
 triggerall = Statetype = A
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 value = ifelse(pos y >= 0,52,65)
 ;---------------------------------------------------------------------------
@@ -774,24 +774,6 @@ trigger1 = ctrl
 type = ChangeState
 value = 950
 triggerall = command = "holddown"
-triggerall = command = "a"
-Triggerall = statetype != A
-trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Fwd + A
-[State -1, Fwd + A]
-type = ChangeState
-value = 220
-triggerall = command = "holdfwd"
-triggerall = command = "a"
-Triggerall = statetype != A
-trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Back + A
-[State -1, Back + A]
-type = ChangeState
-value = 211
-triggerall = command = "holdback"
 triggerall = command = "a"
 Triggerall = statetype != A
 trigger1 = ctrl
