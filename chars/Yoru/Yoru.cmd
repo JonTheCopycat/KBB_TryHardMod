@@ -607,10 +607,11 @@ y = 6
 ; Power Charge
 [State -1, Power Charge]
 type = ChangeState
-Triggerall = power < 3000
-triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
+triggerall = numhelper(51000) = 0
 triggerall = numhelper(56000) = 0
+Triggerall = power < 3000
+triggerall = numhelper(300) = 0 || helper(300),stateno = 656
 value = 500
 triggerall = command = "s"
 Triggerall = statetype != A

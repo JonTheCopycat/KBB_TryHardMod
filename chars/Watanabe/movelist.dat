@@ -26,7 +26,7 @@ Summon: Air (1/2 Bar)							_AIR^C
 	"Watanabe summons a sword and rides it. Hold up,
 	down or C for Watanabe to abandon it, and make
 	it attach to the wall.
-	This summons a thunder after a while.""
+	This summons a thunder after a while."
 
 _! Jumpoff					_U
 
@@ -44,8 +44,8 @@ _! Swing					^B
 Seed Throw (1/4 Bar)							_F^C
 	"Watanabe throws a seed that will wrap around the
 	 opponent. When this lands it will grow into a plant
-	 that will wrap on contact. Holding your Charge key
-	will make the seed miss."
+	 that will wrap on contact. Holding the input will 
+	 make the seed miss."
 
 _! Dash	(1/2 Bar)				_F_F
 	
@@ -67,8 +67,7 @@ _! Ether Drive: Ride						^C
 
 
 Seed spread (1 Bar, _AIR OK)    						_D_DF_F^B
-	"Watanabe throws seeds around him, these have
-	different properties than the normal seed."
+	"Watanabe throws 2 seeds around him."
 
 "Storm Wolf" (1/2 Bar, _AIR OK)    						D_DB_B^B
 	"sideswitches the opponent"

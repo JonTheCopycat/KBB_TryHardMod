@@ -189,8 +189,8 @@ trigger2 = Anim = 5 && AnimTime = 0
 value = 21
 
 ;---------------------------------------------------------------------------
-;Wavedash
-[Statedef 30]
+;Standard Wavedash
+[Statedef 31]
 type = C
 movetype= I
 physics = S
@@ -315,9 +315,166 @@ value = 11
 ctrl = 1
 
 ;---------------------------------------------------------------------------
+; Back Wavedash
+[Statedef 30]
+type    = C
+movetype = I
+physics = S
+ctrl = 0
+anim = 30
+sprpriority = 1
+
+;[State 0, Pause]
+;type = Pause
+;triggerall = enemy,stateno = [5000, 5299]
+;trigger1 = Time = 1
+;time = 10
+;movetime = 10
+;endcmdbuftime = 10
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = AnimElem = 1
+time = 10
+paladd = 120, 120, 120
+trans = add
+
+[State 105, NotHitBy]
+type = NotHitBy
+trigger1 = Time = [1, 4]
+value = SCA
+time = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F100,0
+volumescale = 200
+
+[State 105, 1]
+type = VelSet
+trigger1 = Time = 0
+x = -12
+y = 0
+
+[State 105, 1]
+type = VelSet
+trigger1 = AnimElem = 4
+x = -2
+y = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = F16100
+ID = 16100
+pos = 30,5
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 7,0
+volumescale = 100
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 2
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+Triggerall = time >= 2
+trigger1 = command = "FF"
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+Triggerall = time >= 2
+trigger1 = command = "BB"
+value = 105
+ctrl = 1
+
+[State 300, 5BB]
+type = ChangeState
+Triggerall = time >= 2
+trigger1 = ailevel = 0 && command = "a" && command = "holdfwd"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 591
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 2
+trigger1 = ailevel = 0 && command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 290
+ctrl = 0
+
+;[State 300, 5BB]
+;type = ChangeState
+;Triggerall = time >= 5
+;trigger1 = ailevel = 0 && command = "b" && command = "holddown"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 900
+
+[State 300, 5BB]
+type = ChangeState
+Triggerall = time >= 2
+trigger1 = ailevel = 0 && command = "b" && command = "holdfwd"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 320
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 2
+trigger1 = ailevel = 0 && command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 390
+ctrl = 0
+
+[State 200, C]
+type = ChangeState
+triggerall = time >= 2
+triggerall = power >= 250
+triggerall = numhelper(3500) = 0
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 490
+
+[State 300, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
 ; Jump Start
 [Statedef 40]
-type    = S
+type = C
+movetype= I
 physics = S
 anim = 40
 ctrl = 0
@@ -983,7 +1140,7 @@ flag = NoAutoTurn
 [State 100, 4]
 type = ChangeState
 triggerall = ailevel = 0
-trigger1 = command != "holdfwd" && command != "hold_z"
+trigger1 = command != "holdfwd"
 value = 0
 
 [State 100, 4]
@@ -1162,17 +1319,17 @@ trigger1 = statetype = C && command != "holddown"
 statetype = S
 physics = S
 
-[State 120, Unblockable protection]
-type = NotHitBy
-trigger1 = statetype = S && time <= 1
-value = C
-time = 1
-
-[State 120, Unblockable protection]
-type = NotHitBy
-trigger1 = statetype = C && time <= 1
-value = SA
-time = 1
+;[State 120, Unblockable protection]
+;type = NotHitBy
+;trigger1 = statetype = S && time <= 1
+;value = C
+;time = 1
+;
+;[State 120, Unblockable protection]
+;type = NotHitBy
+;trigger1 = statetype = C && time <= 1
+;value = SA
+;time = 1
 
 [State 120, 5]
 type = ChangeState
@@ -1384,12 +1541,6 @@ type = ChangeState
 trigger1 = pos Y < 0
 value = 154
 
-[State 150, Unblockable protection]
-type = NotHitBy
-trigger1 = time <= 1
-value = C
-time = 1
-
 [State 150, Instant Block]
 type = poweradd
 triggerall = numhelper(4300) >= 1
@@ -1528,12 +1679,6 @@ time = 4
 type = ChangeState
 trigger1 = pos Y < 0
 value = 154
-
-[State 152, Unblockable protection]
-type = NotHitBy
-trigger1 = time <= 1
-value = SA
-time = 1
 
 [State 152, Instant Block]
 type = poweradd

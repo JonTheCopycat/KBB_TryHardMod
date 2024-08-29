@@ -764,7 +764,6 @@ trigger1 = ctrl
 [State -1, C]
 type = ChangeState
 value = 405
-Triggerall = power >= 100
 triggerall = command = "holddown"
 triggerall = command = "c"
 Triggerall = statetype != A
@@ -813,7 +812,7 @@ triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = movecontact
-trigger2 = stateno = [200, 289] || stateno = [900, 999]
+trigger2 = stateno = [200, 289]
 trigger2 = stateno != 201 && stateno != 210
 
 ;---------------------------------------------------------------------------
@@ -830,7 +829,6 @@ Triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = movecontact
 trigger2 = stateno = [200, 399] || stateno = [412, 414] || stateno = [900, 999]
-trigger3 = stateno = 410
 
 ;For AI In Comboes
 [State -1, C]

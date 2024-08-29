@@ -588,7 +588,7 @@ flag3=nostandguard
 [State -1, Soft Fast Fall]
 type = VelSet
 triggerall = statetype = A && movetype != H
-triggerall = stateno != [21000, 25999]
+triggerall = stateno != [900, 905] && stateno != [350, 355] && stateno != [21000, 25999]
 triggerall = command = "down"
 triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
 trigger1 = 1
@@ -936,6 +936,17 @@ triggerall = command = "a"
 Triggerall = statetype = A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
+; Down + B Air
+[State -1, C]
+type = ChangeState
+value = 640
+triggerall = numhelper(3500) = 0
+Triggerall = var(47) > 0
+triggerall = command = "holddown"
+triggerall = command = "b"
+Triggerall = statetype = A
+trigger1 = ctrl
+;---------------------------------------------------------------------------
 ; B Aire
 [State -1, B Aire]
 type = ChangeState
@@ -948,19 +959,6 @@ trigger1 = ctrl
 [State -1, C]
 type = ChangeState
 value = 630
-triggerall = numhelper(3500) = 0
-triggerall = power >= 200
-Triggerall = var(47) > 0
-triggerall = command = "holddownfwd"
-triggerall = command = "c"
-Triggerall = statetype = A
-trigger1 = ctrl
-
-;---------------------------------------------------------------------------
-; Down + C Air
-[State -1, C]
-type = ChangeState
-value = 640
 triggerall = numhelper(3500) = 0
 triggerall = power >= 200
 Triggerall = var(47) > 0

@@ -648,7 +648,7 @@ value = 25000
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 5"
 Triggerall = statetype != A
-Triggerall = power >= 1500
+Triggerall = power >= 2000
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;===========================================================================

@@ -1581,7 +1581,7 @@ Fall.recovertime = 10 + ifelse(enemy,movetype = A, 7,0)
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit
+trigger1 = movecontact
 value = 30
 ctrl = 1
 
@@ -1804,9 +1804,8 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 630
 [State 200, Wavedash Cancel]
 type = ChangeState
-triggerall = prevstateno != 400 && prevstateno != 490
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
+trigger1 = movehit
 value = 30
 ctrl = 1
 
@@ -2216,13 +2215,12 @@ anim = 336
 poweradd = 0
 sprpriority = 2
 
-[State 0, Damage Proration]
-type = VarAdd
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
 persistent = 0
-value = 5
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -2371,13 +2369,12 @@ anim = 390
 poweradd = 0
 sprpriority = 2
 
-[State 0, Damage Proration]
-type = VarAdd
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
 persistent = 0
-value = 5
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -3141,6 +3138,14 @@ map = "juggle"
 value = 5
 persistent = 0
 
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
 [State 0, Sound]
 type = PlaySnd
 trigger1 = AnimElem = 2
@@ -3159,7 +3164,7 @@ trans = add
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = [9,11]
-x = 19
+x = 16
 
 [State 0, VelSet]
 type = VelSet
@@ -3174,6 +3179,7 @@ x = 5
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 22
+trigger2 = movecountered
 x = 2
 
 [State 200, 1]
@@ -3196,7 +3202,7 @@ hitsound   = 5,3
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 8
-ground.hittime  = 10 + ifelse(enemy,movetype = A, 7,0)
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2,-2
 air.velocity = -2,-1
 Fall = 0
@@ -5087,16 +5093,45 @@ trigger1 = AnimElem = 6
 x = 5
 y = -4
 
+[State 0, PlayerPush]
+type = PlayerPush
+triggerall = movehit = [1, 3]
+trigger1 = AnimElem = 4, >= 0 && AnimElem = 8, <= 0
+value = 0
+
+[State 0, MapSet]
+type = MapSet
+triggerall = movehit = [1, 3]
+trigger1 = AnimElem = 4, >= 0 && AnimElem = 8, <= 0
+map = "distX"
+value = (pos x + 20 * facing) - enemy,pos x
+
+[State 0, MapSet]
+type = MapSet
+triggerall = movehit = [1, 3]
+trigger1 = AnimElem = 4, >= 0 && AnimElem = 8, <= 0
+map = "distY"
+value = (pos y + -5) - enemy,pos y
+
 [State 0, TargetBind]
 type = TargetBind
-trigger1 = movehit && Animelem = 4
-trigger2 = movehit && Animelem = 5
-trigger3 = movehit && Animelem = 6
-trigger4 = movehit && Animelem = 7
-trigger5 = movehit && Animelem = 8
+triggerall = movehit = [1, 3]
+trigger1 = AnimElem = 4, >= 0 && AnimElem = 8, <= 0
 time = 1
 id = -1
-pos = 20,-5
+pos = ifelse(abs(map(distX)) < 10,  20, ((enemy,pos x + 10 * map(distX) / abs(map(distX))) - pos x) * facing),    ifelse(abs(map(distY)) < 10, -5, ((enemy,pos y + 10 * map(distY) / abs(map(distY))) - pos y))
+
+
+;[State 0, TargetBind]
+;type = TargetBind
+;trigger1 = movehit && Animelem = 4
+;trigger2 = movehit && Animelem = 5
+;trigger3 = movehit && Animelem = 6
+;trigger4 = movehit && Animelem = 7
+;trigger5 = movehit && Animelem = 8
+;time = 1
+;id = -1
+;pos = 20,-5
 
 [State 0, VelAdd]
 type = VelAdd
@@ -5463,14 +5498,17 @@ ignorehitpause = 1
 persistent = 0
 value = 3
 
+
+
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = animelem = 3||animelem = 4||animelem = 5
-x = 4
+trigger1 = animelem = 3
+x = 5
+y = 0
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 5
-x = 4.5
+x = 5.5
 
 
 [State 0, PowerAdd]
@@ -5498,7 +5536,7 @@ attr = S, NA
 animtype  = Light
 damage    = 15
 hitflag = MAF
-guardflag = MAF
+guardflag = M
 
 pausetime = 10,10
 ground.hittime  = 16 + ifelse(enemy,movetype = A, 7,0)
@@ -5925,19 +5963,22 @@ channel = 0
 
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = animelem = 3
-x = 5
-y = 0
+trigger1 = animelem = 3||animelem = 4||animelem = 5
+x = 4
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 5
-x = 5.5
+x = 4.5
 
-[State 0, VelSet if coming from wavedash]
-type = VelSet
-triggerall = vel x < const(velocity.run.fwd.x)
-trigger1 = prevstateno = 30 && time = 0
-x = const(velocity.run.fwd.x)
+;[State 0, PosAdd]
+;type = PosAdd
+;trigger1 = animelem = 3
+;x = 5
+;y = 0
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = time = 5
+;x = 5.5
 
 [State 200, 1]
 type = HitDef
@@ -8287,7 +8328,7 @@ persistent = 0
 
 [State 0, Failed to block an air unblockable!]
 type = Explod
-triggerall = ((stateno = 200 || stateno = 24200) && enemy, statetype = A) ;Edit this trigger as necessary
+triggerall = ((stateno = 200 || stateno = 2500 || stateno = 24200) && enemy, statetype = A) ;Edit this trigger as necessary
 triggerall = enemy, prevstateno = [120,160] && numexplod(31000) = 0
 trigger1 = enemy, movetype = H && enemy, stateno != [120,160]
 anim = F31000
