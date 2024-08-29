@@ -169,6 +169,12 @@ time = 10
 paladd = 140, 0, 255
 trans = add
 
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = A, AA
+time = 1
+
 [State 0, VelSet]
 type = VelAdd
 trigger1 = time = [0, 1]
@@ -176,14 +182,8 @@ x = const(velocity.run.fwd.x) * 2 * 0.6
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = 2
+trigger1 = time = [2, 4]
 x = const(velocity.run.fwd.x) * 2 * 1.25
-
-[State 0, VelSet]
-type = VelAdd
-trigger1 = time > 5
-trigger1 = vel x > 1
-x = -0.25
 
 [State 0, Explod]
 type = Explod
@@ -222,7 +222,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -253,13 +253,6 @@ triggerall = power >=50
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "c"
 value = 490
-
-[State 200, End]
-type = ChangeState
-triggerall = prevstateno != 52 || time > 3
-trigger1 = command = "x"
-value = 590
-ctrl = 0
 
 [State 200, End]
 type = ChangeState
@@ -298,7 +291,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -1153,17 +1146,17 @@ trigger1 = statetype = C && command != "holddown"
 statetype = S
 physics = S
 
-[State 120, Unblockable protection]
-type = NotHitBy
-trigger1 = statetype = S && time <= 1
-value = C
-time = 1
-
-[State 120, Unblockable protection]
-type = NotHitBy
-trigger1 = statetype = C && time <= 1
-value = SA
-time = 1
+;[State 120, Unblockable protection]
+;type = NotHitBy
+;trigger1 = statetype = S && time <= 1
+;value = C
+;time = 1
+;
+;[State 120, Unblockable protection]
+;type = NotHitBy
+;trigger1 = statetype = C && time <= 1
+;value = SA
+;time = 1
 
 [State 120, 5]
 type = ChangeState
@@ -1375,12 +1368,6 @@ type = ChangeState
 trigger1 = pos Y < 0
 value = 154
 
-[State 150, Unblockable protection]
-type = NotHitBy
-trigger1 = time <= 1
-value = C
-time = 1
-
 [State 150, Instant Block]
 type = poweradd
 triggerall = numhelper(4300) >= 1
@@ -1519,12 +1506,6 @@ time = 4
 type = ChangeState
 trigger1 = pos Y < 0
 value = 154
-
-[State 152, Unblockable protection]
-type = NotHitBy
-trigger1 = time <= 1
-value = SA
-time = 1
 
 [State 152, Instant Block]
 type = poweradd

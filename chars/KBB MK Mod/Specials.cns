@@ -146,7 +146,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 270
+damage    = 300
 hitflag = MAFD
 guardflag = 
 pausetime = 30,60
@@ -160,6 +160,7 @@ ground.hittime  = 15
 ground.velocity  = -10,-7
 air.velocity  = -10,-4
 Fall = 1
+Fall.recover = 0
 Envshake.time = 30
 
 [State 0, EnvShake]
@@ -253,17 +254,17 @@ volumescale = 80
 type = Explod
 trigger1 = Animelem = 5
 anim = 21006
-pos = -2,-3
+pos = -3,-5
 postype = p1  ;p2,front,back,left,right
 facing = 1
 vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
+bindtime = 0
+vel = 16, 0
+accel = -1, 0
 random = 0,0
 removetime = -2
 pausemovetime = 0
-scale = .2,.2
+scale = .22,.3
 sprpriority = 3
 ontop = 0
 shadow = 0,0,0
@@ -313,23 +314,23 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 100,10
+damage    = 130,10
 hitflag = MAFD
 guardflag = MAFD
 guard.kill = 0		;no chipkills
-pausetime = 18,18
+pausetime = 18,24
 sparkno = 9999
 sparkxy = -8,-25
-hitsound = S0,3
+hitsound = S8,4
 guardsound = S2,0
 guard.sparkno = 9999
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15
-ground.velocity  = -4.5,-7
-air.velocity  = -4.5,-6
+ground.velocity  = -3.5,-7
+air.velocity  = -3.5,-6
 Fall = 1
-Fall.recovertime = 50 + ifelse(enemy,movetype = A, 7, 0)
+Fall.recovertime = 70 + ifelse(enemy,movetype = A, 7, 0)
 
 [State 0, EnvShake]
 type = EnvShake
@@ -338,10 +339,18 @@ time = 25
 freq = 5
 ampl = -4
 
+[State 200, Special 5 - Smash Ultra]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 5"
+Trigger1 = power >= 2000
+value = 21000
+
 [State 200, End]
 type = ChangeState
 triggerall = movehit
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 0
 
@@ -351,6 +360,19 @@ triggerall = movehit
 trigger1 = command = "WD"
 value = 30
 ctrl = 0
+
+[State 200, End]
+type = ChangeState
+Triggerall = movehit
+trigger1 = command = "hyperhop"
+value = 60
+
+[State 200, End]
+type = ChangeState
+Triggerall = movehit
+trigger1 = command = "up"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 40
 
 [State 200, End]
 type = ChangeState
@@ -405,7 +427,7 @@ poweradd = 0
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimTime = 14
+trigger1 = AnimTime = 13
 helpertype = normal ;player
 name = "Power Delay"
 ID = 56000
@@ -431,11 +453,11 @@ trigger1 = AnimElem = 2
 x = 8
 y = 0
 
-[State 200, VelSet 3]
-type = VelSet
-trigger1 = AnimElem = 3
-x = 6
-y = -2
+;[State 200, VelSet 3]
+;type = VelSet
+;trigger1 = AnimElem = 3
+;x = 6
+;y = -2
 
 [State 0, Voice - 0]
 type = PlaySnd
@@ -444,35 +466,45 @@ value = S6,6
 volumescale = 200
 [State 200, VelSet Stop]
 type = VelSet
-trigger1 = AnimElem = 4
+trigger1 = AnimElem = 3
 x = 1
 y = -2
 
 [State 200, VelSet Go]
 type = VelSet
-trigger1 = AnimElem = 14
+trigger1 = AnimElem = 13
 x = 6
 y = -4
 [State 200, VelSet Go]
 type = VelSet
-trigger1 = AnimElem = 15
+trigger1 = AnimElem = 14
 x = 6
 y = -10
 
 [State 200, VelAdd Friction]
 type = VelAdd
-trigger1 = time > 21
+trigger1 = time > 19
 x = ifelse(vel x > 0, -0.3, 0)
 y = 0.6
+
+[State 200, Don't Push Me]
+type = PlayerPush
+trigger1 = AnimElem = 8, >= 0 && AnimElem = 9, <= 0
+value = 0
+
+[State 200, Push Me]
+type = PlayerPush
+trigger1 = AnimElem = 9, >= 0
+value = 1
 
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = time <= 20 && !movecontact
+triggerall = time <= 13 && !movecontact
 trigger1 = 1
 attr = A, SA
 animtype  = Heavy
-damage    = 40,5
+damage    = 50,5
 guard.kill = 0	
 hitflag = MAF
 guardflag = MAF
@@ -480,13 +512,13 @@ pausetime = 8,8
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = S0,3
+hitsound   = S5,4
 guardsound = S2,0
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1,-4
-air.velocity = -1,-4
+ground.velocity = -2.5,-4
+air.velocity = -2.5,-4
 guard.velocity = -2
 Fall = 1
 fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
@@ -496,11 +528,11 @@ Envshake.time = 25
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 14
+triggerall = AnimElem = 11
 trigger1 = 1
 attr = A, SA
 animtype  = Heavy
-damage    = 40,5
+damage    = 60,5
 guard.kill = 0	
 hitflag = MAF
 guardflag = MAF
@@ -508,7 +540,7 @@ pausetime = 15,15
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = S0,3
+hitsound   = S8,4
 guardsound = S2,0
 ground.type = High
 ground.slidetime = 12
@@ -523,7 +555,7 @@ Envshake.time = 25
 
 [State 0, End]
 type = ChangeState
-trigger1 = (movehit && AnimElem = 17) || AnimTime = 0
+trigger1 = (movehit && AnimElem = 16) || AnimTime = 0
 value = 50
 ctrl = 1
 
@@ -642,16 +674,17 @@ type = PlaySnd
 trigger1 = animelem = 2
 value = S23000,1
 
-[State 0, BindToTarget]	;Positions behind p2
-type = BindToTarget
-trigger1 = animelem = 2
-time = 1
-pos = -35,0, Foot
+;[State 0, BindToTarget]	;Positions behind p2
+;type = BindToTarget
+;trigger1 = animelem = 2
+;time = 1
+;pos = -35,0, Foot
 
 [State 0, PosSet]
 type = PosSet
-trigger1 = pos y >= 0
+trigger1 = AnimElem = 2
 y = 0
+x = target,pos x - 35 * target,facing
 ;ignorehitpause = 
 ;persistent = 
 
@@ -715,7 +748,7 @@ animtype  = Medium
 damage    = 200
 hitflag = MAFD
 guardflag = 
-pausetime = 2,60
+pausetime = 2,45
 sparkno = 9999
 sparkxy = -8,-25
 guard.sparkno = 9999
@@ -732,7 +765,8 @@ fall.envshake.freq = 5
 fall.envshake.ampl = -4
 down.bounce = 1		;Bounces once
 
-p1stateno = 23007		;Successful hit goes to the successful animation
+p1stateno = 23007
+p2stateno = 1000		;Successful hit goes to the successful animation
 
 [State 200, End]
 type = ChangeState
@@ -926,11 +960,11 @@ triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
 attr = S, SA
 animtype  = Hard
-damage    = 175 + var(11), 10
+damage    = 220 + var(11), 10
 guard.kill = 0	
 hitflag = MAFD
 guardflag = MAFD
-pausetime = 0, 25
+pausetime = 0, 20
 guard.pausetime = 16, 24
 sparkno = 15000
 guard.sparkno = 13000
@@ -941,7 +975,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15
 ground.velocity = -1,-4
-air.velocity = -1,-3.2
+air.velocity = -1,-3
 guard.velocity = -6
 Fall = 1
 fall.recovertime = 50
@@ -992,11 +1026,11 @@ triggerall = enemy,map(hitOverride) = 1
 trigger1 = 1
 attr = S, SA
 animtype  = Hard
-damage    = 175 + var(11), 10
+damage    = 220 + var(11), 10
 guard.kill = 0	
 hitflag = MAFD
 guardflag = MAFD
-pausetime = 0, 25
+pausetime = 0, 20
 guard.pausetime = 16, 24
 sparkno = 15000
 guard.sparkno = 13000
@@ -1007,7 +1041,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15
 ground.velocity = -1,-4
-air.velocity = -1,-3.2
+air.velocity = -1,-3
 guard.velocity = -6
 Fall = 1
 fall.recovertime = 50

@@ -601,9 +601,9 @@ flag3=nostandguard
 [State -1, Soft Fast Fall]
 type = VelSet
 triggerall = statetype = A && movetype != H
-triggerall = stateno != 350 && stateno != 290 ;Moves that have been nerfed to not allow fastfall during them
+triggerall = stateno != 350 && stateno != 290 && stateno != 390 && stateno != 620 ;Moves that have been nerfed to not allow fastfall during them
 triggerall = command = "down" 
-triggerall = vel y > 0 && vel y < 6
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
 trigger1 = 1
 y = 6
 ;Turbo
@@ -625,6 +625,7 @@ triggerall = command = "SPECIAL 1"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 2
 [State -1, SPECIAL 2 - Rapidslash DP]
@@ -635,6 +636,7 @@ triggerall = command = "SPECIAL 2"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 3
 [State -1, SPECIAL 3 - Spinner Cutters]
@@ -645,6 +647,7 @@ triggerall = command = "SPECIAL 3"
 Triggerall = statetype = A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 4
 [State -1, SPECIAL 4 - Sleeper Move]
@@ -655,6 +658,7 @@ triggerall = command = "SPECIAL 4"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 5
 [State -1, SPECIAL 5 - Countercut]
@@ -665,6 +669,7 @@ triggerall = command = "SPECIAL 5"
 Triggerall = statetype != A
 Triggerall = power >= 2000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 
 ;===========================================================================
 ;---------------------------------------------------------------------------
@@ -695,7 +700,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -704,7 +709,7 @@ trigger1 = ctrl
 [State -1, Run Back]
 type = ChangeState
 value = 105
-trigger1 = command = "BB" && command != "holddown"
+trigger1 = command = "BB"
 trigger1 = statetype = S
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
@@ -746,7 +751,7 @@ triggerall = stateno != 60
 triggerall = stateno != 65
 triggerall = stateno != 70
 value = ifelse(pos y >= 0,52,65)
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 triggerall = Statetype = A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------

@@ -11,8 +11,9 @@ _B^B
 _AIR^Y 
 
 <#f0f000>:COMMAND DASH CANCELS:</>
-^A_F_D_DF (Late on Block)
-_B^B_F_D_DF
+^A_F_D_DF (Late On Block)
+^B_F_D_DF
+^B^B_F_D_DF (On Hit Only)
 
 <#f0f000>:COMMAND DASH ATTACKS:</>
 

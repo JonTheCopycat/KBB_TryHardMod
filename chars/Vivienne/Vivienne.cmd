@@ -602,10 +602,11 @@ flag3=nostandguard
 [State -1, Soft Fast Fall]
 type = VelSet
 triggerall = statetype = A && movetype != H
+triggerall = stateno != 23000 && stateno != 472 && stateno != [3010, 3039] 
 triggerall = command = "down"
-triggerall = vel y > 0 && vel y < 8
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
 trigger1 = 1
-y = 8
+y = 6
 
 ;===========================================================================
 ;SPECIALS:
@@ -621,6 +622,7 @@ Triggerall = statetype != A
 Triggerall = power >= 3000 ; ALL METER
 Triggerall = var(53) >=100 ; MAX PLASMA PASSIVE
 trigger1 = ctrl
+trigger2 = stateno = [290, 291] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 1 - GEYSER
 [State -1, SPECIAL 1 - GEYSER]
@@ -631,6 +633,7 @@ triggerall = command = "SPECIAL 1"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [290, 291] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 2 - LAZUR
 [State -1, SPECIAL 2 - LAZUR]
@@ -641,6 +644,7 @@ triggerall = command = "SPECIAL 2"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [290, 291] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 3 - Air Kick
 [State -1, SPECIAL 3 - Air Kick]
@@ -651,6 +655,7 @@ triggerall = command = "SPECIAL 3"
 Triggerall = power >= 1000
 triggerall = numhelper(2105) < 1
 trigger1 = ctrl
+trigger2 = stateno = [290, 291] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 4 - Overhead
 [State -1, SPECIAL 4 - Overhead]
@@ -661,6 +666,7 @@ triggerall = command = "SPECIAL 4"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [290, 291] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 5 - Bubbling Rage
 [State -1, SPECIAL 4 - Overhead]
@@ -671,6 +677,7 @@ triggerall = command = "SPECIAL 5"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [290, 291] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 6 - "Say that again."
 [State -1, SPECIAL 4 - Overhead]
@@ -681,6 +688,7 @@ triggerall = command = "SPECIAL 6"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [290, 291] && command = "holdback" && !ishelper
 
 ;---------------------------------------------------------------------------
 ; Special 8 - "Vivienne Piledriver"
@@ -695,6 +703,7 @@ trigger1 = command = "SPECIAL 8"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel **3)
 trigger2 = P2BodyDist X < 10
 trigger2 = p2statetype = S
+trigger3 = stateno = [290, 291] && command = "holdfwd" && !ishelper
 
 ;===========================================================================
 ;---------------------------------------------------------------------------
@@ -725,7 +734,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -734,7 +743,7 @@ trigger1 = ctrl
 [State -1, Run Back]
 type = ChangeState
 value = 105
-trigger1 = command = "BB" && command != "holddown"
+trigger1 = command = "BB"
 trigger1 = statetype = S
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
@@ -766,7 +775,7 @@ triggerall = stateno != 65
 triggerall = stateno != 70
 value = ifelse(pos y >= 0,52,65)
 triggerall = Statetype = A
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -859,15 +868,6 @@ trigger1 = ctrl
 type = ChangeState
 value = 900
 triggerall = command = "holddown"
-triggerall = command = "b"
-Triggerall = statetype != A
-trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Back + B
-[State -1, Back + B]
-type = ChangeState
-value = 310
-triggerall = command = "holdback"
 triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl

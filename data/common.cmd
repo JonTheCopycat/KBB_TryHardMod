@@ -163,6 +163,11 @@ command = B, B
 time = 10
 
 [Command]
+name = "ss"
+command = s, s
+time = 10
+
+[Command]
 name = "WD"
 command = ~F, D, F, F, D, DF
 time = 30
@@ -191,11 +196,6 @@ name = "WD"
 command = ~F, D, F
 time = 12
 buffer.time = 5
-
-[Command]
-name = "WD"
-command = /$D,z
-time = 1
 
 [Command]
 name = "NotWD"

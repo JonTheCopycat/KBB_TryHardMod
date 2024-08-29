@@ -5,6 +5,8 @@ _D[^B]
 
 <#f0f000>:COMMAND DASH CANCELS:</>
 ^A_F_D_DF (Late on Block)
+^A^A^A_F_D_DF (Late on Block)
+^B_F_D_DF (Late on Block)
 ^C_F_D_DF (Late on Block)
 
 <#f0f000>:COMMAND DASH ATTACKS:</>

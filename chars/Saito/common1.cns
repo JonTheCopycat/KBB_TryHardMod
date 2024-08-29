@@ -218,7 +218,11 @@ volumescale = 500
 type = VelSet
 trigger1 = time = [0, 1]
 x = const(velocity.run.fwd.x) * 1.25
-y = -2
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+y = ifelse(pos y >= -0.5, -4, -2)
 
 [State 0, VelAdd]
 type = VelAdd
@@ -228,7 +232,7 @@ x = -0.02
 
 [State 450, NotHitBy]
 type = notHitBy
-trigger1 = time = [2,12]
+trigger1 = time = [2,10]
 value = C
 time = 1
 
@@ -254,7 +258,7 @@ value = 30
 [State 200, AirDash]
 type = ChangeState
 triggerall = time >= 5
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 65
 
 [State 200, AirDash]
@@ -301,7 +305,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = vel y > 0 && pos y > 0
-value = 50
+value = 52
 ctrl = 1
 
 ;---------------------------------------------------------------------------
@@ -1261,17 +1265,17 @@ trigger1 = statetype = C && command != "holddown"
 statetype = S
 physics = S
 
-[State 120, Unblockable protection]
-type = NotHitBy
-trigger1 = statetype = S && time <= 1
-value = C
-time = 1
-
-[State 120, Unblockable protection]
-type = NotHitBy
-trigger1 = statetype = C && time <= 1
-value = SA
-time = 1
+;[State 120, Unblockable protection]
+;type = NotHitBy
+;trigger1 = statetype = S && time <= 1
+;value = C
+;time = 1
+;
+;[State 120, Unblockable protection]
+;type = NotHitBy
+;trigger1 = statetype = C && time <= 1
+;value = SA
+;time = 1
 
 [State 120, 5]
 type = ChangeState
@@ -1483,12 +1487,6 @@ type = ChangeState
 trigger1 = pos Y < 0
 value = 154
 
-[State 150, Unblockable protection]
-type = NotHitBy
-trigger1 = time <= 1
-value = C
-time = 1
-
 [State 150, Instant Block]
 type = poweradd
 triggerall = numhelper(4300) >= 1
@@ -1627,12 +1625,6 @@ time = 4
 type = ChangeState
 trigger1 = pos Y < 0
 value = 154
-
-[State 152, Unblockable protection]
-type = NotHitBy
-trigger1 = time <= 1
-value = SA
-time = 1
 
 [State 152, Instant Block]
 type = poweradd

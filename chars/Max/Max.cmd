@@ -590,7 +590,7 @@ flag3=nostandguard
 type = VelSet
 triggerall = statetype = A && movetype != H
 triggerall = command = "down"
-triggerall = vel y > 0 && vel y < 6
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
 triggerall = stateno != 900
 trigger1 = 1
 y = 6
@@ -625,7 +625,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF"  || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -671,7 +671,7 @@ triggerall = stateno != 65
 triggerall = stateno != 70
 value = ifelse(pos y >= 0,52,65)
 triggerall = Statetype = A
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -704,6 +704,7 @@ triggerall = numhelper(24001) = 0
 Triggerall = statetype != A
 Triggerall = power >=1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 1 - AIR Gatling
 [State -1, Special 1 - AIR Gatling]
@@ -717,6 +718,7 @@ triggerall = numhelper(21101) = 0
 Triggerall = statetype = A
 Triggerall = power >=1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 2 - BOMBS!?
 [State -1, Special 2 - BOMBS!?]
@@ -729,6 +731,7 @@ triggerall = numhelper(22001) = 0
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 3 - YEET
 [State -1, SPECIAL 3 - YEET]
@@ -741,6 +744,7 @@ triggerall = numhelper(23001) = 0
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 4 - Grabby
 [State -1, SPECIAL 4]
@@ -753,6 +757,7 @@ triggerall = numhelper(24001) = 0
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 5 - PROTON FUCKHEAD
 [State -1, SPECIAL 5 - PROTON FUCKHEAD]
@@ -763,6 +768,7 @@ triggerall = command = "SPECIAL 5"
 Triggerall = statetype != A
 Triggerall = power >= 2000
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;===========================================================================
 ;--------------------------------Normal Attacks---------------------------
 ;---------------------------------------------------------------------------

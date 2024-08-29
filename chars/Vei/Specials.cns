@@ -151,7 +151,7 @@ triggerall = map(juggle) < 100 || hitcount != 0
 trigger1 = AnimElem = 23
 attr = A, NA
 animtype  = Medium
-damage    = 40
+damage    = 100
 hitflag = MAF
 guardflag = MAF
 pausetime = 12,12
@@ -909,6 +909,7 @@ ownpal = 1
 
 [State 0, Helper]
 type = Helper
+triggerall = movehit
 trigger1 = AnimElem = 12
 helpertype = normal ;player
 name = "C Air: 2"
@@ -1042,7 +1043,7 @@ Envshake.time = 5
 [State 200, End]
 type = ChangeState
 trigger1 = pos Y >= 0 && Vel Y > 0
-value = 392
+value = 912
 ctrl = 1
 
 ; Glitch Clone Approach:
@@ -1162,7 +1163,7 @@ movetype= A
 physics = S
 juggle  = 1
 ctrl = 0
-anim = 401
+anim = 406
 sprpriority = -1
 
 [State 0, AttackDist]
@@ -1241,11 +1242,27 @@ persistent = 0
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 12
+trigger1 = AnimElem = 11
 helpertype = normal ;player
 name = "Glitch Bomb"
-ID = 415
-stateno = 23010
+ID = 23005
+stateno = 23005
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+inheritJuggle = 1
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElemTime(11) = 1
+helpertype = normal ;player
+name = "Glitch Bomb"
+ID = 23006
+stateno = 23006
 pos = 0,0
 postype = p1    ;p2,front,back,left,right
 facing = 1
@@ -1260,7 +1277,7 @@ type = Changestate
 trigger1 = frontedgebodydist < -100
 trigger2 = time = 250
 trigger3 = movecontact || movereversed
-value = 411
+value = 23003
 
 ;-------------------------------------------------------------------------------
 ; C - End
@@ -1270,7 +1287,7 @@ movetype= I
 physics = S
 juggle  = 0
 ctrl = 0
-anim = 402
+anim = 407
 sprpriority = 1
 
 [State 411, Velset]
@@ -1285,14 +1302,14 @@ trigger1 = AnimTime = 0
 
 
 ;-------------------------------------------------------------------------------
-; C Charged- Start
-[Statedef 23010]
+; Portal Projectile
+[Statedef 23005]
 type    = S
 movetype= A
 physics = S
 juggle  = 1
 ctrl = 0
-anim = 403
+anim = 410
 sprpriority = 1
 
 [State 0, AttackDist]
@@ -1306,13 +1323,6 @@ trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
 value = 5
 persistent = 0
-
-[State 0, FatalCounter]
-type = MapSet
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
 
 [State 0, Helper Guarded]
 type = RootMapSet
@@ -1375,33 +1385,157 @@ type = HitDef
 triggerall = root,map(juggle) < 100 || hitcount != 0
 trigger1 = !movecontact && !movereversed
 animtype  = Heavy
-attr = S, SP
-damage = ifelse(enemy,movetype = A,30,30)
+attr = S, NP
+damage = 40
 guard.kill = 0
 hitflag = MAF
 guardflag = MA
-ground.hittime = ifelse(enemy,movetype = A,44,22)
+ground.hittime = 22
 pausetime = 0,8
 sparkno = 2
 sparkxy = 0, 0
-hitsound = S ifelse(enemy,movetype = A,5,3), 1
+hitsound = S3, 1
 guard.sparkno = 13000
 guardsound = 6,11
+guard.slidetime = 12
 ground.type = High
-ground.slidetime = 12
+ground.slidetime = 25
 ground.velocity = -3
 airguard.velocity = -1.5,1.75
 air.velocity = -1.5,-1.5
 air.fall = 1
 Getpower = 0,0
-Fall.recovertime = ifelse(enemy,movetype = A,120,60)
+Fall.recover = 0
 
 [State 200, End]
 type = Changestate
 trigger1 = frontedgebodydist < -30
 trigger2 = time = 250
 trigger3 = movecontact || movereversed
-value = 416
+value = 411
+
+
+;-------------------------------------------------------------------------------
+; Portal Projectile After Image
+[Statedef 23006]
+type    = S
+movetype= A
+physics = S
+juggle  = 1
+ctrl = 0
+anim = 23005
+sprpriority = 1
+
+[State 0, AttackDist]
+type = AttackDist
+trigger1 = 1
+value = 60
+
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = moveguarded
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = movehit
+;ignorehitpause = 
+;persistent = 
+
+
+[State 0, Damage Proration]
+type = ParentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 3
+
+[State 0 , VelSet]
+type = Velset
+trigger1 = 1
+x = 13
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = AnimElem = 1
+time = 10
+trans = add
+
+
+[State 400, 4]
+type = HitDef
+triggerall = root,map(juggle) < 100 || hitcount != 0
+trigger1 = !movecontact && !movereversed
+animtype  = Heavy
+attr = S, NP
+damage = 40
+guard.kill = 0
+hitflag = MAF
+guardflag = MA
+ground.hittime = 22
+pausetime = 0,8
+sparkno = 2
+sparkxy = 0, 0
+hitsound = S3, 1
+guard.sparkno = 13000
+guardsound = 6,11
+guard.slidetime = 12
+ground.type = High
+ground.slidetime = 25
+ground.velocity = -3
+airguard.velocity = -1.5,1.75
+air.velocity = -1.5,-1.5
+air.fall = 1
+Getpower = 0,0
+Fall.recover = 0
+
+[State 200, End]
+type = Changestate
+trigger1 = frontedgebodydist < -30
+trigger2 = time = 250
+trigger3 = movecontact || movereversed
+value = 411
+
+
 
 ;===============================================================================
 ; "No more of that annoying ability!":
@@ -1486,7 +1620,7 @@ y = 0
 [State 200, Hit]
 type = HitDef
 getpower = 0
-triggerall = root,map(juggle) < 100 || hitcount != 0
+triggerall = map(juggle) < 100 || hitcount != 0
 trigger1 = AnimElem = 3 || AnimElem = 9
 attr = A, NP
 animtype  = Heavy 
@@ -1494,8 +1628,8 @@ damage    = 20
 Hitflag = MAFD
 guardflag = MAFD
 getpower = 0
-pausetime = 10,16
-guard.pausetime = 10,10
+pausetime = 12,20
+guard.pausetime = 12,12
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-35
@@ -1504,7 +1638,7 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2,-3
+ground.velocity = -2,-2
 air.velocity = -2,-2
 Fall = 1
 fall.recovertime = 50
@@ -1541,6 +1675,14 @@ ctrl = 0
 anim = 24001
 sprpriority = 1
 
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 0
+persistent = 0
+
+
 [State 0, Busterable]
 type = MapSet
 trigger1 = 1
@@ -1552,13 +1694,6 @@ ignorehitpause = 1
 type = AttackDist
 trigger1 = 1
 value = 60
-
-[State 0, Juggle Map]
-type = RootMapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 0
-persistent = 0
 
 [State 0, FatalCounter]
 type = MapSet
@@ -1607,7 +1742,7 @@ time = 1
 [State 200, Hit]
 type = HitDef
 getpower = 0
-triggerall = root,map(juggle) < 100 || hitcount != 0
+triggerall = map(juggle) < 100 || hitcount != 0
 trigger1 = AnimElem = 6 || AnimElem = 12 || AnimElem = 18
 attr = A, NP
 animtype  = Heavy 
@@ -1615,7 +1750,7 @@ damage    = 10
 Hitflag = MAFD
 guardflag = MAF
 getpower = 0
-pausetime = 4,10
+pausetime = 4,6
 guard.pausetime = 4,4
 sparkno = 1
 guard.sparkno = 13000
@@ -1625,8 +1760,8 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -3,-2
-air.velocity = -3,-2
+ground.velocity = -3,-2.5
+air.velocity = -3,-2.5
 Fall = 0
 Fall.recovertime = 40
 Envshake.time = 5

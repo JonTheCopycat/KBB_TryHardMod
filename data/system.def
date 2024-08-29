@@ -166,7 +166,7 @@ cancel.snd = 100,2
 	footer3.font = 10,0,0
 	footer3.scale = 1.5, 1.5
 	footer3.font.height = -1
-	footer3.text = "v0.4.0"
+	footer3.text = "v0.7.0"
 	
 	footer.overlay.col = 0, 0, 64
 	footer.overlay.alpha = 0, 0
@@ -372,30 +372,21 @@ overlay.alpha = 20, 100           ;Ikemen feature
 
 ;----------------------------
 [Infobox Text]
-WELCOME TO KIRBY BATTLE BLITZ!
+WELCOME TO KIRBY BATTLE BLITZ: TRY HARD MOD!
 
 * A project brought to you by JalenBrah, ZackAttack27, Kokorz, and Triea!
 * This game was powered by the childhood gifted to me by Kirby FCs!
 * Thank you for enjoying our Passion Project!
 
-* This game is designed to be Easy to Play! 
-* Even if you're new to fighting games!
-* Anyone should be able to pick it up and start CLOBBERING!
-
-* Don't expect these fan characters to be cringey weirdos...
-* These guys and gals are BRAWLIC WARRIORS!
-
-* Play as Older characters like Aege and Saito...
-* Or Newer Characters like Fly and Max!
-* Or play as MY character Glitch! I DON'T KNOW, GO NUTS!
+* This game is designed to add a bunch of mechanics to an Easy to Play Game.
+* Go crazy doing wavedashes, hyperhops, fastfalls, and plenty of
+new moves.
 
 * More than anything... ENJOY YOURSELF!
 
-* This build is version Try-Hard 0.2.0!
+* This build is unstable version 0.7.0!
 
-* It includes new patches...
-* And our next character, coming from literally nowhere to bring
-* sparks to the competition... Leon!
+* Space Daniel was here
 ;-------------------------------------------------------------------
 ;Character select definition
 [Select Info]
@@ -1887,7 +1878,6 @@ keymenu.itemname.b = "B"                          ;Ikemen feature
 keymenu.itemname.c = "C"                          ;Ikemen feature
 keymenu.itemname.x = "COUNTER"                          ;Ikemen feature
 keymenu.itemname.y = "GRAB"                          ;Ikemen feature
-keymenu.itemname.z = "DASH"                          ;Ikemen feature
 keymenu.itemname.start = "CHARGE"                  ;Ikemen feature
 keymenu.itemname.d = "TAG 1"                          ;Ikemen feature
 keymenu.itemname.w = "TAG 2"                          ;Ikemen feature

@@ -564,8 +564,8 @@ flag3=nostandguard
 type = VelSet
 triggerall = statetype = A && movetype != H
 triggerall = command = "down"
-triggerall = vel y > 0 && vel y < 6
-triggerall = stateno != 900 && stateno != 910
+triggerall = (vel y > 0 && vel y < 6) || stateno = 66 || stateno = 105
+triggerall = stateno != 900 && stateno != 910 && stateno != [440,445]
 trigger1 = 1
 y = 6
 
@@ -582,6 +582,7 @@ triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 1"
 Triggerall = statetype != A
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 2
 [State -1, SPECIAL 2]
@@ -591,6 +592,7 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 2"
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 3
 [State -1, SPECIAL 3]
@@ -601,6 +603,7 @@ triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 3"
 Triggerall = statetype != A
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 4
 [State -1, SPECIAL 4]
@@ -611,6 +614,7 @@ triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 4"
 Triggerall = statetype != A
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;---------------------------------------------------------------------------
 ; Special 5
 [State -1, SPECIAL 5]
@@ -622,6 +626,7 @@ triggerall = command = "SPECIAL 5"
 Triggerall = statetype != A
 Triggerall = numhelper(21003)<1
 trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;===========================================================================
 ;---------------------------------------------------------------------------
 ; Power Charge
@@ -651,7 +656,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 100
 triggerall = stateno != 100
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 trigger1 = statetype = S
 trigger1 = ctrl
 
@@ -660,7 +665,7 @@ trigger1 = ctrl
 [State -1, Run Back]
 type = ChangeState
 value = 105
-trigger1 = command = "BB" && command != "holddown"
+trigger1 = command = "BB"
 trigger1 = statetype = S
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
@@ -704,7 +709,7 @@ triggerall = stateno != 70
 triggerall = prevstateno != 65
 value = 65
 triggerall = Statetype = A
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Air Dash - Backwards
@@ -834,16 +839,28 @@ triggerall = command = "c"
 Triggerall = statetype != A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
-; Fwd + C
-[State -1, Fwd + C]
+; Down + C
+[State -1, Down + C]
 type = ChangeState
-value = 420
+value = 340
+triggerall = numhelper(450) = 0
 triggerall = numhelper(3500) = 0
-triggerall = power >= 100
-triggerall = command = "holdfwd"
+triggerall = power >= 250
+triggerall = command = "holdback"
 triggerall = command = "c"
 Triggerall = statetype != A
 trigger1 = ctrl
+;---------------------------------------------------------------------------
+; Fwd + C
+;[State -1, Fwd + C]
+;type = ChangeState
+;value = 420
+;triggerall = numhelper(3500) = 0
+;triggerall = power >= 100
+;triggerall = command = "holdfwd"
+;triggerall = command = "c"
+;Triggerall = statetype != A
+;trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; C
 [State -1, C]
@@ -851,7 +868,7 @@ type = ChangeState
 value = 400
 Triggerall = numhelper(9999) = 0
 triggerall = numhelper(3500) = 0
-Triggerall = power >= 250
+Triggerall = power >= 100
 triggerall = command = "c"
 Triggerall = statetype != A
 trigger1 = ctrl
@@ -984,17 +1001,28 @@ trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
 ; C Aire
-[State -1, C Aire]
+;[State -1, C Aire]
+;type = ChangeState
+;value = 625
+;;Triggerall = numhelper(9999) = 0
+;triggerall = numhelper(3500) = 0
+;Triggerall = power >= 100
+;triggerall = command = "holdfwd"
+;triggerall = command = "c"
+;Triggerall = statetype = A
+;trigger1 = ctrl
+;---------------------------------------------------------------------------
+; Down + C Aire
+[State -1, Down + C]
 type = ChangeState
-value = 625
-;Triggerall = numhelper(9999) = 0
+value = 445
+triggerall = numhelper(450) = 0
 triggerall = numhelper(3500) = 0
-Triggerall = power >= 100
-triggerall = command = "holdfwd"
+triggerall = power >= 200
+triggerall = command = "holddown"
 triggerall = command = "c"
 Triggerall = statetype = A
 trigger1 = ctrl
-
 ;---------------------------------------------------------------------------
 ; C Aire
 [State -1, C Aire]

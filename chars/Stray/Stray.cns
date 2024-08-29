@@ -910,7 +910,7 @@ ctrl = 1
 ; Wavedash A V2
 ;-------------------------------------------------------------------------------
 [Statedef 291]
-type    = A
+type    = S
 movetype= A
 physics = N 
 ctrl = 0
@@ -935,9 +935,9 @@ value = 10
 
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = time = 0
+trigger1 = time = [0, 35]
 value = C
-time = 35
+time = 1
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -978,7 +978,12 @@ trigger2 = time = 200
 
 [State 200, VelSet]
 type = VelSet
-trigger1 = AnimElem = 2
+trigger1 = AnimElem = 3, < 0
+x = 6
+
+[State 200, VelSet]
+type = VelSet
+trigger1 = AnimElem = 3
 x = 0
 
 [State 200, 1]
@@ -1874,7 +1879,7 @@ ctrl = 0
 type = ChangeState
 triggerall = helper(410), movehit >=1
 triggerall = numhelper(422) <= 0
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -2011,7 +2016,7 @@ ctrl = 0
 [State 200, Dash cancel I guess]
 type = ChangeState
 triggerall = time >= 20
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100 
 ctrl = 1
 
@@ -3029,7 +3034,7 @@ fall.recover = 0
 [State 200, End]
 type = ChangeState
 triggerall = movehit
-trigger1 = command = "FF" || command = "z"
+trigger1 = command = "FF"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 65
 ctrl = 1
@@ -4763,7 +4768,7 @@ x = 15
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = (1,13)
-x = ifelse(command = "holdfwd", 3, ifelse(command = "holdback", -3, 0))
+x = 3
 y = 1
 [State 0, Go up on hit if prevstateno wasn't overhead]
 type = Veladd
@@ -4776,7 +4781,7 @@ y = -.65
 type = VelSet
 triggerall = Prevstateno !=900 && hitcount !=5
 trigger1 = Time = (13,30)
-x = ifelse(command = "holdfwd", 2, ifelse(command = "holdback", -2, 0))
+x = 2
 y = -2
 
 
@@ -4860,6 +4865,7 @@ type = ChangeState
 trigger1 = Time = 30
 value = 621
 ctrl = 0
+
 
 ;-------------------------------------------------------------------------------
 ; C - Aire Lag

@@ -458,7 +458,7 @@ value = 60
 
 [State 200, Wavedash Cancel]
 type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
+Triggerall = command = "BWD" && command != "NotBWD"
 trigger1 = movehit || (movecontact && AnimTime > -7)
 value = 30
 ctrl = 1
@@ -859,11 +859,12 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 6"
 value = 25000
 
-[State 310, End]
+[State 200, Wavedash Cancel]
 type = ChangeState
-triggerall = movehit
-trigger1 = command = "WD" && command != "NotWD"
+Triggerall = command = "BWD" && command != "NotBWD"
+trigger1 = movecontact
 value = 30
+ctrl = 1
 
 [State 300, 5BB]
 type = ChangeState
@@ -904,14 +905,6 @@ Triggerall = power >= 200
 triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 value = 400
-
-[State 300, 5BB]
-type = ChangeState
-Triggerall = movecontact = 1
-triggerall = power >= 100
-trigger1 = ailevel = 0 && command = "holdback"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 590
 
 [State 300, End]
 type = ChangeState
@@ -1007,7 +1000,7 @@ guardflag = MA
 pausetime = 8,12
 ground.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-guard.pausetime = 10,13
+guard.pausetime = 10,12
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -1043,7 +1036,7 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.velocity = -2, -3
-air.velocity = -1.5, -3
+air.velocity = -2, -4
 Fall = 0
 
 
@@ -1072,13 +1065,12 @@ trigger1 = command = "SPECIAL 6"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 25000
 
-[State 300, 5BB]
+[State 200, Wavedash Cancel]
 type = ChangeState
-Triggerall = movecontact = 1
-triggerall = power >= 100
-trigger1 = ailevel = 0 && command = "holdback"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 590
+Triggerall = command = "BWD" && command != "NotBWD"
+trigger1 = movehit
+value = 30
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
@@ -1677,6 +1669,13 @@ trigger1 = command = "up"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = command = "BWD" && command != "NotBWD"
+trigger1 = movecontact
+value = 30
+ctrl = 1
+
 [State 200, 4C - ICE AMP]
 type = ChangeState
 Triggerall = movecontact
@@ -1710,14 +1709,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 value = 400
 
-[State 300, 5BB]
-type = ChangeState
-Triggerall = movecontact = 1
-triggerall = power >= 100
-trigger1 = ailevel = 0 && command = "holdback"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 590
-
 [State 310, End]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -1725,7 +1716,7 @@ value = 0
 ctrl = 1
 
 ;-------------------------------------------------------------------------------
-; Wavedash C
+; Wavedash B
 [Statedef 390]
 type  = S
 movetype= A
@@ -1734,8 +1725,9 @@ juggle = 2
 ctrl = 0
 anim = 390
 poweradd = 0
-velset = 5,0
+velset = 6,0
 sprpriority = 2
+attackdist = 50
 
 [State 0, Juggle Map]
 type = MapAdd
@@ -1812,7 +1804,7 @@ volumescale = 200
 [State 0, VelSet]
 type = VelSet
 trigger1 = time < 5
-x = 5
+x = 6
 
 ;element trail
 [State 0, trail 1]
@@ -2081,7 +2073,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-guard.pausetime = 12, 24
+guard.pausetime = 12, 20
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2129,12 +2121,12 @@ animtype = Heavy
 damage  = 30 + ifelse(var(8) != 0, 30, 0)
 hitflag = MAF
 guardflag = MA
-pausetime = 12,30 + ifelse(var(8) != 0, 10, 0)
+pausetime = 12,24 + ifelse(var(8) != 0, 10, 0)
 ground.type = High
 ground.slidetime = 12
 ground.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-guard.pausetime = 12, 30 + ifelse(var(8) != 0, 10, 0)
+guard.pausetime = 12, 24 + ifelse(var(8) != 0, 10, 0)
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2404,7 +2396,7 @@ triggerall = var(8) = 0
 trigger1 = AnimElem = 3
 helpertype = normal ;player
 name = "Ice"
-ID = 405
+ID = 410
 stateno = 410
 pos = 0,0
 postype = p1  ;p2,front,back,left,right
@@ -2423,7 +2415,7 @@ triggerall = var(8) = 2
 trigger1 = AnimElem = 3
 helpertype = normal ;player
 name = "Amped Ice"
-ID = 405
+ID = 409
 stateno = 409
 pos = 0,0
 postype = p1  ;p2,front,back,left,right
@@ -2454,7 +2446,7 @@ value = 0
 [State 310, End]
 type = ChangeState
 triggerall = helper(405),movehit
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -3240,7 +3232,7 @@ value = 0
 [State 310, End]
 type = ChangeState
 triggerall = helper,movehit = 1
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -4400,7 +4392,7 @@ triggerall = var(8) = 0
 trigger1 = AnimElem = 5
 helpertype = normal ;player
 name = "Ice"
-ID = 405
+ID = 410
 stateno = 493
 pos = 90,0
 postype = p1  ;p2,front,back,left,right
@@ -4416,7 +4408,7 @@ triggerall = var(8) != 0
 trigger1 = AnimElem = 5
 helpertype = normal ;player
 name = "Ice"
-ID = 405
+ID = 410
 stateno = 494
 pos = 110,0
 postype = p1  ;p2,front,back,left,right
@@ -4826,7 +4818,7 @@ attr = S, NP
 damage = 15
 hitflag = MAFD
 guardflag = MAF
-pausetime = 8,60
+pausetime = 8,30
 guard.pausetime = 8,8
 ground.hittime = 12 + ifelse(enemy,movetype = A, 7,0)
 hitsound  = S402,1
@@ -5050,8 +5042,8 @@ attr = S, NP
 damage = 25
 hitflag = MAFD
 guardflag = MAF
-pausetime = 8,18
-guard.pausetime = 8,18
+pausetime = 8,12
+guard.pausetime = 8,12
 ground.hittime = 12 + ifelse(enemy,movetype = A, 7,0)
 hitsound  = 5,4
 guard.sparkno = 13000
@@ -5168,8 +5160,8 @@ attr = S, NP
 damage = 20
 hitflag = MAFD
 guardflag = MAF
-pausetime = 8,18
-guard.pausetime = 8,18
+pausetime = 8,12
+guard.pausetime = 8,12
 ground.hittime = 12 + ifelse(enemy,movetype = A, 7,0)
 hitsound  = 5,4
 guard.sparkno = 13000
@@ -5301,8 +5293,8 @@ attr = S, NP
 damage = 30
 hitflag = MAFD
 guardflag = MAF
-pausetime = 8,18
-guard.pausetime = 8,18
+pausetime = 8,10
+guard.pausetime = 8,10
 ground.hittime = 12 + ifelse(enemy,movetype = A, 7,0)
 hitsound  = 5,4
 guard.sparkno = 13000
@@ -5430,22 +5422,17 @@ anim = 590
 poweradd = -100
 sprpriority = 1
 
-[State 0, SuperPause]
-type = SuperPause
-triggerall = enemy,movetype = H
+[State 0, Pause]
+type = Pause
+triggerall = enemy,stateno = [5000, 5299]
 trigger1 = Time = 1
-anim = 92006
 time = 10
-pos = 0,-20
 movetime = 10
-darken = 0
-p2defmul = 1
-poweradd = 0
-endcmdbuftime = 7
+endcmdbuftime = 10
 
 [State 105, NotHitBy]
 type = NotHitBy
-trigger1 = Time = [1, 5]
+trigger1 = Time = [1, 4]
 value = SCA
 time = 1
 
@@ -5510,7 +5497,7 @@ ctrl = 0
 [State 200, End]
 type = ChangeState
 Triggerall = time >= 7
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -5569,7 +5556,7 @@ ctrl = 0
 anim = 591
 poweradd = 0
 sprpriority = 2
-velset = ifelse(enemy,movetype = H, 16, 12),0
+velset = 12,0
 
 [State 0, Juggle Map]
 type = MapAdd
@@ -5642,8 +5629,8 @@ hitsound  = s0,5
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
-ground.velocity = -4,-5
-air.velocity = -4,-4.5
+ground.velocity = -4,-3
+air.velocity = -4,-2.5
 Envshake.time = 25
 
 [State 300, SPEEEEEEEN]
@@ -5668,11 +5655,12 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 6"
 value = 25000
 
-[State 310, End]
+[State 200, Wavedash Cancel]
 type = ChangeState
-triggerall = movehit
-trigger1 = command = "WD" && command != "NotWD"
+Triggerall = command = "BWD" && command != "NotBWD"
+trigger1 = movecontact
 value = 30
+ctrl = 1
 
 [State 300, 5BB]
 type = ChangeState
@@ -6787,7 +6775,7 @@ value = 0
 
 [State 310, End]
 type = ChangeState
-triggerall = command = "FF" || command = "z"
+triggerall = command = "FF"
 trigger1 = helper(624), movehit
 trigger2 = helper(626), movehit
 value = 65
@@ -8245,9 +8233,9 @@ value = 0
 ;----------
 [State 0, ICE FX]
 type = Explod
-trigger1 = helper(410),movehit
-trigger2 = helper(26002), movehit && numexplod(412) = 0
-trigger3 = helper(409),movehit && numexplod(412) = 0
+trigger1 = helper(410),movehit = 1 && numexplod(412) = 0
+trigger2 = helper(26002), movehit = 1 && numexplod(412) = 0
+trigger3 = helper(409),movehit = 1 && numexplod(412) = 0
 anim = 412
 ID = 412
 pos = 0, 0

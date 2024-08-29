@@ -1,42 +1,51 @@
 <#f0f000>:PASSIVE:</>
-	"If a sword exists for atleast 1.5 seconds, 
-	it will not take proration or juggle points.
-	A sword stuck in either the ground or
-	wall summons a Thunder every 3 seconds.
-	Holding your charge key allows you to activate 
-	your second sword instead of your first one
-	(if you have one)."
 
 <#f0f000>:EX ATTACKS!:</>
 
 Summon (1/4 Bar)							^C
-	"Watanabe summons a sword. Meter charge is
-	halved when a sword is out."
+	"Watanabe summons a sword and it lasts for 8 seconds.
+	 Meter charge is halved when a sword is out."
 
-Grounded Summon (1/4 Bar)							_D^C
-	"Watanabe sticks his sword in the ground
-	and summons a sword from it. Meter charge
-	is only halved when two swords are out."
+_! Two-Hit Combo				^B
+	press b twice or hold b
+
+_! Bajoneto					_C
+
+_! Downslam					_D^C
+
+
+Ground Slam (1/4 Bar)							_D^C
+	"Watanabe slams his sword to the ground
+	and summons a stationary sword from it.
+	This summons a thunder after a while."
+
+_! Swing					^B
+	"Hold the button to delay the attack."
 
 Summon: Air (1/2 Bar)							_AIR^C
 	"Watanabe summons a sword and rides it. Hold up,
 	down or C for Watanabe to abandon it, and make
-	it attach to the wall."
+	it attach to the wall.
+	This summons a thunder after a while."
+
 _! Jumpoff					_U
 
 _! Dropdown					_D
 
 _! Neutral jump?? idk kid			^C
 
-Grounded Summon: Air (1/2 Bar)								_AIR_D^C
-	"Watanabe summons a sword and kicks it down into
-	the ground."
+Summon: Air Slam (1/2 Bar)								_AIR_D^C
+	"Watanabe summons a stationary sword in the air.
+	This summons a thunder after a while."
+
+_! Swing					^B
+	"Hold the button to delay the attack."
 
 Seed Throw (1/4 Bar)							_F^C
 	"Watanabe throws a seed that will wrap around the
 	 opponent. When this lands it will grow into a plant
-	 that will wrap on contact. Holding your Charge key
-	will make the seed miss."
+	 that will wrap on contact. Holding the input will 
+	 make the seed miss."
 
 _! Dash	(1/2 Bar)				_F_F
 	
@@ -47,6 +56,7 @@ _! Dash	(1/2 Bar)				_F_F
 "Ether Drive" (1 Bar)						_D_DF_F^A
 	"Watanabe summons a ton of swords and shoots them at
 	the opponent."
+
 _! Ether Drive: Ride						^C
 	"Watanabe rides one of the summoned swords."
 
@@ -57,8 +67,7 @@ _! Ether Drive: Ride						^C
 
 
 Seed spread (1 Bar, _AIR OK)    						_D_DF_F^B
-	"Watanabe throws seeds around him, these have
-	different properties than the normal seed."
+	"Watanabe throws 2 seeds around him."
 
 "Storm Wolf" (1/2 Bar, _AIR OK)    						D_DB_B^B
 	"sideswitches the opponent"
@@ -66,6 +75,4 @@ Seed spread (1 Bar, _AIR OK)    						_D_DF_F^B
 "Moonlit Serenade" (1 1/2 Bars)				_D_DF_F^C
 	"Watanabe throws a summoned sword forward!
 	If it connects, the opponent gets BLASTED
-	TO DEATH. Summoned sword stays on whiff.
-	If a summoned sword already is hitting an
-	opponent this move becomes instant."
+	TO DEATH. Summoned sword stays on whiff."

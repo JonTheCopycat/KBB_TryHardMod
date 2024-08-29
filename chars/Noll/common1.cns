@@ -167,11 +167,23 @@ anim = 590
 ctrl = 0
 sprpriority = 1
 
+[State 0, MapSet]
+type = MapSet
+trigger1 = time = 0
+map = "letGo"
+value = 0
+
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = time = 0
 value = F65,0
 volumescale = 500
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = C
+time = 1
 
 [State 0, VelSet]
 type = VelSet
@@ -187,12 +199,17 @@ value = 1
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 0
-y = -3.2
+y = -0.2
+
+[State 0, VelSet]
+type = PosAdd
+trigger1 = time = 0
+y = -2
 
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = time > 0
-y = 0.20
+y = -0.075
 
 [State 0, Moving Forward]
 type = VelAdd
@@ -225,8 +242,8 @@ type = Helper
 trigger1 = time = 0
 helpertype = normal
 name = "HELPER"
-ID = 591
-stateno = 591
+ID = 31
+stateno = 31
 pos = pos x, pos y
 postype = p1
 size.xscale = 1
@@ -244,22 +261,14 @@ trigger4 = command = "b" && time > 0
 trigger5 = command = "c" && time > 0
 y = 0
 
-
-[State 200, Special 2 - Rapidslash DP]
+; Special 3
+[State -1, SPECIAL 3 - Spinner Cutters]
 type = ChangeState
-Triggerall = time >= 5
+value = 23000
 triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 2"
-trigger1 = power >= 1000
-value = 22000
-
-[State 200, SPECIAL 4 - Sleeper Move]
-type = ChangeState
-triggerall = time >= 5
-triggerall = numhelper(3500) = 0
-trigger1 = command = "SPECIAL 4"
-Trigger1 = power >= 1000
-value = 24000
+triggerall = command = "SPECIAL 3"
+Triggerall = power >= 1000
+trigger1 = command = "holdfwd"
 
 ;[State 200, End]
 ;type = ChangeState
@@ -297,13 +306,13 @@ ctrl = 0
 type = ChangeState
 triggerall = time >= 5 && var(3) = 0 
 trigger1 = command = "holdup"
-value = 45
+value = 60
 ctrl = 0
 
 [State 200, End]
 type = ChangeState
 triggerall = time >= 5
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 65
 ctrl = 1
 
@@ -320,6 +329,19 @@ triggerall = time >= 5
 trigger1 = command = "s"
 value = 66
 ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "down" && map(letGo) != 0
+value = 50
+ctrl = 1
+
+[State 0, MapSet]
+type = MapSet
+trigger1 = command != "holddown"
+map = "letGo"
+value = 1
 
 [State 200, End]
 type = ChangeState
@@ -351,8 +373,9 @@ y = root,vel y
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = root,statetype != S
-trigger2 = time >= 600
+trigger1 = root,statetype = A
+trigger2 = root,pos y > -1
+trigger3 = root,movetype = H
 value = 32
 ctrl = 0
 
@@ -464,8 +487,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 5 || command != "z"
-trigger1 = command = "FF" || (command = "z" && command != "holddown")
+trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
@@ -1329,17 +1351,17 @@ trigger1 = statetype = C && command != "holddown"
 statetype = S
 physics = S
 
-[State 120, Unblockable protection]
-type = NotHitBy
-trigger1 = statetype = S && time <= 1
-value = C
-time = 1
-
-[State 120, Unblockable protection]
-type = NotHitBy
-trigger1 = statetype = C && time <= 1
-value = SA
-time = 1
+;[State 120, Unblockable protection]
+;type = NotHitBy
+;trigger1 = statetype = S && time <= 1
+;value = C
+;time = 1
+;
+;[State 120, Unblockable protection]
+;type = NotHitBy
+;trigger1 = statetype = C && time <= 1
+;value = SA
+;time = 1
 
 [State 120, 5]
 type = ChangeState
@@ -1551,12 +1573,6 @@ type = ChangeState
 trigger1 = pos Y < 0
 value = 154
 
-[State 150, Unblockable protection]
-type = NotHitBy
-trigger1 = time <= 1
-value = C
-time = 1
-
 [State 150, Instant Block]
 type = poweradd
 triggerall = numhelper(4300) >= 1
@@ -1701,12 +1717,6 @@ time = 4
 type = ChangeState
 trigger1 = pos Y < 0
 value = 154
-
-[State 152, Unblockable protection]
-type = NotHitBy
-trigger1 = time <= 1
-value = SA
-time = 1
 
 [State 152, Instant Block]
 type = poweradd
