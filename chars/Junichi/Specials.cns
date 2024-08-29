@@ -584,7 +584,7 @@ Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = AnimElem = 20
+triggerall = AnimElem = 21
 trigger1 = 1
 attr = S, NA
 animtype  = Light
@@ -617,7 +617,7 @@ x = 1
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = AnimElem = 23
+triggerall = AnimElem = 25
 trigger1 = 1
 attr = S, NA
 animtype  = Light
@@ -645,7 +645,7 @@ Fall.recover = 0
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = AnimElem = 27
+triggerall = AnimElem = 30
 trigger1 = 1
 attr = S, NA
 animtype  = Light
@@ -676,7 +676,7 @@ Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = AnimElem = 31 || AnimElem = 33
+triggerall = AnimElem = 34 || AnimElem = 36
 trigger1 = 1
 attr = S, NA
 animtype  = Light
@@ -704,7 +704,7 @@ Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = AnimElem = 35 || AnimElem = 37
+triggerall = AnimElem = 38 || AnimElem = 40
 trigger1 = 1
 attr = S, NA
 animtype  = Light
@@ -732,7 +732,7 @@ Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = AnimElem = 39 || AnimElem = 41 || AnimElem = 43 || AnimElem = 45
+triggerall = AnimElem = 42 || AnimElem = 44 || AnimElem = 46 || AnimElem = 48
 trigger1 = 1
 attr = S, NA
 animtype  = Light
@@ -758,13 +758,13 @@ Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = Animelem = 47
+trigger1 = Animelem = 50
 x = 8
 
 [State 200, Final Hit]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 48
+triggerall = AnimElem = 51
 triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
 attr = A, NA
@@ -795,7 +795,7 @@ p2getp1state = 0
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 48
+triggerall = AnimElem = 51
 trigger1 = enemy,map(hitOverride) = 1
 attr = A, NA
 animtype  = Heavy 

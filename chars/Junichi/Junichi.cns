@@ -1667,8 +1667,8 @@ volumescale = 50
 ;x = 8
 [State 210, VelSet]
 type = VelSet
-trigger1 = animelem = 2
-x = 3
+trigger1 = AnimElem = 3
+x = 5
 
 [State 210, Explod]
 type = Explod
@@ -1713,12 +1713,12 @@ hitsound   = 5,4
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
-ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1,-2
-air.velocity = -1,-2
+ground.hittime  = 25 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -3,-4
+air.velocity = -3,-3.5
 Fall = 0
 Envshake.time = 10
-Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -7
 airguard.cornerpush.veloff = -7
 
@@ -1754,28 +1754,27 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 4"
 value = 24000
 
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "a"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 201
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 414
 ;[State 200, End]
 ;type = ChangeState
 ;Triggerall = movecontact
-;triggerall = numhelper(3500) = 0
-;trigger1 = command = "holddown"
-;trigger1 = command = "c"
-;value = 400
-;ctrl = 1
-
+;trigger1 = command = "a"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 201
+;
+;[State 200, End]
+;type = ChangeState
+;Triggerall = movecontact
+;trigger1 = command = "b"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 414
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+trigger1 = command = "holddown"
+trigger1 = command = "c"
+value = 400
+ctrl = 1
 
 [State 210, End]
 type = ChangeState
@@ -4757,7 +4756,7 @@ juggle  = 0
 ctrl = 0
 anim = 400
 poweradd = -100
-velset = -2.5,0
+;velset = -2.5,0
 sprpriority = 1
 
 [State 0, PlaySnd]
@@ -10319,7 +10318,7 @@ value = 40
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit
+trigger1 = movecontact
 value = 30
 ctrl = 1
 

@@ -13,16 +13,17 @@ and jump cancellable at any time.
 
 <#f0f000>:COMMAND DASH ATTACKS:</>
 
-Clone Slide Kick							_F_D_DF^A
-	"Vei's clone does a slide kick, and can
-	follow it up."
+Clone Punch									_F_D_DF^A
+	"Vei's clone performs a long reaching punch
+	and can follow it up."
 
 Clone Divekick								_F_D_DF^B
 	"Vei's clone jumps up and divekicks the
 	opponent"
 
-Clone Flurry (1/4 Bar)						_F_D_DF^C
-	"Vei's clone does a flurry of kicks"
+Clone Cloaked Saw (1/4 Bar)					_F_D_DF^C
+	"Vei's clone jumps into a cloak spin, dragging
+	the opponent with him."
 
 
 <#f0f000>:EX ATTACKS!:</>
