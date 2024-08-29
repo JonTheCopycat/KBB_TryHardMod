@@ -1221,6 +1221,12 @@ supermovetime = 0
 pausemovetime = 0
 inheritJuggle = 1
 
+[State 200, C]
+type = ChangeState
+Triggerall = helper(31),stateno = 31
+trigger1 = command = "WD"
+value = 30
+
 [State 200, 5AA]
 type = ChangeState
 Trigger1 = helper(31),stateno = 292
@@ -2384,13 +2390,6 @@ type = PlaySnd
 trigger1 = AnimElem = 2
 value = S0,6
 volumescale = 100
-
-[State 200, End]
-type = ChangeState
-triggerall = time >= 5
-trigger1 = command = "holdup"
-value = 60
-ctrl = 0
 
 [State 210, Cancel into 2C]
 type = ChangeState
@@ -4438,7 +4437,12 @@ sprpriority = 1
 [State 0, AttackDist]
 type = AttackDist
 trigger1 = 1
-value = 60
+value = 45
+
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 1
 
 [State 0, Juggle Map]
 type = RootMapAdd
@@ -4481,25 +4485,38 @@ value = 3
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time <= 7
-x = 6
+trigger1 = time = 0
+x = 2
 
 [State 0, VelSet]
 type = VelSet
-triggerall = !movehit
-trigger1 = time = [8, 12]
-x = 12
+trigger1 = time = 7
+x = 8
+y = -9.5
 
-[State 0, VelSet]
+[State 0, Ground Friction]
 type = VelMul
+triggerall = pos y > -1
 trigger1 = time >= 7
 x = 0.88
 
-[State 0, VelSet]
+[State 0, Ground Land]
+type = PosSet
+triggerall = pos y > -1 && vel y > 0
+trigger1 = time > 7
+y = 0
+
+[State 0, Ground Land]
 type = VelSet
-triggerall = movehit = 1
-trigger1 = time = [7, 29]
-x = 1
+triggerall = pos y > -1 && vel y > 0
+trigger1 = time > 7
+y = 0
+
+[State 0, VelSet]
+type = VelAdd
+triggerall = pos y <= -1
+trigger1 = time > 7
+y = 0.74
 
 [State 0, NotHitBy]
 type = NotHitBy
@@ -4517,6 +4534,14 @@ type = varadd
 trigger1 = moveguarded = 1
 v = 27
 value = 1
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = movehit
+trigger1 = AnimElem = 4, >= 0 && AnimElem = 10, <= 0
+time = 1
+id = -1
+pos = 25,-15
 
 [State 200, Hit]
 type = HitDef
@@ -4570,10 +4595,10 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 30 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2,-3
-air.velocity = -2, -3
+ground.velocity = -3,4
+air.velocity = -3, 4
 fall = 1
-fall.recovertime = 25 + ifelse(enemy,movetype = A, 7,0)
+fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 Envshake.time = 15
 
 [State 0, ScreenBound]	;Don't leave screen pls
