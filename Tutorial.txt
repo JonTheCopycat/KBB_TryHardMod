@@ -4,20 +4,20 @@ How to install:
 	3. Enter the folder of the copy of Kirby Battle Blitz, and
 	4. Paste the folders from the zip file onto this main folder, on top of the original data and char folders
 	5. If a window pops up, click the options to override/replace the data/files.
-	6. Open the game and enjoy the cracked movement 
+	6. Open the game and enjoy the cracked movement.
 
 
 
 Inputs to wavedash
 	Forward > Down > Down-Forward
-	Doing so gives you access to atleast 3 moves in A, B and C. As part of a new change, some characters are starting to have moves in Powercharge, Grab, or Counter as well.
+	Doing so gives you access to at least 3 moves in A, B and C.
 
 You can:
-	* jump out of wavedash. This will do a hyperhop
-	* dash out of wavedash
-	* wavedash a little bit after the start of a wavedash
-	* not do supers while wavedashing
-	* ]Wavedash Cancel During Starburst.
+	* Jump out of wavedash. This will do a hyperhop
+	* Dash out of wavedash
+	* Wavedash a little bit after the start of a wavedash
+	* Do supers while wavedashing
+	* Wavedash Cancel During Starburst.
 
 You can consistently do QCF supers by inputing them as Halfcircles instead.
 
@@ -26,7 +26,7 @@ Inputs to hyperhop:
 	This input is very fast
 	You will jump lower than usual, but doing this with Up-Forward or Up-back will allow you to jump with great horizontal speed
 
-You can also do a soft fastfall with every character. When ever you're not going up in the air, you can press down at ANY time and you will fall faster.
+You can also do a soft fastfall with every character. When ever you're not going up in the air, you can press down at any time and you will fall faster.
 
 Input to Star Cancel:
 	Pressing Charge Twice
