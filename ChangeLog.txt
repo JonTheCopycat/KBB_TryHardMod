@@ -1,5 +1,29 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.7.0 Hotfix 1 Changes:           /
+|---------------------------------------------------/
+
+Fixing some bugs. And Adding something that should have always been in the game.
+
+Universal:
+1. You can now counter out of wavedash.
+
+Glitch:
+1. Fixed bug where charged 5c did not connect.
+2. Fixed bug where moves with explosions did not work properly
+3. Removed hidden move: Wavedash Counter.
+
+Jodie:
+1. Removed hidden move: Wavedash Counter.
+
+Bill:
+1. Removed Hidden move: Wavedash Counter.
+
+Fly:
+1. Removed Hidden move: Wavedash Counter.
+
+===================================================================================================================================
+|-----------------------------------------------------/
 | Try-Hard Version 0.7.0 Changes:                    /
 |---------------------------------------------------/
 

@@ -2338,6 +2338,14 @@ if Const(KBB_Playable) = 1 {
             ChangeState{value: 800; ctrl: 0}
         }
     }
+
+    if command = "hold_x" && ailevel = 0 && stateno = [30, 35] {
+        if statetype = A {
+            ChangeState{value: 810; ctrl: 0}
+        } else {
+            ChangeState{value: 800; ctrl: 0}
+        }
+    }
 }
 #===============================================================================
 #Dont Mess With; Always Executed

@@ -274,12 +274,12 @@ triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "c"
 value = 490
 
-[State 200, End]
-type = ChangeState
-triggerall = prevstateno != 52 || time > 3
-trigger1 = command = "x"
-value = 590
-ctrl = 0
+;[State 200, End]
+;type = ChangeState
+;triggerall = prevstateno != 52 || time > 3
+;trigger1 = command = "x"
+;value = 800
+;ctrl = 0
 
 [State 200, End]
 type = ChangeState
@@ -351,12 +351,12 @@ triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "c"
 value = 490
 
-[State 200, End]
-type = ChangeState
-triggerall = prevstateno != 52 || time > 3
-trigger1 = command = "x"
-value = 590
-ctrl = 0
+;[State 200, End]
+;type = ChangeState
+;triggerall = prevstateno != 52 || time > 3
+;trigger1 = command = "x"
+;value = 590
+;ctrl = 0
 
 [State 200, End]
 type = ChangeState

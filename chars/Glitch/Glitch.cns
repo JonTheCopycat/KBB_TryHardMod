@@ -2097,32 +2097,31 @@ ownpal = 1
 ignorehitpause = 1
 persistent = 0
 
-
-;[State 400, 4]
-;type = HitDef
-;triggerall = root,map(juggle) < 100 || hitcount != 0
-;trigger1 = !movecontact && !movereversed
-;animtype  = Heavy
-;attr = S, NP
-;damage = ifelse(enemy,movetype = A,80,40),40
-;guard.kill = 0
-;hitflag = MAF
-;guardflag = MA
-;ground.hittime = ifelse(enemy,movetype = A,44,22)
-;pausetime = 0,5
-;sparkno = 2
-;sparkxy = 0, 0
-;hitsound = S ifelse(enemy,movetype = A,5,3), 1
-;guard.sparkno = 13000
-;guardsound = 6,11
-;ground.type = High
-;ground.slidetime = 25
-;ground.velocity = 5
-;airguard.velocity = 1.5,1.75
-;air.velocity = 1.5,1.5
-;air.fall = 1
-;Getpower = 0,0
-;Fall.recovertime = ifelse(enemy,movetype = A,120,60)
+[State 400, 4]
+type = HitDef
+triggerall = root,map(juggle) < 100 || hitcount != 0
+trigger1 = !movecontact && !movereversed
+animtype  = Heavy
+attr = S, NP
+damage = ifelse(enemy,movetype = A,80,40),40
+guard.kill = 0
+hitflag = MAF
+guardflag = MA
+ground.hittime = ifelse(enemy,movetype = A,44,22)
+pausetime = 0,5
+sparkno = 2
+sparkxy = 0, 0
+hitsound = S ifelse(enemy,movetype = A,5,3), 1
+guard.sparkno = 13000
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 25
+ground.velocity = -5
+airguard.velocity = -1.5,1.75
+air.velocity = -1.5,1.5
+air.fall = 1
+Getpower = 0,0
+Fall.recovertime = ifelse(enemy,movetype = A,120,60)
 
 [State 200, End]
 type = Changestate
@@ -3297,49 +3296,6 @@ sprpriority = 2
 type = StopSnd
 trigger1 = Time = 0
 channel = 6
-
-[State 200, End]
-type = ChangeState
-trigger1 = AnimTime = 0
-value = 0
-ctrl = 1
-
-;-------------------------------------------------------------------------------
-; Wavedash S
-[Statedef 590]
-type = S
-movetype = I
-physics = N
-juggle = 0
-ctrl = 0
-anim = 590
-poweradd = -250
-sprpriority = 0
-
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = time = 0
-value = 3,0
-volumescale = 50
-
-[State 0, AfterImage]
-type = AfterImage
-triggerall = numhelper(51000) = 0
-trigger1 = time = 0
-time = 5
-trans = add
-
-[State 0, StateTypeSet]
-type = StateTypeSet
-trigger1 = AnimElem = 5
-statetype = S
-movetype = I
-physics = S
-
-[State 50, 3]
-type = Turn
-triggerall = time > 12
-trigger1 = p2dist X < 0
 
 [State 200, End]
 type = ChangeState

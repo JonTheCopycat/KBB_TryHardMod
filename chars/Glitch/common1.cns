@@ -271,18 +271,10 @@ ctrl = 0
 [State 200, C]
 type = ChangeState
 triggerall = numhelper(3500) = 0
-triggerall = power >=100
+triggerall = power >= 100
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "c"
 value = 490
-
-[State 200, C]
-type = ChangeState
-triggerall = numhelper(3500) = 0
-triggerall = power >=250
-triggerall = prevstateno != 52 || time > 3
-trigger1 = command = "x"
-value = 590
 
 [State 200, End]
 type = ChangeState
@@ -359,14 +351,6 @@ triggerall = power >=100
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "c"
 value = 490
-
-[State 200, C]
-type = ChangeState
-triggerall = numhelper(3500) = 0
-triggerall = power >=250
-triggerall = prevstateno != 52 || time > 3
-trigger1 = command = "x"
-value = 590
 
 [State 200, End]
 type = ChangeState

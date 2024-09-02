@@ -900,7 +900,7 @@ ctrl = 1
 ; Fly Dash Slash
 ;-------------------------------------------------------------------------------
 [Statedef 23000]
-type    = U
+type    = S
 movetype= A
 physics = S
 juggle  = 0
