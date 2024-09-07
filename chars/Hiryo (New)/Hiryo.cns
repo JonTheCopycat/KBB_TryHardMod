@@ -3115,11 +3115,11 @@ value = 4
 
 [State 0, VelSet]
 type = Turn
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 2, = 2
 
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 2, = 2
 x = -75
 
 
@@ -3147,7 +3147,7 @@ triggerall = !movecontact && enemy,movetype = A
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 80
+damage    = 90
 hitflag = MAFD
 guardflag = MA
 pausetime = 30,60
@@ -3175,7 +3175,7 @@ triggerall = !movecontact && enemy,movetype != A
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 40
+damage    = 45
 hitflag = MAFD
 guardflag = MA
 pausetime = 12,18

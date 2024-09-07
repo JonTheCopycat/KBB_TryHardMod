@@ -5425,9 +5425,8 @@ volumescale = 50
 
 [State 0, VelSet]
 type = VelSet
-triggerall = moveguarded
 trigger1 = movecontact = 1
-y = -2
+y = -1
 x = 2
 
 [State 200, 1]
@@ -5483,7 +5482,7 @@ air.velocity = -2,8
 Fall = 1
 Envshake.time = 15
 Fall.recover = 0
-Fall.yvelocity = 8
+Fall.yvelocity = -8
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 

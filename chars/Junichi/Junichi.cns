@@ -2924,16 +2924,16 @@ value = 40
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 12
-Triggerall = movecontact
+triggerall = AnimElem = 5, >= 0
+Triggerall = movehit
 trigger1 = command = "a"
 value = 600
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 12
-Triggerall = movecontact
+triggerall = AnimElem = 5, >= 0
+Triggerall = movehit
 trigger1 = command = "b"
 value = 610
 ctrl = 1
@@ -6556,7 +6556,7 @@ damage    = ifelse(prevstateno = 22010, 100, 40)
 hitflag = MAF
 guardflag = MAF
 pausetime = 12,12
-guard.pausetime = 12,12
+guard.pausetime = 12,10
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -7699,8 +7699,8 @@ animtype  = Heavy
 damage    = ifelse(prevstateno = 22010, 80, 35)
 hitflag = MAF
 guardflag = MAF
-pausetime = 12 + 4 * (prevstateno = 22011),12 + 4 * (prevstateno = 22011)
-guard.pausetime = 12 + 4 * (prevstateno = 22011),12 + 4 * (prevstateno = 22011)
+pausetime = 12 + 4 * (prevstateno = 22011),12 + 8 * (prevstateno = 22011)
+guard.pausetime = 12 + 4 * (prevstateno = 22011),10 + 8 * (prevstateno = 22011)
 guard.hittime = 15
 airguard.hittime = 15
 sparkno = 2
@@ -10262,6 +10262,7 @@ damage    = 40
 hitflag = MAF
 guardflag = MA
 pausetime = 16,18
+guard.pausetime = 16,14
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -10300,8 +10301,8 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2,-14
-air.velocity = -2,-14
+ground.velocity = -2,-8
+air.velocity = -2,-8
 Fall = 1
 Fall.recover = 0
 envshake.time = 30

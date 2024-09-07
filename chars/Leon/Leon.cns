@@ -2254,18 +2254,13 @@ x = 6
 
 [State 310, VelSet]
 type = VelSet
-trigger1 = AnimElem = 2
-x = 5
-
-[State 310, VelSet]
-type = VelSet
 trigger1 = AnimElem = 3
-x = 4
+x = 1
 
 [State 310, VelSet]
 type = VelSet
-trigger1 = AnimElem = 4
-x = 3
+trigger1 = AnimElem = 5
+x = 4
 
 [State 330, Sweep - Ground]
 type = HitDef
