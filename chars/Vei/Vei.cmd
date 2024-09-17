@@ -792,7 +792,7 @@ value = 320
 
 [State 200, 5BBB]
 type = ChangeState
-Triggerall = numhelper(31) != 0 && helper(31),stateno = 301
+Triggerall = numhelper(31) != 0 && (helper(31),stateno = 301 && time >= 3)
 triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl

@@ -192,7 +192,7 @@ stateno = 31
 pos = 10,0
 postype = p1    ;p2,front,back,left,right
 facing = 1
-keyctrl = 1
+keyctrl = 0
 ownpal = 1
 inheritJuggle = 1
 
@@ -343,27 +343,27 @@ value = SCA, AA, AP, AT
 [State 200, End]
 type = ChangeState
 ;triggerall = time >= 5
-trigger1 = command = "back"
+trigger1 = root,command = "back"
 trigger2 = root,stateno = 35
 value = 36
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "a"
+trigger1 = root,command = "a"
 trigger2 = root,stateno = 290
 value = 292
 ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "b"
+trigger1 = root,command = "b"
 trigger2 = root,stateno = 390
 value = 391
 ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "c"
+trigger1 = root,command = "c"
 value = 491
 ctrl = 0
 
@@ -371,7 +371,7 @@ ctrl = 0
 type = ChangeState
 triggerall = p2dist x > 0
 triggerall = time >= 5
-trigger1 = command = "WD"
+trigger1 = root,command = "WD"
 value = 31
 
 [State 200, Hurt]

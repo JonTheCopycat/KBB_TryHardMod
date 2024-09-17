@@ -774,7 +774,7 @@ stateno = 31
 pos = 20,0
 postype = p1    ;p2,front,back,left,right
 facing = 1
-keyctrl = 1
+keyctrl = 0
 ownpal = 1
 supermovetime = 0
 pausemovetime = 0
@@ -794,18 +794,11 @@ trigger1 = command = "holdup"
 value = 60
 ctrl = 0
 
-[State 200, 5AA]
-type = ChangeState
-Triggerall = helper(31),movecontact >= 2
-trigger1 = command = "a"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 290
-
 [State 210, Cancel into 2C]
 type = ChangeState
-Triggerall = helper(31),movecontact >= 2
+Triggerall = helper(31),stateno = 301
 trigger1 = command = "b"
-value = ifelse(prevstateno = 300, 310, 300)
+value = 300
 
 [State 210, Cancel into 2C]
 type = ChangeState
@@ -994,14 +987,14 @@ airguard.cornerpush.veloff = -10
 [State 200, 5AA]
 type = ChangeState
 Triggerall = movecontact
-trigger1 = command = "a"
+trigger1 = root,command = "a"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 292
 
 [State 200, 5BBB]
 type = ChangeState
 Triggerall = movecontact
-trigger1 = command = "b"
+trigger1 = root,command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 301
 
@@ -1081,11 +1074,11 @@ volumescale = 50
 [State 210, PosAdd]
 type = PosAdd
 trigger1 = animelem = 2
-x = 8
+x = 4
 [State 210, VelSet]
 type = VelSet
 trigger1 = animelem = 2
-x = 4
+x = 3
 
 [State 0, NotHitBy]
 type = NotHitBy
@@ -1159,8 +1152,8 @@ airguard.cornerpush.veloff = -7
 [State 210, Cancel into 5BBB]
 type = ChangeState
 Triggerall = movecontact
-trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger1 = root,command = "b"
+trigger2 = roundstate = 2 && root,ailevel > 0 && random < (root,ailevel * 100)
 value = ifelse(prevstateno = 301, 311, 301)
 
 [State 210, End]
@@ -1215,7 +1208,7 @@ stateno = 301
 pos = 25,0
 postype = p1    ;p2,front,back,left,right
 facing = 1
-keyctrl = 1
+keyctrl = 0
 ownpal = 1
 supermovetime = 0
 pausemovetime = 0
@@ -1454,29 +1447,29 @@ airguard.cornerpush.veloff = -10
 type = ChangeState
 Triggerall = movecontact || time >= 16
 triggerall = p2dist x > 0
-trigger1 = command = "WD"
+trigger1 = root,command = "WD"
 value = 31
 
 [State 200, 2B]
 type = ChangeState
 Triggerall = movecontact || time >= 16
-trigger1 = command = "holddown"
-trigger1 = command = "b"
+trigger1 = root,command = "holddown"
+trigger1 = root,command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 911
 
 [State 200, 5BBB]
 type = ChangeState
 Triggerall = movecontact || time >= 16
-trigger1 = command = "holdback"
-trigger1 = command = "b"
+trigger1 = root,command = "holdback"
+trigger1 = root,command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 321
 
 [State 200, 5BBB]
 type = ChangeState
 Triggerall = movecontact || time >= 16
-trigger1 = command = "b"
+trigger1 = root,command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 311
 
@@ -1551,29 +1544,29 @@ forceair = 0
 [State 200, C]
 type = ChangeState
 triggerall = p2dist x > 0
-trigger1 = command = "WD"
+trigger1 = root,command = "WD"
 value = 31
 
 [State 200, 2B]
 type = ChangeState
 Triggerall = 1
-trigger1 = command = "holddown"
-trigger1 = command = "b"
+trigger1 = root,command = "holddown"
+trigger1 = root,command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 911
 
 [State 200, 5BBB]
 type = ChangeState
 Triggerall = 1
-trigger1 = command = "holdback"
-trigger1 = command = "b"
+trigger1 = root,command = "holdback"
+trigger1 = root,command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 321
 
 [State 200, 5BBB]
 type = ChangeState
 Triggerall = 1
-trigger1 = command = "b"
+trigger1 = root,command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 301
 
@@ -1639,7 +1632,7 @@ stateno = 311
 pos = 10,0
 postype = p1    ;p2,front,back,left,right
 facing = 1
-keyctrl = 1
+keyctrl = 0
 ownpal = 1
 supermovetime = 0
 pausemovetime = 0
@@ -1884,7 +1877,7 @@ stateno = 321
 pos = 10,0
 postype = p1    ;p2,front,back,left,right
 facing = 1
-keyctrl = 1
+keyctrl = 0
 ownpal = 1
 supermovetime = 0
 pausemovetime = 0
@@ -1953,6 +1946,13 @@ value = 40
 type = PlayerPush
 trigger1 = 1
 value = 1
+
+[State 0, FatalCounter]
+type = MapSet
+trigger1 = 1
+map = "fatal"
+value = 1
+ignorehitpause = 1
 
 [State 0, Helper Guarded]
 type = RootMapSet
@@ -2057,6 +2057,7 @@ type = HitDef
 getpower = 0
 triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
+triggerall = enemy,movetype != A
 trigger1 = 1
 attr = C, NA
 animtype  = Medium
@@ -2078,6 +2079,39 @@ ground.velocity = -2,-5
 air.velocity = -2,-5
 Fall = 1
 fall.recovertime = 50 + ifelse(enemy,movetype = A, 7,0)
+Envshake.time = 20
+guard.cornerpush.veloff = -10
+airguard.cornerpush.veloff = -10
+;ground.cornerpush.veloff = -5
+;air.cornerpush.veloff = -5
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = root,map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+triggerall = enemy,movetype = A
+trigger1 = 1
+attr = C, NA
+animtype  = Medium
+damage    = 70
+hitflag = MAFD
+guardflag = MA
+pausetime = 24,24
+guard.pausetime = 12,6
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,11
+ground.type = Low
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+guard.hittime = 10
+ground.velocity = -1,-8
+air.velocity = -1,-7
+Fall = 1
+fall.recover = 0
 Envshake.time = 20
 guard.cornerpush.veloff = -10
 airguard.cornerpush.veloff = -10
@@ -5940,9 +5974,10 @@ ground.velocity = -3, 8
 air.velocity = -3, 8
 Fall = 1
 fall.recover = 0
-fall.yvelocity = -0.5
+fall.yvelocity = ifelse(enemy,movetype = A,-2,-5)
 Envshake.time = 10
 Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
+Envshake.time = 10 + ifelse(enemy,movetype = A, 10,0)
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -6054,7 +6089,7 @@ stateno = 612
 pos = 0,-pos y
 postype = p1    ;p2,front,back,left,right
 facing = 1
-keyctrl = 1
+keyctrl = 0
 ownpal = 1
 supermovetime = 0
 pausemovetime = 0
