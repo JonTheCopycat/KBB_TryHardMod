@@ -1055,7 +1055,7 @@ ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -4, -3
 air.velocity = -3,-3
 Fall = 0
-Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 25 + ifelse(enemy,movetype = A, 7,0)
 Envshake.time = 10
 
 guard.cornerpush.veloff = -5

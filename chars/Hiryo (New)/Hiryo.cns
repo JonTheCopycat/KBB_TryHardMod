@@ -1181,8 +1181,8 @@ animtype  = Light
 damage    = 25
 hitflag = MAFD
 guardflag = MAF
-guard.pausetime = 10,12
-pausetime = 10,16
+guard.pausetime = 6,6
+pausetime = 10,12
 ground.hittime  = 25 + ifelse(enemy,movetype = A || movecountered, 7,0)
 air.hittime  = 25 + ifelse(enemy,movetype = A || movecountered, 7,0)
 sparkno = ifelse(P2bodyDist X > 130, 2, 0)
@@ -1776,8 +1776,8 @@ value = 3
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = 0
-x = 4
-y = -4.2
+x = 4.5
+y = -4.25
 
 ;[State 0, VelAdd]
 ;type = VelSet
@@ -1786,18 +1786,18 @@ y = -4.2
 
 [State 0, VelAdd]
 type = VelAdd
-trigger1 = time < 16 || time > 30 || !movecontact
+trigger1 = 1
 y = 0.38
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = movecontact = 1 && AnimElem = 4
-y = -0.5
+trigger1 = movecontact = 1
+y = 0.1
 
-[State 0, VelSet]
-type = VelSet
-trigger1 = movecontact = 1 && AnimElem = 9
-y = -0.2
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = movecontact = 1 && AnimElem = 10, >= 0
+;y = -0.5
 
 
 [State 200, 1]
@@ -3115,27 +3115,27 @@ value = 4
 
 [State 0, VelSet]
 type = Turn
-trigger1 = AnimElem = 2, = 2
+trigger1 = AnimElem = 3
 
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = AnimElem = 2, = 2
+trigger1 = AnimElem = 3
 x = -75
 
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 4
 x = -4
 
 [State 0, SOUND EFFECT ]
 type = PlaySnd
-trigger1 = Animelem = 3
+trigger1 = Animelem = 4
 value = S10,0
 volumescale = 80
 [State 0, Dash]
 type = PlaySnd
-trigger1 = Animelem = 4
+trigger1 = Animelem = 5
 value = S404,0
 volumescale = 80
 
