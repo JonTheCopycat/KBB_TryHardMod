@@ -2875,6 +2875,13 @@ trigger1 = AnimElem = 4
 value = S1,10
 volume = 120
 
+[State 650, ChangeState] ; If Heat is available, consumes it to switch to a stronger version of the move
+type = ChangeState
+triggerall = time = 5
+trigger1 = map(heat) >= 100
+trigger1 = command != "s" && command != "hold_s"; Holding S prevents this from consuming heat
+value = 491
+
 [State 0, Burning MapAdd]
 type = MapAdd
 trigger1 = movecontact && !movecountered
@@ -3013,6 +3020,234 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 50
 ctrl = 1
+
+
+
+
+;===============================================================================
+; Wavedash C DP Mini Boosted
+;-------------------------------------------------------------------------------
+[Statedef 491]
+type    = S
+movetype = A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 491
+sprpriority = 2
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 200, Damage Proration]
+type = VarAdd
+trigger1 = movehit ;If the Attack Hits...
+v = 11 ;This variable will be the one the proration points will be added to.
+ignorehitpause = 1 ;This block of code will ignore hitpause.
+persistent = 0 ;This will only trigger once.
+value = 8 ;...Add this number of proration points.
+
+[State 200, Woosh] 
+type = PlaySnd
+trigger1 = AnimElem = 4
+value = S1,10
+volume = 120
+
+[State 0, Burning MapAdd]
+type = MapAdd
+trigger1 = movecontact && !movecountered
+map = "burn"
+value = 1
+persistent = 0
+redirectid = enemynear,id
+
+[State 0, BurnStack MapAdd]
+type = MapAdd
+trigger1 = movecontact && !movecountered
+map = "burnStack"
+value = 1
+persistent = 0
+
+[State 0, Helper] ; Activates with Heat
+type = Helper
+trigger1 = AnimElem = 1
+trigger1 = map(heat) >= 100
+helpertype = normal ;player
+name = "Flare Boom"
+ID = 626
+stateno = 626
+pos = -20,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 0
+supermovetime = 0
+pausemovetime = 0
+inherentjuggle = 2
+
+[State 490, VelSet]
+type = VelSet
+trigger1 = AnimElem = 3 || AnimElem = 7
+x = 1
+y = -4
+
+[State 490, VelSet]
+type = VelSet
+trigger1 = AnimElem = 12
+x = 2
+y = -6
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = AnimElem = 3
+statetype = A
+movetype = A
+physics = A
+
+[State 450, NotHitBy]
+type = notHitBy
+trigger1 = time = [0, 5)
+value = SA
+time = 1
+
+[State 220, Attack] ; MultiHits
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100
+trigger1 = AnimElem = 3 || AnimElem = 7
+attr = C, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAF
+guardflag = MAFD
+pausetime = 5,5
+guard.pausetime = 5, 5
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,1
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12 + ifelse(enemy,movetype = A, 7, 0)
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7, 0)
+ground.velocity = -1,-4
+air.velocity = -1,-4
+Fall = 0
+fall.recover = 1
+Envshake.time = 10
+Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7, 0)
+guard.cornerpush.veloff = -2
+airguard.cornerpush.veloff = -2
+
+[State 220, Attack] ; MultiHits
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100
+trigger1 = AnimElem = 11 || AnimElem = 12 || AnimElem = 13
+attr = C, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAF
+guardflag = MAFD
+pausetime = 10,10
+guard.pausetime = 15, 15
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,1
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12 + ifelse(enemy,movetype = A, 7, 0)
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7, 0)
+ground.velocity = -1,-2
+air.velocity = -1,-2
+Fall = 0
+fall.recover = 1
+Envshake.time = 10
+Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7, 0)
+guard.cornerpush.veloff = -2
+airguard.cornerpush.veloff = -2
+
+[State 220, Attack] ; Final Hit
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100
+trigger1 = AnimElem = 14
+attr = C, NA
+animtype  = Medium
+damage    = 30
+hitflag = MAF
+guardflag = MAFD
+pausetime = 15,15
+guard.pausetime = 15, 15
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 12 + ifelse(enemy,movetype = A, 7, 0)
+ground.hittime  = 25 + ifelse(enemy,movetype = A, 7, 0)
+ground.velocity = -3,-8
+air.velocity = -3,-7
+Fall = 1
+fall.recover = 1
+Envshake.time = 15
+Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7, 0)
+guard.cornerpush.veloff = -2
+airguard.cornerpush.veloff = -2
+
+[State 200, SPECIAL CANCEL]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = power >= 1000
+trigger1 = command = "SPECIAL 2"
+value = 22000
+
+[State 200, SPECIAL CANCEL]
+type = ChangeState
+Triggerall = movehit
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
+[State 200, 2C]
+type = ChangeState
+Triggerall = movehit
+Triggerall = power >= 200
+triggerall = numhelper(3500) = 0
+trigger1 = command = "holddown"
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 650
+
+[State 200, Jumping C Cancel]
+type = ChangeState
+Triggerall = movehit
+triggerall = numhelper(3500) = 0
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 620
+
+[State 610, Air Jump Cancel]
+type = ChangeState
+triggerall = movehit
+trigger1 = command = "holdup" && var(3) = 0 
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && movecontact && var(3) = 0 
+value = 45
+ctrl = 1
+
+[State 610, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
 
 
 
@@ -3248,14 +3483,6 @@ ownpal = 0
 supermovetime = 0
 pausemovetime = 0
 inheritJuggle = 1
-
-[State 0, Active Charge Cancel]
-type = ChangeState
-triggerall = time >= 18
-triggerall = helper(2006),movecontact
-triggerall = numhelper(3500) = 0
-trigger1 = command = "s"
-value = 505
 
 [State 200, SPECIAL CANCEL]
 type = ChangeState
@@ -3620,7 +3847,7 @@ volume = 100
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = [5, 20]
-x = 3
+x = 3.5
 y = 0
 
 [State 2060, Var Reset]
@@ -3657,15 +3884,6 @@ Envshake.time = 10
 Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7, 0)
 guard.cornerpush.veloff = -2
 airguard.cornerpush.veloff = -2
-
-
-[State 0, Active Charge Cancel]
-type = ChangeState
-triggerall = time >= 18
-triggerall = movecontact
-triggerall = numhelper(3500) = 0
-trigger1 = command = "s"
-value = 505
 
 [State 200, SPECIAL CANCEL]
 type = ChangeState
@@ -3748,6 +3966,28 @@ ignorehitpause = 1 ;This block of code will ignore hitpause.
 persistent = 0 ;This will only trigger once.
 value = 5 ;...Add this number of proration points.
 
+[State 0, Burning MapAdd]
+type = MapAdd
+trigger1 = movecontact && !movecountered
+map = "burn"
+value = 1
+persistent = 0
+redirectid = enemynear,id
+
+[State 0, BurnStack MapAdd]
+type = MapAdd
+trigger1 = movecontact && !movecountered
+map = "burnStack"
+value = 1
+persistent = 0
+
+[State 650, ChangeState] ; If Heat is available, consumes it to switch to a stronger version of the move
+type = ChangeState
+triggerall = time = 5
+trigger1 = map(heat) >= 100
+trigger1 = command != "s" && command != "hold_s"; Holding S prevents this from consuming heat
+value = 2031
+
 [State 200, Woosh] 
 type = PlaySnd
 trigger1 = AnimElem = 4
@@ -3757,13 +3997,30 @@ volume = 100
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = 0
-x = 3
+x = 2.5
 y = -5
 
 [State 0, VelAdd]
 type = VelAdd
-trigger1 = 1 
-y = 0.38
+trigger1 = AnimElem = 5, < 0
+y = 0.44
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 5
+x = 2
+y = 0
+
+[State 0, VelSet]
+type = PosSet
+trigger1 = AnimElem = 5
+y = 0
+
+[State 0, VelSet]
+type = StateTypeSet
+trigger1 = AnimElem = 5
+statetype = S
+physics = S
 
 [State 220, Attack] ; Normal Hit
 type = HitDef
@@ -3772,7 +4029,7 @@ triggerall = map(juggle) < 100
 trigger1 = !movecontact
 attr = C, NA
 animtype  = Medium
-damage    = 25
+damage    = 40
 hitflag = MAF
 guardflag = HAF
 pausetime = 10,10
@@ -3794,27 +4051,198 @@ Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7, 0)
 guard.cornerpush.veloff = -2
 airguard.cornerpush.veloff = -2
 
-[State 200, Cancel into Instant Air Dash]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "s"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 66
-
-[State 200, Cancel into j.C]
+[State 0, Active Charge Cancel]
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
-trigger1 = command = "c"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 620
+trigger1 = command = "s"
+value = 505
+
+[State 200, SPECIAL CANCEL]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(21500) = 0; Can't use while another 236a is already out
+triggerall = numhelper(21501) = 0; Can't use while another 236a is already out
+triggerall = power >= 1000
+triggerall = movecontact
+trigger1 = command = "SPECIAL 1"
+value = 21000
+
+[State 200, SPECIAL CANCEL]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+value = 23000
 
 [State 200, End]
 type = ChangeState
-trigger1 = pos Y >= 0 && Vel Y > 0
-trigger2 = animtime = 0
-value = 50
+trigger1 = animtime = 0
+value = 0
 ctrl = 1
+
+; Wavedash C B Final Boosted
+;-------------------------------------------------------------------------------
+[Statedef 2031]
+type    = A
+movetype = A
+physics = N
+juggle  = 1
+ctrl = 0
+anim = 2031
+poweradd = 0
+sprpriority = 2
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 200, Damage Proration]
+type = VarAdd
+trigger1 = movehit ;If the Attack Hits...
+v = 11 ;This variable will be the one the proration points will be added to.
+ignorehitpause = 1 ;This block of code will ignore hitpause.
+persistent = 0 ;This will only trigger once.
+value = 5 ;...Add this number of proration points.
+
+[State 0, Helper] ; Activates with Heat
+type = Helper
+trigger1 = AnimElem = 1
+trigger1 = map(heat) >= 100
+helpertype = normal ;player
+name = "Flare Boom"
+ID = 626
+stateno = 626
+pos = -20,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 0
+supermovetime = 0
+pausemovetime = 0
+inherentjuggle = 2
+
+[State 0, Burning MapAdd]
+type = MapAdd
+trigger1 = movecontact && !movecountered
+map = "burn"
+value = 1
+persistent = 0
+redirectid = enemynear,id
+
+[State 0, BurnStack MapAdd]
+type = MapAdd
+trigger1 = movecontact && !movecountered
+map = "burnStack"
+value = 1
+persistent = 0
+
+[State 200, Woosh] 
+type = PlaySnd
+trigger1 = AnimElem = 4
+value = 1,0
+volume = 100
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time = 0
+x = 1
+y = -5
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = AnimElem = 4, < 0
+y = 0.44
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 4
+x = 4
+y = 0
+
+[State 0, VelSet]
+type = PosSet
+trigger1 = AnimElem = 4
+y = 0
+
+[State 0, VelSet]
+type = StateTypeSet
+trigger1 = AnimElem = 5
+statetype = S
+physics = S
+
+[State 220, Attack] ; Normal Hit
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100
+trigger1 = !movecontact
+attr = C, NA
+animtype  = Medium
+damage    = 60
+hitflag = MAF
+guardflag = HAF
+pausetime = 18,18
+guard.pausetime = 12, 18
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 12 + ifelse(enemy,movetype = A, 7, 0)
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7, 0)
+ground.velocity = -3,8
+air.velocity = -3,8
+guard.velocity = -5
+Fall = 1
+fall.recover = 0
+fall.yvelocity = -8
+Envshake.time = 20
+guard.cornerpush.veloff = -2
+airguard.cornerpush.veloff = -2
+
+[State 0, Consume Heat]
+type = MapAdd
+trigger1 = time = 0
+map = "heat"
+value = -100
+persistent = 0
+
+[State 0, Active Charge Cancel]
+type = ChangeState
+triggerall = movecontact
+triggerall = numhelper(3500) = 0
+trigger1 = command = "s"
+value = 505
+
+[State 200, SPECIAL CANCEL]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(21500) = 0; Can't use while another 236a is already out
+triggerall = numhelper(21501) = 0; Can't use while another 236a is already out
+triggerall = power >= 1000
+triggerall = movecontact
+trigger1 = command = "SPECIAL 1"
+value = 21000
+
+[State 200, SPECIAL CANCEL]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+value = 23000
+
+[State 200, End]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
 
 ; Wavedash C C
 ;-------------------------------------------------------------------------------
@@ -3981,7 +4409,7 @@ volume = 100
 [State 200, VelSet]
 type = VelSet
 trigger1 = time = [5, 13]
-x = 2.5
+x = 3
 
 [State 2060, Var Reset]
 type = VarAdd
@@ -4017,13 +4445,6 @@ Envshake.time = 10
 Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7, 0)
 guard.cornerpush.veloff = -2
 airguard.cornerpush.veloff = -2
-
-[State 0, Active Charge Cancel]
-type = ChangeState
-triggerall = movecontact
-triggerall = numhelper(3500) = 0
-trigger1 = command = "s"
-value = 505
 
 [State 200, SPECIAL CANCEL]
 type = ChangeState
@@ -5394,13 +5815,6 @@ map = "juggle"
 value = 10
 persistent = 0
 
-[State 0, FatalCounter]
-type = MapSet
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
-
 [State 0, Damage Proration]
 type = VarAdd
 trigger1 = movehit
@@ -5423,24 +5837,19 @@ trigger1 = AnimElem = 1
 value = S1,2
 volumescale = 50
 
-[State 0, VelSet]
-type = VelSet
-trigger1 = movecontact = 1
-y = -1
-x = 2
-
-[State 200, 1]
+[State 200, 1 Hard KD]
 type = HitDef
 getpower = 0
 triggerall = enemy,movetype != A
 triggerall = !movecontact
-triggerall = map(juggle) < 100
+triggerall = map(juggle) < 100 
+triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
 attr = A, NA
 animtype  = Medium
 damage    = 20
 guardflag = HA
-pausetime = 10,16
+pausetime = 18,16
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -5449,40 +5858,42 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2, 8
-air.velocity = -2,8
+ground.velocity = -3, 6
+air.velocity = -3,6
 Fall = 1
 Envshake.time = 15
 Fall.recover = 0
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
+p2stateno = 1000
+p2getp1state = 0
 
-[State 200, 1 Fatal]
+[State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = enemy,movetype = A
+triggerall = enemy,movetype != A
 triggerall = !movecontact
-triggerall = map(juggle) < 100
+triggerall = map(juggle) < 100 
+triggerall = enemy,map(hitOverride) != 0
 trigger1 = 1
 attr = A, NA
 animtype  = Medium
-damage    = 60
+damage    = 20
 guardflag = HA
-pausetime = 30,32
+pausetime = 18,16
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = 8,1
-guardsound = 6,10
+hitsound   = 5,4
+guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2, 8
-air.velocity = -2,8
+ground.velocity = -3, 6
+air.velocity = -3,6
 Fall = 1
 Envshake.time = 15
 Fall.recover = 0
-Fall.yvelocity = -8
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
