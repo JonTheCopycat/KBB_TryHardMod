@@ -1,0 +1,1616 @@
+#===============================================================================
+#Custom Hurtstates.
+#===============================================================================
+#For commenting on most states, please refer to data/old/HurtStates.CNS.
+
+
+
+#===============================================================================
+#Functions
+#===============================================================================
+[Function KBB_DeathEffect()]
+if numhelper(666) = 0 {
+    if roundstate = 2 || roundstate = 3 {
+        if life = 0 {
+            Helper {
+                helpertype: normal;
+                name: "Death Sound";
+                ID: 666;
+                stateno: 666;
+                pos: 9999,9999;
+                postype: p1;
+                facing: 1;
+                keyctrl: 0;
+                ownpal: 1;
+                supermovetime: 9999;
+                pausemovetime: 9999
+            }
+        }
+    }
+}
+
+#copied over from common1.cns.zss
+[Function cGetHitShaking(lAnim)]
+if time = 0 {
+	if getHitVar(animType) = [4, 5] &&
+		selfAnimExist(5051 + getHitVar(animType) - 4) {
+		changeAnim{value: 5051 + getHitVar(animType) - 4}
+	} else if getHitVar(animType) = [3, 5] {
+		changeAnim{value: 5030}
+	} else {
+		changeAnim{value: $lAnim + getHitVar(animType)}
+	}
+} else {
+	changeAnim{value: anim}
+}
+
+[Function cGetHitKnockedBack(lAnim, nextState)]
+if time = 0 {
+	hitVelSet{x: 1}
+}
+if animTime = 0 {
+	changeAnim{value: $lAnim + getHitVar(animType)}
+}
+if time >= getHitVar(slideTime) {
+	velMul{x: .6}
+}
+if hitOver {
+	velSet{x: 0}
+	DefenceMulSet{value: 1}
+	changeState{value: $nextState; ctrl: 1}
+}
+
+[Function cHitGroundEffect(vely)]
+if majorVersion = 1 {
+	explod{
+		anim: F(60 + ($vely > const240p(5)) + ($vely > const240p(14)));
+		posType: none; #p1
+		pos: pos x + cameraPos x, 0; #0, 0
+		facing: facing;
+		sprPriority: ifElse($vely <= const240p(14), -10, 10);
+	}
+} else {
+	gameMakeAnim{
+		value: 60 + ($vely > 5) + ($vely > 14);
+		pos: 0, 0;
+		under: $vely <= 14;
+	}
+}
+playSnd{value: F7, ($vely > const240p(5)) + ($vely > const240p(14))}
+
+[Function cSelfAnimExistAddMod10(cond, base) ret]
+let ret = cond($cond && selfAnimExist($base + anim % 10),
+	$base + anim % 10, $base);
+
+#===============================================================================
+#Hard Knockdown - Shaking
+#===============================================================================
+[Statedef 1000;
+ type: A;
+ movetype: H;
+ physics: N;
+ velset: 0,0;]
+
+if hitover = 0 {call KBB_DeathEffect();}
+ChangeAnim{value: 1025}
+if time > 0 {
+    ChangeAnim{value: anim}
+}
+
+if HitShakeOver{
+   ChangeState{value: 1001} 
+}
+
+#===============================================================================
+#Hard Knockdown - Knocked Away
+#===============================================================================
+[Statedef 1001;
+ type: A;
+ movetype: H;
+ physics: N;
+ ctrl: 0;]
+
+if time = 0 {
+    ChangeAnim{value: 1025}
+    HitVelSet{x: 1; y: 1}
+}
+VelAdd{y: GetHitVar(yaccel)}
+
+if HitOver || (Vel Y > 0 && Pos Y >= Const(movement.air.gethit.groundlevel)) {
+    ChangeState{value: 1002} 
+}
+
+if AnimTime = 0 {
+    ChangeState{value: 1002} 
+}
+
+#===============================================================================
+#Hard Knockdown - Falling
+#===============================================================================
+[Statedef 1002;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: GetHitVar(yaccel)}
+
+if (AnimTime = 0 && Anim = 5035) || (Time = 0 && Anim != 5035 && (Anim != [5051, 5059]) && (Anim != [5061, 5069]) && Anim != 5090) {
+    ChangeAnim{value: 5050}
+}
+
+if anim = [5050,5059] && Vel Y >= ifelse(anim = 5050, Const720p(4), Const720p(-8)) && SelfAnimExist(anim+10) {
+    persistent(0) {
+        ChangeAnim{value: anim+10}
+    }
+}
+
+if Vel Y > 0 && (Pos Y >= cond((anim = [5051,5059]) || (anim = [5061,5069]), 0, Const(movement.air.gethit.groundlevel))) {
+    ChangeState{value: 1003}
+}
+
+#===============================================================================
+#Hard Knockdown - Hit Ground from Fall
+#===============================================================================
+[Statedef 1003;
+ type: L;
+ movetype: H;
+ physics: N;]
+
+if stateno = 1003 {
+    NotHitBy{value: SCA}
+}
+
+if (Time = 0 && GetHitVar(fall.yvel) = 0 && vel x < -1) {
+    Null{x: -1} #VelSet; 2004.04.14 behavior
+}
+
+if time = 0 {
+    FallEnvShake{}
+    sysvar(1) := floor(vel y);
+    if ((anim != [5051,5059]) && (anim != [5061,5069])) || (!SelfAnimExist(5100 + (anim % 10))) {
+        ChangeAnim{value: 5100}
+    } else { #if ((anim = [5051,5059]) || (anim = [5061,5069]) && SelfAnimExist(5100 + (anim % 10)))
+        ChangeAnim{value: 5100 + (anim % 10)}
+    }
+    PosSet{y: 0}
+    VelSet{y: 0}
+    VelMul{x: 0.75}
+    if GetHitVar(fall.yvel) = 0 {
+        ChangeState{value: 1005}
+    }
+}
+
+if time = 1 {
+    Explod{
+        anim: F(60 + (sysvar(1) > Const720p(20)) + (sysvar(1) > Const720p(56)));
+        postype: none;
+        pos: pos x + camerapos x, 0;
+        facing: facing;
+        sprpriority: cond(sysvar(1) <= Const720p(56), -10, 10)
+    }
+    PlaySnd{value: F7, (sysvar(1) > Const720p(20)) + (sysvar(1) > Const720p(56))}
+
+}
+
+if time = 3 {
+    HitFallDamage{}
+}
+
+call KBB_DeathEffect();
+PosFreeze{}
+
+if AnimElem = 1 {
+    PlaySnd{value: F7,1; volumescale: 100}
+}
+
+if AnimTime = 0 {
+    ChangeState{value: 1004}
+}
+
+#===============================================================================
+#Hard Knockdown - Bounce Off Ground
+#===============================================================================
+[Statedef 1004;
+ type: L;
+ movetype: H;
+ physics: N;]
+
+if stateno = 1004 {
+    NotHitBy{value: SCA}
+}
+
+VelAdd{y: Const(movement.down.bounce.yaccel)}
+
+if time = 0 {
+    if (anim != [5101,5109]) || (!SelfAnimExist(5160 + (anim % 10))) {
+        ChangeAnim{value: 5160}
+    } else {
+        ChangeAnim{value: 5160 + (anim % 10)}
+    }
+    HitFallVel{}
+    PosSet{y: Const(movement.down.bounce.offset.y)}
+    PosAdd{x: Const(movement.down.bounce.offset.x)}
+}
+
+if Vel Y > 0 && Pos Y >= Const(movement.down.bounce.groundlevel) {
+    ChangeState{value: 1005}
+}
+
+#===============================================================================
+#Hard Knockdown - Lying Down
+#===============================================================================
+[Statedef 1005;
+ type: L;
+ movetype: H;
+ physics: N;]
+
+if stateno = 1005 {
+    NotHitBy{value: SCA}
+}
+
+
+PosSet{y: 0}
+VelMul{x: 0.85}
+VelSet{x: 0; y: 0}
+ChangeAnim{value: 5110}
+
+if time = 0 {
+    HitFallDamage{}
+    FallEnvShake{}
+    PlaySnd{value: S3,3; volumescale: 100}
+    PosSet{y: 0} #lol this is redundant
+    if GetHitVar(fall.yvel) != 0 {
+        sysvar(1) := floor(vel y);
+    }
+    if !sysvar(0) {
+        Explod{
+            anim: F(60 + (sysvar(1) > Const720p(20)) + (sysvar(1) > Const720p(56)));
+            postype: none;
+            pos: pos x + camerapos x, 0;
+            facing: facing;
+            sprpriority: ifelse (sysvar(1) <= Const720p(56), -10, 10)
+        }
+    }
+    VelSet{y: 0} #redundant lmao
+    if SysVar(0) {
+        sysvar(0) := 0;
+    }
+    if alive {
+        ForceFeedback{time: 8;ampl: 240;waveform: sine}
+    } else {
+        ForceFeedback{time: 30;ampl: 200, 7, -.467;waveform: sine}
+    }
+}
+
+persistent(0) if abs(Vel x) < Const(movement.down.friction.threshold) {
+    VelSet{x: 0}
+}
+
+persistent(0) {call KBB_DeathEffect();}
+
+if !alive {
+    if AnimTime = 0 || SysVar(0) || Anim = [5110,5119] {
+        SelfState{value: 5150}
+    }
+}
+
+if alive {
+    if time >= const(data.liedown.time) {
+        SelfState{value: 5120}
+    }
+}
+
+#===============================================================================
+#Wallbounce - Shaking
+#===============================================================================
+[Statedef 1025;
+ type: A;
+ movetype: H;
+ physics: N;
+ velset: 0,0;]
+
+if hitover = 0 {call KBB_DeathEffect();}
+ChangeAnim{value: 1025}
+
+if HitShakeOver{
+   ChangeState{value: 1026} 
+}
+
+#===============================================================================
+#Wallbounce - Flying Through Air
+#===============================================================================
+[Statedef 1026;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: .25}
+
+if time = 0 {
+    VelSet{x: hitvel x; y: hitvel y}
+}
+
+if Pos y < -15 {
+    if BackEdgeBodyDist < 65 || FrontEdgeBodyDist < 65 {
+        ScreenBound{value: 1; movecamera: 0,1}
+    }
+    if BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20 {
+        ChangeState{value: 1027}
+    }
+}
+
+if (Vel y > 0) && (Pos y >= 0) {
+    SelfState{value: 1037}
+}
+
+#===============================================================================
+#Wallbounce - Hit Wall
+#===============================================================================
+[Statedef 1027;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+PosFreeze{}
+ScreenBound{value: 1; movecamera: 0,1}
+
+if (Time = 0) {
+    if (FrontEdgeBodyDist <= 30) {
+        Turn{}
+    }
+    PosAdd{x: 15 - BackEdgeBodyDist}
+    Explod{
+        anim: F72;
+        pos: 0, floor (screenpos y) - 50;
+        postype: back;
+        sprpriority: 3
+    }
+    ChangeAnim{value: 1027}
+    PlaySnd{value: F40,0}
+}
+
+if AnimTime = 0 {
+    ChangeState{value: 1028}
+}
+
+#===============================================================================
+#Wallbounce - Bounce off Wall
+#===============================================================================
+[Statedef 1028;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: .35}
+
+if time = 0 {
+    VelSet{x: 1.6; y: -6}
+    if !SelfAnimExist(5052) {
+        ChangeAnim{value: 5050}
+    } else {
+        ChangeAnim{value: 5052} #DiagUp
+    }
+}
+
+persistent(0) if Vel Y > -2 && Anim = 5050 && SelfAnimExist(5060) {
+    ChangeAnim{value: 5060}
+} else if Vel Y > -2 && Anim = 5052 && SelfAnimExist(5062) {
+    ChangeAnim{value: 5062}
+}
+
+if (Vel y > 0) && (Pos y >= 0) {
+    SelfState{value: 5100}
+}
+#===============================================================================
+#Wallsplat - Shaking
+#===============================================================================
+[Statedef 1030;
+ type: A;
+ movetype: H;
+ physics: N;
+ velset: 0,0;]
+
+if hitover = 0 {call KBB_DeathEffect();}
+ChangeAnim{value: 1025}
+
+if HitShakeOver{
+   ChangeState{value: 1031} 
+}
+
+#===============================================================================
+#Wallsplat - Flying Through Air
+#===============================================================================
+[Statedef 1031;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: GetHitVar(yaccel)}
+
+if time = 0 {
+    HitVelSet{x: 1; y: 1}
+}
+
+if Pos y < -15 {
+    if BackEdgeBodyDist < 65 || FrontEdgeBodyDist < 65 {
+        ScreenBound{value: 1; movecamera: 0,1}
+    }
+    if BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20 {
+        ChangeState{value: 1032}
+    }
+}
+
+if (Vel y > 0) && (Pos y >= 0) {
+    SelfState{value: cond(!HitFall, 52, 1037); ctrl: cond(!HitFall, 1, 0)}
+}
+
+#===============================================================================
+#Wallsplat - Hit Wall
+#===============================================================================
+[Statedef 1032;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+PosFreeze{}
+ScreenBound{value: 1; movecamera: 0,1}
+
+if (Time = 0) {
+    if (FrontEdgeBodyDist <= 30) {
+        Turn{}
+    }
+    PosAdd{x: 15 - BackEdgeBodyDist}
+    Explod{
+        anim: F72;
+        pos: 0, floor (screenpos y) - 50;
+        postype: back;
+        sprpriority: 3
+    }
+    ChangeAnim{value: 1027}
+    PlaySnd{value: F40,0}
+}
+
+if AnimTime = 0 {
+    ChangeState{value: 1033}
+}
+
+#===============================================================================
+#Wallsplat - Slide
+#===============================================================================
+[Statedef 1033;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+ScreenBound{value: 1; movecamera: 0,1}
+
+if time = 1 {
+    VelSet{x: 0; y: -1}
+}
+
+if time >= 30 {
+    VelAdd{y: .25}
+}
+
+if time > 75 {
+    SelfState{value: cond(!HitFall, 50, 5050); ctrl: cond(!HitFall,1,0)}
+}
+
+
+if (Vel y > 0) && (Pos y >= 0) {
+    SelfState{value: cond(!HitFall, 52, 5100); ctrl: cond(!HitFall,1,0)}
+}
+
+#===============================================================================
+#Sliding Knockdown - Shaking
+#===============================================================================
+[Statedef 1035;
+ type: A;
+ movetype: H;
+ physics: N;
+ velset: 0,0;]
+
+if hitover = 0 {call KBB_DeathEffect();}
+ChangeAnim{value: 1025}
+ScreenBound{value: 1; movecamera: 0,0}
+
+if HitShakeOver{
+   ChangeState{value: 1036} 
+}
+
+#===============================================================================
+#Sliding Knockdown - Fly
+#===============================================================================
+[Statedef 1036;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+ScreenBound{value: 1; movecamera: 0,0}
+
+VelAdd{y: GetHitVar(yaccel)}
+
+if time = 0 {
+    HitVelSet{x: 1; y: 1}
+}
+
+if (Vel y > 0) && (Pos y >= 0) {
+   ChangeState{value: 1037} 
+}
+
+#===============================================================================
+#Sliding Knockdown - Sliding
+#===============================================================================
+[Statedef 1037;
+ type: L;
+ movetype: H;
+ physics: N;
+ anim: 5110;]
+
+VelAdd{x: cond(vel x < 0,.08,-0.8)}
+
+if time = 0 {
+    PlaySnd{value: F40,1; volume: 100}
+    if !GetHitVar(fall.envshake.time) {
+        EnvShake{time: 40; freq: 60; ampl: -4; phase: 90}
+    } else {
+        FallEnvShake{}
+    }
+    PosSet{y:0}
+    VelSet{x: cond(vel x < 0,-5,5); y: 0}
+    if vel X > 0 {
+        Turn{}
+    }
+
+}
+
+if vel X = (-7, -3) && numexplod(141) = 0 {
+    Explod {
+        anim: F141;
+        ID: 141;
+        pos: 21,0;
+        postype: p1;
+        facing: 1;
+        vfacing: 1;
+        bindtime: -1;
+        vel: 0,0;
+        accel: 0,0;
+        random: 0,0;
+        removetime: -1;
+        pausemovetime: 0;
+        scale: -7,7;
+        sprpriority: 0;
+        ontop: 1;
+        shadow: 0,0,0;
+        ownpal: 0;
+        removeongethit: 0
+    }
+}
+
+if vel x > -3 && vel x != 0 {
+    RemoveExplod{id: 141}
+}
+
+if vel x > -3 && vel x != 0 && numexplod(140) = 0 {
+    Explod{
+        anim: F140;
+        ID: 140;
+        pos: 21,0;
+        postype: p1;
+        facing: 1;
+        vfacing: 1;
+        bindtime: -1;
+        vel: 0,0;
+        accel: 0,0;
+        random: 0,0;
+        removetime: -1;
+        pausemovetime: 0;
+        scale: -7,7;
+        sprpriority: 0;
+        ontop: 1;
+        shadow: 0,0,0;
+        ownpal: 0;
+        removeongethit: 0;
+
+    }
+}
+
+persistent(0) if abs(Vel x) < Const(movement.down.friction.threshold) {
+    VelSet{x: 0}
+}
+
+if (vel X = 0 || time >= 120) {
+    if (life > 0 && alive) {
+        ChangeState{value: 5120; ctrl: 0}
+    } else {
+        ChangeState{value: 5150; ctrl: 0}
+    }
+}
+
+#===============================================================================
+#Camera Disable - Shaking
+#===============================================================================
+[Statedef 1040;
+ type: A;
+ movetype: H;
+ physics: N;
+ velset: 0,0;]
+
+if hitover = 0 {call KBB_DeathEffect();}
+ScreenBound{value: 0; movecamera: 0,0}
+
+call cGetHitShaking(ifElse(getHitVar(airType) = 1, 5000, 5010));
+
+if hitShakeOver {
+	changeState{value: 1041}
+}
+
+if anim = 5000 || anim = 5010 {
+	forceFeedback{time: 6; waveform: square}
+} else if anim = 5001 || anim = 5011 {
+	forceFeedback{time: 8; waveform: sinesquare; ampl: 110,-1,-.3}
+} else if anim = 5012 || anim = 5002 || anim = 5030 || anim = [5051,5059] {
+	forceFeedback{time: 15; waveform: sinesquare; ampl: 140}
+}
+
+#===============================================================================
+#Camera Disable - Fly
+#===============================================================================
+[Statedef 1041;
+ type: A;
+ movetype: H;
+ physics: N;
+ ctrl: 0;]
+
+ScreenBound{value: 0; movecamera: 0,0}
+
+if majorVersion = 1 && anim != [5000, 5199] && selfAnimExist(5030) {
+	changeAnim{value: 5030}
+}
+if time = 0 {
+	hitVelSet{x: 1; y: 1}
+} else {
+	velAdd{y: getHitVar(yAccel)}
+}
+if hitOver || vel y > 0 && pos y >= const(movement.air.gethit.groundlevel) {
+    MapSet{map: "defence";value: 0}
+	if hitFall {
+		changeState{value: 1043}
+	} else {
+		selfState{value: 5040}
+	}
+}
+if animTime = 0 {
+	changeState{value: 1042}
+}
+
+#===============================================================================
+#Camera Disable - Transition
+#===============================================================================
+[Statedef 1042;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+ScreenBound{value: 0; movecamera: 0,0}
+
+if time = 0 && selfAnimExist(5035) && anim != [5051, 5059] && anim != 5090 {
+	changeAnim{value: 5035}
+}
+if time > 0 {
+	velAdd{y: getHitVar(yAccel)}
+}
+if hitOver || animTime = 0 ||
+	vel y > 0 && pos y >= const(movement.air.gethit.groundlevel) ||
+	time = 0 && anim != 5035 {
+	if hitFall {
+		changeState{value: 1043}
+	} else {
+		selfState{value: 5040}
+	}
+}
+
+#===============================================================================
+#Camera Disable - Falling
+#===============================================================================
+[Statedef 1043;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+ScreenBound{value: 0; movecamera: 0,0}
+
+if animTime = 0 && anim = 5035 || time = 0 && anim != 5035 &&
+	anim != [5051, 5059] && anim != [5061, 5069] && anim != 5090 {
+	changeAnim{value: 5050}
+}
+persistent(0) if anim = [5050, 5059] && vel y >= ifElse(anim = 5050,
+	const240p(1), const240p(-2)) && selfAnimExist(anim + 10) {
+	changeAnim{value: anim + 10}
+}
+if time > 0 {
+	velAdd{y: getHitVar(yAccel)}
+}
+if vel y > 0 && pos y >= cond(anim = [5051, 5059] || anim = [5061, 5069], 0,
+	ifElse(majorVersion = 1, const(movement.air.gethit.groundlevel), 25)) {
+	changeState{value: 1045}
+}
+
+#===============================================================================
+#Camera Disable - Hit Ground
+#===============================================================================
+[Statedef 1045;
+ type: L;
+ movetype: H;
+ physics: N;]
+
+AssertSpecial{flag: GlobalNoShadow}
+ScreenBound{value: 0; movecamera: 0,0}
+
+if time = 0 {
+	if majorVersion != 1 && getHitVar(fall.yVel) = 0 && vel x > 1 {
+		velSet{x: 1}
+	}
+	fallEnvShake{}
+	sysVar(1) := floor(vel y);
+	let a = call cSelfAnimExistAddMod10(anim = [5051, 5059] ||
+		anim = [5061, 5069], 5100);
+	changeAnim{value: $a}
+	posSet{y: 0}
+	velSet{y: 0}
+	velMul{x: .75}
+	if getHitVar(fall.yVel) = 0 {
+		selfState{value: 5110}
+	}
+} else if time = 1 {
+	call cHitGroundEffect(sysVar(1));
+} else if time = 3 {
+	hitFallDamage{}
+}
+posFreeze{}
+if animTime = 0 {
+	changeState{value: 1046}
+}
+if time = 0 {
+	forceFeedback{waveform: sinesquare; ampl: 128,-3,-.2,.005; time: 20}
+}
+
+#===============================================================================
+#Camera Disable - Bounce
+#===============================================================================
+[Statedef 1046;
+ type: L;
+ movetype: H;
+ physics: N;]
+
+AssertSpecial{flag: GlobalNoShadow}
+ScreenBound{value: 0; movecamera: 0,0}
+
+if time = 0 {
+	let a = call cSelfAnimExistAddMod10(anim = [5101, 5109], 5160);
+	changeAnim{value: $a}
+	hitFallVel{}
+	posSet{y: const(movement.down.bounce.offset.y)}
+	posAdd{x: const(movement.down.bounce.offset.x)}
+}
+if time > 0 {
+	velAdd{y: const(movement.down.bounce.yAccel)}
+}
+if vel y > 0 && pos y >= const(movement.down.bounce.groundlevel) {
+	selfState{value: 5110}
+}
+
+#===============================================================================
+#Cornerbounce - Shaking
+#===============================================================================
+[Statedef 1050;
+ type: A;
+ movetype: H;
+ physics: N;
+ velset: 0,0;]
+
+if hitover = 0 {call KBB_DeathEffect();}
+ChangeAnim{value: 1025}
+
+if HitShakeOver{
+   ChangeState{value: 1051} 
+}
+
+#===============================================================================
+#Cornerbounce - Flying
+#===============================================================================
+[Statedef 1051;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: GetHitVar(yaccel)}
+
+if time = 0 {
+    HitVelSet{x: 1; y: 1}
+}
+
+if Pos y < -15 {
+    if StageFrontEdge < 65 || StageBackEdge < 65 {
+        ScreenBound{value: 1; movecamera: 0,1}
+    }
+    if StageFrontEdge <= 20 || StageBackEdge <= 20 {
+        ChangeState{value: 1027}
+    }
+}
+
+if (Vel y > 0) && (Pos y >= 0) {
+    SelfState{value: 1037}
+}
+
+#===============================================================================
+#Pinball Horizontal (3x) - Shaking
+#===============================================================================
+[Statedef 1060;
+ type: A;
+ movetype: H;
+ physics: N;
+ velset: 0,0;]
+
+if hitover = 0 {call KBB_DeathEffect();}
+ChangeAnim{value: 1025}
+
+if HitShakeOver{
+   ChangeState{value: 1061} 
+}
+
+#===============================================================================
+#Pinball Horizontal (3x) - Initial Flying
+#===============================================================================
+[Statedef 1061;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: GetHitVar(yaccel)}
+
+
+if time = 0 {
+    HitVelSet{x: 1; y: 1}
+}
+
+if Pos y < -15 {
+    if BackEdgeBodyDist < 65 || FrontEdgeBodyDist < 65 {
+        ScreenBound{value: 1; movecamera: 0,1}
+    }
+    if BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20 {
+        ChangeState{value: 1062}
+    }
+}
+
+if (Vel y > 0) && (Pos y >= 0) {
+    SelfState{value: 1037}
+}
+
+#===============================================================================
+#Pinball Horizontal (3x) - Hit Wall (1)
+#===============================================================================
+[Statedef 1062;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+PosFreeze{}
+ScreenBound{value: 1; movecamera: 0,1}
+
+if (Time = 0) {
+    if (FrontEdgeBodyDist <= 30) {
+        Turn{}
+    }
+    PosAdd{x: 15 - BackEdgeBodyDist}
+    Explod{
+        anim: F72;
+        pos: 0, floor (screenpos y) - 50;
+        postype: back;
+        sprpriority: 3
+    }
+    ChangeAnim{value: 1027}
+    PlaySnd{value: F40,0}
+}
+
+if AnimTime = -5 {
+    ChangeState{value: 1063}
+}
+
+#===============================================================================
+#Pinball Horizontal (3x) - Bounce off Wall (1)
+#===============================================================================
+[Statedef 1063;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: gethitvar(yaccel)}
+
+if time = 0 {
+    VelSet{x: 36; y: -6}
+    # if !SelfAnimExist(5052) {
+    #     ChangeAnim{value: 5050}
+    # } else {
+    #     ChangeAnim{value: 5052} #DiagUp
+    # }
+}
+
+if Pos y < -15 {
+    if BackEdgeBodyDist < 65 || FrontEdgeBodyDist < 65 {
+        ScreenBound{value: 1; movecamera: 0,1}
+    }
+    if (BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) && time > 15 {
+        ChangeState{value: 1064}
+    }
+}
+
+if (Vel y > 0) && (Pos y >= 0) {
+    SelfState{value: 5100}
+}
+
+#===============================================================================
+#Pinball Horizontal (3x) - Hit Wall (2)
+#===============================================================================
+[Statedef 1064;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+PosFreeze{}
+ScreenBound{value: 1; movecamera: 0,1}
+
+if (Time = 0) {
+    if (FrontEdgeBodyDist <= 30) {
+        Turn{}
+    }
+    PosAdd{x: 15 - BackEdgeBodyDist}
+    Explod{
+        anim: F72;
+        pos: 0, floor (screenpos y) - 50;
+        postype: back;
+        sprpriority: 3
+    }
+    ChangeAnim{value: 1027}
+    PlaySnd{value: F40,0}
+}
+
+if AnimTime = -5 {
+    ChangeState{value: 1065}
+}
+
+#===============================================================================
+#Pinball Horizontal (3x) - Bounce off Wall (2)
+#===============================================================================
+[Statedef 1065;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: gethitvar(yaccel)}
+
+if time = 0 {
+    VelSet{x: 18; y: -6}
+    # if !SelfAnimExist(5052) {
+    #     ChangeAnim{value: 5050}
+    # } else {
+    #     ChangeAnim{value: 5052} #DiagUp
+    # }
+}
+
+if Pos y < -15 {
+    if BackEdgeBodyDist < 65 || FrontEdgeBodyDist < 65 {
+        ScreenBound{value: 1; movecamera: 0,1}
+    }
+    if (BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) && time > 15 {
+        ChangeState{value: 1066}
+    }
+}
+
+if (Vel y > 0) && (Pos y >= 0) {
+    SelfState{value: 5100}
+}
+
+#===============================================================================
+#Pinball Horizontal (3x) - Hit Wall (3)/FINAL
+#===============================================================================
+[Statedef 1066;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+PosFreeze{}
+ScreenBound{value: 1; movecamera: 0,1}
+
+if (Time = 0) {
+    if (FrontEdgeBodyDist <= 30) {
+        Turn{}
+    }
+    PosAdd{x: 15 - BackEdgeBodyDist}
+    Explod{
+        anim: F72;
+        pos: 0, floor (screenpos y) - 50;
+        postype: back;
+        sprpriority: 3
+    }
+    ChangeAnim{value: 1027}
+    PlaySnd{value: F40,0}
+}
+
+if AnimTime = 0 {
+    ChangeState{value: 1067}
+}
+
+#===============================================================================
+#Pinball Horizontal (3x) - Bounce off Wall (3)/FINAL
+#===============================================================================
+[Statedef 1067;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: gethitvar(yaccel)}
+
+if time = 0 {
+    VelSet{x: 7; y: -5}
+    if !SelfAnimExist(5052) {
+        ChangeAnim{value: 5050}
+    } else {
+        ChangeAnim{value: 5052} #DiagUp
+    }
+}
+
+if (Vel y > 0) && (Pos y >= 0) {
+    SelfState{value: 1037}
+}
+
+#===============================================================================
+#Groundbounce Sliding Knockdown - Shaking
+#===============================================================================
+[Statedef 1070;
+ type: A;
+ movetype: H;
+ physics: N;
+ velset: 0,0;]
+
+if numhelper(666) = 0 {
+    if roundstate = 2 || roundstate = 3 {
+        if hitover = 0 {
+            if life = 0 {
+                Helper{
+                    helpertype: normal;
+                    name: "Death Sound";
+                    ID: 666;
+                    stateno: 666;
+                    pos: 9999,9999;
+                    postype: p1;
+                    facing: 1;
+                    keyctrl: 0;
+                    ownpal: 1;
+                    supermovetime: 9999;
+                    pausemovetime: 9999;
+                }
+            }
+        }
+    }
+}
+
+if hitover = 0 {call KBB_DeathEffect();}
+ChangeAnim{value: 1025}
+
+if HitShakeOver {
+   ChangeState{value: 1071} 
+}
+
+#===============================================================================
+#Groundbounce Sliding Knockdown - Fly
+#===============================================================================
+[Statedef 1071;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: GetHitVar(yaccel)}
+
+if time = 0 {
+    HitVelSet{x: 1; y: 1}
+    ChangeAnim{value: 1025}
+}
+
+if HitOver || (Vel Y > 0  && Pos Y >= Const(movement.air.gethit.groundlevel)) {
+   ChangeState{value: 1072} 
+}
+
+if AnimTime = 0 {
+   ChangeState{value: 1072} 
+}
+
+#===============================================================================
+#Groundbounce Sliding Knockdown - Fall
+#===============================================================================
+[Statedef 1072;
+ type: A;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: GetHitVar(yaccel)}
+
+if (AnimTime = 0 && Anim = 5035) || (Time = 0 && Anim != 5035 && (Anim != [5051, 5059]) && (Anim != [5061, 5069]) && Anim != 5090) {
+    ChangeAnim{value: 5050}
+}
+
+persistent(0) if anim = [5050,5059] && Vel Y >= cond(anim = 5050, Const720p(4), Const720p(-8)) && SelfAnimExist(anim+10) {
+    ChangeAnim{value: anim+10}
+}
+
+if Vel Y > 0 && Pos Y >= ifelse((anim = [5051,5059]) || (anim = [5061,5069]), 0, Const(movement.air.gethit.groundlevel)) {
+    ChangeState{value: 1073}
+}
+
+#===============================================================================
+#Groundbounce Sliding Knockdown - Hit Ground
+#===============================================================================
+[Statedef 1073;
+ type: L;
+ movetype: H;
+ physics: N;]
+
+call KBB_DeathEffect();
+PosFreeze{}
+
+if time = 0 {
+    sysvar(1) := floor(vel y);
+    FallEnvShake{}
+    if ((anim != [5051,5059]) && (anim != [5061,5069])) || !SelfAnimExist(5100 + (anim % 10)) {
+        ChangeAnim{value: 5100}
+    } else {
+        ChangeAnim{value: 5100 + anim%10}
+    }
+    PosSet{y:0}
+    VelSet{y:0}
+    VelMul{x:0.75}
+    if GetHitVar(fall.yvel) = 0 {
+        ChangeState{value: 1037}
+    }
+}
+
+if time = 1 {
+    Explod {
+        anim: F(60 + (sysvar(1) > Const720p(20)) + (sysvar(1) > Const720p(56)));
+        postype: none;
+        pos: pos x + camerapos x, 0;
+        facing: facing;
+        sprpriority: ifelse (sysvar(1) <= Const720p(56), -10, 10)
+    }
+    PlaySnd{value: F7, (sysvar(1) > Const720p(20)) + (sysvar(1) > Const720p(56))}
+}
+
+if AnimElem = 1 {
+    PlaySnd{value: F7, 1}
+}
+
+if time = 3 {
+    HitFallDamage{}
+}
+
+if AnimTime = 0 {
+    ChangeState{value:1074}
+}
+
+#===============================================================================
+#Groundbounce Sliding Knockdown - Bounce
+#===============================================================================
+[Statedef 1074;
+ type: L;
+ movetype: H;
+ physics: N;]
+
+VelAdd{y: Const(movement.down.bounce.yaccel)}
+
+if time = 0 {
+    if (anim != [5101,5109]) || (!SelfAnimExist(5160 + (anim % 10))) {
+        ChangeAnim{value: 5160}
+    } else {
+        ChangeAnim{value: 5160 + (anim % 10)}
+    }
+    HitFallVel{}
+    PosSet{y: Const(movement.down.bounce.offset.y)}
+    PosAdd{x: Const(movement.down.bounce.offset.x)}
+}
+
+if Vel Y > 0 && Pos Y >= Const(movement.down.bounce.groundlevel) {
+    ChangeState{value: 1037}
+}
+
+#===============================================================================
+#Glitched
+#===============================================================================
+[Statedef 3000;
+ type: S;
+ movetype: H;
+ physics: S;
+ poweradd: -500;
+ anim: 3000;
+ ctrl: 0;
+ sprpriority: 2;
+ facep2: 1;
+ velset: 0,0;]
+
+if AnimElem = 1 {
+    VelSet{x: -20}
+    if !numhelper(3500) {
+        Helper{
+            helpertype: normal;
+            name: "Glitch Tracker";
+            ID: 3500;
+            stateno: 3500;
+            pos: 9999,9999;
+            postype: p1;
+            facing: 1;
+            keyctrl: 0;
+            ownpal: 1;
+            supermovetime: 0;
+            pausemovetime: 0
+        }
+    }
+}
+
+if time >= 52 {
+    ChangeState{value: 0; ctrl: 1}
+}
+
+#===============================================================================
+#Glitch Ability Seal Tracker
+#===============================================================================
+[Statedef 3500;
+ type: S;
+ movetype: I;
+ physics: S;
+ anim: 9999;
+ poweradd: 0;
+ ctrl: 0;
+ sprpriority: 2;
+ velset: 0,0;]
+
+ModifyExplod{id: 44; scale: 1.6*(100 - (time/7))*0.01,1.6}
+ignorehitpause if root, numhelper(3500) {
+
+    AssertSpecial{flag: NoPowerBarDisplay; redirectID: root, id}
+
+    if root,numexplod(600) = 0 {
+        Explod{
+            anim: F600;
+            ID: 600;
+            pos: -15,-50;
+            postype: p1;
+            facing: 1;
+            vfacing: 1;
+            bindtime: -1;
+            vel: 0,0;
+            accel: 0,0;
+            random: 0,0;
+            removetime: -2;
+            pausemovetime: 0;
+            scale: .3,.3;
+            sprpriority: 0;
+            ontop: 1;
+            shadow: 0,0,0;
+            ownpal: 1;
+            removeongethit: 0;
+            redirectid: root, id
+        }
+    }
+
+    if gametime%5 = 1 {
+        PalFX{
+            time: 20;
+            add: 32,16,100;
+            sinadd: 64,32,5,3;
+            redirectid: root, id
+        }
+    }
+}
+
+ignorehitpause if root,numhelper(3500) <= 0 {
+    RemoveExplod{id: 42}
+}
+
+
+
+#this is very big because the original code is very big :(
+if root,numhelper(3500) >= 1 {
+    ignorehitpause if root,stateno != 5610 && root,stateno != 5611 {
+        if root,teamside = 1 {
+            if numexplod(42) = 0 {
+                Explod{
+                    anim: F42;
+                    ID: 42;
+                    pos: 144.6,142.5;
+                    postype: left;
+                    space: screen;
+                    facing: 1;
+                    vfacing: 1;
+                    bindtime: -1;
+                    vel: 0,0;
+                    accel: 0,0;
+                    random: 0,0;
+                    removetime: -2;
+                    pausemovetime: 0;
+                    scale: 1.6,1.6;
+                    sprpriority: 9;
+                    shadow: 0,0,0;
+                    ownpal: 1;
+                    removeongethit: 0;
+                }
+            } if numexplod(43) = 0 {
+                Explod{
+                    anim: F43;
+                    ID: 43;
+                    pos: 144.6,142.5;
+                    postype: left;
+                    space: screen;
+                    facing: 1;
+                    vfacing: 1;
+                    bindtime: -1;
+                    vel: 0,0;
+                    accel: 0,0;
+                    random: 0,0;
+                    removetime: -2;
+                    pausemovetime: 0;
+                    scale: 1.6,1.6;
+                    sprpriority: 7;
+                    shadow: 0,0,0;
+                    ownpal: 1;
+                    removeongethit: 0
+                }
+            } if numexplod(44) = 0 {
+                Explod{
+                    anim: F44;
+                    ID: 44;
+                    pos: 144.6,142.5;
+                    postype: left;
+                    space: screen;
+                    facing: 1;
+                    vfacing: 1;
+                    bindtime: -1;
+                    vel: 0,0;
+                    accel: 0,0;
+                    random: 0,0;
+                    removetime: -2;
+                    pausemovetime: 0;
+                    scale: 1.6*(100 - (time/7))*0.01,1.6;
+                    sprpriority: 8;
+                    shadow: 0,0,0;
+                    ownpal: 1;
+                    removeongethit: 0;
+                }
+            }
+        } else if root, teamside = 2 {
+            if numexplod(42) = 0 {
+                Explod{
+                    anim: F42;
+                    ID: 42;
+                    pos: 174,142.5;
+                    postype: right;
+                    space: screen;
+                    facing: -1;
+                    vfacing: 1;
+                    bindtime: -1;
+                    vel: 0,0;
+                    accel: 0,0;
+                    random: 0,0;
+                    removetime: -2;
+                    pausemovetime: 0;
+                    scale: 1.6,1.6;
+                    sprpriority: 9;
+                    shadow: 0,0,0;
+                    ownpal: 1;
+                    removeongethit: 0;
+                }
+            } if numexplod(43) = 0 {
+                Explod{
+                    anim: F43;
+                    ID: 43;
+                    pos: 174,142.5;
+                    postype: right;
+                    space: screen;
+                    facing: -1;
+                    vfacing: 1;
+                    bindtime: -1;
+                    vel: 0,0;
+                    accel: 0,0;
+                    random: 0,0;
+                    removetime: -2;
+                    pausemovetime: 0;
+                    scale: 1.6,1.6;
+                    sprpriority: 7;
+                    shadow: 0,0,0;
+                    ownpal: 1;
+                    removeongethit: 0
+                }
+            } if numexplod(44) = 0 {
+                Explod{
+                    anim: F44;
+                    ID: 44;
+                    pos: 174,142.5;
+                    postype: right;
+                    space: screen;
+                    facing: -1;
+                    vfacing: 1;
+                    bindtime: -1;
+                    vel: 0,0;
+                    accel: 0,0;
+                    random: 0,0;
+                    removetime: -2;
+                    pausemovetime: 0;
+                    scale: 1.6*(100 - (time/7))*0.01,1.6;
+                    sprpriority: 8;
+                    shadow: 0,0,0;
+                    ownpal: 1;
+                    removeongethit: 0
+                }
+            }
+        }
+    }
+}
+
+if Time >= 700 || roundstate != 2 {
+    ChangeState{value: 3550; ctrl: 0}
+}
+
+#===============================================================================
+#Glitch Helper: Fin
+#===============================================================================
+[Statedef 3550;
+ type: S;
+ movetype: I;
+ physics: S;
+ anim: 9999;
+ poweradd: 0;
+ ctrl: 0;
+ sprpriority: 2;
+ velset: 0,0;]
+
+DestroySelf{recursive: 1}
+
+#===============================================================================
+#Jay Burn
+#===============================================================================
+[Statedef 3600;
+ type: A;
+ movetype: A;
+ physics: N;
+ juggle: 0;
+ ctrl: 0;
+ anim: 9999;
+ poweradd: 0;
+ sprpriority: 2;]
+
+#Every 30 frames take 1 damage
+if time > 5 && enemy,life > 1 {
+    if (time%(30/(root,map(initialDefence)))) = 0 {
+        LifeAdd{value: -1; redirectID: root, id}
+        if root, life <= 0 {
+            LifeAdd{value: 1; redirectID: root, id}
+        }
+    }
+}
+
+#If in tag mode, burn also removes red life as well
+if teammode = tag && time > 5 && life > 1 {
+    if (time%(30/(root,map(initialDefence)))) = 0 {
+        RedLifeAdd{value: -1; redirectID: root, id;}
+    }
+}
+
+#Every 5 seconds, lowers burn map by 1
+if time > 5 {
+    if (time%300) = 0 {
+        RootMapAdd{map: "burn"; value: -1}
+    }
+}
+
+#Sets burn to 0 if dead
+if root, !alive {
+    RootMapSet{map: "burn"; value: 0}
+}
+
+#If burn map reaches 0 or round is over, destroys self
+if root,map(burn) = 0 || roundstate != 2 {
+    DestroySelf{}
+}
+
+#===============================================================================
+#Dead
+#===============================================================================
+[Statedef 666;
+ type: A;
+ movetype: A;
+ physics: N;
+ juggle: 0;
+ ctrl: 0;
+ anim: 9999;
+ poweradd: 0;
+ sprpriority: 2;]
+
+BindToParent{}
+
+if time = 1 {
+
+    SuperPause{
+        time: 20;
+        anim: 999;
+        sound: S10,0;
+        pos: 0,0;
+        movetime: 0;
+        darken: 1;
+        p2defmul: 1;
+        poweradd: 0
+    }
+
+    EnvShake{
+        time: 30;
+        ampl: -8
+    }
+
+}
+
+if time = 0 {
+    if root,numhelper(666) = 1 {
+        Explod{
+            anim: F666;
+            ID: 666;
+            pos: -10,-80;
+            postype: p1;
+            facing: -1;
+            vfacing: 1;
+            bindtime: 1;
+            vel: 0,0;
+            accel: 0,0;
+            random: 0,0;
+            removetime: -1;
+            pausemovetime: 9999;
+            scale: 1,1;
+            sprpriority: 10;
+            ontop: 1;
+            shadow: 0,0,0;
+            ownpal: 1;
+            removeongethit: 0;
+            supermovetime: 999
+        }
+    }
+    StopSnd{channel: 1}
+    PlaySnd{value: F69,2; volumescale: 999; channel: 2}
+}
+
+if Time = 3 {
+    PlaySnd{value: F69,1; volumescale: 999; channel: 2}
+}
+
+if Time = 9999 {
+    DestroySelf{}
+}
+
+
+#===============================================================================
+#Don't Mess With; Always Executed
+#===============================================================================
+[Statedef -2]
+
+if map(burn) > 0 {
+    if numhelper(3600) = 0 {
+        Helper{
+            helpertype: normal;
+            name: "Burning";
+            ID: 3600;
+            stateno: 3600;
+            pos: 9999,9999;
+            postype: p1;
+            facing: 1;
+            keyctrl: 0;
+            ownpal: 0;
+            supermovetime: 0;
+            pausemovetime: 0
+        }
+    }
+}

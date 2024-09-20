@@ -1883,7 +1883,7 @@ value = 0
 ctrl = 1
 
 ;-------------------------------------------------------------------------------
-; Wavedash A: Glitch out overhead
+; Wavedash B: Glitch out overhead
 [Statedef 391]
 type    = S
 movetype= A
@@ -1965,7 +1965,7 @@ trigger1 = 1
 attr = S, NA
 animtype  = Medium
 damage    = 10
-hitflag = MAFD
+hitflag = MAF
 guardflag = MA
 pausetime = 10,12
 ground.hittime  = 25 + ifelse(enemy,movetype = A || movecountered, 7,0)
@@ -1993,7 +1993,7 @@ trigger1 = 1
 attr = S, NA
 animtype  = Medium
 damage    = 35
-hitflag = MAFD
+hitflag = MAF
 guardflag = HA
 pausetime = 16,14
 ground.hittime  = 25 + ifelse(enemy,movetype = A || movecountered, 7,0)

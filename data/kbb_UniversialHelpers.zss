@@ -1,0 +1,607 @@
+#===============================================================================
+#Special Power Delay
+#===============================================================================
+[Statedef 56000; 
+ type: S; 
+ physics: S;
+ anim: 9999; 
+ sprpriority: 2; 
+ velset: 0,0; 
+ ctrl: 0;]
+
+if Time >= 200 || p2movetype != H {
+    DestroySelf{}
+}
+
+#===============================================================================
+#Infinite Protection
+#===============================================================================
+
+[Statedef 4011; 
+ type: A; 
+ movetype: A; 
+ physics: N;
+ anim: 50000; 
+ juggle: 1;
+ sprpriority: 2; 
+ velset: 0,0; 
+ ctrl: 0;]
+
+# Add to Juggle Map
+persistent(0) if movehit && enemynear,gethitvar(fall) {
+    RootMapAdd{map: "juggle"; value: 5}
+}
+
+# Make the Helper Invisible
+Trans{trans: add; alpha: 0,256}
+
+# Skips to Keyframe 2 so the hit has no delay
+if AnimElem = 1 || movecontact {
+    ChangeAnim2{value:50000; elem: 2}
+}
+
+# Hits regardless of juggle
+AssertSpecial{flag: nojugglecheck}
+
+# Soft Protection: Pops the opponent up into a juggle state if they aren't being juggled, should be relatively non-disruptive
+if !movecontact && parent, var(11) > 50 {
+    if enemynear, stateno = 5000 || enemynear, stateno = 5010 || enemynear, stateno = 5020 {
+        HitDef {
+            attr: S, NA;
+            animtype: Hard;
+            damage: 0;
+            numhits: 0;
+            hitflag: MAFD;
+            guardflag: ;
+            sparkno: -1;
+            fall:1;
+            fall.recover: 1;
+            fall.recovertime: 40;
+            kill:0;
+            ground.velocity: -2, -5;
+            air.velocity: -2, -5
+        }
+    }
+}
+
+# Hard protection, essentially causes your attacks to have no hitstun or knockback and adds juggle. Should end combos. Should not occur normally.
+if parent, var(11) > 250 && (parent, movecontact || parent, helper, movecontact) {
+    HitDef {
+        attr: S, NA;
+        animtype: Light;
+        damage: 0;
+        numhits: 0;
+        hitflag: MAFD;
+        guardflag: ;
+        sparkno: -1;
+        fall:1;
+        fall.recover: 1;
+        fall.recovertime: 1;
+        ground.hittime: 1;
+        air.hittime: 1;
+        kill:0
+    }
+}
+
+if (numenemy && enemynear, movetype != H) || !numenemy || time >= 60 {
+    DestroySelf{}
+}
+
+#===============================================================================
+#Counterhit TSP
+#===============================================================================
+[Statedef 4020; 
+ type: S;
+ movetype: I; 
+ physics: S;
+ anim: 9999; 
+ sprpriority: 2; 
+ velset: 0,0; 
+ ctrl: 0;]
+
+ignorehitpause persistent(0) if time = 1 {
+    #Proration
+    root, var(11) := root, var(11) - 10;
+    #Sound
+    PlaySnd{value: F11, cond(parent,map(fatal) = 1, 1, 0)}
+    #Text
+    if parent, ishelper {
+        if parent, map(fatal) = 1{
+            LifebarAction{spr: Const(MsgFatalCounter), 0; snd: 25, 1}
+        } else {
+            LifebarAction{spr: Const(MsgCounterHit), 0; snd: 25,0}
+        }
+    } else {
+        #Do Nothing. lol.
+    }
+    #FATAL ADDITION: +7 FCH Untech Frames
+    #if parent, map(fatal) = 1 {
+        #Helper{id: 4021; stateno: 4021; pos: 0,0; name: "Counterhit Fatal Hitstun Adder";redirectid: root, id}
+    #}
+}
+
+if numenemy && (enemynear,movetype!=H && enemy,stateno != 52) || !numenemy {
+    DestroySelf{}
+}
+
+#===============================================================================
+#Counterhit Fatal TSP
+#===============================================================================
+[Statedef 4021; 
+ type: S;
+ movetype: I; 
+ physics: S;
+ anim: 9999; 
+ sprpriority: 2; 
+ velset: 0,0; 
+ ctrl: 0;]
+
+if numenemy && (enemynear,movetype!=H && enemy,stateno != 52) || !numenemy {
+    DestroySelf{}
+}
+
+#===============================================================================
+#Grabbed
+#===============================================================================
+[Statedef 4000; 
+ type: S; 
+ movetype: H; 
+ physics: S;
+ ctrl: 0;
+ anim: 5000;
+ poweradd: 0;
+ sprpriority: 2; 
+ facep2: 1;]
+
+if var(29) = 0 {
+
+    HitBy{value: SCA, AT}
+
+    if time = 1 {
+        Explod{
+            anim: F32000;
+            id: 32000;
+            pos: -30, -50;
+            postype: p1;
+            bindtime: -1;
+            vel: 0,0;
+            accel: 0,0;
+            random: 0,0;
+            pausemovetime: 999;
+            ontop: 0;
+            shadow: 0,0,0;
+            removeongethit: 0;
+            ignorehitpause: 1;
+            facing: 1 + (cond(BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20, -2, 0));
+            scale: 0.6,0.6;
+            sprpriority: -3;
+            removetime: -2
+        }
+
+        PlaySnd {
+            value: F9,1;
+            volumescale: 200
+        }
+    }
+
+    ModifyExplod{
+        id: 32000; 
+        pos: -30 + (cond(BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20, 60, 0)),-50; 
+        facing: 1 + (cond(BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20, -2, 0))
+    }
+
+    if time < 19 {
+        if command = "y" || (roundstate = 2 && ailevel > 0 && random < (ailevel * 100)) {
+            ChangeState{value: 4100}
+        }
+    }
+}
+
+if time > 95 {
+    ChangeState{value: 5000}
+}
+
+
+#===============================================================================
+#Grab Tech
+#===============================================================================
+[Statedef 4100; 
+ type: S; 
+ movetype: H; 
+ physics: S;
+ ctrl: 0;
+ anim: 11;
+ poweradd: 0;
+ sprpriority: 2; 
+ facep2: 1;]
+
+PlayerPush{value: 0}
+
+
+
+if numexplod(32000) {
+    RemoveExplod{id:32000}
+}
+
+ignorehitpause if stateno = 4100 {
+    NotHitBy{time: 1; value: SCA}
+}
+
+if AnimElem = 1 {
+    PlaySnd{value: F9,2; volumescale: 200}
+    VelSet{x: -10; y: 0}
+    PosSet{y:0}
+}
+
+if time >= 20 {
+    ChangeState{value: 0; ctrl: 1}
+}
+
+#===============================================================================
+#Used to assert specials that disable blocking in the air after jumping or backdashing
+#Disable Chicken Block Helper
+#===============================================================================
+[Statedef 4200; 
+ type: S;  
+ physics: S;
+ ctrl: 0;
+ anim: 9999;
+ velset: 0,0;
+ sprpriority: 2;]
+
+if time >= 5 {DestroySelf{}}
+
+#===============================================================================
+#Used to determine if the player has instant blocked an attack or not
+#Instant Block Helper
+#===============================================================================
+[Statedef 4300; 
+ type: S;  
+ physics: S;
+ ctrl: 0;
+ anim: 9999;
+ velset: 0,0;
+ sprpriority: 2;]
+
+persistent(0) ignorehitpause if root,stateno = 150 || root,stateno = 152 || root,stateno = 154 {
+    PlaySnd{value: F4300,0; volumescale: 500}
+}
+
+
+ignorehitpause if time > 4 {
+    if root,stateno = 151 || root,stateno = 153 || root,stateno = 155 {
+        ChangeState{value: 4301}
+    }
+}
+
+if root, map(_iksys_trainingGuardModeConfigure) = 0 {
+    if (root, stateno != [150,155] && time >= 8) || root,command = "BB" {
+        ChangeState{value: 4302}
+    }   
+}
+
+#===============================================================================
+#Instant Block Activated Helper
+#===============================================================================
+[Statedef 4301; 
+ type: S;  
+ physics: S;
+ ctrl: 0;
+ anim: 9999;
+ velset: 0,0;
+ sprpriority: 2;]
+
+if root,stateno != 151 || root,stateno != 153 || root,stateno != 155 {
+    DestroySelf{}
+}
+
+#===============================================================================
+#Instant Block Cooldown Helper
+#===============================================================================
+[Statedef 4302; 
+ type: S;  
+ physics: S;
+ ctrl: 0;
+ anim: 9999;
+ velset: 0,0;
+ sprpriority: 2;]
+
+if time >= 15 {
+    DestroySelf{}
+}
+
+#===============================================================================
+#Keeps track of the player's attacks during a combo, if the same move is used repeatedly then adds juggle
+#Stale Moves Helper
+#===============================================================================
+[Statedef 4400; 
+ type: S;  
+ physics: S;
+ ctrl: 0;
+ anim: 9999;
+ velset: 0,0;
+ sprpriority: 2;]
+
+#Resets the variable back to 1 if it goes past 5
+ignorehitpause if var(0) >= 6 {
+    var(0) := 1;
+}
+
+
+# Determines juggle penalty for the player
+if root,stateno != var(50) {
+
+    if (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A) {
+
+        #Move Penalty Calculations
+        ignorehitpause if root, stateno = var(1) {
+            var(11) := var(11) + 1;
+        }
+
+        ignorehitpause if root, stateno = var(2) {
+            var(12) := var(12) + 1;
+        }
+
+        ignorehitpause if root, stateno = var(3) {
+            var(13) := var(13) + 1;
+        }
+
+        ignorehitpause if root, stateno = var(4) {
+            var(14) := var(14) + 1;
+        }
+
+        ignorehitpause if root, stateno = var(5) {
+            var(15) := var(15) + 1;
+        }
+
+        #Proration Penalty
+        ignorehitpause if root, var(11) < 100 {
+            if (root,stateno = var(1) && var(11) > 0 && var(1) >= 15000 && var(1) < 50000) || 
+            (root,stateno = var(2) && var(12) > 0 && var(2) >= 15000 && var(2) < 50000 ) || 
+            (root,stateno = var(3) && var(13) > 0 && var(3) >= 15000 && var(3) < 50000 ) ||
+            (root,stateno = var(4) && var(14) > 0 && var(4) >= 15000 && var(4) < 50000 ) || 
+            (root,stateno = var(5) && var(15) > 0 && var(5) >= 15000 && var(5) < 50000 ) {
+                root, var(11) := root,var(11) + 50;
+            }
+        }
+
+        #Juggle Penalty
+        ignorehitpause if root,map(juggle) < 100 {
+            if (root,stateno = var(1) && var(11) > 0 && var(1) >= 20000) ||
+            (root,stateno = var(2) && var(12) > 0 && var(2) >= 20000) ||
+            (root,stateno = var(3) && var(13) > 0 && var(3) >= 20000) ||
+            (root,stateno = var(4) && var(14) > 0 && var(4) >= 20000) ||
+            (root,stateno = var(5) && var(15) > 0 && var(5) >= 20000) {
+                RootMapAdd{map: "juggle"; value: 50}
+            }
+        }
+
+        #Adds juggle to the player
+        ignorehitpause if root,map(staleMovesException) != 1 {
+
+            if root,stateno = var(1) {
+                RootMapAdd{map: "juggle"; value: var(11)}
+            }
+
+            if root,stateno = var(2) {
+                RootMapAdd{map: "juggle"; value: var(12)}
+            }
+
+            if root,stateno = var(3) {
+                RootMapAdd{map: "juggle"; value: var(13)}
+            }
+
+            if root,stateno = var(4) {
+                RootMapAdd{map: "juggle"; value: var(14)}
+            }
+
+            if root,stateno = var(5) {
+                RootMapAdd{map: "juggle"; value: var(15)}
+            }
+
+        }
+
+        #If all variables are taken, this variable is used to determine which variable should be overwritten
+        ignorehitpause if (var(1) != 0 && var(2) != 0 && var(3) != 0 && var(4) != 0 && var(5) != 0) && 
+        (root,stateno != var(1) && root,stateno != var(2) && root,stateno != var(3) && root,stateno != var(4) && root,stateno != var(5)) {
+            var(0) := var(0) + 1;
+        }
+
+        #Resets juggle penalty if a move on the list is overwritten
+        ignorehitpause if (root,stateno != var(1) && root,stateno != var(2) && root,stateno != var(3) && root,stateno != var(4) && root,stateno != var(5)) {
+            var(10 + var(0)) := 0;
+        }
+
+        #Save States to variables
+        ignorehitpause if var(1) = 0 || (root,stateno != var(1) && root,stateno != var(2) && root,stateno != var(3) && root,stateno != var(4) && root,stateno != var(5) && var(0) = 1) {
+            var(1) := root, StateNo;
+        }
+
+        ignorehitpause if root,stateno != var(1) {
+            if var(2) = 0 || (root,stateno != var(2) && root,stateno != var(3) && root,stateno != var(4) && root,stateno != var(5) && var(0) = 2) {
+                var(2) := root, StateNo;
+            }
+        }
+
+        ignorehitpause if root,stateno != var(1) && root,stateno != var(2) {
+            if var(3) = 0 || (root,stateno != var(3) && root,stateno != var(4) && root,stateno != var(5) && var(0) = 3 && var(0) = 3) {
+                var(3) := root, StateNo;
+            }
+        }
+
+        ignorehitpause if root,stateno != var(1) && root,stateno != var(2) && root,stateno != var(3) {
+            if var(4) = 0 || (root,stateno != var(4) && root,stateno != var(5) && var(0) = 4) {
+                var(4) := root, StateNo;
+            }
+        }
+
+        ignorehitpause if root,stateno != var(1) && root,stateno != var(2) && root,stateno != var(3) && root,stateno != var(4) {
+            if var(5) = 0 || (root,stateno != var(5) && var(0) = 5) {
+                var(5) := root, StateNo;
+            }
+        }
+
+    }
+    
+    #Checks if the player's state has changed (So the code below only runs once per state
+    ignorehitpause if (root,movetype = A && root,movehit && root,hitcount = 1) || (root,movetype != A) || (root,helper,movetype = A && root,movetype = A) {
+        var(50) := root, stateno;
+    }
+
+}
+
+ignorehitpause if (root,numenemy && (root,enemynear,movetype!=H && root,enemy,stateno != 52)) || (root,!numenemy) {
+    DestroySelf{}
+}
+
+#===============================================================================
+#Dont Mess With; Always Executed
+#===============================================================================
+[Statedef -2]
+
+if Const(KBB_Playable) = 1 {
+
+    #Infinite Protection Spawn
+    if numhelper(4011) = 0 {
+        if (var(11) > 50 && (enemy,stateno = 5000 || enemy,stateno =  5010 || enemy,stateno = 5040)) || var(11) > 250 {
+            Helper{
+                helpertype: normal;
+                name: "Infinite Protection";
+                ID: 4011;
+                stateno: 4011; 
+                postype: p1;
+                pos: 0,0; 
+                facing: 1;
+                keyctrl: 0;
+                ownpal: 1;
+                inheritjuggle: 1;
+            }
+        }
+    }
+
+    #Instant Block Spawn
+    if (map(_iksys_trainingGuardMode) = 0) && command = "back" {
+        if (numhelper(4300) = 0) || (helper(4300),stateno != 4300 && helper(4300),stateno != 4302) {
+            Helper{
+                helpertype: normal;
+                name: "Instant block";
+                ID: 4300;
+                stateno: 4300;
+                pos: 0,300;
+                postype: p1;
+                keyctrl: 0;
+                ownpal: 0;
+                supermovetime: 0;
+                pausemovetime: 0;
+            }
+        }
+    }
+
+    #Stale Moves Spawn
+    ignorehitpause if numhelper(4400) = 0 {
+        if movehit || enemynear,movetype = H {
+            Helper{
+                helpertype: normal;
+                name: "Stale Moves";
+                ID: 4400;
+                stateno: 4400;
+                pos: 9999,9999;
+                postype: p1;
+                keyctrl: 0;
+                ownpal: 0;
+                supermovetime: 9999;
+                pausemovetime: 9999;
+            }
+        }
+    }
+
+    #Offscreen Indicator spawner
+    if pos y - 40 > bottomedge && stateno != [5610,5611] {
+        if !numexplod(92000) {
+            Explod {
+                anim: 92000;
+                ID: 92000;
+                pos: 0,bottomedge - 55;
+                postype: P1;
+                facing: 1;
+                vfacing: 1;
+                bindtime: -1;
+                vel: 0,0;
+                accel: 0,0;
+                random: 0,0;
+                removetime: -1;
+                supermovetime: 0;
+                pausemovetime: 0;
+                scale: 1,1;
+                sprpriority: 0;
+                ontop: 0;
+                shadow: 0,0,0;
+                ownpal: 0;
+                #ontop:1;
+                removeongethit: 0
+            }
+        }
+    } if numexplod(92000) {
+        if !numexplod(92001) {
+            Explod {
+                anim: F92001 + teamside;
+                ID: 92001;
+                pos: 0,bottomedge - 55;
+                postype: P1;
+                facing: 1;
+                vfacing: 1;
+                bindtime: -1;
+                vel: 0,0;
+                accel: 0,0;
+                random: 0,0;
+                removetime: -1;
+                supermovetime: 0;
+                pausemovetime: 0;
+                scale: 1,1;
+                sprpriority: 0;
+                ontop: 0;
+                shadow: 0,0,0;
+                ownpal: 1;
+                #ontop:1;
+                removeongethit: 0
+            }
+        }
+    } 
+
+    if numexplod(92000) && numexplod(92001) {
+        ModifyExplod{id: 92000; pos: 0 ,bottomedge - 55}
+        ModifyExplod{id: 92001; pos: 0 ,bottomedge - 55}
+    }
+
+    if pos y - 40 < bottomedge {
+        RemoveExplod{id: 92000}
+        RemoveExplod{id: 92001}
+    }
+
+
+}
+
+#===============================================================================
+#Dont Mess With; Executed when in self state
+#===============================================================================
+[Statedef -3]
+
+if StateNo != 4000 {
+    if movetype = A {
+        var(29) := 1;
+    } else {
+        var(29) := 0;
+    }
+}
+
+if enemynear, Name = "training" && enemynear, var(49) = 1 && numhelper(51000) < 1 {
+    LifeSet{value: 700}
+
+    if enemynear,movetype != H {
+        PowerAdd{value: 3000}
+    }
+}
+
+if (numenemy && (enemynear,movetype!=H && enemy,stateno != 52)) || !numenemy || (movetype = A && stateno != 615) {
+    MapSet{map: "staleMovesException"; value: 0}
+}
