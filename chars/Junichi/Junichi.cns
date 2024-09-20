@@ -132,13 +132,19 @@ victory0 = "You have the right to remain defeated, bozo."
 victory1 = "Phew! You really are something, aren't ya."
 victory2 = "You should try more next time..."
 victory3 = "Damn... That's it?"
-victory4 = "You shouldn't be so cocky, ya know?"
+victory4 = "Stay down, you're under arrest!"
 
 ;Bill Victory Quote
 victory5 = "No more of your explosions!"
 
 ;Max Victory Quote
-victory6 = "Somehow I don't you'll stop stealing after this..."
+victory6 = "Tell your gang their days of crime are numbered..."
+
+;Jodie Victory Quote
+victory7 = "You were going 60 above the speed limit. You got a licence?"
+
+;Aege Victory Quote
+victory8 = "You realize assaulting 124 Waddle Dees is illegal, right?"
 ;---------------------------------------------------------------------------
 ; Lose by Time Over
 ; CNS difficulty: basic
@@ -183,14 +189,26 @@ velset = 0,0
 [State 0, VictoryQuote]
 type = VictoryQuote
 triggerall = random > 500
+trigger1 = enemy,name = "Max"
+value = 6
+
+[State 0, VictoryQuote]
+type = VictoryQuote
+triggerall = random > 500
 trigger1 = enemy,name = "Bill"
 value = 5
 
 [State 0, VictoryQuote]
 type = VictoryQuote
 triggerall = random > 500
-trigger1 = enemy,name = "Max"
-value = 6
+trigger1 = enemy,name = "Jodie"
+value = 7
+
+[State 0, VictoryQuote]
+type = VictoryQuote
+triggerall = random > 500
+trigger1 = enemy,name = "Aege"
+value = 8
 
 [State 0, PlaySnd]
 type = PlaySnd

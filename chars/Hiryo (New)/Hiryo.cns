@@ -1777,7 +1777,7 @@ value = 3
 type = VelSet
 trigger1 = Time = 0
 x = 4.5
-y = -4.25
+y = -4
 
 ;[State 0, VelAdd]
 ;type = VelSet

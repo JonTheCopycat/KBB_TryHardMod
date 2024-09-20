@@ -1,5 +1,74 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.7.1 Changes:                    /
+|---------------------------------------------------/
+Preparing for the tour by giving replacing a few useless moves and improving the balance of the mod.
+
+Glitch:
+1. Wavedash A Replaced with new move
+2. Wavedash B replaced with new move
+3. Wavedash now partially conserves vertical momentum again. Fixed bugs from the past with this.
+
+
+Hyrio:
+1. Slightly Increased Startup of Wavedash B  (f15 -> f16)
+	* Reduced advantage on block (+3 -> +1)
+2. Wavedash A Recovery reduced.
+	* Block Advantage preserved.
+	* Hitpause on block reduced.
+3. Wavedash C is now easier to hit during startup.
+	* Now crosses up slightly sooner to ensure functionality.
+
+
+Junichi:
+1. Kick 2ab no longer cancel on block
+2. Baton 5c has less blockstun now
+3. 236A Made slightly more punishable.
+4. Peekaboo C made more punishable.
+5. Peekaboo 2b increased recovery.
+6. Baton 5c blockstun reduced.
+* Baton 236B will no longer hit from both in front and behind as often.
+    * Now travels further
+    * Tweaked animation.
+* Added More Victory Quotes, and fixed other ones.
+
+
+Jay:
+1. Animations Polished
+2. 6C.x.x.B and 6C.x.x.C Have both received Heat Versions.
+3. 6C.x.x.B Reworked Completely.
+4. j.2b now puts the opponent in hard knockdown.
+
+
+Leon:
+1. Wavedash A: Velocity tweaked (covers less distance)
+* 2c and 2cc are now vulnerable to successful counters.
+
+
+Saito:
+* Replaced Wavedash B with new move. Spin to win.
+
+
+Fly:
+1. 2aa no longer groundbounces during juggle.
+
+
+Vei:
+1. Removed Bug where clone could twinkle cancel and become a real clone.
+2. Fixed bug where cancelling out of 5b put real Vei into the wrong state.
+
+
+Yoru:
+* Replaced Wavedash A with old move, but with a revamped animation and changed cancels. The OG wavedash A has returned in all it's simplicity.
+
+Placed the correct version number.
+
+
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
 | Try-Hard Version 0.7.0 Hotfix 1 Changes:           /
 |---------------------------------------------------/
 

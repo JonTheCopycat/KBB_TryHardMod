@@ -177,9 +177,15 @@ trans = add
 
 [State 0, NotHitBy]
 type = NotHitBy
+triggerall = vel y <= 0
 trigger1 = time = [2, 10]
 value = A, AA
 time = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+y = vel y * 0.5
 
 [State 0, VelSet]
 type = VelAdd
@@ -190,13 +196,12 @@ x = const(velocity.run.fwd.x) * 1.8 * 0.6
 type = VelSet
 trigger1 = time = [2, 4]
 x = const(velocity.run.fwd.x) * 1.8 * 1.25
-y = 0
 
 [State 0, VelSet]
 type = VelAdd
 trigger1 = time > 4
 trigger1 = vel x > 1
-y = -vel y * 0.25
+y = -vel y * 0.33
 
 [State 0, Explod]
 type = Explod
@@ -258,14 +263,14 @@ value = 35
 type = ChangeState
 triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "a"
-value = 290
+value = 291
 ctrl = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = time > 2
+triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "b"
-value = 390
+value = 391
 ctrl = 0
 
 [State 200, C]

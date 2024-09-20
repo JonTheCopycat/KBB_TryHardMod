@@ -1285,7 +1285,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 25
+damage    = 30
 hitflag = MADF
 guardflag = MAF
 pausetime = 10,10
@@ -1299,10 +1299,11 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1.5,-5
+ground.velocity = -1,-5
 air.velocity = -1,-4
 Fall = 1
-Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 35 + ifelse(enemy,movetype = A, 7,0)
+Envshake.time = 5
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -1344,28 +1345,13 @@ value = 25000
 [State 200, End]
 type = ChangeState
 triggerall = movecontact
+trigger1 = command = "holdfwd"
 trigger1 = command = "a"
-value = 201
+value = 951
 
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
-triggerall = numhelper(300) = 0
-trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 300
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-triggerall = numhelper(300) > 0
-trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 320
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-triggerall = numhelper(440) > 0
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 320

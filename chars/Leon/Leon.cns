@@ -4766,7 +4766,7 @@ value = 15
 [State 420, NotHitBy]
 type = NotHitBy
 trigger1 = time = (1,5)
-value = SCA
+value = , NA, SA, NP, SP, NT, ST
 time = 1
 
 [State 610, TargetBind]
@@ -5493,7 +5493,7 @@ value = 8
 [State 420, NotHitBy]
 type = NotHitBy
 trigger1 = time = (1,9)
-value = SCA
+value = , NA, SA, NP, SP, NT, ST
 time = 1
 
 [State 610, TargetBind]
