@@ -939,7 +939,7 @@ trigger1 = ctrl
 [State -1, Down + C]
 type = ChangeState
 value = 460
-Triggerall = power >= 500
+Triggerall = power >= 250
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(401) = 0
 triggerall = numhelper(623) = 0

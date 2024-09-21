@@ -1,10 +1,10 @@
 <#f0f000>:PASSIVE:</>
+"Swords summon a thunder after 3 seconds."
 
 <#f0f000>:EX ATTACKS!:</>
 
 Summon (1/4 Bar)							^C
-	"Watanabe summons a sword and it lasts for 8 seconds.
-	 Meter charge is halved when a sword is out."
+	"Watanabe summons a sword."
 
 _! Two-Hit Combo				^B
 	press b twice or hold b
@@ -16,27 +16,25 @@ _! Downslam					_D^C
 
 Ground Slam (1/4 Bar)							_D^C
 	"Watanabe slams his sword to the ground
-	and summons a stationary sword from it.
-	This summons a thunder after a while."
+	and summons a stationary sword from it."
 
 _! Swing					^B
 	"Hold the button to delay the attack."
 
-Summon: Air (1/2 Bar)							_AIR^C
-	"Watanabe summons a sword and rides it. Hold up,
-	down or C for Watanabe to abandon it, and make
-	it attach to the wall.
-	This summons a thunder after a while."
+Summon: Air Ride (1/2 Bar)							_AIR^C
+	"Watanabe summons a sword and rides it."
 
 _! Jumpoff					_U
+	"Watanabe jumps off the sword."
 
 _! Dropdown					_D
+	"Watanabe falls off the sword."
 
 _! Neutral jump?? idk kid			^C
+	"Watanabe jumps off the sword."
 
-Summon: Air Slam (1/2 Bar)								_AIR_D^C
-	"Watanabe summons a stationary sword in the air.
-	This summons a thunder after a while."
+Summon: Air (1/4 Bar)								_AIR_D^C
+	"Watanabe summons a stationary sword in the air."
 
 _! Swing					^B
 	"Hold the button to delay the attack."
@@ -62,7 +60,7 @@ _! Ether Drive: Ride						^C
 
 "Mystic Nocturn" (1 Bar _AIR OK)					_D_DB_B^A
 	"Watanabe slams his sword into the ground and summons 
-	plants to protect him, this also summons a grounded 
+	plants to protect him, while summoning a grounded 
 	sword."
 
 
@@ -75,4 +73,4 @@ Seed spread (1 Bar, _AIR OK)    						_D_DF_F^B
 "Moonlit Serenade" (1 1/2 Bars)				_D_DF_F^C
 	"Watanabe throws a summoned sword forward!
 	If it connects, the opponent gets BLASTED
-	TO DEATH. Summoned sword stays on whiff."
+	Summoned sword stays on whiff."

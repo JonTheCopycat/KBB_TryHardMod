@@ -64,7 +64,31 @@ Yoru:
 Placed the correct version number.
 
 
-
+Watanabe:
+1. Metercharge is no longer halved if Watanabe has a sword up
+2. 5A has slightly less startup (f8 -> f7)
+	* goes less distance (does not hit on roundstart anymore)
+3. 5B has less recovery
+	* can now cancel into 2A
+4. J5B second hit has more hitpause, and sends the opponent down faster (tried to make it feel like a spike)
+5. The interval before you can do Sword 5B again is now shorter
+6. 5CC goes faster
+7. 2C now gives more juggle
+8. Slightly increased the damage of Sword J2CB/2CB (the swings)  (25 -> 30)
+9. J2C is faster and has less recovery
+	* now costs only 1/4 a bar (before was 1/2 a bar)
+	* Watanabe can now attack before hitting the ground with J2C
+10. J5C Neutral Jump is now.. more of a neutral jump
+11. J.6C goes less distance
+12. 6C now can be thrown while 214B seeds are out (3 plants on screen !!)
+13. Saplings can be destroyed by projectiles if Watanabe is in hitstun
+14. 214A now has invul
+	* no longer fatals.
+	* is a bit faster
+	* has a  hitbox
+15. 214B is no longer invul
+	* slightly longer to come out
+16. Slightly increased 236C's damage (267 -> 280)
 
 
 ===================================================================================================================================

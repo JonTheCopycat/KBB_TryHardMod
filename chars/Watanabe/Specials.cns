@@ -251,13 +251,6 @@ anim = 20000
 sprpriority = 2
 poweradd = -1000
 
-[State 0, FatalCounter]
-type = MapSet
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
-
 [State 0, Busterable]
 type = MapSet
 trigger1 = 1
@@ -271,6 +264,12 @@ triggerall = teammode = tag
 trigger1 = 1
 map = "enableDHC"
 value = 1
+
+[State 0, NotHitBy]
+type = NotHitBy 
+trigger1 = animelemtime(4) < 0 
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 1
 
 [State 0, VelAdd]
 type = VelSet
@@ -310,33 +309,6 @@ endcmdbuftime = 7
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = enemy,movetype = A
-trigger1 = !movecontact
-attr = A, SA
-animtype  = Heavy
-damage    = 110
-hitflag = MAFD
-guardflag = MA
-pausetime = 24,24
-sparkno = 1
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = 8,0
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 24
-ground.hittime  = 200
-ground.velocity = -2,10
-air.velocity = -2,10
-guard.velocity = -2
-Envshake.time = 30
-Fall.recover = 0
-fall = 1
-
-[State 200, 1]
-type = HitDef
-getpower = 0
-triggerall = enemy,movetype != A
 trigger1 = !movecontact
 attr = A, SA
 animtype  = Heavy
@@ -866,12 +838,6 @@ sprpriority = 2
 poweradd = -1000
 
 
-[State 0, NotHitBy]
-type = NotHitBy 
-trigger1 = animelemtime(9) < 0 
-value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
-time = 1
-
 [State 0, Busterable]
 type = MapSet
 trigger1 = 1
@@ -882,10 +848,10 @@ ignorehitpause = 1
 [State 0, SuperPause]
 type = SuperPause
 trigger1 = Time = 0
-time = 20
+time = 15
 sound = 20,0
 pos = 0,-20
-movetime = 20
+movetime = 15
 darken = 1
 p2defmul = 1
 poweradd = 0
@@ -1790,7 +1756,7 @@ triggerall = time%4 = 0
 trigger1 = 1
 attr = S, HA
 animtype  = Light
-damage    = 14 + var(11)
+damage    = 15 + var(11)
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,2
