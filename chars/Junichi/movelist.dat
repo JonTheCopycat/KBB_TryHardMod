@@ -9,6 +9,7 @@ BATON _B^B
 
 <#f0f000>:COMMAND DASH CANCELS:</>
 ^A_F_D_DF (Late on Block)
+^B_F_D_DF
 
 PHOENIX 
 
@@ -18,13 +19,11 @@ Backturned ^B_F_D_DF
 
 FELINE
 
-^C_F_D_DF
 Peekaboo _F_D_DF
 Peekaboo ^A_F_D_DF (On Hit Only)
 
 BATON
 
-^C_F_D_DF
 Arsenal ^A_F_D_DF
 
 <#f0f000>:COMMAND DASH ATTACKS:</>
@@ -176,8 +175,8 @@ Super Dive Kick (1 Bar)    						PHOENIX _D_DF_F^B
 
 Super Dash (1 Bar)    							FELINE _D_DF_F^B
 	"Junichi dashes forward as fast as possible.
-	Boosts the damage of any move he does after
-	performing a Super Dash."
+	When he gets close, he unleashes a powerful
+	uppercut. But don't miss..."
 
 Super Smacker (1 Bar)    						BATON _D_DF_F^B
 	"Junichi jumps up and spins with his baton."

@@ -924,8 +924,6 @@ triggerall = var(10) = 1
 triggerall = command = "b"
 Triggerall = statetype != A
 trigger1 = ctrl
-trigger2 = movecontact
-trigger2 = stateno = [200, 299]
 
 ;---------------------------------------------------------------------------
 ; Fwd C

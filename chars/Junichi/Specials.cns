@@ -104,7 +104,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 3
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Heavy
 damage    = 30
 hitflag = MAF
@@ -141,7 +141,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 6
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Heavy
 damage    = 10
 hitflag = MAF
@@ -168,7 +168,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 8
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 10
 hitflag = MAF
@@ -195,7 +195,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 10
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 15
 hitflag = MAF
@@ -232,7 +232,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 14
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 10
 hitflag = MAF
@@ -262,7 +262,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 18
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 10
 hitflag = MAF
@@ -289,7 +289,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 21
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 15
 hitflag = MAF
@@ -333,7 +333,7 @@ getpower = 0
 triggerall = AnimElem = 39
 triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
-attr = A, NA
+attr = A, SA
 animtype  = Heavy 
 damage    = 120
 Hitflag = MAF
@@ -363,7 +363,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 39
 trigger1 = enemy,map(hitOverride) = 1
-attr = A, NA
+attr = A, SA
 animtype  = Heavy 
 damage    = 50
 Hitflag = MAF
@@ -524,7 +524,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 12
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Heavy
 damage    = 40
 kill = 0
@@ -558,7 +558,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 17
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Heavy
 damage    = 15
 kill = 0
@@ -586,7 +586,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 21
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 15
 kill = 0
@@ -619,7 +619,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 25
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 15
 kill = 0
@@ -647,7 +647,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 30
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 15
 kill = 0
@@ -678,7 +678,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 34 || AnimElem = 36
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 5
 kill = 0
@@ -706,7 +706,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 38 || AnimElem = 40
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 5
 kill = 0
@@ -734,7 +734,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 42 || AnimElem = 44 || AnimElem = 46 || AnimElem = 48
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Light
 damage    = 5
 kill = 0
@@ -767,7 +767,7 @@ getpower = 0
 triggerall = AnimElem = 51
 triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
-attr = A, NA
+attr = A, SA
 animtype  = Heavy 
 damage    = 120
 Hitflag = MAF
@@ -797,7 +797,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 51
 trigger1 = enemy,map(hitOverride) = 1
-attr = A, NA
+attr = A, SA
 animtype  = Heavy 
 damage    = 100
 Hitflag = MAF
@@ -977,7 +977,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 9
 trigger1 = 1
-attr = S, NP
+attr = S, SP
 animtype  = Hard
 damage    = 60
 kill = 0
@@ -1057,7 +1057,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 2 || AnimElem = 4 || AnimElem = 6 || AnimElem = 8
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Medium
 damage    = 10
 kill = 0
@@ -1139,7 +1139,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 6 || AnimElem = 8 || AnimElem = 10
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Hard
 damage    = 5
 kill = 0
@@ -1177,7 +1177,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 18
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Hard
 damage    = 10
 kill = 0
@@ -1306,7 +1306,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 1
 trigger1 = 1
-attr = S, NP
+attr = S, SP
 animtype  = Light
 damage    = 50
 hitflag = MAFD
@@ -1332,7 +1332,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 4
 trigger1 = 1
-attr = S, NP
+attr = S, SP
 animtype  = Medium
 damage    = 70
 hitflag = MAFD
@@ -1590,7 +1590,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Heavy
 damage    = 90
 hitflag = MAF
@@ -1674,21 +1674,6 @@ trigger1 = time = 0
 value = F100,0
 volumescale = 700
 
-[State 0, Helper]
-type = Helper
-trigger1 = time = 10
-helpertype = normal ;player
-name = "Damage Boost"
-ID = 22012
-stateno = 22012
-pos = 9999,9999
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 1
-supermovetime = 0
-pausemovetime = 0
-
 ;[State 0, CtrlSet]
 ;type = CtrlSet
 ;trigger1 = time = 10
@@ -1730,41 +1715,41 @@ ownpal = 1
 ;trigger1 = 1
 ;flag = NoAutoTurn
 
-[State 200, Jump]
-type = ChangeState
-triggerall = time >= 12
-trigger1 = command = "up"
-trigger2 = command = "holdup"
-trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && enemy,pos y <= -10
-value = 22011
-ctrl = 1
+;[State 200, Jump]
+;type = ChangeState
+;triggerall = time >= 12
+;trigger1 = command = "up"
+;trigger2 = command = "holdup"
+;trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && enemy,pos y <= -10
+;value = 22011
+;ctrl = 1
 
 
-[State 200, AA]
-type = ChangeState
-triggerall = time >= 12
-trigger1 = command = "a"
-trigger2 = command = "hold_a"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 50
-value = 426
-ctrl = 1
-
-[State 200, B]
-type = ChangeState
-triggerall = time >= 12
-trigger1 = command = "b"
-trigger2 = command = "hold_b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 50
-value = 431
-ctrl = 1
+;[State 200, AA]
+;type = ChangeState
+;triggerall = time >= 12
+;trigger1 = command = "a"
+;trigger2 = command = "hold_a"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 50
+;value = 426
+;ctrl = 1
+;
+;[State 200, B]
+;type = ChangeState
+;triggerall = time >= 12
+;trigger1 = command = "b"
+;trigger2 = command = "hold_b"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist x < 50
+;value = 431
+;ctrl = 1
 
 [State 210, Cancel into 5C]
 type = ChangeState
 Triggerall = time >= 12
-triggerall = power >= 200
 triggerall = numhelper(3500) = 0
-trigger1 = command = "c"
-value = 440
+trigger1 = p2bodydist x <= 45 && p2bodydist x >= -10
+trigger1 = abs(p2bodydist y) <= 65
+value = 22015
 
 [State 100, 4]
 type = ChangeState
@@ -1773,6 +1758,13 @@ triggerall = time >= 20
 trigger1 = command = "holdback"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && enemy,movetype = A
 value = 0
+ctrl = 1
+
+[State 100, 4]
+type = ChangeState
+triggerall = time >= 15
+trigger1 = FrontEdgeBodyDist <= 10
+value = 22017
 ctrl = 1
 
 [State 100, 4]
@@ -1789,7 +1781,6 @@ physics = S
 anim = 40
 ctrl = 0
 sprpriority = 1
-facep2 = 1
 
 [State 0, Explod]
 type = Explod
@@ -1887,14 +1878,6 @@ trigger1 = time >= 90
 value = 50
 ctrl = 1
 
-[State 200, Jump]
-type = ChangeState
-triggerall = anim = 630
-triggerall = time >= 10 && var(3) = 0
-trigger1 = command = "up"
-value = 45
-ctrl = 0
-
 ;[State 200, Down+C Stance Into Sword]
 ;type = ChangeState
 ;triggerall = time = [12,36]
@@ -1910,11 +1893,16 @@ ctrl = 0
 type = ChangeState
 triggerall = anim = 630
 triggerall = time >= 10
-trigger1 = command = "hold_a"
-trigger2 = command = "hold_b"
-trigger3 = command = "c"
-trigger4 = roundstate = 2 && ailevel > 0 && enemy,movetype != H && random < (ailevel * 100) && p2bodydist x > 0 && p2bodydist x < 40
+trigger1 = p2bodydist x <= 45 && p2bodydist x > -10
+trigger1 = abs(p2bodydist y) <= 45
 value = 631
+ctrl = 1
+
+[State 100, 4]
+type = ChangeState
+triggerall = time >= 15
+trigger1 = FrontEdgeBodyDist <= 10
+value = 22017
 ctrl = 1
 
 ;-------------------------------------------------------------------------------
@@ -1943,6 +1931,266 @@ ampl = -6
 type = DestroySelf
 trigger1 = root,prevstateno != [22010,22011] && root,stateno != [22010,22011]
 trigger2 = root,movecontact
+
+
+;===============================================================================
+; Super Dash Attack
+;-------------------------------------------------------------------------------
+[Statedef 22015]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 21001
+poweradd = 0
+
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = AnimElem = 6, >= 0
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 8
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = AnimElem = 1
+v = 10
+value = 1
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+triggerall = time = 0
+trigger1 = prevstateno = 22010
+value = 21001
+elem = 3
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F100,0
+volumescale = 500
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = AnimElem = 2
+time = 10
+paladd = 256,20,20
+trans = add 
+
+[State 1020, Blink Red]
+type = PalFX
+trigger1 = Time = 0
+time = 10
+add = 82,0,0
+
+[State 0, Dash Velocity]
+type = VelSet
+trigger1 = AnimElem = 3, >= 0 && AnimElem = 4, < 0
+x = 5
+
+[State 0, Dash Velocity]
+type = VelSet
+trigger1 = AnimElem = 5
+x = 2
+y = -6
+
+[State 0, Dash Velocity]
+type = StateTypeSet
+trigger1 = AnimElem = 5
+statetype = A
+physics = A
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S1,1
+volumescale = 50
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = AnimElem = 5
+trigger1 = 1
+attr = S, SA
+animtype  = Medium
+damage    = 50
+hitflag = MAF
+guardflag = MAF
+pausetime = 10,10
+guard.pausetime = 10,10
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,3
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+guard.velocity = -1
+ground.velocity = -1,-3
+air.velocity = -1,-2
+Envshake.time = 15
+Fall = 1
+Fall.recover = 0
+
+[State 200, 2]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = AnimElem = 6
+trigger1 = 1
+attr = A, SA
+animtype  = Medium
+damage    = 50
+hitflag = MAF
+guardflag = MAF
+pausetime = 16,16
+guard.pausetime = 12,10
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5, 4
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2,-8
+air.velocity = -2,-7
+Envshake.time = 30
+Fall = 1
+Fall.recover = 0
+Fall.recovertime = 65 + ifelse(enemy,movetype = A, 7,0) + floor(-enemy,pos y * 0.2) 
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, End]
+type = ChangeState
+Triggerall = movehit
+triggerall = AnimElem = 6, > 0
+trigger1 = command = "holdup"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 45
+
+[State 200, Return to Idle]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+
+
+;---------------------------------------------------------------------------
+; Super Dash Wiff Wallhit (shaking)
+[Statedef 22017]
+type    = A
+movetype= H
+physics = N
+velset = 0,0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = Time = 0
+value = F40,1
+volumescale = 999
+channel = 1
+
+[State 5020, 1] ;Anim for HIT_LIGHT to HIT_HARD
+type = ChangeAnim
+trigger1 = Time = 0
+value = 1040
+
+[State 5020, 4] ;Freeze anim
+type = ChangeAnim
+trigger1 = Time > 0
+value = anim
+
+; [State 5020, Infinite Protection Hard] ;Causes the character to break out of a combo if their proration gets REALLY high. Should not occur in normal gameplay.
+; type = NotHitBy
+; trigger1 = enemy,var(11) > 250
+; value = SCA
+; time = 60
+
+[State 5020, 5]
+type = ChangeState
+trigger1 = time >= 5
+value = 22018
+
+[State 5020, FFB Light]
+type = ForceFeedback
+trigger1 = anim = 5000
+trigger2 = anim = 5010
+persistent = 0
+time = 6
+waveform = square
+
+[State 5020, FFB Medium]
+type = ForceFeedback
+trigger1 = anim = 5001
+trigger2 = anim = 5011
+persistent = 0
+time = 8
+waveform = sinesquare
+ampl = 110,-1,-.3
+
+[State 5020, FFB Hard]
+type = ForceFeedback
+trigger1 = anim = 5012
+trigger2 = anim = 5002
+trigger3 = anim = 5030
+trigger4 = anim = [5051,5059]
+persistent = 0
+time = 15
+waveform = sinesquare
+ampl = 140
+
+;---------------------------------------------------------------------------
+; Super Dash Wiff Wallbounce (knocked away)
+[Statedef 22018]
+type    = A
+movetype= H
+physics = N
+ctrl = 0
+
+[State 5030, 1]
+type = ChangeAnim
+trigger1 = time = 0
+value = 1025
+
+[State 5030, 2]
+type = VelAdd
+trigger1 = 1
+y = GetHitVar(yaccel)
+
+[State 5030, 3]
+type = VelSet
+trigger1 = Time = 0
+x = -2
+y = -1
+
+[State 5030, Defence Reset] ; resets defence stat
+type = MapSet
+trigger1 = HitOver
+map = "defence"
+value = 0
+
+[State 5030, 4]
+type = ChangeState
+trigger1 = Vel Y > 0    ;Hit ground
+trigger1 = Pos Y >= Const(movement.air.gethit.groundlevel)
+value = 5110 ;HITA_RECOV
 
 
 ;--------------------------------------------------------------------------------
@@ -2249,7 +2497,7 @@ pausemovetime = 0
 ;[State 0, ReversalDef]
 ;type = ReversalDef
 ;trigger1 = time = [2,12]
-;reversal.attr = SCA, NA,SA,NP,SP
+;reversal.attr = SCA, SA,SA,NP,SP
 ;pausetime = 0,12
 ;sparkno = S1500
 ;sparkxy = 0,0 ;offset
@@ -2435,7 +2683,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 4 || AnimElem = 10 
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Hard
 damage    = 15
 guard.kill = 0
@@ -2462,7 +2710,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 7 || AnimElem = 13
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Hard
 damage    = 15
 guard.kill = 0
@@ -2489,7 +2737,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 16
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Hard
 damage    = 40
 guard.kill = 0
@@ -2606,7 +2854,7 @@ ctrl = 1
 ;triggerall = map(juggle) < 100 || hitcount != 0
 ;triggerall = !movecontact
 ;trigger1 = 1
-;attr = S, NA
+;attr = S, SA
 ;animtype  = Medium
 ;damage    = 20
 ;hitflag = MAF
@@ -2913,7 +3161,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 3 || AnimElem = 9 
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Hard
 damage    = 15
 guard.kill = 0
@@ -2940,7 +3188,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 6 || AnimElem = 12
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Hard
 damage    = 15
 guard.kill = 0
@@ -2967,7 +3215,7 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 15
 trigger1 = 1
-attr = S, NA
+attr = S, SA
 animtype  = Hard
 damage    = 40
 guard.kill = 0
@@ -3084,7 +3332,7 @@ ctrl = 1
 ;triggerall = map(juggle) < 100 || hitcount != 0
 ;triggerall = !movecontact
 ;trigger1 = 1
-;attr = S, NA
+;attr = S, SA
 ;animtype  = Medium
 ;damage    = 20
 ;hitflag = MAF
@@ -3336,7 +3584,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = animelem = 7 || AnimElem = 9 || AnimElem = 11 || AnimElem = 13
 trigger1 = 1
-attr = S, NP
+attr = S, SP
 animtype  = Hard
 damage    = 30,5
 hitflag = MAFD

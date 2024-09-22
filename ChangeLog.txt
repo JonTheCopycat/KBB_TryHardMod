@@ -25,12 +25,36 @@ Junichi:
 2. Baton 5c has less blockstun now
 3. 236A Made slightly more punishable.
 4. Peekaboo C made more punishable.
+	* does slightly more proration (3 -> 5)
+	* Now sends slightly higher. 
+    	* Opponents now tech this move up in the air
+    	* Fatal now also freezes Junichi for consistent convertions.
+	* Now jump cancellable normally.
 5. Peekaboo 2b increased recovery.
 6. Baton 5c blockstun reduced.
-* Baton 236B will no longer hit from both in front and behind as often.
+7. Baton 236B will no longer hit from both in front and behind as often.
     * Now travels further
     * Tweaked animation.
-* Added More Victory Quotes, and fixed other ones.
+8. Added More Victory Quotes, and fixed other ones.
+9. All 5c's are no longer wavedash cancellable
+10. All 5b's are now wavedash cancellable
+11. Punch Jab no longer wiff cancels
+12. Punch Wavedash A cancels changed a bit.
+13. Baton Wavedash A cancels changed.
+    * Animation changed slightly.
+    * Launch Angle changed.
+14. Peekaboo Dash Velocity Adjusted.
+    * Re-added Dash Cancels and Jump Cancels out of Peekaboo Dash.
+15. Punch j.b no longer a fatal
+    * Less Vertical Reach, but more Horizontal Reach.
+16. Punch j.bb now give junichi more vertical velocity.
+17. Punch j.cc fatal now bounces the opponent higher.
+18. Punch 236B Revamped
+    * No longer requires a second input.
+    * Not jump cancellable for now
+    * Does a unique attack once you reach the opponent, but don't miss.
+19. Properly classified all supers with the super attacks and super projectile properties. (silly me)
+20. Movelist Updated
 
 
 Jay:
