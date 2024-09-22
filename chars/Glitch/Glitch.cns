@@ -3130,7 +3130,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Light
-damage    = ifelse(enemy,movetype = A,100,50),15
+damage    = ifelse(enemy,movetype = A,80,40),10
 guard.kill = 0
 hitflag = MAFD
 guardflag = MAF
@@ -4171,13 +4171,6 @@ type = ChangeState
 Triggerall = movehit 
 trigger1 = command = "up"
 value = 40
-
-[State 200, Wavedash]
-type  = ChangeState
-triggerall = movecontact
-trigger1 = command = "WD"
-value = 30
-
 
 [State 200, 5AA]
 type = ChangeState

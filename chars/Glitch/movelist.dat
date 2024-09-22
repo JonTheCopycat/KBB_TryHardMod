@@ -13,14 +13,13 @@ _AIR^B_F_D_DF
 
 <#f0f000>:COMMAND DASH ATTACKS:</>
 
-Normal Slide Kick									_F_D_DF^A
-	"A totally normal sliding low attack
-	This move will always put Glitch on the
-	ground"
+Glitch Out									_F_D_DF^A
+	"Glitch flickers backwards with an
+	afterimage that stings."
 
-Glitchy Tatsu								_F_D_DF^B
-	"Glitch does a series of glitchy kicks
-	facing through any projectile".
+Glitch Over								_F_D_DF^B
+	"Glitch flickers above the opponent and
+	kicks them in the head.".
 
 Quick Bomb Booster (1/5 Bar)		 		_F_D_DF^C
 	"Quickly boosts Glitch forward on the 

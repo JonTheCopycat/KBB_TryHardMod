@@ -8,6 +8,8 @@ Glitch:
 1. Wavedash A Replaced with new move
 2. Wavedash B replaced with new move
 3. Wavedash now partially conserves vertical momentum again. Fixed bugs from the past with this.
+4. Removed Wavedash Cancel from 2a
+5. Reduced Damage of Wavedash C (50 > 40) including chip damage (15 > 10)
 
 
 Hyrio:
