@@ -241,6 +241,7 @@ blank
 KBB MK, rounds=1, ordersurvival=0, single=1, hidden=2, boss=1, order=5, vsscreen=0, time = -1
 Dedede, rounds=1, ordersurvival=0, single=1, hidden=2, boss=1, order=5, vsscreen=0, time = -1
 Vivienne FP, rounds=1, ordersurvival=0, single=1, hidden=2, boss=1, order=5, vsscreen=0, time = -1
+Space Daniel, rounds=1, ordersurvival=0, single=1, hidden=2, boss=1, order=5, vsscreen=0, time = -1
 ;SWC, rounds=1, ordersurvival=0, single=1, hidden=2, order=5, vsscreen=0, time = -1
 Waddle Rusher, rounds=1, ordersurvival=0, single=1, hidden=2, boss=1, order=2, vsscreen=0
 ;Heavy Lobster, rounds=1, ordersurvival=0, single=1, hidden=2, boss=1, order=2, vsscreen=0

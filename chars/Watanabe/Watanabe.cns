@@ -4037,7 +4037,8 @@ priority = 1, Miss
 hitflag = MAFD
 guardflag =  MA
 sparkno = 88875
-pausetime = 0,ifelse(root,stateno=[23000,24500],180,40)
+pausetime = 0,ifelse(root,stateno=[23000,24500],300,40)
+;ground.hittime = 40
 ground.velocity = 0,0
 air.velocity = 0,0
 guard.sparkno = 13000
@@ -4046,6 +4047,11 @@ hitsound   = 5,1
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 0
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = AnimElem = 3
+movetype = I    
 
 
 [State 0, Busterable]
@@ -4082,17 +4088,17 @@ inheritJuggle = 1
 pausemovetime=9999999
 supermovetime=9999999
 
-
-[State 0, BindToTarget]
-type = BindToTarget
-trigger1 = 1
-pos = 0,0
+[State 0, PosSet]
+type = PosSet
+trigger1 = time >= 2
+x = enemy,pos x
+y = enemy,pos y
 ;ignorehitpause = 
-;persistent =
+;persistent = 
 
 [State 200, End]
 type = ChangeState
-trigger1 = AnimTime = 0 || target,movetype != H && time >= 4
+trigger1 = AnimTime = 0 || target,movetype != H && time >= 4 || AnimElem = 3 && !movecontact
 value = 455
 ctrl = 0
 

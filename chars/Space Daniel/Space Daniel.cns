@@ -22,7 +22,7 @@
 [Data]
 life = 1500			;Amount of life to start with
 power = 3000		;Amount of maximum power
-attack = 90		;attack power (more is stronger)
+attack = 80		;attack power (more is stronger)
 defence = 100		;defensive power (more is stronger)
 fall.defence_up = 0	;Percentage to increase defense everytime player is knocked down
 liedown.time = 45		;Time which player lies down for, before getting up
@@ -57,9 +57,9 @@ shadowoffset = 0		;Number of pixels to vertically offset the shadow
 draw.offset = 0,0		;Player drawing offset in pixels (x, y)
 
 [Velocity]
-walk.fwd  = 2.4		;Walk forward
+walk.fwd  = 2.8		;Walk forward
 walk.back = -2.2		;Walk backward
-run.fwd  = 4.5, 0		;Run forward (x, y)
+run.fwd  = 5.2, 0		;Run forward (x, y)
 run.back = -4.5,-3.8	;Hop backward (x, y)
 jump.neu = 0,-8.4		;Neutral jumping velocity (x, y)
 jump.back = -2.55		;Jump back Speed (x, y)
@@ -79,15 +79,15 @@ crouch.friction = .82	;Friction coefficient when crouching
 
 [Constants]
 KBB_Playable = 1 ;Allows characters to use KBB Exclusive States. (Star Burst, Wall Bounce, Instant Block, etc)
-DHC = 0 ;turn DHC off/on. Press T + A/B/C at the same time to get it.
-dhcAttackA = 20000 ;DHC Attack State when A+T is pressed
-dhcAttackB = 21000 ;DHC Attack State when B+T is pressed
-dhcAttackC = 24000 ;DHC Attack State when C+T is pressed
-dhcMeterRequirementA = 1000 ;Meter Requirement for doing DHC A
-dhcMeterRequirementB = 1000 ;Meter Requirement for doing DHC B
+DHC = 1 ;turn DHC off/on. Press T + A/B/C at the same time to get it.
+dhcAttackA = 25001 ;DHC Attack State when A+T is pressed
+dhcAttackB = 25001 ;DHC Attack State when B+T is pressed
+dhcAttackC = 25001 ;DHC Attack State when C+T is pressed
+dhcMeterRequirementA = 1500 ;Meter Requirement for doing DHC A
+dhcMeterRequirementB = 1500 ;Meter Requirement for doing DHC B
 dhcMeterRequirementC = 1500 ;Meter Requirement for doing DHC C
 dhcAirA = 0 ;If DHC Attack A is aerial (1: Yes, 0: No)
-dhcAirB = 1 ;If DHC Attack B is aerial (1: Yes, 0: No)
+dhcAirB = 0 ;If DHC Attack B is aerial (1: Yes, 0: No)
 dhcAirC = 0 ;If DHC Attack C is aerial (1: Yes, 0: No)
 
 [Map]
@@ -180,6 +180,12 @@ ctrl = 0
 anim = 190
 velset = 0,0
 
+[State 0, Juggle Map]
+type = MapSet
+trigger1 = 1
+map = "nume"
+value = NumEnemy
+persistent = 0
 
 [State 191, Dialogue]
 type = Dialogue
@@ -311,7 +317,7 @@ value = 0
 ;-------------------------------------------------------------------------------
 ; A
 [Statedef 200]
-type    = S
+type    = U
 movetype= A
 physics = S
 juggle  = 1
@@ -351,7 +357,7 @@ triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 200
+value = 75 * map(nume)
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -371,7 +377,7 @@ trans = add
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = time = 6
-x = 8
+x = 8 + map(nume)
 y = 0
 
 [State 210, Attack]
@@ -387,6 +393,7 @@ hitflag = MAFD
 guardflag = MA
 pausetime = 6,8
 guard.pausetime = 6,3
+guard.hittime = 5 * map(nume)
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -523,25 +530,115 @@ trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 620
 
+
 [State 200, End]
 type = ChangeState
 triggerall = pos y >= 0
 trigger1 = AnimTime = 0
-value = 0
+value = 120
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
 triggerall = pos y < 0
 trigger1 = AnimTime = 0
-value = 50
+value = 120
+ctrl = 1
+
+;===============================================================================
+; for leon vro
+[Statedef 210]
+type    = U
+movetype= A
+physics = N
+juggle  = 0
+velset = 0,0
+ctrl = 0
+anim = 900
+poweradd = 0
+sprpriority = 2
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = movecontact = 1
+value = 200
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S1,0
+volumescale = 50
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = time = 7
+Paladd = 255,-0,-0
+time = 5
+trans = add
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = time = 10
+x = 5
+y = 0
+
+[State 0, VelAdd]
+type = VelSet
+trigger1 = time = 22
+x = 0
+y = 0
+;ignorehitpause = 
+;persistent = 
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Light
+damage    = 10
+hitflag = MAF
+guardflag = HA
+pausetime = 10,25
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-55
+hitsound   = 5,1
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -4
+air.velocity = -2,-1
+Fall = 0
+Envshake.time = 10
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
 ctrl = 1
 
 ;===============================================================================
 ; B:
 ;-------------------------------------------------------------------------------
 [Statedef 300]
-type    = S
+type    = U
 movetype= A
 physics = S
 juggle  = 1
@@ -578,7 +675,7 @@ triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 250
+value = 100 * map(nume)
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -597,7 +694,7 @@ trans = add
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = time = 12
-x = 13
+x = 13 + map(nume)
 y = 0
 
 [State 0, VelAdd]
@@ -758,21 +855,21 @@ value = 620
 type = ChangeState
 triggerall = pos y >= 0
 trigger1 = AnimTime = 0
-value = 0
+value = 120
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
 triggerall = pos y < 0
 trigger1 = AnimTime = 0
-value = 50
+value = 120
 ctrl = 1
 
 ;===============================================================================
 ; 4B:
 ;-------------------------------------------------------------------------------
 [Statedef 350]
-type    = S
+type    = A
 movetype= A
 physics = S
 juggle  = 1
@@ -784,7 +881,7 @@ sprpriority = 2
 
 [State 181, 1]
 type = NotHitBy
-trigger1 = time < 5
+trigger1 = time < map(nume) + 4
 value = SCA
 time = 1
 
@@ -831,6 +928,16 @@ type = VelAdd
 trigger1 = time = 7
 x = 15
 y = -5
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = time >= 17
+statetype = A       ;S,A,C,L
+movetype = A        ;I,A,H
+physics = A         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
 
 [State 200, 1]
 type = HitDef
@@ -978,11 +1085,12 @@ value = 300
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
-triggerall = time >= 20
+triggerall = time >= 5
 triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 620
+
 
 [State 200, End]
 type = ChangeState
@@ -1043,11 +1151,11 @@ type = PowerAdd
 triggerall = time >= 7
 triggerall = numhelper(9999) = 0
 trigger1 = 1
-value = 10
+value = 8 + (map(nume)*2)
 
 [State 200, End]
 type = ChangeState
-triggerall = ailevel = 0
+triggerall = ailevel <= 0
 triggerall = time >= 12
 trigger1 = command != "hold_s"
 trigger2 = power = 3000
@@ -1057,25 +1165,8 @@ value = 501
 type = ChangeState
 triggerall = time >= 12
 triggerall = ailevel > 0
-trigger1 = inguarddist
-trigger2 = power = 3000
-trigger3 = p2bodydist x < 60
-value = 501
-
-[State 200, End]
-type = ChangeState
-triggerall = time >= 12
-triggerall = ailevel > 0
-triggerall = enemy, ailevel = 0 
-trigger1 = Time > 110
-value = 501
-
-[State 200, End]
-type = ChangeState
-triggerall = time >= 12
-triggerall = ailevel > 0
-triggerall = enemy, ailevel > 0 
-trigger1 = Time > 80
+trigger1 = power = 3000
+trigger3 = enemynear,movetype != H
 value = 501
 
 ;-------------------------------------------------------------------------------
@@ -1086,7 +1177,7 @@ movetype= I
 physics = S
 juggle  = 1
 velset = 0,0
-ctrl = 0
+ctrl = 1
 anim = 501
 sprpriority = 2
 
@@ -1104,7 +1195,7 @@ ctrl = 1
 ;===============================================================================
 ; Overhead
 [Statedef 900]
-type    = A
+type    = U
 movetype= A
 physics = N
 juggle  = 0
@@ -1289,7 +1380,7 @@ triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 200
+value = 75 * map(nume)
 
 
 [State 0, Juggle Map]
@@ -1314,13 +1405,6 @@ ignorehitpause = 1
 persistent = 0
 value = 8
 
-[State 0, PowerAdd]
-type = PowerAdd
-triggerall = numhelper(51000) = 0
-triggerall = numhelper(55000) = 0
-triggerall = numhelper(56000) = 0
-trigger1 = movecontact = 1
-value = 200
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -1331,7 +1415,7 @@ volumescale = 50
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = time = 10
-x = 8
+x = 10 + map(nume)
 y = 0
 
 
@@ -1506,13 +1590,59 @@ ctrl = 0
 anim = 620
 sprpriority = 2
 
+[State 0, Helper]
+type = Helper
+trigger1 = time = 0 && numenemy >= 2;MATH
+helpertype = normal
+name = "C Clones"
+ID = 621 
+stateno = 621
+pos = 0,0
+postype = p1   ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+
+[State 0, Helper]
+type = Helper
+trigger1 = time = 0 && numenemy >= 3;MATH
+helpertype = normal
+name = "C Clones"
+ID = 623
+stateno = 623
+pos = 0,0
+postype = p1   ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+
+[State 0, Helper]
+type = Helper
+trigger1 = time = 0 && numenemy >= 4;MATH
+helpertype = normal
+name = "C Clones"
+ID = 624
+stateno = 624
+pos = 0,0
+postype = p1   ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+
+
 [State 200, Power Gain]
 type = PowerAdd
 triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 200
+value = 25 * map(nume)
 
 
 [State 0, Juggle Map]
@@ -1529,12 +1659,6 @@ v = 11
 ignorehitpause = 1
 persistent = 0
 value = 8
-
-[State 181, 1]
-type = NotHitBy
-trigger1 = time < 5
-value = SCA
-time = 1
 
 [State 0, EnvShake]
 type = EnvShake
@@ -1554,10 +1678,11 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 30
+damage    = 40
 guardflag = MA
 hitflag = MAFD
-pausetime = 18,18
+pausetime = 12,12
+guard.hittime = 5 * map(nume)
 sparkno = 1
 guard.sparkno = s13000
 sparkxy = -8,-25
@@ -1582,22 +1707,26 @@ fall.yvelocity = -8
 type = VelSet
 trigger1 = time = 0
 x = 0
-y = -.5 
+y = -.7
+
+;[State 0, Turn]
+;type = Turn
+;trigger1 = facing = enemynear,facing && time = 0
 
 [State 0, VelAdd]
 type = VelAdd
-trigger1 = time = 5
-x = p2dist x/16
+trigger1 = time = 0
+x = abs(enemynear(0),Pos X - Pos X)/28
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time >= 20 && pos y < 0 
+trigger1 = time >= 27 && pos y < 0 
 x = 0
 y = 20
 
 [State 0, ChangeAnim]
 type = ChangeAnim
-trigger1 =  pos y < 0 && time >= 20
+trigger1 =  pos y < 0 && time >= 27
 value = 620
 elem = 9
 
@@ -1696,14 +1825,471 @@ Triggerall = movecontact
 ; please stop spamming 5c vro
 triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 20)
+trigger2 = roundstate = 2 && ailevel > 0 && random < (60 * map(nume)) ; more likely to spam ts with more enemies
 value = 620
 
 [State 200, End]
 type = ChangeState
-trigger1 = AnimTime = 0
-value = 0
+trigger1 = Time >= 32 && movecontact
+value = 120
 ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 120
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; C - Aire
+[Statedef 621]
+type    = A
+movetype= A
+physics = N
+juggle  = 2
+ctrl = 0
+velset = 0,0
+anim = 621
+sprpriority = 2
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+[State 200, Power Gain]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = movecontact = 1
+value = 50
+
+
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 200, Damage Proration]
+type = ParentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+[State 181, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = time > 20 && pos y > 0
+time = 10
+freq = 60
+ampl = -4
+phase = 90
+;ignorehitpause = 
+;persistent = 
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+guardflag = MA
+hitflag = MAFD
+pausetime = 18,18
+sparkno = 1
+guard.sparkno = s13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,10 + (random < 500) * 1
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2, 7
+air.velocity = -2,7
+Fall = 1
+Envshake.time = 15
+Fall.recover = 0
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+down.bounce = 1
+fall.yvelocity = -8
+
+
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+x = 0
+y = -.7
+
+[State 0, Turn]
+type = Turn
+trigger1 = facing = enemynear(1),facing && time = 0
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = time = 0
+x = abs(enemynear(1),Pos X - Pos X)/28
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time >= 27 && pos y < 0 
+x = 0
+y = 20
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 =  pos y < 0 && time >= 27
+value = 621
+elem = 9
+
+;persistent = 
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = pos y >= 0
+y = 0
+ignorehitpause = 1
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
+;-------------------------------------------------------------------------------
+; C - Aire
+[Statedef 623]
+type    = A
+movetype= A
+physics = N
+juggle  = 2
+ctrl = 0
+velset = 0,0
+anim = 621
+sprpriority = 2
+
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+
+[State 200, Power Gain]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = movecontact = 1
+value = 50
+
+
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 200, Damage Proration]
+type = ParentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+[State 181, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = time > 20 && pos y > 0
+time = 10
+freq = 60
+ampl = -4
+phase = 90
+;ignorehitpause = 
+;persistent = 
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+guardflag = MA
+hitflag = MAFD
+pausetime = 18,18
+sparkno = 1
+guard.sparkno = s13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,10 + (random < 500) * 1
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2, 7
+air.velocity = -2,7
+Fall = 1
+Envshake.time = 15
+Fall.recover = 0
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+down.bounce = 1
+fall.yvelocity = -8
+
+
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+x = 0
+y = -.7
+
+[State 0, Turn]
+type = Turn
+trigger1 = facing = enemynear(2),facing && time = 0
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = time = 0
+x = abs(enemynear(2),Pos X - Pos X)/28
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time >= 27 && pos y < 0 
+x = 0
+y = 20
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 =  pos y < 0 && time >= 27
+value = 621
+elem = 9
+
+;persistent = 
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = pos y >= 0
+y = 0
+ignorehitpause = 1
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
+
+;-------------------------------------------------------------------------------
+; C - Aire
+[Statedef 624]
+type    = A
+movetype= A
+physics = N
+juggle  = 2
+ctrl = 0
+velset = 0,0
+anim = 621
+sprpriority = 2
+
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+
+[State 200, Power Gain]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = movecontact = 1
+value = 50
+
+
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 200, Damage Proration]
+type = ParentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+[State 181, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = time > 20 && pos y > 0
+time = 10
+freq = 60
+ampl = -4
+phase = 90
+;ignorehitpause = 
+;persistent = 
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+guardflag = MA
+hitflag = MAFD
+pausetime = 18,18
+sparkno = 1
+guard.sparkno = s13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,10 + (random < 500) * 1
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2, 7
+air.velocity = -2,7
+Fall = 1
+Envshake.time = 15
+Fall.recover = 0
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+down.bounce = 1
+fall.yvelocity = -8
+
+
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+x = 0
+y = -.7
+
+[State 0, Turn]
+type = Turn
+trigger1 = facing = enemynear(3),facing && time = 0
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = time = 0
+x = abs(enemynear(3),Pos X - Pos X)/28
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time >= 27 && pos y < 0 
+x = 0
+y = 20
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 =  pos y < 0 && time >= 27
+value = 621
+elem = 9
+
+;persistent = 
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = pos y >= 0
+y = 0
+ignorehitpause = 1
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
+
 ;----------------------------------------------------------------------------------
 
 
@@ -1827,7 +2413,7 @@ triggerall = gametime%5 = 0
 triggerall = roundstate = 2
 triggerall = numhelper(9999) = 0
 trigger1 = 1 ; Walk
-value = 5 ; the "I get to spam summons whenever i want "
+value = 3.5 + (map(nume)*1.5) ; the "I get to spam summons whenever i want "
 
 ;wallbounce spam prevent ----------
 [State 0, Wallbounce prevent reset]

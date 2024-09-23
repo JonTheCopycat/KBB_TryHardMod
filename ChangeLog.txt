@@ -4,6 +4,10 @@
 |---------------------------------------------------/
 Preparing for the tour by giving replacing a few useless moves and improving the balance of the mod.
 
+
+You may now encounter a new foe when fighting bosses. Pray for mercy.
+
+
 Glitch:
 1. Wavedash A Replaced with new move
 2. Wavedash B replaced with new move
@@ -85,7 +89,7 @@ Vei:
 
 
 Yoru:
-* Replaced Wavedash A with old move, but with a revamped animation and changed cancels. The OG wavedash A has returned in all it's simplicity.
+1. Replaced Wavedash A with old move, but with a revamped animation and changed cancels. The OG wavedash A has returned in all it's simplicity.
 
 Placed the correct version number.
 
@@ -107,6 +111,7 @@ Watanabe:
 10. J5C Neutral Jump is now.. more of a neutral jump
 11. J.6C goes less distance
 12. 6C now can be thrown while 214B seeds are out (3 plants on screen !!)
+	* Fixed bug here the opponent would become frozen temporarily if instant blocked.
 13. Saplings can be destroyed by projectiles if Watanabe is in hitstun
 14. 214A now has invul
 	* no longer fatals.

@@ -587,14 +587,14 @@ flag3=nostandguard
 ; Special 1
 [State 0, Helper]
 type = Helper
-triggerall = numhelper(3500) = 0
+;triggerall = numhelper(3500) = 0
 triggerall = numhelper(20005) = 0
 trigger1 = command = "SPECIAL 1"
 Triggerall = power >= 1000
-triggerall = movetype != H
+triggerall =  movetype != H  && (numenemy >= 2 || numenemy = 1 && stateno != [150,155])
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-trigger2 = time%20 = 0
-trigger2 = random < 299
+trigger2 = time%35 - (map(nume)*5) = 0
+trigger2 = random < 199
 helpertype = normal ;player
 name = "Korby"
 ID = 20005
@@ -611,15 +611,15 @@ keyctrl = 0
 ; Special 2
 [State 0, Helper]
 type = Helper
-triggerall = numhelper(3500) = 0
+;triggerall = numhelper(3500) = 0
 triggerall = numhelper(23000) = 0
-triggerall = numhelper(23004) = 0
+triggerall = numhelper(23004) < 1 && map(nume) <= 2
 trigger1 = command = "SPECIAL 2"
 Triggerall = power >= 1000
-triggerall = movetype != H
+triggerall =  movetype != H  && (numenemy >= 2 || numenemy = 1 && stateno != [150,155])
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-trigger2 = time%10 = 0
-trigger2 = random < 299
+trigger2 = time%30 - (map(nume)*5) = 0
+trigger2 = random < 99
 helpertype = normal ;player
 name = "Centurion"
 ID = 23000
@@ -636,16 +636,16 @@ keyctrl = 0
 ; Special 3
 [State 0, Helper]
 type = Helper
-triggerall = numhelper(3500) = 0
+;triggerall = numhelper(3500) = 0
 triggerall = numhelper(21000) = 0
 trigger1 = command = "SPECIAL 3"
-Triggerall = power >= 750
-triggerall = movetype != H
+Triggerall = power >= 1000
+triggerall = movetype != H  && (numenemy >= 2 || numenemy = 1 && stateno != [150,155])
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-trigger2 = time%15 = 0
-trigger2 = random < 299
+trigger2 = time%25 - (map(nume)*3) = 0
+trigger2 = random < 199
 helpertype = normal ;player
-name = "Centurion"
+name = "Takuya"
 ID = 21000
 stateno = 21000
 pos = -200,0
@@ -660,14 +660,14 @@ keyctrl = 0
 ; Special 4
 [State 0, Helper]
 type = Helper
-triggerall = numhelper(3500) = 0
+;triggerall = numhelper(3500) = 0
 triggerall = numhelper(22000) = 0
-Triggerall = power >= 500
-triggerall = movetype != H
+Triggerall = power >= 750
+triggerall = movetype != H  && (numenemy >= 2 || numenemy = 1 && stateno != [150,155])
 trigger1 = command = "SPECIAL 4"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-trigger2 = time%25 = 0
-trigger2 = random < 299
+trigger2 = time%30 - (map(nume)*3) = 0
+trigger2 = random < 149
 helpertype = normal ;player
 name = "Jose&Carlos"
 ID = 22000
@@ -685,13 +685,37 @@ keyctrl = 0
 [State -1, SPECIAL 5]
 type = ChangeState
 value = 25001
+triggerall = movetype != H
 triggerall = numhelper(3500) = 0
 triggerall = stateno != [25001,25500]
 trigger1 = command = "SPECIAL 5"
-Triggerall = statetype != A
 Triggerall = power >= 1500
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-triggerall = movecontact && random < 499
+trigger2 = movecontact && random < (80 + map(nume)*5)
+;---------------------------------------------------------------------------
+; Special 6
+[State 0, Helper]
+type = Helper
+;triggerall = numhelper(3500) = 0
+triggerall = numhelper(24000) = 0
+Triggerall = power >= 1000
+triggerall =  movetype != H  && (numenemy >= 2 || numenemy = 1 && stateno != [150,155])
+trigger1 = command = "SPECIAL 6"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger2 = time%26 - (map(nume)*3) = 0
+trigger2 = random < 199
+helpertype = normal ;player
+name = "Watanabe"
+ID = 24000
+stateno = 24000
+pos = -200,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+ownpal = 0
+supermovetime = 0
+pausemovetime = 0
+inheritJuggle = 1
+keyctrl = 0
 ;===========================================================================
 ;---------------------------------------------------------------------------
 ; Run Fwd
@@ -871,61 +895,91 @@ trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; A.I
 
-[state -1, A AI]
-Type = Changestate
-Triggerall=var(59)>0 ; Use this only if the AI is ON
-Triggerall=abs(P2Bodydist X)<60 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Triggerall=abs(P2dist Y)<0 && abs(P2dist Y)>0
-triggerall = Random <= 500
-Trigger1 = ctrl
-value = 200
-
+[state -1, 4B AI]
 Type = Changestate
 Triggerall=var(59)>0 ; Use this only if the AI is ON
 Triggerall=abs(P2Bodydist X)<90 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Triggerall=abs(P2dist Y)<-10
+Triggerall= enemy,pos y - pos y <-20
 triggerall = Random <= 499
+triggerall = map(juggle) <= 100
 Trigger1 = ctrl
 value = 350
+
+[state -1, A AI]
+Type = Changestate
+Triggerall=var(59)>0 ; Use this only if the AI is ON
+Triggerall=abs(P2Bodydist X)<40 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+Triggerall= enemy,pos y - pos y = [-10,10]
+triggerall = map(juggle) <= 100
+triggerall = Random <= 149
+Trigger1 = ctrl
+value = 200
+
+
 
 [state -1, B AI]
 Type = Changestate
 Triggerall=var(59)>0 ; Use this only if the AI is ON
-Triggerall=abs(P2Bodydist X)<150 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-triggerall = Random <= 150
+Triggerall=abs(P2Bodydist X)<130 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+triggerall = Random <= 399
+triggerall = map(juggle) <= 100
 trigger1 = time%20 = 0
 Trigger1 = ctrl
 value = 300
 
 [state -1, C AI]
 Type = Changestate
+triggerall = numhelper(3500) = 0 ; Glitch! Has! A! Use!
 Triggerall = var(59)>0 ; Use this only if the AI is ON
 Triggerall= abs(P2dist X)>0 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
-Trigger1 = ctrl
+Triggerall = ctrl
+trigger2 = enemy,movetype = A && time < 100
 trigger1 = time%30 = 0
-triggerall = Random <= 249
+triggerall = Random <= 149 + (map(nume)*15)
 value = 620
 
 [state -1, Low Attack AI]
 Type = Changestate
 Triggerall=var(59)>0 ; Use this only if the AI is ON
-Triggerall=abs(P2Bodydist X)<60 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+triggerall = map(juggle) <= 100
+Triggerall=abs(P2Bodydist X)<45 ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
 Triggerall=P2StateType=L && P2MoveType = H || P2Statetype = S; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
 Trigger1 = ctrl
 triggerall = Random <= 249
 value = 950
 
+[state -1, Powercharge AI]
+Type = Changestate
+triggerall = power <= 3000
+Triggerall=abs(P2Bodydist X)>60
+Triggerall=var(59)>0 ; Use this only if the AI is ON
+Triggerall= enemynear,MoveType = H
+Trigger1 = ctrl
+triggerall = Random <= 149
+triggerall = map(juggle) >= 100
+value = 500
+
 [state -1, Block AI]
 Type = Changestate
 Triggerall=var(59)>0 ; Use this only if the AI is ON ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
 Triggerall=P2MoveType=A; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
-Trigger1 = ctrl
 Triggerall=Inguarddist
-triggerall = Random <= 99
+triggerall = Random <= 299
+Trigger1 = ctrl
+value = 120
+
+[state -1, Block AI]
+Type = Changestate
+Triggerall=var(59)>0 ; Use this only if the AI is ON ; use this move only when the opponent is close enough. Moves usually don't hit the entire screen, so specifying the distance this way is necessary
+Triggerall=Inguarddist
+Trigger1 = enemynear,name = "Sareo" && enemynear,numhelper(25002) = 1
+trigger1 = ctrl
 value = 120
 
 [state -1, BlueBurst AI]
 Type = Changestate
+;triggerall = numenemy >= 2
+triggerall = numhelper(3500) = 0 ; Disallow this too, even though glitch doesnt do this 
 Triggerall=var(59)>0 ; Use this only if the AI is ON
 triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
@@ -933,7 +987,7 @@ triggerall = numhelper(50750) = 0
 triggerall = stateno != [800,832]
 triggerall = enemy,stateno != 4000
 triggerall = stateno != [50000,55000]
-triggerall = power >= 2000
+triggerall = power >= 2000 && map(nume) > 1 || power >= 2500 && map(nume) = 1 
 Triggerall=MoveType=H; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
 trigger1 = time%90 = 0
 value = 54000
@@ -941,6 +995,8 @@ value = 54000
 [state -1, GoldBurst AI]
 Type = Changestate
 Triggerall=var(59)>0 ; Use this only if the AI is ON
+Triggerall=MoveType!=H
+triggerall = numhelper(3500) = 0 ; Disallow this too, even though glitch doesnt do this
 triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(50750) = 0
@@ -949,5 +1005,21 @@ triggerall = enemy,stateno != 4000
 triggerall = stateno != [50000,55000]
 triggerall = power >= 1500
 trigger2 = stateno = 25500 && movehit
-Trigger1 = movehit && map(juggle) >= 50; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+Trigger1 = map(juggle) >= 65 && Random <= 49; use it only if the opponent is standing. This way, we don't need to worry about the y position of the opponent, and we won't use it when the opponent is on the ground or is falling. Using other triggers in other cases like P2dist Y, enemynear,pos Y, P2Stateype!=L,!enemynear,hitfall, etc... might be necessary.
+trigger3 = movehit && map(juggle) >= 65
+;trigger4 = enemy,name = "Aege" && enemy,prevstateno = 22001
+value = 50000
+
+
+[state -1, GoldBurst AI]
+Type = Changestate
+Triggerall=var(59)>0 ; Use this only if the AI is ON
+triggerall = numhelper(3500) = 0 ; Disallow this too, even though glitch doesnt do this
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(50750) = 0
+triggerall = stateno != [800,832]
+triggerall = enemy,stateno != 4000
+triggerall = stateno != [50000,55000]
+trigger1 = enemy,name = "Aege" && enemy,prevstateno = 22001
 value = 50000
