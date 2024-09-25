@@ -2196,7 +2196,7 @@ type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
-triggerall = enemy,map(hitOverride) = 0
+trigger2 = enemy,map(hitOverride) = 1
 trigger1 = root,var(31)!= 0
 attr = S, NA
 animtype  = Heavy
@@ -2226,7 +2226,7 @@ getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 trigger1 = root,var(31) = 0
-trigger2 = enemy,map(hitOverride) = 1
+trigger1 = enemy,map(hitOverride) = 0
 attr = S, NA
 animtype  = Heavy
 damage    = 30
