@@ -498,18 +498,19 @@ trans = add
 type = VelSet
 trigger1 = time >= 2
 x = 6.5
+y = 0.75
 
 
-[State 0, VelSet]		;During the first animation frame you have -2 y velocity (Going upwards) and -2 X vel (Backwards, away from p2.)
-type = VelSet
-triggerall = time >= 2
-trigger1 = time <= 14
-y = 0.5
-
-[State 0, VelAdd]
-type = VelAdd
-trigger1 = time > 14
-y = .22
+;[State 0, VelSet]		;During the first animation frame you have -2 y velocity (Going upwards) and -2 X vel (Backwards, away from p2.)
+;type = VelSet
+;triggerall = time >= 2
+;trigger1 = time <= 14
+;y = 0.75
+;
+;[State 0, VelAdd]
+;type = VelAdd
+;trigger1 = time > 14
+;y = .11
 
 [State HITDEF]
 type = HitDef

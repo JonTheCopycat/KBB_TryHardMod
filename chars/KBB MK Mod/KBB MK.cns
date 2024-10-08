@@ -42,7 +42,7 @@ draw.offset = 0,0		;Player drawing offset in pixels (x, y)
 [Velocity]
 walk.fwd  = 2.4		;Walk forward
 walk.back = -2.2		;Walk backward
-run.fwd  = 4.5, 0		;Run forward (x, y)
+run.fwd  = 5.2, 0		;Run forward (x, y)
 run.back = -4.5,-3.8	;Hop backward (x, y)
 jump.neu = 0,-8.4		;Neutral jumping velocity (x, y)
 jump.back = -2.55		;Jump back Speed (x, y)
@@ -1272,19 +1272,27 @@ trigger1 = command = "SPECIAL 5"
 Trigger1 = power >= 2000
 value = 21000
 
-[State 200, 5AA]
-type = ChangeState
-triggerall = movecontact
-trigger1 = command = "a"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 210
-
 [State 200, 5B]
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 320
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+trigger1 = command = "holddown"
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 440
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 400
 
 [State 200, End]
 type = ChangeState
@@ -1328,8 +1336,13 @@ value = 3
 
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = AnimElem = 4
-x = 10
+trigger1 = AnimElem = 3
+x = 12
+
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = AnimElem = 6
+x = 8
 
 [State 0, VelSet]
 type = VelSet
@@ -2227,7 +2240,7 @@ y = -0.5
 [State 0, Moving up]
 type = VelAdd
 trigger1 = AnimElem = 5, >= 0 && AnimElem = 12, <= 0
-y = -0.25
+y = -0.25 + ifelse(command = "hold_c", -0.25, 0)
 
 ;[State 0, Moving fwd]
 ;type = VelAdd
@@ -3052,16 +3065,10 @@ value = 22000
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
-trigger1 = command = "a"
+trigger1 = command = "holddown"
+trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 220
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 320
+value = 440
 
 [State 200, End]
 type = ChangeState
@@ -5041,12 +5048,12 @@ pos = 25 * ((p2bodydist x + 10) / abs(p2bodydist x + 10)),-10
 [State 0, Moving up]
 type = VelSet
 trigger1 = time = [5, 9]
-y = -1
+y = -0.5 + ifelse(command = "hold_c", -1, 0)
 
 [State 0, Moving up]
 type = VelSet
 trigger1 = time = [10, 18]
-y = -3
+y = -2 + ifelse(command = "hold_c", -2, 0)
 
 [State 0, Moving fwd]
 type = VelSet

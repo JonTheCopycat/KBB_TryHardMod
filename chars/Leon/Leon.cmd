@@ -174,6 +174,11 @@ command = B, B
 time = 10
 buffer.time = 1
 
+[Command]
+name = "ShortWD"     ;Required (do not remove)
+command = D, DF
+time = 5
+
 ;-| 2/3 Button Combination |-----------------------------------------------
 [Command]
 name = "recovery" ;Required (do not remove)
@@ -776,6 +781,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 30
 trigger1 = command = "WD" && command != "NotWD"
+trigger2 = command = "ShortWD"  && (prevstateno = 105 || (stateno = [106, 107] && time >= 5))
 trigger1 = statetype = C || statetype = S
 trigger1 = ctrl
 

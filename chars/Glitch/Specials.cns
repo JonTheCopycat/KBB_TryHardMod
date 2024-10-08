@@ -603,7 +603,7 @@ pausemovetime = 0
 type = NotHitBy
 trigger1 = time = 0
 value = SCA
-time = 24
+time = 18
 
 [State 0, VarAdd]
 type = VarAdd
