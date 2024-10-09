@@ -1798,7 +1798,7 @@ x = -1.5
 
 [State 0, ReversalDef]
 type = ReversalDef
-trigger1 = time >= 2 && time < 10
+trigger1 = time = [2, 10]
 reversal.attr = SCA,NA,SA,HA,NP,SP,HP
 pausetime = 0,10
 p1stateno = 343	;On hit he Attacks
@@ -1809,7 +1809,7 @@ p1stateno = 343	;On hit he Attacks
 ;x = 0
 [State 1020, Blink Red]
 type = PalFX
-trigger1 = AnimElem = 3
+trigger1 = time = 10
 time = 10
 add = 40, -40, -40
 [State 0, Play Sound]
@@ -2718,12 +2718,12 @@ sysvar(1) = -1
 [State 0, Moving Forward]
 type = VelSet
 trigger1 = AnimElem = 3, < 0
-x = 2 * sysvar(1)
+x = 1 * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
 trigger1 = AnimElem = 3, >= 0 && AnimElem = 7, < 0
-x = ifelse(sysvar(1) < 0, 4.5, 8.5) * sysvar(1)
+x = ifelse(sysvar(1) < 0, 5, 9) * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
@@ -2848,17 +2848,17 @@ sysvar(1) = -1
 [State 0, Moving Forward]
 type = VelSet
 trigger1 = AnimElem = 3, < 0
-x = 2 * sysvar(1)
+x = 1 * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
 trigger1 = AnimElem = 3, >= 0 && AnimElem = 7, < 0
-x = ifelse(sysvar(1) < 0, 4.5, 8.5) * sysvar(1)
+x = ifelse(sysvar(1) < 0, 5, 9) * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
 trigger1 = AnimElem = 7
-x = 2 * sysvar(1)
+x = 3 * sysvar(1)
 
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -4231,6 +4231,11 @@ value = 620
 type = ChangeState
 trigger1 = pos y >= 0
 value = ifelse(movehit, 52, 612)
+
+;[State 0, End]
+;type = ChangeState
+;trigger1 = pos y >= 0
+;value = 52
 
 [State 0, End]
 type = ChangeState
