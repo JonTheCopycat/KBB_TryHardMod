@@ -2361,7 +2361,7 @@ movetype= I
 physics = S
 ctrl = 0
 anim = 450
-poweradd = -200
+poweradd = ifelse(prevstateno = 390, 0, -200)
 velset = 0,0
 sprpriority = 2
 
@@ -2402,15 +2402,6 @@ triggerall = time < 58
 trigger1 = command = "up"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
-ctrl = 0
-
-[State 200, backdash]
-type = Changestate
-triggerall = time > 6
-triggerall = time < 58
-trigger1 = command = "WD"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 30
 ctrl = 0
 
 [State 200, 2ca]

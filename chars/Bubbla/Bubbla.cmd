@@ -617,7 +617,7 @@ trigger1 = ctrl
 ; Special 2 - Activation
 [State -1, Sudsplosion!]
 type = ChangeState
-value = 21900
+value = 22000
 triggerall = numhelper(3500) = 0
 triggerall = var(22) = 0
 triggerall = var(21) >= 1
@@ -642,7 +642,7 @@ Triggerall = power >= 1000
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Special 4
-[State -1, Giant Bubble Trap]
+[State -1, Triple Bubble Burst]
 type = ChangeState
 value = 24000
 triggerall = numhelper(3500) = 0
@@ -829,6 +829,20 @@ triggerall = command = "c"
 Triggerall = statetype != A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
+; Forward+C
+[State -1, 4C]
+type = ChangeState
+value = 460
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(475) = 0
+triggerall = numhelper(476) = 0
+triggerall = numhelper(477) = 0
+Triggerall = power >= 200
+triggerall = command = "holdfwd"
+triggerall = command = "c"
+Triggerall = statetype != A
+trigger1 = ctrl
+;---------------------------------------------------------------------------
 ; C
 [State -1, C]
 type = ChangeState
@@ -960,10 +974,12 @@ trigger1 = ctrl
 [State -1, Down + C Aire]
 type = ChangeState
 value = 625
+triggerall = command != "holdfwd"
 triggerall = command != "holddown"
 triggerall = command = "c"
 triggerall = numhelper(621) = 0
 triggerall = power >= 200
+triggerall = var(21) > 0
 Triggerall = statetype = A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
@@ -975,6 +991,19 @@ triggerall = command = "holddown"
 triggerall = command = "c"
 triggerall = power >= 200
 Triggerall = statetype = A
+;triggerall = var(21) > 0
+trigger1 = ctrl
+;---------------------------------------------------------------------------
+; Foward + C Aire
+[State -1, C Aire]
+type = ChangeState
+value = 624
+triggerall = command = "holdfwd"
+triggerall = command = "c"
+triggerall = power >= 200
+Triggerall = statetype = A
+triggerall = var(21) > 0
+;triggerall = var(21) > 0
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 
@@ -985,7 +1014,7 @@ Triggerall=var(59)>0
 triggerall = numhelper(3500) = 0 
 Triggerall = power >= 200
 Triggerall= Statetype = S  
-Triggerall= random < (ailevel ** ailevel) + 500
+Triggerall= random < (ailevel ** ailevel) + 100
 triggerall = var(21) > 0
 Triggerall = ctrl
 Trigger1= enemy,movetype = H

@@ -7,7 +7,7 @@
 type    = A
 movetype = A
 physics = N
-juggle  = 2
+juggle  = 0
 ctrl = 0
 anim = 21000
 poweradd = -1000
@@ -95,7 +95,6 @@ y = 0
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = time%5 = 0
 trigger1 = 1
 attr = A, SA
@@ -570,7 +569,7 @@ ctrl = 1
 type    = S
 movetype = A
 physics = S
-juggle  = 2
+juggle  = 0
 ctrl = 0
 anim = 23000
 poweradd = -1000
@@ -626,7 +625,6 @@ volumescale = 80
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 trigger1 = 1
 attr = S, SA
@@ -829,19 +827,12 @@ ctrl = 1
 type    = S
 movetype = A
 physics = S
-juggle  = 2
+juggle  = 0
 ctrl = 0
 anim = 24000
 poweradd = -1000
 velset = 0,0
 sprpriority = 2
-
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 10
-persistent = 0
 
 [State 0, I'm gonna do an unblockable attack!]
 type = Explod
@@ -975,7 +966,6 @@ y = -5
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 triggerall = enemy,stateno != [150,156]
 triggerall = AnimElem = 4 || AnimElem = 3
@@ -1081,19 +1071,12 @@ ctrl = 1
 type    = S
 movetype= A
 physics = S
-juggle  = 2
+juggle  = 0
 ctrl = 0
 anim = 25000
 poweradd = -2000
 velset = 0,0
 sprpriority = 2
-
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 10
-persistent = 0
 
 [State 0, I'm gonna do an unblockable attack!]
 type = Explod
@@ -1184,7 +1167,6 @@ volumescale = 80
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = Time < 36
 trigger1 = !movecontact
 trigger1 = 1

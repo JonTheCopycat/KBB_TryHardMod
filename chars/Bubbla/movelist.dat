@@ -3,13 +3,19 @@ Bubbla has the abillity to blow and store up
 to 10 bubbles! These bubbles can be used for 
 attacks/EX/Star Strikes as long as you have meter.
 
+<#f0f000>:UNIQUE NORMALS:</>
+^A^A_-^C
+^A^A^B_-^C
+^B^B_-^C
+
 <#f0f000>:EX ATTACKS:</>
 
-Bubble Blowing (1/4 Bar)				^C
-	"Bubbla blows a bubble 
-	adding a bubble to your meter.
-	If held longer, a bubble is blown,
-	trapping any nearby opponent."
+Bubble Inhaler (1/4 Bar)				^C
+	"Bubbla inhales air 
+	to add bubbles to her meter.
+	If close, nearby opponents
+	will be inhaled and
+	spit out in a bubble."
 
 Bubblo Launch (1/4 Bar)				_B^C
 	"Bubbla charges a Bubblo and 
@@ -18,17 +24,34 @@ Bubblo Launch (1/4 Bar)				_B^C
 	can be summoned. Can be charged."
 
 Bubble Burst (1/4 Bar: 1 Bubble)		_D^C
-	"Bubbla spawns an explosive bubble burst
-	around herself, damaging the nearby opponent."
-	
-Bubble Burst Bounce (1/4 Bar,_AIR OK: 1 Bubble)					_AIR^C
-	"Bubbla spawns an explosive bubble burst
-	propelling her through the air,
-	damaging the opponent." 
+	"Bubbla spawns an explosive 
+	bubble burst around herself, 
+	damaging the nearby opponent.
+	If held, the explosion will 
+	have a higher launch."
 
-Drop Bubble Trap (1/4 Bar,_AIR OK: 1 Bubble)					_AIR_D^C
-	"Bubbla spawns a bubble trap 
+Bubblo Spin (1/4 Bar)				_F^C
+	"Bubbla launches herself at 
+	their opponent, trapping
+	them in a bubble."
+
+Bubble Burst Levitato (1/4 Bar,_AIR OK: 1 Bubble)					_AIR^C
+	"Bubbla spawns and floats
+	in a bubble as long as ^C
+	is still held. Bursts
+ 	the moment ^C is released."
+
+Falling Bubble Trap (1/4 Bar,_AIR OK: 1 Bubble)					_AIR_D^C
+	"Bubbla sends a bubble trap 
 	hurtling to the ground. Anyone
+	caught will be damaged by the
+	explosion."
+
+Bubble Grab Trap (1/4 Bar,_AIR OK: 1 Bubble)					_AIR_F^C
+	"Bubbla grabs the opponent,
+	trapping them in a bubble,
+	and launches them behind her
+	at high speeds. Anyone
 	caught will be damaged by the
 	explosion."
  
@@ -36,46 +59,32 @@ Drop Bubble Trap (1/4 Bar,_AIR OK: 1 Bubble)					_AIR_D^C
 <#f0f000>:STAR STRIKES!:</>
 
 Giant Bubble Ball (1 Bar: 1 Bubble)					_D_DF_F^A
-	 "Bubbla chucks a large bubble that 
-	bounces on the floor three times before
-	exploding.
-	 Catches any opponent nearby, trapping them
-	until the bubble explodes. Consumes 1 Bubble."
+	 "Bubbla chucks a large bubble.
+	 Catches any opponent nearby, 
+	trapping them until the bubble 
+	explodes. Consumes 1 Bubble."
 
-SudsyChoice (1 Bar: 1 Bubble)					_D_DB_B^A
-	"Bubble charges for a quick second before
-	choosing one out of three bubble moves."
-
-	^A: Sudsplosion
-	 "Bubbla becomes a germaphobe and douses
-	herself and nearby opponents in a sudsy
-	explosion! Everything must be clean! 
-	Pressing C will summon an even bigger
-	explosion, consuming three bubbles."
-
-	^B: Sudsy Crash
-	 "Bubbla summons a large bubble, catching
-	nearby opponents and exploding once enough
-	time has passed. Pressing C will end the 
-	move by releasing a large bubble burst."
-
-	^C: Sudsy Surf
-	 "Bubbla launches herself forward with
-	a ton of bubbles, emptying the bubble count.
-	Pressing C will end the move by releasing a 
-	large explosion."
+Sudsplosion (1 Bar: 1 Bubble)					_D_DB_B^A
+	Sudsplosion							
+	 "Bubbla becomes a germaphobe 
+	and douses herself and nearby 
+	opponents in a sudsy explosion!
+	Everything must be clean! 
+	Pressing C will summon an 
+	even bigger explosion, 
+	consuming three bubbles."
 
 Triple Bubble Ball (1 Bar: 3 Bubbles) 			_D_DF_F^B
-	"Bubbla throws three mini bubble balls
-	that can trap the opponent until popping.
-	Otherwise, the bubbles will pop once it hits
-	a surface."
+	"Bubbla throws three mini 
+	bubble balls that can trap 
+	the opponent until popping.
+	Otherwise, the bubbles will 
+	pop once it hits a surface."
  
-"Giant Bubble Trap" (1 Bar: 3 Bubbles)					_D_DB_B^B		
-	"Bubbla plants a giant Bubble Trap on the
-	ground! Traps the opponent, forcing them
-	to rise into the air and explode, stunning
-	them even more."
+"Triple Bubble Burst" (1 Bar: 3 Bubbles)					_D_DB_B^B		
+	"Bubbla spawns three bubbles
+	that immediately burst. Launches
+	any opponents caught in the chain."
 
 "Deady Bubble Blowing" (1 1/2 Bars)		_D_DF_F^C			
 	"Bubbla blows a giant bubble that rises
