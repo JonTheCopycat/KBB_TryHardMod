@@ -1798,7 +1798,7 @@ x = -1.5
 
 [State 0, ReversalDef]
 type = ReversalDef
-trigger1 = time = [2, 10]
+trigger1 = time = [1, 5]
 reversal.attr = SCA,NA,SA,HA,NP,SP,HP
 pausetime = 0,10
 p1stateno = 343	;On hit he Attacks
@@ -1809,7 +1809,7 @@ p1stateno = 343	;On hit he Attacks
 ;x = 0
 [State 1020, Blink Red]
 type = PalFX
-trigger1 = time = 10
+trigger1 = time = 5
 time = 10
 add = 40, -40, -40
 [State 0, Play Sound]
@@ -1820,7 +1820,7 @@ volume = 120
 
 [State 200, End]
 type = ChangeState
-trigger1 = AnimTime = 0
+trigger1 = time = 20
 value = 0
 ctrl = 1
 ;-------------------------------------------------------------------------------
@@ -1965,7 +1965,7 @@ time = 20
 type = VelSet
 trigger1 = Time = 0
 x = const(velocity.run.back.x)
-y = const(velocity.run.back.y)
+y = const(velocity.run.back.y) * 0.75
 
 [State 0, Explod]
 type = Explod
@@ -1994,10 +1994,10 @@ trigger1 = AnimElem = 1
 value = S3,2
 volumescale = 100
 
-[State 105, Dash Forward]
-type = ChangeState
-trigger1 = command = "FF"
-value = 344
+;[State 105, Dash Forward]
+;type = ChangeState
+;trigger1 = command = "FF"
+;value = 344
 
 [State 105, Dash Forward]
 type = ChangeState
