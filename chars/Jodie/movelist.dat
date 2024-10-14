@@ -17,12 +17,12 @@ Scoop Kick										_F_D_DF^A
 	and scoops the opponent off the ground.
 	Can be repeated once before gaining access
 	to unique moves."
-_! Thrust Kick									A
+_! Thrust Kick									^A
 	"Jodie thrusts both feet at the opponent"
-_! Jump Kick									B
+_! Jump Kick									^B
 	"Jodie jumps at the opponent with the
 	kick"
-_! Quick Spindash!
+_! Quick Spindash!								^C
 	"See Quick Spindash!"
 
 Bounce											_F_D_DF^A

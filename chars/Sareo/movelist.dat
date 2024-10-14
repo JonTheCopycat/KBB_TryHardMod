@@ -4,9 +4,9 @@
 	element, allowing him to combine two 
 	elements for devestating attacks!
 	
-Backsway								_B during wavedash
+Backsway								_B_D_DB
 	"Sareo has access to a unique evasive retreat
-	when wavedashing or doing specific moves.
+	that replaces his wavedash.
 	He gains unique moves during backsway."
 	
 <#f0f000>:UNIQUE NORMALS:</>
@@ -15,25 +15,36 @@ _F^A
 _B^A
 _F_F^B
 
-<#f0f000>:COMMAND DASH CANCELS:</>
-^A_F_D_DF (Late on Block)
-^A^A^A_F_D_DF or _F^A_F_D_DF (On Hit Only)
-^A^A^A~B or _F^A~B
-^B^B^B~B
+<#f0f000>:BACKSWAY CANCELS:</>
+^A_B_D_DB(Late on Block)
+^A^A^A_B_D_DB or _F^A_B_D_DB
+^B^B^B_B_D_DB
+_B_D_DB^A_B_D_DB (On Hit Only)
+_B_D_DB_F^A_B_D_DB
+_B_D_DB_F^B_B_D_DB
 
-<#f0f000>:COMMAND DASH ATTACKS:</>
+<#f0f000>:BACKSWAY ATTACKS:</>
 
-Double Sweep								_F_D_DF^A
+Double Sweep								_B_D_DB^A
 	"Sareo spins, sweeping the opponent
 	twice."
 
-Long Jump 2B								_F_D_DF^B
-	"A version of his universal overhead
-	with greater velocity."
+Moon Slice									_B_D_DB_F^A
+	"Sareo charges forward with a large
+	sweeping swing."
 
-Elemental Slash! (1/4 Bar)		 			_F_D_DF^C
+Elemental Slash!		 					_B_D_DB^B
 	"Sareo inbues his keyblade with his
 	current element, and slashes upwards."
+
+Key Trust									_B_D_DB_F^B
+	"Sareo thrusts his keyblade forward with
+	great velocity."
+
+Elemental Blast! (1/5 Bar) 					_B_D_DB^C
+	"Sareo inbues his keyblade with his
+	current element and releases in one
+	large blast."
 
 <#f0f000>:EX ATTACKS:</>
 

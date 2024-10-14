@@ -14,6 +14,7 @@ _AIR^Y
 ^A_F_D_DF (Late On Block)
 ^B_F_D_DF
 ^B^B_F_D_DF (On Hit Only)
+_B_B_D_DF
 
 <#f0f000>:COMMAND DASH ATTACKS:</>
 
@@ -30,7 +31,7 @@ Star Platinum: Platinum Fist (1/4 Bar)		_F_D_DF^C
 	uppercut!"
 	
 Star Platinum: Electric Platinum Fist (1/4 Bar)	
-								Frame Perfect _F_D_DF^C
+											_F_D_DF+^C
 	"If done perfectly, this move will do 
 	more damage, send highter, and have 
 	more blockstun."

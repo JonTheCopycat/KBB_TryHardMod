@@ -14,9 +14,10 @@ _D[^B]
 Hellsweep									_F_D_DF^A
 	"Violet sweeps the opponent off their feet"
 
-Backflip Kick								_F_D_DF^B
-	"Violet does a backflip, kicking the opponent
-	on the way down."
+"Going Up!"									_F_D_DF^B
+	"Violet shoots a gauntlet shot and
+	recoils herself upwards!"
+	(Costs 1 Bullet)
 
 Double Geysers (1/10 Bar)					_F_D_DF^C
 	"Violet 2 low hitting shots that instantly

@@ -186,6 +186,11 @@ command = ~B, D, DB
 time = 20
 
 [Command]
+name = "BWD"
+command = ~B, D, B
+time = 20
+
+[Command]
 name = "NotBWD"
 command = F, D, DB
 time = 20

@@ -47,14 +47,16 @@ STANCE _B_D_DB
 
 Quick Blade									_F_D_DF^A
 	"Hyrio instantly dashes forward and 
-	slashes you."
+	slashes the opponent. 
+	Advantagous on block"
 
-Alpha Blade									_F_D_DF^B
+Double Kick									_F_D_DF^A
+	"Hyrio leaps ahead to kick the opponents'
+	head twice."
+
+Alpha Blade	(1/4 Bar)						_F_D_DF^C
 	"Hyrio disappears, appearing behind the
 	opponent and slashing their back."
-
-Instant C Stance (1/4 Bar)		 			_F_D_DF^C
-	"Hyrio instantly enters his C stance."
 
 <#f0f000>:EX ATTACKS:</>
 

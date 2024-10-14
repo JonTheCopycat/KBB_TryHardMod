@@ -5,6 +5,30 @@ _B^B
 _AIR_D^A
 _AIR_B^B
 
+<#f0f000>:COMMAND DASH CANCELS:</>
+^A_F_D_DF (Late on Block)
+^A^A_F_D_DF (Late on Block)
+^A^A^A_F_D_DF
+^B^B^B_F_D_DF
+
+<#f0f000>:COMMAND DASH ATTACKS:</>
+
+Ground Blast										_F_D_DF^A
+	"Clutch blasts the opponent into the
+	ground with a close range blast."
+
+Remote Bomb	(1/5 Bar)								_F_D_DF^B
+	"Clutch plants a remotely detonated
+	bomb. When you let go of ^B , it will
+	explode."
+
+Burst Charge (1/5 Bar)								_F_D_DF^C
+	"Clutch releases a short burst of energy
+	to charge up his 'Charge Shot' level once
+	the move finishes. It can be cancelled by
+	jumping to cancel the charge and endlag."
+
+
 <#f0f000>:EX ATTACKS:</>
 
 Charge Shot (1/4 Bar)									^C
@@ -25,7 +49,7 @@ _!Level 2:
 _!Level 3:
 	"Clutch fires a beam!"
 
-Charge (1/4 Bar)							 _D^C
+Charge (1/10 Bar)							 _D^C
 	"Clutch charges up his 'Charge Shot' level!"
 
 <#f0f000>:STAR STRIKES!:</>
