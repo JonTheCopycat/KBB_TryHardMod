@@ -4,6 +4,93 @@
 |---------------------------------------------------/
 
 
+Clutch:
+1. Wavedash C Cost increased (100 -> 200)
+
+
+Glitch:
+1. 214B No longer invul after superflash ends.
+
+
+MK:
+1. Airdash velocity changed:
+	* Goes down faster at the start
+	* No longer starts to fall down faster after some time.
+2. Run Speed Increased: 4.5 -> 5.2 (used to be 5.0 in the past)
+3. Some animations tweaked slightly.
+4. Wavedash A and C Given Proper C cancels.
+5. Dash Attack now extends MK's hurtbox during endlag.
+6. 5c and j.5c given extra properties:
+	* j.5c now has less vertical velocity upwards when done normally.
+	* Both moves get increased height when C is held.
+7. 2c velocity tweaked to be snappier. Slight Distance Buff.
+	* Recovers 1 frame sooner.
+	* Retains more exit velocity in the air.
+8. 4c:
+	* Startup Reduced (f3 -> f2)
+	* Active Frames Reduced (8 -> 5)
+	* Total Length Reduced (30 -> 20)
+	* Removed Dash Cancel on Success.
+	* Reduced time to land on Success.
+9. Portrait no longer blurry
+
+
+Junichi:
+1. Baton 4b animation and hitbox changed and buffed.
+	* Sweaping Hitbox that knocks down. Less Diagonal Up Reach, but Much Thicker Hitbox
+	* Now cancels into 5b.
+2. Baton j.5b downwards range reduced.
+3. Baton j.5c.b animation polished.
+4. Baton j.5c.c reworked with a new animation.
+5. Kick Backturned 5a endlag reduced (14 -> 11)
+	* is now +0 on block and +3 on hit (if no cancel)
+6. Backturned 2b hurtbox made more accurate (slightly more evasive. not enough to dodge jabs though)
+7. Backturned 5b animation polished slightly
+	* Startup reduced (f10 -> f9)
+8. Kick 4c:
+	* Can no longer jump cancel out of backturned in the first 5 frames of idle after this move.
+	* Can no longer backdash out of backturned in the first 10 frames of idle after this move.
+	* Backdash during backturned now exits backturned.
+	* Distance Travelled decreased slightly.
+9. Kick 6c startup increased (f10 -> f12)
+	* Distance Travelled increased.
+	* Removed unnecessary hitboxes.
+10. Distance Travelled when Crouch blocking out of backturned reduced.
+	* Can no longer jump cancel this animation.
+11. Punch 6c:
+	* Jump cancel delayed by 2 frames (f6 -> f8)
+	* Dash Cancel delayed by 2 frames (f7 -> f9)
+	* Wavedash Cancel delayed by 2 frames (f7 -> f9)
+12. Baton Ready Stance:
+	* Delayed Jump Cancel and Backdash Cancel Significantly (f4 -> f13).
+	* Delayed Dash Cancel (f4 -> f10)
+	* Can now buffer Dash and back dash by holding forward or backwards.
+13. Baton 5c.c: Endlag increased
+14. 214B: Endlag Increased
+
+
+Leon: Rejoice
+1. When performing a backdash or a backdash cancel, you can now perform a wavedash by inputting just 23. There is a delay for the backdash cancel version.
+2. Wavedash B now groundbounces
+3. Wavedash C now hits OTG
+4. j.a range reduced.
+5. j.c Upwards Range reduced
+
+
+Sareo:
+1. Backsway Input Made slightly more leniant.
+
+
+Vei: He works better now
+1. New Portrait
+2. Wavedash C: range reduced
+	* Now costs 1/4 Bar
+3. 2c now costs 1/4 bar instead of 1/5 bar.
+4. Cancelling moves as the clone is now much smoother and responsive.
+5. Removed Repeated Clone Spawning Sounds.
+6. Wavedash A Changed into a kick that cancels into a punch if A is pressed again.
+7. Wavedashing out of 5b will more likely cause both Vei and the Clone to Wavedash simultaneously. Still not perfect (they can still be desynced here).
+
 
 ===================================================================================================================================
 |-----------------------------------------------------/
