@@ -828,7 +828,10 @@ triggerall = command = "c"
 Triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = movecontact
-trigger2 = stateno = [200, 399] || stateno = [412, 414] || stateno = [900, 999]
+trigger2 = stateno = [412, 414]
+trigger3 = movecontact
+trigger3 = stateno = [200, 399] || stateno = [900, 999]
+;stateno = [200, 399] || stateno = [900, 999]
 
 ;For AI In Comboes
 [State -1, C]
@@ -840,8 +843,9 @@ triggerall = numhelper(3500) = 0
 triggerall = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 Triggerall = statetype != A
 trigger1 = movecontact
-trigger1 = stateno = [200, 399] || stateno = [412, 414] || stateno = [900, 999]
-trigger1 = stateno = 410
+trigger1 = stateno = [412, 414]
+trigger2 = movecontact
+trigger2 = stateno = [200, 399] || stateno = [900, 999]
 
 
 
