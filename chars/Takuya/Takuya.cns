@@ -772,6 +772,7 @@ ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -5
 air.velocity = -3,-1
+Fall.recovertime = 30
 Fall = 0
 Envshake.time = 5
 
@@ -800,7 +801,7 @@ ground.velocity = -8
 air.velocity = -3,-1
 Fall = 0
 Envshake.time = 5
-Fall.recovertime = 16 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 30
 
 [State 200, 5 Strikes]
 type = ChangeState
@@ -1547,10 +1548,9 @@ animtype  = Medium
 damage    = 45
 hitflag = MAFD
 guardflag = MA
-pausetime = 20,30
-ground.hittime  = 16
-air.hittime = 16
-guard.pausetime = 10,24
+pausetime = 20,20
+ground.hittime  = 60 
+guard.pausetime = 20,30
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-55
@@ -1584,9 +1584,8 @@ Hitflag = MAFD
 guardflag = MA
 pausetime = 40,40
 hitsound   = 8,1
-ground.hittime  = 16
-air.hittime = 16
-guard.pausetime = 10,24
+guard.pausetime = 20,30
+ground.hittime = 60
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-55
@@ -1618,10 +1617,8 @@ animtype  = Medium
 damage    = 45
 hitflag = MAFD
 guardflag = MAF
-pausetime = 20,20
-ground.hittime  = 16
-air.hittime = 16
-guard.pausetime = 10,24
+pausetime = 20,30
+ground.hittime  = 60
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-55
@@ -1685,7 +1682,7 @@ value = 24000
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "holdup" && movecontact && var(3) = 0 
+trigger1 = command = "holdup" && movehit && var(3) = 0 
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
 ctrl = 1
@@ -2421,6 +2418,12 @@ anim = 401
 velset = 11,0
 sprpriority = 5
 
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1 
+flag = NoShadow
+
 [State -2, Counterhit TSP]
 type = Helper
 Triggerall = numhelper(4020) = 0
@@ -2489,7 +2492,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 20
+damage    = 30
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,0
@@ -2540,6 +2543,12 @@ anim = 402
 velset = 9,-5
 sprpriority = 5
 
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1 
+flag = NoShadow
+
 [State -2, Counterhit TSP]
 type = Helper
 Triggerall = numhelper(4020) = 0
@@ -2606,7 +2615,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 20
+damage    = 30
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,0
@@ -2651,6 +2660,12 @@ anim = 403
 velset = 5,-6
 sprpriority = 5
 
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1 
+flag = NoShadow
+
 [State -2, Counterhit TSP]
 type = Helper
 Triggerall = numhelper(4020) = 0
@@ -2716,7 +2731,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 20
+damage    = 30
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,0
@@ -3055,6 +3070,12 @@ anim = 401
 velset = ifelse(helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466,12,12),0
 sprpriority = 0
 
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1 
+flag = NoShadow
+
 [State 0, DestroySelf]
 type = DestroySelf
 trigger1 = root,movetype = H
@@ -3126,7 +3147,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 5
+damage    = 20
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,8
@@ -3188,6 +3209,12 @@ anim = 402
 velset = ifelse(helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466,12,10),ifelse(helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466,-8,-6)
 sprpriority = 0
 
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1 
+flag = NoShadow
+
 [State 0, DestroySelf]
 type = DestroySelf
 trigger1 = root,movetype = H
@@ -3259,7 +3286,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 10
+damage    = 20
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,8
@@ -3317,6 +3344,11 @@ anim = 403
 velset = ifelse(helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466,8,6),ifelse(helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466,-9,-7)
 sprpriority = 0
 
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1 
+flag = NoShadow
 [State 0, DestroySelf]
 type = DestroySelf
 trigger1 = root,movetype = H
@@ -3388,7 +3420,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 15
+damage    = 20
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,8
@@ -3513,7 +3545,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Hard
-damage    = 20 - ifelse(prevstateno = [23400,23500],10,0)
+damage    = 25 - ifelse(prevstateno = [23400,23500],10,0)
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,0
@@ -4613,7 +4645,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 10
+damage    = 15
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,0
@@ -4746,7 +4778,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 10
+damage    = 15
 hitflag = MAFD
 guardflag = MAF
 pausetime = 0,0
@@ -4877,7 +4909,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 25
+damage    = 30
 hitflag = MAFD
 guardflag = MAF
 pausetime = 5,10
@@ -4990,7 +5022,7 @@ triggerall = !movecontact && time <= 15
 trigger1 = 1
 attr = S, NA
 animtype  = Hard
-damage    = 20
+damage    = 30
 hitflag = MAFD
 guardflag = MA
 pausetime = 15,10
@@ -5253,7 +5285,7 @@ triggerall = AnimElem = 11
 trigger1 = 1
 attr = S, NA
 animtype  = Hard
-damage    = 10
+damage    = 20
 hitflag = MAFD
 guardflag = MA
 pausetime = 15,10
@@ -5492,11 +5524,12 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 13 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = 5,-3
+ground.velocity = 3,-3
 guard.velocity = 15
 airguard.velocity = 7,-2
-air.velocity = 5,2
+air.velocity = 2,-1
 Fall = 1
+yaccel = .22
 Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
 Envshake.time = 15
 persistent = 0
@@ -6397,28 +6430,7 @@ value = 1
 [State 0, AssertSpecial]
 type = AssertSpecial
 trigger1 = 1 
-;flag = Intro
-;flag2 = Invisible
-;flag3 = RoundNotOver
-;ignorehitpause = 
-;persistent = 
-;-----------------------
-;flag = NoBarDisplay
-;flag = NoBG
-;flag = NoFG
-;flag = NoStandGuard
-;flag = NoCrouchGuard
-;flag = Noairguard
-;flag = Noautoturn
-;flag = Nojugglecheck
-;flag = NoKOSnd
-;flag = NoKOSlow
 flag = NoShadow
-;flag = GlobalNoShadow
-;flag = NoMusic
-;flag = NoWalk
-;flag = TimerFreeze
-;flag = Unguardable
 
 
 [State 0, Damage Proration]
@@ -6441,6 +6453,7 @@ damage    = ifelse(enemy,movetype = A, 80, 40)
 hitflag = MAF
 guardflag = HA
 pausetime = ifelse(enemy,movetype = A, 30, 25),ifelse(enemy,movetype = A, 20, 15)
+ground.hittime = 10
 guard.pausetime = 10,0
 guard.hittime = 3
 sparkno = 2
@@ -7632,7 +7645,7 @@ animtype  = Medium
 damage    = 10
 hitflag = MAFD
 guardflag = LA
-pausetime = 4,12
+pausetime = 10,20
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-55
@@ -7641,11 +7654,12 @@ guardsound = 6,10
 ground.type = Low
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1,-3
+ground.velocity = -1,-2
 air.hittime  = 35 + ifelse(enemy,movetype = A, 7,0)
 down.hittime = 45
+;down.velocity = -5,-5
 fall.recovertime = 40
-air.velocity = -1,-3
+air.velocity = -1,-2
 Envshake.time = 5
 
 [State 200, 1]
@@ -7659,7 +7673,7 @@ animtype  = Heavy
 damage    = 15
 hitflag = MAFD
 guardflag = LA
-pausetime = 5,6
+pausetime = 12,10
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-55
@@ -7812,7 +7826,7 @@ x = .55
 [State 0, Hit/Block Velocity]
 type = VelSet
 trigger1 = movecontact = 1
-y = -3
+y = -2.5
 x = 2
 
 
@@ -7850,8 +7864,8 @@ hitsound   = S0,2
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
-ground.velocity = 1,-5
-air.velocity = -1,-4
+ground.velocity = 1,-4
+air.velocity = -1,-3
 Fall = 0
 fall.recovertime = 30
 guard.cornerpush.veloff = -5
@@ -8507,6 +8521,7 @@ ground.type = High
 ground.slidetime = 12
 ground.velocity = -3,-10
 air.velocity = -3,-10
+yaccel = .33
 Fall = 1
 Envshake.time = 20
 fall.recover = 0
@@ -8529,6 +8544,7 @@ guard.pausetime = 15,15
 guard.hittime  = 10
 airguard.hittime  = 10
 sparkno = 2
+yaccel = .3
 guard.sparkno = s7000
 sparkxy = -8,-25
 hitsound   = 5,4
@@ -9956,7 +9972,7 @@ value = 653
 
 [State 0, ChangeAnim]
 type = ChangeAnim
-trigger1 = time = 1 && root,command = "holddown" && prevstateno = 651
+trigger1 = time = 1 && root,command = "holddown" 
 value = 654
 
 [State 0, Explod]
@@ -10087,7 +10103,7 @@ y = 0
 [State 0, Helper]
 type = Helper
 trigger2 = movecontact
-trigger1 = (Time = 180 || (pos y >= -1 && anim = 654 || (BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30) && vel y = 0 || (BackEdgeBodyDist < 10 || FrontEdgeBodyDist < 10) && vel y = 0) || root,command = "c") && time >= 25 
+trigger1 = (Time = 180 || (pos y >= -1 && anim = 654 || (BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30) && vel y = 0 || (BackEdgeBodyDist < 10 || FrontEdgeBodyDist < 10) && vel y = 0) || root,command = "c") && time >= 5 
 helpertype = normal ;player
 name = "not Charged Glitch Bomb"
 ID = 640
@@ -10106,21 +10122,21 @@ persistent = 0
 [State 0, RemoveExplod]
 type = RemoveExplod
 trigger2 = movecontact
-trigger1 = (Time = 180 || (pos y >= -1 && anim = 654 || (BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30) && vel y = 0 || (BackEdgeBodyDist < 10 || FrontEdgeBodyDist < 10) && vel y = 0) || root,command = "c") && time >= 25 
+trigger1 = (Time = 180 || (pos y >= -1 && anim = 654 || (BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30) && vel y = 0 || (BackEdgeBodyDist < 10 || FrontEdgeBodyDist < 10) && vel y = 0) || root,command = "c") && time >= 5 
 id = 660
 persistent = 0
 
 [State 0, RemoveExplod]
 type = RemoveExplod
 trigger2 = movecontact
-trigger1 = (Time = 180 || (pos y >= -1 && anim = 654 || (BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30) && vel y = 0 || (BackEdgeBodyDist < 10 || FrontEdgeBodyDist < 10) && vel y = 0) || root,command = "c") && time >= 25 
+trigger1 = (Time = 180 || (pos y >= -1 && anim = 654 || (BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30) && vel y = 0 || (BackEdgeBodyDist < 10 || FrontEdgeBodyDist < 10) && vel y = 0) || root,command = "c") && time >= 5 
 id = 661
 persistent = 0
 
 [State 0, RemoveExplod]
 type = RemoveExplod
 trigger2 = movecontact
-trigger1 = (Time = 180 || (pos y >= -1 && anim = 654 || (BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30) && vel y = 0 || (BackEdgeBodyDist < 10 || FrontEdgeBodyDist < 10) && vel y = 0) || root,command = "c") &&  time >= 25 
+trigger1 = (Time = 180 || (pos y >= -1 && anim = 654 || (BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30) && vel y = 0 || (BackEdgeBodyDist < 10 || FrontEdgeBodyDist < 10) && vel y = 0) || root,command = "c") &&  time >= 5 
 id = 662
 persistent = 0
 ;ignorehitpause = 
@@ -10128,7 +10144,8 @@ persistent = 0
 
 [State 0, DestroySelf]
 type = DestroySelf
-trigger1 = (Time = 180 || (pos y >= -1 && anim = 654 || (BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30) && vel y = 0 || (BackEdgeBodyDist < 10 || FrontEdgeBodyDist < 10) && vel y = 0) || root,command = "c") && time >= 25 
+trigger2 = movecontact
+trigger1 = (Time = 180 || (pos y >= -1 && anim = 654 || (BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30) && vel y = 0 || (BackEdgeBodyDist < 10 || FrontEdgeBodyDist < 10) && vel y = 0) || root,command = "c") && time >= 5 
 ;ignorehitpause = 
 ;persistent = 
 
@@ -10549,8 +10566,8 @@ damage    = 35
 hitflag = MAFD
 guardflag = MA
 pausetime = 5,10
-guard.pausetime = 2,5
-guard.hittime = 10
+guard.pausetime = 2,10
+guard.hittime = 20
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -10562,6 +10579,7 @@ ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -.5,-7
 air.velocity = -.5,-7
+yaccel = .3
 Fall = 1
 Fall.recovertime = 70 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
@@ -10745,7 +10763,7 @@ value = 50
 ctrl = 1
 
 ;------------------------------------------------------------------------------------------------
-; FAST FALL
+; FastFALL
 [Statedef 55]
 type    = A
 physics = A
@@ -10769,7 +10787,7 @@ trans = add
 type = VelSet
 trigger1 = animelem = 1
 x = ifelse(prevstateno=600||prevstateno=610,12,vel x)
-y = 10
+y = 11
 
 [State 0, ChangeState]
 type = ChangeState

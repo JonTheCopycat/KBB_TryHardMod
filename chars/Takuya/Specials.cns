@@ -55,24 +55,24 @@ ownpal = 0
 supermovetime = 0
 pausemovetime = 0
 
-[State 0, Helper]
-type = Helper
-trigger1 = AnimElem = 20
-helpertype = normal ;player
-name = "236A Delay"
-ID = 19004
-stateno = 19004
-pos = 9999,9999
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 0
-supermovetime = 0
-pausemovetime = 0
+;[State 0, Helper]
+;type = Helper
+;trigger1 = AnimElem = 20 ; why did i have this??
+;helpertype = normal ;player
+;name = "236A Delay"
+;ID = 19004
+;stateno = 19004
+;pos = 9999,9999
+;postype = p1    ;p2,front,back,left,right
+;facing = 1
+;keyctrl = 0
+;ownpal = 0
+;supermovetime = 0
+;pausemovetime = 0
 
 [State 0, ChangeAnim]
 type = ChangeAnim
-trigger1 = !movecontact &&  AnimElem = 20
+trigger1 = !movecontact &&  AnimElem = 19
 value = 20010
 ;elem = 1
 ;ignorehitpause = 
@@ -89,7 +89,7 @@ animtype  = Medium
 damage    = 2
 hitflag = MAF
 guardflag = MAFD
-pausetime = 3,50
+pausetime = 3,5
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -98,8 +98,9 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 50
-ground.velocity = -1,0
-air.velocity = -1,0
+ground.velocity = -3,-2
+air.velocity = -3,-2
+yaccel = .11
 Envshake.time = 7
 getpower = 0
 Fall = 1
@@ -107,7 +108,7 @@ fall.recover = 0
 
 [State 0, StateTypeSet]
 type = StateTypeSet
-trigger1 = AnimElem = 20
+trigger1 = AnimElem = 19
 statetype = A       ;S,A,C,L
 movetype = A        ;I,A,H
 physics = N     ;A,C,S,N
@@ -116,7 +117,7 @@ physics = N     ;A,C,S,N
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 20
+trigger1 = AnimElem = 19
 x = -4
 y = -7
 ;ignorehitpause = 
@@ -124,32 +125,32 @@ y = -7
 
 [State 200, Gravity]
 type = VelAdd
-trigger1 = vel x > 0 && AnimElemTime(20) > 0 && AnimElemTime(26) < 0
+trigger1 = vel x > 0 && AnimElemTime(19) > 0 && AnimElemTime(25) < 0
 x = -0.11
 
 [State 200, Gravity]
 type = VelAdd
-trigger1 = vel x < 0  && AnimElemTime(20) > 0 && AnimElemTime(26) < 0
+trigger1 = vel x < 0  && AnimElemTime(19) > 0 && AnimElemTime(25) < 0
 x = 0.11
 
 [State 200, Gravity]
 type = VelAdd
-trigger1 = pos y < 0 && AnimElemTime(20) > 0 && AnimElemTime(26) < 0
+trigger1 = pos y < 0 && AnimElemTime(19) > 0 && AnimElemTime(25) < 0
 y = 0.44
 
 [State 0, VelAdd]
 type = VelSet
-trigger1 = pos y >= 0  && AnimElemTime(20) > 0 && AnimElemTime(26) < 0
+trigger1 = pos y >= 0  && AnimElemTime(19) > 0 && AnimElemTime(25) < 0
 y = 0 
 
 [State 0, PosSet]
 type = PosSet
-trigger1 = pos y >= 0 && AnimElemTime(20) > 0 && AnimElemTime(26) < 0
+trigger1 = pos y >= 0 && AnimElemTime(19) > 0 && AnimElemTime(25) < 0
 y = 0
 
 [State 0, StateTypeSet]
 type = StateTypeSet
-trigger1 = AnimElem = 26
+trigger1 = AnimElem = 25
 statetype = S       ;S,A,C,L
 movetype = A        ;I,A,H
 physics = S     ;A,C,S,N
@@ -159,19 +160,19 @@ physics = S     ;A,C,S,N
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 26
+trigger1 = AnimElem = 25
 x = -3
 y = 0
 ;ignorehitpause = 
 ;persistent = 
 [State 0, PosSet]
 type = PosSet
-trigger1 =  AnimElem = 26
+trigger1 =  AnimElem = 25
 y = 0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 28
+trigger1 = AnimElem = 25
 x = 3
 ;ignorehitpause = 
 ;persistent = 
@@ -199,7 +200,7 @@ ownpal = 1
 
 [State 0, C - Start]
 type = Helper
-trigger1 = AnimElem = 20
+trigger1 = AnimElem = 19
 helpertype = normal
 name = "space Daniel 2 just in case"
 ID = 20005
@@ -284,7 +285,7 @@ elem = 1
 
 [State 0, TargetBind]
 type = TargetBind
-trigger1 = movehit
+trigger1 = !(BackEdgeBodyDist < 65 || FrontEdgeBodyDist < 65)
 time = 1
 pos = 0,-10
 ;ignorehitpause = 
@@ -661,7 +662,7 @@ value = 20010
 ; Lunar Ascension
 ;-------------------------------------------------------------------------------
 [Statedef 21000]
-type    = S
+type    = A
 movetype= A
 physics = S
 juggle  = 0
@@ -797,6 +798,7 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 80
 ground.velocity = -4,-8
+yaccel = .33
 air.velocity = -4,-8
 down.velocity = -5,-5
 fall.recover = 0
@@ -1217,7 +1219,7 @@ value = 22000
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "DD" && time >= 15
+trigger1 = command = "DD" && time >= 3
 value = 55
 ctrl = 1
 
@@ -1232,13 +1234,13 @@ ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "holdup" && helper(640),movehit && var(3) = 0 && time >= 3
+trigger1 = command = "holdup" && time >= 3
 value = 45
 ctrl = 1 
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = power >= 200 && command = "c" && command = "holddown" && time >= 3 ;NO
+trigger1 = power >= 200 && command = "c" && command = "holddown" && time >= 3 
 value = 670
 ctrl = 0
 
@@ -1254,7 +1256,7 @@ ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
 triggerall = numhelper(3500) = 0
-trigger1 = prevstateno = 620 && power >= 500 && command = "c" && time >= 3
+trigger1 = power >= 500 && command = "c" && time >= 3
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && time >= 3  && power >= 500 && prevstateno = 620
 value = 650
 ctrl = 0
@@ -1561,7 +1563,7 @@ getpower = 0
 trigger1 = time%2 = 0
 attr = A, SA
 animtype  = Heavy
-damage    = 7
+damage    = 8
 hitflag = MAFD
 guardflag = MAF
 pausetime = 10,10
@@ -2282,7 +2284,7 @@ persistent = 0
 
 [State 0, Explod]
 type = Explod
-trigger1 = AnimElem = 4
+trigger1 = AnimElem = 1
 trigger1 = helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466
 anim = 6000
 ID = 6000
@@ -2615,7 +2617,7 @@ juggle  = 0
 ctrl = 0
 anim = 401
 velset = 15,0
-sprpriority = 1
+sprpriority = 3
 
 [State -2, Counterhit TSP]
 type = Helper
@@ -2715,7 +2717,7 @@ juggle  = 0
 ctrl = 0
 anim = 402
 velset = 13,-8
-sprpriority = 1
+sprpriority = 3
 
 [State -2, Counterhit TSP]
 type = Helper
@@ -2809,7 +2811,7 @@ juggle  = 0
 ctrl = 0
 anim = 403
 velset = 8,-11
-sprpriority = 1
+sprpriority = 3
 
 [State -2, Counterhit TSP]
 type = Helper
@@ -2902,7 +2904,7 @@ juggle  = 0
 ctrl = 0
 anim = 401
 velset = -15,0
-sprpriority = 1
+sprpriority = 3
 
 [State 0, Turn]
 type = Turn
@@ -3007,7 +3009,7 @@ juggle  = 0
 ctrl = 0
 anim = 402
 velset = -13,-8
-sprpriority = 1
+sprpriority = 3
 
 [State 0, Turn]
 type = Turn
@@ -3104,7 +3106,7 @@ juggle  = 0
 ctrl = 0
 anim = 403
 velset = -8,-11
-sprpriority = 1
+sprpriority = 3
 
 [State 0, Turn]
 type = Turn
@@ -3200,7 +3202,7 @@ juggle  = 0
 ctrl = 0
 anim = 23402
 velset = -13,8
-sprpriority = 1
+sprpriority = 3
 
 [State -2, Counterhit TSP]
 type = Helper
@@ -3293,7 +3295,7 @@ juggle  = 0
 ctrl = 0
 anim = 23403
 velset = -8,11
-sprpriority = 1
+sprpriority = 3
 
 [State -2, Counterhit TSP]
 type = Helper
@@ -3385,7 +3387,7 @@ juggle  = 0
 ctrl = 0
 anim = 23402
 velset = 13,8
-sprpriority = 1
+sprpriority = 3
 
 [State 0, Turn]
 type = Turn
@@ -3482,7 +3484,7 @@ juggle  = 0
 ctrl = 0
 anim = 23403
 velset = 8,11
-sprpriority = 1
+sprpriority = 3
 
 [State 0, Turn]
 type = Turn
@@ -3656,11 +3658,11 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Hard
-damage    = 5
+damage    = 10
 hitflag = MAFD
 guardflag = MA
-pausetime = 0,0
-guard.pausetime = 0,15
+pausetime = 0,10
+guard.pausetime = 0,25
 guard.hittime = 0
 sparkno = 2
 guard.sparkno = 13000
@@ -3977,7 +3979,7 @@ triggerall = AnimElem = 19
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 50
+damage    = 75
 kill = 0 
 hitflag = MAFD
 guardflag = MA
@@ -6588,12 +6590,13 @@ supermovetime= 0
 
 [State 0, PowerAdd]
 type = PowerAdd
+trigger1 = time >= 180
 trigger1 = time%3 = 0
-value = -1 - time/120
+value = -1 - time/180
 
 [State 200, End]
 type = Changestate
-trigger1 = power <= 0 || root,stateno = 27015
+trigger1 = power <= 0  && root,stateno != [20000,25000] || root,stateno = 27015
 value = 430
 
 ;-------------------------------------------------------------------------------

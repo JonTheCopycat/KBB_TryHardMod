@@ -81,6 +81,35 @@ Sareo:
 1. Backsway Input Made slightly more leniant.
 
 
+Takuya:
+1. j.5a: Doesn't go as high on hit
+	* Launch angle slightly tweaked
+2. j.5b: Launch angle slightly tweaked
+3. 5B goes more distance 
+4. 5[B] has less blockstun (he is now punishable if he does 5[B] -> 2B  on IB)
+5. J5[B] is more active
+6. All versions of 2C do more damage (44, -> idk, 63 -> 85, 91 -> 114)
+7. All versions of 5C do more damage (30 -> 40, 40 -> 60,)
+8. 5C has less recovery
+9. 5[C] has less startup
+10. 6C hitbox tweaked 
+11. Enhanced J2[C] is less minus (-10 -> -3)
+12. Enhanced J5[C] can now aim downwards (yo crossup mix doesnt go away anymore)
+13. 214A can now cancel into J5[C]
+14. Takuya can no longer soft fastfall during 214A
+15. Takuya can no longer jump again after exhausting his double jump if he whiffed 214A  
+16. Takuya can now always jump after hitting 214A (even if he already exhausted his double jump)
+17. 236A no longer has a cooldown
+18. 214B is more minus (-12 -> -17)
+19. 214[B] is less minus (-14 -> -4) 
+20. 236[B] does more damage per hit (7 -> 8)
+21. 214C has a 3 second grace period before it starts taking meter
+22. 214C takes meter slightly slower
+23. 214C buff no longer goes away while doing a super (like 6[C]..)
+24. 236C does 25 extra damage for all versions (not true damage) (250 -> 275, 375 -> 400, 475 -> 500)
+25. Takuya's fastfall falls slightly faster
+
+
 Vei: He works better now
 1. New Portrait
 2. Wavedash C: range reduced
