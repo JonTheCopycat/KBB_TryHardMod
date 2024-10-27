@@ -912,8 +912,8 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Heavy
-damage    = 15
-Hitflag = MAF
+damage    = 20
+Hitflag = MAFD
 guardflag = MAF
 pausetime = 0,25
 guard.pausetime = 3,6
@@ -999,7 +999,7 @@ value = 628
 
 [State 0, Helper]
 type = Helper
-trigger1 = Time = 240 || movecontact || (vel x = 0 && vel y = 0) || command = "c" && time >= 14
+trigger1 = Time = 180 || movecontact || (vel x = 0 && vel y = 0) || command = "c" && time >= 14
 helpertype = normal ;player
 name = "Explosion"
 ID = 21010
@@ -1016,7 +1016,7 @@ inheritJuggle = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = Time = 240 || movecontact || (vel x = 0 && vel y = 0) || command = "c" && time >= 14
+trigger1 = Time = 180 || movecontact || (vel x = 0 && vel y = 0) || command = "c" && time >= 14
 value = 21630
 ctrl = 1
 
@@ -1278,6 +1278,7 @@ poweradd = -1000
 [State 0, Charge]
 type = changestate
 triggerall = animElem = 3
+triggerall = helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466
 trigger1 = command = "hold_b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 22015
@@ -2097,7 +2098,8 @@ persistent = 0
 
 [State 0, Charge]
 type = changestate
-triggerall = animElem = 2
+triggerall = animElem = 2 
+triggerall = helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466
 trigger1 = command = "hold_b"
 value = 23005
 

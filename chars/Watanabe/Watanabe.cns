@@ -2457,6 +2457,12 @@ map = "juggle"
 value = 10
 persistent = 0
 
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = 1
+value = 1
+
+
 [State 0, Damage Proration]
 type = ParentVarAdd
 trigger1 = movehit
@@ -2525,7 +2531,7 @@ channel = -1
 [State 310, Normal]
 type = HitDef
 getpower = 0
-triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 triggerall = enemy,movetype != A
 trigger1 = 1
@@ -2613,6 +2619,11 @@ map = "juggle"
 value = 10
 persistent = 0
 
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = 1
+value = 1
+
 [State 0, Damage Proration]
 type = ParentVarAdd
 trigger1 = movehit
@@ -2674,7 +2685,7 @@ value = movehit
 [State 310, Normal]
 type = HitDef
 getpower = 0
-triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 triggerall = enemy,movetype != A
 trigger1 = 1
@@ -2820,7 +2831,7 @@ value = 1
 type = MapSet
 trigger1 = 1 
 map = "Main"
-value = ifelse(parent,numhelper(401) > 1 && helper(401),ID != ID,0,1)
+value = 1 ;ifelse(parent,numhelper(401) > 1 && helper(401),ID != ID,0,1)
 
 [State 0, AttackDist]
 type = AttackDist
@@ -4817,7 +4828,7 @@ ground.hittime  = 150
 ground.velocity = 0
 air.velocity = 0
 p2stateno = 4000
-;p2facing = 0
+p2facing = 0
 p2getp1state = 0
 Envshake.time = 0
 
@@ -4853,11 +4864,12 @@ inheritJuggle = 0
 
 [State 0, TargetBind]
 type = TargetBind
+triggerall = enemy,stateno != 4100
 trigger1 = movehit
-time = 10
+triggerall = time < 30
+time = 1
 pos = 50,0
 ;ignorehitpause = 
-persistent = 0
 
 [State 200, End]
 type = ChangeState
@@ -4932,7 +4944,7 @@ type = HitDef
 trigger1 = time%10 = 0
 animtype  = Heavy
 attr = S, NT
-damage = 20
+damage = 21
 hitflag = MAFD
 guardflag = MA
 ground.hittime = 20
@@ -6112,10 +6124,10 @@ inheritJuggle = 1
 pausemovetime=9999999
 supermovetime=9999999
 
-[State 0, PlayerPush]
-type = PlayerPush
-trigger1 = time >= 15
-value = 0
+;[State 0, PlayerPush]
+;type = PlayerPush
+;trigger1 = time >= 15
+;value = 0
 ;ignorehitpause = 
 ;persistent = 
 
@@ -7642,6 +7654,11 @@ type = ScreenBound
 trigger1 = 1
 value = 1
 
+[State 20, 2]
+type = Turn
+triggerall = time = 0
+trigger1 = P2BodyDist X < -20
+
 [State 0, Helper]
 type = Helper
 trigger1 = time >= 180 - map(ThunderTime) && root,movetype != H && time > 1 && numhelper(621 + ID) = 0
@@ -7695,7 +7712,7 @@ attackdist = 45
 [State 20, 2]
 type = Turn
 triggerall = time = 0
-trigger1 = P2BodyDist X < -10
+trigger1 = P2BodyDist X < -20
 
 [State 0, Helper]
 type = Helper
@@ -7873,6 +7890,11 @@ type = ScreenBound
 trigger1 = 1
 value = 1
 
+[State 20, 2]
+type = Turn
+triggerall = time = 0
+trigger1 = P2BodyDist X < -20
+
 [State 0, Helper]
 type = Helper
 trigger1 = time >= 180 - map(ThunderTime) && root,movetype != H && time > 1  && numhelper(621 + ID) = 0
@@ -7947,7 +7969,7 @@ attackdist = 45
 [State 20, 2]
 type = Turn
 triggerall = time = 0
-trigger1 = P2BodyDist X < -10
+trigger1 = P2BodyDist X < -20
 
 
 [State 0, Helper]
