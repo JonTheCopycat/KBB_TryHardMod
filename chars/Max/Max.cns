@@ -491,7 +491,7 @@ ctrl = 0
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -669,7 +669,7 @@ ctrl = 0
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -909,14 +909,6 @@ triggerall = prevstateno = 224
 trigger1 = command = "up"
 trigger2 = command = "holdup"
 value = 40
-
-[State 200, Wavedash Cancel]
-type = ChangeState
-triggerall = movecontact
-Trigger1 = command = "WD" && command != "NotWD"
-trigger2 = roundstate = 2 && ailevel > 5 && random < (ailevel * 100)
-value = 30
-ctrl = 1
 
 [State 200, Stance A - SHOOT]
 type = ChangeState
@@ -1891,7 +1883,8 @@ animtype  = Light
 damage    = 20
 hitflag = MAFD
 guardflag = LA
-pausetime = 5,12
+pausetime = 5,24
+guard.pausetime = 5,12
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2425,7 +2418,7 @@ type = ChangeState
 triggerall = movehit
 Trigger1 = command = "WD" && command != "NotWD"
 trigger2 = roundstate = 2 && ailevel > 5 && random < (ailevel * 100)
-value = 30
+value = 35
 ctrl = 1
 
 [State 230, Jump Cancel]
@@ -3553,14 +3546,19 @@ elem = 1
 ;value = 1
 ;movecamera = 0,0
 
+[State 632, VelSet]
+type = ChangeState
+trigger1 = movecontact = 1
+value = 493
+
 [State 632, HitDef] 
 type = HitDef
-trigger1 = !movecontact
+trigger1 = !movecontact && map(juggle) < 100
 attr = A, NP
 damage = 0
 guardflag = MA
 hitflag = MAFD
-pausetime = 0,8
+pausetime = 0,4
 guard.pausetime= 0,4
 sparkxy = 10,-15
 sparkno = s6051
@@ -3572,12 +3570,6 @@ ground.velocity = -3,-4
 air.velocity = -2.5,-3
 fall = 1
 fall.recovertime = 60 + ifelse(enemy,movetype = A, 7, 0)
-p1stateno = 493
-
-[State 632, VelSet]
-type = ChangeState
-trigger1 = movecontact = 1
-value = 493
 
 ;[State 632, End]
 ;type = ChangeState
@@ -4230,6 +4222,14 @@ guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 ground.cornerpush.veloff = -5
 air.cornerpush.veloff = -4
+
+[State 200, Wavedash Cancel]
+type = ChangeState
+triggerall = movecontact
+Trigger1 = command = "WD" && command != "NotWD"
+trigger2 = roundstate = 2 && ailevel > 5 && random < (ailevel * 100)
+value = 35
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
