@@ -802,7 +802,7 @@ triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 50
+value = 30
 
 [State 0, Voice]
 type = PlaySnd
@@ -961,7 +961,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 45 ;seethe.
+value = 25 ;seethe. ;no
 
 [State 0, Voice]
 type = PlaySnd
@@ -2859,7 +2859,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 10	
 
 [State 0, Helper Guarded]
 type = RootMapSet
@@ -3181,7 +3181,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 3
+value = 5
 
 [State 1010, Helper Attack Scale]
 type = AttackMulSet
