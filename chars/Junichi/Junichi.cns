@@ -558,7 +558,7 @@ airguard.cornerpush.veloff = -2
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -1066,7 +1066,7 @@ airguard.cornerpush.veloff = -4
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 2 - Weave]
@@ -1413,7 +1413,7 @@ airguard.cornerpush.veloff = -4
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 2 - Weave]
@@ -2408,7 +2408,7 @@ airguard.cornerpush.veloff = -4
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 2 - Big Kick]
@@ -2743,7 +2743,7 @@ type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 2 - Big Kick]
@@ -3036,7 +3036,7 @@ type = Explod
 trigger1 = AnimElem = 3
 anim = 10000
 ID = 10000
-pos = 30,-30
+pos = 40,-30
 postype = p1  ;p2,front,back,left,right
 facing = 1
 vfacing = 1
@@ -3073,7 +3073,7 @@ x = 4
 [State 0, VelSet]
 type = VelSet
 trigger1 = Animelem = 2
-x = 4
+x = 5
 
 [State 200, 1]
 type = HitDef
@@ -3107,7 +3107,7 @@ airguard.cornerpush.veloff = -4
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 2 - Big Kick]
@@ -3734,7 +3734,7 @@ airguard.cornerpush.veloff = -4
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 2 - Big Kick]
@@ -5504,7 +5504,7 @@ airguard.cornerpush.veloff = -4
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 2 - Big Kick]
@@ -5850,7 +5850,7 @@ airguard.cornerpush.veloff = -7
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -6193,7 +6193,7 @@ ctrl = 1
 type = ChangeState
 triggerall = time >= 8
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 1
 
 ;[State 200, Down+C Stance Into Sword]
@@ -6209,7 +6209,7 @@ ctrl = 1
 
 [State 200, AA]
 type = ChangeState
-triggerall = time >= 3
+triggerall = time >= 2
 triggerall = command = "down" || command = "holddown"
 trigger1 = command = "a"
 trigger2 = command = "hold_a"
@@ -6220,7 +6220,7 @@ ctrl = 1
 [State 200, AA]
 type = ChangeState
 triggerall = prevstateno != 421
-triggerall = time >= 3
+triggerall = time >= 2
 trigger1 = command = "a"
 trigger2 = command = "hold_a"
 trigger3 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
@@ -6229,7 +6229,7 @@ ctrl = 1
 
 [State 200, B]
 type = ChangeState
-triggerall = time >= 3
+triggerall = time >= 2
 triggerall = command = "down" || command = "holddown"
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
@@ -6238,7 +6238,7 @@ ctrl = 1
 
 [State 200, B]
 type = ChangeState
-triggerall = time >= 3
+triggerall = time >= 2
 trigger1 = command = "b"
 trigger2 = command = "hold_b"
 value = 430
@@ -6339,7 +6339,7 @@ trigger1 = p2dist X < 0
 [State 200, SPRINT]
 type = ChangeState
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, SPRINT]
@@ -6977,10 +6977,10 @@ value = 100
 
 [State 0, Explod]
 type = Explod
-trigger1 = AnimElem = 2
+trigger1 = AnimElem = 3
 anim = 10002
 ID = 10002
-pos = 35,-20
+pos = 35,-15
 postype = p1  ;p2,front,back,left,right
 facing = 1
 vfacing = 1
@@ -7008,8 +7008,8 @@ trigger1 = Animelem = 2 || AnimElem = 3
 x = 4
 [State 0, VelSet]
 type = VelSet
-trigger1 = Animelem = 2
-x = 4
+trigger1 = Animelem = 1
+x = 7
 
 [State 200, 1]
 type = HitDef
@@ -7110,7 +7110,7 @@ airguard.cornerpush.veloff = -4
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 2 - Big Kick]
@@ -7671,7 +7671,7 @@ ignorehitpause = 1
 
 [State 0, Explod]
 type = Explod
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 4
 anim = 10002
 ID = 10002
 pos = 40,-15
@@ -7712,10 +7712,10 @@ value = 100
 type = VelSet
 trigger1 = Animelem = 2 || AnimElem = 3
 x = 7
-[State 0, VelSet]
-type = VelSet
-trigger1 = Animelem = 4
-x = 2
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = Animelem = 4
+;x = 4
 
 [State 200, 1]
 type = HitDef
@@ -8713,7 +8713,7 @@ airguard.cornerpush.veloff = -4
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 2 - Weave]
@@ -11099,7 +11099,7 @@ ctrl = 1
 ;type = ChangeState
 ;triggerall = time >= 6
 ;trigger1 = command = "WD" && command != "NotWD"
-;value = 30
+;value = 35
 ;ctrl = 1
 
 ;[State 200, Down+C Stance Into Sword]
@@ -12249,7 +12249,7 @@ trigger1 = hitcount = 3
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 30
+value = 35
 
 
 [State 0, VelSet]
@@ -13523,11 +13523,6 @@ trigger1 = movecontact = 1
 y = -2
 x = 2
 
-[State 0, Turn]
-type = Turn
-trigger1 = movecontact = 1
-trigger1 = p2bodydist x < -10
-
 
 [State 200, 1]
 type = HitDef
@@ -14188,11 +14183,11 @@ type = Explod
 trigger1 = AnimElem = 3
 anim = 10004
 ID = 10004
-pos = 30,-30
+pos = 25,-20
 postype = p1  ;p2,front,back,left,right
 facing = 1
 vfacing = 1
-bindtime = 1
+bindtime = 2
 vel = 0,0
 accel = 0,0
 random = 0,0
@@ -14779,7 +14774,7 @@ add = 0,32,72
 
 [State 0, DP Inful]
 type = NotHitBy
-trigger1 = time = [0, 6] 
+trigger1 = time = [0, 4] 
 value = SCA,NA,SA,NP,SP
 time = 1
 
@@ -15459,15 +15454,16 @@ trigger1 = time % 5 = 0
 value = S1,0
 volumescale = 50
 
-[State 0, Dash Velocity]
-type = VelSet
-trigger1 = time = 0
-y = -3
-
 [State 200, Move Forward]
 type = VelAdd
 trigger1 = time = [0, 10]
 y = -0.44 * 0.5
+
+[State 0, Dash Velocity]
+type = VelSet
+trigger1 = time = 0
+x = vel x * 0.5
+y = -3
 
 [State 200, Jump]
 type = ChangeState
