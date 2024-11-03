@@ -1225,15 +1225,17 @@ Clsn2: 1
 Clsn2: 1
   Clsn2[0] = -19, -39, 20, 0
 610,10, -2,0, 3, H
-Clsn1: 2
-  Clsn1[0] = -56, -44, -10, 2
-  Clsn1[1] = -14, -22, -1, 6
-Clsn2: 1
-  Clsn2[0] = -10, -43, 22, -1
+Clsn1: 4
+  Clsn1[0] = -29, -30, -7, -9
+  Clsn1[1] = -40, -34, -22, -18
+  Clsn1[2] = -54, -40, -38, -26
+  Clsn1[3] = -14, -20, 11, 1
+Clsn2: 2
+  Clsn2[0] = -7, -43, 22, -1
+  Clsn2[1] = -20, -44, -6, -30
 610,11, 0,0, 4, , , 1.1,1
-Clsn1: 2
+Clsn1: 1
   Clsn1[0] = -35, -32, -17, -18
-  Clsn1[1] = -13, -13, -2, -4
 Clsn2: 1
   Clsn2[0] = -18, -39, 21, -3
 610,8, -6,-3, 3, , , 1.1,0.9
@@ -1335,34 +1337,34 @@ Clsn2Default: 1
 
 ; C - Air: Forward
 [Begin Action 621]
+Clsn2: 1
+  Clsn2[0] = -17, -31, 8, -6
 Clsn1: 1
   Clsn1[0] = -26, -43, 22, 1
-Clsn2: 1
-  Clsn2[0] = -17, -39, 8, -1
 620,10, 0,0, 10
 
 ; C - Air: Backwards
 [Begin Action 622]
+Clsn2: 1
+  Clsn2[0] = -17, -31, 8, -6
 Clsn1: 1
   Clsn1[0] = -26, -43, 22, 1
-Clsn2: 1
-  Clsn2[0] = -17, -39, 8, -1
 620,10, -4,0, 10, H
 
 ; C - Air: Up
 [Begin Action 623]
+Clsn2: 1
+  Clsn2[0] = -17, -31, 8, -6
 Clsn1: 1
   Clsn1[0] = -26, -43, 22, 1
-Clsn2: 1
-  Clsn2[0] = -17, -39, 8, -1
 620,10, 21,-20, 10, , , 1,1, 90
 
 ; C - Air: Down
 [Begin Action 624]
+Clsn2: 1
+  Clsn2[0] = -17, -31, 8, -6
 Clsn1: 1
   Clsn1[0] = -26, -43, 22, 1
-Clsn2: 1
-  Clsn2[0] = -17, -39, 8, -1
 620,10, 21,-18, 10, H, , 1,1, 90
 
 ; C - Air: Diagonally Down Left
@@ -1370,31 +1372,31 @@ Clsn2: 1
 Clsn1: 1
   Clsn1[0] = -26, -43, 22, 1
 Clsn2: 1
-  Clsn2[0] = -17, -39, 8, -1
+  Clsn2[0] = -17, -31, 8, -6
 620,9, 16,-10, 10, H, , 1,1, 90
 
 ; C - Air: Diagonally Down Right
 [Begin Action 626]
+Clsn2: 1
+  Clsn2[0] = -17, -31, 8, -6
 Clsn1: 1
   Clsn1[0] = -26, -43, 22, 1
-Clsn2: 1
-  Clsn2[0] = -17, -39, 8, -1
 620,9, -14,-10, 10, HV, , 1,1, 90
 
 ; C - Air: Diagonally Up Right
 [Begin Action 627]
+Clsn2: 1
+  Clsn2[0] = -17, -31, 8, -6
 Clsn1: 1
   Clsn1[0] = -26, -43, 22, 1
-Clsn2: 1
-  Clsn2[0] = -17, -39, 8, -1
 620,9, -14,-29, 10, V, , 1,1, 90
 
 ; C - Air: Diagonally Up Left
 [Begin Action 628]
+Clsn2: 1
+  Clsn2[0] = -17, -31, 8, -6
 Clsn1: 1
   Clsn1[0] = -26, -43, 22, 1
-Clsn2: 1
-  Clsn2[0] = -17, -39, 8, -1
 620,9, 17,-28, 10, , , 1,1, 90
 
 ; aaAAHHHHHH

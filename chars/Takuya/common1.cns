@@ -36,7 +36,7 @@ sprpriority = 0
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 3 && anim = 0
 value = S3,0
 volumescale = 100
 
