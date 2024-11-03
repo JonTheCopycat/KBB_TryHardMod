@@ -151,51 +151,55 @@ time = 1
 name = "hyperhop"
 command = ~D, $U
 time = 5
+buffer.time = 1
 
 [Command]
 name = "FF"
 command = F, F
 time = 10
+buffer.time = 1
 
 [Command]
 name = "BB"
 command = B, B
 time = 10
+buffer.time = 1
 
 [Command]
 name = "ss"
 command = s, s
 time = 10
+buffer.time = 1
 
 [Command]
 name = "WD"
 command = ~F, D, F, F, D, DF
 time = 30
-buffer.time = 5
+buffer.time = 3
 
 [Command]
 name = "WD"
 command = ~F, F, D, DF
 time = 20
-buffer.time = 5
+buffer.time = 3
 
 [Command]
 name = "WD"
 command = ~F, F, D, F
 time = 20
-buffer.time = 5
+buffer.time = 3
 
 [Command]
 name = "WD"
 command = ~F, D, DF
 time = 12
-buffer.time = 5
+buffer.time = 3
 
 [Command]
 name = "WD"
 command = ~F, D, F
 time = 12
-buffer.time = 5
+buffer.time = 3
 
 [Command]
 name = "NotWD"
