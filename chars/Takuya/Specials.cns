@@ -1358,7 +1358,7 @@ getpower = 0
 trigger1 = !movecontact
 attr = A, SA
 animtype  = Heavy
-damage    = 40
+damage    = 60
 hitflag = MAFD
 guardflag = MAF
 pausetime = 10,10
@@ -1564,9 +1564,9 @@ getpower = 0
 trigger1 = time%2 = 0
 attr = A, SA
 animtype  = Heavy
-damage    = 8
+damage    = 9
 hitflag = MAFD
-guardflag = MAF
+guardflag = MA
 pausetime = 10,10
 sparkno = 1
 guard.sparkno = 13000
@@ -1579,8 +1579,8 @@ ground.hittime  = 100
 ground.velocity = -4,15
 air.velocity = -4,15
 Fall = 1
+fall.recover = 0
 Envshake.time = 4
-Fall.recover = 0
 fall.yvelocity = -12
 down.bounce = 1
 
@@ -1908,7 +1908,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 25
+damage    = 15
 hitflag = MAFD
 guardflag = MAF
 pausetime = 0,0
@@ -2033,7 +2033,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 30
+damage    = 25
 hitflag = MAFD
 guardflag = MA
 pausetime = 5,10
@@ -3844,7 +3844,7 @@ triggerall = AnimElem = 4 && anim = 24000 && !movecontact
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 30
+damage    = 90
 kill = 0 
 hitflag = MAFD
 guardflag = MA
@@ -3869,7 +3869,7 @@ triggerall = AnimElem = 5 && anim = 24005 && !movecontact
 trigger1 = 1
 attr = S, SA ; i did not know Hyper made the attack uncounterable
 animtype  = Heavy
-damage    = 30
+damage    = 90
 kill = 0 
 hitflag = MAFD
 pausetime = 18,10
@@ -4085,7 +4085,7 @@ triggerall = AnimElem = 26 && anim = 24000
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 170
+damage = 110
 kill = 0 
 hitflag = MAFD
 guardflag = MA
@@ -4403,14 +4403,14 @@ kill = 1
 
 [State 200, Neutral Reset]
 type = ChangeState
-Triggerall = time >= 108 && enemy, life >= 1
+Triggerall = time >= 108 && enemy, life >= 1 
 trigger1 = p2movetype !=H 
 value = 0
 ctrl = 1
 
 [State 200, Is he dead?]
 type = ChangeState
-Trigger1 = time >= 108 && enemy, life <= 0
+Trigger1 = time >= 108 && enemy, life <= 0 || time >= 360
 value = 0
 ctrl = 1
 
@@ -4536,7 +4536,7 @@ attr = S, HA
 animtype  = Hard
 damage    = 100
 hitflag = MAFD
-pausetime = 30,30
+pausetime = 45,45
 guard.pausetime = 30,30
 guard.hittime = 25
 sparkno = 1
@@ -4548,8 +4548,8 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 air.hittime = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = 0,-10
-air.velocity = 0,-10
+ground.velocity = 0,-12
+air.velocity = 0,-12
 Fall = 1
 Fall.recover = 0
 guard.cornerpush.veloff = -5
@@ -4645,21 +4645,21 @@ movecamera = 0,0
 ;ignorehitpause = 
 ;persistent = 
 
-[State 0, Damage Proration]
-type = ParentVarAdd
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 50
-
-[State 0, Juggle Map]
-type = RootMapAdd
-trigger1 = movehit 
-map = "juggle"
-value = 50
-persistent = 0
-ignorehitpause = 1
+;[State 0, Damage Proration]
+;type = ParentVarAdd
+;trigger1 = movehit
+;v = 11
+;ignorehitpause = 1
+;persistent = 0
+;value = 50
+;
+;[State 0, Juggle Map]
+;type = RootMapAdd
+;trigger1 = movehit 
+;map = "juggle"
+;value = 50
+;persistent = 0
+;ignorehitpause = 1
 
 
 [State 0, ChangeAnim]
@@ -4704,7 +4704,7 @@ getpower = 0
 trigger1 = !movecontact
 attr = S, SA
 animtype  = Heavy
-damage    = 100
+damage    = (50 / numhelper(470)) + 50 ; 1:100,2:75,3:66,4:52 per hit,  Shouldnt make  it AS better than b4
 hitflag = MAFD
 pausetime = 30,30
 sparkno = 2

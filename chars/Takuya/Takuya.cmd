@@ -864,7 +864,7 @@ type = ChangeState
 value = 400
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(425) = 0
-Triggerall = power >= 500
+Triggerall = power >= 200
 triggerall = command = "c"
 Triggerall = statetype != A
 trigger1 = ctrl
@@ -1000,7 +1000,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 670
 triggerall = numhelper(3500) = 0
-Triggerall = power >= 500
+Triggerall = power >= 200
 triggerall = command = "holddown"
 triggerall = command = "c"
 Triggerall = statetype = A

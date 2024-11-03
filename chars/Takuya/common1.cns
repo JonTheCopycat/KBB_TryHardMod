@@ -34,6 +34,12 @@ type = S
 physics = S
 sprpriority = 0
 
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 3
+value = S3,0
+volumescale = 100
+
 [State 0, 1]
 type = ChangeAnim
 trigger1 = Anim != 0 && Anim != 5 && Anim != 1
