@@ -1,0 +1,45 @@
+<#f0f000>:PASSIVE ABILLITY:</>
+	"Copy abilites"
+	"Pancakes, use this to avoid aerials."
+
+Unique Attacks
+	_B  ^B
+	_AIR  _B  ^B
+	
+<#f0f000>:EX ATTACKS:</>
+
+Inhale  					       ^C
+	"Inhale the enemy!"
+	"press the button again to cancel"
+_! Consume						_D
+	"Take their EX ATTACKS!"
+_! Spit						^A
+	"Spit them out"
+
+<#f0f000>:STAR STRIKES!:</>
+
+Sword (1 Bar)     						_D_DF_F^A
+	"Korby gets the SWORD ability and readies himself."
+
+_! Sword Slash										^A
+	"Quick sword slash, hold A to rapidly slash."
+_! Sword Thrust										^B
+	"Dash forward with a unblockable thrust."
+_! Sword Toss       									^C
+	"Tosses sword up, then jumps to get it."
+
+
+Hammer (1 1/2  Bar)						_D_DB_B^A
+	 "Korby gets the HAMMER ability and swings."
+
+Cutter (1 Bar, _AIR OK)					 _D_DF_F^B
+	 "Korby gets the CUTTER ability and throws the blade."
+
+Now Korby really...hate you! (2 Bar, _AIR OK)					_D_DB_B^B 
+	 "Korby gets the CRASH ability and KILLS you."
+
+Ability: Roulette (1 bar) 					_D_DB_B^C
+	"Get a random characters EX ATTACKS!"
+
+Ability: Dispose (1/2 bar) 					_D_DF_F^C
+	"remove your current ability"

@@ -1,0 +1,1347 @@
+;-------------------------------------------------------------------------------
+; Star Burst
+[Statedef 50000]
+type    = A
+movetype= A
+physics = N
+anim = 50000
+poweradd = 0
+sprpriority = 2
+juggle = -5
+facep2 = 1
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = -25
+persistent = 0
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = 0
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = 0
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElem = 1
+helpertype = normal ;player
+name = "Starburst Cooldown"
+ID = 50750
+stateno = 50750
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 999
+pausemovetime = 999
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = -20
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = AnimElem = 2
+statetype = A       ;S,A,C,L
+movetype = A        ;I,A,H
+physics = A         ;A,C,S,N
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time = 0
+x = 0
+y = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 1
+y = -3
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = Time < 25
+y = .1
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = AnimElem = 2
+time = 30
+ampl = -16
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = pos y >= 0
+y = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = F32,0
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = F32,0
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = F32,1
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = F32,2
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = F32,2
+volumescale = 999
+
+[State 1020, Blink Yellow]
+type = PalFX
+trigger1 = Time = 0
+time = 35
+add = 32,16,0
+sinadd = 64,32,5,3
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElem = 2
+helpertype = normal ;player
+name = "StarBurst Start"
+ID = 51000
+stateno = 51000
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = life <= 3300
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy
+damage    = 0
+numhits = 0
+hitflag = MAFD
+guardflag = MA
+pausetime = 24,24
+sparkno = s9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = S2,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 30,4
+air.velocity = 30,4
+ground.cornerpush.veloff = -15
+Fall = 1
+fall.recover = 0
+priority = 7
+p2stateno = 1025
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 1
+time = 25
+sound = F20,1
+anim = 500
+pos = 0,-50
+movetime = 25
+darken = 1
+p2defmul = 1
+poweradd = 0
+
+[State 0, Explod]
+type = Explod
+triggerall = movecontact
+trigger1 = command = "FF"
+anim = F1500
+ID = 1500
+pos = 0,-10
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 2,2
+sprpriority = 0
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = power >= 500
+triggerall = time > 4
+trigger1 = command = "FF"
+value = -500
+
+[State 200, End]
+type = ChangeState
+triggerall = power >= 500
+triggerall = time > 4
+trigger1 = command = "FF"
+value = 65
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = power >= 500
+triggerall = time > 4
+trigger1 = command = "s"
+value = -500
+
+[State 200, End]
+type = ChangeState
+triggerall = power >= 500
+triggerall = time > 4
+trigger1 = command = "s"
+value = 66
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 0
+
+;-------------------------------------------------------------------------------
+;-------------------------------------------------------------------------------
+; Twinkle Cancel
+[Statedef 50500]
+type    = A
+movetype= A
+physics = N
+anim = 50500
+poweradd = -1500
+sprpriority = 2
+facep2 = 1
+velset = 0,0
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = 0
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = 0
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElem = 1
+helpertype = normal ;player
+name = "Starburst Cooldown"
+ID = 50750
+stateno = 50750
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 999
+pausemovetime = 999
+
+[State 0, Pause]
+type = Pause
+trigger1 = 1 
+time = 3
+movetime = 3
+
+[State 0, Flash]
+type = PlaySnd
+trigger1 = time = 1
+value = F20,1
+channel = -1
+freqmul = 1.0
+loop = 0
+pan = 0
+
+[State 0, Twinkle]
+type = PlaySnd
+trigger1 = time = 3
+value = F20,2
+channel = -1
+freqmul = 1.0
+loop = 0
+pan = 0
+
+[State 0, Kirby Sound]
+type = PlaySnd
+trigger1 = time = 1
+value = F20,3
+channel = -1
+freqmul = 1.0
+loop = 0
+pan = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 1
+anim = F520
+ID = 520
+pos = -10,-20
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+supermovetime = 999
+pausemovetime = 999
+scale = 0.6,0.6
+sprpriority = 4
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 1
+
+[State 0, PalFXWiz]
+type = BGPalFX
+trigger1 = 1
+time = 35
+add = 0,0,0
+mul = 128,128,128
+sinadd = 0,0,0,1
+invertall = 0
+color = 256
+
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+[State 0, AfterImage]
+type = AfterImage
+trigger1 = time = (1,6)
+time = 12
+length = 8
+trans = add
+paladd = 255,150,0
+
+[State 0, VelSet]
+type = VelSet
+triggerall = ailevel = 0
+trigger1 = Time < 5
+triggerall = command != "holdup"
+triggerall = command != "holddown"
+triggerall = command != "holdfwd"
+triggerall = command != "holdback"
+trigger1 = 1
+x = 0
+y = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time < 5
+triggerall = ailevel = 0
+trigger1 = command = "holdup"
+trigger1 = command = "holdfwd"
+x = 4
+y = -4
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time < 5
+trigger1 = command = "holddown"
+trigger1 = command = "holdfwd"
+x = 4
+y = 4
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time < 5
+triggerall = ailevel = 0
+trigger1 = command = "holdup"
+trigger1 = command = "holdback"
+x = -4
+y = -4
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time < 5
+trigger1 = command = "holddown"
+trigger1 = command = "holdback"
+x = -4
+y = 4
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time < 5
+triggerall = ailevel = 0
+trigger1 = command != "holdfwd"
+trigger1 = command != "holdback"
+trigger1 = command = "holdup"
+x = 0
+y = -4
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time < 5
+trigger2 = ailevel > 0
+trigger1 = command != "holdfwd"
+trigger1 = command != "holdback"
+trigger1 = command = "holddown"
+x = 0
+y = 4
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time < 5
+triggerall = ailevel = 0
+trigger1 = command != "holdup"
+trigger1 = command != "holddown"
+trigger1 = command = "holdfwd"
+x = 4
+y = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time < 5
+triggerall = ailevel = 0
+trigger1 = command != "holdup"
+trigger1 = command != "holddown"
+trigger1 = command = "holdback"
+x = -4
+y = 0
+
+[State 0, VelAdd]
+type = VelAdd
+triggerall = time >= 5
+trigger1 = vel x <= -0.25 && vel x != 0
+x = .14
+y = 0
+
+[State 0, VelAdd]
+type = VelAdd
+triggerall = time >= 5
+trigger1 = vel y <= -0.25 && vel y != 0
+x = 0
+y = .14
+
+[State 0, VelAdd]
+type = VelAdd
+triggerall = time >= 5
+trigger1 = vel x >= 0.25 && vel x != 0
+x = -.14
+y = 0
+
+[State 0, VelAdd]
+type = VelAdd
+triggerall = time >= 5
+trigger1 = vel y >= 0.25 && vel y != 0
+x = 0
+y = -.14
+
+[State 0, PosSet]
+type = PosSet
+triggerall = pos y > 0
+trigger1 = 1
+y = 0
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = ifelse(pos y < 0, 50, 0)
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; Star Burst Start
+[Statedef 51000]
+type    = S
+movetype= I
+physics = S
+anim = 51000
+poweradd = 0
+sprpriority = 2
+
+[State 0, Damage Proration] ;Reduces damage by adding proration once starburst state ends
+type = parentVarAdd
+trigger1 = numhelper(52000) = 1
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 30
+
+[State -2, Activate Starburst for Tag partners] ;Tells tag partners to activate Starburst mode
+type = TeamMapSet
+triggerall = teammode = tag
+trigger1 = time = 0
+map = "tagStarburst"
+value = 1
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = numhelper(52000) = 1
+;-------------------------------------------------------------------------------
+;Starburst Cooldown
+[Statedef 50750]
+type    = S
+movetype= I
+physics = S
+anim = 9999
+poweradd = 0
+sprpriority = 2
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = root,stateno != 50000
+trigger1 = Time >= 7
+;-------------------------------------------------------------------------------
+; Star Burst End
+[Statedef 52000]
+type    = S
+movetype= I
+physics = S
+anim = 52000
+poweradd = 0
+sprpriority = 2
+
+[State -2, Reset Map] ;Removes starburstTag variable
+type = TeamMapSet
+triggerall = teammode = tag
+trigger1 = time < 2
+map = "tagStarburst"
+value = 0
+
+[State 0, DestroySelf]
+type = DestroySelf
+triggerall = root,stateno != 50000
+trigger1 = Time >= 1
+;-------------------------------------------------------------------------------
+; Star Buster
+[Statedef 54000]
+type    = A
+movetype= A
+physics = N
+anim = 50000
+poweradd = -2000
+sprpriority = 2
+facep2 = 1
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 200
+persistent = 0
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 1
+time = 25
+sound = F20,1
+anim = 550
+pos = 0,-50
+movetime = 25
+darken = 1
+p2defmul = 1
+poweradd = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 100
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = AnimElem = 2
+statetype = A       ;S,A,C,L
+movetype = A        ;I,A,H
+physics = A         ;A,C,S,N
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time = 0
+x = 0
+y = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 1
+y = -3
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = Time < 25
+y = .1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = movehit
+x = -3
+y = -2
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = AnimElem = 2
+time = 30
+ampl = -16
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = pos y >= 0
+y = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S32,0
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = F32,0
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = F32,1
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = F32,2
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = F32,2
+volumescale = 999
+
+[State 0, Blink Blue]
+type = PalFX
+trigger1 = Time = 0
+time = 35
+add = 23,11,90
+mul = 256,256,256
+sinadd = 64,32,5,3
+invertall = 0
+color = 256
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElem = 2
+helpertype = normal ;player
+name = "StarBuster Start"
+ID = 55000
+stateno = 55000
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy
+damage    = 0
+numhits = 0
+hitflag = MAFD
+guardflag = MA
+pausetime = 24,24
+sparkno = s9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = S2,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 50
+air.hittime  = 50
+ground.velocity = -6,-6
+air.velocity = -6,-6
+fall.recover = 1
+fall.recovertime = 50
+Fall = 1
+p2facing = 1
+
+[State 54000, NotHitBy]
+type = NotHitBy
+trigger1 = time = 35
+value = SCA
+time = 30
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 0
+
+;-------------------------------------------------------------------------------
+; Star Buster Countdown
+[Statedef 55000]
+type    = S
+movetype= I
+physics = S
+anim = 9999
+poweradd = 0
+sprpriority = 2
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 540
+
+;-------------------------------------------------------------------------------
+; Star Burst (In Neutral & off Block)
+[Statedef 54500]
+type    = A
+movetype= A
+physics = N
+anim = 54500
+poweradd = 0
+sprpriority = 2
+juggle = -5
+facep2 = 1
+ctrl = 0
+
+;Reduces juggle by 25 on hit
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = -25
+persistent = 0
+
+;If enemy is not in a hurt state, adds 200 juggle
+[State 0, Juggle Map]
+type = MapAdd
+triggerall = enemy,movetype != H
+trigger1 = animelem = 2
+map = "juggle"
+value = 200
+persistent = 0
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = 0
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = 0
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 13
+anim = F575
+ID = 575
+pos = 0,-30
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = .75,.75
+sprpriority = 3
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 0
+
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = time = 0
+y = 10
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElem = 1
+helpertype = normal ;player
+name = "Starburst Cooldown"
+ID = 50750
+stateno = 50750
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 999
+pausemovetime = 999
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = ifelse(enemy,movetype = H,-20,100)
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = AnimElem = 2
+statetype = A       ;S,A,C,L
+movetype = A        ;I,A,H
+physics = A         ;A,C,S,N
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time = 0
+x = 0
+y = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 1
+y = -2.7
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = Time < 13
+y = .09
+
+[State 0, Velset]
+type = VelSet
+trigger1 = time > 13
+y = 0
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = AnimElem = 2
+time = 15
+ampl = -7
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = pos y >= 0
+y = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S32,0
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = F32,0
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = F32,1
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = F32,2
+volumescale = 999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = F32,2
+volumescale = 999
+
+[State 1020, Blink Yellow]
+type = PalFX
+trigger1 = Time = 0
+time = 35
+add = 32,16,0
+sinadd = 64,32,5,3
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElem = 2
+helpertype = normal ;player
+name = "StarBurst Start"
+ID = 51000
+stateno = 51000
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+triggerall = enemy,movetype !=H
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy
+damage    = 0
+numhits = 0
+kill = 0
+hitflag = MAFD
+guardflag = MA
+pausetime = 25,18
+guard.pausetime = 18,10
+sparkno = s9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.velocity = -15,-1
+air.velocity = -15,-1
+guard.velocity = 1
+airguard.velocity = 0,0
+Fall = 1
+fall.recover = 0
+priority = 7
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+triggerall = enemy,movetype = H
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy
+damage    = 0
+numhits = 0
+hitflag = MAFD
+guardflag = MA
+pausetime = 24,24
+sparkno = s9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = S2,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 30,4
+air.velocity = 30,4
+ground.cornerpush.veloff = -15
+Fall = 1
+fall.recover = 0
+priority = 7
+p2stateno = 1025
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 0
+
+
+;-------------------------------------------------------------------------------
+; Star Burst ground dash proration cooldown
+[Statedef 51001]
+type    = S
+movetype= I
+physics = S
+anim = 9999
+poweradd = 0
+sprpriority = 2
+
+[State 0, Negative Damage Proration]
+type = parentvaradd 
+trigger1 = time = 0
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = -5
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 500
+trigger2 = numhelper(51002) != 0
+
+;-------------------------------------------------------------------------------
+; Star Burst air dash proration cooldown
+[Statedef 51002]
+type    = S
+movetype= I
+physics = S
+anim = 9999
+poweradd = 0
+sprpriority = 2
+
+[State 0, Negative Proration]
+type = parentVarAdd
+trigger1 = time = 0
+v = 11
+value = -5
+persistent = 0
+ignorehitpause = 1
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 500
+trigger2 = numhelper(51001) != 0
+
+;----------------------------------------------------------------------------------------------------
+;StarBurst Negative Statedef Stuff
+[Statedef -3]
+
+[State 0, StarBurst ChangeState]
+type = ChangeState
+triggerall = StageVar(info.displayname) != "Halberd Run"
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+triggerall = numhelper(50750) = 0
+triggerall = numhelper(3500) = 0
+triggerall = stateno != [800,832]
+triggerall = (enemy,stateno != [801,806]) && (enemy,stateno != [811,816]) && (enemy,stateno != [821,822]) && (enemy,stateno != 831) ;enemy successfully countered
+triggerall = enemy,stateno != 4000 && enemy,stateno != 4100 ; Grabbed & grab tech state
+Triggerall = life <= 700
+Triggerall = Power >= 1500
+Triggerall = (movehit || map(helperHit) != 0)
+triggerall = (!hitoverridden && !movereversed && !enemy, hitoverridden)
+triggerall = enemy,movetype = H
+Trigger1 = command =  "hold_x"
+Trigger1 = command =  "hold_y"
+Value = 50000
+
+[State 0, Twinkle Cancel ChangeState]
+type = ChangeState
+triggerall = StageVar(info.displayname) != "Halberd Run"
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(50750) = 0
+triggerall = numhelper(3500) = 0
+triggerall = stateno != [800,832]
+triggerall = (enemy,stateno != [801,806]) && (enemy,stateno != [811,816]) && (enemy,stateno != [821,822]) && (enemy,stateno != 831) ;enemy successfully countered
+triggerall = enemy,stateno != 4000 && enemy,stateno != 4100 ; Grabbed & grab tech state
+Triggerall = Power >= 1500
+Triggerall = (moveguarded || map(helperGuarded) != 0)
+triggerall = (!hitoverridden && !movereversed && !enemy, hitoverridden)
+Triggerall = movetype = A
+Trigger1 = command =  "hold_x"
+Trigger1 = command =  "hold_y"
+ignorehitpause = 1
+Value = 50500
+
+[State 0, Starburst Run Cancel Effect]
+type = Explod
+triggerall = numhelper(51000) = 1
+triggerall = movetype = a
+triggerall = numexplod(1500) = 0
+Triggerall = movehit || helper, movehit || map(helperHit) != 0
+triggerall = stateno != 50000
+trigger1 = command = "FF"
+anim = F1500
+ID = 1500
+pos = 0,-10
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+sprpriority = 3
+persistent = 0
+
+[State 0, StarBurst SuperPause]
+type = SuperPause
+triggerall = numhelper(51000) = 1
+triggerall = movetype = a
+Triggerall = movehit || helper, movehit || map(helperHit) != 0
+triggerall = stateno != 50000
+trigger1 = command = "FF"
+time = 5
+sound = F20,1
+pos = 0,-20
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+persistent = 0
+
+[State 0, Busterable]
+type = MapSet
+triggerall = !enemynear, numhelper(51000) = 1
+trigger1 = numhelper(51000) = 1 && enemynear, movetype = H
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, Helper Guarded Reset]
+type = RootMapSet
+triggerall = map(helperGuarded) != 0
+trigger1 = MoveType != A 
+trigger2 = (enemynear,movetype!=H && enemy,stateno != 52)
+map = "helperGuarded"
+value = 0
+ignorehitpause = 1
+
+[State 0, Helper Hit Reset]
+type = RootMapSet
+triggerall = map(helperHit) != 0
+trigger1 = MoveType != A 
+trigger2 = (enemynear,movetype!=H && enemy,stateno != 52)
+map = "helperHit"
+value = 0
+ignorehitpause = 1
+
+[State 0, Negative Proration] ;Whenever the player ground dashes, give them negative proration, doesn't work twice in a row
+type = Helper
+Triggerall = numhelper(51000) = 1
+triggerall = numhelper(51001) = 0 ; Only works if the ground dash proration helper doesn't exist currently
+Triggerall = movehit
+triggerall = statetype = s || statetype = c
+triggerall = movetype != H
+trigger1 = command = "FF"
+helpertype = normal 
+name = "Ground Dash Proration"
+ID = 51001
+stateno = 51001
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+
+[State 0, Meter Drain - Dash Cancel Forward]
+type = PowerAdd
+Triggerall = numhelper(51000) = 1
+Triggerall = movehit || helper, movehit || map(helperHit) != 0
+triggerall = movetype != H
+trigger1 = command = "FF"
+value = -250
+
+[State 0, Dash Cancel Forward]
+type = ChangeState
+Triggerall = numhelper(51000) = 1
+Triggerall = movehit || helper, movehit || map(helperHit) != 0
+triggerall = statetype = s || statetype = c
+triggerall = movetype != H
+trigger1 = command = "FF"
+Value = 100
+ctrl = 1
+ignorehitpause = 1
+
+[State 0, Meter Drain - Backdash Cancel]
+type = PowerAdd
+Triggerall = numhelper(51000) = 1
+triggerall = moveguarded || helper, moveguarded || map(helperGuarded) != 0
+triggerall = movetype != H
+trigger1 = command = "BB"
+value = -250
+
+
+[State 0, Dash Cancel Backward]
+type = ChangeState
+Triggerall = numhelper(51000) = 1
+triggerall = moveguarded || helper, moveguarded || map(helperGuarded) != 0
+triggerall = statetype = s || statetype = c
+triggerall = movetype != H
+trigger1 = command = "BB"
+Value = 105
+ctrl = 1
+
+[State 0, Negative Proration] ;Whenever the player airdashes, give them negative proration
+type = Helper 
+Triggerall = numhelper(51000) = 1
+triggerall = numhelper(51002) = 0 ; Only works if the air dash proration helper doesn't exist currently
+Triggerall = movehit 
+triggerall = statetype = a
+triggerall = movetype != H
+trigger1 = command = "FF"
+name = "Air Dash Proration"
+ID = 51002
+stateno = 51002
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+
+[State 0, Air Dash Cancel Forward]
+type = ChangeState
+Triggerall = numhelper(51000) = 1
+Triggerall = movehit || helper, movehit || map(helperHit) != 0
+triggerall = statetype = a
+triggerall = movetype != H
+trigger1 = command = "FF"
+Value = 65
+ctrl = 1
+ignorehitpause = 1
+
+[State 0, Air Dash Cancel Backward]
+type = ChangeState
+Triggerall = numhelper(51000) = 1
+Triggerall = moveguarded || helper, moveguarded || map(helperGuarded) != 0
+triggerall = statetype = A
+triggerall = movetype != H
+trigger1 = command = "BB"
+Value = 70
+ctrl = 1
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 1
+trigger1 = gametime%100 = 1
+time = 200
+length = 20
+trans = add
+paladd = 255,150,0
+
+[State 0, Starburst Meterdrain]
+type = PowerAdd
+triggerall = numhelper(51000) = 1
+triggerall = stateno != 5611 && stateno != 5610
+trigger1 = 1
+value = -5
+
+[State 0, StarBurst Twinkle]
+type = Explod
+trigger1 = numhelper(51000) > 0
+triggerall = numexplod(1000) = 0
+anim = F1000
+ID = 1000
+pos = 0,-10
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 2,2
+sprpriority = 0
+ontop = 1
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+
+[State 0, StarBurst Autoheal]
+type = LifeAdd
+triggerall = numhelper(51000) = 1
+triggerall = stateno != 5611 && stateno != 5610
+trigger1 = gametime%4 = 1
+value = 1
+
+[State 0, StarBurst Overtime Damage Boost] ; Increases the player's damage overtime
+type = VarAdd
+triggerall = numhelper(51000) = 1
+triggerall = stateno != 5611 && stateno != 5610
+trigger1 = gametime%20 = 1
+v = 11
+value = -1
+
+[State 0, StarBurst End]
+type = Helper
+triggerall = numhelper(51000) > 0 
+trigger1 = power = 0
+trigger2 = roundstate != 2
+helpertype = normal ;player
+name = "StarBurst End"
+ID = 52000
+stateno = 52000
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+
+[State -3, Starburst tag] ;Activates starburst if tagged out
+type = Helper
+triggerall = teammode = tag
+trigger1 = numhelper(51000) = 0
+trigger1 = map(tagStarburst) = 1
+helpertype = normal ;player
+name = "StarBurst Start"
+ID = 51000
+stateno = 51000
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0

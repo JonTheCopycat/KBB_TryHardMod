@@ -1,0 +1,1853 @@
+;===============================================================================
+; Counter
+[Statedef 800]
+type    = S
+movetype= A
+physics = S
+velset = -1.5,0
+ctrl = 0
+anim = 800
+poweradd = 0
+sprpriority = -1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = s800,3
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 1
+anim = F805
+ID = 805
+pos = 0,-20
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+pausemovetime = 60
+scale = .2,.2
+sprpriority = 1
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent =1
+
+[State 5201, 5] ;Blink white
+type = PalFX
+trigger1 = Time >= 0 &&  time <=15
+time = 3
+add = 128,128,128 ;256,256,256
+
+[State 0, COUNTER]
+type = HitOverride
+triggerall = time = 0
+trigger1 = P2Stateno != 801;Stand Counter Slow
+trigger2 = P2Stateno != 802;Stand Counter Fast
+trigger3 = P2Stateno != 803;Stand Counter Fastest
+trigger4 = P2Stateno != 811;Air Counter Slow
+trigger5 = P2Stateno != 812;Air Counter Fast
+trigger6 = P2Stateno != 813;Air Counter Fastest
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 801
+time = 15
+;15 frames of oppurtunity, 15 frames of recovery.
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time >= 15
+map = "hitOverride"
+value = 0
+
+[State 0, Slowdown]
+type = changeAnim
+trigger1 = enemy,hitpausetime > 15
+trigger1 = var(47) <= 1
+value = 800
+elem = 1
+
+[State 0, DefenceMapSet]
+type = Mapset
+triggerall = !movecontact
+trigger1 = time = 16
+map = "defence"
+value = 0.2
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = prevstateno != 820;If you do it off block, you don't spend an extra bar of meter.
+trigger1 = animtime = 0
+value = -1000
+
+[State 200, End]
+type = ChangeState
+trigger1 = animtime = 0
+value = 806
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; Counter - Push - SLOW
+;-------------------------------------------------------------------------------
+[Statedef 801]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 801
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit
+map = "juggle"
+value = 200
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = f800,0
+volumescale = 100
+ignorehitpause = 1
+persistent = 0
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 4
+x = 10
+y = 0
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = time = 0
+x = 2
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0
+anim = F806
+ID = 801
+pos = 5,-25
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+pausemovetime = 60
+scale = .3,.3
+sprpriority = 1
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent =1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = animtime = 0
+id = 801
+ignorehitpause = 1
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = Time = 2
+value = 2
+[State 0, Pause]
+type = Pause
+trigger1 = AnimElem = 1
+time = 20
+
+[State 200, ON HIT - Recovery]
+type = ChangeState
+trigger1 = movehit
+value = 804
+ctrl = 0
+
+[State 0, HitOverride]
+type = HitOverride
+triggerall = time = 0
+trigger1 = P2Stateno != 801
+trigger2 = P2Stateno != 802
+trigger3 = P2Stateno != 803
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 802
+time = 16
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time >= 16
+map = "hitOverride"
+value = 0
+
+[State 0, Swing]
+type = PlaySnd
+trigger1 = animelem = 2
+value = 800,4
+volumescale = 200
+ignorehitpause = 0
+
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = time >= 6
+movetype = A
+
+[State 801, 1] ; For hitting players, grants 1000 power
+type = HitDef
+triggerall = !movecontact
+triggerall = enemy,!ishelper
+triggerall = enemy,movetype != H
+trigger1 = 1
+getpower = 1000,0
+attr = S, HP
+animtype  = Heavy
+damage    = 15
+Hitflag = MAF
+guardflag = 
+pausetime = 12,12
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+air.velocity = -30,3
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 801, 1] ; For hitting helpers, grants 0 power
+type = HitDef
+triggerall = !movecontact
+trigger1 = enemy,ishelper
+trigger2 = enemy,movetype = H
+getpower = 0,0
+attr = S, HP
+animtype  = Heavy
+damage    = 15
+Hitflag = MAF
+guardflag = 
+pausetime = 12,12
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+air.velocity = -30,3
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 0, DefenceMapSet]
+type = Mapset
+triggerall = !movecontact
+trigger1 = time = 17
+map = "defence"
+value = 0.2
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 805
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+;---------------Counter - Push - FAST
+;-------------------------------------------------------------------------------
+[Statedef 802]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 802
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit
+map = "juggle"
+value = 200
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = f800,1
+volumescale = 100
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 4
+x = 10
+y = 0
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = time = 0
+x = 5
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0
+anim = F805
+ID = 803
+pos = 5,-10
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = .7,.7
+sprpriority = -1
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent =1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = animtime = 0
+id = 803
+ignorehitpause = 1
+
+
+
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = Time = 2
+value = 2
+
+[State 0, Pause]
+type = Pause
+trigger1 = AnimElem = 1
+time = 5
+
+
+
+ 
+[State 200, ON HIT - Recovery]
+type = ChangeState
+trigger1 = movehit
+value = 805
+ctrl = 0
+[State 0, COUNTER AIR]
+type = HitOverride
+triggerall = time = 0 && p2statetype = A
+trigger1 = P2Stateno != 811
+trigger2 = P2Stateno != 812
+trigger3 = P2Stateno != 813
+attr = A, NA, SA, NP, SP
+slot = 0
+stateno = 813
+time = 14
+[State 0, HitOverride]
+type = HitOverride
+triggerall = time = 0 
+trigger1 = P2Stateno != 801
+trigger2 = P2Stateno != 802
+trigger3 = P2Stateno != 803
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 803
+time = 14
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time >= 14
+map = "hitOverride"
+value = 0
+
+[State 801, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+triggerall = enemy,!ishelper
+triggerall = enemy,movetype != H
+trigger1 = 1
+getpower = 1000,0
+attr = S, HP
+animtype  = Heavy
+damage    = 4
+Hitflag = MAF
+guardflag = 
+pausetime = 5,5
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+air.velocity = -30,3
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 801, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = enemy,ishelper
+trigger2 = enemy,movetype = H
+getpower = 0,0
+attr = S, HP
+animtype  = Heavy
+damage    = 4
+Hitflag = MAF
+guardflag = 
+pausetime = 5,5
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+air.velocity = -30,3
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+
+[State 0, DefenceMapSet]
+type = Mapset
+triggerall = !movecontact
+trigger1 = time = 15
+map = "defence"
+value = 0.2
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 805
+ctrl = 1
+;-------------------------------------------------------------------------------
+;-------------------------------------------------------------------------------
+;---------------Counter - Push - FASTEST
+;-------------------------------------------------------------------------------
+[Statedef 803]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 803
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit
+map = "juggle"
+value = 200
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = f800,2
+volumescale = 100
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 4
+x = 10
+y = 0
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = time = 0
+x = 10
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = Time = 2
+value = 2
+
+[State 200, ON HIT - Recovery]
+type = ChangeState
+triggerall = 1
+trigger1 = movehit
+value = 804
+ctrl = 0
+
+[State 0, COUNTER AIR]
+type = HitOverride
+triggerall = time = 0 && p2statetype = A
+trigger1 = P2Stateno != 811
+trigger2 = P2Stateno != 812
+trigger3 = P2Stateno != 813
+attr = A, NA, SA, NP, SP
+slot = 0
+stateno = 813
+time = 13
+[State 0, HitOverride]
+type = HitOverride
+triggerall = time = 0
+trigger1 = P2Stateno != 801
+trigger2 = P2Stateno != 802
+trigger3 = P2Stateno != 803
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 803
+time = 13
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time >= 13
+map = "hitOverride"
+value = 0
+
+[State 0, Invul By Distance]
+type = NotHitBy
+trigger1 = p2bodydist x <= 80
+value = SCA,NA,SA,HA,NP,SP,HP
+time = 1
+ignorehitpause = 1
+
+[State 801, 1]
+type = HitDef
+triggerall = !movecontact
+triggerall = enemy,!ishelper
+triggerall = enemy,movetype != H
+trigger1 = 1
+getpower = 1000,0
+attr = S, HP
+animtype  = Heavy
+damage    = 2
+Hitflag = MAF
+guardflag = 
+pausetime = 3,3
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+air.velocity = -30,3
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 801, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = enemy,ishelper
+trigger2 = enemy,movetype = H
+getpower = 0,0
+attr = S, HP
+animtype  = Heavy
+damage    = 2
+Hitflag = MAF
+guardflag = 
+pausetime = 3,3
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+air.velocity = -30,3
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 0, DefenceMapSet]
+type = Mapset
+triggerall = !movecontact
+trigger1 = time = 14
+map = "defence"
+value = 0.2
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 805
+ctrl = 1
+;-------------------------------------------------------------------------------
+; Counter - Recovery On hit.
+;-------------------------------------------------------------------------------
+[Statedef 804]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+anim = 804
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = p2movetype !=H
+trigger2 = enemy,!alive
+value = 0
+ctrl = 1
+;-------------------------------------------------------------------------------
+;-------------------------------------------------------------------------------
+; Counter - Recovery On Wiff.
+;-------------------------------------------------------------------------------
+[Statedef 805]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+anim = 804
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+;-------------------------------------------------------------------------------
+; Counter - EndLag
+[Statedef 806]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 0
+poweradd = 0
+velset = 1.5,0
+sprpriority = -1
+
+[State 0, COUNTER OFF BLOCK Variable - Reset]
+type = VarSet
+trigger1 = time = 0
+v = 82
+value = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = Time = 15
+value = 0
+ctrl = 1
+;-------------------------------------------------------------------------------
+
+
+
+
+
+;===============================================================================
+; Counter AIR - Start
+[Statedef 810]
+type    = A
+movetype= A
+physics = A
+velset = 1,-.5
+ctrl = 0
+anim = 810
+poweradd = 0
+sprpriority = -1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = 1
+x = vel x /2
+y = vel y /2
+
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = s800,3
+volumescale = 100
+[State 0, Explod]
+type = Explod
+trigger1 = time = 1
+anim = F805
+ID = 805
+pos = 0,-20
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+pausemovetime = 60
+scale = .2,.2
+sprpriority = 1
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent =1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = animtime = 0
+id = 805
+ignorehitpause = 1
+
+
+
+[State 5201, 5] ;Blink white
+type = PalFX
+trigger1 = gametime%10 =1
+time = 3
+add = 128,128,128 ;256,256,256
+
+[State 0, HitOverride]
+type = HitOverride
+triggerall = time = 0
+trigger1 = P2Stateno != 801
+trigger2 = P2Stateno != 814
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 811
+time = 15
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time >= 15
+map = "hitOverride"
+value = 0
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = prevstateno != 820;If you do it off block, you don't spend an extra bar of meter.
+trigger1 = time = 15 ; Changed from 10, which was too early (Could cause you to lose meter on a late successful counter)
+trigger2 = Vel Y > 0 
+trigger2 = Pos Y >= -10 ; Causes you to lose meter if you cancel the counter by hitting the ground too early
+value = -1000
+
+[State 0, Slowdown]
+type = changeAnim
+trigger1 = enemy,hitpausetime > 15
+trigger1 = var(47) <= 1
+value = 810
+elem = 1
+
+[State 5210, 5] ;Land on ground
+type = ChangeState
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= -10
+value = 816 ;Jump land
+ctrl = 0
+
+[State 0, DefenceMapSet]
+type = Mapset
+triggerall = !movecontact
+trigger1 = time = 16
+map = "defence"
+value = 0.2
+
+[State 200, Recovery Wiff]
+type = ChangeState
+trigger1 = animtime = 0
+value = 815
+ctrl = 0
+
+;-------------------------------------------------------------------------------
+; AIR Counter - Push - SLOW
+[Statedef 811]
+type    = A
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 811
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit
+map = "juggle"
+value = 200
+persistent = 0
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = Time = 2
+value = 2
+[State 0, Pause]
+type = Pause
+trigger1 = AnimElem = 1
+time = 20
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = time = 0
+x = 2
+[State 0, If Floor or lower, you pos higher.]
+type = PosSet
+trigger1 = pos y >= 0
+y = -5
+
+
+
+[State 0, Sound FX - Activation]
+type = PlaySnd
+trigger1 = time = 0
+value = f800,0
+volumescale = 100
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0
+anim = F806
+ID = 806
+pos = 5,-25
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+pausemovetime = 60
+scale = .3,.3
+sprpriority = 1
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent =1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = animtime = 0
+id = 806
+ignorehitpause = 1
+
+
+
+
+[State 0, HitOverride]
+type = HitOverride
+triggerall = time = 0
+trigger1 = P2Stateno != 801;Stand Counter Slow
+trigger2 = P2Stateno != 802;Stand Counter Fast
+trigger3 = P2Stateno != 803;Stand Counter Fastest
+trigger4 = P2Stateno != 811;Air Counter Slow
+trigger5 = P2Stateno != 812;Air Counter Fast
+trigger6 = P2Stateno != 813;Air Counter Fastest
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 812
+time = 16
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time >= 16
+map = "hitOverride"
+value = 0
+
+[State 200, ON HIT - Recovery]
+type = ChangeState
+trigger1 = movehit
+value = 814
+ctrl = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 4
+x = 10
+y = 0
+[State 0, Sound FX - Swing]
+type = PlaySnd
+trigger1 = animelem = 3
+value = 800,4
+volumescale = 200
+ignorehitpause = 0
+
+ 
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = time >= 6
+movetype = A
+[State 801, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = 1
+getpower = 0
+attr = A, HP
+animtype  = Heavy
+damage    = 15
+Hitflag = MAF
+guardflag = HA
+pausetime = 12,12
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+air.velocity = -30,3
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 0, DefenceMapSet]
+type = Mapset
+triggerall = !movecontact
+trigger1 = time = 17
+map = "defence"
+value = 0.2
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0 && !movehit 
+value = 815
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0 && movehit
+value = 50
+ctrl = 0
+
+
+
+;-------------------------------------------------------------------------------
+;--------------------------AIR Counter - Push - FAST
+[Statedef 812]
+type    = A
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 812
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit
+map = "juggle"
+value = 200
+persistent = 0
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = Time = 2
+value = 2
+[State 0, Pause]
+type = Pause
+trigger1 = AnimElem = 1
+time = 5
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = time = 0
+x = 5
+[State 0, If standing or lower, you pos higher.]
+type = PosSet
+trigger1 = pos y >= 0
+y = -5
+
+[State 0, Sound FX - Activation]
+type = PlaySnd
+trigger1 = time = 0
+value = f800,0
+volumescale = 100
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0
+anim = F806
+ID = 801
+pos = 0,-20
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+pausemovetime = 60
+scale = .3,.3
+sprpriority = 1
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent =1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = animtime = 0
+id = 801
+ignorehitpause = 1
+
+[State 0, HitOverride]
+type = HitOverride
+trigger1 = P2Stateno != 801;Stand Counter Slow
+trigger2 = P2Stateno != 802;Stand Counter Fast
+trigger3 = P2Stateno != 803;Stand Counter Fastest
+trigger4 = P2Stateno != 811;Air Counter Slow
+trigger5 = P2Stateno != 812;Air Counter Fast
+trigger6 = P2Stateno != 813;Air Counter Fastest
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 813
+time = 11
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time >= 11
+map = "hitOverride"
+value = 0
+
+[State 200, ON HIT - Recovery]
+type = ChangeState
+trigger1 = movehit
+value = 814
+ctrl = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 4
+x = 10
+y = 0
+[State 0, Sound FX - Swing]
+type = PlaySnd
+trigger1 = animelem = 3
+value = 800,4
+volumescale = 200
+ignorehitpause = 0
+
+ 
+  
+[State 801, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = 1
+getpower = 0
+attr = A, HP
+animtype  = Heavy
+damage    = 4
+Hitflag = MAF
+guardflag = HA
+pausetime = 5,5
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+air.velocity = -30,3
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 0, DefenceMapSet]
+type = Mapset
+triggerall = !movecontact
+trigger1 = time = 12
+map = "defence"
+value = 0.2
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0 && !movehit 
+value = 815
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0 && movehit
+value = 50
+ctrl = 0
+;-------------------------------------------------------------------------------
+;--------------------------AIR Counter - Push - FASTER
+[Statedef 813]
+type    = A
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 813
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit
+map = "juggle"
+value = 200
+persistent = 0
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = Time = 2
+value = 2
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = time = 0
+x = 10
+[State 0, If standing or lower, you pos higher.]
+type = PosSet
+trigger1 = pos y >= 0
+y = -5
+
+[State 0, Sound FX - Activation]
+type = PlaySnd
+trigger1 = time = 0
+value = f800,0
+volumescale = 100
+ignorehitpause = 1
+persistent = 0
+
+
+
+
+[State 0, HitOverride]
+type = HitOverride
+triggerall = 1
+trigger1 = P2Stateno != 801;Stand Counter Slow
+trigger2 = P2Stateno != 802;Stand Counter Fast
+trigger3 = P2Stateno != 803;Stand Counter Fastest
+trigger4 = P2Stateno != 811;Air Counter Slow
+trigger5 = P2Stateno != 812;Air Counter Fast
+trigger6 = P2Stateno != 813;Air Counter Fastest
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 813
+time = 10
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time >= 10
+map = "hitOverride"
+value = 0
+
+[State 200, ON HIT - Recovery]
+type = ChangeState
+trigger1 = movehit
+value = 814
+ctrl = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 4
+x = 10
+y = 0
+[State 0, Sound FX - Swing]
+type = PlaySnd
+trigger1 = animelem = 3
+value = 800,4
+volumescale = 200
+ignorehitpause = 0
+
+ 
+[State 0, Invul By Distance]
+type = NotHitBy
+trigger1 = p2bodydist x <= 80
+value = SCA,NA,SA,HA,NP,SP,HP
+time = 1
+ignorehitpause = 1
+[State 801, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = 1
+getpower = 0
+attr = A, HP
+animtype  = Heavy
+damage    = 2
+Hitflag = MAF
+guardflag = HA
+pausetime = 3,3
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+air.velocity = -30,3
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 0, DefenceMapSet]
+type = Mapset
+triggerall = !movecontact
+trigger1 = time = 11
+map = "defence"
+value = 0.2
+
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0 && !movehit 
+value = 815
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0 && movehit
+value = 50
+ctrl = 0
+
+;-------------------------------------------------------------------------------
+; AIR Counter - Recovery On Hit
+[Statedef 814]
+type    = A
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 814
+poweradd = 0
+velset = 0,0
+sprpriority = -1
+
+[State 0, PowerAdd]
+type = PowerAdd
+trigger1 = enemy,movetype = H
+value = 1000
+persistent = 0
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = p2movetype !=H
+value = 50
+ctrl = 1
+;-------------------------------------------------------------------------------
+; AIR Counter - EndLag
+[Statedef 815]
+type    = A
+movetype= A
+physics = A
+juggle  = 0
+ctrl = 0
+anim = 815
+poweradd = 0
+velset = .5,0
+sprpriority = -1
+
+[State 5210, 5] ;Land on ground
+type = ChangeState
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= -10
+value = 816 ;Jump land
+ctrl = 0
+[State 200, End]
+type = ChangeState
+trigger1 = Time = 15
+value = 50
+ctrl = 0
+;-------------------------------------------------------------------------------
+; AIR Counter - EndLag LAND
+[Statedef 816]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 816
+poweradd = 0
+velset = .5,0
+sprpriority = -1
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = time = 0
+y = 0
+
+[State 0, COUNTER OFF BLOCK Variable - Reset]
+type = VarSet
+trigger1 = time = 0
+v = 82
+value = 0
+
+[State 0, HitOverride] ; Only exists to cancel the hitoverride from a land cancelled counter
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 5000
+time = 0
+
+
+[State 200, End]
+type = ChangeState
+trigger1 = Time = 20
+value = 0
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+;COUNTER OFF BLOCK
+[Statedef 820]
+type    = S
+movetype= A
+physics = N
+juggle  = 0
+ctrl = 0
+anim = 820
+poweradd = -1000
+velset = 0,0
+sprpriority = 0
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP
+time = 1
+
+[State 200, Stand Counter Start]
+type = ChangeState
+triggerall = animtime = 0
+trigger1 = pos y >= 0
+value = 821
+ctrl = 0
+[State 200, Air Counter Start]
+type = ChangeState
+triggerall = animtime = 0
+trigger1 = pos y <= -0.5
+value = 822
+ctrl = 0
+;-------------------------------------------------------------------------------
+;--------------------COUNTER OFF BLOCK - STAND
+[Statedef 821]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 821
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit
+map = "juggle"
+value = 200
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = f800,0
+volumescale = 100
+ignorehitpause = 1
+persistent = 0
+[State 0, VelSet]
+type = VelSet
+trigger1 = animelem = 3
+x = 10
+y = 0
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = animelem = 3
+x = 2
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP
+time = 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0
+anim = F806
+ID = 801
+pos = 5,-25
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+pausemovetime = 60
+scale = .3,.3
+sprpriority = 1
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent =1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = animtime = 0
+id = 801
+ignorehitpause = 1
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = animelem = 2
+value = 2
+
+[State 200, ON HIT - Recovery]
+type = ChangeState
+trigger1 = movehit
+value = 804
+ctrl = 0
+
+[State 0, Swing]
+type = PlaySnd
+trigger1 = time = 10
+value = 800,4
+volumescale = 200
+ignorehitpause = 0
+
+[State 801, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = 1
+getpower = 0,
+attr = S, HP
+animtype  = Heavy
+damage    = 15
+Hitflag = MAFD
+guardflag = MAFD
+pausetime = 12,12
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+guard.velocity = -7
+air.velocity = -30,3
+airguard.velocity = -2.5,-1.5
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 805
+ctrl = 1
+;-------------------------------------------------------------------------------
+;--------------------COUNTER OFF BLOCK - AIR
+[Statedef 822]
+type    = A
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 822
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit
+map = "juggle"
+value = 200
+persistent = 0
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = animelem = 2
+value = 2
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = time = 0
+x = 2
+[State 0, If Floor or lower, you pos higher.]
+type = PosSet
+trigger1 = pos y >= 0
+y = -5
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP
+time = 1
+
+[State 0, Sound FX - Activation]
+type = PlaySnd
+trigger1 = time = 0
+value = f800,0
+volumescale = 100
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0
+anim = F806
+ID = 806
+pos = 5,-25
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+pausemovetime = 60
+scale = .3,.3
+sprpriority = 1
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent =1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = animtime = 0
+id = 806
+ignorehitpause = 1
+
+[State 200, ON HIT - Recovery]
+type = ChangeState
+trigger1 = movehit
+value = 814
+ctrl = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 4
+x = 10
+y = 0
+[State 0, Sound FX - Swing]
+type = PlaySnd
+trigger1 = animelem = 3
+value = 800,4
+volumescale = 200
+ignorehitpause = 0
+
+[State 801, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = 1
+getpower = 0,
+attr = A, HP
+animtype  = Heavy
+damage    = 15
+Hitflag = MAFD
+guardflag = HAFD
+pausetime = 12,12
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -30,0
+guard.velocity = -7
+air.velocity = -30,3
+airguard.velocity = -2.5,-1.5
+Fall = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 0
+;-------------------------------------------------------------------------------
+
+;===============================================================================
+; Red Counter
+[Statedef 830]
+type    = S
+movetype= A
+physics = S
+velset = 1.5,0
+ctrl = 0
+anim = 800
+poweradd = 0
+sprpriority = -1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = s800,3
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 1
+anim = F805
+ID = 805
+pos = 0,-20
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+pausemovetime = 60
+scale = .2,.2
+sprpriority = 1
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent =1
+
+
+[State 5201, 5] ;Blink red
+type = PalFX
+trigger1 = time = 0
+time = 5
+add = 100,-100,-100
+sinadd = 40,80,40,2
+color = 0
+
+[State 0, COUNTER]
+type = HitOverride
+trigger1 = time = 0
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 831
+time = 5
+;5 frames of oppurtunity, 25 frames of recovery.
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time >= 15
+map = "hitOverride"
+value = 0
+
+[State 0, DefenceMapSet]
+type = Mapset
+triggerall = !movecontact
+trigger1 = time = 6
+map = "defence"
+value = 0.2
+
+[State 0, PowerAdd] ;If your counter isn't triggered you lose one bar of meter
+type = PowerAdd
+trigger1 = animtime = 0
+value = -1000
+
+[State 200, End]
+type = ChangeState
+trigger1 = animtime = 0
+value = 806
+ctrl = 1
+;-------------------------------------------------------------------------------
+; Red Counter Push
+;-------------------------------------------------------------------------------
+[Statedef 831]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 821
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = f800,0
+volumescale = 100
+ignorehitpause = 1
+persistent = 0
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 4
+x = 10
+y = 0
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = time = 0
+x = 2
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0
+anim = F806
+ID = 801
+pos = 5,-25
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+pausemovetime = 60
+scale = .3,.3
+sprpriority = 1
+ownpal = 1
+removeongethit = 0
+ignorehitpause = 1
+persistent =1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = animtime = 0
+id = 801
+ignorehitpause = 1
+
+[State 0, Pause]
+type = Pause
+trigger1 = AnimElem = 1
+time = 20
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = Time = 2
+value = 2
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = 0
+value = SCA
+time = 20
+ignorehitpause = 0
+
+[State 0, Swing]
+type = PlaySnd
+trigger1 = animelem = 2
+value = 800,4
+volumescale = 200
+ignorehitpause = 0
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = time >= 6
+movetype = A
+
+[State 801, 1]
+type = HitDef
+triggerall = !movecontact
+trigger1 = 1
+attr = S, HP
+animtype  = Heavy
+damage    = 15
+Hitflag = MAF
+guardflag = MA
+pausetime = 20,20
+sparkno = 14000
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 30
+ground.velocity = -1,-8
+air.velocity = -1,-8
+Fall = 1
+fall.recover = 0
+Envshake.time = 30
+Envshake.ampl = 8
+kill = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = movehit
+value = 0
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 805
+ctrl = 1

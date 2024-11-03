@@ -1,0 +1,618 @@
+;===============================================================================
+; Special Power Delay:
+;-------------------------------------------------------------------------------
+[Statedef 56000]
+type    = S
+physics = S
+anim = 9999
+velset = 0,0
+sprpriority = 2
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 200
+trigger2 = p2movetype != H
+
+;-------------------------------------------------------------------------------
+; Infinite Protection
+[Statedef 4011]
+type    = A
+movetype= A
+physics = N
+juggle = 1
+ctrl = 0
+anim = 50000
+
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 4011, trans] ;Makes the helper invisible
+type = trans
+trigger1 = 1
+trans = add
+alpha = 0,256
+
+[State 4011, ChangeAnim] ;Skips to elem 2 so the hit isn't delayed
+type = ChangeAnim2
+trigger1 = animelem = 1
+trigger2 = movecontact
+value = 50000
+elem = 2
+
+[State 4011, AssertSpecial] ; Allows the helper to hit regardless of juggle
+type = AssertSpecial
+trigger1 = 1
+flag = nojugglecheck
+
+[State 4011, hit] ; Soft protection: Pops the opponent up into a juggle state if they aren't being juggled, should be relatively non-disruptive
+type = HitDef
+triggerall = !movecontact
+triggerall = parent,var(11) > 50
+trigger1 = enemy,stateno = 5000 || enemy,stateno = 5010 || enemy,stateno = 5040
+attr = S, NA
+animtype  = Heavy
+damage    = 0
+numhits = 0
+hitflag = MAFD
+guardflag = 
+sparkno = s9999
+ground.velocity = -2,-5
+air.velocity = -2,-5
+Fall = 1
+fall.recover = 1
+fall.recovertime = 40
+
+[State 4011, hit] ; Hard protection, essentially causes your attacks to have no hitstun or knockback and adds juggle. Should end combos. Should not occur normally.
+type = HitDef
+triggerall = parent,var(11) > 250
+triggerall = parent,movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Light
+damage    = 0
+numhits = 0
+hitflag = MAFD
+guardflag = 
+sparkno = s9999
+guard.sparkno = 13000
+sparkxy = -8,-25
+Fall = 1
+pausetime = 0,0
+p2facing = 1
+fall.recover = 1
+fall.recovertime = 1
+ground.hittime = 1
+air.hittime = 1
+
+[State 200, End]
+type = Destroyself
+trigger1 = numenemy
+trigger1 = (enemynear,movetype!=H)
+trigger2 = !numenemy
+trigger3 = time = 60
+;===============================================================================
+; Grabbed
+[Statedef 4000]
+type    = S
+movetype = H
+physics = S
+ctrl = 0
+anim = 5000
+poweradd = 0
+sprpriority = 2
+facep2 = 1
+
+[State 0, I need to tech! Immediately!!]
+type = Explod
+triggerall = var(29) = 0
+trigger1 = time = 1
+anim = F32000
+id = 32000
+pos = -30, -50
+postype = p1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+pausemovetime = 999
+ontop = 0
+shadow = 0,0,0
+removeongethit = 0
+ignorehitpause = 1
+facing = 1 + (cond(BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20, -2, 0))
+;vfacing = 1
+scale = 0.6,0.6
+sprpriority = -3
+removetime = -2
+
+[State 0, ModifyExplod]
+type = ModifyExplod
+triggerall = var(29) = 0
+trigger1 = 1
+id = 32000
+pos = -30 + (cond(BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20, 60, 0)),-50
+facing = 1 + (cond(BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20, -2, 0))
+;ignorehitpause = 
+;persistent = 
+
+
+[State 4000, PlaySnd]
+type = PlaySnd
+trigger1 = time = 1
+value = F9,1
+volumescale = 200
+
+[State 200, End]
+type = ChangeState
+triggerall = var(29) = 0
+Triggerall = time < 19
+trigger1 = command = "y"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 4100
+
+[State 200, End]
+type = ChangeState
+Trigger1 = time > 95
+value = 5000
+
+;===============================================================================
+; Grab Tech
+[Statedef 4100]
+type    = S
+movetype = H
+physics = S
+ctrl = 0
+anim = 11
+poweradd = 0
+sprpriority = 2
+facep2 = 1
+
+[State 0, Teched it, no longer need you now!]
+type = RemoveExplod
+trigger1 = numexplod(32000) > 0
+id = 32000
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = stateno = 4100
+value = SCA
+time = 1
+ignorehitpause = 1
+
+[State 4100, PlaySnd]
+type = PlaySnd
+trigger1 = time = 1
+value = F9,2
+volumescale = 200
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 1
+x = -10
+y = 0
+
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = time = 1
+y = 0
+
+[State 200, End]
+type = ChangeState
+Trigger1 = Time = 20
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Disable Chicken Block Helper
+;Used to assert specials that disable blocking in the air after jumping or backdashing
+[Statedef 4200]
+type    = S
+physics = S
+anim = 9999
+velset = 0,0
+sprpriority = 2
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 5
+
+;---------------------------------------------------------------------------
+;Instant Block Helper
+;Used to determine if the player has instant blocked an attack or not
+[Statedef 4300]
+type    = S
+physics = S
+anim = 9999
+velset = 0,0
+sprpriority = 2
+
+[State 0, Changestate] ;If the user blocks an attack, activates instant block when they go into knockback
+type = Changestate
+triggerall = time > 4
+trigger1 = root,stateno = 151 ;Standing block
+trigger2 = root,stateno = 153 ;Crouching block
+trigger3 = root,stateno = 155 ;Air block
+value = 4301
+ignorehitpause = 1
+
+[State 0, changestate] ;If 8 frames pass and the user doesn't block, or the player inputs back+back, skips to cooldown state
+type = Changestate
+trigger1 = root,stateno != [150,155]
+trigger1 = Time = 8
+trigger2 = root,command = "BB"
+value = 4302
+
+;---------------------------------------------------------------------------
+;Instant Block Activated Helper
+[Statedef 4301]
+type    = S
+physics = S
+anim = 9999
+velset = 0,0
+sprpriority = 2
+
+
+[State 4301, DestroySelf] ;Ends when the player leaves sliding knockback
+type = DestroySelf
+trigger1 = root,stateno != 151 ;Standing block
+trigger2 = root,stateno != 153 ;Crouching block
+trigger3 = root,stateno != 155 ;Air block
+
+;---------------------------------------------------------------------------
+;Instant Block Cooldown Helper
+;Prevents the player from getting the instant block bonus briefly if they pressed back and didn't block anything
+[Statedef 4302]
+type    = S
+physics = S
+anim = 9999
+velset = 0,0
+sprpriority = 2
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 15
+
+;---------------------------------------------------------------------------
+;Stale Moves Helper
+;Keeps track of the player's attacks during a combo, if the same move is used repeatedly then adds juggle
+[Statedef 4400]
+type    = S
+physics = S
+anim = 9999
+velset = 0,0
+sprpriority = 2
+
+[State 4400, Move1Penalty] ; Determines juggle penalty for the player
+type = VarAdd
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno = var(1) 
+v = 11
+value = var(11) + 1
+ignorehitpause = 1
+
+[State 4400, Move2Penalty] 
+type = VarAdd
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno = var(2)
+v = 12
+value = var(12) + 1
+ignorehitpause = 1
+
+[State 4400, Move3Penalty] 
+type = VarAdd
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno = var(3) 
+v = 13
+value = var(13) + 1
+ignorehitpause = 1
+
+[State 4400, Move4Penalty] 
+type = VarAdd
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno = var(4) 
+v = 14
+value = var(14) + 1
+ignorehitpause = 1
+
+
+[State 4400, Move5Penalty] 
+type = VarAdd
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno = var(5) 
+v = 15
+value = var(15) + 1
+ignorehitpause = 1
+
+[State 4400, Proration Penalty]; If the player uses the same super within 5 moves, applies a heavy proration penalty on them 
+type = RootVarAdd
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+triggerall = root,var(11) < 100
+trigger1 = root,stateno = var(1) && var(11) > 0 && var(1) >= 15000 && var(1) < 50000 
+trigger2 = root,stateno = var(2) && var(12) > 0 && var(2) >= 15000 && var(2) < 50000  
+trigger3 = root,stateno = var(3) && var(13) > 0 && var(3) >= 15000 && var(3) < 50000  
+trigger4 = root,stateno = var(4) && var(14) > 0 && var(4) >= 15000 && var(4) < 50000  
+trigger5 = root,stateno = var(5) && var(15) > 0 && var(5) >= 15000 && var(5) < 50000 
+v = 11
+value = 50
+ignorehitpause = 1
+
+[State 4400, Juggle Penalty]; If the player uses the same super within 5 moves, applies a heavy juggle penalty on them 
+type = RootMapAdd
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+triggerall = root,map(juggle) < 100
+trigger1 = root,stateno = var(1) && var(11) > 0 && var(1) >= 20000 
+trigger2 = root,stateno = var(2) && var(12) > 0 && var(2) >= 20000 
+trigger3 = root,stateno = var(3) && var(13) > 0 && var(3) >= 20000 
+trigger4 = root,stateno = var(4) && var(14) > 0 && var(4) >= 20000 
+trigger5 = root,stateno = var(5) && var(15) > 0 && var(5) >= 20000 
+map = "juggle"
+value = 50
+ignorehitpause = 1
+
+[State 4400, RootMapAdd] ; Adds juggle to the player
+type = RootMapAdd
+triggerall = root,map(staleMovesException) != 1
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno = var(1)
+map = "juggle"
+value = var(11)
+ignorehitpause = 1
+
+[State 4400, RootMapAdd] 
+type = RootMapAdd
+triggerall = root,map(staleMovesException) != 1
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno = var(2)
+map = "juggle"
+value = var(12)
+ignorehitpause = 1
+
+[State 4400, RootMapAdd] 
+type = RootMapAdd
+triggerall = root,map(staleMovesException) != 1
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno = var(3)
+map = "juggle"
+value = var(13)
+ignorehitpause = 1
+
+[State 4400, RootMapAdd] 
+type = RootMapAdd
+triggerall = root,map(staleMovesException) != 1
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno = var(4)
+map = "juggle"
+value = var(14)
+ignorehitpause = 1
+
+[State 4400, RootMapAdd] 
+type = RootMapAdd
+triggerall = root,map(staleMovesException) != 1
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno = var(5)
+map = "juggle"
+value = var(15)
+ignorehitpause = 1
+
+[State 4400, Overwrite List]; If all variables are taken, this variable is used to determine which variable should be overwritten
+type = VarAdd
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A ) 
+trigger1 = var(1) != 0 && var(2) != 0 && var(3) != 0 && var(4) != 0 && var(5) != 0
+trigger1 = root,stateno != var(1) && root,stateno != var(2) && root,stateno != var(3) && root,stateno != var(4) && root,stateno != var(5) 
+v = 0
+value = 1
+ignorehitpause = 1
+
+[State 4400, Reset Overwrite Variable]; Resets the variable back to 1 if it goes past 5
+type = VarSet
+trigger1 = var(0) = 6
+v = 0
+value = 1
+ignorehitpause = 1
+
+[State 4400, MovePenaltyReset] ; Resets juggle penalty if a move on the list is overwritten
+type = VarSet
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = root,stateno != var(1) && root,stateno != var(2) && root,stateno != var(3) && root,stateno != var(4) && root,stateno != var(5)
+v = 10 + var(0)
+value = 0
+ignorehitpause = 1
+
+[State 4400, VarSet1]
+type = VarSet
+triggerall = root,stateno != var(50)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = var(1) = 0
+trigger2 = root,stateno != var(1) && root,stateno != var(2) && root,stateno != var(3) && root,stateno != var(4) && root,stateno != var(5) && var(0) = 1
+v = 1
+value = root,stateno
+ignorehitpause = 1
+
+[State 4400, VarSet2]
+type = VarSet
+triggerall = root,stateno != var(50)
+triggerall = root,stateno != var(1)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = var(2) = 0
+trigger2 = root,stateno != var(2) && root,stateno != var(3) && root,stateno != var(4) && root,stateno != var(5) && var(0) = 2
+v = 2
+value = root,stateno
+ignorehitpause = 1
+
+[State 4400, VarSet3]
+type = VarSet
+triggerall = root,stateno != var(50)
+triggerall = root,stateno != var(1)
+triggerall = root,stateno != var(2)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = var(3) = 0
+trigger2 = root,stateno != var(3) && root,stateno != var(4) && root,stateno != var(5) && var(0) = 3
+v = 3
+value = root,stateno
+ignorehitpause = 1
+
+[State 4400, VarSet4]
+type = VarSet
+triggerall = root,stateno != var(50)
+triggerall = root,stateno != var(1)
+triggerall = root,stateno != var(2)
+triggerall = root,stateno != var(3)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = var(4) = 0
+trigger2 = root,stateno != var(4) && root,stateno != var(5) && var(0) = 4
+v = 4
+value = root,stateno
+ignorehitpause = 1
+
+[State 4400, VarSet5]
+type = VarSet
+triggerall = root,stateno != var(50)
+triggerall = root,stateno != var(1)
+triggerall = root,stateno != var(2)
+triggerall = root,stateno != var(3)
+triggerall = root,stateno != var(4)
+triggerall = (root,movetype = A && root,movehit && root,hitcount = 1) || (root,helper,movetype = A && root,movetype = A )
+trigger1 = var(5) = 0
+trigger2 = root,stateno != var(5) && var(0) = 5
+v = 5
+value = root,stateno
+ignorehitpause = 1
+
+[State 4400, State Tracker] ; Checks if the player's state has changed (So the code below only runs once per state
+type = VarSet
+triggerall = root,stateno != var(50)
+trigger1 = root,movetype = A && root,movehit && root,hitcount = 1
+trigger2 = root,movetype != A
+trigger3 = root,helper,movetype = A && root,movetype = A
+v = 50
+value = root,stateno
+ignorehitpause = 1
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = root,numenemy
+trigger1 = (root,enemynear,movetype!=H && root,enemy,stateno != 52)
+trigger2 = root,!numenemy
+ignorehitpause = 1
+
+;----------------------------------------------------------------------------------------
+;Dont Mess with; Always Executed
+[Statedef -2]
+
+[State -2, Infinite protection]
+type = Helper
+triggerall = numhelper(4011) = 0
+trigger1 = var(11) > 50
+trigger1 = enemy,stateno = 5000 || enemy,stateno =  5010 || enemy,stateno = 5040
+trigger2 = var(11) > 250
+helpertype = normal ;player
+name = "Infinite Protection"
+ID = 4011
+stateno = 4011
+postype = p1 
+pos = 0,0  
+facing = 1
+keyctrl = 0
+ownpal = 1
+inheritjuggle = 1
+
+[State -2, InstantBlock Helper Spawn] ;Helper used to determine instant blocks
+type = Helper
+triggerall = map(_iksys_trainingGuardMode) = 0
+triggerall = command = "back"
+trigger1 = numhelper(4300) = 0
+trigger2 = helper(4300),stateno != 4300 ;Won't spawn extra copies if one non-activated helper exists already
+trigger2 = helper(4300),stateno != 4302 ;If there is a helper that turned into a cooldown helper, doesn't spawn
+helpertype = normal
+name = "Instant block"
+ID = 4300
+stateno = 4300
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+keyctrl = 0
+ownpal = 0
+supermovetime = 0
+pausemovetime = 0
+
+[State -2, Stale Moves Helper Spawn]; Helper that adds juggle if the player repeatedly uses the same move(s) in a combo
+type = Helper
+triggerall = numhelper(4400) = 0
+trigger1 = movehit
+trigger2 = enemy,movetype = H
+helpertype = normal
+name = "Stale Moves"
+ID = 4400
+stateno = 4400
+pos = 9999,9999
+postype = p1
+keyctrl = 0
+ownpal = 0
+supermovetime = 9999
+pausemovetime = 9999
+ignorehitpause = 1
+;--------------------------------------------------------------------------------------
+;Dont mess with; Executed when in self state
+[Statedef -3]
+
+[State 0, VarSet]
+type = VarSet
+Triggerall = stateno != 4000
+trigger1 = MoveType = A
+v = 29    ;fv = 10
+value = 1
+
+[State 0, VarSet]
+type = VarSet
+Triggerall = stateno != 4000
+trigger1 = MoveType != A
+v = 29    ;fv = 10
+value = 0
+
+[State -3, Training Refill On Life Set]
+type = LifeSet
+triggerall = enemy, Name = "training"
+trigger1 = enemy, var(49) = 1
+value = 700
+
+[State -3, Training Refill On Meter Add]
+type = PowerAdd
+triggerall = enemy, Name = "training"
+triggerall = enemy, var(49) = 1
+triggerall = numhelper(51000) < 1
+trigger1 = enemy,movetype != H
+value = 3000
+
+[State 615, StaleMovesException]; Removes stale moves exception if it was enabled
+type = MapSet
+trigger1 = numenemy
+trigger1 = (enemynear,movetype!=H && enemy,stateno != 52)
+trigger2 = !numenemy
+trigger3 = movetype = A && stateno != 615
+map = "staleMovesException"
+value = 0
+persistent = 0
+
+

@@ -223,7 +223,10 @@ Vivienne, order=0
 KBB MK Mod, order=1
 Leon, order = 1
 Violet, order=4
-Watanabe, order = 1
+slot = {
+Watanabe, next=s, order = 1
+Kaby, next=s, order = 2
+}
 Jay, order=1
 Bill, order=1
 Vei, order = 1
