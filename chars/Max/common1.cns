@@ -194,13 +194,13 @@ time = 1
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = [0, 1]
+trigger1 = time = 0
 x = const(velocity.run.fwd.x) * 1.8 * 0.6
 y = 0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = [2, 4]
+trigger1 = time = [1, 3]
 x = const(velocity.run.fwd.x) * 1.8 * 1.25
 
 
@@ -248,7 +248,7 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = command = "back"
-value = 0
+value = 11
 ctrl = 1
 
 [State 200, End]
@@ -345,13 +345,6 @@ trigger1 = command = "holdup"
 value = 60
 ctrl = 0
 
-;[State 200, End]
-;type = ChangeState
-;triggerall = time >= 10
-;trigger1 = command = "WD"
-;value = 30
-;ctrl = 0
-
 [State 200, End]
 type = ChangeState
 triggerall = time >= 10
@@ -362,8 +355,9 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 triggerall = time >= 10
-trigger1 = command = "back"
-value = 35
+trigger1 = command = "holdback"
+value = 11
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
@@ -1032,7 +1026,7 @@ flag = NoAutoTurn
 [State 100, 4]
 type = ChangeState
 triggerall = ailevel = 0
-trigger1 = command != "holdfwd"  && command != "hold_z"
+trigger1 = command != "holdfwd"
 value = 0
 
 [State 100, 4]
