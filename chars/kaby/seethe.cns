@@ -453,6 +453,13 @@ type    = A
 movetype= I
 physics = A
 
+; Sareo
+[State 1000, 6]
+type = ChangeState
+trigger1 = var(19) = 13
+value = 726
+ctrl = 1
+
 ;nothing found, check neutral next
 [State 1000, 6]
 type = ChangeState
@@ -1347,11 +1354,11 @@ value = 0
 
 
 
-
-[State 2125, ]
-type = ChangeState
-trigger1 = Time = 200
-value = 0
+[State 0, SelfState]
+type = SelfState
+trigger1 = Time = 200  || enemynear,stateno = 67
+value = 5080
+;anim =
 ctrl = 0
 
 
@@ -1698,7 +1705,7 @@ helpertype = normal ;player
 name = "Glitch Bomb"
 ID = 448
 stateno = 448
-pos = 0,-20
+pos = 20,-20
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -1744,7 +1751,7 @@ name = "Charged Glitch Bomb"
 ID = 452
 stateno = 452
 scale = 2,2
-pos = 0,-20
+pos = 40,-20
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -2094,13 +2101,14 @@ map = "fatal"
 value = 1
 ignorehitpause = 1
 
+
 [State 0, PlaySnd]
 type = PlaySnd
 triggerall = random < 600
 trigger1 = AnimElem = 1
-value = S200,10+(random<500)*1
+value = Sifelse(map(VoiceSwitch)=0,200,205),0+(random<500)*1+(random<500)*1+(random<500)*1
 volumescale = 200
-channel = 0
+channel = 1
 
 [State 0, VelSet]
 type = VelSet
@@ -2116,6 +2124,21 @@ ignorehitpause = 1
 persistent = 0
 value = 5
 
+[State 0, VelSet]
+type = VelSet
+trigger1 = prevstateno = 21005
+trigger1 = movecontact = 1
+y = -1
+ignorehitpause = 1
+
+[State 0, VelSet]
+type = VelSet
+triggerall = prevstateno != 21005
+triggerall = !moveguarded
+trigger1 = movecontact = 1
+x = 2
+y = -5
+ignorehitpause = 1
 
 
 [State 0, PowerAdd]
@@ -2687,6 +2710,7 @@ type = PlaySnd
 trigger1 = Animelem = 2
 value = s620,0
 volumescale = 100
+
 [State 0, Helper]
 type = Helper
 trigger1 = AnimElem = 2
@@ -2744,51 +2768,24 @@ value = movehit
 ;ignorehitpause = 
 ;persistent = 
 
-[State -2, Counterhit Proration Scale - Helper] ;Whenever the player counterhits, give them negative proration, only works for first hit in combo
+[State -2, Counterhit TSP]
 type = Helper
 Triggerall = numhelper(4020) = 0
 trigger1 = movecountered
 helpertype = normal 
-name = "Counterhit Proration Scale"
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
 ID = 4020
 stateno = 4020
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
 ownpal = 1
-
-[State -2, Counterhit Bass Drop Sound - Helper]
-type = Helper
-Triggerall = numhelper(1021) = 0 && stateno != 700
-trigger1 = movecountered
-helpertype = normal 
-name = "Counterhit Sound"
-ID = 1021
-stateno = 1021
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 1
 ignorehitpause = 1
-
-[State 0, Counterhit Text Display]
-type = LifebarAction
-trigger1 = MoveCountered = 1 && root, map(_kbbsys_actionMoveCounteredFlag) = 0
-spr = Const(MsgCounterHit), 0
-snd = 25,0
 persistent = 0
-
-[State 0, Counterhit Map Modify]
-type = RootMapSet
-trigger1 = (MoveCountered = 1 && root,MoveCountered = 1) && root, map(_kbbsys_actionMoveCounteredFlag) = 0
-map = "_kbbsys_actionMoveCounteredFlag"
-value = 1
-
-[State 0, Counterhit Map Reset]
-type = RootMapSet
-trigger1 = (MoveCountered = 0 && root,MoveCountered = 0) && root, map(_kbbsys_actionMoveCounteredFlag) = 1
-map = "_kbbsys_actionMoveCounteredFlag"
-value = 0
 
 
 [State 0, Damage Proration]
@@ -3011,7 +3008,7 @@ accel = 0,0
 random = 0,0
 removetime = -2
 pausemovetime = 9999
-scale = map(AbilityMultiplier),map(AbilityMultiplier)
+scale = 1.2,1.2
 sprpriority = 2
 ontop = 0
 shadow = 0,0,0
@@ -3341,10 +3338,10 @@ trigger1 = movehit = 1 && movecountered = 0
 v = 43
 value = 1
 ignorehitpause = 1
+persistent = 0
 
 [State 0, Turn]
 type = Turn
-triggerall = var(43) != 1
 trigger1 = p2dist x < 0 && time = 0
 
 [State 0, VelSet]
@@ -3368,7 +3365,7 @@ volumescale = 50
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = var(43) != 1
+triggerall = var(43) < 1
 triggerall = !movecontact
 triggerall = enemy,map(hitOverride) = 0
 triggerall = root,map(juggle) < 100
@@ -3406,9 +3403,9 @@ airguard.cornerpush.veloff = -32
 [State 200, 1]
 type = HitDef
 getpower = 0
-trigger3 = var(43) = 1
 triggerall = !movecontact
 trigger1 = enemy,map(hitOverride) = 1
+trigger2 = var(43) >= 1
 attr = S, NP
 animtype  = Heavy 
 damage    = 50*1
@@ -6175,17 +6172,7 @@ trigger1 = Animelem = 3
 x = 3
 y = -3
 
-[State 470, MapSet] ; Saves Noll's X position
-type = MapSet
-trigger1 = time = 0
-map = "switchX"
-value = pos x
 
-[State 470, MapSet] ; Saves Noll's Y position
-type = MapSet
-trigger1 = time = 0
-map = "switchY"
-value = pos y
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -6211,9 +6198,21 @@ trigger1 = Animelem = 3
 x = 3
 y = -3
 
+[State 470, MapSet] ; Saves Noll's X position
+type = MapSet
+trigger1 = time = 0
+map = "switchX"
+value = pos x
+
+[State 470, MapSet] ; Saves Noll's Y position
+type = MapSet
+trigger1 = time = 0
+map = "switchY"
+value = pos y
+
 [State 0, PosSet]
 type = PosSet
-trigger1 = AnimElem = 3
+trigger1 = time = 5
 x = helper(506),pos x
 y = helper(506),pos y + 35
 
@@ -6892,6 +6891,17 @@ poweradd = -200
 sprpriority = 2
 ctrl = 0
 
+[State 0, VelSet]
+type = VelSet
+trigger1 = animelem = 3
+x = 2
+
+[State 402, Stance var reset] ; If you use this, reset your stance var
+type = RootVarSet
+trigger1 = time = 1
+v = 35
+value = 0
+
 [State 0, Swing]
 type = PlaySnd
 trigger1 = Animelem = 2
@@ -6925,12 +6935,18 @@ y = -5
 
 [State 0, Helper]
 type = Helper
-trigger1 = Animelem = 1
-helpertype = normal 
-name = "Counterhit Proration Scale"
+trigger1 = AnimElem = 3
+helpertype = normal ;player
+name = "Activator"
 ID = 634
 stateno = 634
-
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
 ;--------------------------------------------------------
 ; Noll - Down + C Direction Stab - Horizontal
 [Statedef 681]
@@ -12494,7 +12510,7 @@ persistent = 0
 
 [State 400, StateTypeSet]
 type = StateTypeSet
-trigger1 = animelem = 4
+trigger1 = animelem = 2 
 statetype = S
 movetype = A
 physics = S
@@ -13130,8 +13146,8 @@ sprpriority = 2
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = time = 0
-value = Sifelse(map(VoiceSwitch)=0,200,205),1
-volumescale = 50
+value = Sifelse(root,map(VoiceSwitch)=0,200,205),1
+volumescale = 100
 
 [State 475, ParentVarAdd] ; If the enemy touches the sticky mine, adds +1 to bomb count and vanishes
 type = Parentvaradd
@@ -16294,8 +16310,8 @@ guardsound = 6,10
 ground.type = Low
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -1.5,-5
-air.velocity = -1,-5
+ground.velocity = -2,-4
+air.velocity = -2,-3
 Fall = 1
 Envshake.time = 15
 
@@ -19810,7 +19826,7 @@ helpertype = normal ;player
 name = "FIREBALL"
 ID = 731
 stateno = 731
-pos = 15,-5
+pos = 15,20
 postype = p1  ;p2,front,back,left,right
 facing = 1
 keyctrl = 0

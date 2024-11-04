@@ -36,23 +36,9 @@ sprpriority = 0
 
 [State 0, 1]
 type = ChangeAnim
-trigger1 = Anim != 0 && Anim != 5 && Anim != 2 && Anim != 1 && Anim != 2000 
+trigger1 = Anim != 0 && Anim != 5 && Anim != 2000 
 trigger2 = Anim = 5 && AnimTime = 0 ;Turn anim over
-trigger1 = var(19) = 11 || var(19) = 3 || var(19) = 2
-value = 0
-
-[State 0, 1]
-type = ChangeAnim
-trigger1 = Anim != 0 && Anim != 5 && Anim != 2 && Anim != 1 && Anim != 2000
-trigger2 = Anim = 5 && AnimTime = 0 ;Turn anim over
-trigger1 = var(19) = 6
-value = 1
-
-[State 0, 1]
-type = ChangeAnim
-trigger1 = Anim != 0 && Anim != 5 && Anim != 2 && Anim != 1 && Anim != 2000
-trigger2 = Anim = 5 && AnimTime = 0 ;Turn anim over
-trigger1 = var(19) = 0 && var(10) = 0 || var(19) = 7 && var(10) = 0 || var(19) = 1 || var(19) = 4 || var(19) = 5 || var(19) = 8 || var(19) = 9 || var(19) = 10 || var(19) = 12 || var(19) = 13
+trigger1 = var(10) = 0
 value = 2
 
 [State 0, 1]
@@ -240,9 +226,17 @@ ownpal = 0
 
 [State 200, End]
 type = ChangeState
+;triggerall = time >= 5
 trigger1 = command = "holdup"
 value = 60
 ctrl = 0
+
+;[State 200, End]
+;type = ChangeState
+;triggerall = time >= 10
+;trigger1 = command = "WD"
+;value = 30
+;ctrl = 0
 
 [State 200, End]
 type = ChangeState
@@ -252,9 +246,9 @@ ctrl = 1
 
 [State 200, End]
 type = ChangeState
+;triggerall = time >= 5
 trigger1 = command = "back"
-value = 11
-ctrl = 1
+value = 35
 
 [State 200, End]
 type = ChangeState
@@ -283,6 +277,32 @@ value = 80000
 ;triggerall = prevstateno != 52 || time > 3
 ;trigger1 = command = "x"
 ;value = 590
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "FF"
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 15
+trigger1 = command = "WD"
+value = 30
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "back"
+value = 105
 
 [State 200, End]
 type = ChangeState
@@ -2035,7 +2055,6 @@ ctrl = 0
 type = ChangeState
 trigger1 = Time = 0
 value = 0
-
 ;---------------------------------------------------------------------------
 ; Stand get-hit (shaking)
 [Statedef 5000]
@@ -2046,13 +2065,11 @@ velset = 0,0
 
 [State 0, PlaySnd]
 type = PlaySnd
-triggerall = random < 200
+triggerall = random < 150 + ifelse(map(VoiceSwitch)=0,150,0)
 trigger1 = Time = 0
 value = Sifelse(map(VoiceSwitch)=0,200,205),4+(random<500)*1+(random<500)*1
 volumescale = 200
 channel = 1
-
-
 
 [State 5000, VelSet] ;Fixes sliding issues caused by PlayerPush changing
 type = VelSet
@@ -2064,19 +2081,19 @@ y = 0
 type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = GetHitVar(animtype) != [3,5]
-value = ifelse(var(10)=0,ifelse((GetHitVar(groundtype) = 1),5000,5010) + GetHitVar(animtype),2850)
+value = ifelse((GetHitVar(groundtype) = 1),5000,5010) + GetHitVar(animtype)
 
 [State 5000, 2] ;Anim for HIT_BACK
 type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = GetHitVar(animtype) = [3,5]
-value = ifelse(var(10)=0,5030,2850)
+value = 5030
 
 [State 5000, 3] ;Anim for HIT_UP/HIT_DIAGUP (only if it exists)
 type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = (GetHitVar(animtype) = [4,5]) && (SelfAnimExist(5047 + GetHitVar(animtype)))
-value =ifelse(var(10)=0,5047 + GetHitVar(animtype),2850) 
+value = 5047 + GetHitVar(animtype) ;5051 - 4 + type
 
 [State 5000, 4] ;Freeze anim
 type = ChangeAnim
@@ -2149,7 +2166,7 @@ x = 1
 [State 5001, 2]
 type = ChangeAnim
 trigger1 = AnimTime = 0
-value =ifelse(var(10)=0, 5005 + GetHitVar(animtype) + (GetHitVar(groundtype)=2)*10,2850)
+value = 5005 + GetHitVar(animtype) + (GetHitVar(groundtype)=2)*10
 
 [State 5001, 3] ;Stop sliding back
 type = VelMul
@@ -2167,6 +2184,11 @@ trigger1 = HitOver
 map = "defence"
 value = 0
 
+[State 5001, Infinite Protection Soft] ;Causes the character to fall into a juggle state if their proration gets too high
+type = ChangeState
+trigger1 = enemy,var(11) > 35
+value = 5050
+
 [State 5001, 6]
 type = ChangeState
 trigger1 = HitOver
@@ -2183,7 +2205,7 @@ velset = 0,0
 
 [State 0, PlaySnd]
 type = PlaySnd
-triggerall = random < 200
+triggerall = random < 150 + ifelse(map(VoiceSwitch)=0,150,0)
 trigger1 = Time = 0
 value = Sifelse(map(VoiceSwitch)=0,200,205),4+(random<500)*1+(random<500)*1
 volumescale = 200
@@ -2193,19 +2215,19 @@ channel = 1
 type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = GetHitVar(animtype) != [3,5]
-value = ifelse(var(10)=0,5020 + GetHitVar(animtype),2850)
+value = 5020 + GetHitVar(animtype)
 
 [State 5010, 2] ;Anim for HIT_BACK
 type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = GetHitVar(animtype) = [3,5]
-value = ifelse(var(10)=0,5030,2850)
+value = 5030
 
 [State 5010, 3] ;Anim for HIT_UP/HIT_DIAGUP (only if it exists)
 type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = (GetHitVar(animtype) = [4,5]) && (SelfAnimExist(5047 + GetHitVar(animtype)))
-value = ifelse(var(10)=0,5047 + GetHitVar(animtype),2850) ;5051 - 4 + type
+value = 5047 + GetHitVar(animtype) ;5051 - 4 + type
 
 [State 5010, 4] ;Freeze anim
 type = ChangeAnim
@@ -2274,7 +2296,7 @@ x = 1
 [State 5011, 2]
 type = ChangeAnim
 trigger1 = AnimTime = 0
-value = ifelse(var(10)=0,5025 + GetHitVar(animtype),2850)
+value = 5025 + GetHitVar(animtype)
 
 [State 5011, 3] ;Stop sliding back
 type = VelMul
@@ -2308,7 +2330,7 @@ velset = 0,0
 
 [State 0, PlaySnd]
 type = PlaySnd
-triggerall = random < 200
+triggerall = random < 150 + ifelse(map(VoiceSwitch)=0,150,0)
 trigger1 = Time = 0
 value = Sifelse(map(VoiceSwitch)=0,200,205),4+(random<500)*1+(random<500)*1
 volumescale = 200
@@ -2318,30 +2340,24 @@ channel = 1
 type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = GetHitVar(animtype) != [3,5]
-value = ifelse(var(10)=0,ifelse((GetHitVar(airtype) = 1),5000,5010) + GetHitVar(animtype),2850)
+value = ifelse((GetHitVar(airtype) = 1),5000,5010) + GetHitVar(animtype)
 
 [State 5020, 2] ;Anim for HIT_BACK
 type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = GetHitVar(animtype) = [3,5]
-value = ifelse(var(10)=0,5030,2850)
+value = 5030
 
 [State 5020, 3] ;Anim for HIT_UP/HIT_DIAGUP (only if it exists)
 type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = (GetHitVar(animtype) = [4,5]) && (SelfAnimExist(5047 + GetHitVar(animtype)))
-value = ifelse(var(10)=0,5047 + GetHitVar(animtype),2850) ;5051 - 4 + type
+value = 5047 + GetHitVar(animtype) ;5051 - 4 + type
 
 [State 5020, 4] ;Freeze anim
 type = ChangeAnim
 trigger1 = Time > 0
 value = anim
-
-; [State 5020, Infinite Protection Hard] ;Causes the character to break out of a combo if their proration gets REALLY high. Should not occur in normal gameplay.
-; type = NotHitBy
-; trigger1 = enemy,var(11) > 250
-; value = SCA
-; time = 60
 
 [State 5020, 5]
 type = ChangeState
@@ -2388,7 +2404,7 @@ ctrl = 0
 type = ChangeAnim
 trigger1 = Anim != [5000, 5199]
 trigger1 = SelfAnimExist(5030)
-value = ifelse(var(10)=0,5030,2850)
+value = 5030
 
 [State 5030, 2]
 type = VelAdd
@@ -2441,7 +2457,7 @@ trigger1 = Time = 0
 trigger1 = SelfAnimExist(5035)
 trigger1 = Anim != [5051,5059] ;Not if in hit up anim
 trigger1 = Anim != 5090 ;Not if hit off ground anim
-value = ifelse(var(10)=0,5035,2850)
+value = 5035
 
 [State 5035, 2]
 type = VelAdd
@@ -2472,9 +2488,8 @@ value = 5050 ;Air get-hit (falling)
 
 ; [State 5035, Infinite Protection Soft] ;Causes the character to fall into a juggle state if their proration gets too high
 ; type = ChangeState
-; trigger1 = enemy,var(11) > 50
+; trigger1 = enemy,var(11) > 35
 ; value = 5050
-
 
 ;---------------------------------------------------------------------------
 ; Air get-hit (recovering in air, not falling)
@@ -2489,19 +2504,13 @@ trigger1 = !Alive
 value = 5050
 ctrl = 0
 
-[State 0, NotHitBy]
-type = NotHitBy
-trigger1 = AnimElem = 1
-value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
-time = 10
-
 [State 5040, 2]
 type = ChangeAnim
 trigger1 = AnimTime = 0
 trigger1 = Anim != 5040
 trigger2 = Time = 0
 trigger2 = Anim != 5035
-value = ifelse(var(10)=0,5040,2850)
+value = 5040
 
 [State 5040, 3]
 type = CtrlSet
@@ -2559,14 +2568,14 @@ trigger2 = Time = 0     ;If no transition anim
 trigger2 = Anim != 5035
 trigger2 = (Anim != [5051, 5059]) && (Anim != [5061, 5069])
 trigger2 = Anim != 5090 ;Not if hit off ground anim
-value = ifelse(var(10)=0,5050,2850)
+value = 5050
 
 [State 5050, 2] ;Coming down anim
 type = ChangeAnim
 trigger1 = anim = [5050,5059]
 trigger1 = Vel Y >= ifelse(anim = 5050, Const720p(4), Const720p(-8))
 trigger1 = SelfAnimExist(anim+10)
-value = ifelse(var(10)=0,anim+10,2850)
+value = anim+10
 persistent = 0
 
 [State 5050, 3] ;Gravity
@@ -2609,18 +2618,10 @@ movetype= H
 physics = N
 velset = 0,0
 
-[State 0, PlaySnd]
-type = PlaySnd
-triggerall = random < 200
-trigger1 = Time = 0
-value = Sifelse(map(VoiceSwitch)=0,200,205),4+(random<500)*1+(random<500)*1
-volumescale = 200
-channel = 1
-
 [State 5070, 1]
 type = ChangeAnim
 trigger1 = 1
-value = ifelse(var(10)=0,5070,2850)
+value = 5070
 
 [State 5070, 2]
 type = ChangeState
@@ -2668,7 +2669,7 @@ velset = 0,0
 
 [State 0, PlaySnd]
 type = PlaySnd
-triggerall = random < 200
+triggerall = random < 150 + ifelse(map(VoiceSwitch)=0,150,0)
 trigger1 = Time = 0
 value = Sifelse(map(VoiceSwitch)=0,200,205),4+(random<500)*1+(random<500)*1
 volumescale = 200
@@ -2765,14 +2766,14 @@ type = ChangeAnim
 triggerall = time = 0
 trigger1 = (anim != [5051,5059]) && (anim != [5061,5069])
 trigger2 = !SelfAnimExist(5100 + (anim % 10))
-value = ifelse(var(10)=0,5100,2855)
+value = 5100
 
 [State 5100, 3] ;Hit ground anim (for hit up)
 type = ChangeAnim
 trigger1 = time = 0
 trigger1 = (anim = [5051,5059]) || (anim = [5061,5069])
 trigger1 = SelfAnimExist(5100 + (anim % 10))
-value = ifelse(var(10)=0,5100 + (anim % 10),2855)
+value = 5100 + (anim % 10)
 
 [State 5100, 4]
 type = PosSet
@@ -2832,7 +2833,7 @@ time = 20
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = AnimElem = 1
-value = F7,1
+value = S3,4
 volumescale = 100
 ;---------------------------------------------------------------------------
 ; Downed get-hit (bounce off ground)
@@ -2846,14 +2847,14 @@ type = ChangeAnim
 triggerall = time = 0
 trigger1 = anim != [5101,5109]
 trigger2 = !SelfAnimExist(5160 + (anim % 10))
-value = ifelse(var(10)=0,5160,2850)
+value = 5160
 
 [State 5101, 2] ;Coming hit ground anim (for hit up)
 type = ChangeAnim
 triggerall = time = 0
 trigger1 = anim = [5101,5109]
 trigger1 = SelfAnimExist(5160 + (anim % 10))
-value = ifelse(var(10)=0,5160 + (anim % 10),2850)
+value = 5160 + (anim % 10)
 
 [State 5101, 3]
 type = HitFallVel
@@ -2929,7 +2930,7 @@ type = ChangeAnim
 persistent = 0
 trigger1 = SelfAnimExist(5110 + (anim % 10))
 trigger1 = anim = [5081,5089]
-value = ifelse(var(10)=0,5110 + (anim % 10),2855)
+value = 5110 + (anim % 10)
 
 [State 5110, 2] ;Hit ground anim (normal)
 type = ChangeAnim
@@ -2937,7 +2938,7 @@ triggerall = time = 0
 triggerall = anim != [5110,5119] ;Not already changed anim
 trigger1 = anim != [5161,5169]
 trigger2 = !SelfAnimExist(5170 + (anim % 10))
-value = ifelse(var(10)=0,5170,2855)
+value = 5170
 
 [State 5110, 3] ;Hit ground anim (for hit up)
 type = ChangeAnim
@@ -2945,7 +2946,7 @@ triggerall = time = 0
 triggerall = anim != [5110,5119] ;Not already changed anim
 trigger1 = anim = [5161,5169]
 trigger1 = SelfAnimExist(5170 + (anim % 10))
-value = ifelse(var(10)=0,5170 + (anim % 10),2855)
+value = 5170 + (anim % 10)
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -2991,7 +2992,7 @@ triggerall = anim = [5171,5179]
 triggerall = SelfAnimExist(5110 + (anim % 10))
 trigger1 = AnimTime = 0
 trigger2 = SysVar(0) ;SysVar(0) = 1 avoids hit ground anim
-value = ifelse(var(10)=0,5110 + (anim % 10),2850)
+value = 5110 + (anim % 10)
 
 [State 5110, 10] ;For normal
 type = ChangeAnim
@@ -2999,7 +3000,7 @@ persistent = 0
 triggerall = Anim != [5111,5119]
 trigger1 = AnimTime = 0
 trigger2 = SysVar(0) ;SysVar(0) = 1 avoids hit ground frame
-value = ifelse(var(10)=0,5110,2850)
+value = 5110
 
 [State 5110, 11] ;If just died
 type = ChangeState
@@ -3055,14 +3056,14 @@ type = ChangeAnim
 triggerall = time = 0
 trigger1 = anim != [5111,5119]
 trigger2 = !SelfAnimExist(5120 + (anim % 10))
-value = ifelse(var(10)=0,5120,2047)
+value = 5120
 
 [State 5120, 1b] ;Get up anim (for hit up/diag-up)
 type = ChangeAnim
 triggerall = time = 0
 trigger1 = anim = [5111,5119]
 trigger1 = SelfAnimExist(5120 + (anim % 10))
-value = ifelse(var(10)=0,5120 + (anim % 10),2047)
+value = 5120 + (anim % 10)
 
 [State 5120, VelSet] ; Removes all momentum to prevent targetbind bugs
 type = Velset
@@ -3124,27 +3125,20 @@ physics = N
 sprpriority = -3
 ctrl = 0
 
-[State 0, Voice - ]
-type = PlaySnd
-trigger1 = time = 0
-trigger1 = !matchover
-value = Sifelse(map(VoiceSwitch)=0,27000,27005),3
-volumescale = 1000
-
 [State 5150, 1] ;Normal anim
 type = ChangeAnim
 triggerall = Time = 0
 triggerall = SelfAnimExist(5140)
 trigger1 = (anim != [5111,5119]) && (anim != [5171,5179])
 trigger2 = !SelfAnimExist(5140 + (anim % 10))
-value = ifelse(var(10)=0,5140,2855)
+value = 5140
 
 [State 5150, 3] ;Hit up type anim
 type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = (anim = [5111,5119]) || (anim = [5171,5179])
 trigger1 = SelfAnimExist(5140 + (anim % 10))
-value = ifelse(var(10)=0,5140 + (anim % 10),2855)
+value = 5140 + (anim % 10)
 
 [State 5150, 4] ;Match over anim
 type = ChangeAnim
@@ -3160,7 +3154,7 @@ type = ChangeAnim
 trigger1 = Time = 0
 trigger1 = Anim != [5140,5159]
 trigger1 = Anim != [5110,5119]
-value = ifelse(var(10)=0,5110,2855)
+value = 5110
 
 [State 5150, 6] ;Friction
 type = VelMul
@@ -3236,7 +3230,7 @@ physics = N
 type = ChangeAnim
 trigger1 = Anim = 5035
 trigger1 = AnimTime = 0
-value = ifelse(var(10)=0,5050,2850)
+value = 5050
 
 [State 5200, 2]
 type = VelAdd
@@ -3255,7 +3249,7 @@ value = 5201
 type    = A
 movetype= I
 physics = A
-anim = ifelse(var(10)=0,5200,2850)
+anim = 5200
 facep2 = 1
 
 [State 5201, 1] ;Turn if not facing opponent
@@ -3307,7 +3301,7 @@ value = 0
 type    = A
 movetype= I
 physics = N
-anim = ifelse(var(10)=0,5200,2850)
+anim = 5210
 ctrl = 0
 facep2 = 1
 
@@ -3420,7 +3414,6 @@ type = MapSet
 trigger1 = time = 0
 map = "defence"
 value = 0
-
 ;---------------------------------------------------------------------------
 ; Continue screen animation
 [Statedef 5500]

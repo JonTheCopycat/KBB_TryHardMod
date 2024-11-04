@@ -1052,6 +1052,18 @@ Triggerall = statetype = A
 triggerall = command = "c"
 Triggerall = power >= 250
 trigger1 = ctrl
+;-----------------------------------------------------------------------------
+; Forward + C Air
+[State -1, Forward + C Air]
+type = ChangeState
+value = 4405
+triggerall = numhelper(3500) = 0 && numhelper(45001) = 0
+triggerall = map(Has4C) = 1
+triggerall = command = "holdback"
+Triggerall = statetype = A
+triggerall = command = "c"
+Triggerall = power >= 250
+trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; C - Air
 [State -1, C Air]

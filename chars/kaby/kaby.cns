@@ -332,7 +332,7 @@ type = Dialogue
 triggerall = enemy,name = "Stray"
 trigger1 = 1
 hidebars = 1
-text1 = "<p1>	... <wait=15>What is that you intend to do here?<wait=30>"
+text1 = "<p1>	 stay lowtier fn<wait=30>"  
 
 [State 191, Dialogue]
 type = Dialogue
@@ -343,10 +343,10 @@ text1 = "<p1>	Greetings, Kirby...!<wait=30>"
 
 [State 191, Dialogue]
 type = Dialogue
-triggerall = enemy,name = "Saito" || enemy,name = "Glitch"
+triggerall = enemy,name = "Saito" || enemy,name = "Glitch" 
 trigger1 = 1
 hidebars = 1
-text1 = "<p1>	Just looking at such an uncouth mortal is enough to make me ill...<wait=30>"
+text1 = "<p1>	He's carried Sobbing Emoji...<wait=30>"
 
 
 [State 191, Dialogue]
@@ -354,55 +354,56 @@ type = Dialogue
 triggerall = enemy,name = "Jodie"
 trigger1 = 1
 hidebars = 1
-text1 = "<p1>	You? Defeat me? <wait=10> Ha! Try it, foolish mortal!<wait=30>"
+text1 = "<p1>	yo lemme 5c you king <wait=30>"
+
+;[State 191, Dialogue]
+;type = Dialogue
+;triggerall = enemy,name = "Fly"
+;trigger1 = 1
+;hidebars = 1
+;text1 = "<p1>	What a fascinating technique...<wait=30>"
+;
+;[State 191, Dialogue]
+;type = Dialogue
+;triggerall = enemy,name = "Jay"
+;trigger1 = 1
+;hidebars = 1
+;text1 = "<p1>	What a interesting technique...<wait=30>"
 
 [State 191, Dialogue]
 type = Dialogue
-triggerall = enemy,name = "Fly"
+triggerall = enemy,name = "Max"
 trigger1 = 1
 hidebars = 1
-text1 = "<p1>	What a fascinating technique...<wait=30>"
+text1 = "<p1>	dont spam 4a bro! <wait=30>"
 
-[State 191, Dialogue]
-type = Dialogue
-triggerall = enemy,name = "Jay"
-trigger1 = 1
-hidebars = 1
-text1 = "<p1>	What a interesting technique...<wait=30>"
-
-[State 191, Dialogue]
-type = Dialogue
-triggerall = enemy,name = "Max" || enemy,name = "Clutch"
-trigger1 = 1
-hidebars = 1
-text1 = "<p1>	Ugly wretched mortal..!<wait=30>"
 
 [State 191, Dialogue]
 type = Dialogue
 triggerall = enemy,name = "Vivienne"
 trigger1 = 1
 hidebars = 1
-text1 = "<p1>	How unsightly...<wait=30> You mortals are truly nothing but mindless brutes...<wait=30>"
+text1 = "<p1>	MONKEY MODE CHARACTER!!!<wait=30>"
+
+;[State 191, Dialogue]
+;type = Dialogue
+;triggerall = enemy,name = "Aege" yappity yap bro
+;trigger1 = 1
+;hidebars = 1
+;text1 = "<p1>	It's about time, mortal...<wait=45>"
+;text2 = "<p1>	You've been running around making messes for too long and now I'm going to choke the life from you.<wait=60> "
+;text3 = "<p1>	I can't wait to watch you die.<wait=50>"
 
 [State 191, Dialogue]
 type = Dialogue
-triggerall = enemy,name = "Aege"
-trigger1 = 1
-hidebars = 1
-text1 = "<p1>	It's about time, mortal...<wait=45>"
-text2 = "<p1>	You've been running around making messes for too long and now I'm going to choke the life from you.<wait=60> "
-text3 = "<p1>	I can't wait to watch you die.<wait=50>"
-
-[State 191, Dialogue]
-type = Dialogue
-triggerall = enemy,name = "Pichu" || enemy,name = "Aumu" || enemy,name = "Ari" || enemy,name = "Sareo"
+triggerall = enemy,name = "Sareo" || enemy,name = "Frosty" || enemy,name = "Vei"
 trigger1 = 1
 hidebars = 1
 text1 = "<p1>	kill yourself!<wait=30>"
 
 [State 191, Dialogue]
 type = Dialogue
-triggerall = enemy,name = "Crusade" || enemy,name = "Onyxon"
+triggerall = enemy,name = "Crusade" || enemy,name = "Onyxon" || enemy,name = "Quote"
 trigger1 = 1
 hidebars = 1
 text1 = "<p1>	my honest reaction when I see KBB 3.0<wait=30>"
@@ -734,7 +735,7 @@ type = ChangeState
 triggerall = movecontact
 trigger1 = command = "a"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 210
+value = 213
 
 [State 300, End]
 type = ChangeState
@@ -794,7 +795,7 @@ movetype= A
 physics = S
 juggle  = 2
 ctrl = 0
-anim = 212
+anim = 210
 poweradd = 0
 velset = 0,0
 sprpriority = 2
@@ -1127,6 +1128,7 @@ value = 440
 [State 300, End]
 type = ChangeState
 triggerall = movecontact
+triggerall = var(19) != 0
 ;trigger1 = command = "c" &&  movehit
 trigger1 = command = "c"; && time <= 24
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
@@ -1258,6 +1260,7 @@ value = 310
 [State 300, End]
 type = ChangeState
 ;trigger1 = command = "c" &&  movehit && command = "holddown"
+triggerall = var(19) != 0
 trigger1 = command = "c" &&  movecontact && command = "holddown"; && time <= 24
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 450
@@ -1368,7 +1371,7 @@ attr = S, NA
 animtype  = Light
 damage    = ifelse(enemy,movetype = A, 30,15)
 hitflag = MAF
-guardflag = M
+guardflag = H ; sure i guess bro
 pausetime = ifelse(enemy,movetype = A, 16,8),ifelse(enemy,movetype = A, 20,10)
 ground.hittime  = 15
 air.hittime = 25 + ifelse(enemy,movetype = A, 12,0)
@@ -1376,7 +1379,7 @@ guard.pausetime = 12,15
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = S0,1
+hitsound   =  ifelse(enemy,movetype = A,8,5),ifelse(enemy,movetype = A,1,3)
 guardsound = 6,10
 ground.type = Low
 ground.slidetime = 0
@@ -1627,6 +1630,7 @@ persistent = 0
 type = velset
 trigger1 = animelem = 1
 x = -6
+
 [State 0, PowerAdd]
 type = PowerAdd
 triggerall = numhelper(51000) = 0
@@ -1644,8 +1648,8 @@ y = -8
 
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = 1
-value = A,NA,SA,HA,NP,SP,HP
+trigger1 = time = [5,25]
+value = SCA,NA,SA,NP,SP
 ;value2 = S,NA
 time = 1
 
@@ -1660,31 +1664,31 @@ animtype  = Heavy
 damage    = ifelse(enemy,movetype = A,18,9)
 hitflag = MAFD
 guardflag = MA
-pausetime = ifelse(enemy,movetype = A,14,7),ifelse(enemy,movetype = A,20,10)
+pausetime = ifelse(enemy,movetype = A,14,7),ifelse(enemy,movetype = A,10,5)
 ground.hittime  = 40
 air.hittime = 45
 guard.pausetime = 6,4
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = S0,1
+hitsound   =  ifelse(enemy,movetype = A,8,5),ifelse(enemy,movetype = A,1,1)
 guardsound = 6,10
 ground.type = Low
 ground.slidetime = 25
-ground.velocity = -1,-8
-air.velocity = -1, -8
+ground.velocity = -3,-5
+air.velocity = -3, -5
 Fall = 0
 
-[State 0, TargetBind]
-type = TargetBind
-trigger1 =  movehit
-time = 1
-id = -1
-pos = 40,0
+;[State 0, TargetBind]
+;type = TargetBind
+;trigger1 =  movehit
+;time = 1
+;id = -1
+;pos = 40,0
 
 [State 300, End]
 type = ChangeState
-trigger1 = AnimTime = 0  && movehit = 0
+trigger1 = AnimTime = 0 && movehit = 0
 value = 405
 ctrl = 1
 
@@ -1879,14 +1883,21 @@ sprpriority = 2
 
 [State 0, Turn]
 type = Turn
-triggerall = p2dist x < 0
-trigger1 = prevstateno = [210,212]
+triggerall = p2dist x < -5
+trigger1 = prevstateno = [210,213]
 persistent = 0
 
 [State 0, VelSet]
 type = VelSet
+trigger1 = AnimElem = 1
+x = ifelse(prevstateno = 653,10,3)
+y = 0
+
+
+[State 0, VelSet]
+type = VelSet
 trigger1 = AnimElem = 2
-x = ifelse(prevstateno=[210,212],12,6)
+x = ifelse(prevstateno=[210,212],12,5)
 y = 0
 
 [State 0, VelSet]
@@ -1894,11 +1905,6 @@ type = PosSet
 trigger1 = prevstateno = 653
 y = 0
 
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 1
-x = ifelse(prevstateno = 653,10,4)
-y = 0
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -2044,7 +2050,7 @@ value = 220
 [State 200, 1]
 type = ChangeState
 trigger1 = command = "holdup"
-trigger1 = movecontact
+trigger1 = movehit
 triggerall = prevstateno != 653
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
@@ -2636,14 +2642,14 @@ pos = 40,0
 type = TargetBind
 triggerall = enemy,stateno != 4100
 trigger1 = movecontact && AnimElem = 7
-time = 1
+time = 25
 id = -1
 pos = 0,0
 
 
 [State 0, PlayerPush]
 type = PlayerPush
-trigger1 = Time > 29
+trigger1 = Time > 25
 value = 0
 
 [State 700, 1]
@@ -2688,7 +2694,7 @@ pausetime = 1,1
 sparkno = 15000
 guard.sparkno = s13000
 sparkxy = -8,-25
-hitsound   = 8,0
+hitsound   = 5,1
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
@@ -2713,7 +2719,7 @@ pausetime = 25,25
 sparkno = 2
 guard.sparkno = s13000
 sparkxy = -8,-25
-hitsound   = 8,0
+hitsound   = 5,4
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
@@ -3417,7 +3423,7 @@ ignorehitpause = 1
 [State 0, PlaySnd]
 type = PlaySnd
 triggerall = random < 600
-trigger1 = AnimElem = 1
+trigger1 = AnimElem = 3
 value = Sifelse(map(VoiceSwitch)=0,200,205),0+(random<500)*1+(random<500)*1+(random<500)*1
 volumescale = 200
 channel = 1
@@ -3912,8 +3918,8 @@ attr = A, NA
 animtype  = Medium
 damage    = 20
 hitflag = MAF
-guardflag = HAF
-pausetime = 10,12
+guardflag = HA
+pausetime = 10,10
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -3927,16 +3933,16 @@ ground.velocity = -2, -4
 air.velocity = -2,-4
 Fall = 0
 Envshake.time = 0
-Fall.recovertime = 20 + ifelse(enemy,movetype = A, 10,0)
+Fall.recovertime = 30 + ifelse(enemy,movetype = A, 10,0)
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
-[State 0, ChangeState]
-type = ChangeState
-trigger1 = command = "holdup" && movecontact && var(3) = 0 
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && movecontact && var(3) = 0 
-value = 45
-ctrl = 1
+;[State 0, ChangeState]
+;type = ChangeState
+;trigger1 = command = "holdup" && movecontact && var(3) = 0 
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && movecontact && var(3) = 0 
+;value = 45
+;ctrl = 1
 
 [State 200, SPECIAL 3 - CUTTER]
 type = ChangeState
@@ -4393,7 +4399,7 @@ value = 0
 
 [State 0, Failed to block an overhead!]
 type = Explod
-triggerall = stateno = [600, 601] || stateno = 900 || stateno = 610
+triggerall = stateno = [600, 601] || stateno = 900 || stateno = 610  || stateno = 220
 triggerall = enemy, prevstateno = [120,160] && numexplod(31000) = 0
 trigger1 = enemy, movetype = H && enemy, stateno != [120,160]
 anim = F35000
@@ -4463,7 +4469,7 @@ persistent = 0
 type = Explod
 ownpal = 1
 trigger1 = enemy,movecountered && enemy,map(fatal) = 1
-trigger2 = gethitvar(damage) >= 75 
+trigger2 = gethitvar(damage) >= 70
 triggerall = movetype = H
 triggerall = var(19) != 0 
 triggerall = teamside = 1 ;p1 side
@@ -4490,7 +4496,7 @@ type = Explod
 ownpal = 1
 triggerall = map(hitOverride) = 0
 trigger1 = enemy,movecountered && enemy,map(fatal) = 1
-trigger2 = gethitvar(damage) >= 75
+trigger2 = gethitvar(damage) >= 70
 triggerall = movetype = H
 triggerall = var(19) != 0 
 triggerall = teamside = 2 ;p2 side
@@ -4513,7 +4519,7 @@ pausemovetime = 99999999999999999999999
 
 [State 0, Helper]
 type = Helper
-trigger1 = gethitvar(damage) >= 75
+trigger1 = gethitvar(damage) >= 70
 trigger2 = enemy,movecountered
 trigger2 = enemy,map(fatal) = 1
 triggerall = map(hitOverride) = 0
@@ -4535,7 +4541,7 @@ pausemovetime = 0
 
 [State 1200, 6]
 type = explod
-trigger1 = gethitvar(damage) >= 75
+trigger1 = gethitvar(damage) >= 70
 trigger2 = enemy,map(fatal) = 1
 trigger2 = enemy,movecountered
 triggerall = map(hitOverride) = 0
@@ -4562,7 +4568,7 @@ triggerall = map(hitOverride) = 0
 trigger1 = enemy,map(fatal) = 1 ; got fatal? LOSE ABILITY
 trigger1 = enemy,movecountered
 trigger1 = stateno != 20010
-trigger2 = gethitvar(damage) >= 75 ; took over 74 damage? LOSE ABILITY
+trigger2 = gethitvar(damage) >= 70 ; took 70 damage? LOSE ABILITY
 v = 19    ;fv = 10
 value = 0
 persistent = 0
@@ -4574,7 +4580,7 @@ triggerall = map(hitOverride) = 0
 trigger1 = enemy,map(fatal) = 1 ; got fatal? LOSE ABILITY
 trigger1 = enemy,movecountered
 trigger1 = stateno != 20010
-trigger2 = gethitvar(damage) >= 75 ; took over 74 damage? LOSE ABILITY
+trigger2 = gethitvar(damage) >= 70 ; took 70 damage? LOSE ABILITY
 v = 10    ;fv = 10
 value = 0
 persistent = 0
@@ -4649,6 +4655,14 @@ trigger1 = p2movetype != H
 v = 31
 value = 0
 ignorehitpause = 1
+
+[State 0, Wallbounce prevent reset]
+type = VarSet
+trigger1 = p2movetype != H
+v = 43
+value = 0
+ignorehitpause = 1
+
 [State 0, PosSet]
 type = PosSet
 triggerall = time = 0
