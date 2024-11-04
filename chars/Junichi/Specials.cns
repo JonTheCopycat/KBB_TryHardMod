@@ -413,7 +413,31 @@ Envshake.time = 30
 [State 200, End]
 type = ChangeState
 trigger1 = movehit && AnimTime = 0
-trigger2 = !movehit && AnimElem = 6
+value = 0
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = !movehit && AnimElem = 4
+value = 20005
+ctrl = 1
+
+;------------------------------------------------------------------------------
+; Combo Fail:
+[Statedef 20005]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 20005
+poweradd = 0
+velset = -3,0
+sprpriority = 2
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
@@ -843,11 +867,38 @@ Envshake.time = 30
 ;trigger1 = command = "SPECIAL 4"
 ;value = 22000
 
-
 [State 200, End]
 type = ChangeState
 trigger1 = movehit && AnimTime = 0
-trigger2 = !movehit && AnimElem = 16
+value = 0
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = !movehit && AnimElem = 13
+value = 20015
+ctrl = 1
+
+; Combo Fail:
+[Statedef 20015]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 20015
+poweradd = 0
+velset = 2,0
+sprpriority = 2
+
+[State 200, End]
+type = VelSet
+trigger1 = AnimElem = 6, < 0
+x = 2
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
@@ -874,29 +925,6 @@ ignorehitpause = 1
 ;value = S200,0+(random<500)*1+(random<500)*1+(random<500)*1
 ;volumescale = 200
 ;channel = 0
-
-[State 0, I'm gonna do an unblockable attack!]
-type = Explod
-trigger1 = time = 1
-anim = F30000
-id = 30000
-pos = -30 + (cond(BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30, 60, 0)),-50
-postype = p1
-bindtime = -1
-vel = 0,0
-accel = 0,0
-random = 0,0
-pausemovetime = 999
-supermovetime = 999
-ontop = 0
-shadow = 0,0,0
-removeongethit = 0
-ignorehitpause = 1
-facing = facing
-vfacing = 1
-scale = 0.6,0.6
-sprpriority = 5
-removetime = -2
 
 [State 0, Busterable]
 type = MapSet
@@ -982,7 +1010,7 @@ animtype  = Hard
 damage    = 60
 kill = 0
 hitflag = MAFD
-guardflag = 
+guardflag = MA
 pausetime = 10,100
 guard.pausetime = 16,16
 guard.hittime = 15
@@ -1747,8 +1775,8 @@ ownpal = 1
 type = ChangeState
 Triggerall = time >= 12
 triggerall = numhelper(3500) = 0
-trigger1 = p2bodydist x <= 45 && p2bodydist x >= -10
-trigger1 = abs(p2bodydist y) <= 65
+trigger1 = p2bodydist x <= 35 && p2bodydist x >= 0
+trigger1 = abs(p2bodydist y) <= 70
 value = 22015
 
 [State 100, 4]
@@ -1955,7 +1983,7 @@ persistent = 0
 
 [State 0, Damage Proration]
 type = VarAdd
-trigger1 = AnimElem = 6, >= 0
+trigger1 = AnimElem = 5, >= 0
 trigger1 = movehit
 v = 11
 ignorehitpause = 1
@@ -1997,18 +2025,18 @@ add = 82,0,0
 
 [State 0, Dash Velocity]
 type = VelSet
-trigger1 = AnimElem = 3, >= 0 && AnimElem = 4, < 0
+trigger1 = AnimElem = 2, >= 0 && AnimElem = 3, < 0
 x = 5
 
 [State 0, Dash Velocity]
 type = VelSet
-trigger1 = AnimElem = 5
+trigger1 = AnimElem = 4
 x = 2
 y = -6
 
 [State 0, Dash Velocity]
 type = StateTypeSet
-trigger1 = AnimElem = 5
+trigger1 = AnimElem = 4
 statetype = A
 physics = A
 
@@ -2022,7 +2050,7 @@ volumescale = 50
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = AnimElem = 5
+triggerall = AnimElem = 3
 trigger1 = 1
 attr = S, SA
 animtype  = Medium
@@ -2050,7 +2078,7 @@ Fall.recover = 0
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = AnimElem = 6
+triggerall = AnimElem = 5
 trigger1 = 1
 attr = A, SA
 animtype  = Medium
@@ -2276,11 +2304,11 @@ pos = ifelse(abs(map(distX)) < 10,  20, ((enemy,pos x + 10 * map(distX) / abs(ma
 type = VelSet
 trigger1 = AnimElem = 3
 x = 4
-y = -7
+y = -4
 
 [State 0, VelSet]
 type = VelAdd
-trigger1 = Time > 15
+trigger1 = AnimElem = 4, >= 0
 y = .44
 
 [State 200, 1]
@@ -2304,7 +2332,8 @@ ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A || movecountered, 7,0)
 ground.velocity = 0
-guard.velocity = 5
+guard.velocity = -4
+airguard.velocity = -3, -3
 air.velocity = 0,0
 Fall = 1
 down.bounce = 1

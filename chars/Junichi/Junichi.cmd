@@ -1072,6 +1072,7 @@ trigger1 = ctrl
 trigger2 = movecontact
 trigger2 = stateno = [200, 499]
 trigger2 = stateno != 412
+trigger2 = stateno != 436
 
 ;---------------------------------------------------------------------------
 ; Neutral C
@@ -1105,7 +1106,7 @@ trigger1 = stateno != 201
 ; Punch C
 [State -1, C]
 type = ChangeState
-value = 423
+value = 440
 triggerall = var(10) = 1
 Triggerall = power >= 200
 triggerall = numhelper(3500) = 0
@@ -1118,7 +1119,7 @@ trigger2 = stateno = [200, 399] || stateno = [900, 999]
 ;For AI in Comboes
 [State -1, C]
 type = ChangeState
-value = 423
+value = 440
 triggerall = var(10) = 1
 Triggerall = power >= 200
 triggerall = numhelper(3500) = 0
@@ -1164,23 +1165,21 @@ Triggerall = power >= 200
 triggerall = numhelper(3500) = 0
 triggerall = command = "c"
 Triggerall = statetype != A
-trigger1 = ctrl || stateno = 410
-trigger2 = movecontact
-trigger2 = stateno = [412, 414] || stateno = 201
+trigger1 = movecontact
+trigger1 = stateno = [412, 414] || stateno = 201
 
 ;---------------------------------------------------------------------------
 ; Punch C
 [State -1, Punch C]
 type = ChangeState
-value = 440
+value = 435
 triggerall = var(10) = 1
 Triggerall = power >= 200
 triggerall = numhelper(3500) = 0
 triggerall = command = "c"
 Triggerall = statetype != A
-trigger1 = ctrl || stateno = 421
-trigger2 = movecontact
-trigger2 = stateno = [420, 429]
+trigger1 = movecontact
+trigger1 = stateno = [420, 429]
 
 ;---------------------------------------------------------------------------
 ; Baton C
