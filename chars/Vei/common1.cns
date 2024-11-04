@@ -226,13 +226,19 @@ value = 35
 type = ChangeState
 trigger1 = command = "a"
 value = 290
-ctrl = 0
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
 trigger1 = command = "b"
 value = 390
-ctrl = 0
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "c"
+value = 490
+ctrl = 1
 
 [State 200, C]
 type = ChangeState
