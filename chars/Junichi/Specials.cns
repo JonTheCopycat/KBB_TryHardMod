@@ -1482,7 +1482,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 15
+value = 12
 
 [State 0, Helper]
 type = Helper
@@ -3123,7 +3123,7 @@ trigger1 = hitcount = 5
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 15
+value = 10
 
 [State 0, FatalCounter]
 type = MapSet
