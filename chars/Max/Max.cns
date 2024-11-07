@@ -490,7 +490,7 @@ ctrl = 0
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
+trigger1 = movecontact
 value = 35
 ctrl = 1
 
@@ -802,7 +802,7 @@ triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 30
+value = 50
 
 [State 0, Voice]
 type = PlaySnd
@@ -961,7 +961,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 25 ;seethe. ;no
+value = 45 ;seethe.
 
 [State 0, Voice]
 type = PlaySnd
@@ -2859,7 +2859,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 10	
+value = 5
 
 [State 0, Helper Guarded]
 type = RootMapSet
@@ -3181,7 +3181,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 3
 
 [State 1010, Helper Attack Scale]
 type = AttackMulSet

@@ -247,7 +247,7 @@ ctrl = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "back"
+trigger1 = command = "holdback"
 value = 11
 ctrl = 1
 
@@ -340,7 +340,7 @@ ownpal = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 2
+triggerall = time >= 5
 trigger1 = command = "holdup"
 value = 60
 ctrl = 0

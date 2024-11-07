@@ -233,18 +233,21 @@ ownpal = 0
 type = ChangeState
 ;triggerall = time >= 5
 trigger1 = command = "holdup"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && time >= 5
 value = 60
 ctrl = 0
 
 [State 200, End]
 type = ChangeState
 trigger1 = command = "FF"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && time >= 5
 value = 100
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "back"
+trigger1 = command = "holdback"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && time >= 5
 value = 11
 ctrl = 1
 
@@ -356,7 +359,7 @@ ownpal = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 2
+triggerall = time >= 5
 trigger1 = command = "holdup"
 value = 60
 ctrl = 0
@@ -377,7 +380,7 @@ ctrl = 1
 
 [State 200, End]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
+triggerall = time >= 2
 trigger1 = command = "a"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 290 + var(10) * 3
@@ -385,7 +388,7 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
+triggerall = time >= 2
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 390 + var(10) * 3
@@ -394,7 +397,7 @@ ctrl = 0
 [State 200, C]
 type = ChangeState
 triggerall = power >= 200
-triggerall = prevstateno != 52 || time > 3
+triggerall = time >= 2
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 490 + var(10) * 3
