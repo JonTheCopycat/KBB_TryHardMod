@@ -998,7 +998,7 @@ trigger1 = ctrl
 [State -1, C Aire]
 type = ChangeState
 value = 624
-triggerall = command = "holdfwd"
+triggerall = command = "holdback"
 triggerall = command = "c"
 triggerall = power >= 200
 Triggerall = statetype = A

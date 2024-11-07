@@ -507,7 +507,7 @@ volumescale = 50
 [State 0, VelSet]
 type = VelSet
 trigger1 = animelem = 2
-x = 5
+x = 2
 
 [State 200, 1]
 type = HitDef
@@ -523,7 +523,7 @@ guardflag = M
 pausetime = 8,8
 guard.pausetime = 8, 7
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,10 + (random < 500) * 1
@@ -712,7 +712,7 @@ guardflag = MAFD
 pausetime = 10,10
 guard.pausetime = 12, 10
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,3
 guardsound = 6,10 + (random < 500) * 1
@@ -760,13 +760,13 @@ trigger1 = movehit || (movecontact && AnimTime > -7)
 value = 30
 ctrl = 1
 
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "holddown"
-trigger1 = command = "a"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 950
+;[State 200, End]
+;type = ChangeState
+;Triggerall = movecontact
+;trigger1 = command = "holddown"
+;trigger1 = command = "a"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 950
 
 ;[State 200, End]
 ;type = ChangeState
@@ -910,7 +910,7 @@ guardflag = MAF
 pausetime = 10,10
 guard.pausetime = 10, 8
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,3
 guardsound = 6,10 + (random < 500) * 1
@@ -1233,7 +1233,7 @@ guardflag = MAF
 pausetime = 10,10
 guard.pausetime = 10,8
 sparkno = 1
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,10 + (random < 500) * 1
@@ -1396,7 +1396,7 @@ guardflag = MAF
 pausetime = 10,10
 guard.pausetime = 10,10
 sparkno = 1
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,3
 guardsound = 6,10 + (random < 500) * 1
@@ -1570,7 +1570,7 @@ guard.pausetime = 12,8
 guard.hittime = 15
 airguard.hittime = 15
 sparkno = 2
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,10 + (random < 500) * 1
@@ -1772,7 +1772,7 @@ pausetime = 0,12
 guard.pausetime = 12, 3
 sparkno = s9999
 numhits = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,0
 guardsound = 6,0
@@ -1899,7 +1899,7 @@ guardflag = MAF
 pausetime = 6,6
 guard.pausetime = 12, 1
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 ;hitsound   = 5,4
 hitsound   = S30000,3
@@ -1961,7 +1961,7 @@ guardflag = MAF
 pausetime = 1,5
 guard.pausetime = 10, 4
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 ;hitsound   = S23000,1
 hitsound   = 5,3
@@ -2111,7 +2111,7 @@ guardflag = MAF
 pausetime = 1,5
 guard.pausetime = 12, 5
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 ;hitsound   = S23000,1
 hitsound   = 5,3
@@ -2290,7 +2290,7 @@ hitflag = MAF
 guardflag = MAF
 pausetime = 1,5
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 ;hitsound   = S23000,1
 hitsound   = 5,3
@@ -2525,12 +2525,12 @@ value = 1
 ;ignorehitpause = 1
 ;persistent = 0
 
-[State 400, StateTypeSet]
-type = StateTypeSet
-trigger1 = animelem = 2 
-statetype = S
-movetype = A
-physics = S
+;[State 400, StateTypeSet]
+;type = StateTypeSet
+;trigger1 = animelem = 2 
+;statetype = S
+;movetype = A
+;physics = S
 
 [State 0, Damage Proration]
 type = VarAdd
@@ -2543,14 +2543,14 @@ value = 5
 [State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 1
-x = 1
-y = -2.5
+x = 0;1
+y = 0;-2.5
 
-[State 0, VelAdd]
-type = VelAdd
-triggerall = time <= 10
-trigger1 = 1
-y = .4
+;[State 0, VelAdd]
+;type = VelAdd
+;triggerall = time <= 10
+;trigger1 = 1
+;y = .4
 
 [State 0, PosSet]
 type = PosSet
@@ -2607,7 +2607,7 @@ guardflag = M
 pausetime = 8,14
 guard.pausetime = 8, 8
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,10 + (random < 500) * 1
@@ -2751,13 +2751,13 @@ Triggerall = movecontact
 triggerall = power >= 1500
 triggerall = Anim != 411
 trigger1 = command = "SPECIAL 5"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger2 = time >= 10 && roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 25000
 
 [State 200, End]
 type = ChangeState
 trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger2 = time >= 10 && roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 triggerall = Anim = 411 && AnimElem = 3
 value = 320
 ctrl = 1
@@ -2779,7 +2779,7 @@ channel = 3327832
 
 [State 1000, 6]
 type = ChangeState
-trigger1 = command != "hold_c" && Anim != 411
+trigger1 = command != "hold_c" && Anim != 411 && time >= 8
 trigger2 = AnimTime = 0 && Anim = 411
 trigger3 = time >= 100 && Anim != 411
 value = 0
@@ -2871,7 +2871,7 @@ pausetime = 0,12
 guard.pausetime = 12, 3
 sparkno = s9999
 numhits = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,0
 guardsound = 6,0
@@ -3036,7 +3036,7 @@ pausetime = 0,12
 guard.pausetime = 12, 3
 sparkno = s9999
 numhits = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,0
 guardsound = 6,0
@@ -3168,7 +3168,7 @@ guardflag = MAF
 pausetime = 12,ifelse(prevstateno = 621,1,12) ;Reduced blockstun if from j.5c
 guard.pausetime = 12, 1
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 ;hitsound   = 5,4
 hitsound   = S30000,3
@@ -3322,7 +3322,7 @@ guard.pausetime = 12,8
 guard.hittime = 15
 airguard.hittime = 15
 sparkno = 2
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,10 + (random < 500) * 1
@@ -3599,7 +3599,7 @@ guard.pausetime = 4,2
 guard.hittime = 15
 airguard.hittime = 15
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,10 + (random < 500) * 1
@@ -3756,7 +3756,7 @@ guardflag = MAF
 pausetime = 12, 12
 guard.pausetime = 0,4
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 ;hitsound   = 5,4
 hitsound   = S30000,3
@@ -3931,7 +3931,7 @@ guardflag = MAF
 pausetime = 18, 18
 guard.pausetime = 0,4
 sparkno = 2
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 hitsound   = S30000,3
@@ -4204,7 +4204,7 @@ pausetime = 0,12
 guard.pausetime = 12, 3
 sparkno = s9999
 numhits = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,0
 guardsound = 6,0
@@ -4450,24 +4450,6 @@ ctrl = 0
 anim = 476
 sprpriority = 2
 
-[State 0, Helper]
-type = Helper
-triggerall = time > 1
-trigger1 = time % (ifelse(root,var(22) = 1, 10, 40)) = 0
-helpertype = normal ;player
-name = "Sudsy Mode"
-ID = 22010
-stateno = 22010
-pos = -20,0
-scale = 0.1,0.1
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 1
-ownpal = 0
-supermovetime = 0
-pausemovetime = 0
-inheritjuggle = 1
-
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = time = 0
@@ -4483,6 +4465,7 @@ x = 7
 type = Parentvaradd
 trigger1 = abs(pos X - enemynear,pos X) <= 30 
 trigger1 = abs(pos Y - enemynear,pos Y) <= 20 
+;trigger1 = movecontact
 v = 21
 value = 1
 
@@ -4497,6 +4480,7 @@ value = 1
 type = ChangeState
 trigger1 = abs(pos X - enemynear,pos X) <= 30 
 trigger1 = abs(pos Y - enemynear,pos Y) <= 20
+;trigger2 = movecontact
 value = 478
 
 [State 0, ChangeState]
@@ -4746,10 +4730,10 @@ animtype  = Light
 damage    = 5
 hitflag = MAF
 guardflag = MAF
-pausetime = 10,25
+pausetime = 1,1
 guard.pausetime = 10, 5
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 ;hitsound   = S23000,1
 hitsound   = S30000,3
@@ -4779,7 +4763,7 @@ hitflag = MAFD
 guardflag = MAF
 pausetime = 10,9
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 ;hitsound   = S23000,1
 hitsound   = S30000,3
@@ -4877,7 +4861,7 @@ hitflag = MAFD
 guardflag = MAF
 pausetime = 18,18
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,3
 guardsound = 6,0
@@ -5008,7 +4992,7 @@ guardflag = MAF
 pausetime = 18,18
 guard.pausetime = 12, 5
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,3
 guardsound = 6,0
@@ -5105,7 +5089,7 @@ guardflag = MAF
 pausetime = 18,18
 guard.pausetime = 12, 5
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,3
 guardsound = 6,0
@@ -5216,7 +5200,7 @@ guardflag = MAF
 pausetime = 12,ifelse(prevstateno = 621,1,12) 
 guard.pausetime = 12, 6
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,0
@@ -5244,7 +5228,7 @@ guardflag = MAF
 pausetime = 12,ifelse(prevstateno = 621,30,30) 
 guard.pausetime = 12, 6
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,0
@@ -5354,7 +5338,7 @@ guardflag = MAF
 pausetime = 1, 12
 guard.pausetime = 12,1
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,0
@@ -5890,7 +5874,7 @@ priority = 0, Miss
 pausetime = 10,100
 sparkno = 2
 hitsound = 9,0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 ground.type = High
 ground.slidetime = 12
@@ -5914,7 +5898,7 @@ HitFlag = MAFD
 guardflag = MAFD
 pausetime = 2,30
 sparkno = 2
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 8,0
 guardsound = 6,0
@@ -5941,7 +5925,7 @@ HitFlag = MAFD
 guardflag = MAFD
 pausetime = 3,20
 ;sparkno = 2
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,0
@@ -5966,7 +5950,7 @@ HitFlag = MAFD
 guardflag = MAFD
 pausetime = 3,20
 ;sparkno = 2
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,0
@@ -5991,7 +5975,7 @@ HitFlag = MAFD
 guardflag = MAFD
 pausetime = 3,20
 ;sparkno = 2
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,0
@@ -6016,7 +6000,7 @@ HitFlag = MAFD
 guardflag = MAFD
 pausetime = 3,20
 ;sparkno = 2
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,0
@@ -6041,7 +6025,7 @@ HitFlag = MAFD
 guardflag = MAFD
 pausetime = 0,30
 ;sparkno = 2
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,0
@@ -6189,7 +6173,7 @@ guardflag = MA
 pausetime = 0,3000
 sparkno = s9999
 numhits = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,8
 guardsound = 6,0
@@ -6278,7 +6262,7 @@ guardflag = HAFD
 pausetime = 16,22
 guard.pausetime = 16, 12
 sparkno = 1
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-55
 hitsound   = 5,1
 guardsound = 6,10 + (random < 500) * 1
@@ -6639,7 +6623,7 @@ guardflag = LA
 pausetime = 10,10
 guard.pausetime = 10,10
 sparkno = 1
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,10 + (random < 500) * 1
@@ -6795,7 +6779,7 @@ guardflag = MAF
 pausetime = 1,26
 guard.pausetime = 0,6
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,3
 guardsound = 6,0
@@ -6877,7 +6861,7 @@ guardflag = HA
 pausetime = 10,10
 guard.pausetime = 10, 10
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,10 + (random < 500) * 1
@@ -6930,7 +6914,7 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = prevstateno != 625
 triggerall = command != "holddown"
-triggerall = command != "holdfwd"
+triggerall = command != "holdback"
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 triggerall = var(21) > 0
@@ -6939,7 +6923,7 @@ value = 625
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
-triggerall = command = "holdfwd"
+triggerall = command = "holdback"
 trigger1 = command = "c"
 triggerall = power >= 200
 triggerall = var(21) > 0
@@ -7031,7 +7015,7 @@ guardflag = HA
 pausetime = 10,10
 guard.pausetime = 10, 10
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,10 + (random < 500) * 1
@@ -7083,7 +7067,7 @@ value = 610
 type = ChangeState
 Triggerall = movecontact
 triggerall = command != "holddown"
-triggerall = command != "holdfwd"
+triggerall = command != "holdback"
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 triggerall = var(21) > 0
@@ -7092,7 +7076,7 @@ value = 625
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
-triggerall = command = "holdfwd"
+triggerall = command = "holdback"
 trigger1 = command = "c"
 triggerall = power >= 200
 triggerall = var(21) > 0
@@ -7263,7 +7247,7 @@ value = 620
 [State 200, End]
 type = ChangeState
 ;Triggerall = movecontact
-triggerall = command = "holdfwd"
+triggerall = command = "holdback"
 triggerall = time > 5
 trigger1 = command = "c"
 triggerall = power >= 200
@@ -7277,7 +7261,7 @@ Triggerall = movecontact
 triggerall = power >= 200
 triggerall = prevstateno != 625
 triggerall = command != "holddown"
-triggerall = command != "holdfwd"
+triggerall = command != "holdback"
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 triggerall = var(21) > 0
@@ -7353,7 +7337,7 @@ pausetime = 1,11
 guard.pausetime = 10, 1
 sparkno = 0
 numhits = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,0
@@ -7473,7 +7457,7 @@ pausetime = 1,1
 guard.pausetime = 1, 1
 sparkno = s9999
 numhits = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,0
@@ -7637,7 +7621,7 @@ pausetime = 1,1
 guard.pausetime = 1, 1
 sparkno = s9999
 numhits = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,0
@@ -7799,7 +7783,7 @@ guardflag = HA
 pausetime = 10,10
 guard.pausetime = 10, 10
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,10 + (random < 500) * 1
@@ -7960,7 +7944,7 @@ type = ChangeAnim2
 trigger1 = command != "hold_c" && Anim != 626
 trigger2 = command != "hold_c" && time = 0 && Anim != 626
 trigger3 = time >= 100 && Anim != 626
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger2 = time >= 5 && roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 626
 elem = 0
 ;ignorehitpause = 
@@ -8054,7 +8038,7 @@ guardflag = MAF
 pausetime = 4,4
 guard.pausetime = 4,4
 sparkno = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 ;hitsound   = 5,4
 hitsound   = S30000,3
@@ -8117,7 +8101,7 @@ value = 610
 [State 200, End]
 type = ChangeState
 ;Triggerall = movecontact
-triggerall = command = "holdfwd"
+triggerall = command = "holdback"
 triggerall = time > 5
 trigger1 = command = "c"
 triggerall = power >= 200
@@ -8226,7 +8210,7 @@ pausetime = 0,12
 guard.pausetime = 12, 3
 sparkno = s9999
 numhits = 0
-guard.sparkno = s13000
+guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,0
 guardsound = 6,0
@@ -8417,6 +8401,12 @@ v = 21
 value = 10
 ignorehitpause = 1
 persistent = 0
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = roundstate = 0
+v = 21    ;fv = 10
+value = 3
 
 ;----------------------------------------
 
