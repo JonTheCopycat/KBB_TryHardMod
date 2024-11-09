@@ -358,7 +358,7 @@ ctrl = 0
 type = ChangeState
 triggerall = movehit
 trigger1 = command = "WD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, End]

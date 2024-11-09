@@ -429,7 +429,7 @@ value = 21000
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -559,7 +559,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Light
-damage    = 10
+damage    = 15
 guardflag = MAFD
 hitflag = MAFD
 pausetime = 8,8
@@ -618,7 +618,7 @@ value = 22000
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -1442,7 +1442,7 @@ type = ChangeState
 triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit
 trigger2 = movecontact && AnimTime = -7
-value = 30
+value = 35
 
 [State 200, Special 1 - Smash Baby]
 type = ChangeState
@@ -1927,7 +1927,7 @@ ctrl = 1
 type = ChangeState
 triggerall = movecontact
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 
 ;-----------------------------------------------------------------------------
 ;B - WALK STATE -> BACKDASH
@@ -1994,10 +1994,10 @@ trigger1 = AnimElem = 1
 value = S3,2
 volumescale = 100
 
-;[State 105, Dash Forward]
-;type = ChangeState
-;trigger1 = command = "FF"
-;value = 344
+[State 105, Dash Forward]
+type = ChangeState
+trigger1 = command = "FF"
+value = 344
 
 [State 105, Dash Forward]
 type = ChangeState
@@ -2089,7 +2089,7 @@ airguard.cornerpush.veloff = -5
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 10
+value = 25
 persistent = 0
 
 [State 0, Damage Proration]
@@ -2098,7 +2098,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 25
+value = 45
 
 [State 200, End]
 type = ChangeState
@@ -2468,7 +2468,7 @@ type = ChangeState
 triggerall = AnimElem = 5, >= 5
 Trigger1 = command = "WD" && command != "NotWD"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 1 - Smash Baby]
@@ -2723,7 +2723,7 @@ x = 1 * sysvar(1)
 [State 0, Speed Cap Forward]
 type = VelSet
 trigger1 = AnimElem = 3, >= 0 && AnimElem = 7, < 0
-x = ifelse(sysvar(1) < 0, 5, 9) * sysvar(1)
+x = ifelse(sysvar(1) < 0, 6, 10) * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
@@ -2853,7 +2853,7 @@ x = 1 * sysvar(1)
 [State 0, Speed Cap Forward]
 type = VelSet
 trigger1 = AnimElem = 3, >= 0 && AnimElem = 7, < 0
-x = ifelse(sysvar(1) < 0, 5, 9) * sysvar(1)
+x = ifelse(sysvar(1) < 0, 6, 10) * sysvar(1)
 
 [State 0, Speed Cap Forward]
 type = VelSet
@@ -4498,7 +4498,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 3
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -4733,7 +4733,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Up
-damage    = 10
+damage    = 15
 hitflag = MAF
 guardflag = HAF
 pausetime = 8,8
