@@ -39,11 +39,11 @@ type = ChangeAnim
 trigger1 = Anim != 0 && Anim != 5 && Anim != 2000 
 trigger2 = Anim = 5 && AnimTime = 0 ;Turn anim over
 trigger1 = var(10) = 0
-value = 2
+value = 0
 
 [State 0, 1]
 type = ChangeAnim
-trigger1 =  Anim != 0 && Anim != 5 && Anim != 2 && Anim != 1 && Anim != 2000
+trigger1 =  Anim != 0 && Anim != 5 && Anim != 2000
 trigger2 = Anim = 5 && AnimTime = 0 ;Turn anim over
 trigger1 = var(10) = 1
 value = 2000
@@ -905,11 +905,20 @@ trigger1 = command = "holddown"
 trigger1 = command = "holdback"
 value = 120
 
+
+
+
 [State 52, 3]
 type = CtrlSet
 trigger1 = Time = 3 
 trigger2 = prevstateno = 5040
 value = 1
+
+[State 52, Cancel2Crouch] 
+type = ChangeState
+triggerall = time = 3
+trigger1 = command = "holddown"
+value = 11
 
 [State 52, 4]
 type = VelSet

@@ -29,6 +29,10 @@ _! Sword Toss       									^C
 	"Tosses sword up, then jumps to get it."
 
 
+Burning (1 Bar)     						_AIR_D_DF_F^A
+	"Korby gets the BURNING ability and flies forward
+	in a fiery attack!"
+
 Hammer (1 1/2  Bar)						_D_DB_B^A
 	 "Korby gets the HAMMER ability and swings."
 

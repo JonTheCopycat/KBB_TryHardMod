@@ -636,6 +636,17 @@ Triggerall = power >= 1000
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;---------------------------------------------------------------------------
+; Burnin'
+[State -1, 21000]
+type = ChangeState
+value = 23000
+triggerall = numhelper(3500) = 0
+triggerall = command = "SPECIAL 1"
+Triggerall = statetype = A
+Triggerall = power >= 1000
+trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
+;---------------------------------------------------------------------------
 ; Hammer
 [State -1, 22000]
 type = ChangeState

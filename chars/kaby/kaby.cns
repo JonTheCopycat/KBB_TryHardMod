@@ -293,9 +293,7 @@ velset = 0,0
 [State 0, Voice - ]
 type = PlaySnd
 trigger1 = AnimElem = 15
-trigger1 = enemy,name != "KBB MK"
-trigger1 = enemy,name != "KBB MK Mod"
-trigger1 = enemy,name != "Dedede"
+trigger1 = enemy,name != "KBB MK" && enemy,name != "KBB MK Mod" && enemy,name != "Dedede" && enemy,name != "MetaKnight"
 value = S2002,28+(random<500)*1
 volumescale = 75
 channel = 1
@@ -303,8 +301,7 @@ channel = 1
 [State 0, Voice - ]
 type = PlaySnd
 trigger1 = AnimElem = 15
-trigger1 =  enemy,name = "KBB MK"
-trigger2 =  enemy,name = "KBB MK Mod"
+trigger1 =  enemy,name = "KBB MK" || enemy,name = "KBB MK Mod" || enemy,name = "MetaKnight"
 value = S2002,0
 volumescale = 75
 channel = 1
@@ -784,8 +781,9 @@ value = 400
 [State 300, End]
 type = ChangeState
 trigger1 = AnimTime = 0
-value = 0
+value = 501
 ctrl = 1
+
 ;===============================================================================
 ; A - 2:
 ;===============================================================================
@@ -1300,7 +1298,7 @@ ctrl = 1
 ;===============================================================================
 ; A - 3:
 ;===============================================================================
-[Statedef 220]
+ [Statedef 220]
 type    = S
 movetype= A
 physics = S
@@ -1333,7 +1331,7 @@ value = 0
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 7
+value = 5
 persistent = 0
  
 [State 200, Damage Proration]
@@ -1342,7 +1340,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 7
+value = 5
 
 
 [State 0, PowerAdd]
@@ -1394,6 +1392,15 @@ fall.recover = 0
 ;trigger1 = time = 1 && prevstateno != 310
 ;x = 3
 ;y = -7
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 1"
+value = 23000
+
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = time = 1
@@ -1648,7 +1655,7 @@ y = -8
 
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = time = [5,25]
+trigger1 = time = [5,15]
 value = SCA,NA,SA,NP,SP
 ;value2 = S,NA
 time = 1
@@ -1679,12 +1686,12 @@ ground.velocity = -3,-5
 air.velocity = -3, -5
 Fall = 0
 
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 =  movehit
-;time = 1
-;id = -1
-;pos = 40,0
+[State 0, TargetBind]
+type = TargetBind
+trigger1 =  movehit
+time = 1
+id = -1
+pos = 40,0
 
 [State 300, End]
 type = ChangeState
@@ -2949,7 +2956,7 @@ persistent = 0
 
 [State 0, Juggle Map]
 type = MapSet
-trigger1 = movehit && enemy,gethitvar(fall)
+trigger1 = 1
 map = "lowAttack"
 value = 1
 persistent = 0
@@ -3213,6 +3220,15 @@ type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 1"
+value = 23000
+
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 26000
 
@@ -3327,6 +3343,15 @@ trigger1 = command = "holdup" && movecontact && var(3) = 0
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && movecontact && var(3) = 0 
 value = 45
 ctrl = 1
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 1"
+value = 23000
+
 
 [State 200, SPECIAL 3 - CUTTER]
 type = ChangeState
@@ -3528,6 +3553,22 @@ Fall = 1
 fall.recover = 1
 Envshake.time = 30
 air.cornerpush.veloff = 0
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 1"
+value = 23000
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+value = 26000
 
 [State 300, End]
 type = ChangeState
@@ -3792,8 +3833,8 @@ sprpriority = 0
 
 [State 0, ChangeAnim2]
 type = ChangeAnim
-trigger1 = prevstateno = 26000  && anim != 26005
-value = 26005 
+trigger1 = prevstateno = 23000 && anim != 260005
+value = 260005 
 ;elem = 1
 ;ignorehitpause = 
 ;persistent = 
@@ -3943,6 +3984,15 @@ airguard.cornerpush.veloff = -4
 ;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && movecontact && var(3) = 0 
 ;value = 45
 ;ctrl = 1
+
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 1"
+value = 23000
 
 [State 200, SPECIAL 3 - CUTTER]
 type = ChangeState
@@ -4101,6 +4151,22 @@ fall.recover = 0
 fall.recovertime = 30
 Envshake.time = 25
 
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 1"
+value = 23000
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+value = 26000
 
 [State 200, End]
 type = ChangeState
@@ -4425,7 +4491,7 @@ persistent = 0
 
 [State 0, Failed to block an air unblockable!]
 type = Explod
-triggerall = (stateno = 200 && enemy, statetype = A) ;Edit this trigger as necessary
+triggerall = (stateno = 200 || stateno = 220 || stateno = 2600) && enemy, statetype = A   ;Edit this trigger as necessary
 triggerall = enemy, prevstateno = [120,160] && numexplod(31000) = 0
 trigger1 = enemy, movetype = H && enemy, stateno != [120,160]
 anim = F31000
@@ -5076,7 +5142,7 @@ value = 1
 type = VarSet
 trigger1 = var(52) < 1
 v = 52    ;fv = 10
-value = 8
+value = 10
 ;-------------------------------------------------------------------
 
 [State 0, StopSnd]
