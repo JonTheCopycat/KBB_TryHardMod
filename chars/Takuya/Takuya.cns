@@ -3797,7 +3797,7 @@ persistent = 0
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = numhelper(445) <= 0 && time > 20
+trigger1 = numhelper(445) <= 0 && time > 11
 value = 444
 ctrl = 0
 
@@ -3814,6 +3814,7 @@ facing = 1
 keyctrl = 0
 ownpal = 1
 inheritjuggle = 1
+
 
 
 [State 0, ChangeAnim]
@@ -4228,6 +4229,13 @@ fall.recovertime = 24
 Envshake.time = 5
 Getpower = 0,0
 guard.cornerpush.veloff = -2
+
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = root,movetype = H 
+map = "charge"
+value = 0
 
 [State 200, End]
 type = Destroyself

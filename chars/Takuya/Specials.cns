@@ -2202,11 +2202,11 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15
-ground.velocity = -3,-8
-air.velocity = -3,-8
+ground.velocity = -5,-4
+air.velocity = -5,-4
 Fall = 1
 Envshake.time = 30
-Fall.recovertime = 45
+Fall.recovertime = 40
 
 
 [State 200, End]
