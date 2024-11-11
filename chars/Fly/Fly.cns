@@ -492,8 +492,8 @@ value = 24000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movecontact
+value = 35
 ctrl = 1
 
 [State 200, 4A]
@@ -1665,7 +1665,7 @@ value = 40
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "WD"
-value = 30
+value = 35
 
 [State 200, 5 Strikes]
 type = ChangeState

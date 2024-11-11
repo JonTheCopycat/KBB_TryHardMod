@@ -525,14 +525,14 @@ value = 25000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movehit
+value = 35
 ctrl = 1
 
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "BWD" && command != "NotBWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
+trigger1 = movehit
 value = 31
 ctrl = 1
 
@@ -678,14 +678,14 @@ value = 25000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movehit
+value = 35
 ctrl = 1
 
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "BWD" && command != "NotBWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
+trigger1 = movehit
 value = 31
 ctrl = 1
 
@@ -838,7 +838,7 @@ value = 25000
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End] ; LOW ATTACK
@@ -1410,7 +1410,7 @@ value = 25000
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Wavedash Cancel]
@@ -2042,7 +2042,7 @@ ctrl = 1
 type = ChangeState
 triggerall = movehit
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, Wavedash Cancel]
@@ -2732,7 +2732,7 @@ ctrl = 1
 type = ChangeState
 triggerall = prevstateno != 30 || time >= 4
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 [State 200, Wavedash Cancel]
 type = ChangeState
@@ -2901,7 +2901,7 @@ ctrl = 0
 type = ChangeState
 triggerall = movecontact
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, Wavedash Cancel]

@@ -744,7 +744,7 @@ value = 24000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact >= 5)
+trigger1 = movehit
 value = 35
 ctrl = 1
 
@@ -1279,6 +1279,13 @@ guard.cornerpush.veloff = -12
 airguard.cornerpush.veloff = -11
 ;ground.cornerpush.veloff = -9
 ;air.cornerpush.veloff = -7
+
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movehit
+value = 35
+ctrl = 1
 
 [State 200, Special 01 - Step back]
 type = ChangeState

@@ -32,14 +32,14 @@ _F_F^A
 _AIR_D^B
 
 <#f0f000>:COMMAND DASH CANCELS:</>
-^A_F_D_DF (Late On Block)
-^A_B_D_DB (Late On Block)
-^A^A_F_D_DF (Late On Block)
-^A^A_B_D_DB (Late On Block)
+^A_F_D_DF (On Hit Only)
+^A_B_D_DB (On Hit Only)
+^A^A_F_D_DF (On Hit Only)
+^A^A_B_D_DB (On Hit Only)
 ^B_F_D_DF
 ^B_B_D_DB
-^C_F_D_DF
-^C_B_D_DB
+^C_F_D_DF (On Hit Only)
+^C_B_D_DB (On Hit Only)
 STANCE _F_D_DF
 STANCE _B_D_DB
 

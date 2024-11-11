@@ -5,8 +5,8 @@ Brisk													_AIR_F_F
 	with a time dash"
 	
 <#f0f000>:COMMAND DASH CANCELS:</>
-^A_F_D_DF (Late on Block)
-^A^A_F_D_DF (Late on Block)
+^A_F_D_DF (On Hit Only)
+^A^A_F_D_DF (On Hit Only)
 ^C^A_F_D_DF
 
 <#f0f000>:COMMAND DASH ATTACKS:</>

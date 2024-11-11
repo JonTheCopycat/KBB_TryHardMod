@@ -548,7 +548,7 @@ value = 950
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -681,6 +681,13 @@ supermovetime = 0
 pausemovetime = 0
 inheritjuggle = 1
 
+[State 200, Dash cancel Forward]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movehit
+value = 35
+ctrl = 1
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -688,13 +695,6 @@ triggerall = power >= 2000
 trigger1 = command = "SPECIAL 5"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 25000
-
-[State 200, Wavedash Cancel]
-type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
-ctrl = 1
 
 [State 200, End]
 type = ChangeState
@@ -863,13 +863,13 @@ inheritjuggle = 1
 [State 0, VelSet]
 type = VelSet
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
+trigger1 = movehit
 y = 0
 [State 200, Dash cancel Forward]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movehit
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -1060,7 +1060,7 @@ value = 25000
 type = ChangeState
 Triggerall = movehit
 trigger1 = command = "WD"
-value = 30
+value = 35
 
 [State 200, End]
 type = ChangeState
@@ -4753,6 +4753,12 @@ type = MapSet
 trigger1 = var(22) = 1
 map = "defence"
 value = 0.7
+
+[State 0, DefenceMapSet] ; Reset the damage Bill takes if pyromaniac is off
+type = MapSet
+trigger1 = var(22) = 0
+map = "defence"
+value = 0
 
 ;[State -2, Defense Set] ; Used to determine character defense
 ;type = defenceMulSet

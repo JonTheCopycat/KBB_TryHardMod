@@ -222,13 +222,13 @@ time = 1
 
 [State 0, VelSet]
 type = VelAdd
-trigger1 = time = [0, 1]
+trigger1 = time = 0
 x = 13 * 0.6
 y = 0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = [2, 4]
+trigger1 = time = [1, 3]
 x = 13 * 1.25
 
 [State 0, VelSet]
@@ -260,17 +260,9 @@ ownpal = 0
 
 [State 200, End]
 type = ChangeState
-;triggerall = time >= 5
 trigger1 = command = "holdup"
 value = 60
 ctrl = 0
-
-;[State 0, 4] ;Wavedash
-;type = ChangeState
-;triggerall = time >= 3
-;trigger1 = command = "downback"
-;value = 31
-;ctrl = 0
 
 [State 200, End]
 type = ChangeState
@@ -280,20 +272,18 @@ ctrl = 1
 
 [State 200, End]
 type = ChangeState
-;triggerall = time >= 5
-trigger1 = command = "back"
-value = 35
+trigger1 = command = "holdback"
+value = 11
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "a"
 value = 290
 ctrl = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "b"
 value = 390
 ctrl = 0
@@ -302,7 +292,6 @@ ctrl = 0
 type = ChangeState
 triggerall = numhelper(3500) = 0
 triggerall = power >= 100
-triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "c"
 value = 491
 
@@ -434,67 +423,125 @@ ctrl = 1
 
 
 ;---------------------------------------------------------------------------
-;Wavedash Stop
+;Wavedash Cancel
 [Statedef 35]
 type = C
 movetype= I
-physics = C
-anim = 35
+physics = S
+anim = 30
 ctrl = 0
 sprpriority = 1
 
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = time = 0
+time = 5
+paladd = 240,50,0
+trans = add
+
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = time = [0, 1]
+;x = 13
+;
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = time = 10
+;x = 6
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = A, AA
+time = 1
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = time = 0
+x = 13 * 0.6
+y = 0
+
 [State 0, VelSet]
 type = VelSet
-trigger1 = 1
-x = vel x * 0.5
+trigger1 = time = [1, 3]
+x = 13 * 1.25
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = time > 5
+trigger1 = vel x > 1
+x = -0.22
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = F16000
+ID = 16000
+pos = -40,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
 
 [State 200, End]
 type = ChangeState
-;triggerall = time >= 5
+triggerall = time >= 5
 trigger1 = command = "holdup"
 value = 60
 ctrl = 0
 
-;[State 200, End]
-;type = ChangeState
-;triggerall = time >= 10
-;trigger1 = command = "WD"
-;value = 30
-;ctrl = 0
-
 [State 200, End]
 type = ChangeState
+triggerall = time >= 10
 trigger1 = command = "FF"
 value = 100
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "BB"
-value = 105
+triggerall = time >= 10
+trigger1 = command = "holdback"
+value = 11
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
+triggerall = time >= 2
 trigger1 = command = "a"
 value = 290
 ctrl = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
+triggerall = time >= 2
 trigger1 = command = "b"
-value = 491
+value = 390
 ctrl = 0
 
 [State 200, C]
 type = ChangeState
 triggerall = numhelper(3500) = 0
-triggerall = power >=200
-triggerall = prevstateno != 52 || time > 3
+triggerall = power >= 100
+triggerall = time >= 2
 trigger1 = command = "c"
-value = 408
+value = 491
 
 [State 200, End]
 type = ChangeState
@@ -503,6 +550,7 @@ value = 11
 ctrl = 1
 
 
+;---------------------------------------------------------------------------
 
 
 ;---------------------------------------------------------------------------

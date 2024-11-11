@@ -6,7 +6,7 @@ when he is slightly above the ground.
 _AIR_D^B
 
 <#f0f000>:COMMAND DASH CANCELS:</>
-^A_F_D_DF (Late on Block)
+^A_F_D_DF
 ^B_F_D_DF
 _AIR^A_F_D_DF
 _AIR^B_F_D_DF
