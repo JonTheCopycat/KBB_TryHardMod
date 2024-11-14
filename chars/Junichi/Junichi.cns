@@ -6494,12 +6494,12 @@ add = 82,0,0
 [State 0, Dash Velocity]
 type = VelSet
 trigger1 = AnimElem = 2
-x = 12
+x = 15
 
 [State 0, Dash Velocity]
 type = VelSet
 trigger1 = AnimElem = 3
-x = 6
+x = 5
 
 ;[State 0, Dash Velocity]
 ;type = VelSet
@@ -6543,7 +6543,7 @@ ctrl = 1
 type = ChangeState
 triggerall = time >= 8
 trigger1 = command = "WD" && command != "NotWD"
-value = 35
+value = 30
 ctrl = 1
 
 ;[State 200, Down+C Stance Into Sword]
@@ -6685,7 +6685,7 @@ trigger1 = p2dist X < 0
 [State 200, SPRINT]
 type = ChangeState
 trigger1 = command = "WD" && command != "NotWD"
-value = 35
+value = 30
 ctrl = 1
 
 [State 200, SPRINT]

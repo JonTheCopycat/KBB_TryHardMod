@@ -408,7 +408,7 @@ value = 35
 [State 22010, Pyromaniac explosion counter Reset]
 type = rootMapSet
 trigger1 = Time >= 900
-trigger2 = (enemynear,movetype!=H && enemy,stateno != 52)
+trigger2 = (enemynear,movetype!=H && enemynear,stateno != 52)
 trigger3 = !numenemy
 map = "pyroTracker"
 value = 0
@@ -417,7 +417,7 @@ persistent = 0
 [State 22020, Pyromaniac expire]
 type = rootVarSet
 trigger1 = Time >= 900
-trigger2 = root,stateno = 21550
+trigger2 = root,stateno = 22550
 v = 22
 value = 0
 
@@ -1252,7 +1252,7 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 23000
-poweradd = -1000
+poweradd = -500
 sprpriority = 2
 
 [State 0, AttackDist]
@@ -1346,7 +1346,7 @@ value = 21565
 
 [State 200, End]
 type = ChangeState
-triggerall = root,numhelper(21570) > 0
+triggerall = root,numhelper(21560) > 0
 trigger1 = abs(Pos X - (root,helper(21560), Pos X)) < 70 
 trigger1 = abs(Pos Y - (root,helper(21560), Pos Y)) < 70 
 value = 21565
@@ -1360,7 +1360,7 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 24000
-poweradd = -1000
+poweradd = -500
 sprpriority = 2
 
 [State 0, AttackDist]
