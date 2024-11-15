@@ -1344,8 +1344,8 @@ airguard.cornerpush.veloff = -4
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movecontact
+value = 35
 ctrl = 1
 
 [State 0, Special Backdash Cancel]
@@ -2342,7 +2342,7 @@ value = 25000
 type = ChangeState
 triggerall = movehit
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 
 [State 0, Special Backdash Cancel]
 type = ChangeState
@@ -2818,7 +2818,7 @@ value = 24000
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 0, Special Backdash Cancel]
@@ -2975,7 +2975,7 @@ value = 21000
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit
-value = 30
+value = 35
 ctrl = 1
 
 [State 300, 4B Cancel]
@@ -3919,7 +3919,7 @@ type = ChangeState
 triggerall = anim = 391
 triggerall = movehit
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 
 [State 300, 5B Cancel]
 type = ChangeState

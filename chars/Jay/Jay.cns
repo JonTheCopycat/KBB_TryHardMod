@@ -556,8 +556,8 @@ airguard.cornerpush.veloff = -4 ;Velocity the character pushes themself away if 
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movecontact
+value = 35
 ctrl = 1
 
 [State 200, Cancel into Low Attack] ; Allows this move to cancel into a low attack
@@ -876,8 +876,8 @@ value = 21000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movehit
+value = 35
 ctrl = 1
 
 [State 220, Cancel into 2C]
@@ -1099,8 +1099,8 @@ value = 21000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movehit
+value = 35
 ctrl = 1
 
 [State 220, Cancel into 2C]
@@ -1147,12 +1147,6 @@ type = ChangeState
 Triggerall = movehit
 trigger1 = command = "up"
 value = 40
-
-[State 200, Wavedash]
-type = ChangeState
-Triggerall = movehit
-trigger1 = command = "WD" && command != "NotWD"
-value = 30
 
 [State 220, End]
 type = ChangeState
@@ -1456,7 +1450,7 @@ airguard.cornerpush.veloff = -4
 type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 
 [State 200, End]
 type = ChangeState

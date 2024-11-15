@@ -522,8 +522,8 @@ Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movecontact
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -682,13 +682,6 @@ air.velocity = -2,-1
 Fall = 0
 Envshake.time = 10
 Fall.recovertime = 10 + ifelse(enemy,movetype = A, 7,0)
-
-[State 200, Wavedash Cancel]
-type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
-ctrl = 1
 
 [State 200, SPEED SPECIAL]
 type = ChangeState
@@ -883,7 +876,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 3
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -934,7 +927,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
-damage    = 15
+damage    = 10
 hitflag = MAFD
 guardflag = MA
 pausetime = 8,10
@@ -949,11 +942,11 @@ hitsound   = 5,3
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
-ground.velocity = -1,-3
-air.velocity = -1,-3
+ground.velocity = -1,-2
+air.velocity = -1,-1
 Fall = 1
 Envshake.time = 10
-Fall.recovertime = 25 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
 
 [State 200, End]
 type = ChangeState
@@ -969,11 +962,9 @@ value = 293
 
 [State 200, End]
 type = ChangeState
-triggerall = power >= 200
 triggerall = time >= 12 || movecontact
-triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
-value = 490
+value = 294
 
 [State 200, End]
 type = ChangeState
@@ -1047,10 +1038,10 @@ volumescale = 200
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 3
-x = 3
+trigger1 = AnimElem = 4, >= 0 && AnimElem = 5, < 0
+x = 4
 
-[State 200, From 5BB/Anything other than 5C Stance]
+[State 200, Hit]
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
@@ -1058,12 +1049,12 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Heavy
-damage    = 20
-hitflag = MAF
-guardflag = MAF
+damage    = 25
+hitflag = MAFD
+guardflag = LA
 pausetime = 12,16
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-guard.pausetime = 12,16
+guard.pausetime = 12,12
 guard.hittime  = 25
 sparkno = 2
 guard.sparkno = 13000
@@ -1073,8 +1064,8 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 guard.velocity = -2
-ground.velocity = -3.5,-3
-air.velocity = -3.5,-2
+ground.velocity = -1.5,-4
+air.velocity = -1.5,-3
 Fall = 1
 Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
 Envshake.time = 20
@@ -1135,6 +1126,8 @@ value = 0
 ctrl = 1
 
 
+
+
 ;-------------------------------------------------------------------------------
 ; Wavedash A B
 [Statedef 293]
@@ -1153,6 +1146,14 @@ trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
 value = 10
 persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 12
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -1202,7 +1203,7 @@ y = -5
 type = VelSet
 trigger1 = time = 0
 x = 4
-y = -3.7
+y = -4
 
 [State 0, VelSet]
 type = VelSet
@@ -1222,7 +1223,7 @@ damage    = 30
 hitflag = MAF
 guardflag = MAF
 pausetime = 12,12
-guard.pausetime = 12, 10
+guard.pausetime = 12, 12
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -1297,6 +1298,160 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 50
 ctrl = 1
+
+
+; Wavedash A C
+;-------------------------------------------------------------------------------
+[Statedef 294]
+type    = S
+movetype= A
+physics = S
+juggle  = 1
+ctrl = 0
+anim = 294
+poweradd = 0
+sprpriority = 2
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = moveguarded = 1
+value = 25
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = movehit = 1
+value = 125
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S1,0
+volumescale = 50
+
+[State 0, Voice - You Alright!?]
+type = PlaySnd
+triggerall = var(2)  >=0
+triggerall = var(2)  <=34
+trigger1 = AnimElem = 1
+value = S7,33
+volumescale = 200
+[State 0, Voice - GYEEEEHH!!!]
+type = PlaySnd
+triggerall = var(2)  >=50
+triggerall = var(2)  <=65
+trigger1 = AnimElem = 1
+value = S7,28
+volumescale = 200
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 3
+x = 3
+
+[State 200, From 5BB/Anything other than 5C Stance]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Heavy
+damage    = 45
+hitflag = MAF
+guardflag = MAF
+pausetime = 12,16
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+guard.pausetime = 12,22
+guard.hittime  = 25
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 12
+guard.velocity = -2
+ground.velocity = -3.5,-3
+air.velocity = -3.5,-2
+Fall = 1
+Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+Envshake.time = 20
+
+[State 200, SPEED SPECIAL]
+type = ChangeState
+Triggerall = movehit
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 500
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 1"
+value = 21000
+[State 200, DP SPECIAL]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+triggerall = numhelper(2860) = 0
+trigger1 = command = "SPECIAL 2"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 22000
+
+[State 200, End]
+type = ChangeState
+Triggerall = var(10) = 0
+Triggerall = movecontact
+Triggerall = power >= 500
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
+[State 200, Fwd+C]
+type = ChangeState
+Triggerall = movecontact
+Triggerall = numhelper(420) < 1
+triggerall = numhelper(3500) = 0
+triggerall = power >= 300
+trigger1 = command = "holdfwd"
+triggerall = numhelper(3500) = 0
+trigger1 = command = "c"
+value = 402
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+Triggerall = numhelper(420) < 1
+triggerall = numhelper(3500) = 0
+triggerall = prevstateno != 400 && prevstateno != 490
+triggerall = numhelper(3500) = 0
+trigger1 = command = "c"
+value = 400
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
 
 
 ;===============================================================================
@@ -1397,7 +1552,7 @@ Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -1582,7 +1737,7 @@ Fall.recovertime = 10 + ifelse(enemy,movetype = A, 7,0)
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, DP SPECIAL]
@@ -1806,7 +1961,7 @@ value = 630
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Fwd+C]
@@ -5586,8 +5741,8 @@ value = 23000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movehit
+value = 35
 ctrl = 1
 
 [State 200, 2A]
@@ -5738,13 +5893,6 @@ triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 23000
-
-[State 200, Wavedash Cancel]
-type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
-ctrl = 1
 
 [State 200, 2A]
 type = ChangeState
@@ -6069,7 +6217,7 @@ value = 23000
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, 5B]
@@ -8259,7 +8407,7 @@ ctrl = 1
 
 [State 0, Failed to block a low!]
 type = Explod
-triggerall = stateno = 950 || stateno = 2700
+triggerall = stateno = 950 || stateno = 2700 || stateno = 292
 triggerall = enemy, prevstateno = [120,160] && numexplod(31000) = 0
 trigger1 = enemy, movetype = H && enemy, stateno != [120,160]
 anim = F36000
@@ -8285,7 +8433,7 @@ persistent = 0
 
 [State 0, IM DOING A LOW, BOZO]
 type = MapSet
-trigger1 = stateno = 950 || stateno = 2700 || stateno = 290 || stateno = 2590
+trigger1 = stateno = 950 || stateno = 2700 || stateno = 292 || stateno = 2590
 map = "lowAttack"
 value = 1
 ;ignorehitpause = 
@@ -8293,7 +8441,7 @@ value = 1
 
 [State 0, nvm lol]
 type = MapSet
-trigger1 = stateno != 950 && stateno != 2700 && stateno != 290 && stateno != 2590
+trigger1 = stateno != 950 && stateno != 2700 && stateno != 292 && stateno != 2590
 map = "lowAttack"
 value = 0
 ;ignorehitpause = 
@@ -8302,7 +8450,7 @@ value = 0
 
 [State 0, Failed to block an overhead!]
 type = Explod
-triggerall = stateno = [600, 615] || stateno = 390 || stateno = 900 || stateno = 2900 || Stateno = [2800, 2820] || Stateno = 2840 || Stateno = 401
+triggerall = stateno = [600, 615] || stateno = 294 || stateno = 900 || stateno = 2900 || Stateno = [2800, 2820] || Stateno = 2840 || Stateno = 401
 triggerall = enemy, prevstateno = [120,160] && numexplod(31000) = 0
 trigger1 = enemy, movetype = H && enemy, stateno != [120,160]
 anim = F35000

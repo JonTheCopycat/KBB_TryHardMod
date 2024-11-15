@@ -851,21 +851,21 @@ trigger1 = ctrl
 
 ;===========================================================================
 ;--------------------------------Normal Attacks---------------------------
-;---------------------------------------------------------------------------
-; Back + A
-[State -1, Back + A]
-type = ChangeState
-value = 230
-triggerall = command = "holdback"
-triggerall = command = "a"
-Triggerall = statetype != A
-trigger1 = ctrl
 ;--------------------------------------------------------------------------
 ; Down + A
 [State -1, Down + A]
 type = ChangeState
 value = 950
 triggerall = command = "holddown"
+triggerall = command = "a"
+Triggerall = statetype != A
+trigger1 = ctrl
+;---------------------------------------------------------------------------
+; Back + A
+[State -1, Back + A]
+type = ChangeState
+value = 230
+triggerall = command = "holdback"
 triggerall = command = "a"
 Triggerall = statetype != A
 trigger1 = ctrl
