@@ -458,8 +458,8 @@ air.velocity = 2,-1
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movehit
+value = 35
 ctrl = 1
 
 [State 200, 2A]
@@ -581,13 +581,6 @@ ground.slidetime = 12
 ground.velocity = -2.5,-3
 air.velocity = -2,-2
 Envshake.time = 10
-
-[State 200, Wavedash Cancel]
-type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
-ctrl = 1
 
 [State 200, 2A]
 type = ChangeState
@@ -733,7 +726,7 @@ type = ChangeState
 triggerall = movecontact
 trigger1 = command = "WD"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 50)
-value = 30
+value = 35
 
 [State 200, 2A]
 type = ChangeState
@@ -1221,7 +1214,7 @@ type = ChangeState
 triggerall = movehit
 trigger1 = command = "WD"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 50)
-value = 30
+value = 35
 
 [State 200, 2A]
 type = ChangeState

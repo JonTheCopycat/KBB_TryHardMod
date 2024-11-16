@@ -374,7 +374,7 @@ type = ChangeState
 triggerall = hitcount >= 6
 triggerall = var(13) < 2
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, Cancel into j236B]	;Ends with j.236b

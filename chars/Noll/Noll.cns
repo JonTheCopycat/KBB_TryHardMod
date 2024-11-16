@@ -476,9 +476,9 @@ value = 25000
 
 [State 200, End]
 type = ChangeState
-triggerall = movehit || (movecontact && AnimTime > -7)
+triggerall = movecontact
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, End]
@@ -680,7 +680,7 @@ type = ChangeState
 triggerall = movehit
 triggerall = var(13) < 2
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, End]
@@ -900,7 +900,7 @@ type = ChangeState
 triggerall = movecontact
 triggerall = var(13) < 2
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, End]
@@ -1254,7 +1254,7 @@ type = ChangeState
 triggerall = movecontact
 triggerall = var(13) < 2
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, Special 1 - TRIPLE SLASH]
@@ -6078,7 +6078,7 @@ value = 25000
 type = ChangeState
 triggerall = movecontact
 trigger1 = command = "WD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, Into FORWARD + A]
@@ -6252,7 +6252,7 @@ type = ChangeState
 triggerall = movecontact
 triggerall = var(13) < 2
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State -1, SPECIAL 3 - Spinner Cutters]
@@ -6377,7 +6377,7 @@ type = ChangeState
 triggerall = movecontact
 triggerall = var(13) < 2
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State -1, SPECIAL 3 - Spinner Cutters]
@@ -6504,7 +6504,7 @@ type = ChangeState
 triggerall = movecontact
 triggerall = var(13) < 2
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, End]

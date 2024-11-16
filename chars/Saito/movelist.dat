@@ -18,7 +18,7 @@ _AIR_D^A
 _AIR_D^B
 
 <#f0f000>:COMMAND DASH CANCELS:</>
-^A_F_D_DF (Late on Block)
+^A_F_D_DF (On Hit Only)
 ^B_F_D_DF 
 ^B^B_F_D_DF (On Hit Only)
 _AIR^A_F_D_DF

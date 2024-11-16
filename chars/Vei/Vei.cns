@@ -506,8 +506,8 @@ airguard.cornerpush.veloff = -4
 [State 200, Dash cancel Forward]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movehit
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -669,8 +669,8 @@ airguard.cornerpush.veloff = -7
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 triggerall = prevstateno != 290
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movecontact
+value = 35
 ctrl = 1
 
 

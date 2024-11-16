@@ -2,9 +2,9 @@
 _D^A_F^A
 
 <#f0f000>:COMMAND DASH CANCELS:</>
-^A_F_D_DF (Late on Block)
-^A^A_F_D_DF (Late on Block)
-^A^A^A_F_D_DF (On Hit Only)
+^A_F_D_DF (On Hit Only)
+^A^A^A_F_D_DF
+^B_F_D_DF
 
 <#f0f000>:COMMAND DASH ATTACKS:</>
 

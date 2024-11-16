@@ -635,7 +635,7 @@ value = 950
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -1678,7 +1678,7 @@ value = 24000
 ;type = ChangeState
 ;Triggerall = command = "WD" && command != "NotWD" ; no more
 ;trigger1 = movecontact
-;value = 30
+;value = 35
 ;ctrl = 1
 
 ;[State 0, ChangeState]
@@ -1849,7 +1849,7 @@ value = 23000
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -3816,7 +3816,6 @@ ownpal = 1
 inheritjuggle = 1
 
 
-
 [State 0, ChangeAnim]
 type = ChangeAnim
 trigger1 = AnimElemTime(4) > 0 && anim = 440 && map(charge) >= 35 && map(charge) <= 65
@@ -3889,7 +3888,7 @@ ctrl = 0
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD" && time > 18
 trigger1 = helper(445),movehit
-value = 30
+value = 35
 ctrl = 1
 
 [State 0, ChangeState]

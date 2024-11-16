@@ -451,8 +451,8 @@ value = 21000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movecontact
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -783,8 +783,8 @@ value = 25000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -10)
-value = 30
+trigger1 = movecontact
+value = 35
 ctrl = 1
 
 [State 200, 2C]
@@ -1072,8 +1072,8 @@ value = 25000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -10)
-value = 30
+trigger1 = movecontact
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -1226,7 +1226,7 @@ value = 40
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, GRAB AND DUNK]
@@ -1332,7 +1332,7 @@ trigger1 = Animelem = 2
 y = -5
 [State 0, VelSet]
 type = VelSet
-trigger1 = movecontact
+trigger1 = movecontact && (!movehit || moveguarded)
 y = -2
 x = -2
 
@@ -1408,7 +1408,7 @@ animtype  = Heavy
 damage    = 60
 hitflag = MAFD
 guardflag = MA
-pausetime = 28,40
+pausetime = 28,30
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -1417,8 +1417,8 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15
-ground.velocity = -7,-7
-air.velocity = -7,-7
+ground.velocity = -5,-7
+air.velocity = -5,-7
 Fall = 1
 fall.recover = 0
 Envshake.time = 15     ;Force to face p1
@@ -1434,7 +1434,7 @@ animtype  = Heavy
 damage    = 30
 hitflag = MAFD
 guardflag = MA
-pausetime = 14,20
+pausetime = 16,20
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -1446,7 +1446,7 @@ ground.hittime  = 15
 ground.velocity = -4,-5
 air.velocity = -3,-4
 Fall = 1
-fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
 Envshake.time = 15
 Fall.recovertime = 20
 
@@ -2274,7 +2274,7 @@ value = 410
 type = ChangeState
 triggerall = time > 15 || movehit
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, End]
@@ -2472,7 +2472,7 @@ value = 420
 type = ChangeState
 triggerall = time > 15 || movehit
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, End]
@@ -2679,7 +2679,7 @@ value = 410
 type = ChangeState
 triggerall = time > 15 || movehit
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, End]
@@ -3226,7 +3226,7 @@ value = 465
 type = ChangeState
 triggerall = movehit
 trigger1 = command = "WD"
-value = 30
+value = 35
 ctrl = 0
 
 [State 200, End]

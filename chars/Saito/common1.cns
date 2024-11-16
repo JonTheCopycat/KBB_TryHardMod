@@ -238,13 +238,156 @@ time = 1
 
 [State 200, Jump]
 type = ChangeState
+trigger1 = command = "up" && ailevel = 0
+value = 45
+
+[State 200, FAST FALL]
+type = ChangeState
+trigger1 = command = "DD"
+value = 55
+
+[State 200, AirDash]
+type = ChangeState
+triggerall = var(13) < 2
+triggerall = time >= 5
+trigger1 = command = "WD" && command != "NotWD"
+value = 30
+
+[State 200, AirDash]
+type = ChangeState
+trigger1 = command = "FF"
+value = 65
+
+[State 200, AirDash]
+type = ChangeState
+trigger1 = command = "BB"
+value = 70
+
+[State 200, AirDash]
+type = ChangeState
+trigger1 = command = "s"
+value = 66
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "a"
+value = 250
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "b"
+value = 910
+ctrl = 0
+
+;Access to stance moves
+[State 200, wdC1a]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = power >= 100
+trigger1 = command = "c"
+value = 490
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = vel y > 0 && pos y > 0
+value = 52
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Wavedash Cancel
+[Statedef 35]
+type = A
+movetype= I
+physics = N
+anim = 30
+ctrl = 0
+sprpriority = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = time = 0
+paladd = 230,230,0
+time = 10
+trans = add
+
+[State 0, VarSet]
+type = VarAdd
+trigger1 = time = 0 
+v = 13    ;fv = 10
+value = 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = F16000
+ID = 16000
+pos = -40,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = [0, 1]
+x = const(velocity.run.fwd.x) * 1.25
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+y = ifelse(pos y >= -0.5, -4, -2)
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = time > 2
+y = 0.22
+x = -0.02
+
+[State 450, NotHitBy]
+type = notHitBy
+trigger1 = time = [2,10]
+value = C
+time = 1
+
+[State 200, Jump]
+type = ChangeState
 Triggerall = time >= 5
 trigger1 = command = "up" && ailevel = 0
 value = 45
 
 [State 200, FAST FALL]
 type = ChangeState
-Triggerall = time >= 5
+Triggerall = time >= 10
 trigger1 = command = "DD"
 value = 55
 
@@ -269,20 +412,20 @@ value = 70
 
 [State 200, AirDash]
 type = ChangeState
-triggerall = time >= 5
+triggerall = time >= 10
 trigger1 = command = "s"
 value = 66
 
 [State 200, End]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
+triggerall = time >= 2
 trigger1 = command = "a"
 value = 250
 ctrl = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
+triggerall = time >= 2
 trigger1 = command = "b"
 value = 910
 ctrl = 0
@@ -290,9 +433,9 @@ ctrl = 0
 ;Access to stance moves
 [State 200, wdC1a]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
 triggerall = numhelper(3500) = 0
 triggerall = power >= 100
+triggerall = time >= 2
 trigger1 = command = "c"
 value = 490
 
@@ -307,6 +450,7 @@ type = ChangeState
 trigger1 = vel y > 0 && pos y > 0
 value = 52
 ctrl = 1
+
 
 ;---------------------------------------------------------------------------
 ; Jump Start

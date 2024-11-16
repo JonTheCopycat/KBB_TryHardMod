@@ -740,8 +740,8 @@ value = 24000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movehit
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -868,7 +868,7 @@ type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 triggerall = var(13) < 2
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 1 - windball]
@@ -1020,7 +1020,7 @@ type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 triggerall = var(13) < 2
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 1 - windball]
@@ -1387,7 +1387,7 @@ type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 triggerall = var(13) < 2
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 1 - windball]
@@ -1577,7 +1577,7 @@ value = 24000
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = hitcount >= 2
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, j.2A]
@@ -2166,7 +2166,7 @@ type = ChangeState
 triggerall = movehit || time >= 15
 triggerall = var(13) < 2
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 
 [State 200, AirDash]
 type = ChangeState
@@ -2391,7 +2391,7 @@ type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 triggerall = var(13) < 2
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 
@@ -2872,7 +2872,7 @@ type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 triggerall = var(13) < 2
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, Special 1 - windball]
@@ -3536,7 +3536,7 @@ value = 66
 type = ChangeState
 triggerall = movecontact
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 
 [State 200, Special 1 - windball]
 type = ChangeState
@@ -4032,7 +4032,7 @@ type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 triggerall = var(13) < 2
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 
