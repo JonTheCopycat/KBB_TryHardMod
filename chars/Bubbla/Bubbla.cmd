@@ -970,10 +970,11 @@ triggerall = command = "b"
 Triggerall = statetype = A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
-; Down + C - Aire
+; C - Aire
 [State -1, Down + C Aire]
 type = ChangeState
 value = 625
+triggerall = command != "holdback"
 triggerall = command != "holdfwd"
 triggerall = command != "holddown"
 triggerall = command = "c"
@@ -982,8 +983,10 @@ triggerall = power >= 200
 triggerall = var(21) > 0
 Triggerall = statetype = A
 trigger1 = ctrl
+trigger2 = time >= 5 && roundstate = 2 && ailevel > 0 && stateno = 50
+
 ;---------------------------------------------------------------------------
-; C Aire
+; C+Down Aire
 [State -1, C Aire]
 type = ChangeState
 value = 620
@@ -994,20 +997,45 @@ Triggerall = statetype = A
 ;triggerall = var(21) > 0
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
-; Foward + C Aire
+; Back + C Aire
 [State -1, C Aire]
 type = ChangeState
-value = 624
+value = 623
 triggerall = command = "holdback"
 triggerall = command = "c"
+triggerall = map(bubbleTrapsSpawned) = 0
 triggerall = power >= 200
 Triggerall = statetype = A
 triggerall = var(21) > 0
 ;triggerall = var(21) > 0
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
+; Foward + C Aire
+;[State -1, C Aire]
+;type = ChangeState
+;value = 623
+;triggerall = command = "holdfwd"
+;triggerall = command = "c"
+;triggerall = power >= 200
+;Triggerall = statetype = A
+;triggerall = var(21) > 0
+;triggerall = var(21) > 0
+;trigger1 = ctrl
+;---------------------------------------------------------------------------
 
 ; A.I
+
+[state -1, Reload AI]
+Type = Changestate
+Triggerall = var(59)>0 
+Triggerall = var(21) < 7
+Triggerall= abs(P2Bodydist X) > 100 
+Triggerall= Statetype = S 
+Triggerall= random<var(50)*1.1 + abs(P2Bodydist X) + (10- var(21)) * 20
+trigger1 = ctrl
+value = 400
+
+
 [state -1, 2C AI]
 Type = Changestate
 Triggerall=var(59)>0
@@ -1015,6 +1043,8 @@ triggerall = numhelper(3500) = 0
 Triggerall = power >= 200
 Triggerall= Statetype = S  
 Triggerall= random < (ailevel ** ailevel) + 100
+Triggerall =abs(P2Bodydist X)<20
+Triggerall =abs(P2Bodydist Y)<20
 triggerall = var(21) > 0
 Triggerall = ctrl
 Trigger1= enemy,movetype = H
@@ -1045,6 +1075,8 @@ Triggerall = power >= 200
 Triggerall= Statetype = S  
 Triggerall= random < (ailevel ** ailevel) + 500
 Triggerall = ctrl
+Triggerall =abs(P2Bodydist X)<50
+Triggerall =abs(P2Bodydist Y)<50
 Trigger1= enemy,movetype = H
 trigger2= abs(P2Bodydist X) >100  && !inguarddist
 value = 470
@@ -1127,6 +1159,7 @@ Triggerall=abs(P2Bodydist X)<20
 Triggerall=P2StateType=L
 Triggerall=random<var(50)*1.1
 Trigger1 = ctrl
+Trigger2 = prevstateno = 623
 value = 950
 
 [state -1, Counter AI]
@@ -1177,7 +1210,7 @@ value = 501
 Type = Changestate
 Triggerall=var(59)>0 
 Triggerall= Statetype = A 
-Triggerall=abs(P2Bodydist X)<40 
+Triggerall=abs(P2Bodydist X)<35 
 Triggerall=P2StateType=A
 Triggerall=random<var(50)*1.1
 Trigger1 = ctrl
@@ -1186,38 +1219,40 @@ value = 600
 [state -1, B-Air AI]
 Type = Changestate
 Triggerall=var(59)>0 
-Triggerall = Stateno = 600  && movehit = 1
+;Triggerall = Stateno = 600  && movehit = 1
 Triggerall= Statetype = A 
 Triggerall=abs(P2Bodydist X)<40 
 Triggerall=P2StateType=A
-Triggerall=random<var(50)*1.1
+Triggerall=random<var(50)*21.1
 Trigger1 = Stateno = 600  && movehit = 1
+Trigger1 = Stateno = 601  && movehit = 1
+Trigger2 = ctrl
 value = 601
 
-[state -1, B2-Air AI]
-Type = Changestate
-Triggerall=var(59)>0 
-Triggerall = Stateno = 601  && movehit = 1
-Triggerall= Statetype = A 
-Triggerall=abs(P2Bodydist X)<40 
-Triggerall=P2StateType=A
-Triggerall=random<var(50)*1.1
-Trigger1 = Stateno = 601  && movehit = 1
-value = 610
+;[state -1, B2-Air AI]
+;Type = Changestate
+;Triggerall=var(59)>0 
+;Triggerall = Stateno = 601  && movehit = 1
+;Triggerall= Statetype = A 
+;Triggerall=abs(P2Bodydist X)<40 
+;Triggerall=P2StateType=A
+;Triggerall=random<var(50)*1.1
+;Trigger1 = Stateno = 601  && movehit = 1
+;value = 610
 
-[state -1, C-Air AI]
-Type = Changestate
-Triggerall=var(59)>0 
-triggerall = numhelper(3500) = 0
-Triggerall = Stateno = 610  && movehit = 1
-Triggerall = power >= 200
-Triggerall= Statetype = A 
-Triggerall=abs(P2Bodydist X)>40 
-triggerall = p2movetype != H
-Triggerall=!Inguarddist
-Triggerall=random<var(50)*1.1
-Trigger1 = Stateno = 610  && movehit = 1
-value = 620
+;[state -1, C-Air AI]
+;Type = Changestate
+;Triggerall=var(59)>0 
+;triggerall = numhelper(3500) = 0
+;Triggerall = Stateno = 600  && movehit = 1
+;Triggerall = power >= 200
+;Triggerall= Statetype = A 
+;Triggerall=abs(P2Bodydist X)>40 
+;triggerall = p2movetype != H
+;Triggerall=!Inguarddist
+;Triggerall=random<var(50)*1.1
+;Trigger1 = Stateno = 610  && movehit = 1
+;value = 620
 
 [state -1, Jump forward in combos]
 type = VarSet
