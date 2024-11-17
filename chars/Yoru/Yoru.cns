@@ -547,7 +547,7 @@ damage    = 15
 hitflag = MAF
 guardflag = M
 pausetime = 10,15
-guard.pausetime = 10,20
+guard.pausetime = 10,14
 guard.hittime = 20
 sparkno = 0
 guard.sparkno = 13000
@@ -602,8 +602,8 @@ value = 25000
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movecontact
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -794,7 +794,7 @@ hitflag = MAF
 guardflag = MAF
 pausetime = 10,12
 ground.hittime  = 18
-guard.pausetime = 10,10
+guard.pausetime = 10,12
 guard.hittime = 10
 sparkno = 15000
 guard.sparkno = 13000
@@ -909,7 +909,7 @@ value = 25000
 type = ChangeState
 triggerall = movecontact
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 
 [State 200, End]
 type = ChangeState
@@ -1085,8 +1085,8 @@ airguard.cornerpush.veloff = -4
 [State 200, Wavedash Cancel]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
+trigger1 = movehit
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -1128,13 +1128,6 @@ Triggerall = Life <= 700
 Triggerall = Power >= 2000
 Triggerall = var(17) < 1
 value = 25000
-
-[State 200, Wavedash Cancel]
-type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movehit || (movecontact && AnimTime > -7)
-value = 30
-ctrl = 1
 
 [State 200, End]
 type = ChangeState

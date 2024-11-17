@@ -723,7 +723,7 @@ trigger1 = ctrl
 ; Wavedash
 [State -1, Wavedash]
 type = ChangeState
-value = 290
+value = 30
 trigger1 = command = "WD"
 trigger1 = statetype = C || statetype = S
 trigger1 = ctrl

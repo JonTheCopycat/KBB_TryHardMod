@@ -116,7 +116,7 @@ Clsn2Default: 1
 Interpolate Scale
 Clsn2: 1
   Clsn2[0] = -26, -24, 28, 0
-0,21, 0,0, 3, , , 1.2,0.8
+0,21, 0,0, 3, , , 0.9,1.1
 Interpolate Scale
 Clsn2: 1
   Clsn2[0] = -25, -22, 27, 1

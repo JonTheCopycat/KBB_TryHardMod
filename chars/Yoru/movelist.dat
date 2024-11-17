@@ -4,10 +4,11 @@
 _F_F^A
 
 <#f0f000>:COMMAND DASH CANCELS:</>
-^A_F_D_DF (Late on Block)
-^A^A_F_D_DF (Late on Block)
+^A_F_D_DF
+^A^A_F_D_DF (On Hit Only)
+_B^A
 ^A^A^A_F_D_DF
-^B^B^B_F_D_DF
+
 
 <#f0f000>:COMMAND DASH ATTACKS:</>
 

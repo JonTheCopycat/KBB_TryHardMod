@@ -92,7 +92,7 @@ Clsn2Default: 1
 20,0, 0,0, 6
 
 ; Wavedash
-[Begin Action 30]
+[Begin Action -30]
 Clsn2Default: 1
   Clsn2[0] = -26, -14, 28, 2
 10,0, 0,0, 2, , , 1,0.8
@@ -105,6 +105,30 @@ Clsn2Default: 1
   Clsn2[0] = -25, -37, 29, 4
 10,2, 0,0, 3, , , 1,0.8
 10,2, 0,0, 3, , , 1,0.9
+
+; No Mercy
+[Begin Action 30]
+LoopStart
+
+Clsn2: 1
+  Clsn2[0] = -21, -45, 20, -1
+20,0, 0,0, 5, , , 0.9,1.1, 355
+Clsn2Default: 1
+  Clsn2[0] = -25, -42, 21, 1
+Clsn1: 1
+  Clsn1[0] = 7, -11, 22, 1
+20,1, 0,0, 5, , , 1.1,0.9
+Clsn2Default: 1
+  Clsn2[0] = -25, -42, 22, 1
+20,2, 0,0, 4, , , 1,1, 360
+20,3, 0,0, 3, , , 1,1, 360
+20,4, 0,0, 5, , , 0.9,1.1, 360
+Clsn1: 1
+  Clsn1[0] = 7, -12, 23, 1
+20,5, 4,0, 5, , , 1.1,0.9
+20,6, 0,0, 4, , , 1,1, 360
+20,7, 0,0, 3, , , 1,1, 358
+20,8, 0,0, 4, , , 1,1, 355
 
 ;--------------------------------------------------
 ; Jump start frame
@@ -492,32 +516,10 @@ Clsn2: 3
 
 
 
-; No Mercy
-[Begin Action 290]
-LoopStart
 
-Clsn2: 1
-  Clsn2[0] = -21, -45, 20, -1
-20,0, 0,0, 5, , , 0.9,1.1, 355
-Clsn2Default: 1
-  Clsn2[0] = -25, -42, 21, 1
-Clsn1: 1
-  Clsn1[0] = 7, -11, 22, 1
-20,1, 0,0, 5, , , 1.1,0.9
-Clsn2Default: 1
-  Clsn2[0] = -25, -42, 22, 1
-20,2, 0,0, 4, , , 1,1, 360
-20,3, 0,0, 3, , , 1,1, 360
-20,4, 0,0, 5, , , 0.9,1.1, 360
-Clsn1: 1
-  Clsn1[0] = 7, -12, 23, 1
-20,5, 4,0, 5, , , 1.1,0.9
-20,6, 0,0, 4, , , 1,1, 360
-20,7, 0,0, 3, , , 1,1, 358
-20,8, 0,0, 4, , , 1,1, 355
 
 ; Wavedash A
-[Begin Action 291]
+[Begin Action 290]
 Clsn2Default: 1
   Clsn2[0] = -23, -48, 27, 2
 200,13, 0,0, 3
@@ -533,7 +535,7 @@ Clsn1: 1
 200,7, 0,0, 15
 
 ; Wavedash A Throw
-[Begin Action 292]
+[Begin Action 291]
 Clsn2Default: 1
   Clsn2[0] = -28, -56, 24, 0
 200,6, 0,0, 4
@@ -554,8 +556,8 @@ Clsn1: 1
 200,7, 0,0, 10
 
 
-; Wavedash A B Grab
-[Begin Action 293]
+; Wavedash B Grab
+[Begin Action 390]
 Clsn2: 1
   Clsn2[0] = -28, -36, 25, 1
 310,5, 0,0, 3
@@ -583,8 +585,8 @@ Clsn2: 1
   Clsn2[0] = -28, -47, 24, 2
 310,16, 0,0, 3
 
-; Wavedash A B Throw
-[Begin Action 294]
+; Wavedash B Throw
+[Begin Action 391]
 310,9, 0,0, 2
 310,10, 0,0, 2
 310,11, 0,0, 2
@@ -605,8 +607,8 @@ Clsn1: 1
 2400,19, 0,0, 4, , , 0.9,0.9
 2400,20, 0,0, 4, , , 0.9,0.9
 
-; Wavedash A Strong Punch
-[Begin Action 295]
+; Wavedash Strong Punch
+[Begin Action 395]
 Clsn2: 1
   Clsn2[0] = -27, -54, 20, 1
 200,9, -2,0, 5, , , 0.9,1.1

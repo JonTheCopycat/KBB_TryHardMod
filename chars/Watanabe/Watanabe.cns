@@ -475,7 +475,7 @@ fall.recovertime = 20
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movecontact
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, 2A]
@@ -1636,7 +1636,6 @@ hitflag = MAF
 guardflag = MA
 pausetime = 10,ifelse(root,stateno=[23000,24500],180,20)
 guard.pausetime = 10,9
-guard.hittime = 5
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -1808,7 +1807,6 @@ hitflag = MAFD
 guardflag = MA
 pausetime = 15,ifelse(root,stateno=[23000,24500],180,10)
 guard.pausetime = 10,10
-guard.hittime = 10
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2003,7 +2001,6 @@ persistent = 0
 type = ChangeState
 value = 19000
 Triggerall = helper(311),movecontact
-triggerall = time > 5
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 1"
 Triggerall = power >= 1000
@@ -2013,7 +2010,6 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 type = ChangeState
 value = 20000
 Triggerall = helper(311),movecontact
-triggerall = time > 5
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 Triggerall = power >= 1000
@@ -2023,7 +2019,6 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 type = ChangeState
 value = 21000
 Triggerall = helper(311),movecontact
-triggerall = time > 5
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 3"
 Triggerall = power >= 500
@@ -2033,7 +2028,6 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 type = ChangeState
 value = 22000
 Triggerall = helper(311),movecontact
-triggerall = time > 5
 triggerall = numhelper(5465) = 0  && numhelper(5466) = 0 
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 4"
@@ -2044,7 +2038,6 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 type = ChangeState
 value = 23000
 Triggerall = helper(311),movecontact
-triggerall = time > 5
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 5"
 Triggerall = power >= 1500
@@ -2053,7 +2046,6 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 [State 200, End]
 type = ChangeState
 triggerall = helper(311),movecontact
-triggerall = time > 5
 triggerall = numhelper(5465) = 0
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 500
@@ -2065,7 +2057,6 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 [State 200, End]
 type = ChangeState
 triggerall = helper(311),movecontact
-triggerall = time > 5
 Triggerall = power >= 500
 trigger1 = command = "holddown"
 trigger1 = command = "c"
@@ -2075,7 +2066,6 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 [State 200, End]
 type = ChangeState
 Triggerall = helper(311),movecontact
-triggerall = time > 5
 triggerall = numhelper(401) = 0
 triggerall = numhelper(402) = 0
 triggerall = numhelper(623) = 0
@@ -3480,7 +3470,7 @@ Envshake.time = 10
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
 trigger1 = movehit
-value = 30
+value = 35
 ctrl = 1
 
 [State 200, End]
@@ -4444,7 +4434,7 @@ type = ChangeState
 Triggerall = helper(401),movecontact
 triggerall = time >= 5
 trigger1 = command = "WD" && command != "NotWD"
-value = 30
+value = 35
 
 [State 200, End]
 type = ChangeState
@@ -4775,7 +4765,7 @@ trigger1 = AnimElem = 15
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 35
+value = 30
 
 [State 0, NotHitBy]
 type = NotHitBy
@@ -6083,7 +6073,7 @@ y = -2
 
 [State 0, VelAdd]
 type = VelSet
-trigger1 =  time >= 14
+trigger1 =  time >= 12
 x = ifelse(prevstateno=19000,9,6.5 + ifelse(vel x > 0, vel x/2,0))
 y = 0
 persistent = 0
@@ -6144,7 +6134,7 @@ supermovetime=9999999
 
 [State 0, Helper]
 type = Helper
-trigger1 = time = 17
+trigger1 = time = 15
 helpertype = normal ;player
 name = "green sword"
 ID = 401
@@ -6165,7 +6155,7 @@ keyctrl = 0
 ;ctrl = 0
 [State 0, ChangeAnim]
 type = ChangeAnim
-trigger1 = prevstateno = 19000 && time >= 17
+trigger1 = prevstateno = 19000 && time >= 15
 value = 620
 elem = 4
 ;ignorehitpause = 
@@ -6182,7 +6172,7 @@ value = 631
 
 [State 200, End]
 type = ChangeState
-trigger1 = time >= 20
+trigger1 = time >= 15
 trigger1 = (command = "hold_c" || command = "holdup"  || command = "holddown") && prevstateno != 19000
 value = 627
 ctrl = 0
@@ -6476,7 +6466,6 @@ guardflag = MA
 ground.hittime = 20
 pausetime = 0,150
 guard.pausetime = 0,5
-guard.hittime = 15
 sparkno = 0
 sparkxy = 0, 0
 hitsound = 5,3
@@ -6634,7 +6623,6 @@ guardflag = MA
 ground.hittime = 20
 pausetime = 5,ifelse(root,stateno=[23000,24500],180,20)
 guard.pausetime = 0,5
-guard.hittime = 15
 sparkno = 2
 sparkxy = 0, 0
 hitsound = 5,3
@@ -7020,7 +7008,7 @@ y = 0.44
 
 [State 200, End];jjdrviuidb'ei eihhPWdibvWWkwoviw
 type = ChangeState
-trigger1 = time = 30 || target,stateno = [5000,5210]
+trigger1 = time = 25 || target,stateno = [5000,5210]
 value = 50
 ctrl = 1
 
@@ -7820,7 +7808,7 @@ hitflag = MAFD
 guardflag = MA
 pausetime = 15,ifelse(root,stateno=[23000,24500],180,10)
 guard.pausetime = 10,10
-guard.hittime = 10
+guard.hittime = 7
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -8078,7 +8066,7 @@ hitflag = MAFD
 guardflag = MA
 pausetime = 15,ifelse(root,stateno=[23000,24500],180,10)
 guard.pausetime = 10,10
-guard.hittime = 10
+guard.hittime = 7
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25

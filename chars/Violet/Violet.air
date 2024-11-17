@@ -86,11 +86,11 @@ Clsn2Default: 1
 [Begin Action 30]
 Interpolate Scale
 Clsn2Default: 1
-  Clsn2[0] = -24, -18, 21, 1
-10,2, 0,0, 3, , , 1.2,0.8
+  Clsn2[0] = -24, -30, 21, 1
+10,2, 0,0, 3, , , 0.9,1.1
 Interpolate Scale
 Clsn2Default: 1
-  Clsn2[0] = -24, -12, 27, 1
+  Clsn2[0] = -24, -20, 27, 1
 10,2, 0,0, 5, , , 1.4,0.6
 10,2, 0,0, 2, , , 1.3,0.7
 Clsn2: 1
