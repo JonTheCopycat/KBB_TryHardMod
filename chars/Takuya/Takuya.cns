@@ -6039,8 +6039,8 @@ value = 466
 
 [State 0, ChangeAnim]
 type = ChangeAnim
-trigger1 = (time >= 300 && anim != 464||time >= 70&& anim = 464 ) && (anim != 463 && anim != 464 && anim != 466|| (anim = 466 && animelemtime(7) > 0))
-value = ifelse(anim=464,467,463)
+trigger1 = time >= (180 + (root,numhelper(470)*120)) && (anim != 464 && anim != 466 && anim != 467 && anim != 463)
+value = 463
 ;elem = 1
 ;ignorehitpause = 
 
@@ -6059,7 +6059,7 @@ ctrl = 0
 
 [State 0, DestroySelf]
 type = DestroySelf
-trigger1 = time > 400 && root,stateno != [20000,25000] && anim != 467  || anim = 467 && time > 90 || anim = 464 && animtime = 0
+trigger1 = anim = 467 && animtime = 0 || anim = 464 && animtime = 0  || anim = 463 && animtime = 0 ; i can simplify this but i dont want to..
 
 
 ;-------------------------------------------------------------------------------
@@ -6190,7 +6190,7 @@ attr = S, NA
 animtype  = Medium
 damage    = 10
 hitflag = MAFD
-guardflag = MA ; meh
+guardflag = HA ; meh
 pausetime = 5,5
 guard.pausetime = 5,15
 sparkno = 15000
@@ -6316,7 +6316,7 @@ attr = S, NA
 animtype  = Medium
 damage    = 25
 hitflag = MAFD
-guardflag = MAF
+guardflag = HA
 pausetime = 10,10
 ground.hittime  = 16
 air.hittime = 16
@@ -7506,35 +7506,35 @@ persistent = 0
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = [7,15]
-x = 6.5
+x = 7
 
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = time = 15
-x = 5
+trigger1 = time = 14
+x = 8
 y = 0
 ;ignorehitpause = 
 ;persistent = 
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = [15,19]
-x = 3
+trigger1 = time = [15,18]
+x = 3.5
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = [20,22]
+trigger1 = time = [19,21]
 x = 1
 
 [State 0, Turn]
 type = Turn
-trigger1 = time = 16
+trigger1 = time = 18
 ;ignorehitpause = 
 ;persistent = 
 
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time > 22
+trigger1 = time > 21
 x = 0
 
 
@@ -7542,7 +7542,7 @@ x = 0
 
 [State 0, PlayerPush]
 type = PlayerPush
-trigger1 = time <= 24
+trigger1 = time <= 22
 value = 0
 ;ignorehitpause = 
 ;persistent = 
@@ -11302,7 +11302,7 @@ value = 0
 
 [State 0, Failed to block an overhead!]
 type = Explod
-triggerall = stateno = [600, 625] && stateno != 620 || stateno = 900 || stateno = 390 || stateno = 455 || stateno = 610 || helper(25001),stateno = 25004 || helper(495),stateno = 495
+triggerall = stateno = [600, 625] && stateno != 620 || stateno = 900 || stateno = 390 || stateno = [480,482] ||stateno = 455 || stateno = 610 || helper(25001),stateno = 25004 || helper(495),stateno = 495
 triggerall = enemy, prevstateno = [120,160] && numexplod(31000) = 0
 trigger1 = enemy, movetype = H && enemy, stateno != [120,160]
 anim = F35000
