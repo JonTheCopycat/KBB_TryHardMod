@@ -326,6 +326,12 @@ velset = 0,0
 ;trigger1 = RoundState = 0
 ;value = 190
 
+[State 0, VarSet]
+type = VarSet
+trigger1 = 1
+v = 10
+value = 2
+
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = Animelem = 6
@@ -363,7 +369,7 @@ value = 0
 [Statedef 195]
 type = S
 ctrl = 0
-anim = 0
+anim = 3
 velset = 0,0
 movetype = I
 physics = S
@@ -6243,7 +6249,7 @@ triggerall = AnimElem = 9
 trigger1 = 1
 attr = S, NA
 animtype  = Heavy
-damage    = 30
+damage    = 35
 hitflag = MAFD
 guardflag = MAF
 pausetime = 12,12
@@ -10952,7 +10958,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Heavy
-damage    = 50
+damage    = 45
 hitflag = MAF
 guardflag = MA
 pausetime = 16,18
@@ -13600,6 +13606,7 @@ ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2
 air.velocity = -2,-1.5
+down.velocity = -2,-1
 Fall = 0
 Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
@@ -16127,7 +16134,7 @@ y = -0.44 * 0.5
 [State 0, Dash Velocity]
 type = VelSet
 trigger1 = time = 0
-x = vel x * 0.5
+x = 2
 y = -3
 
 [State 200, Jump]

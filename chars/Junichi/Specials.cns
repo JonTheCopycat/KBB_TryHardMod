@@ -1620,7 +1620,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 90
+damage    = 100
 hitflag = MAF
 guardflag = MAF
 pausetime = 16,16
@@ -2054,7 +2054,7 @@ triggerall = AnimElem = 3
 trigger1 = 1
 attr = S, SA
 animtype  = Medium
-damage    = 50
+damage    = 40
 hitflag = MAF
 guardflag = MAF
 pausetime = 10,10
@@ -2248,14 +2248,6 @@ trigger1 = 1
 map = "enableDHC"
 value = 1
 
-[State 0, Damage Proration]
-type = VarAdd
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 8
-
 [State 0, SuperPause]
 type = SuperPause
 trigger1 = Time = 1
@@ -2302,13 +2294,13 @@ pos = ifelse(abs(map(distX)) < 10,  20, ((enemy,pos x + 10 * map(distX) / abs(ma
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 5
 x = 4
-y = -4
+y = -5
 
 [State 0, VelSet]
 type = VelAdd
-trigger1 = AnimElem = 4, >= 0
+trigger1 = AnimElem = 5, > 0
 y = .44
 
 [State 200, 1]
@@ -2319,7 +2311,7 @@ triggerall = time%5 = 0
 trigger1 = 1
 attr = A, SA
 animtype  = Light
-damage    = 10
+damage    = 6
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,4
@@ -2345,7 +2337,7 @@ kill = 0
 [State 200, End]
 type = ChangeState
 trigger1 = pos y >= 0
-trigger1 = time >= 15
+trigger1 = AnimElem = 5, > 0
 value = 22021
 
 
@@ -2375,6 +2367,14 @@ triggerall = teammode = tag
 trigger1 = 1
 map = "enableDHC"
 value = 1
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 8
 
 [State 0, Sword Swing]
 type = PlaySnd
@@ -2415,7 +2415,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 60
+damage    = 44
 hitflag = MAFD
 guardflag = MAF
 pausetime = 16,16
@@ -3192,7 +3192,7 @@ triggerall = AnimElem = 3 || AnimElem = 9
 trigger1 = 1
 attr = S, SA
 animtype  = Hard
-damage    = 15
+damage    = 20
 guard.kill = 0
 hitflag = MAFD
 guardflag = MAF
@@ -3219,7 +3219,7 @@ triggerall = AnimElem = 6 || AnimElem = 12
 trigger1 = 1
 attr = S, SA
 animtype  = Hard
-damage    = 15
+damage    = 20
 guard.kill = 0
 hitflag = MAFD
 guardflag = MAF
@@ -3615,7 +3615,7 @@ triggerall = animelem = 7 || AnimElem = 9 || AnimElem = 11 || AnimElem = 13
 trigger1 = 1
 attr = S, SP
 animtype  = Hard
-damage    = 30,5
+damage    = 25,5
 hitflag = MAFD
 guardflag = MA
 pausetime = 4,8
