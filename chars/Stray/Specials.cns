@@ -676,7 +676,7 @@ channel = 0
 
 [State 200, Dash Cancel]
 type = ChangeState
-triggerall = helper(23500),movecontact
+triggerall = helper(23500),movehit
 triggerall = time >= 43
 trigger1 = command = "FF"
 value = 100

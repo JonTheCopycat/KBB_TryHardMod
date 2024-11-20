@@ -9202,7 +9202,6 @@ value = 40
 type = ChangeState
 triggerall = time >= 9
 trigger1 = command = "FF"
-trigger2 = command = "holdfwd"
 value = 100
 ctrl = 1
 
@@ -9210,7 +9209,6 @@ ctrl = 1
 type = ChangeState
 triggerall = time >= 12
 trigger1 = command = "BB"
-trigger2 = command = "holdback"
 value = 105
 ctrl = 1
 

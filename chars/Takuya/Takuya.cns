@@ -5724,7 +5724,7 @@ y = 0
 type = HitDef
 getpower = 0
 trigger1 = AnimElem = 4 && !movecontact
-triggerall = 1 ; I think hitting this Post-Juggle would be crazy
+triggerall = root,map(juggle) < 100 || hitcount != 0 ; I think hitting this Post-Juggle would be crazy
 attr = S, NA
 animtype  = Light
 damage    = 25
