@@ -574,8 +574,8 @@ value = 950
 [State 200, Dash cancel Forward]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
-value = 35
+trigger1 = movehit || (movecontact && AnimTime > -7)
+value = 30
 ctrl = 1
 
 [State 200, End]
@@ -757,8 +757,8 @@ value = 25000
 [State 200, Dash cancel Forward]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
-value = 35
+trigger1 = movehit || (movecontact && AnimTime > -7)
+value = 30
 ctrl = 1
 
 ;[State 200, End]
@@ -947,14 +947,14 @@ inheritjuggle = 1
 [State 0, VelSet]
 type = VelSet
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
+trigger1 = movehit || (movecontact && AnimTime > -7)
 y = 0
 
 [State 200, Dash cancel Forward]
 type = ChangeState
 Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
-value = 35
+trigger1 = movehit || (movecontact && AnimTime > -7)
+value = 30
 ctrl = 1
 
 [State 200, End]
@@ -6547,6 +6547,13 @@ value = 400
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
+trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 210
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = ifelse(var(15) > 22, 320,310)
@@ -7728,7 +7735,7 @@ type = DestroySelf
 trigger1 = frontedgebodydist < -20
 
 ;-------------------------------------------------------------------------------
-; C-Foward - Aire
+; C-Backward - Aire
 [Statedef 623]
 type    = A
 movetype= A
@@ -7749,7 +7756,8 @@ elem = 0
 
 [State 0, Helper]
 type = Helper
-triggerall = time % 5.5 = 0
+triggerall = time >= 7
+triggerall = time % 2.5 = 0
 triggerall = map(bubbleTrapsSpawned) = 0
 triggerall = map(juggle) < 100
 ;triggerall = numhelper(632) < 10
@@ -7769,7 +7777,7 @@ pausemovetime = 0
 
 [State 0, Helper Hit]
 type = MapSet
-trigger1 = numhelper(632) >= 8
+trigger1 = numhelper(632) >= 5
 map = "bubbleTrapsSpawned"
 value = 1
 ;ignorehitpause = 
@@ -7927,7 +7935,7 @@ ctrl = 1
 
 
 ;===============================================================================
-; Backward + C - Aire
+; Foward(Cancelled) + C - Aire
 ;-------------------------------------------------------------------------------
 [Statedef 624]
 type    = A
@@ -8744,6 +8752,18 @@ velset = 1,0
 poweradd = 0
 sprpriority = 2
 
+[State 0, AttackDist]
+type = AttackDist
+trigger1 = 1
+value = 40
+
+[State 0, HitOverride]
+type = HitOverride
+trigger1 = Time = 1
+attr = SCA, AA, AP, AT
+slot = 0
+stateno = 636
+time = -1
 
 ;[State 0, ScreenBound]
 ;type = ScreenBound
@@ -8921,6 +8941,12 @@ triggerall = root,stateno = 26000
 ;trigger1 = root,movecontact
 trigger1 = 1
 ;value = 402
+
+[State 200, End]
+type = ChangeState
+trigger1 = abs(pos X - enemynear,pos X) <= 35 
+trigger1 = abs(pos Y - enemynear,pos Y) <= 35 
+value = 634
 
 [State 475, End] ; Destroys self once Bubblo Bubbla Slam activates!
 type = ChangeState
@@ -9337,6 +9363,18 @@ value = 402
 [State 475, End] ; Destroys self once Bubblo Bubbla Slam activates!
 type = DestroySelf
 triggerall = moveguarded || movecountered
+trigger1 = 1
+
+;------------------------------------------------------------------------------
+;Mini Bubble Die
+[Statedef 636]
+movetype= I
+physics = N
+anim = 9999
+sprpriority = 2
+
+[State 0, Helper Die]
+type = DestroySelf
 trigger1 = 1
 
 ;---------------------------------------------------------------------

@@ -25,10 +25,10 @@ Bubblo Launch (1/4 Bar)				_B^C
 
 Bubble Burst (1/4 Bar: 1 Bubble)		_D^C
 	"Bubbla spawns an explosive 
-	bubble burst around herself, 
-	damaging the nearby opponent.
+	bubble beneath her, launching
+	herself and nearby opponents.
 	If held, the explosion will 
-	have a higher launch."
+	have a higher launch power."
 
 Bubblo Spin (1/4 Bar)				_F^C
 	"Bubbla launches herself at 
@@ -37,9 +37,14 @@ Bubblo Spin (1/4 Bar)				_F^C
 
 Bubble Burst Levitato (1/4 Bar,_AIR OK: 1 Bubble)					_AIR^C
 	"Bubbla spawns and floats
-	in a bubble as long as ^C
+	in a bubble as long as C
 	is still held. Bursts
- 	the moment ^C is released."
+ 	the moment C is released.
+	If FOWARD is pressed, Bubbla
+	launches forward with force.
+	If BACKWARD is pressed, Bubbla
+	spawns mini bubbles that
+	explode on impact."
 
 Falling Bubble Trap (1/4 Bar,_AIR OK: 1 Bubble)					_AIR_D^C
 	"Bubbla sends a bubble trap 
@@ -47,13 +52,10 @@ Falling Bubble Trap (1/4 Bar,_AIR OK: 1 Bubble)					_AIR_D^C
 	caught will be damaged by the
 	explosion."
 
-Bubble Grab Trap (1/4 Bar,_AIR OK: 1 Bubble)					_AIR_F^C
-	"Bubbla grabs the opponent,
-	trapping them in a bubble,
-	and launches them behind her
-	at high speeds. Anyone
-	caught will be damaged by the
-	explosion."
+Mini Bubble Spray (1/4 Bar,_AIR OK: 1 Bubble)					_AIR_B^C
+	"Bubbla spawns up to 8
+	mini bubbles that damage
+	the opponent on impact."
  
 
 <#f0f000>:STAR STRIKES!:</>
