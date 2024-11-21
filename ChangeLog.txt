@@ -1,5 +1,232 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.7.3 Changes:                    /
+|---------------------------------------------------/
+
+System changes, Character Improvements, and Revamps to the Modded Guest Characters. This update should make the experience much smoother and fairer.
+
+Universal:
+1. All Standard Wavedashes now are split between a normal version and a Cancel verion.
+* Normal version has less restrictions than before and no longer has a delayed block when pressing back.
+* Cancel edition now restricts cancelling into movement options early, avoiding overpowered strategies.
+2. All Late Wavedash Cancels have been replaced with either on block cancels or on hit cancels.
+3. Buffer Times for Dashes Returned to normal. 
+	* (3 buffer frames -> 1 buffer frame for dashing and hyperhopping)
+	* (5 buffer frames -> 3 buffer frames for wavedash)
+
+
+Exceptions to Unversal Changes:
+Noll and Saito:
+1. (~) Unique Wavedash Cancel Behavior
+	* Airdash and Jump delayed for 5 frames
+	* IAD delayed for 10 frames
+	* Fastfall delayed for 10 frames
+2. (+) New Raw Wavedash Behavior:
+	* All attack and movement cancels can be performed immediately (from 5 frame delay)
+
+
+Bill:
+1. (+) Bug fixed where pyro Defence debuff lasted longer than it was suppose too
+2. (+) Bug Fixed where tech time for bombs was inconsistent (?)
+3. (+) 236B Cost Reduced to 500 (from 1000)
+4. (+) 214B Cost Reduced to 500 (from 1000)
+
+
+Leon:
+1. (-) j.c now has less upwards reach.
+
+
+Sareo:
+1. (+) Backsway Input Made slightly more leniant.
+
+
+Stray:
+1. (-) 236B no longer dash cancelable on block
+
+
+Clutch:
+1. (-) Wavedash C Cost increased (100 -> 200)
+
+
+MK:
+1. (-) 66 Proration increased to 5 (from 3)
+2. (~) 5a hitbox adjusted:
+	* Horizontal Reach slightly increased
+	* Vertical Reach is now only present at the middle of it's reach and is no longer present point blank.
+3. (+) 5aa damage increased to 15 (from 10)
+4. (+) 2c Intangible frames reduced (10 -> 8)
+	* Now metaknight reappears only when his hurtbox comes back.
+5. (+) 4c is now air dash cancellable again on success.
+6. (-) 4c > 66 Proration drasitaclly increased to 45 (from 25)
+	* Juggle increased to 25 (from 10)
+7. (+) j.5a Proration reduced to 3 (from 5)
+8. (+) j.5aa Damage increased to 15 (from 10)
+
+
+Max Adjustments:
+1. (+) 2a can now cancel into wavedash
+2. (-) 5aaa can no longer cancel into wavedash
+3. (-) Wavedash A no longer groundbounces on hit
+	* More hitpause on hit.
+4. (-) Wavedash C: Fixed bug where proration and juggle wasn't applied properly
+	* Proration increased (0 -> 5)
+	* Juggle Increased (0 -> 10) (review and possible reduce this ngl)
+5. (-) Added proration to cannonball and bomb explosion
+6. (-) Reduced metergain on 4a
+7. (+) GunStance B proration decreased (45 -> 30)
+
+
+Jodie:
+1. (+) Wavedash A Rekka Followup options improved
+	* Rekka A: is now a low sweep. Does the least damage and low blockstun.
+	* Rekka B: Has been slowed down and turned into an overhead. (f11 -> f17).
+		* Framedata improved (-2 -> +4).
+		* Proration increased (0 -> 12)
+	* Rekka C: is old rekka A.
+		* Increased damage (20 -> 45)
+		* Increased Blockstun and Recovery (more advantagous for 5c cancel now)
+		* Startup (f7 -> f10)
+2. (-) Jodie Sword Jab Startup Increased (f7 -> f8) (Shadow nerf, forgot lmao)
+
+
+Junichi:
+1. (~) Fixed bug where changing stances sometimes switched palletes during round start.
+2. (~) Fixed bug where some sprites had the wrong shade of black.
+3. (-) All versions of 236C now have a wiff/block animation. Increased recovery.
+4. (-) Overall Damage Reduced
+5. (~) Proration Rebalanced to (hopefully) reward harder comboes more than easier loops and routes.
+6. (~) Junichi now starts round 1 in baton stance, and switches to kick stance in later rounds.
+--Kick:
+7. (-) Kick 2ab no longer cancels into j.5a and j.5b
+	* Sends opponents higher
+	* Sends junichi lower with less gravity
+	* Slightly more hitpause
+8. (+) Kick 5c Revamped
+9. (+) 5c damage increased (35 -> 50)
+10. (-) Backturned 5a hitbox reaches less high now
+11. (+) Backturned 2a now comboes more consistently
+12. (-) Kick j.5a no longer auto turns around on crossup hit.
+	* Hitbox reach downwards reduced, reach backwards slightly increased.
+	* startup increased (f6-> f7)
+13. (+) Kick j.5aa how has a second hitbox behind.
+14. (-) Kick j.5c invul length reduced. (6 frames -> 4 frames)
+15. (+) Backturned new move added: 2c
+	* Junichi hops forward, stays in backturned, while briefly evading low attacks.
+16. (+) Kick 236B damage increased (90 -> 100)
+--Punch:
+17. (+) Punch 2a upwards reach reduced. Knockback adjusted to combo better
+	* startup reduced (f8 -> f7)
+18. (+) Punch 5b: Range slightly increased.
+	* Claw effect position adjusted.
+	* startup reduced (f10 -> f8)
+19. (~) Punch 5bb no longer groundbounces
+	* Sends further
+	* More hitpause
+	* startup reduced (f6 -> f5)
+20. (~) Punch 5c replaced with new move.
+21. (+) Punch 6c: Increased Initial Burst Velocity, Reduced Exit Velocity
+22. (+) Peekaboo time to attack reduced by one frame.
+23. (+) Peekaboo 5a range increased:
+	* Claw Effect position adjusted
+	* Initial Velocity adjusted to be consistent.
+	* No longer stop velocity on swing
+24. (+) j.5a startup reduced (f7 -> f6)
+25. (~) Punch j.5b Reach Down slightly reduced. Reach up slightly increased.
+* Claw Effect position tweaked
+26. (+) Punch j.5c hitbox improved slightly.
+--Baton:
+27. (~) Baton 5bb has more hitpause, and sends further
+28. (~) Baton 4b no longer groundbounces. Comboes normally now.
+29. (+) Baton 5c animation revamped. Increased Range.
+30. (-) Baton j.5a Startup increased (f7 -> f9)
+31. (-) Baton j.5b startup increased (f7 -> f11)
+	* j.5b horizontal range increased
+32. (-) Baton j.5c velocity changed; no longer conserves velocity, and always pushes the player forward at slow speed.
+33. (-) Baton j.5c.c hitbox reach forward reduced.
+34. (-) Baton 236B initial vertical velocity drastically reduced.
+	* Pushes the opponent away on block.
+	* 236B Damage reduced (~110 -> ~80)
+35. (-) Baton 236C is no longer an unblockable.
+
+36. (+) 214A Proration Reduced (15 -> 12)
+37. (+) 236A Proration Reduced (15 -> 10)
+	* Damage increased (100 -> 120)
+38. (+) 236B horizontal activation range reduced.
+	* Vertical activation range increased.
+	* Activated 236B startup reduced.
+	* 236B damage reduced (100 -> 90)
+39. (+) 214B Proration Reduced (15 -> 10)
+	* Damage reduced (120 -> 100)
+
+
+Watanabe:
+1. (~) Bugfix with grab teching
+2. (~) Bugfix with doing 236C while already having a Phantom Sword up
+3. (-) Watanabe Wavedash B no longer hits post juggle
+4. (~) J5C no longer goes through people
+	* 2 frames slower
+5. (-) J5C.C now properly has landing lag
+6. (-) J5C.X landing lag increased by 3 frames
+7. (-) Sword 5B, 5BB, and 5C have less guardstun
+8. (+) Sword J2C and Sword 2C have increased guardstun
+
+
+Takuya: This dude got completely reworked
+1. (+) Takuya's 5BBB blockstring got more blockstun
+2. (-) Takuya no longer can charge moves unless he is enhanced (Excludes 236C and 6C)
+3. (~) Launch angles for moves tweaked
+4. (~) 2A is now jump cancellable on hit
+5. (~) 2[B] now takes 10 juggle and 10 proration (20 proration -> 10 proration)
+6. (~) 5[B] no longer can be jump cancelled on hit
+	* No longer loses plus frames on IB
+7. (+) 2[B] is faster (f22 -> f18)
+8. (+) 5[C]'s 2nd (and 3rd if enhanced) spike comes out 9 frames faster
+9. (+) 5[C] and Enhanced 5[C] spikes both now stick to opponent on block
+10. (+) 5[C] has less recovery and slightly less startup
+11. (~) 6C can always be charged now
+	* now takes 45 juggle and 20 proration (30,30->45,20)
+	* no longer comboes past juggle.
+12. (~) 6[C] now lasts for about 6.5 seconds, or 390 frames (500 -> 390)
+	* timer now resets when Takuya hits someone (not blockhit ok)
+	* is now minus on block (+4 -> -6) 6[C]4 is still 0 though
+	* Follow up is now a overhead.
+13. (~) 6[C] Spike Timer is now longer depending on the amount of spikes are up. Each spike adds 2 seconds to the timer (180 + 120x)
+14. (-) 4C now returns to 0 charge if Takuya was hit
+15. (+) J5A has increased hitpause
+	* Now can cancel into J2C
+16. (~) J5B rework
+17. (+) J5[B] has more blockpush
+18. (+) Enhanced J5[B]'s 2nd hit is less minus(-7 to -5 -> -1 to +1)
+19. (-) J5C now does 15 self damage (10->15)
+20. (-) J5[C] does 5 juggle and proration (10->5)
+21. (~) J2C rework
+22. (+) J2C now costs 1/4 a bar (500->200)
+23. (~) 214A hurtbox tweaked
+24. (~) 236B hitbox tweaked
+25. (+) 236[B] does 9 per hit (8->9)
+26. (~) 214B has a different launch angle
+27. (+) 214C install no longer disables 6[C]
+
+
+Violet:
+1. (+) Wavedash B No longer pushes violet back on hit
+2. (+) Wavedash B combo time increased
+3. (+) Wavedash B Fatal horizontal velocity reduced.
+
+
+Yoru:
+1. (+) 5a recovery reduced (23 -> 18), Block advantage retained
+2. (-) 4a recovery increased (14 -> 22)
+	* Now -11 on block (from -7)
+
+
+Vivienne:
+1. (+) Can now hyperhop out of armor walk.
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
 | Try-Hard Version 0.7.2 Changes:                    /
 |---------------------------------------------------/
 
