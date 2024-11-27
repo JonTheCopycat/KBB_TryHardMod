@@ -1252,7 +1252,7 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 23000
-poweradd = -500
+poweradd = -1000
 sprpriority = 2
 
 [State 0, AttackDist]
