@@ -258,7 +258,7 @@ x = -6
 type = PlaySnd
 trigger1 =  Time = 110
 trigger1 = life <= 999
-value = Sifelse(map(VoiceSwitch)=0,200,205),24+(random<500)*1+(random<500)*1+(random<500)*1+(random<500)*1+(random<500)*1
+value = Sifelse(map(VoiceSwitch)=0,200,205),25+(random<500)*1+(random<500)*1;+(random<500)*1+(random<500)*1+(random<500)*1
 volumescale = 100
 channel = -1
 
@@ -298,21 +298,21 @@ value = S2002,28+(random<500)*1
 volumescale = 75
 channel = 1
 
-[State 0, Voice - ]
-type = PlaySnd
-trigger1 = AnimElem = 15
-trigger1 =  enemy,name = "KBB MK" || enemy,name = "KBB MK Mod" || enemy,name = "MetaKnight"
-value = S2002,0
-volumescale = 75
-channel = 1
-
-[State 0, Voice - ]
-type = PlaySnd
-trigger1 = AnimElem = 15
-trigger1 =  enemy,name = "Dedede"
-value = S2002,1
-volumescale = 75
-channel = 1
+;[State 0, Voice - ]
+;type = PlaySnd
+;trigger1 = AnimElem = 15
+;trigger1 =  enemy,name = "KBB MK" || enemy,name = "KBB MK Mod" || enemy,name = "MetaKnight"
+;value = S2002,0
+;volumescale = 75
+;channel = 1
+;
+;[State 0, Voice - ]
+;type = PlaySnd
+;trigger1 = AnimElem = 15
+;trigger1 =  enemy,name = "Dedede"
+;value = S2002,1
+;volumescale = 75
+;channel = 1
 
 [State 190, 1] ;Freeze animation until PreIntro is over
 type = ChangeAnim
@@ -704,11 +704,12 @@ ground.velocity = -2.5
 air.velocity = -3,-1
 Fall = 0
 
-[State 200, End]
+[State 200, Wavedash Cancel]
 type = ChangeState
-triggerall = movehit || AnimTime  > -7
-trigger1 = command = "WD" && command != "NotWD"
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
 value = 35
+ctrl = 1
 
 [State 200, SPECIAL 3 - CUTTER]
 type = ChangeState
@@ -1491,11 +1492,6 @@ triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
 value = 100
 
-[State 0, PosSet]
-type = PosSet
-trigger1 = AnimElem = 1
-y = 0
-
 [State 0, Swing]
 type = PlaySnd
 trigger1 = AnimElem = 2
@@ -1504,7 +1500,7 @@ volumescale = 150
 
 [State 0, VelSet if coming from wavedash]
 type = VelAdd
-trigger1 = prevstateno = 30 && time = 0
+trigger1 = prevstateno = [30,35] && time = 0
 x = const(velocity.run.fwd.x) * 1.6
 
 [State 200, 1]
@@ -2817,7 +2813,7 @@ y = -3
 
 [State 0, VelSet if coming from wavedash]
 type = VelAdd
-trigger1 = prevstateno = 30 && time = 0
+trigger1 = prevstateno = [30,35] && time = 0
 x = 2
 
 [State 0, VelAdd]
@@ -2830,7 +2826,7 @@ y = 0.2
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = !movecontact && prevstateno != 30
+triggerall = !movecontact && prevstateno != [30,35]
 trigger1 = 1
 attr = S, NA
 animtype  = Light
@@ -2855,13 +2851,13 @@ Envshake.time = 10
 type = HitDef
 getpower = 0
 triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = !movecontact && prevstateno = 30
+triggerall = !movecontact && prevstateno = [30,35]
 trigger1 = 1
 attr = S, NA
 animtype  = Light
 damage    = 60
-hitflag = MAF
-guardflag = HAFD
+hitflag = MAFD
+guardflag = HA
 pausetime = 18,20
 sparkno = 1
 guard.sparkno = 13000
@@ -2879,7 +2875,7 @@ Envshake.time = 10
 
 [State 0, ChangeAnim2]
 type = ChangeAnim
-trigger1 = prevstateno = 30  && anim != 390
+trigger1 = prevstateno = [30,35]  && anim != 390
 value = 390 
 
 [State 300, End]
@@ -3248,6 +3244,13 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 610
 ctrl = 1
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall =  var(19) = 1 || var(19) = 6
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
+value = 35
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
@@ -3410,6 +3413,13 @@ trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 610
 ctrl = 1
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall =  var(19) = 1 || var(19) = 6
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
+value = 35
+ctrl = 1
 
 
 [State 200, End]
@@ -3610,6 +3620,14 @@ Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 26000
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall =  var(19) = 1 || var(19) = 6
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
+value = 35
+ctrl = 1
+
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -3642,7 +3660,7 @@ y = 0
 type = explod
 Trigger1 = AnimElem = 3
 anim = 6953
-id = 143
+id = 144
 pos = 10,-60
 facing = 0
 scale = .5,.5
@@ -3677,7 +3695,7 @@ type = explod
 trigger1 = prevstateno != 21000
 Trigger1 = AnimElem = 1
 anim = 6953
-id = 143
+id = 144
 pos = 0,-60
 facing = 0
 scale = .5,.5
@@ -3833,7 +3851,7 @@ sprpriority = 0
 
 [State 0, ChangeAnim2]
 type = ChangeAnim
-trigger1 = prevstateno = 23000 && anim != 260005
+trigger1 = prevstateno = 25000 && anim != 260005
 value = 260005 
 ;elem = 1
 ;ignorehitpause = 
@@ -3843,6 +3861,12 @@ value = 260005
 type = VelAdd
 trigger1 = 1
 y = 0.44
+
+[State 200, End];jjdrviuidb'ei eihhPWdibvWWkwoviw
+type = ChangeState
+trigger1 = pos y >= 0 && prevstateno = 25000
+value = 52
+ctrl = 1
 
 [State 200, End];jjdrviuidb'ei eihhPWdibvWWkwoviw
 type = ChangeState
@@ -3860,6 +3884,7 @@ ctrl = 0
 anim = 406
 poweradd = 0
 sprpriority = 0
+
 [State 0, PosSet]
 type = PosSet
 trigger1 =  AnimElem = 1
@@ -4064,6 +4089,14 @@ trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 620
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall =  var(19) = 1 || var(19) = 6
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
+value = 35
+ctrl = 1
+
 
 [State 200, End]
 type = ChangeState
@@ -4209,6 +4242,13 @@ trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 620
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall =  var(19) = 1 || var(19) = 6
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
+value = 35
+ctrl = 1
 
 
 [State 200, End]
@@ -4692,13 +4732,6 @@ v = 47    ;fv = 10
 value = 16
 ;---------------------------------------
 
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = enemy,name = "Dee" && Win && map(roundCount) = 2
-value = S200,22
-volumescale = 100
-channel = 1
-
 ;hi
 
 ;[State 9165]
@@ -5134,7 +5167,7 @@ value = palno
 
 [State 0, VarSet]
 type = VarSet
-trigger1 = var(52) > 8
+trigger1 = var(52) > 10
 v = 52    ;fv = 10
 value = 1
 

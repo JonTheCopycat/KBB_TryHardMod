@@ -2563,12 +2563,12 @@ type = PowerAdd
 trigger1 = time = 10
 value = -200
 
-[State 0, CtrlSet]
-type = CtrlSet
-triggerall = time > 5
-trigger1 = !movecontact
-value = 1
-ignorehitpause = 1
+;[State 0, CtrlSet]
+;type = CtrlSet
+;triggerall = time > 5
+;trigger1 = !movecontact
+;value = 1
+;ignorehitpause = 1
 
 [State 0, NotHitBy]
 type = NotHitBy
@@ -2674,14 +2674,81 @@ Fall.recovertime = ifelse(enemy,movetype = A, 80,40)
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = time > 5
+triggerall = !movecontact
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = 1
+value = 35
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 20
+triggerall = !movecontact
+triggerall = var(3) = 0
+trigger1 = command = "holdup"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 45
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 20 || movecontact
+triggerall =  !movecontact
+trigger1 = command = "FF"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 65
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 20 || movecontact
+triggerall =  !movecontact
+trigger1 = command = "BB"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 70
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 20 || movecontact
+triggerall =  !movecontact
+trigger1 = command = "s"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 66
+
 [State 200, End]
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
 trigger1 = command = "holddown"
 trigger1 = command = "c"
-value = 689
+value = 470
 ctrl = 1
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 5 || movecontact
+triggerall =  !movecontact
+trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 600
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 5 || movecontact
+triggerall =  !movecontact
+trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 610
+
+[State 200, End]
+type = ChangeState
+Triggerall = time > 5 || movecontact
+triggerall =  !movecontact
+triggerall = numhelper(3500) = 0
+trigger1 = command = "c"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 687
 
 [State 200, End]
 type = ChangeState
@@ -2694,6 +2761,7 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 50
 ctrl = 1
+
 
 ;===============================================================================
 ; Glitch - Down C - Air Finisher:

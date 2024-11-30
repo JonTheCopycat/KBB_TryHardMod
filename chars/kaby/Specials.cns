@@ -1213,7 +1213,7 @@ triggerall = movecontact != 1
 trigger1 = 1
 attr = A, SA
 animtype  = Medium
-damage    = ifelse(prevstateno = 21250,3,4)
+damage    = ifelse(prevstateno = 21250,2,4)
 hitflag = MAF
 guardflag = MAF
 pausetime = 1,3
@@ -1445,10 +1445,10 @@ triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 175
+damage    = 225
 hitflag = MAFD
 guardflag =
-pausetime = 30,45
+pausetime = 45,60
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -1476,7 +1476,7 @@ triggerall = enemy,map(hitOverride) = 1
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 155
+damage    = 150
 hitflag = MAFD
 guardflag =
 pausetime = 30,45
@@ -1541,6 +1541,12 @@ sinadd = -80,-80,-80,10
 color = 0
 
 
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
 
 [State 814,]
 type = PlayerPush
@@ -1707,12 +1713,7 @@ time = 20
 freq = 60
 ampl = 2
 
-[State 0, Busterable]
-type = MapSet
-trigger1 = 1
-map = "busterable"
-value = 0
-ignorehitpause = 1
+
 
 [State 200, 1]
 type = HitDef
@@ -1721,7 +1722,7 @@ triggerall = time%3 = 0 && time <= 183
 trigger1 = hitcount <= 38
 attr = S, HA
 animtype  = Light
-damage    = 8  + var(11) ; buu really really hate you
+damage    = 8  + var(11),1 ; buu really really hate you
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,2
@@ -1745,10 +1746,10 @@ fall.recover =  0
 [State 200, 1]
 type = HitDef
 getpower = 0
-trigger1 = AnimElem = 12
+trigger1 = time = 132
 attr = S, HA
 animtype  = Light
-damage    = 1
+damage    = 10
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,2
@@ -1765,6 +1766,7 @@ ground.hittime  = 15 + ifelse(enemy,movetype = A || movecountered, 7,0)
 ground.velocity = 1,-6
 guard.velocity = 5
 air.velocity = 1,-6
+kill = 1
 Fall = 1
 fall.recover =  0
 
@@ -1783,7 +1785,7 @@ trigger1 = AnimTime = 0
 ;========================================================
 ;Burning
 ;========================================================
-[Statedef 23000]
+[Statedef 25000]
 type    = S
 movetype= A
 juggle  = 2
@@ -1848,6 +1850,7 @@ value = 0
 type = HitDef
 getpower = 0
 getpower = 0
+triggerall  = hitcount <= 2
 trigger1 = time%5 = 0
 attr = A, HA
 animtype  = Light

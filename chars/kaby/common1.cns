@@ -163,6 +163,7 @@ trigger2 = Anim = 5 && AnimTime = 0
 value = ifelse(var(10)=0,21,2021)
 
 
+
 ;---------------------------------------------------------------------------
 ;Wavedash
 [Statedef 30]
@@ -182,26 +183,37 @@ volumescale = 500
 [State 0, AfterImage]
 type = AfterImage
 triggerall = numhelper(51000) = 0
-trigger1 = time = 0
-time = 5
+trigger1 = AnimElem = 1
+time = 10
 trans = add
 
 [State 0, NotHitBy]
 type = NotHitBy
+triggerall = vel y <= 0
 trigger1 = time = [2, 10]
 value = A, AA
 time = 1
 
 [State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+y = vel y * 0.5
+
+[State 0, VelSet]
 type = VelAdd
 trigger1 = time = 0
-x = const(velocity.run.fwd.x) * 1.85 * 0.6
-y = 0
+x = const(velocity.run.fwd.x) * 1.8 * 0.6
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = [1, 3]
-x = const(velocity.run.fwd.x) * 1.85 * 1.25
+x = const(velocity.run.fwd.x) * 1.8 * 1.25
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = time > 4
+trigger1 = vel x > 1
+y = -vel y * 0.33
 
 [State 0, Explod]
 type = Explod
@@ -226,89 +238,62 @@ ownpal = 0
 
 [State 200, End]
 type = ChangeState
-;triggerall = time >= 5
+triggerall = pos y < -1 && var(3) = 0
+trigger1 = command = "holdup"
+value = 45
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y >= -1
 trigger1 = command = "holdup"
 value = 60
 ctrl = 0
 
-;[State 200, End]
-;type = ChangeState
-;triggerall = time >= 10
-;trigger1 = command = "WD"
-;value = 30
-;ctrl = 0
-
 [State 200, End]
 type = ChangeState
 trigger1 = command = "FF"
-value = 100
+value = ifelse(pos y < -1, 65, 100)
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
-;triggerall = time >= 5
-trigger1 = command = "back"
-value = 35
+trigger1 = command = "holdback"
+value = 11
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "a"
 value = 290
-ctrl = 1
+ctrl = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = prevstateno != 52 || time > 3
 trigger1 = command = "b"
 value = 900
-ctrl = 1
+ctrl = 0
 
 [State 200, C]
 type = ChangeState
 triggerall = numhelper(3500) = 0
-triggerall = power >=200
-triggerall = prevstateno != 52 || time > 3
+triggerall = power >= 100
 trigger1 = command = "c"
 value = 80000
-
-;[State 200, Dodge]
-;type = ChangeState
-;triggerall = prevstateno != 52 || time > 3
-;trigger1 = command = "x"
-;value = 590
-
-[State 200, End]
-type = ChangeState
-triggerall = time >= 5
-trigger1 = command = "holdup"
-value = 60
-ctrl = 0
-
-[State 200, End]
-type = ChangeState
-trigger1 = command = "FF"
-value = 100
-ctrl = 1
-
-[State 200, End]
-type = ChangeState
-triggerall = time >= 15
-trigger1 = command = "WD"
-value = 30
-ctrl = 0
-
-[State 200, End]
-type = ChangeState
-triggerall = time >= 5
-trigger1 = command = "back"
-value = 105
 
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
-value = 11
+value = ifelse(pos y < -1, 50, 0)
 ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time > 2
+trigger1 = pos y >= 1
+value = 52
+ctrl = 1
+
 
 ;---------------------------------------------------------------------------
 ;Wavedash Cancel
@@ -329,26 +314,37 @@ volumescale = 500
 [State 0, AfterImage]
 type = AfterImage
 triggerall = numhelper(51000) = 0
-trigger1 = time = 0
-time = 5
+trigger1 = AnimElem = 1
+time = 10
 trans = add
 
 [State 0, NotHitBy]
 type = NotHitBy
+triggerall = vel y <= 0
 trigger1 = time = [2, 10]
 value = A, AA
 time = 1
 
 [State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+y = vel y * 0.5
+
+[State 0, VelSet]
 type = VelAdd
 trigger1 = time = 0
-x = const(velocity.run.fwd.x) * 1.85 * 0.6
-y = 0
+x = const(velocity.run.fwd.x) * 1.8 * 0.6
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = [1, 3]
-x = const(velocity.run.fwd.x) * 1.85 * 1.25
+x = const(velocity.run.fwd.x) * 1.8 * 1.25
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = time > 4
+trigger1 = vel x > 1
+y = -vel y * 0.33
 
 [State 0, Explod]
 type = Explod
@@ -373,23 +369,25 @@ ownpal = 0
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 2
+triggerall = pos y < -1 && var(3) = 0
+triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 45
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5
+triggerall = pos y >= -1
 trigger1 = command = "holdup"
 value = 60
 ctrl = 0
-
-;[State 200, End]
-;type = ChangeState
-;triggerall = time >= 10
-;trigger1 = command = "WD"
-;value = 30
-;ctrl = 0
 
 [State 200, End]
 type = ChangeState
 triggerall = time >= 10
 trigger1 = command = "FF"
-value = 100
+value = ifelse(pos y < -1, 65, 100)
 ctrl = 1
 
 [State 200, End]
@@ -404,33 +402,34 @@ type = ChangeState
 triggerall = time >= 2
 trigger1 = command = "a"
 value = 290
-ctrl = 1
+ctrl = 0
 
 [State 200, End]
 type = ChangeState
 triggerall = time >= 2
 trigger1 = command = "b"
 value = 900
-ctrl = 1
+ctrl = 0
 
 [State 200, C]
 type = ChangeState
 triggerall = numhelper(3500) = 0
-triggerall = power >=200
+triggerall = power >= 100
 triggerall = time >= 2
 trigger1 = command = "c"
 value = 80000
 
-;[State 200, Dodge]
-;type = ChangeState
-;triggerall = prevstateno != 52 || time > 3
-;trigger1 = command = "x"
-;value = 590
-
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
-value = 11
+value = ifelse(pos y < -1, 50, 0)
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time > 2
+trigger1 = pos y >= 1
+value = 52
 ctrl = 1
 
 

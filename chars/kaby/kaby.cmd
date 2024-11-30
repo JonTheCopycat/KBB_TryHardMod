@@ -639,7 +639,7 @@ trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ; Burnin'
 [State -1, 21000]
 type = ChangeState
-value = 23000
+value = 25000
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 1"
 Triggerall = statetype = A
@@ -714,7 +714,7 @@ triggerall = var(10) = 0
 triggerall = numhelper(3500) = 0
 Triggerall = statetype != A
 triggerall = command = "SPECIAL 5"
-trigger1 = var(19)  > 0
+triggerall = var(19)  > 0
 Triggerall = power >= 500
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
@@ -770,12 +770,23 @@ Triggerall = statetype != A
 trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
+ ;Wavedash
+[State -1, Wavedash]
+type = ChangeState
+value = 30
+Triggerall =  var(19) != 1 && var(19) != 6
+trigger1 = command = "WD" && command != "NotWD"
+trigger1 = statetype = C || statetype = S
+trigger1 = ctrl
+;---------------------------------------------------------------------------------
 ; Wavedash
 [State -1, Wavedash]
 type = ChangeState
 value = 30
+Triggerall =  var(19) = 1 || var(19) = 6
+triggerall = pos y > -120
 trigger1 = command = "WD" && command != "NotWD"
-trigger1 = statetype = C || statetype = S
+;trigger1 = statetype = C || statetype = S
 trigger1 = ctrl
 
 ;---------------------------------------------------------------------------

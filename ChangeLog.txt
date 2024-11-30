@@ -223,6 +223,21 @@ Yoru:
 Vivienne:
 1. (+) Can now hyperhop out of armor walk.
 
+Korby:
+1. (-) 236A is less active (6f -> 2f)
+2. (-) 236A hitbox made smaller
+3. (-) 236AB does slightly less damage (248 -> 237)
+4. (-) J236A now has a max of 3 hits
+5. (+) 214B actually kills now...
+6. (+) 214B now has chip damage
+7. (+) Korby can now do aerial wavedashes if he has the Glitch or Saito copy ability.
+	* Now has wavedash cancels on aerials
+8. (+) Wavedash B now hits downed opponents
+9. (-) 214A does slightly less damage (155 -> 150)
+10. (+) 214A does more damage on fatal (175 -> 225)
+11. (~) 2 New palletes
+	
+
 
 
 ===================================================================================================================================
