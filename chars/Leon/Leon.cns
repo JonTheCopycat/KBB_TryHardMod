@@ -2094,8 +2094,237 @@ value = 220
 ctrl = 0
 
 ;-------------------------------------------------------------------------------
-; Power Crush
+; Yuh
 [Statedef 290]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 290
+;poweradd = -150
+sprpriority = 2
+
+[State 310, PlaySnd]
+type = PlaySnd
+triggerall = random < 600
+trigger1 = AnimElem = 1
+value = S200,8 + (random<500)*1 
+channel = 0 
+
+[State 200, Woosh]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S1,1
+volumescale = 50
+
+[State 200, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 310, PowerAdd]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+triggerall = numhelper(23002) = 0
+trigger1 = movecontact = 1
+value = 100
+
+[State 310, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S1,2
+volumescale = 50
+
+[State 310, VelSet]
+type = VelSet
+trigger1 = AnimElem = 1
+x = 6
+
+[State 310, VelSet]
+type = VelSet
+trigger1 = AnimElem = 4
+x = 1
+
+[State 330, Sweep - Ground]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+trigger1 = 1
+attr = C, NA
+animtype  = Medium
+hitflag = MAFD
+damage    = 30
+guardflag = MA
+pausetime = 15,15
+guard.pausetime = 12,16
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S0,3
+guardsound = 6,10
+;id = 331
+ground.type = High
+ground.slidetime = 15
+ground.hittime  = 18
+ground.velocity = -4,-4
+air.velocity = -4,-3
+Fall = 1
+Envshake.time = 15
+Fall.recovertime = 30
+;p2stateno = 1000
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+;ground.cornerpush.veloff = -5
+;air.cornerpush.veloff = -4
+
+[State 310, Rapid Kicks Cancel (Grounded)]
+type = ChangeState
+Triggerall = movecontact
+;triggerall = enemynear, statetype = A && (AnimElemTime(7) > 0 || AnimElemTime(8) > 0)
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 500
+trigger1 = command = "SPECIAL 1"
+value = 21000
+
+[State 310, Triple Shock Uppercuts Cancel]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 2"
+value = 22000
+
+[State 310, Tandem Rush Cancel]
+type = ChangeState
+Triggerall = movecontact
+triggerall = var(53) > 7
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+value = 23000
+
+[State 0, Star Breaker Cancel]
+type = ChangeState
+triggerall = var(53) > 30
+triggerall = numhelper(3500) = 0
+triggerall = power >= 1500
+trigger1 = command = "SPECIAL 4"
+value = 24000
+
+[State 310, Leon Montage]
+type = ChangeState
+triggerall = var(53) > 30
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 2000
+trigger1 = command = "SPECIAL 5"
+value = 25000
+
+[State 0, Special Backdash Cancel]
+type = ChangeState
+triggerall = numhelper(51000) = 0
+trigger1 = movecontact
+trigger1 = command = "BB"
+value = 107
+ctrl = 0
+
+[State 200, 66C Cancel]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 250
+triggerall = numhelper(3500) = 0
+trigger1 = command = "FFc"
+value = 450
+
+[State 315, 6C Cancel]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 250
+triggerall = numhelper(9870) = 0 ;Destroyed
+triggerall = map(shatterCount) < 4 ;Shatter Count
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(405) = 0
+triggerall = var(53) > 20
+trigger1 = command = "holdfwd"
+trigger1 = command = "c"
+value = 430
+
+[State 200, 22C Cancel]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 500
+triggerall = numhelper(3500) = 0
+trigger1 = command = "DDc"
+value = 440
+
+[State 315, 2C Cancel]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 500
+triggerall = numhelper(3500) = 0
+trigger1 = command = "holddown"
+trigger1 = command != "holdfwd"
+trigger1 = command != "holdback"
+trigger1 = command = "c"
+value = 420
+
+[State 315, 4C Cancel]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 500
+triggerall = numhelper(3500) = 0
+trigger1 = command != "holddown"
+trigger1 = command != "holdfwd"
+trigger1 = command = "holdback"
+trigger1 = command = "c"
+value = 460
+
+[State 315, 5C Cancel]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 250
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(405) = 0
+triggerall = var(53) > 20
+trigger1 = command != "holddown"
+trigger1 = command != "holdfwd"
+trigger1 = command != "holdback"
+trigger1 = command = "c"
+value = 400
+
+[State 300, 4B Cancel]
+type = ChangeState
+Triggerall = movecontact
+trigger1 = command = "holdback"
+trigger1 = ailevel = 0 && command = "b"
+value = 340
+
+[State 310, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+
+
+;-------------------------------------------------------------------------------
+; Power Crush
+[Statedef 292]
 type    = S
 movetype= A
 physics = S
@@ -3917,7 +4146,7 @@ ctrl = 0
 [State 0, Wavedash Cancel]
 type = ChangeState
 triggerall = anim = 391
-triggerall = movehit
+triggerall = movecontact
 trigger1 = command = "WD" && command != "NotWD"
 value = 35
 

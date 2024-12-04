@@ -18,8 +18,9 @@ _B_B_D_DF
 
 <#f0f000>:COMMAND DASH ATTACKS:</>
 
-Armored Hook								_F_D_DF^A
-	"Leon unleashes a powerful armored hook"
+Left Hook								_F_D_DF^A
+	"Leon attacks with a fast uppercut. Advantagous
+	on block."
 
 Divekick									_F_D_DF^B
 	"Leon does a large overhead kick at
