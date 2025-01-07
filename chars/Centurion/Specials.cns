@@ -1,0 +1,2713 @@
+;===============================================================================
+;----------------------Specials-------------------------------------------------
+;===============================================================================
+
+;===============================================================================
+; Ice Breaker
+;-------------------------------------------------------------------------------
+[Statedef 20000]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 20000
+velset = 0,0
+sprpriority = 1
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno != 23000
+value = -1000
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno = 23000
+value = -500
+
+[State 0, reversalMove]
+type = MapSet
+trigger1 = 1
+map = "reversalMove"
+value = 1
+ignorehitpause = 1
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, enableDHC] ; Enables DHC and disables tag
+type = MapSet
+triggerall = teammode = tag
+trigger1 = 1
+map = "enableDHC"
+value = 1
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = 0
+value = SCA,AA,AP
+time = 26
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 0
+anim = 92006
+time = 15
+sound = 20,0
+pos = 0,-20
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+endcmdbuftime = 7
+
+[State 0, Helper]
+type = Helper
+trigger1 = time = 1
+helpertype = normal ;player
+name = "ice boo"
+ID = 20005
+stateno = 20005
+pos = 0,-40
+postype = p1    ;p2,front,back,left,right
+facing = 1
+ownpal = 0
+supermovetime = 0
+pausemovetime = 0
+inheritJuggle = 1
+keyctrl = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0 && numexplod(622) = 0
+anim = 622
+ID = 622
+pos = 0,-20
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 10
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 1,1
+sprpriority = 1
+removeongethit = 1
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 23000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 1"
+value = 23000
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;===============================================================================
+; Ice Breaker: Ice
+;-------------------------------------------------------------------------------
+[Statedef 20005]
+type    = S
+movetype= A
+physics = N
+juggle  = 1
+ctrl = 0
+anim = 20005
+velset = 0,0
+sprpriority = 5
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, reversalMove]
+type = MapSet
+trigger1 = 1
+map = "reversalMove"
+value = 1
+ignorehitpause = 1
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+x = root,pos x
+y = root,pos y - 20
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 4
+value = S5,2
+volumescale = 200
+persistent = 0
+
+[State 310, Wallbounce]
+type = HitDef
+getpower = 0
+triggerall = !movecontact && AnimElem = 4
+trigger1 = 1
+attr = S, SP
+animtype  = Heavy
+damage    = 15
+Hitflag = MAFD
+guardflag = MA
+pausetime = 0,60
+guard.pausetime = 0,30
+sparkno = 5444
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = S0,3
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = 0,0
+guard.velocity = -2
+airguard.velocity = -3,-2
+air.velocity = 0,0
+forcenofall = 1
+Envshake.time = 5
+kill = 0
+
+[State 310, Wallbounce]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 15
+trigger1 = 1
+attr = S, SP
+animtype  = Heavy
+damage    = 85
+Hitflag = MAFD
+guardflag = MA
+pausetime = 0,80
+guard.pausetime = 0,15
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = S0,3
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = 0,0
+guard.velocity = -2
+airguard.velocity = -3,-2
+air.velocity = 0,0
+forcenofall = 1
+Envshake.time = 15
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 15
+value = S5,0
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 15 && movecontact
+anim = 20010
+ID = 20010
+pos = 0,0
+postype = P2  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 80
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 1,1
+sprpriority = 1
+removeongethit = 1
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = 1
+value = 5
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 0 
+trigger2 = root,movetype = H 
+
+;ignorehitpause = 
+;persistent = 
+
+
+;===============================================================================
+; Spindash
+;-------------------------------------------------------------------------------
+[Statedef 21000]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+;velset = 0,0
+anim = 21000
+sprpriority = 2
+poweradd = -500
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = pos y < 0
+value = 21010
+ctrl = 0
+;anim =
+;ignorehitpause = 
+
+;[State 0, PlaySnd]
+;type = PlaySnd voice vol too low and im too lazy to increase it
+;trigger1 = time = 0
+;value = S21000,1
+;volumescale = 100
+
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, enableDHC] ; Enables DHC and disables tag
+type = MapSet
+triggerall = teammode = tag
+trigger1 = 1
+map = "enableDHC"
+value = 1
+
+[State 0, PosAdd]
+type = VelSet
+trigger1 = AnimElem = 11
+x = 30
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElemTime(12) > 0
+x = 6
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S21000,3
+volumescale = 200
+channel = 3
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = S21000,3
+volumescale = 200
+channel = 3
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 11
+value = S21000,2
+volumescale = 200
+channel = 4
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 1
+anim = 92006
+time = 5
+sound = 20,0
+pos = 0,-20
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+endcmdbuftime = 7
+
+
+[State 21000, Attack]
+type = HitDef
+getpower = 0
+triggerall = time%2 = 0 && AnimElemTime(9) < 0
+trigger1 = 1
+attr = A, SA
+animtype  = Up
+damage    = 5
+hitflag = MAFD
+guardflag = MA
+pausetime = 2,2
+guard.pausetime = 2,2
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-30
+hitsound   = 5,0
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -2,-3
+air.velocity = -2,-2
+guard.velocity = 2
+Fall = 1
+Envshake.time = 20
+fall.recover = 0
+
+[State 21000, Attack]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 11
+trigger1 = 1
+attr = A, SA
+animtype  = Up
+damage    = 50
+hitflag = MAFD
+guardflag = MA
+pausetime = 10,10
+guard.pausetime = 10,10
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-30
+hitsound   = 5,3
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -4,-2
+air.velocity = -4,-2
+guard.velocity = 2
+Fall = 1
+Envshake.time = 20
+fall.recover = 0
+
+[State 21000, Attack]
+type = HitDef
+getpower = 0
+triggerall = time%5 = 0 && AnimElemTime(12) > 0
+trigger1 = 1
+attr = A, SA
+animtype  = Up
+damage    = 10
+hitflag = MAF
+guardflag = MA
+pausetime = 5,5
+guard.pausetime = 5,5
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-30
+hitsound   = 5,1
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -3,-2
+air.velocity = -3,-1
+guard.velocity = 2
+Fall = 1
+Envshake.time = 20
+fall.recover = 0
+
+[State 200, SPECIAL 4 - thingy throw]
+type = ChangeState
+triggerall = time >= 10
+triggerall = prevstateno != [22000,22020]
+triggerall = numhelper(22005) = 0
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 500
+trigger1 = command = "SPECIAL 4"
+value = 22000
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimElem = 12
+value = 21005
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; Spindash End
+[Statedef 21005]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 21005
+sprpriority = 2
+poweradd = 0
+
+[State 200, SPECIAL 4 - thingy throw]
+type = ChangeState
+triggerall = numhelper(22005) = 0
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 500
+trigger1 = command = "SPECIAL 4"
+value = 22000
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+y = 0
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, enableDHC] ; Enables DHC and disables tag
+type = MapSet
+triggerall = teammode = tag
+trigger1 = 1
+map = "enableDHC"
+value = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;===============================================================================
+; Spindash air
+;-------------------------------------------------------------------------------
+[Statedef 21010]
+type    = A
+movetype= A
+physics = A
+juggle  = 0
+ctrl = 0
+;velset = 0,0
+anim = 21010
+sprpriority = 2
+;poweradd = -500
+
+
+;[State 0, PlaySnd]
+;type = PlaySnd voice vol too low and im too lazy to increase it
+;trigger1 = time = 0
+;value = S21000,1
+;volumescale = 100
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+x = -3
+y = -4
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, enableDHC] ; Enables DHC and disables tag
+type = MapSet
+triggerall = teammode = tag
+trigger1 = 1
+map = "enableDHC"
+value = 1
+
+[State 0, PosAdd]
+type = VelSet
+trigger1 = AnimElem = 11
+x = 15
+y = 0
+
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = AnimElemTime(11) > 0
+;y = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S21000,3
+volumescale = 200
+channel = 3
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = S21000,3
+volumescale = 200
+channel = 3
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 11
+value = S21000,2
+volumescale = 200
+channel = 4
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 1
+anim = 92006
+time = 5
+sound = 20,0
+pos = 0,-20
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+endcmdbuftime = 7
+
+
+[State 21000, Attack]
+type = HitDef
+getpower = 0
+triggerall = time%2 = 0 && AnimElemTime(9) < 0
+trigger1 = 1
+attr = A, SA
+animtype  = Up
+damage    = 5
+hitflag = MAFD
+guardflag = MA
+pausetime = 2,2
+guard.pausetime = 2,2
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-30
+hitsound   = 5,0
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 2,-3
+air.velocity = 2,-2
+guard.velocity = 2
+Fall = 1
+Envshake.time = 20
+fall.recover = 0
+
+[State 21000, Attack]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 11
+trigger1 = 1
+attr = A, SA
+animtype  = Up
+damage    = 50
+hitflag = MAFD
+guardflag = MA
+pausetime = 10,10
+guard.pausetime = 10,10
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-30
+hitsound   = 5,3
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -4,-2
+air.velocity = -4,-2
+guard.velocity = 2
+Fall = 1
+Envshake.time = 20
+fall.recover = 0
+
+[State 21000, Attack]
+type = HitDef
+getpower = 0
+triggerall = time%5 = 0 && AnimElemTime(13) > 0
+trigger1 = 1
+attr = A, SA
+animtype  = Up
+damage    = 10
+hitflag = MAF
+guardflag = MA
+pausetime = 5,5
+guard.pausetime = 5,5
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-30
+hitsound   = 5,1
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -3,-2
+air.velocity = -3,-1
+guard.velocity = 2
+Fall = 1
+Envshake.time = 20
+fall.recover = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimElem = 13
+value = 50
+ctrl = 1
+
+
+;===============================================================================
+; Karambit Rekka
+;-------------------------------------------------------------------------------
+[Statedef 22000]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 22000
+sprpriority = 2
+poweradd = 0
+
+[State 0, staleMovesException] ;Negates stale moves
+type = MapSet
+trigger1 = 1
+map = "staleMovesException"
+value = 1
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno != 22020 && prevstateno != [21000,21005]
+value = -1000
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno = [21000,21005]
+value = -500
+
+[State 0, Juggle Map]
+type = MapSet
+trigger1 = time = 0 && prevstateno != 22020
+map = "used2a"
+value = 0
+persistent = 0
+
+[State 0, Juggle Map]
+type = MapSet
+trigger1 = time = 0 && prevstateno = 22020
+map = "used2a"
+value = 1
+persistent = 0
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 1 && prevstateno != 22020
+anim = 92006
+time = 10
+sound = 20,0
+pos = 0,0
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+endcmdbuftime = 7
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = AnimElem = 3
+x = 7
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact && prevstateno != 22020
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 20
+hitflag = MAF
+guardflag = MA
+pausetime = 5,10
+guard.pausetime = 5,10
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,3
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2
+air.velocity = -2,-1
+Envshake.time = 5
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact && prevstateno = 22020
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 20
+hitflag = MAFD
+guardflag = MA
+pausetime = 5,10
+guard.pausetime = 5,10
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,3
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2
+air.velocity = -2,-1
+Envshake.time = 5
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "b" && command = "holddown"
+trigger1 = AnimElemTime(4) > 0
+value = 22010
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "a" && command = "holddown"
+trigger1 = AnimElemTime(4) > 0
+value = 22020
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "b"
+trigger1 = AnimElemTime(4) > 0
+value = 22005
+ctrl = 1
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 21000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 3"
+value = 21000
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y = 0
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y < 0
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+;===============================================================================
+; Karambit Rekka pt2
+;-------------------------------------------------------------------------------
+[Statedef 22005]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 22005
+sprpriority = 2
+poweradd = 0
+
+[State 0, staleMovesException] ;Negates stale moves
+type = MapSet
+trigger1 = 1
+map = "staleMovesException"
+value = 1
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = AnimElem = 3
+x = 7
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 20
+hitflag = MAFD
+guardflag = MA
+pausetime = 5,10
+guard.pausetime = 5,10
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,3
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2
+air.velocity = -2,1
+Envshake.time = 5
+down.bounce = 1
+fall.yvelocity = -4
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "a"
+trigger1 = AnimElemTime(3) > 0
+value = 22020
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "b"
+trigger1 = AnimElemTime(3) > 0
+value = 22010
+ctrl = 1
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 21000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 3"
+value = 21000
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y = 0
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y < 0
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+;===============================================================================
+; Karambit Rekka pt3
+;-------------------------------------------------------------------------------
+[Statedef 22010]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 22010
+sprpriority = 2
+poweradd = 0
+
+[State 0, staleMovesException] ;Negates stale moves
+type = MapSet
+trigger1 = 1
+map = "staleMovesException"
+value = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 2
+x = 3
+y = -4
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = AnimElem = 2
+statetype = A       ;S,A,C,L
+movetype = A        ;I,A,H
+physics = A         ;A,C,S,N
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 20
+hitflag = MAFD
+guardflag = MA
+pausetime = 10,10
+guard.pausetime = 10,10
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,3
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2,-3
+air.velocity = -2,-2
+Envshake.time = 5
+down.bounce = 1
+fall.yvelocity = -4
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "b"
+trigger1 = AnimElemTime(2) > 0
+value = 22015
+ctrl = 1
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 21000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 3"
+value = 21000
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y = 0
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y < 0
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+;===============================================================================
+; Karambit Rekka pt4
+;-------------------------------------------------------------------------------
+[Statedef 22015]
+type    = S
+movetype= A
+physics = N
+juggle  = 0
+ctrl = 0
+anim = 22015
+sprpriority = 2
+poweradd = 0
+
+[State 0, staleMovesException] ;Negates stale moves
+type = MapSet
+trigger1 = 1
+map = "staleMovesException"
+value = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 1
+x = 1
+y = -3
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = 1 
+y = 0.44
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = HA
+pausetime = 10,10
+guard.pausetime = 10,10
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,2
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+down.bounce = 1
+fall.yvelocity = -4
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2,3
+air.velocity = -2,3
+Envshake.time = 5
+fall = 1
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 21000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 3"
+value = 21000
+
+[State 200, End]
+type = ChangeState
+trigger1 = pos y >= 0
+value = 21005
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; Spindash End
+[Statedef 22016]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 21005
+sprpriority = 2
+poweradd = 0
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 21000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 3"
+value = 21000
+
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+y = 0
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, enableDHC] ; Enables DHC and disables tag
+type = MapSet
+triggerall = teammode = tag
+trigger1 = 1
+map = "enableDHC"
+value = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+;===============================================================================
+; Karambit Rekka Low
+;-------------------------------------------------------------------------------
+[Statedef 22020]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 22020
+sprpriority = 2
+poweradd = 0
+
+[State 0, staleMovesException] ;Negates stale moves
+type = MapSet
+trigger1 = 1
+map = "staleMovesException"
+value = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 3
+x = 5
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = LA
+pausetime = 10,10
+guard.pausetime = 10,10
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,2
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2,3
+air.velocity = -2,3
+Envshake.time = 5
+down.bounce = 1
+fall.yvelocity = -4
+fall = 1
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "b" && command = "holddown"
+trigger1 = AnimElemTime(4) > 0
+value = 22010
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "b" && map(used2a) = 0
+trigger1 = AnimElemTime(3) > 0
+value = 22025
+ctrl = 1
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 21000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 3"
+value = 21000
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;===============================================================================
+; Karambit Rekka
+;-------------------------------------------------------------------------------
+[Statedef 22025]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 22000
+sprpriority = 2
+poweradd = 0
+
+[State 0, staleMovesException] ;Negates stale moves
+type = MapSet
+trigger1 = 1
+map = "staleMovesException"
+value = 1
+
+[State 0, Juggle Map]
+type = MapSet
+trigger1 = time = 0
+map = "used2a"
+value = 1
+persistent = 0
+
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = AnimElem = 3
+x = 7
+
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 20
+hitflag = MAFD
+guardflag = MA
+pausetime = 5,10
+guard.pausetime = 5,10
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,3
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2
+air.velocity = -2,-1
+Envshake.time = 5
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "b" && command = "holddown"
+trigger1 = AnimElemTime(4) > 0
+value = 22010
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "a" && command = "holddown"
+trigger1 = AnimElemTime(4) > 0
+value = 22035
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "b"
+trigger1 = AnimElemTime(4) > 0
+value = 22030
+ctrl = 1
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 21000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 3"
+value = 21000
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y = 0
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y < 0
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+;===============================================================================
+; Karambit Rekka pt2
+;-------------------------------------------------------------------------------
+[Statedef 22030]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 22005
+sprpriority = 2
+poweradd = 0
+
+[State 0, staleMovesException] ;Negates stale moves
+type = MapSet
+trigger1 = 1
+map = "staleMovesException"
+value = 1
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = AnimElem = 3
+x = 7
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 20
+hitflag = MAFD
+guardflag = MA
+pausetime = 5,10
+guard.pausetime = 5,10
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,3
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2
+air.velocity = -2,1
+Envshake.time = 5
+down.bounce = 1
+fall.yvelocity = -4
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "a"
+trigger1 = AnimElemTime(3) > 0
+value = 22035
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "b"
+trigger1 = AnimElemTime(3) > 0
+value = 22010
+ctrl = 1
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 21000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 3"
+value = 21000
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y = 0
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = pos y < 0
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+;===============================================================================
+; Karambit Rekka Low
+;-------------------------------------------------------------------------------
+[Statedef 22035]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 22020
+sprpriority = 2
+poweradd = 0
+
+[State 0, staleMovesException] ;Negates stale moves
+type = MapSet
+trigger1 = 1
+map = "staleMovesException"
+value = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 3
+x = 5
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 10
+hitflag = MAFD
+guardflag = LA
+pausetime = 10,10
+guard.pausetime = 10,10
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,2
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2,3
+air.velocity = -2,3
+Envshake.time = 5
+down.bounce = 1
+fall.yvelocity = -4
+fall = 1
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "b" && command = "holddown"
+trigger1 = AnimElemTime(4) > 0
+value = 22010
+ctrl = 1
+
+;[State 200, End]
+;type = ChangeState
+;triggerall = command = "b" && map(used2a) = 0
+;trigger1 = AnimElemTime(3) > 0
+;value = 22025
+;ctrl = 1
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 21000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 3"
+value = 21000
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+;Ice Wall
+;-------------------------------------------------------------------------------
+[Statedef 23000]
+type    = C
+movetype= A
+physics = C
+juggle  = 0
+ctrl = 0
+anim = 23000
+velset = 0,0
+sprpriority = 2
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno != [20000,20005]
+value = -1000
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno = [20000,20005]
+value = -500
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, enableDHC] ; Enables DHC and disables tag
+type = MapSet
+triggerall = teammode = tag
+trigger1 = movecontact
+map = "enableDHC"
+value = 1
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = AnimElem = 2
+x = -6
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 1
+anim = 92006
+time = 10
+sound = 20,0
+pos = 0,-20
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+endcmdbuftime = 7
+
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0 && numexplod(622) = 0
+anim = 622
+ID = 622
+pos = 0,-20
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = .8,.8
+sprpriority = 1
+removeongethit = 1
+
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimTime = 0
+helpertype = normal ;player
+name = "Power Delay"
+ID = 56000
+stateno = 56000
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 0
+supermovetime = 0
+pausemovetime = 0
+
+[State 0, Helper]
+type = Helper
+trigger1 = time = 10 ;MATH
+helpertype = normal ;player
+name = "Ice Wall/Spike Or Whatever, Kill Yourself!!!!"
+ID = 23001
+stateno = 23001
+pos = 20,0
+postype = p1   ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+size.height = 180
+supermovetime = 0
+pausemovetime = 0
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 20000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 2"
+value = 20000
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+;Ice Wall/Spike Or Whatever!!!!!
+[Statedef 23001]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 23001
+velset = 0,0
+attackdist = 25
+sprpriority = 2
+poweradd = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0
+anim = 23002
+ID = 23002
+pos = 0,0
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 240
+removetime = 240
+supermovetime = 0
+pausemovetime = 0
+scale = 1.75,1.75
+sprpriority = 3
+removeongethit = 1
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = moveguarded
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = movehit
+;ignorehitpause = 
+;persistent =
+ 
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = 621
+ID = 621
+pos = 0,10
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 1
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 1.25,1.25
+sprpriority = 2
+removeongethit = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S5,0
+volumescale = 100
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 4 && !movecontact
+trigger1 = 1
+attr = A, NP
+animtype  = Light
+damage    = 30
+hitflag = MAFD
+guardflag = LA
+pausetime = 0,5
+guard.pausetime = 0,5
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,2
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -1,-8.5
+air.velocity = -1,-8.5
+Fall = 1
+fall.recover = 0
+Envshake.time = 20
+Fall.recovertime = 150
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = root,animelem = 5 && root,stateno = 23000
+value = 23002
+ctrl = 0
+
+[State 200, End]
+type = Destroyself
+trigger1 = Animtime = 0
+
+;-------------------------------------------------------------------------------
+;Ice Wall/Spike Or Whatever!!!!!
+[Statedef 23002]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 23001
+velset = 0,0
+attackdist = 60
+sprpriority = 2
+poweradd = 0
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = 1
+value = 23001
+elem = 5
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S21000,0
+volume = 100
+channel = 4
+loop = 1
+pan = 1
+;abspan = 
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = 1
+x = 2
+y = 0
+
+
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = moveguarded
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = movehit
+;ignorehitpause = 
+;persistent =
+ 
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+trigger1 = !movecontact
+attr = A, NP
+animtype  = Light
+damage    = 60
+guardflag = MA
+pausetime = 15,15
+guard.pausetime = 0,5
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,3
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2,-5
+air.velocity = -2,-4
+Fall = 1
+fall.recover = 0
+Envshake.time = 20
+Fall.recovertime = 150
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = frontedgebodydist <= -30 || root,stateno = [5000,5150]|| movecontact
+id = 23002
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Explod]
+type = Explod
+trigger1 = root,stateno = [5000,5150]|| movecontact
+anim = 621
+ID = 621
+pos = 0,0
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 1
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 1.5,1.5
+sprpriority = 2
+removeongethit = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = root,stateno = [5000,5150]|| movecontact
+value = S5,0
+volumescale = 100
+
+[State 0, StopSnd]
+type = StopSnd
+trigger1 = frontedgebodydist <= -30 || root,stateno = [5000,5150]|| movecontact
+channel = 4
+;ignorehitpause = 
+;persistent = 
+
+[State 200, End]
+type = Destroyself
+trigger1 = frontedgebodydist <= -30 || root,stateno = [5000,5150] || movecontact
+
+;===============================================================================
+; "grabby":
+;-------------------------------------------------------------------------------
+[Statedef 24000]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 24000
+velset = 0,0
+sprpriority = 2
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno != 26000
+value = -1500
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno = 26000
+value = -500
+
+[State 0, I'm gonna do an unblockable attack!]
+type = Explod
+trigger1 = time = 1
+anim = F30000
+id = 30000
+pos = -30 + (cond(BackEdgeBodyDist <= 30 || FrontEdgeBodyDist <= 30, 60, 0)),-50
+postype = p1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+pausemovetime = 999
+supermovetime = 999
+ontop = 0
+shadow = 0,0,0
+removeongethit = 0
+ignorehitpause = 1
+facing = facing
+vfacing = 1
+scale = 0.6,0.6
+sprpriority = 5
+removetime = -2
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 1
+x = -3
+y = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 5
+x = 7.5
+y = 0
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 1
+anim = 92006
+time = 10
+sound = 20,0
+pos = 0,-20
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+endcmdbuftime = 7
+
+;[State 0, TargetBind]
+;type = TargetBind
+;trigger1 = movecontact
+;time = 1
+;id = -1
+;pos = 40,0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+triggerall = enemy,stateno != 150 && enemy,stateno != 151 && enemy,stateno != 152 && enemy,stateno != 153 && enemy,stateno != 155 && enemy,stateno != 156
+trigger1 = enemy,anim != 40 && P2statetype != A
+trigger2 = P2MoveType = H
+attr = S, HT
+animtype  = Heavy
+damage    = 10
+hitflag = MAFD
+pausetime = 0,100
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S4,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 0,0
+air.velocity = -0,0
+Fall = 1
+Envshake.time = 20
+fall.recover = 0
+kill = 0
+p2facing = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = movecontact
+trigger1 = Time = 32
+value = 24500
+ctrl = 1
+
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = AnimTime = 0
+x = 8
+y = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 26000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 6"
+value = 26000
+
+;===============================================================================
+; "grabby twwo":
+;-------------------------------------------------------------------------------
+[Statedef 24500]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 24500
+sprpriority = 2
+poweradd = 0
+
+
+[State 200, Damage Proration Set]
+type = VarSet
+trigger1 = AnimElem = 19 && var(11) > 60
+v = 11
+ignorehitpause = 1
+value = 60
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+
+[State 0, enableDHC] ; Enables DHC and disables tag
+type = MapSet
+triggerall = teammode = tag
+trigger1 = 1
+map = "enableDHC"
+value = 1
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimTime = 0
+helpertype = normal ;player
+name = "Power Delay"
+ID = 56000
+stateno = 56000
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 0
+supermovetime = 0
+pausemovetime = 0
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = !movecontact
+time = 1
+id = -1
+pos = 40,0
+
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 0
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElem = 6
+helpertype = normal ;player
+name = "ice boo"
+ID = 25000
+stateno = 25000
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+ownpal = 0
+supermovetime = 0
+pausemovetime = 0
+inheritJuggle = 1
+keyctrl = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 4
+trigger1 = 1
+attr = S, SA
+animtype  = Heavy
+damage    = 20
+kill = 0 
+hitflag = MAFD
+pausetime = 18,10
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -1,-12
+air.velocity = -1,-12
+Fall = 1
+Envshake.time = 20
+fall.recover = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 12
+trigger1 = 1
+attr = S, SA
+animtype  = Heavy
+damage    = 25
+kill = 0 
+hitflag = MAFD
+pausetime = 10,10
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,3
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = 2
+air.velocity = 2,-2
+Fall = 0
+Envshake.time = 20
+fall.recover = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 16
+trigger1 = 1
+attr = S, SA
+animtype  = Heavy
+damage    = 25
+kill = 0 
+hitflag = MAFD
+pausetime = 10,20
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,3
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -2,4
+air.velocity = -2,4
+down.bounce = 1
+fall.yvelocity = -8
+Fall = 1
+Envshake.time = 20
+fall.recover = 0
+
+[State -2,Zoom] ; THX
+type= Zoom
+trigger1= AnimElemTime(27) >= 0 && AnimElemTime(28) <= 0
+scale = 1.5 ; zoom-in scale
+lag = 0.3 ; zoom-in delay timing
+stagebound = 1 
+pos = (parent, pos X + enemy, pos X) / 4,(parent, pos Y + enemy, pos Y) / 4 ; position of the zoom-in, currently follows the center of P1 and P2's position
+ignorehitpause = 1
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = AnimElem = 12 || AnimElem = 16
+x = 5
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = AnimElem = 19 || AnimElem = 21
+x = -4
+
+;[State 0, ChangeAnim]
+;type = ChangeAnim
+;trigger1 = AnimElem = 10
+;value = 24500
+;elem = 12
+;;ignorehitpause = 
+;persistent = 0
+
+;[State 0, ChangeAnim]
+;type = ChangeAnim
+;trigger1 = time >= 145 && p2dist x = [-65,65]
+;value = 24500
+;elem = 21
+;;ignorehitpause = 
+;persistent = 0
+
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 27
+trigger1 = 1
+attr = S, SA
+animtype  = Heavy
+damage    = 225
+hitflag = MAFD
+pausetime = 30,30
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -8,0
+air.velocity = -8,0
+Fall = 1
+kill = 0
+Envshake.time = 20
+fall.recover = 0
+
+[State 0, Juggle Map]
+type = MapSet
+trigger1 = AnimElem = 27
+map = "juggle"
+value = 100
+persistent = 0
+
+[State 0, TargetLifeAdd]
+type = TargetLifeAdd
+trigger1 = AnimElem = 28
+value = -1
+kill = 1
+;ignorehitpause = 
+;persistent = 
+
+[State 200, Is he dead?]
+type = ChangeState
+Trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != 26000
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 6"
+value = 26000
+
+
+;----------------------------------===============================================================================
+; grabby ice
+;-------------------------------------------------------------------------------
+[Statedef 25000]
+type    = S
+movetype= A
+physics = N
+juggle  = 0
+ctrl = 0
+anim = 25000
+velset = 0,0
+sprpriority = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = movecontact
+value = S5,2
+volumescale = 200
+persistent = 0
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = moveguarded
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = movehit
+;ignorehitpause = 
+;persistent = 
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = pos y >= 0
+y = 0
+
+[State 200, Gravity]
+type = VelAdd
+trigger1 = pos y < 0
+y = 0.44
+
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = time < 30
+x = enemy,pos x
+y = enemy,pos y
+
+[State 0, PosSet]
+type = VelSet
+trigger1 = time > 30  && time <= 35
+x = 0
+y = 0
+
+
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = movehit
+time = 120
+id = -1
+pos = 0,-10
+;ignorehitpause = 
+persistent =  0
+;
+;[State 0, BindToTarget]
+;type = BindToTarget
+;trigger1 = movehit && time > 60
+;time = 1
+;ID = -1
+;pos = 0, 0, Foot ;Mid, Head
+;ignorehitpause = 
+;pos = 0, 0, Foot ;Mid, Head
+;ignorehitpause = 
+;persistent =
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = movehit && time > 30
+value = 25000
+elem = 15
+;ignorehitpause = 
+;persistent = 
+
+[State 310, Wallbounce]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, SP
+animtype  = Heavy
+damage    = 10
+Hitflag = MAFD
+guardflag = MA
+pausetime = 0,80
+guard.pausetime = 0,19
+sparkno = 046897856
+guard.sparkno = 13000
+sparkxy = -9,-30
+hitsound   = S0,3
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 1
+ground.hittime  = 1
+forcenofall = 1
+guard.velocity = -2
+airguard.velocity = 0,0
+kill = 0
+Envshake.time = 10
+
+[State 0, Explod]
+type = Explod
+trigger1 = root,AnimElem = 27
+anim = 621
+ID = 621
+pos = 0,0
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 1
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 1,1
+sprpriority = 2
+removeongethit = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = root,AnimElem = 27
+value = S5,0
+volumescale = 100
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = animtime = 0
+trigger2 = root,movetype = H
+trigger3 = root,AnimElem = 27
+trigger4 = enemy,movetype != H && time > 40
+
+;===============================================================================
+; Ice Shield Summon
+;-------------------------------------------------------------------------------
+[Statedef 26000]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 26005
+velset = 0,0
+sprpriority = 2
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno != [24000,24500]
+value = -1000
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno = [24000,24500]
+value = -500
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = Time = 0
+anim = 92006
+time = 10
+sound = 20,0
+pos = 0,-20
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+endcmdbuftime = 7
+
+[State 0, Helper]
+type = Helper
+trigger1 = time = 0 ;MATH
+helpertype = normal ;player
+name = "ice shield"
+ID = 26005
+stateno = 26005
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+
+[State 200, SPECIAL 2 - CLONE EVADE]
+type = ChangeState
+triggerall = prevstateno != [24000,24500]
+Triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+triggerall = power >= 500
+trigger1 = command = "SPECIAL 5"
+value = 24000
+
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;===============================================================================
+; Ice Shield
+;-------------------------------------------------------------------------------
+[Statedef 26005]
+type    = S
+movetype= I
+physics = S
+juggle  = 0
+ctrl = 0
+anim = 26000
+velset = 0,0
+sprpriority = 7
+
+[State 0, HitOverrideCheck]
+type = RootMapSet
+trigger1 = 1
+map = "hitOverride"
+value = 1
+
+[State 0, VarSet]
+type = ParentVarSet
+trigger1 = time >= 34 && numhelper(26005) > 0
+v = 18    ;fv = 10
+value = 1
+
+
+[State 0, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT      ;SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+stateno = 26006
+time = 1
+ignorehitpause = 1
+;persistent = 
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1 
+;flag = Intro
+;flag2 = Invisible
+;flag3 = RoundNotOver
+;ignorehitpause = 
+;persistent = 
+;-----------------------
+;flag = NoBarDisplay
+;flag = NoBG
+;flag = NoFG
+;flag = NoStandGuard
+;flag = NoCrouchGuard
+;flag = Noairguard
+flag = Noautoturn
+;flag = Nojugglecheck
+;flag = NoKOSnd
+;flag = NoKOSlow
+;flag = NoShadow
+;flag = GlobalNoShadow
+;flag = NoMusic
+;flag = NoWalk
+;flag = TimerFreeze
+;flag = Unguardable
+
+
+[State 0, BindToRoot]
+type = BindToRoot
+trigger1 = 1
+time = 1
+facing = 0
+pos = 0,8
+;ignorehitpause = 
+;persistent = 
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = time >= 34
+value = 26000
+elem = 17
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = root,movetype = H  || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
+value = S5,0
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
+anim = 621
+ID = 622
+pos = 0,-20
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 10
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 1,1
+sprpriority = 1
+removeongethit = 1
+
+[State 0, VarSet]
+type = ParentVarSet
+trigger1 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
+v = 18    ;fv = 10
+value = 0
+
+
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger2 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
+trigger1 = animtime = 0
+
+;===============================================================================
+; Ice Shield Shatter!!!!!
+;-------------------------------------------------------------------------------
+[Statedef 26006]
+type    = S
+movetype= H
+physics = S
+juggle  = 0
+ctrl = 0
+velset = 0,0
+sprpriority = 7
+
+[State 0, BindToRoot]
+type = BindToRoot
+trigger1 = 1
+time = 1
+facing = 0
+pos = 0,8
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = 1
+value = 26006
+elem = 17
+;ignorehitpause = 
+;persistent = 
+
+[State 0, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT      ;SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+stateno = 26006
+time = 1
+ignorehitpause = 1
+;persistent = 
+
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = gethitvar(hitshaketime) = 0 || (enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831 || enemy,stateno = 50000 || enemy,stateno = 54000)
+value = 26007
+ctrl = 0
+
+
+;===============================================================================
+; WAIT!!!!!, 
+;-------------------------------------------------------------------------------
+[Statedef 26007]
+type    = S
+movetype= H
+physics = S
+juggle  = 0
+ctrl = 0
+velset = 0,0
+sprpriority = 7
+
+[State 0, BindToRoot]
+type = BindToRoot
+trigger1 = 1
+time = 1
+facing = 0
+pos = 0,8
+
+[State 0, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT      ;SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+stateno = 26006
+time = 1
+ignorehitpause = 1
+;persistent = 
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = 1
+value = 26006
+elem = 17
+;ignorehitpause = 
+;persistent = 
+
+[State 0, HitOverrideCheck]
+type = RootMapSet
+trigger1 = time = 3
+map = "hitOverride"
+value = 0
+
+[State 0, VarSet]
+type = ParentVarSet
+trigger1 = time = 3
+v = 18    ;fv = 10
+value = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 3
+value = S5,0
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 3
+anim = 621
+ID = 622
+pos = 0,-20
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 10
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 1,1
+sprpriority = 1
+removeongethit = 1
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = time = 3
