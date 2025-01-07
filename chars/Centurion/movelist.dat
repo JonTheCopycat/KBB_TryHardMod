@@ -1,7 +1,7 @@
 <#f0f000>:PASSIVE!:</>
 Special Transition
 	"Centurion can transition from 5C to 2C or
-	 vice versa."
+	 vice versa once."
 
 Super Transition
 	"Centurion can transition from the same
@@ -31,31 +31,31 @@ Chuck		 						_F_D_DF^C
 <#f0f000>:EX ATTACKS!:</>
 
 Ice Step (1/4 Bar)								^C
-	"Centurion steps forward, breaking ice."
+	"Centurion steps forward, breaking ice.
+	Dash Cancellable."
 
 Ice Shard (1/4 Bar)				_D^C
 	"Centurion shoots multiple ice shards."
 
-Ice Launch (1/2 Bar)				_AIR^C
-	"Centurion propels himself forward by
-	breaking the ice that surrounds him.
+Ice Chuck (1/2 Bar)				_AIR^C
+	"Centurion chucks a ball of ice.
 
-Ice Slinger (1/4 Bar)				_AIR_D^C
-	"Centurion slings an ice beam that explodes 
-	once hitting the ground."
+Ice Divekick (1/4 Bar)				_AIR_D^C
+	"Centurion slams to the ground, encased
+	in ice."
 
 <#f0f000>:STAR STRIKES!:</>
 
-Ice Wall (1 Bars)					_D_DF_F^A
+Ice Wall (1 Bar)					_D_DF_F^A
 	"Centurion creates an ice spike, and
 	kicks it forward."
 
 Ice Breaker (1 Bar)					_D_DB_B^A
-	"Centurion surrounds himself with ice, then
+	"Centurion encases himself with ice, then
 	breaks it."
 
 Spindash (1/2 Bar, _AIR OK)    	_D_DF_F^B
-	"ion got a good name for this yet."
+	"Centurion dashes forward."
 
 Karambit Rekka (1 Bar)		_D_DB_B^B
 	"Centurion slashes with his Karambits."

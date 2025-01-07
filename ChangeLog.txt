@@ -5,6 +5,8 @@
 
 System changes, Character Improvements, and Revamps to the Modded Guest Characters. This update should make the experience much smoother and fairer.
 
+New Character: Centurion
+
 Universal:
 1. All Standard Wavedashes now are split between a normal version and a Cancel verion.
 * Normal version has less restrictions than before and no longer has a delayed block when pressing back.
