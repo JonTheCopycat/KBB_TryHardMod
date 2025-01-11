@@ -15,6 +15,30 @@ Leon:
 2. (~) No longer able to fastfall during 214A
 
 
+Junichi:
+--Kicks--
+1. (+) Time to backdash out of backturned after 4c reduced (f11 -> f6)
+2. (+) 5c advantage on block increased (+0 -> +2)
+3. (-) Backturned 5b recovery increased slightly.
+
+--Punch--
+1. (+) 236B: Increased Activation Radius to improve consistency.
+
+--Baton
+1. (+) Time to jump, dash, and backdash after entering Ready stance reduced to f9 (from f13, f10, and f13 respectively)
+2. (+) Ready stance moves can now be performed at the same timing as peekaboo stance (from f4 to f3)
+3. (+) 5c: Blockstun increased
+	* Knockback increased to improve combo consistency.
+4. (~) Baton j.5a move replaced:
+	* More horizontal reach, less all-around coverage.
+	* Startup reduced(f10 -> f7)
+5. (+) New move: Baton j.5aa.
+6. (+) j.5c.a: Startup reduced (f8 -> f7).
+7. (+) j.5c.b: Startup reduced (f8 -> f7).
+	* Hitbox adjusted.
+8. (+) 236B: Startup nerf reverted. (f8 -> f6)
+
+
 
 ===================================================================================================================================
 |-----------------------------------------------------/

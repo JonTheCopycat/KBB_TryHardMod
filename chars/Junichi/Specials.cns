@@ -1775,7 +1775,7 @@ ownpal = 1
 type = ChangeState
 Triggerall = time >= 12
 triggerall = numhelper(3500) = 0
-trigger1 = p2bodydist x <= 35 && p2bodydist x >= 0
+trigger1 = p2bodydist x <= 38 && p2bodydist x >= -10
 trigger1 = abs(p2bodydist y) <= 70
 value = 22015
 
