@@ -2148,15 +2148,24 @@ trigger1 = AnimElem = 1
 value = S1,2
 volumescale = 50
 
-[State 310, VelSet]
-type = VelSet
-trigger1 = AnimElem = 1
-x = 6
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = AnimElem = 2, >= 0 && AnimElem = 7, < 0
+value = A, NA, SA
+value2 = SCA, NP, SP
+time = 1
+;ignorehitpause = 
+;persistent = 
 
 [State 310, VelSet]
 type = VelSet
-trigger1 = AnimElem = 4
-x = 1
+trigger1 = AnimElem = 2, >= 0 && AnimElem = 6, < 0
+x = 8
+
+[State 310, VelSet]
+type = VelSet
+trigger1 = AnimElem = 9
+x = 2
 
 [State 330, Sweep - Ground]
 type = HitDef
@@ -2170,7 +2179,7 @@ hitflag = MAFD
 damage    = 30
 guardflag = MA
 pausetime = 15,15
-guard.pausetime = 12,16
+guard.pausetime = 14,10
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2190,6 +2199,12 @@ guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 ;ground.cornerpush.veloff = -5
 ;air.cornerpush.veloff = -4
+
+[State 0, Wavedash Cancel]
+type = ChangeState
+triggerall = movecontact
+trigger1 = command = "WD" && command != "NotWD"
+value = 35
 
 [State 310, Rapid Kicks Cancel (Grounded)]
 type = ChangeState

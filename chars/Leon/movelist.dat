@@ -18,13 +18,14 @@ _B_B_D_DF
 
 <#f0f000>:COMMAND DASH ATTACKS:</>
 
-Left Hook								_F_D_DF^A
-	"Leon attacks with a fast uppercut. Advantagous
-	on block."
+Rolling Hook								_F_D_DF^A
+	"Leon rolls forward, dodging attacks and
+	hitting the opponent with a strong hook
+	afterwards."
 
 Divekick									_F_D_DF^B
 	"Leon does a large overhead kick at
-	the opponents head"
+	the opponents head."
 
 Star Platinum: Platinum Fist (1/4 Bar)		_F_D_DF^C
 	"In a split second, Star Platinum Launches

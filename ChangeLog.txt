@@ -1,11 +1,27 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.7.4 Changes:                    /
+|---------------------------------------------------/
+
+A new surge in active means that some more changes and polish are overdue. This update aims to replacing some of the less well liked wavedash moves and to uplift some characters that have been struggling.
+
+New Characters: Centurion?, Bubbla?
+
+Leon:
+1. (-) Wavedash A has been replaced:
+	* Instead of armor, it is partially invul to aerial attacks and all projectiles during the roll.
+	* Startup drastically increased, reach drastically increased.
+	* Wavedash cancellable.
+2. (~) No longer able to fastfall during 214A
+
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
 | Try-Hard Version 0.7.3 Changes:                    /
 |---------------------------------------------------/
 
 System changes, Character Improvements, and Revamps to the Modded Guest Characters. This update should make the experience much smoother and fairer.
-
-New Character: Centurion
 
 Universal:
 1. All Standard Wavedashes now are split between a normal version and a Cancel verion.
