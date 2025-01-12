@@ -1,11 +1,12 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
-| Try-Hard Version 0.7.4 Changes:                    /
+| Try-Hard Version 0.7.3a Hotfix Changes:            /
 |---------------------------------------------------/
 
 A new surge in active means that some more changes and polish are overdue. This update aims to replacing some of the less well liked wavedash moves and to uplift some characters that have been struggling.
 
-New Characters: Centurion?, Bubbla?
+Universal:
+1. Air counter is now unblockable.
 
 Leon:
 1. (-) Wavedash A has been replaced:
@@ -14,7 +15,7 @@ Leon:
 	* Wavedash cancellable.
 2. (~) No longer able to fastfall during 214A
 
-
+h 
 Junichi:
 --Kicks--
 1. (+) Time to backdash out of backturned after 4c reduced (f11 -> f6)

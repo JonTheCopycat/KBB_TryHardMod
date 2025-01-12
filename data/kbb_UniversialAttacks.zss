@@ -854,7 +854,7 @@ if !movecontact {
         animtype: Heavy;
         damage: 15;
         Hitflag: MAF;
-        guardflag: HA;
+        guardflag: ;
         pausetime: 12,12;
         sparkno: 14000;
         guard.sparkno: 13000;
@@ -972,7 +972,7 @@ if !movecontact {
         animtype: Heavy;
         damage: 4;
         Hitflag: MAF;
-        guardflag: HA;
+        guardflag: ;
         pausetime: 5,5;
         sparkno: 14000;
         guard.sparkno: 13000;
@@ -1078,7 +1078,7 @@ if !movecontact {
         animtype: Heavy;
         damage: 2;
         Hitflag: MAF;
-        guardflag: HA;
+        guardflag: ;
         pausetime: 3,3;
         sparkno: 14000;
         guard.sparkno: 13000;
