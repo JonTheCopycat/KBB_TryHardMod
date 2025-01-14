@@ -166,7 +166,7 @@ cancel.snd = 100,2
 	footer3.font = 10,0,0
 	footer3.scale = 1.5, 1.5
 	footer3.font.height = -1
-	footer3.text = "v0.7.3u"
+	footer3.text = "v0.7.3au"
 	
 	footer.overlay.col = 0, 0, 64
 	footer.overlay.alpha = 0, 0
@@ -384,7 +384,7 @@ new moves.
 
 * More than anything... ENJOY YOURSELF!
 
-* This build is stable version 0.7.2u!
+* This build is stable version 0.7.3au!
 
 * Space Daniel was here
 ;-------------------------------------------------------------------
