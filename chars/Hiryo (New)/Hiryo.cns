@@ -2626,7 +2626,7 @@ physics = S
 sprpriority = 1
 anim = 408
 ctrl = 0
-poweradd = ifelse(prevstateno = 30, -200, 0)
+poweradd = ifelse(prevstateno = [30, 35], -200, 0)
 
 [State 0, Turn]
 type = Turn

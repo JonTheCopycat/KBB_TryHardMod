@@ -395,27 +395,28 @@ ctrl = 1
 [State 0, 4] ;Attack A - Slash
 type = ChangeState
 triggerall = time >= 10
-trigger1 = command = "a"
-value = 402
+trigger1 = command = "hold_a"
+value = 290
 ctrl = 0
 [State 0, 4] ;Attack B - Dash Slash
 type = ChangeState
 triggerall = time >= 10
-trigger1 = command = "b"
-value = 404
+trigger1 = command = "hold_b"
+value = 390
 ctrl = 0
-[State 0, 4] ;Attack C - Anti Air
+[State 0, 4] ;Attack C - Stance
 type = ChangeState
 triggerall = time >= 10
 triggerall = numhelper(3500) = 0
-trigger1 = command = "c"
-value = 406
+triggerall = power >= 200
+trigger1 = command = "hold_c"
+value = 408
 ctrl = 0
 
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
-value = 408
+value = 0
 ctrl = 1
 
 
