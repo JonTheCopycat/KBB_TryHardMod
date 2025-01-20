@@ -624,7 +624,7 @@ value = 22000
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 3"
 Triggerall = statetype = A
-Triggerall = power >= 1000
+Triggerall = power >= 500
 triggerall = var(10) = 0
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
@@ -636,7 +636,7 @@ value = 22010
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 3"
 Triggerall = statetype != A
-Triggerall = power >= 1000
+Triggerall = power >= 500
 triggerall = var(10) = 1
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
@@ -648,7 +648,7 @@ value = 22020
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 3"
 ;Triggerall = statetype = A
-Triggerall = power >= 1000
+Triggerall = power >= 500
 triggerall = var(10) = 2
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
