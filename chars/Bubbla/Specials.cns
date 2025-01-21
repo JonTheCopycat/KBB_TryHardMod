@@ -179,7 +179,7 @@ value = 1
 [State 200, 1]
 type = HitDef
 getpower = 0
-;triggerall = root,map(juggle) < 100
+triggerall = !moveguarded;root,map(juggle) < 100
 triggerall = time % 4 = 0
 trigger1 = 1
 attr = S, SP
@@ -217,7 +217,7 @@ persistent = 1
 type = ChangeState
 trigger1 = time >= 3000
 trigger2 = pos y >= 0 && time >= 20
-value = 21550
+value = 21005
 ctrl = 1
 
 [State 200, Die] ; 
@@ -228,6 +228,139 @@ trigger1 = root,stateno = 26000 && root,animelem = 3
 ;value = 1
 
 ;-------------------------------------------------------------------------------
+; Special 1 Bubble Explosion
+[Statedef 21005]
+type    = S
+movetype= A
+physics = S
+juggle  = 1
+ctrl = 0
+anim = 21550
+poweradd = 0
+sprpriority = 2
+velset = 0,0
+
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 1
+;value = S21500,0
+value = S30000,3
+volumescale = 50
+channel = -1
+;lowpriority = -1
+freqmul = 1.0
+loop = 0
+pan = 0
+;abspan = 
+ignorehitpause = 1
+persistent = 0
+
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = moveguarded
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = movehit
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Damage Proration]
+type = parentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 15 ; More bombs = more proration
+
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = AnimElem = 2
+time = 15
+ampl = -8
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 2
+trigger1 = 1
+attr = S, SP
+animtype  = Light
+damage    = 30
+hitflag = MAFD
+guardflag = MAF
+pausetime = 10,10
+guard.pausetime = 1,7
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+;hitsound   = 5,2
+hitsound   = S30000,3
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 10
+ground.velocity = -2.5
+air.velocity = -3,-2
+Fall = 0
+Fall.recovertime = 60
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 3
+trigger1 = 1
+attr = S, SP
+animtype  = Heavy
+damage    = 60
+hitflag = MAFD
+guardflag = MAF
+pausetime = 18,18
+guard.pausetime = 0,6
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+;hitsound   = 5,4
+hitsound   = S30000,3
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 10
+ground.velocity = -2.5,-8
+air.velocity = -3,-5
+Fall = 1
+Fall.recovertime = 60
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
+
 ;-------------------------------------------------------------------------------
 ; Special 2 Helper: Bubble Ball1
 [Statedef 21501]
@@ -1660,7 +1793,7 @@ value = 0
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 4
 helpertype = normal ;player
 name = "Bubble Stun"
 ID = 22505
@@ -1750,13 +1883,21 @@ trigger1 = AnimElem = 2
 time = 15
 ampl = -8
 
+[State 0, Damage Proration]
+type = parentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 8 ; More bombs = more proration
+
 [State 200, 1]
 type = HitDef
 getpower = 0
 triggerall = AnimElem = 1 || AnimElem = 2 || AnimElem = 3
 trigger1 = 1
 attr = S, SP
-animtype  = Light
+animtype  = Medium
 damage    = 5
 hitflag = MAFD
 guardflag = MAF
@@ -1783,7 +1924,7 @@ getpower = 0
 triggerall = AnimElem = 4
 trigger1 = 1
 attr = S, SP
-animtype  = Heavy
+animtype  = Medium
 damage    = 35
 hitflag = MAFD
 guardflag = MAF
@@ -1877,13 +2018,21 @@ trigger1 = AnimElem = 2
 time = 15
 ampl = -8
 
+[State 0, Damage Proration]
+type = parentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 10 ; More bombs = more proration
+
 [State 200, 1]
 type = HitDef
 getpower = 0
 triggerall = AnimElem = 1 || AnimElem = 2 || AnimElem = 3
 trigger1 = 1
 attr = S, SP
-animtype  = Light
+animtype  = Heavy
 damage    = 5
 hitflag = MAFD
 guardflag = MAF
@@ -2241,6 +2390,13 @@ trigger1 = 1
 value = 1 * 0.99**root,var(11)
 ignorehitpause = 1
 
+[State 0, Damage Proration]
+type = parentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 10 ; More bombs = more proration
 
 [State 0, EnvShake]
 type = EnvShake
@@ -2939,6 +3095,14 @@ pan = 0
 ;abspan = 
 ignorehitpause = 1
 persistent = 0
+
+[State 0, Damage Proration]
+type = parentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5 ; More bombs = more proration
 
 [State 200, 1]
 type = HitDef
@@ -4998,6 +5162,14 @@ pan = 0
 ;abspan = 
 ignorehitpause = 1
 persistent = 0
+
+[State 0, Damage Proration]
+type = parentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 40 ; More bombs = more proration
 
 [State 200, 1]
 type = HitDef

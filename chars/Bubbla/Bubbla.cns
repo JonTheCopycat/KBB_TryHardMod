@@ -194,6 +194,64 @@ ctrl = 0
 anim = 190
 velset = 0,0
 
+[State 0, Charge]
+type = changeAnim2
+triggerall = time = 50
+trigger1 = 1
+value = ifelse(enemy, name = "kaby" || enemy, name = "blu" || enemy, name = "Vivienne" || enemy, name = "Miasma", 192, ifelse(enemy, name = "Sparko" || enemy, name = "Centurion" || enemy, name = "Bill", 193, 190));190
+elem = 2
+
+[State 0, Explod]
+type = Explod
+trigger1 = time = 0
+anim = 191
+ID = 191
+pos = 0,-40
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+removetime = 60
+pausemovetime = 0
+scale = 1.1,1.1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 35
+;value = S21500,0
+value = S30000,3
+volume = 1000
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 45
+;value = S21500,0
+value = S1,1
+;volume = 1000
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 65
+;value = S21500,0
+value = S3,4
+;volume = 1000
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 70
+;value = S21500,0
+value = S3,4
+channel = 2190219
+;volume = 1000
+
+
 [State 191, Dialogue]
 type = Dialogue
 triggerall = enemy,name = "Sparko" && (Random = [21,99])
@@ -263,7 +321,7 @@ text6 = "<p2>Sparko would be upset with you?<wait=30>"
 text7 = "<p1>You know what?<wait=30> You're right.<wait=30>"
 text8 = "<p1>But Sparko isn't here...<wait=30>"
 text9 = "<p2>Gotta go.<wait=5>"
-text10 = "<p1>COME BACK HERE RIGHT NOW.<wait=30>"
+text10 = "<p1>COME BACK HERE RIGHT NOW!<wait=30>"
 
 [State 191, Dialogue]
 type = Dialogue
@@ -710,7 +768,7 @@ animtype  = Light
 damage    = 15
 hitflag = MAF
 guardflag = MAFD
-pausetime = 10,10
+pausetime = 8,8
 guard.pausetime = 12, 10
 sparkno = 0
 guard.sparkno = 13000
@@ -2493,6 +2551,7 @@ juggle  = 3
 ctrl = 0
 anim = 400
 poweradd = -200
+velset = 0,0
 sprpriority = 1
 
 ;[State 0, Juggle Map]
@@ -2590,13 +2649,13 @@ y = 0;-2.5
 
 [State 0, PosSet]
 type = PosSet
-triggerall = time > 10
+;triggerall = time > 10
 trigger1 = pos y >= 0
 y = 0
 
 [State 0, VelSet]
 type = VelSet
-triggerall = time > 10
+;triggerall = time > 10
 trigger1 = pos y >= 0
 y = 0
 
@@ -3721,7 +3780,7 @@ accel = 0,0
 random = 0,0
 removetime = 3
 pausemovetime = 0
-scale = 1+(ifelse((root,time) > 8, 1, (root,time/25))),1+(ifelse((root,time) > 8, 1, (root,time/25)))
+scale = 2,2;1+(ifelse((root,time) > 8, 1, (root,time/25))),1+(ifelse((root,time) > 8, 1, (root,time/25)))
 sprpriority = 28
 ontop = 0
 shadow = 0,0,0
@@ -3787,7 +3846,7 @@ triggerall = AnimElem = 1
 trigger1 = 1
 attr = A, NP 
 animtype  = Heavy
-damage    = root, time/5 * 5
+damage    = 10 + root, time
 hitflag = MAFD
 guardflag = MAF
 pausetime = 12, 12
@@ -3801,8 +3860,8 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 10
 ground.hittime  = 16
-ground.velocity = -1,-1+ (-2*ifelse((root,time) < 8, -5, (root,time/6)))
-air.velocity = -1, -1+(-2*ifelse((root,time) < 8, -5, (root,time/6)))
+ground.velocity = -1,-8;-1+ (-2*ifelse((root,time) < 8, -5, (root,time/6)))
+air.velocity = -1,-8; -1+(-2*ifelse((root,time) < 8, -5, (root,time/6)))
 airguard.velocity = -5,-1
 Fall = 1
 Fall.recovertime = 60
@@ -3874,7 +3933,7 @@ keyctrl
 [State 0, StateTypeSet]
 type = ChangeAnim
 triggerall = time < 20
-;triggerall = AnimElem <= 2
+triggerall = time >= 5
 triggerall = var(21) > 0
 trigger2 = time >= 8 && roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 trigger1 = command = "hold_c"
@@ -3892,7 +3951,7 @@ physics = A
 type = VelSet
 triggerall = AnimElem = 4
 trigger1 = 1
-y = -1 + ifelse(time < 10, -2,(ifelse((time) > 20, -8, (time/-3))))
+y = -9;-1 + ifelse(time < 10, -2,(ifelse((time) > 20, -8, (time/-3))))
 x = 1
 
 
@@ -4365,43 +4424,52 @@ value = 21000
 
 [State 0, Charge]
 type = changeAnim2
-triggerall = time < 70
-triggerall = animElem = 4
+triggerall = time <= 50
+triggerall = animElem = 2
 trigger1 = command = "hold_c" && command = "holdback"
-trigger2 = time >= 25
-trigger3 = !HitOver
+;trigger2 = time >= 40
+;trigger3 = !HitOver
 value = 470
-elem = 3
+elem = 1
 
-[State 0, Explod]
-type = Explod
-trigger1 = AnimElem = 3 && numexplod(475) = 0
-anim = 475
-ID = 475
-pos = -40,-20
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = 55
-pausemovetime = 0
-scale = 1,1
-sprpriority = 28
-ontop = 0
-shadow = 0,0,0
-ownpal = 1
-removeongethit = 0
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movecontact
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+;[State 0, Explod]
+;type = Explod
+;trigger1 = AnimElem = 3 && numexplod(475) = 0
+;anim = 475
+;ID = 475
+;pos = -40,-20
+;postype = p1  ;p2,front,back,left,right
+;facing = 1
+;vfacing = 1
+;bindtime = 1
+;vel = 0,0
+;accel = 0,0
+;random = 0,0
+;removetime = 55
+;pausemovetime = 0
+;scale = 1,1
+;sprpriority = 28
+;ontop = 0
+;shadow = 0,0,0
+;ownpal = 1
+;removeongethit = 0
 
 [State 0, Explod]
 type = Explod
 triggerall = command = "hold_c" && command = "holdback"
-trigger1 = time = 25 || time = 50
+triggerall = time = 25 || time = 50
+trigger1 = 1
 anim = ifelse(time = 25, 21560, 21550)
 ID = ifelse(time = 25, 21560, 21550)
-pos = -40,-20
+pos = 0,-10
 postype = p1  ;p2,front,back,left,right
 facing = 1
 vfacing = 1
@@ -4426,17 +4494,30 @@ ignorehitpause = 1
 
 [State 200, End]
 type = ChangeAnim2
+triggerall = Anim = 470
 triggerall = command != "hold_c" || command != "holdback"
-trigger1 = AnimElem >= 3
-value = 470
-elem = 4
+triggerall = time < 25
+trigger1 = 1
+value = 4701
+elem = 3
 
 [State 200, End]
 type = ChangeAnim2
+triggerall = Anim = 470
 triggerall = command != "hold_c" || command != "holdback"
-trigger1 = AnimElem <= 2
-value = 470
-elem = 4
+triggerall = time >= 25 && time < 50
+trigger1 = 1;(AnimElem >= 1) && (AnimElem <= 1)
+value = 4702
+elem = 3
+
+[State 200, End]
+type = ChangeAnim2
+triggerall = Anim = 470
+;triggerall = command != "hold_c" || command != "holdback"
+triggerall = time >= 50
+trigger1 = 1;(AnimElem >= 1) && (AnimElem <= 1)
+value = 4703
+elem = 3
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -4447,7 +4528,8 @@ volumescale = 50
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 5 && time < 25
+trigger1 = AnimElem = 6 && Anim = 4701 && !movecontact
+trigger2 = AnimElem = 7 && Anim = 4701 && movecontact
 helpertype = normal ;player
 name = "Bubblo Small"
 ID = 475
@@ -4461,9 +4543,18 @@ scale = 0.1,0.1
 supermovetime = 0
 pausemovetime = 0
 
+[State 200, End]
+type = ChangeAnim2
+triggerall = Anim = 4702
+triggerall = !movecontact
+trigger1 = AnimElem = 7
+value = 4702
+elem = 11
+
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 5 && (time >= 25 && time < 50)
+trigger1 = AnimElem = 6 && Anim = 4702 && !movecontact
+trigger2 = AnimElem = 10 && Anim = 4702 && movecontact
 helpertype = normal ;player
 name = "Bubblo Medium"
 ID = 476
@@ -4477,9 +4568,18 @@ scale = 0.1,0.1
 supermovetime = 0
 pausemovetime = 0
 
+[State 200, End]
+type = ChangeAnim2
+triggerall = Anim = 4703
+triggerall = !movecontact
+trigger1 = AnimElem = 7
+value = 4703
+elem = 15
+
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 5 && time >= 50
+trigger1 = AnimElem = 6 && Anim = 4703 && !movecontact
+trigger2 = AnimElem = 14 && Anim = 4703 && movecontact
 helpertype = normal ;player
 name = "Bubblo Big"
 ID = 477
@@ -4493,6 +4593,55 @@ scale = 0.1,0.1
 supermovetime = 0
 pausemovetime = 0
 
+[State 200, 1]
+type = HitDef
+getpower = 0
+trigger1 = AnimElem = 5
+trigger2 = AnimElem = 9
+trigger3 = AnimElem = 13
+trigger4 = AnimElem = 17
+attr = A, NP 
+animtype  = Heavy
+damage    = 10 ; Grenades do reduced damage in Sudsy mode (To reduce Sudsy's damage boost) 
+hitflag = MAFD
+guardflag = MAF
+pausetime = 5,15 ;Reduced blockstun if from j.5c
+guard.pausetime = 0,8
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+;hitsound   = 5,4
+hitsound   = S0,2
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 10
+ground.hittime  = 16
+ground.velocity = -1,-3
+air.velocity = -1,-2 ; Launches away farther horizontally if from j.5c grenade
+airguard.velocity = -5,-1
+Fall = 1
+Fall.recovertime = 40
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, 2C Cancel]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 200
+triggerall = numhelper(3500) = 0
+triggerall = Anim != 470
+trigger1 = command = "holdfwd"
+trigger1 = command = "c"
+value = 460
+
+[State 200, End]
+type = ChangeState
+Triggerall = movehit
+trigger1 = command = "up"
+triggerall = Anim != 470
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 40
+
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -4503,7 +4652,7 @@ ctrl = 1
 ;4C Bubblo Small
 [Statedef 475]
 type    = S
-movetype= I
+movetype= A
 physics = S
 juggle  = 1
 ctrl = 0
@@ -4523,9 +4672,9 @@ x = 7
 
 [State 475, ParentVarAdd] ; If the enemy touches the bubblo, adds +1 to the bubble count and PLODES
 type = Parentvaradd
-trigger1 = abs(pos X - enemynear,pos X) <= 30 
-trigger1 = abs(pos Y - enemynear,pos Y) <= 20 
-;trigger1 = movecontact
+;trigger1 = abs(pos X - enemynear,pos X) <= 30 
+;trigger1 = abs(pos Y - enemynear,pos Y) <= 20 
+trigger1 = movecontact
 v = 21
 value = 1
 
@@ -4536,11 +4685,69 @@ value = 1
 ;value = S200,0
 ;volumescale = 50
 
+;[State 200, 1]
+;type = HitDef
+;getpower = 0
+;triggerall = !movecontact
+;triggerall = root, var(11) < 200
+;triggerall = root,stateno != 950 ; Used for most attacks
+;trigger1 = 1
+;attr = S, NA
+;animtype  = Light
+;damage    = 5
+;hitflag = MAF
+;guardflag = MAF
+;pausetime = 1,1
+;guard.pausetime = 10, 5
+;sparkno = 0
+;guard.sparkno = 13000
+;sparkxy = -8,-25
+;;hitsound   = S23000,1
+;hitsound   = S30000,3
+;guardsound = 6,0
+;ground.type = High
+;ground.slidetime = 6
+;ground.hittime  = 5
+;ground.velocity = -1,-5 + (root,map(sudsyTracker)/5)
+;air.velocity = -1, ifelse(root,stateno =610, 3, -6)
+;Fall = 1
+;down.bounce = ifelse(root,stateno = 610,1,0)
+;Fall.recovertime = 60 - (root,map(sudsyTracker)*2)
+;guard.cornerpush.veloff = -5
+;airguard.cornerpush.veloff = -4
+
+[State 200, 1]
+type = HitDef
+trigger1 = !movecontact
+attr = A, NP 
+animtype  = Light
+damage    = 1 ; Grenades do reduced damage in Sudsy mode (To reduce Sudsy's damage boost) 
+hitflag = MAFD
+guardflag = MAF
+pausetime = 1,1 ;Reduced blockstun if from j.5c
+guard.pausetime = 1,1
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+;hitsound   = 5,4
+hitsound   = S3,3
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 10
+ground.hittime  = 16
+ground.velocity = -1,-3
+air.velocity = -1,-2 ; Launches away farther horizontally if from j.5c grenade
+airguard.velocity = -5,-1
+Fall = 1
+Fall.recovertime = 40
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
 [State 475, End] ; Destroys self if the opponent touches it
 type = ChangeState
-trigger1 = abs(pos X - enemynear,pos X) <= 30 
-trigger1 = abs(pos Y - enemynear,pos Y) <= 20
-;trigger2 = movecontact
+;trigger1 = abs(pos X - enemynear,pos X) <= 30 
+;trigger1 = abs(pos Y - enemynear,pos Y) <= 20
+trigger1 = movecontact
 value = 478
 
 [State 0, ChangeState]
@@ -4554,30 +4761,13 @@ ctrl = 0
 ;4C Bubblo Med
 [Statedef 476]
 type    = S
-movetype= I
+movetype= A
 physics = S
 juggle  = 1
 ctrl = 0
 anim = 477
 sprpriority = 2
 
-[State 0, Helper]
-type = Helper
-triggerall = time > 1
-trigger1 = time % (ifelse(var(22) = 1, 2, 20)) = 0
-helpertype = normal ;player
-name = "Sudsy Mode"
-ID = 22010
-stateno = 22010
-pos = -20,0
-scale = 0.1,0.1
-postype = p1    ;p2,front,back,left,right
-facing = 1
-keyctrl = 1
-ownpal = 0
-supermovetime = 0
-pausemovetime = 0
-inheritjuggle = 1
 
 [State 0, Helper]
 type = Helper
@@ -4612,8 +4802,9 @@ x = 5
 
 [State 475, ParentVarAdd] ; If the enemy touches the bubblo, adds +1 to the bubble count and PLODES
 type = Parentvaradd
-trigger1 = abs(pos X - enemynear,pos X) <= 40 
-trigger1 = abs(pos Y - enemynear,pos Y) <= 30 
+;trigger1 = abs(pos X - enemynear,pos X) <= 40 
+;trigger1 = abs(pos Y - enemynear,pos Y) <= 30
+trigger1 = movecontact 
 v = 21
 value = 1
 
@@ -4624,10 +4815,38 @@ value = 1
 ;value = S200,0
 ;volumescale = 50
 
+[State 200, 1]
+type = HitDef
+trigger1 = !movecontact
+attr = A, NP 
+animtype  = Medium
+damage    = 1 ; Grenades do reduced damage in Sudsy mode (To reduce Sudsy's damage boost) 
+hitflag = MAFD
+guardflag = MAF
+pausetime = 1,1 ;Reduced blockstun if from j.5c
+guard.pausetime = 1,1
+sparkno = 0
+guard.sparkno = 13000
+sparkxy = -8,-25
+;hitsound   = 5,4
+hitsound   = S3,3
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 10
+ground.hittime  = 16
+ground.velocity = -1,-3
+air.velocity = -1,-2 ; Launches away farther horizontally if from j.5c grenade
+airguard.velocity = -5,-1
+Fall = 1
+Fall.recovertime = 40
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
 [State 475, End] ; Destroys self if the opponent touches it
 type = ChangeState
-trigger1 = abs(pos X - enemynear,pos X) <= 40 
-trigger1 = abs(pos Y - enemynear,pos Y) <= 30
+;trigger1 = abs(pos X - enemynear,pos X) <= 40 
+;trigger1 = abs(pos Y - enemynear,pos Y) <= 30
+trigger1 = movecontact
 value = 21560
 
 [State 0, ChangeState]
@@ -4641,7 +4860,7 @@ ctrl = 0
 ;4C Bubblo Large
 [Statedef 477]
 type    = S
-movetype= I
+movetype= A
 physics = S
 juggle  = 1
 ctrl = 0
@@ -4770,7 +4989,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = cond(root,stateno = 900 || root, map(juggle) >= 100,6, 3) ; Applies extra proration if done from overhead
+value = 3 ; Applies extra proration if done from overhead
 
 [State 0, EnvShake]
 type = EnvShake
@@ -4801,8 +5020,8 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 6
 ground.hittime  = 5
-ground.velocity = -1,-5 + (root,map(sudsyTracker)/5)
-air.velocity = -1, ifelse(root,stateno =610, 3, -6)
+ground.velocity = -1,-5;(root,map(sudsyTracker)/5)
+air.velocity = -1, -6;ifelse(root,stateno =610, 3, -6)
 Fall = 1
 down.bounce = ifelse(root,stateno = 610,1,0)
 Fall.recovertime = 60 - (root,map(sudsyTracker)*2)
@@ -4831,8 +5050,8 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 6
 ground.hittime  = 5
-ground.velocity = -1,-5 + (root,map(sudsyTracker)/5)
-air.velocity = -1, ifelse(root,stateno =610, 12, -6)
+ground.velocity = -1,-5;+ (root,map(sudsyTracker)/5)
+air.velocity = -1, -6;ifelse(root,stateno =610, 12, -6)
 Fall = 1
 down.bounce = ifelse(root,stateno = 610,1,0)
 Fall.recovertime = 60 - (root,map(sudsyTracker)*2)
@@ -5687,15 +5906,6 @@ ignorehitpause = 1
 persistent = 0
 value = 25
 
-[State 700, Kaboom Mode Enabled.]
-type = VarAdd
-triggerall = var(21) < 10
-trigger1 = movecontact && time > 41
-v = 21    
-value = 1
-persistent = 0
-ignorehitpause = 1
-
 [State 0, AfterImage]
 type = AfterImage
 trigger1 = time > 30 && time < 50
@@ -5712,20 +5922,41 @@ type = VelSet
 trigger1 = AnimElem = 3
 x = 5
 
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 7
-x = 8
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 15
-x = 4
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = AnimElem = 7
+;x = 8
+;
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = AnimElem = 15
+;x = 4
 
 [State 0, Viento]
 type = Explod
 triggerall = numexplod(130) = 0
-trigger1 = AnimElem = 15
+triggerall = movecontact
+trigger1 = AnimElem = 18
+anim = 701
+ID = 701
+pos = 0,-22
+postype = p2
+facing = 1
+vfacing = 0
+bindtime = 30
+removetime = 60
+scale = 1.5,1.5
+vel = 0,0
+sprpriority = 3
+ontop = 1
+ownpal = 0
+removeongethit = 1
+
+[State 0, Viento]
+type = Explod
+triggerall = numexplod(130) = 0
+triggerall = movecontact
+trigger1 = AnimElem = 22
 anim = 21550
 ID = 21550
 pos = 0,0
@@ -5733,7 +5964,7 @@ postype = p2
 facing = 1
 vfacing = 0
 bindtime = -1
-removetime = -1
+removetime = 10
 scale = 1.1,1.1
 vel = 0,0
 sprpriority = 3
@@ -5745,15 +5976,16 @@ trans = add
 [State 0, Viento]
 type = Explod
 triggerall = numexplod(130) = 0
-trigger1 = AnimElem = 16
-anim = 4601
+triggerall = movecontact
+trigger1 = AnimElem = 6
+anim = 627
 ID = 4601
 pos = 0,-10
 postype = p2
 facing = 1
 vfacing = 0
 bindtime = -1
-removetime = -1
+removetime = 40
 scale = 1.1,1.1
 vel = 0,0
 sprpriority = 3
@@ -5770,74 +6002,60 @@ ignorehitpause = 1
 
 [State 0, Remove Bubbla] ; Whenever the Bubble Count changes, refreshes the UI
 type = removeExplod
-trigger1 = AnimElem >= 16
+trigger1 = AnimElem >= 24
 ID = 21550
 ignorehitpause = 1
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 19
-x = 3
-y = -10
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 20
-x = 3
-y = -5
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 21
-x = 3
-y = -3
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 22
-x = 3
-y = -1
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElem = 23
-x = -0.1
-y = -0.1
+;
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = AnimElem = 19
+;x = 3
+;y = -10
+;
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = AnimElem = 20
+;x = 3
+;y = -5
+;
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = AnimElem = 21
+;x = 3
+;y = -3
+;
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = AnimElem = 22
+;x = 3
+;y = -1
+;
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = AnimElem = 23
+;x = -0.1
+;y = -0.1
 
 [State 0, VelAdd]
-type = VelAdd
-trigger1 = pos y < 0 && time > 89
-y = 0.44
-;ignorehitpause = 
-;persistent = 
-
-[State 0, PosAdd]
-type = PosAdd
-trigger1 = AnimElemTime(15) = 1
-y = -10
-;ignorehitpause = 
-;persistent = 
-
-
-
-[State 0, PosAdd]
-type = PosAdd
-trigger1 = AnimTime = 0
+type = PosSet
+trigger1 = pos y < 0
 y = 0
+;ignorehitpause = 
+;persistent = 
 
-[State 700, Airborne on AnimElem 12]
-type = StateTypeSet
-trigger1 = AnimElemTime(19) = 1
-statetype = A       ;S,A,C,L
-movetype = A        ;I,A,H
-physics = N         ;A,C,S,N
-
-[State 700, Airborne on AnimElem 12]
-type = StateTypeSet
-trigger1 = AnimElemTime(19) = 2
-statetype = A       ;S,A,C,L
-movetype = A        ;I,A,H
-physics = A         ;A,C,S,N
+;[State 700, Airborne on AnimElem 12]
+;type = StateTypeSet
+;trigger1 = AnimElemTime(19) = 1
+;statetype = A       ;S,A,C,L
+;movetype = A        ;I,A,H
+;physics = N         ;A,C,S,N
+;
+;[State 700, Airborne on AnimElem 12]
+;type = StateTypeSet
+;trigger1 = AnimElemTime(19) = 2
+;statetype = A       ;S,A,C,L
+;movetype = A        ;I,A,H
+;physics = A         ;A,C,S,N
 
 [State 0, PlayerPush]
 type = PlayerPush
@@ -5850,28 +6068,28 @@ triggerall = movecontact
 trigger1 = Time > 100
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
 time = 1
+;
+;[State 0, TargetBind]
+;type = TargetBind
+;triggerall = enemy,stateno != 4100
+;trigger1 = movecontact && (AnimElem = 8 || AnimElem = 9 || AnimElem = 10 || AnimElem = 18 || AnimElem = 19 || AnimElem = 20)
+;time = 1
+;id = -1
+;pos = 40,0
+;
+;[State 0, TargetBind]
+;type = TargetBind
+;triggerall = enemy,stateno != 4100
+;trigger1 = movecontact && AnimElem = 11
+;time = 1
+;id = -1
+;pos = 38,-8
 
-[State 0, TargetBind]
-type = TargetBind
-triggerall = enemy,stateno != 4100
-trigger1 = movecontact && (AnimElem = 8 || AnimElem = 9 || AnimElem = 10 || AnimElem = 18 || AnimElem = 19 || AnimElem = 20)
-time = 1
-id = -1
-pos = 40,0
-
-[State 0, TargetBind]
-type = TargetBind
-triggerall = enemy,stateno != 4100
-trigger1 = movecontact && AnimElem = 11
-time = 1
-id = -1
-pos = 38,-8
-
-[State 0, Turn]
-type = Turn
-trigger1 = AnimElem = 18
-;ignorehitpause = 
-persistent = 0
+;[State 0, Turn]
+;type = Turn
+;trigger1 = AnimElem = 18
+;;ignorehitpause = 
+;persistent = 0
 
 
 [State 0, Explod]
@@ -5928,11 +6146,11 @@ trigger1 = 1
 attr = S, AT
 animtype  = Heavy
 damage  = 0
-HitFlag = M-
+HitFlag = M
 guardflag =
 priority = 0, Miss
 pausetime = 10,100
-sparkno = 2
+sparkno = 0
 hitsound = 9,0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -5949,103 +6167,27 @@ p2getp1state = 0
 [State 700, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 15
+triggerall = AnimElem = 6
 trigger1 = 1
 attr = S, AT
 animtype  = Heavy
-damage  = 20
+damage  = 30
 HitFlag = MAFD
-guardflag = MAFD
-pausetime = 2,30
+guardflag = MA
+pausetime = 2,6
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = 8,0
-guardsound = 6,0
+hitsound   = 5,4
+guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
-ground.hittime  = 40
-ground.velocity = 0,-6
-air.velocity = 0,-6
-Envshake.time = 40
-envshake.ampl = -6
-fall = 0
-fall.recover = 0
+ground.hittime  = 15
+ground.velocity = 0,-7
+air.velocity = 0,-7
+Envshake.time = 25
+fall = 1
 kill = 0
-
-[State 700, 1]
-type = HitDef
-getpower = 0
-triggerall = AnimElem = 19
-trigger1 = 1
-attr = S, AT
-animtype  = Heavy
-damage  = 10
-HitFlag = MAFD
-guardflag = MAFD
-pausetime = 3,20
-;sparkno = 2
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = 5,4
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 12
-ground.hittime  = 15
-ground.velocity = -1,-2
-air.velocity = -1,-2
-Envshake.time = 30
-fall = 0
-fall.recover = 0
-
-[State 700, 1]
-type = HitDef
-getpower = 0
-triggerall = AnimElem = 20
-trigger1 = 1
-attr = S, AT
-animtype  = Heavy
-damage  = 3
-HitFlag = MAFD
-guardflag = MAFD
-pausetime = 3,20
-;sparkno = 2
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = 5,4
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 12
-ground.hittime  = 15
-ground.velocity = -1,-2
-air.velocity = -1,-2
-Envshake.time = 30
-fall = 0
-fall.recover = 0
-
-[State 700, 1]
-type = HitDef
-getpower = 0
-triggerall = AnimElem = 21
-trigger1 = 1
-attr = S, AT
-animtype  = Heavy
-damage  = 3
-HitFlag = MAFD
-guardflag = MAFD
-pausetime = 3,20
-;sparkno = 2
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = 5,4
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 12
-ground.hittime  = 15
-ground.velocity = -1,-2
-air.velocity = -1,-2
-Envshake.time = 30
-fall = 0
 fall.recover = 0
 
 [State 700, 1]
@@ -6055,6 +6197,33 @@ triggerall = AnimElem = 22
 trigger1 = 1
 attr = S, AT
 animtype  = Heavy
+damage  = 70
+HitFlag = MAFD
+guardflag = MAFD
+pausetime = 2,30
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 8,0;S30000,0
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 40
+ground.velocity = -1,-6
+air.velocity = -1,-6
+Envshake.time = 40
+envshake.ampl = -6
+fall = 0
+fall.recover = 0
+kill = 1
+
+[State 700, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 201
+trigger1 = 1
+attr = S, AT
+animtype  = Heavy
 damage  = 3
 HitFlag = MAFD
 guardflag = MAFD
@@ -6076,7 +6245,57 @@ fall.recover = 0
 [State 700, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 23
+triggerall = AnimElem = 211
+trigger1 = 1
+attr = S, AT
+animtype  = Heavy
+damage  = 3
+HitFlag = MAFD
+guardflag = MAFD
+pausetime = 3,20
+;sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -1,-2
+air.velocity = -1,-2
+Envshake.time = 30
+fall = 0
+fall.recover = 0
+
+[State 700, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 221
+trigger1 = 1
+attr = S, AT
+animtype  = Heavy
+damage  = 3
+HitFlag = MAFD
+guardflag = MAFD
+pausetime = 3,20
+;sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -1,-2
+air.velocity = -1,-2
+Envshake.time = 30
+fall = 0
+fall.recover = 0
+
+[State 700, 1]
+type = HitDef
+getpower = 0
+triggerall = AnimElem = 231
 trigger1 = 1
 attr = S, AT
 animtype  = Heavy
@@ -7777,7 +7996,7 @@ pausemovetime = 0
 
 [State 0, Helper Hit]
 type = MapSet
-trigger1 = numhelper(632) >= 5
+trigger1 = numhelper(632) >= 4
 map = "bubbleTrapsSpawned"
 value = 1
 ;ignorehitpause = 
@@ -8889,7 +9108,7 @@ airguard.cornerpush.veloff = -4
 [State 200, End]
 type = ChangeState
 triggerall = root, stateno != 25500
-trigger1 = time >= 500
+trigger1 = time >= 200
 trigger2 = pos y >= 0 && time >= 50
 trigger3 = movecontact
 trigger4 = root, stateno = 22000
