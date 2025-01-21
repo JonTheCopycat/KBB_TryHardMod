@@ -2179,7 +2179,7 @@ hitflag = MAFD
 damage    = 30
 guardflag = MA
 pausetime = 15,15
-guard.pausetime = 14,10
+guard.pausetime = 15,15
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -4563,9 +4563,7 @@ triggerall = root, statetype != A
 triggerall = root, movetype != H
 triggerall = root, power >= 250
 triggerall = root,var(53) > 10
-trigger1 = root, time <= 1
-trigger1 = root, stateno = 30
-trigger1 = root, command = "c"
+trigger1 = root, stateno = 490
 value = 495
 ctrl = 0
 
@@ -4576,9 +4574,7 @@ triggerall = root, statetype != A
 triggerall = root, movetype != H
 triggerall = root, power >= 250
 triggerall = root,var(53) > 10
-trigger1 = root, time > 1
-trigger1 = root, stateno = 30
-trigger1 = root, command = "c"
+trigger1 = root, stateno = 491
 value = 496
 ctrl = 0
 
@@ -4911,6 +4907,28 @@ p2stateno = 1035
 ;Envshake.time = 20
 ;priority = 3
 ;p2stateno = 1030
+
+[State 420, Cancel into STAH FINGAH]
+type = ChangeState
+triggerall = time > 11
+triggerall = root, statetype != A
+triggerall = root, movetype != H
+triggerall = root, power >= 250
+triggerall = root,var(53) > 10
+trigger1 = root, stateno = 490
+value = 495
+ctrl = 0
+
+[State 420, Cancel into STAH FINGAH]
+type = ChangeState
+triggerall = time > 11
+triggerall = root, statetype != A
+triggerall = root, movetype != H
+triggerall = root, power >= 250
+triggerall = root,var(53) > 10
+trigger1 = root, stateno = 491
+value = 496
+ctrl = 0
 
 [State 420, Cancel into STAH FINGAH]
 type = ChangeState
@@ -5568,9 +5586,7 @@ triggerall = root, statetype != A
 triggerall = root, movetype != H
 triggerall = root, power >= 250
 triggerall = root,var(53) > 10
-trigger1 = root, time <= 1
-trigger1 = root, stateno = 30
-trigger1 = root, command = "c"
+trigger1 = root, stateno = 490
 value = 495
 ctrl = 0
 
@@ -5581,9 +5597,7 @@ triggerall = root, statetype != A
 triggerall = root, movetype != H
 triggerall = root, power >= 250
 triggerall = root,var(53) > 10
-trigger1 = root, time > 1
-trigger1 = root, stateno = 30
-trigger1 = root, command = "c"
+trigger1 = root, stateno = 491
 value = 496
 ctrl = 0
 
@@ -6525,7 +6539,7 @@ movetype= A
 physics = S
 juggle  = 2
 ctrl = 0
-anim = 340
+anim = 490
 poweradd = 0
 sprpriority = 2
 
@@ -6719,7 +6733,7 @@ movetype= A
 physics = S
 juggle  = 2
 ctrl = 0
-anim = 340
+anim = 490
 poweradd = 0
 sprpriority = 2
 
@@ -7013,7 +7027,7 @@ persistent = 0
 [State 0, Drain Stand Meter]
 type = RootVarAdd
 trigger1 = AnimElem = 1
-var(53) = -10
+var(53) = -20
 
 [State 400, Damage Proration]
 type = RootVarAdd
@@ -7346,7 +7360,7 @@ persistent = 0
 [State 0, Drain Stand Meter]
 type = RootVarAdd
 trigger1 = AnimElem = 1
-var(53) = -10
+var(53) = -15
 
 [State 400, Damage Proration]
 type = RootVarAdd

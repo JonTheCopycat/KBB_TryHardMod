@@ -10,6 +10,13 @@ Hyrio:
 4. All options out of Backsway are now hold bufferable.
 
 
+Leon:
+1. (+) Wavedash A: Made more advantageous on block (-2 -> +2)
+2. (-) Wavedash C: Leon's recovery increased by 5
+3. (-) Wavedash C: Stand Gauge cost increased (normal: 10 -> 20; perfect: 10 -> 15)
+4. (+) Wavedash C: Fixed bug where performing wavedash c during other stand attacks wouldn't make the stand perform the attack (w.i.p.).
+
+
 Junichi:
 --Kicks--
 1. (+) 214A damage increased (140 -> 160)
