@@ -5,11 +5,7 @@ Fastfall								_AIR_D_D
 	velocity."
 
 Enhanced
-	"Takuya is enhanced, buffing his charged moves."
-	"5[B] wallsplats."
-	"Metercharge speed is increased"
-	"2[B] does a sideswitch instead"
-	"J.5[B] divekicks down"
+	"Takuya is enhanced, giving him charged moves."
 
 Charge Cancel
 	"Takuya stops using the charged version."
@@ -21,40 +17,31 @@ _D [^B]
 
 <#f0f000>:EX ATTACKS:</>
 
-"Maids Knife" (1/2 Bar)							^C
-	"Takuya throws a spikes."
+"Maids Knife" (1/4 Bar)							^C
+	"Takuya throws a spike."
 
 _! Charged								[^C]
-	"Takuya throws another spike, and spikes stay stuck
-	in the opponent and explode shortly after.
-	If Takuya is Enhanced, Takuya throws an extra spike."
+	"Takuya throws more spike, and spikes stay stuck
+	in the opponent and explode shortly after."
 
 
 "November 11th 2008" (1/2 Bar)							_AIR^C
 	"Takuya morphs into a missile."
 
 _! Charged								[^C]
-	"Missile goes only forward, down or back and is much
-	faster.
-	If Takuya is Enhanced, Takuya instead shoots a missile."
+	"Takuya instead shoots a shadow missile."
 
 "Dark Shatterer" (1/2 Bar)							_D^C
 	"Takuya summons spikes under the opponent."
 
 _! Charged								[^C]
-	"Takuya jumps up with the last spike.
-	If Takuya is Enhanced, Takuya slams down upon
-	reaching max height."
+	"Takuya jumps up with the last spike."
 
 "Gift For You" (1/2 Bar)							_AIR_D^C
-	"Takuya teleports infront of the opponent and
-	morphs his body into spikes."
+	"Takuya morphs his body into spikes."
 
 _! Charged								[^C]
-	"Takuya teleports behind the opponent instead.
-	If Takuya is Enhanced, Takuya saves the usage. 
-	Using it again makes him do the move without
-	teleporting."
+	"Takuya stays spiked"
 
 "Takuhameha" (1/8 Bar, _AIR OK)							_B^C
 	"Takuya charges a shadow ball.
@@ -67,7 +54,7 @@ _! Release								^C
 
 "Spike Body" (1/2 Bar, _AIR OK)							_F^C
 	"Takuya morphs his arms into a spike and thrusts 
-	them. 
+	forward. 
 
 _! Charged								[^C]
 	"Takuya abandons the spike. Near a wall the spike 
@@ -87,8 +74,7 @@ _! Charged								[^C]
 	"Takuya super taunts."
 
 _! Charged								[^B]
-	"Takuya shoots out spikes.
-	If Takuya is Enhanced, the spikes are stronger."
+	"Takuya shoots out spikes."
 
 "Nova Mote" (1 Bar)						_AIR_D_DF_F^B
 	"Takuya slams down to the ground. Upon hitting the
@@ -96,8 +82,7 @@ _! Charged								[^B]
 
 _! Charged								[^B]
 	"Takuya hits the opponent multiple times while falling.
-	If Takuya is Enhanced, Takuya bounces upon touching
-	a spike." 
+	Takuya bounces upon touching a spike." 
 
 "Starslammer" (2 Bars)						_D_DF_F^C
 	"Takuya uppercuts the opponent then teleports next
@@ -106,10 +91,10 @@ _! Charged								[^B]
 _! Charged								[^C]
 	"Takuya morphs his arm into a hammer to crush the
 	opponent.
-	If Takuya is Enhanced, Space Daniel flips the spike up 
-	landing ontop of the opponent."
+	If Takuya a spike is out, Space Daniel flips the
+	spike to land ontop of the opponent."
 
-"Power Transfer." (1 1/2 Bars)						_D_DB_B^C
+"Power Transfer." (1 Bar)						_D_DB_B^C
 	"Space Daniel gives Takuya a bit of his power, this 
 	Enhances Takuya until meter runs out."
 

@@ -669,7 +669,7 @@ triggerall = numhelper(3500) = 0
 triggerall = numhelper(27020) = 0
 triggerall = command = "SPECIAL 6"
 Triggerall = statetype != A
-Triggerall = power >= ifelse(helper(470),stateno=27050, 0,1500)
+Triggerall = power >= ifelse(helper(470),stateno=27050, 0,1000)
 trigger1 = ctrl
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
@@ -982,6 +982,7 @@ type = ChangeState
 value = 600
 triggerall = command = "a"
 Triggerall = statetype = A
+Triggerall = cond(prevstateno = 600&&p2movetype = H,0,1)
 trigger1 = ctrl
 
 ;---------------------------------------------------------------------------

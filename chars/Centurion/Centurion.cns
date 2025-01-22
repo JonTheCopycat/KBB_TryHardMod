@@ -4170,7 +4170,6 @@ type = ChangeState
 trigger1 = stateno != [120,155] && helper(26005),movetype = H && pos y >= 0
 value = 150
 ctrl = 0
-ignorehitpause = 1
 
 
 [State 0, ChangeState]
@@ -4178,7 +4177,6 @@ type = ChangeState
 trigger1 = stateno != [120,155] && helper(26005),movetype = H && pos y < 0
 value = 154
 ctrl = 0
-ignorehitpause = 1
 
 
 

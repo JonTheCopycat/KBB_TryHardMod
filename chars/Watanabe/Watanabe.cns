@@ -3772,8 +3772,8 @@ y = 0
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = time = 0
-x = gethitvar(xvel) * 2
-y = gethitvar(yvel) * 2
+x = gethitvar(xvel) * 1.75
+y = gethitvar(yvel) * 1.75
 ;ignorehitpause = 
 ;persistent = 
 

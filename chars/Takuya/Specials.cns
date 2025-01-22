@@ -437,7 +437,7 @@ type = HitDef
 trigger1 = !movecontact
 animtype  = Heavy
 attr = S, NA
-damage = 120
+damage = 125
 hitflag = MAFD
 guardflag = MA
 ground.hittime = 120
@@ -661,7 +661,7 @@ value = 20010
 ;===============================================================================
 ; Lunar Ascension
 ;-------------------------------------------------------------------------------
-[Statedef 21000]
+ [Statedef 21000]
 type    = A
 movetype= A
 physics = S
@@ -765,7 +765,7 @@ physics = A         ;A,C,S,N
 type = SuperPause
 trigger1 = Time = 1
 anim = 92006
-time = 10
+time = 5
 sound = 20,0
 pos = 0,-20
 movetime = 0
@@ -1358,7 +1358,7 @@ getpower = 0
 trigger1 = !movecontact
 attr = A, SA
 animtype  = Heavy
-damage    = 60
+damage    = 70
 hitflag = MAFD
 guardflag = MAF
 pausetime = 10,10
@@ -1472,29 +1472,29 @@ y = .66
 ;ignorehitpause = 
 ;persistent = 
 
-[State 0, Explod]
-type = Explod
-trigger1 = time > 16 && (helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466) && pos x - helper(470),pos x = [-80,80] && pos y - helper(470),pos y = [-40,40]
-anim = 6000
-ID = 6000
-pos = 0,-60
-postype = P1  ;P2, Front, Back, Left, Right
-facing = 1
-vfacing = 1
-bindtime = -1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 9999
-scale = 1,1
-sprpriority = 3
-ontop = 0
-shadow = 0,0,0
-ownpal = 1
-removeongethit = 1
-ignorehitpause = 1
-persistent = 0
+;[State 0, Explod]
+;type = Explod
+;trigger1 = time > 16 && (helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466) && pos x - helper(470),pos x = [-80,80] && pos y - helper(470),pos y = [-40,40]
+;anim = 6000
+;ID = 6000
+;pos = 0,-60
+;postype = P1  ;P2, Front, Back, Left, Right
+;facing = 1
+;vfacing = 1
+;bindtime = -1
+;vel = 0,0
+;accel = 0,0
+;random = 0,0
+;removetime = -2
+;pausemovetime = 9999
+;scale = 1,1
+;sprpriority = 3
+;ontop = 0
+;shadow = 0,0,0
+;ownpal = 1
+;removeongethit = 1
+;ignorehitpause = 1
+;persistent = 0
 
 [State 0, VelSet]
 type = VelSet
@@ -1564,7 +1564,7 @@ getpower = 0
 trigger1 = time%2 = 0
 attr = A, SA
 animtype  = Heavy
-damage    = 9
+damage    = 10
 hitflag = MAFD
 guardflag = MA
 pausetime = 10,10
@@ -2284,30 +2284,30 @@ removeongethit = 1
 ignorehitpause = 1
 persistent = 0
 
-[State 0, Explod]
-type = Explod
-trigger1 = AnimElem = 1
-trigger1 = helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466
-anim = 6000
-ID = 6000
-pos = 0,-60
-postype = p1  ;P2, Front, Back, Left, Right
-facing = 1
-vfacing = 1
-bindtime = -1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 9999
-scale = 1,1
-sprpriority = 3
-ontop = 0
-shadow = 0,0,0
-ownpal = 1
-removeongethit = 1
-ignorehitpause = 1
-persistent = 0
+;[State 0, Explod]
+;type = Explod
+;trigger1 = AnimElem = 1
+;trigger1 = helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466
+;anim = 6000
+;ID = 6000
+;pos = 0,-60
+;postype = p1  ;P2, Front, Back, Left, Right
+;facing = 1
+;vfacing = 1
+;bindtime = -1
+;vel = 0,0
+;accel = 0,0
+;random = 0,0
+;removetime = -2
+;pausemovetime = 9999
+;scale = 1,1
+;sprpriority = 3
+;ontop = 0
+;shadow = 0,0,0
+;ownpal = 1
+;removeongethit = 1
+;ignorehitpause = 1
+;persistent = 0
 
 
 [State 0, Helper Guarded]
@@ -4332,30 +4332,30 @@ trigger1 = AnimElem = 3
 value = S25000,4
 volumescale = 300
 
-[State 0, Explod]
-type = Explod
-trigger1 = AnimElem = 3
-trigger1 = helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466
-anim = 6000
-ID = 6000
-pos = 0,-60
-postype = P1  ;P2, Front, Back, Left, Right
-facing = 1
-vfacing = 1
-bindtime = -1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 9999
-scale = 1,1
-sprpriority = 3
-ontop = 0
-shadow = 0,0,0
-ownpal = 1
-removeongethit = 1
-ignorehitpause = 1
-persistent = 0
+;[State 0, Explod]
+;type = Explod
+;trigger1 = AnimElem = 3
+;trigger1 = helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466
+;anim = 6000
+;ID = 6000
+;pos = 0,-60
+;postype = P1  ;P2, Front, Back, Left, Right
+;facing = 1
+;vfacing = 1
+;bindtime = -1
+;vel = 0,0
+;accel = 0,0
+;random = 0,0
+;removetime = -2
+;pausemovetime = 9999
+;scale = 1,1
+;sprpriority = 3
+;ontop = 0
+;shadow = 0,0,0
+;ownpal = 1
+;removeongethit = 1
+;ignorehitpause = 1
+;persistent = 0
 
 [State 0, C - Start]
 type = Helper
@@ -5629,7 +5629,7 @@ ctrl = 0
 anim = 27000
 velset = 0,0
 sprpriority = 2
-poweradd = -1000
+;poweradd = -1000
 
 [State 0, Busterable]
 type = MapSet
@@ -5794,7 +5794,7 @@ anim = 92006
 time = 30
 sound = 20,0
 pos = 0,-20
-movetime = 5
+movetime = 20
 darken = 1
 p2defmul = 1
 poweradd = 0

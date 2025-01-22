@@ -2561,13 +2561,13 @@ elem = 17
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = root,movetype = H  || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
+trigger1 = root,movetype = H  || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831 || enemy,stateno = 54000
 value = S5,0
 volumescale = 100
 
 [State 0, Explod]
 type = Explod
-trigger1 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
+trigger1 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831 || enemy,stateno = 54000
 anim = 621
 ID = 622
 pos = 0,-20
@@ -2583,7 +2583,7 @@ removeongethit = 1
 
 [State 0, VarSet]
 type = ParentVarSet
-trigger1 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
+trigger1 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831 || enemy,stateno = 54000
 v = 18    ;fv = 10
 value = 0
 
@@ -2591,7 +2591,7 @@ value = 0
 
 [State 0, DestroySelf]
 type = DestroySelf
-trigger2 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
+trigger2 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831  || enemy,stateno = 54000
 trigger1 = animtime = 0
 
 ;===============================================================================
@@ -2676,25 +2676,25 @@ elem = 17
 
 [State 0, HitOverrideCheck]
 type = RootMapSet
-trigger1 = time = 3
+trigger1 = time = 1|| enemy,stateno = 50000 || enemy,stateno = 54000
 map = "hitOverride"
 value = 0
 
 [State 0, VarSet]
 type = ParentVarSet
-trigger1 = time = 3
+trigger1 = time = 1|| enemy,stateno = 50000 || enemy,stateno = 54000
 v = 18    ;fv = 10
 value = 0
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = time = 3
+trigger1 = time = 1|| enemy,stateno = 50000 || enemy,stateno = 54000
 value = S5,0
 volumescale = 100
 
 [State 0, Explod]
 type = Explod
-trigger1 = time = 3
+trigger1 = time = 1|| enemy,stateno = 50000 || enemy,stateno = 54000
 anim = 621
 ID = 622
 pos = 0,-20
@@ -2710,4 +2710,4 @@ removeongethit = 1
 
 [State 0, DestroySelf]
 type = DestroySelf
-trigger1 = time = 3
+trigger1 = time = 1 || enemy,stateno = 50000 || enemy,stateno = 54000

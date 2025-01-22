@@ -48,6 +48,54 @@ Junichi:
 	* cost reduced to 1/2 bar
 2. (+) 214b: damage increased (100 -> 120)
 
+Takuya:
+1. (+) Takuya runs faster (5.1 -> 5.3)
+2. (+) 5A has less recovery
+3. (+) 5AA has more blockstun
+	* Less recovery
+4. Grab launch angle changed
+	* Now applies hard knockdown (Still can combo off of it)
+5. (+) J5A has less recovery
+6. (+) 5[B] does more damage (45 -> 60)
+	* 5B and 5[B] go farther
+	* (+) 5[B] now has a wavedash cancel and jump cancel 
+	* Less recovery
+7. (-) J5[B] does less damage (60 -> 45)
+	* J5B and J5[B] hitbox size increased
+	* J5B is more plus
+8. (+) Wavedash C now has a charged version
+9. (+) 5C cooldown is lower
+	* 5C launch angle changed
+	* 5[C] throws 4 spikes
+	* 5[C] does less damage
+	* 5[C] and 5C are faster
+10. (+) J5C launch angle changed
+	* Takuya now does a shorthop when he jump cancels
+11. (-) 2[C] does less damage
+	* 2[C] cancels into J.5C instead of J.5[C]
+12. (+) J2C is faster
+	* J2C no longer hits post-juggle
+	* Hitbox and hurtbox tweaked, better as an antiair
+13. (+) 4C launch angle changed
+	* 4C has increased blockstun (Charge/11 -> Charge/5)
+	* 4C when enhanced charges faster
+	* Less endlag on jump cancel
+14. (+) 6C has more blockstun and pulls less
+	* 6[C] does not hit post-juggle  now (hopefully)
+15. (+) 214A superpause time decreased (10 -> 5)
+16. (+) 236A damage slightly increased (120 -> 125)
+17. (+) 236B damage increased (60 -> 70)
+	* 236[B] damage per hit increased (9 -> 10)
+18. (+) 214C has less recovery, less startup, and no longer costs meter, requiring it instead
+	* 214C requires 1000 meter (1500 -> 1000)
+
+Centurion:
+1. (-) 214C Ice Shield breaks on blue burst
+
+Watanabe:
+1. (~) 6C seed is knocked away less distance when hit
+
+
 
 ===================================================================================================================================
 |-----------------------------------------------------/
