@@ -7123,7 +7123,6 @@ trigger1 = 1
 map = "helperHit"
 value = movehit
 
-
 [State -2, Counterhit TSP]
 type = Helper
 Triggerall = numhelper(4020) = 0
@@ -7248,7 +7247,7 @@ type = HitDef
 getpower = 0
 trigger1 = anim = 402 && (map(guardCount) + hitcount) <= 6
 triggerall = AnimElem = 3 || AnimElem = 4 || AnimElem = 5 || AnimElem = 6 || AnimElem = 7 || AnimElem = 8
-trigger1 = 1
+trigger1 = root,map(juggle) < 100
 attr = S, NP
 animtype  = Light
 damage    = 5
@@ -7498,7 +7497,7 @@ attr = S, NP
 animtype  = Light
 damage    = 25
 hitflag = MAFD
-guardflag = HA
+guardflag = MA
 pausetime = 6,8
 sparkno = 1
 guard.sparkno = 13000
@@ -7526,7 +7525,7 @@ attr = S, NP
 animtype  = Light
 damage    = 25
 hitflag = MAFD
-guardflag = HA
+guardflag = MA
 pausetime = 12,12
 sparkno = 15000
 guard.sparkno = 13000
