@@ -88,6 +88,14 @@ Takuya:
 	* 236[B] damage per hit increased (9 -> 10)
 18. (+) 214C has less recovery, less startup, and no longer costs meter, requiring it instead
 	* 214C requires 1000 meter (1500 -> 1000)
+19. (-) J5C does less damage
+	* Has slightly more chip damage
+20. (-) 5AA string gives less meter
+21. (-) 5BBB string does less damage
+  * Also gives less meter
+22. (-) 2A now has a leg hurtbox..
+23. (+) Takuya no longer loses extra meter when Charge Cancelling
+24. (~) Takuya now has a sound effect and visual when he places an extra spike (Indicates the timer length increases i hope)
 
 Centurion:
 1. (-) 214C Ice Shield breaks on blue burst

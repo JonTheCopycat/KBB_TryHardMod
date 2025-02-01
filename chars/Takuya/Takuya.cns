@@ -721,7 +721,7 @@ triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 30
+value = 20
 
 [State 0, Rapid Sound]
 type = PlaySnd
@@ -1213,7 +1213,7 @@ triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 100
+value = 75
 
 
 [State 300, 1]
@@ -1223,7 +1223,7 @@ triggerall = map(juggle) < 100 || hitcount != 0
 trigger1 = !movecontact
 attr = S, NA
 animtype  = Medium
-damage    = 15
+damage    = 10
 guardflag = MA
 pausetime = 10,10
 ground.hittime  = 16
@@ -1804,7 +1804,7 @@ triggerall = numhelper(51000) = 0
 triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
-value = 100
+value = 75
 
 
 [State 300, 1]
@@ -1814,7 +1814,7 @@ triggerall = map(juggle) < 100 || hitcount != 0
 trigger1 = !movecontact
 attr = S, NA
 animtype  = Medium
-damage    = 20
+damage    = 15
 guardflag = MA
 pausetime = 15,15
 ground.hittime  = 16
@@ -2216,7 +2216,7 @@ triggerall = AnimElem = 10
 trigger1 = 1
 attr = S, NA
 animtype  = Light
-damage    = 50
+damage    = 45
 guardflag = HA
 hitflag = MAFD
 pausetime = 25,15
@@ -2519,6 +2519,13 @@ Fall.recovertime = 60
 fall = 1
 Envshake.time = 25
 
+[State 200, Wavedash Cancel]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD" ; more
+trigger1 = movehit
+value = 35
+ctrl = 1
+
 [State 200, End]
 type = ChangeState
 trigger1 = Time = 60
@@ -2534,8 +2541,13 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 400
-poweradd = -200
 sprpriority = 1
+
+[State 0, PowerAdd]
+type = PowerAdd
+trigger1 = PrevStateNo != 406
+value = -200
+persistent = 0
 
 [State 0, PosAdd]
 type = PosAdd
@@ -3159,7 +3171,35 @@ value = F10,1
 volumescale = 300
 persistent = 0
 
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = numhelper(427) >= 1
+map = "juggle"
+value = numhelper(427) * 5
+persistent = 0
 
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = numhelper(427) >= 1
+v = 11
+ignorehitpause = 1
+value = numhelper(427) * 5
+persistent = 0
+
+[State 0, Helper]
+type = Helper
+trigger1 = Time = 0 
+helpertype = normal ;player
+name = "5c spam Check"
+ID = 427
+stateno = 427
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 9999
+pausemovetime = 9999
 
 [State 0, Explod]
 type = Explod
@@ -3435,7 +3475,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 15
+damage    = 10
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,8
@@ -3574,7 +3614,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 15
+damage    = 10
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,8
@@ -3708,7 +3748,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Heavy
-damage    = 15
+damage    = 10
 Hitflag = MAF
 guardflag = MA
 pausetime = 0,8
@@ -4784,9 +4824,9 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 450
-poweradd = -500
 velset = 0,0
 sprpriority = 2
+poweradd = -500
 
 [State 0, Helper]
 type = Helper
@@ -6054,6 +6094,38 @@ x = -4
 y = -5
 ;ignorehitpause = 
 ;persistent = 
+
+[State 0, Explod]
+type = Explod
+trigger1 = NumHelper(470) > 0 && AnimTime = 0 && MoveContact && ((BackEdgeBodyDist <= 0 || FrontEdgeBodyDist <= 140) || (BackEdgeBodyDist < 0 || FrontEdgeBodyDist < 145))
+anim = 6002
+ID = 6002
+pos = 0,-60
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = .65,.65
+sprpriority = 3
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = NumHelper(470) > 0 && AnimTime = 0 && MoveContact && ((BackEdgeBodyDist <= 0 || FrontEdgeBodyDist <= 140) || (BackEdgeBodyDist < 0 || FrontEdgeBodyDist < 145)) 
+value = S460,1
+volume = 100
+channel = -1
+
 
 [State 0, C - Start]
 type = Helper
@@ -8962,7 +9034,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NA
 animtype  = Light
-damage    = 45
+damage    = 30
 hitflag = MAFD
 guardflag = HA
 pausetime = 15,15
@@ -9181,7 +9253,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NA
 animtype  = Light
-damage    = 40
+damage    = 90
 hitflag = MAFD
 guardflag = HA
 pausetime = 20,20
@@ -9210,7 +9282,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = A, NA
 animtype  = Light
-damage    = 20
+damage    = 30
 hitflag = MAFD
 guardflag = HA
 pausetime = 10,10
@@ -9343,9 +9415,13 @@ physics = N
 juggle  = 0
 ctrl = 0
 anim = 620
-poweradd = -500
 sprpriority = 1
 
+[State 0, PowerAdd]
+type = PowerAdd
+trigger1 = PrevStateNo != [650,652]
+value = -500
+persistent = 0
 
 [State 0, Turn]
 type = Turn
@@ -9359,14 +9435,6 @@ trigger1 = movehit
 map = "juggle"
 value = 7
 persistent = 0
-
-[State 0, Damage Proration]
-type = VarAdd
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 7
 
 [State 0, Stop any y axis motion.]	
 type = Velset
@@ -9889,7 +9957,13 @@ type = AttackDist
 trigger1 = 1
 value = 60
 
-
+[State 0, Damage Proration]
+type = ParentVarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 7
 
 [State 0, Helper Guarded]
 type = RootMapSet
@@ -9938,7 +10012,7 @@ triggerall = root,map(juggle) < 100 || hitcount != 0
 trigger1 = !movecontact && !movereversed
 animtype  = Heavy
 attr = S, NP
-damage = ifelse(root,life <= 0,enemy,life*2,45)
+damage = ifelse(root,life <= 0,enemy,life*2,40)
 guard.kill = 0
 hitflag = MAFD
 guardflag = MA
@@ -9999,15 +10073,36 @@ inheritjuggle = 1
 type = VelSet
 trigger1 = animelem = 5 && anim = 650 ;&& (helper(470),anim = 462||helper(470),anim = 463||helper(470),anim = 466)
 x = 2
-;ignorehitpause = 
-;persistent = 
 
-;[State 0, Juggle Map]
-;type = MapAdd
-;trigger1 = movehit 
-;map = "juggle"
-;value = 10
-;persistent = 0
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = numhelper(428) >= 1
+map = "juggle"
+value = numhelper(428) * 5
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = numhelper(428) >= 1
+v = 11
+ignorehitpause = 1
+value = numhelper(428) * 5
+persistent = 0
+
+[State 0, Helper]
+type = Helper
+trigger1 = Time = 0 
+helpertype = normal ;player
+name = "j5c spam Check"
+ID = 428
+stateno = 427
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 9999
+pausemovetime = 9999
 
 [State 0, Helper Guarded]
 type = MapSet
@@ -10728,7 +10823,7 @@ getpower = 0
 trigger1 = !movecontact && !movereversed
 attr = S, NA
 animtype  = Medium
-damage    = 60,ifelse(parent,stateno=652,0,5)
+damage    = 50,ifelse(parent,stateno=652,0,10)
 guard.kill = 0
 hitflag = MAFD
 guardflag = MA
@@ -11490,6 +11585,24 @@ sprpriority = 5
 type = Changestate
 trigger1 = time = 80
 value = 430
+
+;-------------------------------------------------------------------------------
+; 5c Check
+[Statedef 427]
+type    = S
+movetype= I
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 9999
+sprpriority = 5
+
+[State 200, End]
+type = Changestate
+trigger1 = p2movetype != H
+trigger2 = time = 150
+value = 430
+
 ;-------------------------------------------------------------------------------
 ; Spam Allow
 [Statedef 430]

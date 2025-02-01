@@ -664,12 +664,12 @@ trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
  ; Special 6 - Space Daniel's Power Transfer
 [State -1, SPECIAL 6] ; Hey...
 type = ChangeState
-value = ifelse(helper(470),stateno=27050,27015,27000)
+value = ifelse(numhelper(27060)>=1,27015,27000)
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(27020) = 0
 triggerall = command = "SPECIAL 6"
 Triggerall = statetype != A
-Triggerall = power >= ifelse(helper(470),stateno=27050, 0,1000)
+Triggerall = power >= ifelse(numhelper(27060)>=1, 0,1000)
 trigger1 = ctrl
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
