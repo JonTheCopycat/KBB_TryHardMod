@@ -98,10 +98,17 @@ Takuya:
 24. (~) Takuya now has a sound effect and visual when he places an extra spike (Indicates the timer length increases i hope)
 
 Centurion:
-1. (-) 214C Ice Shield breaks on blue burst
+1. (+) J5C does more damage
+2. (+) 5C is more advantageous on hit/block by 1 frame 
+3. (+) 2C is more advantageous on block by 1 frame, and 2 frames on hit
+4. (-) 214C Ice Shield breaks on blue burst
+5. (-) 236C does less damage (316 -> 280)
+6. (+) 236A does more damage (80 -> 110)
+7. (-) 236B doesn't hit post juggle anymore
 
 Watanabe:
-1. (~) 6C seed is knocked away less distance when hit
+1. (+) Grab speed buffed (16f -> 12f)
+2. (~) 6C seed is knocked away less distance when hit
 
 
 
