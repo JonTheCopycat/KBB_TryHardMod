@@ -309,6 +309,564 @@ type = ChangeState
 trigger1 = command = "hold_a"
 value = 0
 
+;---------------------------------------------------------------------------
+;Wavedash
+[Statedef 30]
+type = C
+movetype= I
+physics = S
+anim = 30
+ctrl = 0
+sprpriority = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = AnimElem = 1
+time = 10
+trans = add
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = A, AA
+time = 1
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = time = 0
+x = const(velocity.run.fwd.x) * 1.78 * 0.6
+y = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = [1, 3]
+x = const(velocity.run.fwd.x) * 1.78 * 1.25
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = F16000
+ID = 16000
+pos = -40,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+
+[State 200, End]
+type = ChangeState
+;triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "FF"
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+;triggerall = time >= 5
+trigger1 = command = "back"
+value = 11
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "a"
+value = 290
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "b"
+value = 910
+ctrl = 0
+
+[State 200, C]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 200
+trigger1 = command = "c"
+value = 490
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Wavedash Cancel
+[Statedef 35]
+type = C
+movetype= I
+physics = S
+anim = 30
+ctrl = 0
+sprpriority = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = AnimElem = 1
+time = 10
+trans = add
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = A, AA
+time = 1
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = time = 0
+x = const(velocity.run.fwd.x) * 1.78 * 0.6
+y = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = [1, 3]
+x = const(velocity.run.fwd.x) * 1.78 * 1.25
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = F16000
+ID = 16000
+pos = -40,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 10
+trigger1 = command = "FF"
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 10
+trigger1 = command = "back"
+value = 11
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 2
+trigger1 = command = "a"
+value = 290
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 2
+trigger1 = command = "b"
+value = 910
+ctrl = 0
+
+[State 200, C]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 200
+triggerall = time >= 2
+trigger1 = command = "c"
+value = 490
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+
+
+;-------------------------------------------------------------------------------
+; Air Dash - Forward:
+[Statedef 65]
+type    = A
+movetype= A
+physics = N
+velset = 0,0
+juggle = 1
+ctrl = 0
+anim = 196
+sprpriority = 2
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = time >= 15
+trigger2 = movehit
+value = 1
+
+[State 0, AfterImage]
+type = AfterImage
+trigger1 = AnimElem = 2
+time = 10
+trans = add
+
+[State 0, VelSet]		;During the first animation frame you have -2 y velocity (Going upwards) and -2 X vel (Backwards, away from p2.)
+type = VelSet
+trigger1 = time >= 2
+x = 6.5
+y = 0.75
+
+
+;[State 0, VelSet]		;During the first animation frame you have -2 y velocity (Going upwards) and -2 X vel (Backwards, away from p2.)
+;type = VelSet
+;triggerall = time >= 2
+;trigger1 = time <= 14
+;y = 0.75
+;
+;[State 0, VelAdd]
+;type = VelAdd
+;trigger1 = time > 14
+;y = .11
+
+[State HITDEF]
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = !movecontact
+trigger1 = 1
+attr = S, NA
+animtype  = Medium
+damage    = 25
+hitflag = MAFD
+guardflag = MAF
+pausetime = 8,8
+guard.pausetime = 8,6
+guard.dist = 60
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S8,4
+guardsound = S2,0
+ground.type = High
+ground.slidetime = 18
+ground.hittime  = 22
+ground.velocity = -5
+air.hittime  = 22
+air.velocity = -5,-1
+;Fall.recovertime = 40
+fall.recover = 0
+;Fall = 1
+Envshake.time = 10
+down.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -5
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+[State 200, End]
+type = ChangeState
+trigger1 = command != "holdfwd" && time >= 14
+value = 50
+ctrl = 1
+
+[State 0, ChangeState]
+type = ChangeState
+triggerall = time >= 2
+trigger1 = command = "up" && var(3) < const(movement.airjump.num)
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && var(3) = 0
+value = 45
+ctrl = 1
+
+[State 0, ChangeState]
+type = ChangeState
+triggerall = time >= 2
+trigger1 = command = "s" && var(4) = 0 
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && var(4) = 0 
+value = 66
+ctrl = 1
+
+[State 0, ChangeState]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 600
+ctrl = 1
+
+[State 0, ChangeState]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 610
+ctrl = 1
+
+[State -1, Down + C]
+type = ChangeState
+value = 445
+triggerall = time >= 5
+triggerall = numhelper(450) = 0
+triggerall = numhelper(3500) = 0
+triggerall = power >= 200
+trigger1 = command = "holddown"
+trigger1 = command = "c"
+
+[State 0, ChangeState]
+type = ChangeState
+triggerall = time >= 5
+triggerall = numhelper(3500) = 0
+trigger1 = command = "c" && var(12) < const(movement.airjump.num)
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 620
+ctrl = 1
+
+[State 200, End]		
+type = ChangeState
+triggerall = time > 5
+trigger1 = pos y >= -1
+value = 52
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; Hyperhop Start
+[Statedef 60]
+type    = S
+physics = S
+anim = 40
+ctrl = 0
+sprpriority = 1
+facep2 = 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimTime = -1
+anim = F60
+ID = 16001
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = 1.5,1.5
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimTime = -1
+anim = F61
+ID = 16002
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = 0.5,0.5
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+
+[State 40, Disable Jump Block Helper]
+type = helper
+name = "Disable Jump Block"
+trigger1 = time = 0
+ID = 4200
+stateno = 4200
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+supermovetime = 0
+pausemovetime = 0
+
+[State 40, 1]
+type = VarSet
+trigger1 = Time = 0 && ailevel = 0
+trigger2 = abs(P2Bodydist X) <= 30 
+trigger2 = ailevel > 0 && time = 0 && random < 200 && p2movetype != H
+sysvar(1) = 0
+
+[State 40, 2]
+type = VarSet
+trigger1 = command = "holdfwd" && ailevel = 0
+trigger2 = abs(P2Bodydist X) > 100 
+trigger2 = ailevel > 0 && time = 0 && random < 300 && random >= 200 && p2movetype != H
+sysvar(1) = 1
+
+[State 40, 3]
+type = VarSet
+trigger1 = command = "holdback" && ailevel = 0
+trigger2 = p2movetype = A && abs(P2Bodydist X) < 50 
+trigger2 = ailevel > 0 && time = 0 && random < 400 && random >= 300 && p2movetype != H
+sysvar(1) = -1
+
+[State 40, 4]
+type = VelSet
+trigger1 = AnimTime = 0
+x = ifelse(sysvar(1)=0, 0, ifelse(sysvar(1)=1, 5.1, -4.8))
+y = const(velocity.jump.y) * 0.75
+
+[State 0, Turn]
+type = Turn
+triggerall = p2dist x < 0
+trigger1 = AnimTime = 0
+
+[State 40, 6]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+
+;---------------------------------------------------------------------------
+; Run forward
+[Statedef 100]
+type    = S
+physics = S
+anim = 100
+sprpriority = 1
+ctrl = 1
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = time = 1
+trigger1 = prevstateno = 700 || prevstateno = 21005
+time = 10
+trans = add
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = time = 1
+trigger1 = prevstateno = 700
+value = -200
+
+[State 100, 1]
+type = VelSet
+trigger1 = prevstateno != 21005
+x = const(velocity.run.fwd.x)
+
+[State 100, 1]
+type = VelSet
+trigger1 = prevstateno = 21005
+x = const(velocity.run.fwd.x) * 1.25
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = 16000
+ID = 16000
+pos = -40,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+
+[State 100, 3] ;Prevent from turning
+type = AssertSpecial
+trigger1 = 1
+flag = NoAutoTurn
+
+[State 100, 4]
+type = ChangeState
+triggerall = ailevel = 0
+trigger1 = command != "holdfwd"  && command != "hold_z"
+value = 0
+
+[State 100, 4]
+type = ChangeState
+triggerall = ailevel < 0
+trigger1 = Time > 20
+trigger2 = p2dist x < 20
+value = 0
+
+
+
 ;===============================================================================
 ; A:
 ;-------------------------------------------------------------------------------
@@ -5491,6 +6049,18 @@ scale = 0.5,0.5
 sprpriority = 5
 removetime = -2
 persistent = 0
+
+[State 0, IM DOING A HIGH, BOZO]
+type = MapSet
+trigger1 = stateno = [600, 610] || stateno = 900
+map = "highAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = [600, 610] || stateno = 900)
+map = "highAttack"
+value = 0
 
 [State 0, Failed to block an air unblockable!]
 type = Explod

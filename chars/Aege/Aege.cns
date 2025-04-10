@@ -609,6 +609,741 @@ type = ChangeState
 trigger1 = command = "hold_a"
 value = 0
 
+;---------------------------------------------------------------------------
+;Wavedash
+[Statedef 30]
+type = C
+movetype= I
+physics = S
+anim = 30
+ctrl = 0
+sprpriority = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = time = 0
+time = 5
+paladd = 0, 156, 26
+trans = add
+
+[State 0, Helper]
+type = Helper
+trigger1 = time = 0
+helpertype = normal ;player
+name = "Aege Still Clone"
+ID = 31
+stateno = 31
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+inheritJuggle = 1
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = A, AA
+time = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+x = const(velocity.run.fwd.x) * 1.9 * 0.6
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = [1, 3]
+x = const(velocity.run.fwd.x) * 1.9 * 1.25
+
+[State 30, End]
+type = MapSet
+trigger1 = command = "holdback"
+map = "posX"
+value = pos x
+
+[State 30, End]
+type = MapSet
+trigger1 = command = "holdback"
+map = "posY"
+value = pos y
+
+[State 30, End]
+type = MapSet
+trigger1 = command = "holdback"
+map = "velX"
+value = vel x
+
+[State 30, End]
+type = MapSet
+trigger1 = command = "holdback"
+map = "velY"
+value = vel y
+
+;Ending teleports and velsets
+[State 30, End]
+type = PosSet
+trigger1 = command = "holdback"
+x = helper(31),pos x
+y = helper(31),pos y
+
+[State 30, End]
+type = VelSet
+trigger1 = command = "holdback"
+x = helper(31),vel x
+y = helper(31),vel y
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = F16000
+ID = 16000
+pos = -40,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "FF"
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "holdback"
+value = 11
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "a"
+value = 250
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "b"
+value = 390
+ctrl = 0
+
+[State 200, C]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = power >=250
+trigger1 = command = "c"
+value = 590
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Wavedash Still Clone
+[Statedef 31]
+type = S
+movetype= I
+physics = S
+anim = 31
+ctrl = 0
+sprpriority = 1
+velset = 0, 0
+
+[State 31, ChangeState]
+type = ChangeState
+trigger1 = root,prevstateno = 30 && root,command = "holdback"
+trigger2 = root,prevstateno = 35 && root,command = "holdback"
+value = 32
+
+[State 31, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 0
+trigger2 = root,prevstateno = [30, 35] && root,command != "holdback"
+
+;---------------------------------------------------------------------------
+;Wavedash Stop Still Clone
+[Statedef 32]
+type = S
+movetype= I
+physics = S
+anim = 35
+ctrl = 0
+sprpriority = 1
+velset = 0, 0
+
+[State 30, End]
+type = PosSet
+trigger1 = time = 0
+x = root,map(posX)
+y = root,map(posY)
+
+[State 30, End]
+type = VelSet
+trigger1 = time = 0
+x = root,map(velX)
+y = root,map(velY)
+
+[State 31, DestroySelf]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
+
+;---------------------------------------------------------------------------
+;Wavedash Cancel
+[Statedef 35]
+type = C
+movetype= I
+physics = S
+anim = 30
+ctrl = 0
+sprpriority = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = time = 0
+time = 5
+paladd = 0, 156, 26
+trans = add
+
+[State 0, Helper]
+type = Helper
+trigger1 = time = 0
+helpertype = normal ;player
+name = "Aege Still Clone"
+ID = 31
+stateno = 31
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+inheritJuggle = 1
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10]
+value = A, AA
+time = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+x = const(velocity.run.fwd.x) * 1.9 * 0.6
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = [1, 3]
+x = const(velocity.run.fwd.x) * 1.9 * 1.25
+
+[State 30, End]
+type = MapSet
+triggerall = time >= 10
+trigger1 = command = "holdback"
+map = "posX"
+value = pos x
+
+[State 30, End]
+type = MapSet
+triggerall = time >= 10
+trigger1 = command = "holdback"
+map = "posY"
+value = pos y
+
+[State 30, End]
+type = MapSet
+triggerall = time >= 10
+trigger1 = command = "holdback"
+map = "velX"
+value = vel x
+
+[State 30, End]
+type = MapSet
+triggerall = time >= 10
+trigger1 = command = "holdback"
+map = "velY"
+value = vel y
+
+;Ending teleports and velsets
+[State 30, End]
+type = PosSet
+triggerall = time >= 10
+trigger1 = command = "holdback"
+x = helper(31),pos x
+y = helper(31),pos y
+
+[State 30, End]
+type = VelSet
+triggerall = time >= 10
+trigger1 = command = "holdback"
+x = helper(31),vel x
+y = helper(31),vel y
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = F16000
+ID = 16000
+pos = -40,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 10
+trigger1 = command = "FF"
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 10
+trigger1 = command = "holdback"
+value = 11
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 2
+trigger1 = command = "a"
+value = 250
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 2
+trigger1 = command = "b"
+value = 390
+ctrl = 0
+
+[State 200, C]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = power >=250
+triggerall = time >= 2
+trigger1 = command = "c"
+value = 590
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+
+
+;-------------------------------------------------------------------------------
+; Air Dash - Forward:
+[Statedef 65]
+type    = A
+movetype= I
+physics = N
+juggle  = 1
+velset = 0,0
+ctrl = 0
+anim = 196
+sprpriority = 2
+poweradd = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, Turn]
+type = Turn
+triggerall = p2dist x < 0
+trigger1 = prevstateno = 24500
+trigger2 = numhelper(51000)!=0 && (enemynear,movetype=H)
+
+[State 0, Pause]
+type = Pause
+trigger1 = prevstateno = 24500
+time = 10
+movetime = 10
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = time = 5
+value = 1
+
+[State 0, PosAdd]
+type = PosAdd
+triggerall = prevstateno != 50000
+trigger1 = AnimElem = 1
+x = 75
+
+[State 0, PosAdd]
+type = PosAdd
+triggerall = prevstateno != 50000
+trigger1 = AnimElem = 1
+x = 65
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = AnimElem = 1
+time = 10
+paladd = 0, 255, 50
+trans = add
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S3,0
+volumescale = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S3,1
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = 5400
+ID = 5400
+pos = -70,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0.25,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = 2,1.2
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = 1500
+ID = 1500
+pos = 0,-10
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignore
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 2
+x = 6.5
+y = 0
+
+[State 0, VelSet]
+type = VelMul
+trigger1 = time >= 2
+x = 0.97
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = time >= 7
+statetype = A
+movetype = I
+physics = A
+
+[State 200, End]
+type = ChangeState
+trigger1 = time = 25
+value = 50
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time > 2
+trigger1 = pos y >= -1
+value = 52
+ctrl = 1
+
+;===============================================================================
+; Air Dash - Backward:
+;-------------------------------------------------------------------------------
+[Statedef 70]
+type    = A
+movetype= I
+physics = A 
+juggle  = 1
+velset = 0,0
+ctrl = 0
+anim = 197
+sprpriority = 2
+PowerAdd = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = time = 2
+value = 1
+
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = AnimElem = 1
+x = -75
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S3,0
+volumescale = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S3,1
+volumescale = 100
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = AnimElem = 1
+time = 10
+paladd = 0, 255, 50
+trans = add
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = 5450
+ID = 5450
+pos = 50,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = -.25,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = 1.1,1.5
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+
+[State 0, VelSet]
+type = VelSet
+Triggerall = prevstateno = 50||prevstateno = 80
+trigger1 = time = 1
+x = -5.25
+y = -2
+
+[State 0, VelSet]
+type = VelSet
+Triggerall = prevstateno != 50 && prevstateno != 80
+trigger1 = time = 2
+x = -5.25
+y = -4
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = time >= 2
+statetype = A
+movetype = I
+physics = A
+
+[State 200, End]
+type = ChangeState
+triggerall = prevstateno = 50||prevstateno = 80
+trigger1 = time = 15
+value = 50
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time > 2
+trigger1 = pos y >= -1
+value = 52
+ctrl = 1
+
+
+;---------------------------------------------------------------------------
+; Hyperhop Start
+[Statedef 60]
+type    = S
+physics = S
+anim = 40
+ctrl = 0
+sprpriority = 1
+facep2 = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S7,0
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimTime = -1
+anim = F60
+ID = 16001
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = 1.5,1.5
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimTime = -1
+anim = F61
+ID = 16002
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = 0.5,0.5
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+
+[State 40, Disable Jump Block Helper]
+type = helper
+name = "Disable Jump Block"
+trigger1 = time = 0
+ID = 4200
+stateno = 4200
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+supermovetime = 0
+pausemovetime = 0
+
+[State 40, 1]
+type = VarSet
+trigger1 = Time = 0 && ailevel = 0
+trigger2 = abs(P2Bodydist X) <= 30 
+trigger2 = ailevel > 0 && time = 0 && random < 200 && p2movetype != H
+sysvar(1) = 0
+
+[State 40, 2]
+type = VarSet
+trigger1 = command = "holdfwd" && ailevel = 0
+trigger2 = abs(P2Bodydist X) > 100 
+trigger2 = ailevel > 0 && time = 0 && random < 300 && random >= 200 && p2movetype != H
+sysvar(1) = 1
+
+[State 40, 3]
+type = VarSet
+trigger1 = command = "holdback" && ailevel = 0
+trigger2 = p2movetype = A && abs(P2Bodydist X) < 50 
+trigger2 = ailevel > 0 && time = 0 && random < 400 && random >= 300 && p2movetype != H
+sysvar(1) = -1
+
+[State 40, 4]
+type = VelSet
+trigger1 = AnimTime = 0
+x = ifelse(sysvar(1)=0, const(velocity.jump.neu.x) * 2, ifelse(sysvar(1)=1, 5, -4.5))
+y = const(velocity.jump.y) * 0.75
+
+[State 0, Turn]
+type = Turn
+triggerall = p2dist x < 0
+trigger1 = AnimTime = 0
+
+[State 40, 6]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
 ;===============================================================================
 ; A:
 ;-------------------------------------------------------------------------------
@@ -4423,6 +5158,18 @@ sprpriority = 5
 removetime = -2
 persistent = 0
 
+[State 0, IM DOING A HIGH, BOZO]
+type = MapSet
+trigger1 = stateno = 600 || stateno = 900 || stateno = 455
+map = "highAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = 600 || stateno = 900 || stateno = 455)
+map = "highAttack"
+value = 0
+
 [State 0, Failed to block an air unblockable!]
 type = Explod
 triggerall = (stateno = 200 && enemy, statetype = A) ;Edit this trigger as necessary
@@ -4448,6 +5195,18 @@ scale = 0.5,0.5
 sprpriority = 5
 removetime = -2
 persistent = 0
+
+[State 0, IM DOING A AUB, BOZO]
+type = MapSet
+trigger1 = stateno = 200
+map = "aubAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = 200)
+map = "aubAttack"
+value = 0
 
 ; ------ Reversal Move Check ------
 [State -2, Reset reversalMove]

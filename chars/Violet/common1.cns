@@ -1004,7 +1004,7 @@ flag = NoAutoTurn
 [State 100, 4]
 type = ChangeState
 triggerall = ailevel = 0
-trigger1 = command != "holdfwd" && command != "hold_z"
+trigger1 = command != "holdfwd"
 value = 0
 
 [State 100, 4]

@@ -166,7 +166,7 @@ cancel.snd = 100,2
 	footer3.font = 10,0,0
 	footer3.scale = 1.5, 1.5
 	footer3.font.height = -1
-	footer3.text = "v0.7.3au"
+	footer3.text = "v0.8.0u"
 	
 	footer.overlay.col = 0, 0, 64
 	footer.overlay.alpha = 0, 0
@@ -384,7 +384,7 @@ new moves.
 
 * More than anything... ENJOY YOURSELF!
 
-* This build is stable version 0.7.3au!
+* This build is developer version 0.8.0u!
 
 * Space Daniel was here
 ;-------------------------------------------------------------------
@@ -1876,7 +1876,7 @@ keymenu.itemname.right = "Right"                  ;Ikemen feature
 keymenu.itemname.a = "A"                          ;Ikemen feature
 keymenu.itemname.b = "B"                          ;Ikemen feature
 keymenu.itemname.c = "C"                          ;Ikemen feature
-keymenu.itemname.x = "COUNTER"                          ;Ikemen feature
+keymenu.itemname.x = "GUARD"                          ;Ikemen feature
 keymenu.itemname.y = "GRAB"                          ;Ikemen feature
 keymenu.itemname.start = "CHARGE"                  ;Ikemen feature
 keymenu.itemname.d = "TAG 1"                          ;Ikemen feature
@@ -1929,7 +1929,8 @@ menu.itemname.menuaudio.back = "Back"
 menu.itemname.menuvideo = "Video Settings"
 menu.itemname.menuvideo.resolution = "Resolution" ;reserved submenu
 ; Resolution is assigned based on values used in itemname suffix (e.g. 320x240)
-menu.itemname.menuvideo.resolution.854x480 = "854x480   (16:9 SD)"
+menu.itemname.menuvideo.resolution.512x288 = "512x288   (16:9 SD)"
+menu.itemname.menuvideo.resolution.768x432 = "768x432   (16:9 SD)"
 menu.itemname.menuvideo.resolution.1280x720 = "1280x720   (16:9 HD)"
 menu.itemname.menuvideo.resolution.1600x900 = "1600x900   (16:9 HD+)"
 menu.itemname.menuvideo.resolution.1920x1080 = "1920x1080  (16:9 FHD)"
@@ -2326,6 +2327,7 @@ menu.valuename.distance.far = "Far"
 
 menu.valuename.guardconfig.normal = "Normal" ;Kokorz Addition
 menu.valuename.guardconfig.ib = "Instant Block" ;Kokorz Addition
+menu.valuename.guardconfig.sg = "Star Guard" ;JonTheCopycat Addition
 
 menu.valuename.bjconfig.mash = "Mash" ;Kokorz Addition
 menu.valuename.bjconfig.reversal = "Reversal" ;Kokorz Addition

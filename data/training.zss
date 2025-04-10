@@ -1,0 +1,557 @@
+# Mugen style Training Mode global code
+# maps set via Pause Menu (menu.lua)
+# _iksys_trainingDummyControl: 0 - cooperative, 1 - ai, 2 - manual
+# _iksys_trainingGuardMode: 0 - none, 1 - auto
+# _iksys_trainingDummyMode: 0 - stand, 1 - crouch, 2 - jump, 3 - wjump
+# _iksys_trainingDistance: 0 - any, 1 - close, 2 - medium, 3 - far
+# _iksys_trainingButtonJam: 0 - none, 1-9 - a/b/c/x/y/z/s/d/w
+
+# _iksys_traininglife: 
+# _iksys_trainingpower: 
+
+# _iksys_trainingLiedownTime:
+# _iksys_trainingRecoverDirection: 
+# _iksys_trainingFrameData: 0 - off, 1 - on (added by Kokorz)
+#===============================================================================
+[Statedef 10000; 
+ type: S; 
+ physics: S; 
+ sprpriority: 0;]
+
+if Time = 0 {
+    MapSet{map: "HitDamageReal"; value: root, map(HitDamageInit)}
+}
+
+ignorehitpause if gametime%5 = 0{	
+	text{removetime: 5; layerno: 0; text: "%0.0f"; params: Map(HitDamageReal); font: F7; align: -1; pos: 330, 80; scale: 0.7,0.7}
+}
+
+if (root, map(HitDamageInit) > 0 && Time > 1) || root,map(_iksys_trainingFrameData) = 0 {
+	DestroySelf{}
+}
+
+#===============================================================================
+[Statedef 10020; 
+ type: S; 
+ physics: S; 
+ sprpriority: 0;]
+ 
+ignorehitpause if time = 0{
+    MapSet{map: "p1MoveState"; value: enemynear,stateno}
+}
+
+ignorehitpause if (root,ctrl = 1)&& enemy,ctrl = 0 && map(MoveOver) = 0{
+	mapAdd{map: "FrameAdvantage"; value: -1}
+}
+ignorehitpause if (root,ctrl = 0) && enemy,ctrl = 1 && map(MoveOver) = 0{
+	mapAdd{map: "FrameAdvantage"; value: 1}
+}
+
+ignorehitpause if (root,ctrl = 1 && enemy,ctrl = 1) {
+				MapSet{map: "MoveOver"; value: 1}
+				MapSet{map: "p1MoveState"; value: 0}
+}
+
+ignorehitpause if map(MoveOver) = 0{
+	text{removetime: 1; layerno: 0; text: "%0.0f"; params: Map(FrameAdvantage); font: F7; align: -1; pos: 330, 110; scale: 0.7,0.7}
+}
+
+ignorehitpause if gametime%5 = 0{
+	text{removetime: 5; layerno: 0; text: "%0.0f"; params: Map(FrameAdvantage); font: F7; align: -1; pos: 330, 110; scale: 0.7,0.7}
+}
+ignorehitpause if (map(p1MoveState) != enemynear,stateno && enemynear,moveguarded) || (root, map(HitDamageInit) > 0 && Time > 1) ||  root,map(_iksys_trainingFrameData) = 0{
+	DestroySelf{}
+}
+
+ignorehitpause if ((root,stateno = 150 || root,stateno = 152 || root,stateno = 154) && root,time <= 1) {
+	DestroySelf{}
+}
+
+#===============================================================================
+[Statedef 10030; 
+ type: S; 
+ physics: S; 
+ sprpriority: 0;]
+ 
+ ignorehitpause if root, Ctrl && root, StateNo != [120,160] && enemyNear, moveType != A && Time > 30 {
+	DestroySelf{}
+ }
+
+#===============================================================================
+[Statedef 10035; 
+ type: S; 
+ physics: S; 
+ sprpriority: 0;]
+
+ignorehitpause if enemyNear, map(lowAttack) = 0 && root, InGuardDist {
+	if root, facing = 1 {
+		assertInput{flag: L; redirectId: root, id}
+	} else {
+		assertInput{flag: R; redirectId: root, id}
+	}
+} 
+ignorehitpause if enemyNear, map(lowAttack) = 1 && root, InGuardDist {
+	assertInput{flag: D; redirectId: root, id}
+	if root, facing = 1 {
+		assertInput{flag: L; redirectId: root, id}
+	} else {
+		assertInput{flag: R; redirectId: root, id}
+	}
+}
+
+ignorehitpause if root, map(trainingRandomGuard) <= 499 {
+	DestroySelf{}
+}					
+ 
+#===============================================================================
+# Global states (not halted by Pause/SuperPause, no helper limitations)
+#===============================================================================
+[StateDef -4]
+
+if gameMode != "training" || isHelper || teamSide != 2 {
+	# Do nothing, not training more or statedef executed by helper or not P2
+} else if roundState = 0 {
+	# Round start reset
+	powerSet{value: powerMax}
+	powerSet{value: enemyNear,powerMax; redirectId: enemyNear,id}
+	mapSet{map: "_iksys_trainingDummyCounter"; value: 0}
+    mapSet{map: "_iksys_traininglife"; value: 0}
+    mapSet{map: "_iksys_trainingpower"; value: 0}
+    mapSet{map: "_iksys_trainingDirection"; value: 0}
+    mapSet{map: "_iksys_trainingAirJumpNum"; value: 0}
+	mapSet{map: "TotalDamage"; value: 0}
+	mapSet{map: "MaxDamage"; value: 0}
+    mapSet{map: "AttackStartupFreeze"; value: 0}
+    mapSet{map: "AttackStartup"; value: 0}
+    MapSet{map: "HitDamageInit"; value: GetHitVar(damage)}
+	MapSet{map: "FrameAdvantage"; value: 0}
+	MapSet{map: "MoveOver"; value: 0}
+	MapSet{map: "p1MoveState"; value: 0}
+	mapSet{map: "onehitautoguard"; value: 0}
+
+} else if roundState = 1 {
+	if StateNo = 195 && Time = 1 {
+		assertInput{flag: a}
+	}
+} else if roundState = 2 {
+
+	ignorehitpause if map(_iksys_enableKO) = 0 {
+		assertSpecial{flag: noko}
+		assertSpecial{flag: noko; redirectId: enemyNear, id}
+		assertSpecial{flag: nokovelocity}
+		assertSpecial{flag: nokovelocity; redirectId: enemyNear, id}
+	}
+
+    # Life and Power recovery
+    if ctrl = 0 || enemyNear,Numhelper(51000) > 0{
+        mapSet{map: "_iksys_trainingDummyCounter"; value: 0}
+    } else if map(_iksys_trainingDummyCounter) >= 60{
+        lifeSet{value: lifeMax - (map(_iksys_trainingenemylife) * 300)}
+        lifeSet{value: enemyNear,lifeMax - (map(_iksys_traininglife) * 300); redirectId: enemyNear,id}
+		if map(_iksys_enableRefill) = 0 {
+			powerSet{value: enemyNear,powerMax - (map(_iksys_trainingpower) * 1000); redirectId: enemyNear,id}
+			powerSet{value: powerMax - (map(_iksys_trainingpower) * 1000)}
+		}
+		#if enemynear,name = "Leon" {
+			#var(53) = 100, redirectId: enemyNear,id}
+		#}
+        mapSet{map: "_iksys_trainingDummyCounter"; value: 0}
+    } else {
+        mapAdd{map: "_iksys_trainingDummyCounter"; value: 1}
+    }
+	
+	#Determine when to 1-Hit Autoguard
+	if map(_iksys_trainingGuardMode) = 2 {
+		if MoveType = I && (PrevStateNo = [5000,5210] || PrevStateNo = [1000,1050] || PrevStateNo = 3000) && NumHelper(10030) = 0 {
+			helper{name: "1-Hit Guard Determine"; id: 10030; stateno: 10030; pos: 9999,9999; keyctrl: 0; supermovetime: 0; pausemovetime: 0;}
+		}
+	}
+
+	#Generate a Random Value for Random Autoguard
+	if map(_iksys_trainingGuardMode) = 3 {
+		if enemyNear,time = 1 && enemyNear, moveType = A {
+			mapSet{map: "trainingRandomGuard"; value: random}
+			#debug
+			#text{removetime: 5; layerno: 0; text: "%0.0f"; params: map(trainingRandomGuard); font: F7; align: -1; pos: 50, 60; scale: 0.7,0.7}
+		}
+		#if map(trainingRandomGuard) > 499 && movetype != H{
+			#if enemyNear, map(lowAttack) = 0 {
+				#assertSpecial{flag: autoguard}
+			#} else if enemyNear, map(lowAttack) = 1 {
+				#assertInput{flag: D}
+				#assertSpecial{flag: autoguard}
+			#}
+		#}
+		#if map(trainingRandomGuard) <= 499 && InGuardDist && enemynear, time = 1 && movetype != H {
+			#if facing = 1 {
+				#assertInput{flag: R}
+			#} else {
+				#assertInput{flag: L}
+			#}
+			#changeState{value: 140; ctrl:1}
+		#}
+	}
+	
+	# Dummy Control: Cooperative
+	if aiLevel = 0 && map(_iksys_trainingDummyControl) = 0 {
+
+		# Guard mode: None
+		# if map(_iksys_trainingGuardMode) > 0 {
+			# if (map(_iksys_trainingGuardMode) = 1 || NumHelper(10030) = 1 || (map(_iksys_trainingGuardMode) = 3 && random < 500)) && P2StateType != C {
+				# assertSpecial{flag: autoguard}
+			# }
+			# else if (map(_iksys_trainingGuardMode) = 1 || NumHelper(10030) = 1) && InGuardDist && P2StateType = C {
+				# assertInput{flag: D}
+					# if facing = 1 {
+						# assertInput{flag: L}
+					# } else {
+						# assertInput{flag: R}
+					# }
+			# }
+		# }
+
+		#Guard mode: 
+		if map(_iksys_trainingGuardMode) > 0 {
+
+			if (map(_iksys_trainingGuardMode) = 1 || NumHelper(10030) = 1 || map(trainingRandomGuard) > 499) && enemyNear, map(lowAttack) = 0 {
+				assertSpecial{flag: autoguard}
+			} else if (map(_iksys_trainingGuardMode) = 1 || NumHelper(10030) = 1 || map(trainingRandomGuard) > 499) &&  enemyNear, map(lowAttack) = 1 {
+				assertInput{flag: D}
+				assertSpecial{flag: autoguard}
+
+			} 
+			if map(_iksys_trainingGuardModeConfigure) = 1 && !numhelper(4300) && enemynear, MoveType = A {
+				Helper{
+                	helpertype: normal;
+                	name: "Instant block";
+                	ID: 4300;
+                	stateno: 4300;
+                	pos: 0,300;
+                	postype: p1;
+                	keyctrl: 0;
+                	ownpal: 0;
+                	supermovetime: 0;
+                	pausemovetime: 0;
+				}
+			}
+			if map(_iksys_trainingGuardModeConfigure) = 2 && !numexplod(13500) && enemynear,MoveType = A && stateno = [120, 155] {
+				Explod{
+					anim: F13500;
+					ID: 13500;
+					pos: 20,-20;
+					postype: p1;
+					facing: 1;
+					vfacing: 1;
+					bindtime: -1;
+					vel: 0,0;
+					accel: 0,0;
+					random: 0,0;
+					removetime: -1;
+					pausemovetime: 0;
+					scale: 1,1;
+					sprpriority: 8;
+					ontop: 1;
+					ownpal: 1;
+					removeongethit: 0;
+				}
+			}
+			if map(trainingRandomGuard) <= 499 || map(_iksys_trainingGuardMode) = 1 {
+				if StateNo = 140 {
+					if StateType = A {
+						changeState{value: 50; ctrl: 1}
+					} else if StateType = S {
+						changeState{value: 0; ctrl: 1}
+					} else if StateType = C {
+						changeState{value: 11; ctrl: 1}
+					}
+				}
+			}
+		}
+
+		#Guard mode: Random
+		#ignorehitpause if map(_iksys_trainingGuardMode) > 0 {
+			#if (map(_iksys_trainingGuardMode) = 3 && map(trainingRandomGuard) > 499) && enemyNear, map(lowAttack) = 0 {
+				#assertSpecial{flag: autoguard}
+			#} else if (map(_iksys_trainingGuardMode) = 3 && map(trainingRandomGuard) > 499) && enemyNear, map(lowAttack) = 1 {
+				#assertInput{flag: D}
+				#assertSpecial{flag: autoguard}
+			#}
+		#}
+
+		#Guard mode: Random
+		#ignorehitpause if map(_iksys_trainingGuardMode) > 0 {
+			#if (map(_iksys_trainingGuardMode) = 3 && map(trainingRandomGuard) > 499) && NumHelper(10035) = 0 {
+				#Helper{name: "start blocking!"; id: 10035; stateno: 10035; pos: 9999,9999; postype: p1; facing: 1; keyctrl: 0; supermovetime: 0; pausemovetime: 0;}
+			#}
+		#}
+
+		#Recover and Recover Direction
+		if CanRecover && StateNo != [5080,5210] && MoveType = H {
+			assertInput{flag: a}
+		} 
+		
+		if map(_iksys_trainingRecoverDirection) > 0 && StateNo = 5210 && time = [3,5] {
+			if map(_iksys_trainingRecoverDirection) = 1 || (map(_iksys_trainingRecoverDirection) = 5 && random = (0,249)) {
+				assertInput{flag: U}
+				assertInput{flag: a}
+			} else if map(_iksys_trainingRecoverDirection) = 2 || (map(_iksys_trainingRecoverDirection) = 5 && random = (250,499)) {
+				assertInput{flag: a}
+				if facing = 1 {
+					assertInput{flag: L}
+				} else {
+					assertInput{flag: R}
+				}
+			} else if map(_iksys_trainingRecoverDirection) = 3 || (map(_iksys_trainingRecoverDirection) = 5 && random = (500, 749))  {
+				assertInput{flag: a}
+				assertInput{flag: D}
+			} else if map(_iksys_trainingRecoverDirection) = 4 || (map(_iksys_trainingRecoverDirection) = 5 && random = (750,999)) {
+				assertInput{flag: a}
+				if facing = 1 {
+					assertInput{flag: R}
+				} else {
+					assertInput{flag: L}
+				}
+			}
+		}
+		
+		#Liedown Tech Time
+		if StateNo = 5110 && Time = 1 && (map(_iksys_trainingLiedownTime) = 0 || (map(_iksys_trainingLiedownTime) = 2 && random < 499))  {
+			assertInput{flag: a}
+		}
+		
+		#Grab Tech
+		if StateNo = 4000 && Time = 1 && (map(_iksys_trainingGrabTech) = 1 || (map(_iksys_trainingGrabTech) = 2 && random < 499)) {
+			assertInput{flag: y}
+		}
+		
+		#Counterhit-on-Idle
+		if enemynear, MoveType = A && map(_iksys_trainingCounterHit) = 1 && (MoveType = I && StateNo != 52) && MoveType != H {
+			StateTypeSet{movetype: A}
+		} else if (enemynear, movetype != A && (enemy, numhelper = 0 ||(enemynear, numhelper >= 1 && enemynear, helper, movetype != A))) && map(_iksys_trainingCounterHit) = 1 && (MoveType = I && StateNo = 52) && MoveType != H{
+			StateTypeSet{movetype: I}
+		}
+
+		#Counterhit-on-Idle - Helper
+		if enemynear, numhelper > 1 && map(_iksys_trainingCounterHit) = 1 && MoveType = I {
+				if enemynear, helper, movetype = A{
+					StateTypeSet{movetype: A}
+				}
+		}
+
+		# Distance
+		let dir = 0;
+		if map(_iksys_trainingDistance) != 0 {
+			# Close
+			if map(_iksys_trainingDistance) = 1 && p2BodyDist x > const240p(10) {
+				let dir = 1;
+				mapSet{map: "_iksys_trainingDirection"; value: 1}
+			# Medium
+			} else if map(_iksys_trainingDistance) = 2 {
+				if p2BodyDist x > const240p(130) {
+					let dir = 1;
+					mapSet{map: "_iksys_trainingDirection"; value: 1}
+				} else if p2BodyDist x < const240p(80) && backEdgeBodyDist >= const240p(10) {
+					let dir = -1;
+					mapSet{map: "_iksys_trainingDirection"; value: -1}
+				}
+			# Far
+			} else if map(_iksys_trainingDistance) = 3 && backEdgeBodyDist > const240p(10) {
+				let dir = -1;
+				mapSet{map: "_iksys_trainingDirection"; value: -1}
+			}
+		}
+
+		if map(_iksys_trainingDirection) != 0 {
+			# if adjusting position is no longer needed
+			if $dir = 0 {
+				# maintain assertion only if dummy and nearest P1 are moving in the same direction
+				if vel x * enemyNear,vel x >= 0 || enemyNear,backEdgeBodyDist = 0 {
+					mapSet{map: "_iksys_trainingDirection"; value: 0}
+				}
+			}
+			# if dummy should move forward and player is not trying to move dummy back
+			if map(_iksys_trainingDirection) = 1 && command != "holdback" {
+				if facing = 1 {
+					assertInput{flag: R}
+				} else {
+					assertInput{flag: L}
+				}
+			# if dummy should move backward and player is not trying to move dummy forward
+			} else if map(_iksys_trainingDirection) = -1 && command != "holdfwd" {
+				if facing = 1 {
+					assertInput{flag: L}
+				} else {
+					assertInput{flag: R}
+				}
+			}
+		} else {
+			# Dummy mode: Crouch
+			if map(_iksys_trainingDummyMode) = 1 {
+				assertInput{flag: D}
+			# Dummy mode: Jump
+			} else if map(_iksys_trainingDummyMode) = 2 {
+				if stateNo = const(StateStand) || vel y <= 0 {
+					assertInput{flag: U}
+				}
+			# Dummy mode: W Jump
+			} else if map(_iksys_trainingDummyMode) = 3 {
+				if map(_iksys_trainingAirJumpNum) = 0 {
+					if stateNo = const(StateStand) || vel y <= 0 {
+						assertInput{flag: U}
+					} else { # 1 frame delay before another assertInput is used to register double jump
+						mapSet{map: "_iksys_trainingAirJumpNum"; value: 1}
+					}
+				} else if map(_iksys_trainingAirJumpNum) >= const(movement.airjump.num) && stateNo = const(StateJumpUp) {
+					mapAdd{map: "_iksys_trainingAirJumpNum"; value: 1}
+					assertInput{flag: U}
+				} else if stateNo = const(StateStand) {
+					mapSet{map: "_iksys_trainingAirJumpNum"; value: 0}
+				}
+			}
+			# Button jam
+			if map(_iksys_trainingDummyMode) > 0 && stateNo = const(StateStand) {
+				mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+			}
+			if (map(_iksys_trainingButtonJam) > 0 && (ctrl) && command != "holdback" && command != "holdfwd" && map(_iksys_trainingButtonJamConfigure) = 0) ||
+			 (map(_iksys_trainingButtonJam) > 0 && ((ctrl = 1 && prevStateNo = [120,155]) || MoveType = I && (PrevStateNo = [5000,5210] || PrevStateNo = [1000,1050] || PrevStateNo = 3000)) && map(_iksys_trainingButtonJamConfigure) = 1) {
+				if map(_iksys_trainingButtonJamDelay) > 0 {
+					mapAdd{map: "_iksys_trainingButtonJamDelay"; value: -1}
+				} else if map(_iksys_trainingButtonJam) = 1 {
+					assertInput{flag: a}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				} else if map(_iksys_trainingButtonJam) = 2 {
+					assertInput{flag: b}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				} else if map(_iksys_trainingButtonJam) = 3 {
+					assertInput{flag: c}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				} else if map(_iksys_trainingButtonJam) = 4 {
+					assertInput{flag: x}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				} else if map(_iksys_trainingButtonJam) = 5 {
+					assertInput{flag: y}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				} else if map(_iksys_trainingButtonJam) = 6 {
+					assertInput{flag: z}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				} else if map(_iksys_trainingButtonJam) = 7 {
+					assertInput{flag: s}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				} else if map(_iksys_trainingButtonJam) = 8 {
+					assertInput{flag: d}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				} else if map(_iksys_trainingButtonJam) = 9 {
+					assertInput{flag: w}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				}
+			}
+			
+			# if map(_iksys_trainingDefenseMash) > 0 && ctrl && command != "holdback" && command != "holdfwd" {
+				# if map(_iksys_trainingButtonJamDelay) > 0 {
+					# mapAdd{map: "_iksys_trainingButtonJamDelay"; value: -1}
+				# } else if InGuardDist {
+					# if map(_iksys_trainingDefenseMash) = 1 {
+						# assertInput{flag: x}
+					# } else if map(_iksys_trainingDefenseMash) = 2 {
+							# if facing = 1 {
+								# assertInput{flag: L}
+							# } else {
+								# assertInput{flag: R}
+							# }
+						# }
+						# assertInput{flag: x}
+					# } else if map(_iksys_trainingDefenseMash) = 3 {
+						# assertSpecial{flag: autoguard}
+						# ignorehitpause if enemyNear, MoveOver {
+							# if facing = 1 {
+								# assertInput{flag: L}
+							# } else {
+								# assertInput{flag: R}
+							# }
+						# }
+					# } else if map(_iksys_trainingDefenseMash) = 4 {
+						# assertSpecial{flag: NoStandGuard}
+						# assertSpecial{flag: NoCrouchGuard}
+						# assertSpecial{flag: NoAirGuard}
+						# ignorehitpause if enemyNear, MoveHit {
+							# assertInput{flag: x}
+							# assertInput{flag: y}
+						# }
+					# } else if map(_iksys_trainingDefenseMash) = 5 {
+						# assertSpecial{flag: autoguard}
+						# ignorehitpause if enemyNear, MoveOver {
+							# assertInput{flag: x}
+							# assertInput{flag: y}
+						# }
+					# } else if map(_iksys_trainingDefenseMash) = 6 {
+						# assertSpecial{flag: autoguard}
+						# ignorehitpause if enemyNear, MoveOver {
+							# assertInput{flag: x}
+							# assertInput{flag: s}
+						# }
+					# }
+				# }
+				
+			ignorehitpause if map(_iksys_trainingFrameData) > 0 && numExplod(40000) < 1 {
+					Explod{id:40000; anim: F40000; postype: left; pos: 190, 24.2; scale: 0.633,0.633; removetime: -1; sprpriority: 6; ontop: 1; ownpal: 1; removeongethit: 0}
+			}
+			ignorehitpause if map(_iksys_trainingFrameData) = 0 && numexplod(40000) >= 1 {
+					RemoveExplod{id:40000}
+			}
+				
+			#Frame Data Display - Kokorz Addition
+			ignorehitpause if map(_iksys_trainingFrameData) > 0 {
+
+					# ignorehitpause if enemyNear, HitPauseTime && NumTarget {
+						# MapSet{map: "AttackStartupFreeze"; value: 1}
+					# } else if enemyNear, Time = 0 {
+						# MapSet{map: "AttackStartupFreeze"; value: 0}
+					# }
+				
+					
+					# ignorehitpause if enemyNear, MoveType = A && Map(AttackStartupFreeze) = 0 { 
+						# MapSet{map: "AttackStartup"; value:enemyNear, Time}
+					# } else if (HitPauseTime > 0 && NumTarget) ||  Map(AttackStartupFreeze) = 1 {
+						# MapSet{map: "AttackStartup"; value: Map(AttackStartup)}
+					# } else if enemyNear, Time = 0 {
+						# MapSet{map: "AttackStartup"; value: 0}
+					# }
+				
+				#Labels for Each Thing
+				ignorehitpause if gametime%5 = 0 {
+					#Values Display
+					#text{removetime: 5; layerno: 0; text: "%d"; params: ReceivedHits; font: F7; align: -1; pos: 330, 50; scale: 0.7,0.7}
+					
+					ignorehitpause if ReceivedDamage > 0 && ReceivedDamage != map(TotalDamage){
+						mapSet{map: "TotalDamage"; value: ReceivedDamage}
+					}
+					
+					ignorehitpause if map(MaxDamage) < ReceivedDamage{
+						mapSet{map: "MaxDamage"; value: ReceivedDamage}
+					}
+					text{removetime: 5; layerno: 0; text: "%d"; params: Life; font: F7; align: -1; pos: 330, 50; scale: 0.7,0.7}
+					#text{removetime: 5; layerno: 0; text: "%0.0f"; params: 100*(map(initialDenence)+map(defence)); font: F7; align: -1; pos: 330, 60; scale: 0.7,0.7}
+					text{removetime: 5; layerno: 0; text: "%0.0f"; params: map(TotalDamage); font: F7; align: -1; pos: 330, 60; scale: 0.7,0.7}
+					text{removetime: 5; layerno: 0; text: "%0.0f"; params: map(MaxDamage); font: F7; align: -1; pos: 330, 70; scale: 0.7,0.7}
+					text{removetime: 5; layerno: 0; text: "%0.2f"; params: 100*0.99**enemy,var(11); font: F7; align: -1; pos: 330, 90; scale: 0.7,0.7}
+					text{removetime: 5; layerno: 0; text: "%0.0f"; params: enemy,map(juggle); font: F7; align: -1; pos: 330, 100; scale: 0.7,0.7}
+				}
+				MapSet{map: "HitDamageInit"; value: GetHitVar(damage)}
+				if GetHitVar(damage) > 0 {
+					Helper{name: "gethitvar just got ninja'd! nerd!!"; id: 10000; stateno: 10000; pos: 9999,9999; postype: p1; facing: 1; keyctrl: 0; supermovetime: 0; pausemovetime: 0;}
+					}
+				# text{removetime: 1; layerno: 0; text: "%d"; params: helper(10000),Map(HitDamageReal); font: F7; align: -1; pos: 330, 70; scale: 0.7,0.7}
+
+			
+				
+				
+				# text{removetime: 1; layerno: 0; text: "%0.0f"; params: Map(AttackStartup); font: F7; align: -1; pos: 330, 90; scale: 0.7,0.7}
+				
+				if movetype = H && numhelper(10020) < 1{
+					helper{name: "FrameAdvantage helper"; id: 10020; stateno: 10020; pos: 9999,9999; keyctrl: 0; supermovetime: 0; pausemovetime: 0;}
+				}
+				
+			}
+		}
+	}
+}

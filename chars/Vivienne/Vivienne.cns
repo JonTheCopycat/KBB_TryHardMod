@@ -511,6 +511,960 @@ trigger1 = command = "hold_a"
 value = 0
 
 
+;---------------------------------------------------------------------------
+;Wavedash Old
+[Statedef 39]
+type = C
+movetype= I
+physics = S
+anim = 30
+ctrl = 0
+sprpriority = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = time = 0
+time = 5
+paladd = 0, 255, 110
+trans = add
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = [0, 1]
+x = const(velocity.run.fwd.x) * 1.72
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 1
+anim = F16000
+ID = 16000
+pos = -40,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = Time = 0
+v = 53
+value = 4
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 0
+
+;[State 200, End]
+;type = ChangeState
+;triggerall = time >= 10
+;trigger1 = command = "WD"
+;value = 30
+;ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "FF" || (command = "z" && command != "holddown" && time >= 5)
+value = 100
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "back"
+value = 105
+
+[State 200, A]
+type = ChangeState
+triggerall = prevstateno != 52 || time > 3
+trigger1 = command = "a"
+value = 290
+ctrl = 0
+
+[State 200, B]
+type = ChangeState
+triggerall = prevstateno != 52 || time > 3
+trigger1 = command = "b"
+value = 900
+ctrl = 0
+
+[State 200, C]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+triggerall = power >=100
+triggerall = prevstateno != 52 || time > 3
+trigger1 = command = "c"
+value = 490
+
+[State 200, Grab]
+type = ChangeState
+triggerall = prevstateno != 52 || time > 3
+trigger1 = command = "y"
+value = 3001
+ctrl = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+; No Mercy Initiation
+[Statedef 30]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 30
+poweradd = 0
+sprpriority = 0
+
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+
+;[State 20, 1]
+;type = VelSet
+;trigger1 = prevstateno != 30
+;trigger1 = time = 0
+;x = 6
+
+[State 20, 1]
+type = VelSet
+trigger1 = 1
+x = const(velocity.walk.fwd.x) * 1.2
+
+[State 1020, Blink White]
+type = PalFX
+trigger1 = Time = 0
+time = 5
+add = 126,126,126
+
+[State -2, Toughness var reset] ; Causes Vivienne to take damage when armoring through attacks again
+type = VarSet
+triggerall = anim != 290
+trigger1 = time = 0
+var(47) = 0
+ignorehitpause = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 3
+map = "hitOverride"
+value = 1
+
+;failsafe
+[State 0, Super Armor Bootleg = Animelem = 3]
+type = HitOverride
+triggerall = power >= 250
+trigger1 = time >= 3
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 31
+time = 1
+
+;[State 200, 1]
+;type = HitDef
+;triggerall = map(juggle) < 100 || hitcount != 0
+;triggerall = !movecontact
+;trigger1 = 1
+;attr = C, NA
+;animtype  = Medium
+;damage    = 20
+;hitflag = MAFD
+;guardflag = LAF
+;pausetime = 12,10
+;sparkno = 0
+;guard.sparkno = 13000
+;sparkxy = -8,-25
+;hitsound   = 5,3
+;guardsound = 6,10
+;ground.type = Low
+;ground.slidetime = 12
+;ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+;ground.velocity = -4
+;air.velocity = -3,-2
+;air.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+;fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 3
+trigger1 = command = "b"
+value = 290
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 3
+trigger1 = command = "c"
+value = 390
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 3
+trigger1 = command = "a"
+value = 395
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+trigger1 = time = 5
+value = 31
+ctrl = 1
+
+;Failsafe
+[State 0, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+;-------------------------------------------------------------------------------
+; No Mercy
+[Statedef 31]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State -2, Toughness var reset] ; Causes Vivienne to take damage when armoring through attacks again
+type = VarSet
+triggerall = anim != 30
+trigger1 = time = 0
+var(47) = 0
+ignorehitpause = 1
+
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = AnimElem = 2 || AnimElem = 6
+time = 10
+ampl = 5
+[State 0, Fwd - Step 01]
+type = PlaySnd
+trigger1 = animelem = 2
+value = S20,0
+volumescale = 300
+[State 0, Fwd - Step 02]
+type = PlaySnd
+trigger1 = animelem = 6
+value = S20,1
+volumescale = 300
+
+;Cost Meter To Armor
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = anim = 30 && prevstateno != 30
+trigger1 = time = 0
+value = -250
+
+[State 0, Blink Red]
+type = PalFX
+triggerall = anim = 30 && prevstateno != 30
+trigger1 = Time = 0
+time = 5
+add = 255,0,0
+mul = 255,0,0
+[State 0, Toughness Variable]
+type = varadd
+trigger1 = anim = 30 && prevstateno != 30
+trigger1 = time = 0
+v = 47
+value = 1
+[State 0, Hurt]
+type = LifeAdd
+triggerall = anim = 30 && prevstateno != 30
+trigger1 = time = 0
+value = ifelse(var(47) <= 30,-15 +(var(47)/2),0)
+;kill = 1
+absolute = 0
+[State 0, Hitpause]
+type = Pause
+triggerall = anim = 30 && prevstateno != 30
+trigger1 = time = 0
+time = 5
+movetime = 0
+
+
+
+[State 0, Super Armor Bootleg = Animelem = 3]
+type = HitOverride
+trigger1 = power >= 250
+attr = SCA,NA,SA,HA,NP,SP,HP
+slot = 0
+stateno = stateno
+time = 3
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, ChangeAnimTo]
+type = ChangeAnim2
+trigger1 = anim != 30
+value = 30
+elem = 4
+
+[State 20, 1]
+type = VelSet
+trigger1 = 1
+x = const(velocity.walk.fwd.x) * 1.25
+
+;[State 200, 1]
+;type = HitDef
+;triggerall = map(juggle) < 100 || hitcount != 0
+;triggerall = AnimElem = 2 || AnimElem = 6
+;trigger1 = 1
+;attr = C, NA
+;animtype  = Medium
+;damage    = 15
+;hitflag = MAFD
+;guardflag = LA
+;pausetime = 6,6
+;guard.pausetime = 6,2
+;sparkno = 0
+;guard.sparkno = 13000
+;sparkxy = -8,-15
+;hitsound   = 5,3
+;guardsound = 6,10
+;ground.type = Low
+;ground.slidetime = 10
+;ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+;ground.velocity = -1.5,-3.5
+;air.velocity = -1.5,-3
+;down.velocity = -1.8,-4
+;air.hittime  = 25 + ifelse(enemy,movetype = A, 7,0)
+;guard.hittime = 10
+;fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+
+[State 0, HitOverrideCheck]
+type = MapSet
+triggerall = time >= 0
+trigger1 = command = "a"
+trigger2 = command = "b"
+trigger3 = command = "c"
+map = "hitOverride"
+value = 0
+
+[State 0, HitOverrideCheck]
+type = MapSet
+triggerall = time >= 5
+trigger1 = command != "holdfwd"
+map = "hitOverride"
+value = 0
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command != "holdfwd"
+value = 0
+ctrl = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+triggerall = time >= 0
+trigger1 = command = "holdup"
+map = "hitOverride"
+value = 0
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 0
+trigger1 = command = "holdup"
+value = 60
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 0
+trigger1 = command = "FF"
+value = 100
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+trigger1 = command = "b"
+value = 290
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+trigger1 = command = "c"
+value = 390
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+trigger1 = command = "a"
+value = 395
+ctrl = 1
+
+;Failsafe
+[State 0, End]
+type = ChangeState
+trigger1 = time >= 300
+value = 0
+ctrl = 1
+
+
+;-------------------------------------------------------------------------------
+; No Mercy Cancel Initiation
+[Statedef 35]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 30
+poweradd = 0
+sprpriority = 0
+
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+
+;[State 20, 1]
+;type = VelSet
+;trigger1 = prevstateno != 30
+;trigger1 = time = 0
+;x = 6
+
+[State 20, 1]
+type = VelSet
+trigger1 = 1
+x = const(velocity.walk.fwd.x) * 1.2
+
+[State 1020, Blink White]
+type = PalFX
+trigger1 = Time = 0
+time = 5
+add = 126,126,126
+
+[State -2, Toughness var reset] ; Causes Vivienne to take damage when armoring through attacks again
+type = VarSet
+triggerall = anim != 30
+trigger1 = time = 0
+var(47) = 0
+ignorehitpause = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 3
+map = "hitOverride"
+value = 1
+
+;failsafe
+[State 0, Super Armor Bootleg = Animelem = 3]
+type = HitOverride
+triggerall = power >= 250
+trigger1 = time >= 3
+attr = SCA,NA,SA,NP,SP
+slot = 0
+stateno = 31
+time = 1
+
+;[State 200, 1]
+;type = HitDef
+;triggerall = map(juggle) < 100 || hitcount != 0
+;triggerall = !movecontact
+;trigger1 = 1
+;attr = C, NA
+;animtype  = Medium
+;damage    = 20
+;hitflag = MAFD
+;guardflag = LAF
+;pausetime = 12,10
+;sparkno = 0
+;guard.sparkno = 13000
+;sparkxy = -8,-25
+;hitsound   = 5,3
+;guardsound = 6,10
+;ground.type = Low
+;ground.slidetime = 12
+;ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+;ground.velocity = -4
+;air.velocity = -3,-2
+;air.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+;fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 3
+trigger1 = command = "b"
+value = 290
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 3
+trigger1 = command = "c"
+value = 390
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 3
+trigger1 = command = "a"
+value = 395
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+trigger1 = time = 5
+value = 36
+ctrl = 1
+
+;Failsafe
+[State 0, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+
+;-------------------------------------------------------------------------------
+; No Mercy Cancel
+[Statedef 36]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+poweradd = 0
+velset = 0,0
+sprpriority = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
+[State -2, Toughness var reset] ; Causes Vivienne to take damage when armoring through attacks again
+type = VarSet
+triggerall = anim != 30
+trigger1 = time = 0
+var(47) = 0
+ignorehitpause = 1
+
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = AnimElem = 2 || AnimElem = 6
+time = 10
+ampl = 5
+[State 0, Fwd - Step 01]
+type = PlaySnd
+trigger1 = animelem = 2
+value = S20,0
+volumescale = 300
+[State 0, Fwd - Step 02]
+type = PlaySnd
+trigger1 = animelem = 6
+value = S20,1
+volumescale = 300
+
+;Cost Meter To Armor
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = anim = 30 && prevstateno != 35
+trigger1 = time = 0
+value = -250
+
+[State 0, Blink Red]
+type = PalFX
+triggerall = anim = 30 && prevstateno != 35
+trigger1 = Time = 0
+time = 5
+add = 255,0,0
+mul = 255,0,0
+[State 0, Toughness Variable]
+type = varadd
+trigger1 = anim = 30 && prevstateno != 35
+trigger1 = time = 0
+v = 47
+value = 1
+[State 0, Hurt]
+type = LifeAdd
+triggerall = anim = 30 && prevstateno != 35
+trigger1 = time = 0
+value = ifelse(var(47) <= 30,-15 +(var(47)/2),0)
+;kill = 1
+absolute = 0
+[State 0, Hitpause]
+type = Pause
+triggerall = anim = 30 && prevstateno != 35
+trigger1 = time = 0
+time = 5
+movetime = 0
+
+
+
+[State 0, Super Armor Bootleg = Animelem = 3]
+type = HitOverride
+trigger1 = power >= 250
+attr = SCA,NA,SA,HA,NP,SP,HP
+slot = 0
+stateno = stateno
+time = 3
+
+[State 0, HitOverrideCheck]
+type = MapSet
+trigger1 = time = 0
+map = "hitOverride"
+value = 1
+
+[State 0, ChangeAnimTo]
+type = ChangeAnim2
+trigger1 = anim != 30
+value = 30
+elem = 4
+
+[State 20, 1]
+type = VelSet
+trigger1 = 1
+x = const(velocity.walk.fwd.x) * 1.25
+
+;[State 200, 1]
+;type = HitDef
+;triggerall = map(juggle) < 100 || hitcount != 0
+;triggerall = AnimElem = 2 || AnimElem = 6
+;trigger1 = 1
+;attr = C, NA
+;animtype  = Medium
+;damage    = 15
+;hitflag = MAFD
+;guardflag = LA
+;pausetime = 6,6
+;guard.pausetime = 6,2
+;sparkno = 0
+;guard.sparkno = 13000
+;sparkxy = -8,-15
+;hitsound   = 5,3
+;guardsound = 6,10
+;ground.type = Low
+;ground.slidetime = 10
+;ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
+;ground.velocity = -1.5,-3.5
+;air.velocity = -1.5,-3
+;down.velocity = -1.8,-4
+;air.hittime  = 25 + ifelse(enemy,movetype = A, 7,0)
+;guard.hittime = 10
+;fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
+
+[State 0, HitOverrideCheck]
+type = MapSet
+triggerall = time >= 0
+trigger1 = command = "a"
+trigger2 = command = "b"
+trigger3 = command = "c"
+map = "hitOverride"
+value = 0
+
+[State 0, HitOverrideCheck]
+type = MapSet
+triggerall = time >= 10
+trigger1 = command != "holdfwd"
+map = "hitOverride"
+value = 0
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 10
+trigger1 = command != "holdfwd"
+value = 0
+ctrl = 1
+
+[State 0, HitOverrideCheck]
+type = MapSet
+triggerall = time >= 5
+trigger1 = command = "holdup"
+map = "hitOverride"
+value = 0
+
+[State 0, End]
+type = ChangeState
+triggerall = time >= 5
+trigger1 = command = "holdup"
+value = 60
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time >= 10
+trigger1 = command = "FF"
+value = 100
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+trigger1 = command = "b"
+value = 290
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+trigger1 = command = "c"
+value = 390
+ctrl = 1
+
+[State 0, End]
+type = ChangeState
+trigger1 = command = "a"
+value = 395
+ctrl = 1
+
+;Failsafe
+[State 0, End]
+type = ChangeState
+trigger1 = time >= 300
+value = 0
+ctrl = 1
+
+
+;-------------------------------------------------------------------------------
+; Air Dash - Forward:
+[Statedef 65]
+type    = A
+movetype= I
+physics = A
+juggle  = 1
+velset = 0,0
+ctrl = 0
+anim = 196
+sprpriority = 2
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F65,0
+volumescale = 500
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = time = 2
+value = 1
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = AnimElem = 1
+time = 10
+paladd = 0, 255, 110
+trans = add
+
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = animelem = 1
+x = 5
+[State 0, VelSet]
+type = VelSet
+Triggerall = prevstateno = 50||prevstateno = 80
+trigger1 = time = 2
+x = 6
+y = -2
+[State 0, VelSet]
+type = VelSet
+Triggerall = prevstateno != 50 && prevstateno != 80
+trigger1 = time = 2
+x = 6
+y = -4
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = time >= 2
+statetype = A
+movetype = I
+physics = A
+
+[State 200, End]
+type = ChangeState
+triggerall = prevstateno = 50||prevstateno = 80
+trigger1 = time = 15
+value = 50
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+triggerall = time > 2
+trigger1 = pos y >= -1
+value = 52
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; Hyperhop Start
+[Statedef 60]
+type    = S
+physics = S
+anim = 40
+ctrl = 0
+sprpriority = 1
+facep2 = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S7,0
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimTime = -1
+anim = F60
+ID = 16001
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = 1.5,1.5
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimTime = -1
+anim = F61
+ID = 16002
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999
+scale = 0.5,0.5
+sprpriority = 2
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+
+[State 40, Disable Jump Block Helper]
+type = helper
+name = "Disable Jump Block"
+trigger1 = time = 0
+ID = 4200
+stateno = 4200
+pos = 9999,9999
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+supermovetime = 0
+pausemovetime = 0
+
+[State 40, 1]
+type = VarSet
+trigger1 = Time = 0 && ailevel = 0
+trigger2 = abs(P2Bodydist X) <= 30 
+trigger2 = ailevel > 0 && time = 0 && random < 200 && p2movetype != H
+sysvar(1) = 0
+
+[State 40, 2]
+type = VarSet
+trigger1 = command = "holdfwd" && ailevel = 0
+trigger2 = abs(P2Bodydist X) > 100 
+trigger2 = ailevel > 0 && time = 0 && random < 300 && random >= 200 && p2movetype != H
+sysvar(1) = 1
+
+[State 40, 3]
+type = VarSet
+trigger1 = command = "holdback" && ailevel = 0
+trigger2 = p2movetype = A && abs(P2Bodydist X) < 50 
+trigger2 = ailevel > 0 && time = 0 && random < 400 && random >= 300 && p2movetype != H
+sysvar(1) = -1
+
+[State 40, 4]
+type = VelSet
+trigger1 = AnimTime = 0
+x = ifelse(sysvar(1)=0, 0, ifelse(sysvar(1)=1, 4.5, -4.3))
+y = const(velocity.jump.y) * 0.75
+
+[State 0, Turn]
+type = Turn
+triggerall = p2dist x < 0
+trigger1 = AnimTime = 0
+
+[State 40, 6]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
 ;===============================================================================
 ; A:
 ;-------------------------------------------------------------------------------
@@ -14199,6 +15153,18 @@ scale = 0.5,0.5
 sprpriority = 5
 removetime = -2
 persistent = 0
+
+[State 0, IM DOING A HIGH, BOZO]
+type = MapSet
+trigger1 = stateno = [600, 610] || stateno = 900
+map = "highAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = [600, 610] || stateno = 900)
+map = "highAttack"
+value = 0
 
 [State 0, Failed to block an air unblockable!]
 type = Explod

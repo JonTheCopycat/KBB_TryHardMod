@@ -143,18 +143,19 @@ if time = 0 {
     MapSet{map:"hitOverride"; value: 1}
     PlaySnd{value:s800,3; volumescale: 100}
 
-    if time <= 15 {
+    if time <= 6 {
         PalFX{time:3; add: 128,128,128}
     }
 
-    #15 frames of oppurtunity, 15 frames of recovery.
+    #Original: 15 frames of oppurtunity, 15 frames of recovery.
+    #Current: 6 frames of opportunity, 12 frames of recovery.
 
     if (P2Stateno != 801 || P2Stateno != 802 || P2Stateno != 803 || P2Stateno != 811 || P2Stateno != 812 || P2Stateno != 813) {
         HitOverride {
             attr: SCA,NA,SA,NP,SP;
             slot: 0;
             stateno: 801;
-            time: 15;
+            time: 6;
         }
     }
 
@@ -178,7 +179,7 @@ ignorehitpause if time = 1 {
     }
 }
 
-if !movecontact && time >= 16 {
+if !movecontact && time >= 7 {
     persistent(0) if prevStateNo != 820 {
         poweradd{value: -1000}
     }
@@ -190,8 +191,7 @@ if enemynear, hitpausetime > 15 && var(47) <= 1 {
     ChangeAnim{value: 800; elem: 1}
 }
 
-if animtime = 0 {
-    
+if time >= 18 {
     changeState{value: 806; ctrl: 1}
 }
 
@@ -704,14 +704,15 @@ if time = 0 {
     MapSet{map:"hitOverride"; value: 1}
     PlaySnd{value:s800,3; volumescale: 100}
 
-    #15 frames of oppurtunity, 15 frames of recovery.
+    #Original: 15 frames of oppurtunity, 15 frames of recovery.
+    #Current: 6 frames of opportunity, 12 frames of recovery.
 
     if (P2Stateno != 801 || P2Stateno != 802 || P2Stateno != 803 || P2Stateno != 811 || P2Stateno != 812 || P2Stateno != 813 || P2Stateno != 814) {
         HitOverride {
             attr: SCA,NA,SA,NP,SP;
             slot: 0;
             stateno: 811;
-            time: 15;
+            time: 6;
         }
     }
 
@@ -736,12 +737,12 @@ ignorehitpause if time = 1 {
 }
 
 if prevStateNo != 820 {
-    persistent(0) if time = 15 {
+    persistent(0) if time = 7 {
         poweradd{value: -1000}
     }
 }
 
-if !movecontact && time > 15 {
+if !movecontact && time > 6 {
     #MapSet {map:"defence"; value: 0.2}
     MapSet {map:"hitOverride"; value: 0}
 }
@@ -751,11 +752,11 @@ if enemynear, hitpausetime > 15 && var(47) <= 1 {
     ChangeAnim{value: 810; elem: 1}
 }
 
-if (Vel Y > 0 && Pos Y >= -1) && time > 15 {
+if (Vel Y > 0 && Pos Y >= -1) && time > 6 {
     ChangeState{value:816;ctrl:0}
 }
 
-if animtime = 0 {
+if time >= 18 {
     ignorehitpause{RemoveExplod{id: 805}}
     changeState{value: 815; ctrl: 0}
 }
@@ -854,7 +855,7 @@ if !movecontact {
         animtype: Heavy;
         damage: 15;
         Hitflag: MAF;
-        guardflag: ;
+        guardflag: HA;
         pausetime: 12,12;
         sparkno: 14000;
         guard.sparkno: 13000;
@@ -972,7 +973,7 @@ if !movecontact {
         animtype: Heavy;
         damage: 4;
         Hitflag: MAF;
-        guardflag: ;
+        guardflag: HA;
         pausetime: 5,5;
         sparkno: 14000;
         guard.sparkno: 13000;
@@ -1078,7 +1079,7 @@ if !movecontact {
         animtype: Heavy;
         damage: 2;
         Hitflag: MAF;
-        guardflag: ;
+        guardflag: HA;
         pausetime: 3,3;
         sparkno: 14000;
         guard.sparkno: 13000;
@@ -2284,28 +2285,28 @@ if Const(KBB_Playable) = 1 {
         }
     }
 
-    #archived exceptions
-    #!(statetype = S && movetype = I)
-    #Star Cancel Command
-    if (power >= 1500 || numhelper(51000) != 0) && command = "ss" {
-        if alive && !ctrl && movetype != H && !ishelper && roundstate = 2 && time >= 3 {
-            #The exceptions
-            if stateno != [700, 709] && stateno != 800 && stateno != 810 && stateno != [820, 829] && stateno != 830 &&
-            stateno != [150, 155] && stateno != [500, 501] {
-                #No Character Specific Exceptions
-                # ChangeState{value: 67}
+    # #archived exceptions
+    # #!(statetype = S && movetype = I)
+    # #Star Cancel Command
+    # if (power >= 1500 || numhelper(51000) != 0) && command = "ss" {
+    #     if alive && !ctrl && movetype != H && !ishelper && roundstate = 2 && time >= 3 {
+    #         #The exceptions
+    #         if stateno != [700, 709] && stateno != 800 && stateno != 810 && stateno != [820, 829] && stateno != 830 &&
+    #         stateno != [150, 155] && stateno != [500, 501] {
+    #             #No Character Specific Exceptions
+    #             # ChangeState{value: 67}
 
-                #Character exceptions
-                if !(name = "Leon" && stateno = [26000, 26999]) && 
-                !(name = "Jodie" && ((stateno = 611 && movehit) || ((stateno = 401 || stateno = 292) && movecontact))) &&
-                !(name != "Noll" && stateno = [900, 909] && movehit) &&
-                !(name = "Saito" && stateno = 300) &&
-                !(name = "Junichi" && stateno = 413){
-                    ChangeState{value: 67}
-                }
-            }
-        }
-    }
+    #             #Character exceptions
+    #             if !(name = "Leon" && stateno = [26000, 26999]) && 
+    #             !(name = "Jodie" && ((stateno = 611 && movehit) || ((stateno = 401 || stateno = 292) && movecontact))) &&
+    #             !(name != "Noll" && stateno = [900, 909] && movehit) &&
+    #             !(name = "Saito" && stateno = 300) &&
+    #             !(name = "Junichi" && stateno = 413){
+    #                 ChangeState{value: 67}
+    #             }
+    #         }
+    #     }
+    # }
 
     #&&
     #stateno != [1000, 1039] &&
@@ -2326,24 +2327,40 @@ if Const(KBB_Playable) = 1 {
     }
 
     #Counter
-    if command = "hold_x" && ailevel = 0 && ctrl && stateno != 67 {
-        #Air Counter
-        if statetype = A {
-            ChangeState{value: 810; ctrl: 0}
-        #Red Counter
-        } else if statetype != A && command = "holdfwd" {
-            ChangeState{value: 830; ctrl: 0}
-        #Counter
+    if command = "hold_x" && ailevel = 0 && ctrl {
+        # #Air Counter
+        # if statetype = A {
+        #     ChangeState{value: 810; ctrl: 0}
+        # #Red Counter
+        # } else if statetype != A && command = "holdfwd" {
+        #     ChangeState{value: 830; ctrl: 0}
+        # #Counter
+        # } else {
+        #     ChangeState{value: 800; ctrl: 0}
+        # }
+
+        if command = "hold_s" && stateno = [120, 155] && power >= 1000 {
+            ChangeState{value: 820; ctrl: 0;}
+        }
+
+        if command = "holdfwd" {
+            if statetype = A {
+                ChangeState{value: 810; ctrl: 0}
+            } else {
+                ChangeState{value: 800; ctrl: 0}
+            }
         } else {
-            ChangeState{value: 800; ctrl: 0}
+            if stateno != [120, 155] && power >= 100 {
+                ChangeState{value: 120; ctrl: 0}
+            }
         }
     }
 
     if command = "hold_x" && ailevel = 0 && stateno = [30, 35] {
         if statetype = A {
-            ChangeState{value: 810; ctrl: 0}
+            ChangeState{value: 830; ctrl: 0}
         } else {
-            ChangeState{value: 800; ctrl: 0}
+            ChangeState{value: 830; ctrl: 0}
         }
     }
 }
@@ -2538,12 +2555,6 @@ if Const(KBB_Playable) = 1 {
                 pausemovetime: 0;
             }
         }
-
-
-
-
-
-
     }
 
     if teammode = tag {

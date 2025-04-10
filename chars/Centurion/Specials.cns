@@ -353,7 +353,6 @@ endcmdbuftime = 7
 type = HitDef
 getpower = 0
 triggerall = time%2 = 0 && AnimElemTime(9) < 0
-triggerall = map(juggle) < 100 || hitcount != 0
 trigger1 = 1
 attr = A, SA
 animtype  = Up
@@ -372,34 +371,6 @@ ground.slidetime = 12
 ground.hittime  = 15
 ground.velocity = -2,-3
 air.velocity = -2,-2
-guard.velocity = 2
-Fall = 1
-Envshake.time = 20
-fall.recover = 0
-
-[State 21000, Attack]
-type = HitDef
-getpower = 0
-triggerall = time%5 = 0 && AnimElemTime(12) > 0
-triggerall = map(juggle) < 100 || hitcount != 0
-trigger1 = 1
-attr = A, SA
-animtype  = Up
-damage    = 10
-hitflag = MAF
-guardflag = MA
-pausetime = 5,5
-guard.pausetime = 5,5
-sparkno = 1
-guard.sparkno = 13000
-sparkxy = -8,-30
-hitsound   = 5,1
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 12
-ground.hittime  = 15
-ground.velocity = -3,-2
-air.velocity = -3,-1
 guard.velocity = 2
 Fall = 1
 Envshake.time = 20
@@ -432,7 +403,32 @@ Fall = 1
 Envshake.time = 20
 fall.recover = 0
 
-
+[State 21000, Attack]
+type = HitDef
+getpower = 0
+triggerall = time%5 = 0 && AnimElemTime(12) > 0
+trigger1 = 1
+attr = A, SA
+animtype  = Up
+damage    = 10
+hitflag = MAF
+guardflag = MA
+pausetime = 5,5
+guard.pausetime = 5,5
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-30
+hitsound   = 5,1
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -3,-2
+air.velocity = -3,-1
+guard.velocity = 2
+Fall = 1
+Envshake.time = 20
+fall.recover = 0
 
 [State 200, SPECIAL 4 - thingy throw]
 type = ChangeState
@@ -1735,11 +1731,6 @@ trigger1 = root,animelem = 5 && root,stateno = 23000
 value = 23002
 ctrl = 0
 
-[State 0, RemoveExplod]
-type = RemoveExplod
-trigger1 = Animtime = 0
-id = 23002
-
 [State 200, End]
 type = Destroyself
 trigger1 = Animtime = 0
@@ -1832,7 +1823,7 @@ getpower = 0
 trigger1 = !movecontact
 attr = A, NP
 animtype  = Light
-damage    = 80
+damage    = 60
 guardflag = MA
 pausetime = 15,15
 guard.pausetime = 0,5
@@ -1844,8 +1835,8 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2,-6
-air.velocity = -2,-5
+ground.velocity = -2,-5
+air.velocity = -2,-4
 Fall = 1
 fall.recover = 0
 Envshake.time = 20
@@ -2226,7 +2217,7 @@ triggerall = AnimElem = 27
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 189
+damage    = 225
 hitflag = MAFD
 pausetime = 30,30
 sparkno = 2
@@ -2570,13 +2561,13 @@ elem = 17
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = root,movetype = H  || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831 || enemy,stateno = 54000
+trigger1 = root,movetype = H  || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
 value = S5,0
 volumescale = 100
 
 [State 0, Explod]
 type = Explod
-trigger1 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831 || enemy,stateno = 54000
+trigger1 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
 anim = 621
 ID = 622
 pos = 0,-20
@@ -2592,7 +2583,7 @@ removeongethit = 1
 
 [State 0, VarSet]
 type = ParentVarSet
-trigger1 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831 || enemy,stateno = 54000
+trigger1 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
 v = 18    ;fv = 10
 value = 0
 
@@ -2600,7 +2591,7 @@ value = 0
 
 [State 0, DestroySelf]
 type = DestroySelf
-trigger2 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831  || enemy,stateno = 54000
+trigger2 = root,movetype = H || enemy,stateno = [801,803] || enemy,stateno = [811,813] || enemy,stateno = [821,822] || enemy,stateno = 831
 trigger1 = animtime = 0
 
 ;===============================================================================
@@ -2685,25 +2676,25 @@ elem = 17
 
 [State 0, HitOverrideCheck]
 type = RootMapSet
-trigger1 = time = 1|| enemy,stateno = 50000 || enemy,stateno = 54000
+trigger1 = time = 3
 map = "hitOverride"
 value = 0
 
 [State 0, VarSet]
 type = ParentVarSet
-trigger1 = time = 1|| enemy,stateno = 50000 || enemy,stateno = 54000
+trigger1 = time = 3
 v = 18    ;fv = 10
 value = 0
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = time = 1|| enemy,stateno = 50000 || enemy,stateno = 54000
+trigger1 = time = 3
 value = S5,0
 volumescale = 100
 
 [State 0, Explod]
 type = Explod
-trigger1 = time = 1|| enemy,stateno = 50000 || enemy,stateno = 54000
+trigger1 = time = 3
 anim = 621
 ID = 622
 pos = 0,-20
@@ -2719,4 +2710,4 @@ removeongethit = 1
 
 [State 0, DestroySelf]
 type = DestroySelf
-trigger1 = time = 1 || enemy,stateno = 50000 || enemy,stateno = 54000
+trigger1 = time = 3

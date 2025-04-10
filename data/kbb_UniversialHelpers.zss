@@ -587,7 +587,7 @@ if Const(KBB_Playable) = 1 {
 [Statedef -3]
 
 if StateNo != 4000 {
-    if movetype = A {
+    if movetype = A || numexplod(13500) > 0 {
         var(29) := 1;
     } else {
         var(29) := 0;
