@@ -116,7 +116,7 @@ if power = 0 {
 		ChangeState{value: 160; ctrl: 1;}
 	}
 }
-PlaySnd{value: F6,0; volumescale: 60;}
+PlaySnd{value: F6,0; volumescale: 50;}
 Helper{
 	helpertype: normal;
 	name: "Pushblock";
@@ -185,7 +185,7 @@ if numhelper(4300) >= 1 && helper(4300),stateno = 4300 {
 		PalFX{time: 8; add: 128, 128, 200;}
 	}
 	if time >= 8 {
-		ChangeState{value: 151 + (stateType = C) * 2 + (stateType = A) * 4;}
+		ChangeState{value: 151 + (stateType = C && pos y >= 0) * 2 + (pos y < 0) * 4;}
 	}
 	ignorehitpause if time = 0 && numenemy && gethitvar(damage) > 0 {
 		lifeadd{value: gethitvar(damage);}

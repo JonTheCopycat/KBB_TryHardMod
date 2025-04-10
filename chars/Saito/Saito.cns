@@ -1255,6 +1255,49 @@ trigger1 = pos y >= -1
 value = 52
 ctrl = 1
 
+;---------------------------------------------------------------------------
+; FAST FALL
+[Statedef 55]
+type    = A
+physics = A
+anim = 55
+ctrl = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S55,0
+volumescale = 150
+
+[State 0, AfterImage]
+type = AfterImage
+triggerall = numhelper(51000) = 0
+trigger1 = AnimElem = 1
+time = 10
+trans = add
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NP,SP,NT,ST,HT
+time = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = animelem = 1
+x = 0
+y = 0
+
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = animelem = 2
+y = 5
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = animelem = 2
+y = 15
+
 ;===============================================================================
 ; A:
 ;-------------------------------------------------------------------------------
