@@ -6100,7 +6100,17 @@ value = 0
 ignorehitpause = 1
 persistent = 0
 
+[State 0, More Guard Damage, BOZO]
+type = MapSet
+trigger1 = stateno = 970 || stateno = 21005 || stateno = 22000 || stateno = 24000
+map = "heavyAttack"
+value = 1
 
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = 970 || stateno = 21005 || stateno = 22000 || stateno = 24000)
+map = "heavyAttack"
+value = 0
 
 [Statedef -3]
 

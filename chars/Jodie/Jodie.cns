@@ -8855,7 +8855,7 @@ value = 0
 
 [State 0, Failed to block an overhead!]
 type = Explod
-triggerall = stateno = [600, 615] || stateno = 294 || stateno = 900 || stateno = 2900 || Stateno = [2800, 2820] || Stateno = 2840 || Stateno = 401
+triggerall = stateno = [600, 615] || stateno = 293 || stateno = 900 || stateno = 2900 || Stateno = [2800, 2820] || Stateno = 2840 || Stateno = 401
 triggerall = enemy, prevstateno = [120,160] && numexplod(31000) = 0
 trigger1 = enemy, movetype = H && enemy, stateno != [120,160]
 anim = F35000
@@ -8881,13 +8881,13 @@ persistent = 0
 
 [State 0, IM DOING A HIGH, BOZO]
 type = MapSet
-trigger1 = stateno = [600, 615] || stateno = 294 || stateno = 900 || stateno = 2900 || Stateno = [2800, 2820] || Stateno = 2840 || Stateno = 401
+trigger1 = stateno = [600, 615] || stateno = 293 || stateno = 900 || stateno = 2900 || Stateno = [2800, 2820] || Stateno = 2840 || Stateno = 401
 map = "highAttack"
 value = 1
 
 [State 0, nvm lol]
 type = MapSet
-trigger1 = !(stateno = [600, 615] || stateno = 294 || stateno = 900 || stateno = 2900 || Stateno = [2800, 2820] || Stateno = 2840 || Stateno = 401)
+trigger1 = !(stateno = [600, 615] || stateno = 293 || stateno = 900 || stateno = 2900 || Stateno = [2800, 2820] || Stateno = 2840 || Stateno = 401)
 map = "highAttack"
 value = 0
 
@@ -8916,6 +8916,18 @@ scale = 0.5,0.5
 sprpriority = 5
 removetime = -2
 persistent = 0
+
+[State 0, More Guard Damage, BOZO]
+type = MapSet
+trigger1 = stateno = 22000 || stateno = [23000, 23999] || stateno = 24200
+map = "heavyAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = 22000 || stateno = [23000, 23999] || stateno = 24200)
+map = "heavyAttack"
+value = 0
 
 ; ------ Reversal Move Check ------
 [State -2, Reset reversalMove]

@@ -7498,8 +7498,8 @@ animtype  = Heavy
 damage    = 50
 hitflag = MAFD
 guardflag = MA
-pausetime = 17,17
-guard.pausetime = 15,15
+pausetime = 7,7
+guard.pausetime = 5,5
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -7841,15 +7841,15 @@ animtype  = Heavy
 damage    = 75
 hitflag = MAFD
 guardflag = MA
-pausetime = 17,17
-guard.pausetime = 15,15
+pausetime = 7,7
+guard.pausetime = 5,5
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S0,3
 guardsound = 6,10
-guard.hittime  = 21
-guard.slidetime = 21
+guard.hittime  = 16
+guard.slidetime = 16
 guard.velocity = -12
 ground.type = High
 ground.slidetime = 12
@@ -10384,6 +10384,18 @@ scale = 0.5,0.5
 sprpriority = 5
 removetime = -2
 persistent = 0
+
+[State 0, More Guard Damage, BOZO]
+type = MapSet
+trigger1 = stateno = 970 || stateno = 21500 || stateno = 22000 || stateno = 24000
+map = "heavyAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = 970 || stateno = 21500 || stateno = 22000 || stateno = 24000)
+map = "heavyAttack"
+value = 0
 
 ; ------ Reversal Move Check ------
 [State -2, Reset reversalMove]

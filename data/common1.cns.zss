@@ -80,10 +80,10 @@ if stateType != A {
 let a = call WasBlockedCorrectly();
 MapSet{map:"Wrongblock";value:!$a}
 if $a = 1 {
-	PowerAdd{value: -125;}
+	PowerAdd{value: -75 - 200 * (enemynear,map(heavyAttack));}
 }
 else{
-	PowerAdd{value: -625;}
+	PowerAdd{value: -625 - 200 * (enemynear,map(heavyAttack));}
 	Explod{
 		anim: F13505;
 		ID: 13505;
@@ -162,6 +162,7 @@ call HiToLoAndLoToHi();
 [Function GuardKnockedBack(nextState)]
 if time = 0 {
 	hitVelSet{x: 1}
+	MapSet{map: "timeSinceHitOver"; value: 0;}
 }
 NotHitBy{value: ,HA,NT,ST,HT; time: 8;}
 if time = getHitVar(slideTime) + (numexplod(13500) > 0) * 3 || hitOver
@@ -174,7 +175,15 @@ if time = getHitVar(ctrlTime) + (numexplod(13500) > 0) * 3
 }
 call HiToLoAndLoToHi();
 if hitOver {
-	changeState{value: $nextState; ctrl: 1}
+	if numexplod(13500) > 0 {
+		if map(timeSinceHitOver) > 3 {
+			changeState{value: $nextState; ctrl: 1}
+		}
+	} else {
+		changeState{value: $nextState; ctrl: 1}
+	}
+
+	MapAdd{map: "timeSinceHitOver"; value: 1;}
 }
 
 #---------------------------------------------------------------------------------
@@ -1814,17 +1823,11 @@ x: 9999;
 y: 9999
 }
 if numhelper(99100) > 1 {
-	PosAdd{x: -2 * ((time + 1) ** -0.6);}
-	PosAdd{
-		x: -2 * ((time + 1) ** -0.6);
-		redirectID: enemynear,ID;
-	}
+	PosAdd{x: -2 * ((time + 1) ** -0.6); redirectID: root,ID}
+	PosAdd{x: -2 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
 } else {
-	PosAdd{x: -3 * ((time + 1) ** -0.6);}
-	PosAdd{
-		x: -3 * ((time + 1) ** -0.6);
-		redirectID: enemynear,ID;
-	}
+	PosAdd{x: -2 * ((time + 1) ** -0.6); redirectID: root,ID}
+	PosAdd{x: -4 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
 }
 
 
@@ -1853,7 +1856,7 @@ PlayerPush{value: 0}
 
 NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT; time: 3;}
 
-if time = 10 {
+if time = 8 {
 	DestroySelf{}
 }
 

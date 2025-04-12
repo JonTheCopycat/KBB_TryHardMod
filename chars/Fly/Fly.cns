@@ -5232,6 +5232,18 @@ sprpriority = 5
 removetime = -2
 persistent = 0
 
+[State 0, More Guard Damage, BOZO]
+type = MapSet
+trigger1 = stateno = 23000 || stateno = 24000
+map = "heavyAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = 23000 || stateno = 24000)
+map = "heavyAttack"
+value = 0
+
 ; ------ Reversal Move Check ------
 [State -2, Reset reversalMove]
 type = MapSet

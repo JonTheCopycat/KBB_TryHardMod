@@ -4906,7 +4906,7 @@ volumescale = 80
 type = VelSet
 trigger1 = AnimElem = 3
 x = 3.25
-y = -3
+y = -4
 
 [State 0, VelAdd]
 type = VelAdd
@@ -4956,7 +4956,7 @@ damage    = 30
 hitflag = MAFD
 guardflag = HA
 pausetime = 14,14
-guard.pausetime = 14,10
+guard.pausetime = 14,14
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -4989,7 +4989,7 @@ damage    = 20
 hitflag = MAFD
 guardflag = HA
 pausetime = 14,14
-guard.pausetime = 14,10
+guard.pausetime = 14,14
 sparkno = 15000
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -9044,6 +9044,18 @@ scale = 0.5,0.5
 sprpriority = 5
 removetime = -2
 persistent = 0
+
+[State 0, More Guard Damage, BOZO]
+type = MapSet
+trigger1 = stateno = 21000 || stateno = 21000
+map = "heavyAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = 23000 || stateno = 24000)
+map = "heavyAttack"
+value = 0
 
 ; ------ Reversal Move Check ------
 [State -2, Reset reversalMove]

@@ -4402,6 +4402,17 @@ sprpriority = 5
 removetime = -2
 persistent = 0
 
+[State 0, More Guard Damage, BOZO]
+type = MapSet
+trigger1 = stateno = 400 || helper(24500),stateno = 21580
+map = "heavyAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = 400 || helper(24500),stateno = 21580)
+map = "heavyAttack"
+value = 0
 
 [Statedef -3]
 
