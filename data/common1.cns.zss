@@ -15,7 +15,7 @@ if command = "holddown" {
 
 #-------------------------------------------------------------------------------
 [Function StartStarGuardCheck()]
-if command = "hold_x" && power >= 100 && NumExplod(13500) = 0 {
+if command = "hold_x" && command != "holdfwd" && power >= 100 && NumExplod(13500) = 0 {
 	Explod{
 		anim: F13500;
 		ID: 13500;
@@ -1871,7 +1871,7 @@ if NumExplod(13500) > 0 {
 		ChangeState{value: cond(statetype = A, 165, 160);}
 	}
 
-	if (stateno != [120,159] || (command != "hold_x" || map(_iksys_trainingGuardModeConfigure) != 2)) 
+	if (stateno != [120,155] || (command != "hold_x" || command = "holdfwd" || map(_iksys_trainingGuardModeConfigure) != 2)) 
 	&& (stateno != [150, 155]) {
 		RemoveExplod{ID: 13500;}
 	}
