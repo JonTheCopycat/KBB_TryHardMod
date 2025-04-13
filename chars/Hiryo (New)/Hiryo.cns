@@ -5482,6 +5482,21 @@ persistent = 0
 ;-------------------------------------------------------------------------------------------------------------------
 [Statedef -3]
 
+[State 52, Instant Wavedash from Fastfall]
+type = ChangeState
+triggerall = stateno = 52
+triggerall = prevstateno = 106
+trigger1 = (command = "IWD" && command != "IWD Cancelled")
+trigger2 = (command = "WD" && command != "NotWD")
+value = 30
+
+[State 52, Instant Wavedash from Fastfall]
+type = ChangeState
+triggerall = stateno = 52
+triggerall = prevstateno = 106
+trigger1 = (command = "IBWD" && command != "IBWD Cancelled")
+trigger2 = (command = "BWD" && command != "NotBWD")
+value = 31
 
 [State 0, PosSet]
 type = PosSet

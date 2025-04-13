@@ -859,6 +859,59 @@ ctrl = 1
 
 
 ;---------------------------------------------------------------------------
+; Jump Land
+[Statedef 53]
+type    = S
+physics = S
+ctrl = 0
+anim = 48
+facep2 = 1
+
+;[State 52, Extra Jump Lag]
+;type = ChangeState
+;trigger1 = prevstateno = [641,644]
+;value = 624
+
+[State 52, NotHitBy] ; Gives the player one frame of invincibility to prevent getting reset
+type = NotHitBy
+value = SCA
+triggerall = prevstateno = 5040 || prevstateno = 5035
+trigger1 = time = 0
+time = 1
+
+[State 52, CtrlSet] ; Gives control to the player if they landed in a non-juggle hurt state (To avoid potential unavoidable throw or reset setups)
+type = CtrlSet
+trigger1 = prevstateno = 5040 || prevstateno = 5035 || prevstateno = 5210
+value = 1
+
+[State 52, 1]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+[State 52, 2]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 52, 4]
+type = VelSet
+trigger1 = abs(vel x) < Const(movement.stand.friction.threshold)
+x = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = S3,3
+volumescale = 100
+
+[State 52, 5]
+type = ChangeState
+trigger1 = time = 3
+value = 410
+ctrl = 1
+
+;---------------------------------------------------------------------------
 ; Run forward
 [Statedef 100]
 type    = S

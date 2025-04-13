@@ -39,13 +39,16 @@ if command = "hold_x" && power >= 100 && NumExplod(13500) = 0 {
 
 #-------------------------------------------------------------------------------
 [Function StarGuard()]
-AssertSpecial{flag: NoAutoTurn;}
-if (enemynear,pos x - pos x) * Facing < -15 {
+if (enemynear,pos x - pos x) * Facing < -20 {
 	#PalFX{mul: 256, 128, 128; time: 3;}
-	AssertSpecial{flag:UnGuardable;redirectid:enemynear,ID;}
-	if (command = "holdfwd") {
-		Turn{}
+	if stateno != [130, 133] && stateno != 150 && stateno != 152 && stateno != 154 {
+		AssertSpecial{flag:NoAutoTurn}
+		AssertSpecial{flag:UnGuardable;redirectid:enemynear,ID;}
+		if (command = "holdfwd") {
+			Turn{}
+		}
 	}
+	
 }
 ignorehitpause{
 	if (statetype != A) {
