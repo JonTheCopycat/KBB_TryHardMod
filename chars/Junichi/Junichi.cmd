@@ -942,7 +942,7 @@ triggerall = command = "c"
 Triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = movecontact
-trigger2 = stateno = [200, 399] || stateno = [900, 999] || stateno = 423
+trigger2 = stateno = [200, 399] || stateno = [900, 999] || stateno = 425
 
 
 
