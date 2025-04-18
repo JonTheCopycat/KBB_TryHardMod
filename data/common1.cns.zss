@@ -81,7 +81,8 @@ if stateType != A {
 [Function StarGuardHit()]
 
 let a = call WasBlockedCorrectly();
-MapSet{map:"Wrongblock";value:!$a}
+MapSet{map:"Starguarded";value:1;}
+MapSet{map:"Wrongblock";value:!$a;}
 if $a = 1 {
 	PowerAdd{value: -75 - 200 * (enemynear,map(heavyAttack));}
 }
@@ -168,17 +169,17 @@ if time = 0 {
 	MapSet{map: "timeSinceHitOver"; value: 0;}
 }
 NotHitBy{value: ,HA,NT,ST,HT; time: 8;}
-if time = getHitVar(slideTime) + (numexplod(13500) > 0) * 3 || hitOver
-|| (numhelper(4300) > 0 && helper(4300),stateno = 4301 && time >= 8 + (numexplod(13500) > 0) * 3) {
+if time = getHitVar(slideTime) + (map(Starguarded) > 0) * 3 || hitOver
+|| (numhelper(4300) > 0 && helper(4300),stateno = 4301 && time >= 8 + (map(Starguarded) > 0) * 3) {
 	velSet{x: 0}
 }
-if time = getHitVar(ctrlTime) + (numexplod(13500) > 0) * 3
-|| (numhelper(4300) > 0 && helper(4300),stateno = 4301 && time >= 8 + (numexplod(13500) > 0) * 3) {
+if time = getHitVar(ctrlTime) + (map(Starguarded) > 0) * 3
+|| (numhelper(4300) > 0 && helper(4300),stateno = 4301 && time >= 8 + (map(Starguarded) > 0) * 3) {
 	ctrlSet{value: 1}
 }
 call HiToLoAndLoToHi();
 if hitOver {
-	if numexplod(13500) > 0 {
+	if map(Starguarded) > 0 {
 		if map(timeSinceHitOver) > 3 {
 			changeState{value: $nextState; ctrl: 1}
 		}
@@ -1003,8 +1004,9 @@ call HiToLoAndLoToHi();
 # Stand guard hit (shaking)
 [StateDef 150; type: S; moveType: H; physics: N; velSet: 0, 0;]
 
-MapSet{map:"Wrongblock";value:0}
 if time = 0 {
+	MapSet{map:"Starguarded";value:0;}
+	MapSet{map:"Wrongblock";value:0}
 	if NumExplod(13500) > 0 {
 		call StarGuardHit();
 	}
@@ -1040,8 +1042,9 @@ ignorehitpause if NumExplod(13500) > 0 {
 # Crouch guard hit (shaking)
 [StateDef 152; type: C; moveType: H; physics: N; velSet: 0, 0;]
 
-MapSet{map:"Wrongblock";value:0}
 if time = 0 {
+	MapSet{map:"Starguarded";value:0;}
+	MapSet{map:"Wrongblock";value:0}
 	if NumExplod(13500) > 0 {
 		call StarGuardHit();
 	}
@@ -1080,11 +1083,12 @@ ignorehitpause if NumExplod(13500) > 0 {
 # Air guard hit (shaking)
 [StateDef 154; type: A; moveType: H; physics: N; velSet: 0, 0;]
 
-MapSet{map:"Wrongblock";value:0}
 NotHitBy{value: ,HA,NT,ST,HT;}
 changeAnim{value: 152}
 
 if time = 0 {
+	MapSet{map:"Starguarded";value:0;}
+	MapSet{map:"Wrongblock";value:0}
 	if NumExplod(13500) > 0 {
 		call StarGuardHit();
 	}
@@ -1346,11 +1350,13 @@ if anim = 5000 || anim = 5010 {
 if majorVersion = 1 && anim != [5000, 5199] && selfAnimExist(5030) {
 	changeAnim{value: 5030}
 }
+
+velAdd{y: getHitVar(yAccel)}
+
 if time = 0 {
 	hitVelSet{x: 1; y: 1}
-} else {
-	velAdd{y: getHitVar(yAccel)}
 }
+
 if hitOver || vel y > 0 && pos y >= const(movement.air.gethit.groundlevel) {
 	if hitFall {
 		changeState{value: 5050}
@@ -1369,9 +1375,9 @@ if animTime = 0 {
 if time = 0 && selfAnimExist(5035) && anim != [5051, 5059] && anim != 5090 {
 	changeAnim{value: 5035}
 }
-if time > 0 {
-	velAdd{y: getHitVar(yAccel)}
-}
+
+velAdd{y: getHitVar(yAccel)}
+
 if hitOver || animTime = 0 ||
 	vel y > 0 && pos y >= const(movement.air.gethit.groundlevel) ||
 	time = 0 && anim != 5035 {
@@ -1397,9 +1403,8 @@ if hitOver {
 	stateTypeSet{moveType: I}
 	MapSet{map: "defence"; value: 0;}
 }
-if time > 0 {
-	velAdd{y: getHitVar(yAccel)}
-}
+
+velAdd{y: getHitVar(yAccel)}
 
 if p2dist x < 0 {
 	if command = "holdfwd" && inguarddist {
@@ -1427,9 +1432,9 @@ persistent(0) if anim = [5050, 5059] && vel y >= ifElse(anim = 5050,
 	const240p(1), const240p(-2)) && selfAnimExist(anim + 10) {
 	changeAnim{value: anim + 10}
 }
-if time > 0 {
-	velAdd{y: getHitVar(yAccel)}
-}
+
+velAdd{y: getHitVar(yAccel)}
+
 if alive && canRecover && (command = "recovery" 
 || (roundstate = 2 && ailevel > 0 && ((random < (ailevel * 100) && time = 1) 
 || random < (ailevel ** 2) * time/5))) {
@@ -1819,17 +1824,17 @@ changeState{value: 0}
 # }
 
 [StateDef 99100;
-juggle: 0; poweradd: 0; ctrl: 0; anim: 99100; velset: 0;]
+juggle: 0; poweradd: 0; ctrl: 0; anim: -1; velset: 0;]
 
 PosSet{
 x: 9999;
 y: 9999
 }
 if numhelper(99100) > 1 {
-	PosAdd{x: -2 * ((time + 1) ** -0.6); redirectID: root,ID}
-	PosAdd{x: -2 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
+	PosAdd{x: -3 * ((time + 1) ** -0.6); redirectID: root,ID}
+	PosAdd{x: -3 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
 } else {
-	PosAdd{x: -2 * ((time + 1) ** -0.6); redirectID: root,ID}
+	PosAdd{x: -4 * ((time + 1) ** -0.6); redirectID: root,ID}
 	PosAdd{x: -4 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
 }
 
@@ -1866,11 +1871,6 @@ if time = 8 {
 
 [StateDef -2;]
 if NumExplod(13500) > 0 {
-	if (stateno = [5000, 5210] || stateno = [1000, 1099]) {
-		PowerAdd{value: -675;}
-		ChangeState{value: cond(statetype = A, 165, 160);}
-	}
-
 	if (stateno != [120,155] || (command != "hold_x" || command = "holdfwd" || map(_iksys_trainingGuardModeConfigure) != 2)) 
 	&& (stateno != [150, 155]) {
 		RemoveExplod{ID: 13500;}

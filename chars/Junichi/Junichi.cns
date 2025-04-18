@@ -2168,11 +2168,11 @@ ctrl = 1
 
 
 ;-------------------------------------------------------------------------------
-; Kicks Wavedash A - Swipe
+; Kicks Wavedash A - Sweep
 [Statedef 290]
-type    = S
+type    = C
 movetype= A
-physics = S
+physics = C
 juggle  = 1
 ctrl = 0
 anim = 290
@@ -2257,7 +2257,7 @@ attr = S, NA
 animtype  = Medium
 damage    = 25
 hitflag = MAF
-guardflag = MAF
+guardflag = LA
 pausetime = 8,8
 guard.pausetime = 8, 8
 sparkno = 0
@@ -2268,8 +2268,8 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 25 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -3,-4
-air.velocity = -3,-3.5
+ground.velocity = -2,-4
+air.velocity = -2,-3.5
 Fall = 0
 Envshake.time = 10
 Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
@@ -2380,7 +2380,7 @@ volumescale = 50
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = Animelem = 3
+trigger1 = Animelem = 3, >= 0 && Animelem = 4, < 0
 x = 6
 
 [State 200, 1]
@@ -2402,13 +2402,13 @@ sparkxy = -8,-25
 hitsound   = 5,2
 guardsound = 6,10
 ground.type = High
-ground.slidetime = 12
-ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -4
-air.velocity = -3,-1
+ground.slidetime = 15
+ground.hittime  = 18 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -3, -4
+air.velocity = -3,-3
 guard.velocity = -3
 Envshake.time = 15
-Fall.recovertime = 20 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
 ;forcenofall = 1
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
@@ -5612,6 +5612,67 @@ type = NotHitBy
 trigger1 = time = [0, 4] 
 value = SCA,NA,SA,NP,SP,NT,ST
 time = 1
+
+[State 200, Special 2 - Big Kick]
+type = ChangeState
+triggerall = time >= 6
+triggerall = power >= 1500
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 5"
+value = 20000
+
+[State 200, Special 2 - Skyfall Kick]
+type = ChangeState
+triggerall = time >= 6
+triggerall = power >= 1000
+triggerall = numhelper(3500) = 0
+trigger1 = command = "SPECIAL 2"
+value = 21000
+
+;Attacks
+[State 200, 2A]
+type = ChangeState
+triggerall = time >= 6
+trigger1 = command = "a" && command = "holddown"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist y > -40
+value = 412
+ctrl = 0
+[State 200, AA]
+type = ChangeState
+triggerall = time >= 6
+trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && p2bodydist y > -40
+value = 201
+ctrl = 0
+[State 200, B]
+type = ChangeState
+triggerall = time >= 6
+trigger1 = command = "b" && command = "holddown"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && ailevel > 5 && p2bodydist x < 60
+value = 413
+ctrl = 0
+[State 200, B]
+type = ChangeState
+triggerall = time >= 6
+trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100) && enemy,movetype = A && enemy,time >= 12
+value = 414
+ctrl = 0
+
+[State -1, Down C]
+type = ChangeState
+triggerall = time >= 6
+triggerall = command = "holddown"
+trigger1 = command = "c"
+value = 416
+
+[State -1, Jumpkick C]
+type = ChangeState
+triggerall = time >= 6
+Triggerall = power >= 200
+triggerall = numhelper(3500) = 0
+trigger1 = command = "c"
+value = 450
 
 [State 1000, 6]
 type = ChangeState
