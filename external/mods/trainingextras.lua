@@ -51,7 +51,6 @@ menu.t_valuename = {
 		{itemname = 'z', displayname = motif.training_info.menu_valuename_buttonjam_z},
 		{itemname = 's', displayname = motif.training_info.menu_valuename_buttonjam_s},
 		{itemname = 'd', displayname = motif.training_info.menu_valuename_buttonjam_d},
-		{itemname = 'w', displayname = motif.training_info.menu_valuename_buttonjam_w},
 	},
 	life = { -- Triea Addition
 		{itemname = '100', displayname = motif.training_info.menu_valuename_life_100},

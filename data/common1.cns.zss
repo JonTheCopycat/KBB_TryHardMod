@@ -43,9 +43,33 @@ if (enemynear,pos x - pos x) * Facing < -20 {
 	#PalFX{mul: 256, 128, 128; time: 3;}
 	if stateno != [130, 133] && stateno != 150 && stateno != 152 && stateno != 154 {
 		AssertSpecial{flag:NoAutoTurn}
-		AssertSpecial{flag:UnGuardable;redirectid:enemynear,ID;}
+		
 		if (command = "holdfwd") {
 			Turn{}
+		}
+		if (power >= 250) {
+			PowerAdd{value: -250;}
+			Turn{}
+			Explod{
+				anim: F13505;
+				ID: 13505;
+				pos: 22,-20;
+				postype: p1;
+				facing: 1;
+				vfacing: 1;
+				bindtime: -1;
+				vel: 0,0;
+				accel: 0,0;
+				random: 0,0;
+				removetime: -2;
+				pausemovetime: 0;
+				scale: 1.1,1.1;
+				sprpriority: 9;
+				ontop: 1;
+				removeongethit: 0;
+			}
+		} else {
+			AssertSpecial{flag:UnGuardable;redirectid:enemynear,ID;}
 		}
 	}
 	
@@ -1834,8 +1858,8 @@ if numhelper(99100) > 1 {
 	PosAdd{x: -3 * ((time + 1) ** -0.6); redirectID: root,ID}
 	PosAdd{x: -3 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
 } else {
-	PosAdd{x: -4 * ((time + 1) ** -0.6); redirectID: root,ID}
-	PosAdd{x: -4 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
+	PosAdd{x: -5 * ((time + 1) ** -0.6); redirectID: root,ID}
+	PosAdd{x: -5 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
 }
 
 
