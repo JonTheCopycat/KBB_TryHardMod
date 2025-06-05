@@ -3112,7 +3112,7 @@ value = -200
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time >= 10 && time <= 24
-Value = A,NP,SP,HP,NT,ST,HT
+Value = ,NP,SP,HP
 time = 1
 
 [State 0, PlaySnd]

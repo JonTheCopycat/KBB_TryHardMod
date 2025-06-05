@@ -2623,24 +2623,14 @@ triggerall = command = "SPECIAL 1"
 trigger1 = power >= 1000
 value = 23000
 
-[State 200, End]
+[State 200, 2C]
 type = ChangeState
+Triggerall = Power >= 333
 Triggerall = movecontact
-trigger1 = command = "s"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 66
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "b"
-value = 610
-[State 200, j5C]
-type = ChangeState
-Triggerall = movecontact
-triggerall = numhelper(625) = 0
+triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
-value = 620
+trigger1 = command = "holddown"
+value = 450
 
 [State 200, End]
 type = ChangeState
@@ -2658,7 +2648,7 @@ physics = S
 juggle  = 1
 ctrl = 0
 anim = 400
-poweradd = -200
+poweradd = -250
 velset = -2,0
 sprpriority = 1
 
@@ -3107,7 +3097,7 @@ physics = S
 juggle  = 4
 ctrl = 0
 anim = 430
-poweradd = -100
+poweradd = -250
 sprpriority = 2
 
 [State 0, Juggle Map]
