@@ -1,7 +1,24 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
-| Try-Hard Version 0.7.4 Hotfix Changes:             /
+| Try-Hard Version 0.8.0 Changes:                    /
 |---------------------------------------------------/
+
+Universal Changes:
+1. New defensive mechanic: Star guard. performed by inputting what used to be counter. Blocks everything at the cost of meter, and pushes the opponent back in the process.
+2. Counter has been nerfed in light of the new mechanic.
+	* Now inputted with forward + counter.
+	* Active frames reduced (15 -> 8). Timing is more important now.
+
+
+New Characters (?): Say hello to Centurion, Bubbla, and Dharkblu (?)
+
+
+Aege:
+(-) Wavedash B: no longer possible to fastfall during this move.
+(-) Wavedash B: can no longer be cancelled into air skip, j.5a, j.5b, and j.5b. Now cancellable into j.2c
+(-) 5c: cost increased (200 -> 250)
+(-) 5c.c: cost increased (100 -> 250)
+
 
 Hyrio:
 1. (-) Backsway A changed to Wavedash A
@@ -19,14 +36,20 @@ Leon:
 
 Junichi:
 --Kicks--
-1. (+) 214A damage increased (140 -> 160)
-2. (+) 236B cost reduced to 1/2 bar
+(+) 5b: range increased
+(+) 2ab: can now cancel into j.5c
+(+) Wavedash A: changed to a low sweep.
+(+) 4c: Recovery reduced by 4 frames.
+(+) 214A damage increased (140 -> 160)
+(+) 236B cost reduced to 1/2 bar
 	* Can now be performed during kick j.5c
-3. (-) 236B no longer advantageous on block (from +3 to -2)
+(-) 236B no longer advantageous on block (from +3 to -2)
 	* No longer puts Junichi in backturned unless Junichi lands behind the opponent.
-4. (-) 236B damage reduced (100 -> 65)
+(-) 236B damage reduced (100 -> 65)
 
 --Punch--
+(-) 2a: startup increased (f7 -> f9)
+(+) Wavedash A: active frames increased (4 -> 7)
 1. (+) 5b: made more consistent to combo after.
 2. (+) 5bb: blockstun increased (4 more frames)
 3. (-) 5bb: recovery increased (11f -> 15f)
@@ -35,6 +58,8 @@ Junichi:
 6. (~) 6c: animation and velocity adjusted for better feel.
 7. (+) 6c: time to enter Peekaboo idle decreased. (15f -> 12f)
 8. (+) 6c: time to dash cancel and wavedash decreased (9f -> 7f)
+(+) Peekaboo new move: 2c - Junichi Grabs you and punches you in the gut. A fast, techable grab with low damage, but leads to advantage.
+(+) Peekaboo 5c changed to ground pound for good.
 9. (+) 236a: damage increased (120 -> 140)
 10. (+) 236b: cost reduced to 1/2 bar.
 11. (-) 236b: damage reduced (90 -> 75)
@@ -47,6 +72,7 @@ Junichi:
 	* damage reduced (80 -> 60)
 	* cost reduced to 1/2 bar
 2. (+) 214b: damage increased (100 -> 120)
+
 
 Takuya:
 1. (+) Takuya runs faster (5.1 -> 5.3)
@@ -97,14 +123,9 @@ Takuya:
 23. (+) Takuya no longer loses extra meter when Charge Cancelling
 24. (~) Takuya now has a sound effect and visual when he places an extra spike (Indicates the timer length increases i hope)
 
-Centurion:
-1. (+) J5C does more damage
-2. (+) 5C is more advantageous on hit/block by 1 frame 
-3. (+) 2C is more advantageous on block by 1 frame, and 2 frames on hit
-4. (-) 214C Ice Shield breaks on blue burst
-5. (-) 236C does less damage (316 -> 280)
-6. (+) 236A does more damage (80 -> 110)
-7. (-) 236B doesn't hit post juggle anymore
+
+
+
 
 Watanabe:
 1. (+) Grab speed buffed (16f -> 12f)
@@ -225,14 +246,14 @@ MK:
 8. (+) j.5aa Damage increased to 15 (from 10)
 
 
-Max Adjustments:
+Max:
 1. (+) 2a can now cancel into wavedash
 2. (-) 5aaa can no longer cancel into wavedash
 3. (-) Wavedash A no longer groundbounces on hit
 	* More hitpause on hit.
 4. (-) Wavedash C: Fixed bug where proration and juggle wasn't applied properly
 	* Proration increased (0 -> 5)
-	* Juggle Increased (0 -> 10) (review and possible reduce this ngl)
+	* Juggle Increased (0 -> 10)
 5. (-) Added proration to cannonball and bomb explosion
 6. (-) Reduced metergain on 4a
 7. (+) GunStance B proration decreased (45 -> 30)
@@ -384,6 +405,7 @@ Yoru:
 
 Vivienne:
 1. (+) Can now hyperhop out of armor walk.
+
 
 Korby:
 1. (-) 236A is less active (6f -> 2f)
