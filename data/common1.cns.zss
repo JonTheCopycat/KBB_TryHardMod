@@ -47,32 +47,10 @@ if (enemynear,pos x - pos x) * Facing < -20 {
 		if (command = "holdfwd") {
 			Turn{}
 		}
-		if (power >= 250) {
-			PowerAdd{value: -250;}
-			Turn{}
-			Explod{
-				anim: F13505;
-				ID: 13505;
-				pos: 22,-20;
-				postype: p1;
-				facing: 1;
-				vfacing: 1;
-				bindtime: -1;
-				vel: 0,0;
-				accel: 0,0;
-				random: 0,0;
-				removetime: -2;
-				pausemovetime: 0;
-				scale: 1.1,1.1;
-				sprpriority: 9;
-				ontop: 1;
-				removeongethit: 0;
-			}
-		} else {
+		if (power < 250) {
 			AssertSpecial{flag:UnGuardable;redirectid:enemynear,ID;}
 		}
 	}
-	
 }
 ignorehitpause{
 	if (statetype != A) {
@@ -107,6 +85,8 @@ if stateType != A {
 let a = call WasBlockedCorrectly();
 MapSet{map:"Starguarded";value:1;}
 MapSet{map:"Wrongblock";value:!$a;}
+
+#Guard Cost
 if $a = 1 {
 	PowerAdd{value: -75 - 200 * (enemynear,map(heavyAttack));}
 }
@@ -131,6 +111,53 @@ else{
 		removeongethit: 0;
 	}
 }
+
+#Turnaround logic
+if (enemynear,pos x - pos x) * Facing < -20 && power >= 250 {
+	PowerAdd{value: -250;}
+	Turn{}
+	#Remove and Respawn Star Guard effect to correct direction.
+	RemoveExplod{ ID: 13500; }
+	Explod{
+		anim: F13500;
+		ID: 13500;
+		pos: 20,-20;
+		postype: p1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: -1;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -1;
+		pausemovetime: 0;
+		scale: 1,1;
+		sprpriority: 8;
+		ontop: 1;
+		ownpal: 1;
+		removeongethit: 0;
+	}
+	#Wrongblock effect
+	Explod{
+		anim: F13505;
+		ID: 13505;
+		pos: 22,-20;
+		postype: p1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: -1;
+		vel: 0,0;
+		accel: 0,0;
+		random: 0,0;
+		removetime: -2;
+		pausemovetime: 0;
+		scale: 1.1,1.1;
+		sprpriority: 9;
+		ontop: 1;
+		removeongethit: 0;
+	}
+}
+
 if power = 0 {
 	ModifyExplod{
 		ID: 13500;
