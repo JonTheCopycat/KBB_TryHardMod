@@ -755,14 +755,6 @@ value = 106
 trigger1 = command = "DD"
 trigger1 = statetype = A
 trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Wavedash
-[State -1, Wavedash]
-type = ChangeState
-value = 30
-trigger1 = command = "WD" && command != "NotWD"
-trigger1 = statetype = C || statetype = S
-trigger1 = ctrl
 ;===========================================================================
 ;---------------------------Basics-----------------------------------------
 ;---------------------------------------------------------------------------

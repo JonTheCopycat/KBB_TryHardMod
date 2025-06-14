@@ -506,7 +506,7 @@ trans = add
 type = NotHitBy
 triggerall = vel y <= 0
 trigger1 = time = [2, 10]
-value = A, AA
+value = A, NA
 time = 1
 
 [State 0, VelSet]
@@ -636,7 +636,7 @@ trans = add
 type = NotHitBy
 triggerall = vel y <= 0
 trigger1 = time = [2, 10]
-value = A, AA
+value = A, NA
 time = 1
 
 [State 0, VelSet]

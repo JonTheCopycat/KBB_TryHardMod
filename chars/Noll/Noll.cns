@@ -392,7 +392,7 @@ volumescale = 500
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time = [2, 10]
-value = C
+value = C, NA
 time = 1
 
 [State 0, VelSet]
@@ -646,7 +646,7 @@ volumescale = 500
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time = [2, 10]
-value = C
+value = C, NA
 time = 1
 
 [State 0, VelSet]

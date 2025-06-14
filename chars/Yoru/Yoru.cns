@@ -535,7 +535,7 @@ trans = add
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time = [2, 10]
-value = A, AA
+value = A, NA
 time = 1
 
 [State 0, VelSet]
@@ -641,7 +641,7 @@ trans = add
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time = [2, 10]
-value = A, AA
+value = A, NA
 time = 1
 
 [State 0, VelSet]
@@ -3330,7 +3330,7 @@ air.velocity = -3,-5
 guard.velocity = -8
 Envshake.time = 20  + floor(10.1 * var(12) / (60 - 9))
 Fall = 1
-Fall.recovertime = 45
+Fall.recovertime = 45 + floor(10.1 * var(12) / (60 - 9))
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -3363,7 +3363,7 @@ air.velocity = -3,-8
 guard.velocity = -8
 Envshake.time = 20  + floor(10.1 * var(12) / (60 - 9))
 Fall = 1
-Fall.recovertime = 45 + 60
+Fall.recovertime = 45 + 60 + floor(10.1 * var(12) / (60 - 9))
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 

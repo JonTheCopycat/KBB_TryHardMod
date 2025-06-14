@@ -969,21 +969,6 @@ value = 610
 triggerall = command = "b"
 Triggerall = statetype = A
 trigger1 = ctrl
-;---------------------------------------------------------------------------
-; C - Aire
-[State -1, Down + C Aire]
-type = ChangeState
-value = 625
-triggerall = command != "holdback"
-triggerall = command != "holdfwd"
-triggerall = command != "holddown"
-triggerall = command = "c"
-triggerall = numhelper(621) = 0
-triggerall = power >= 200
-triggerall = var(21) > 0
-Triggerall = statetype = A
-trigger1 = ctrl
-trigger2 = time >= 5 && roundstate = 2 && ailevel > 0 && stateno = 50
 
 ;---------------------------------------------------------------------------
 ; C+Down Aire
@@ -998,17 +983,17 @@ Triggerall = statetype = A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Back + C Aire
-[State -1, C Aire]
-type = ChangeState
-value = 623
-triggerall = command = "holdback"
-triggerall = command = "c"
-triggerall = map(bubbleTrapsSpawned) = 0
-triggerall = power >= 200
-Triggerall = statetype = A
-triggerall = var(21) > 0
+;[State -1, C Aire]
+;type = ChangeState
+;value = 623
+;triggerall = command = "holdback"
+;triggerall = command = "c"
+;triggerall = map(bubbleTrapsSpawned) = 0
+;triggerall = power >= 200
+;Triggerall = statetype = A
 ;triggerall = var(21) > 0
-trigger1 = ctrl
+;;triggerall = var(21) > 0
+;trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Foward + C Aire
 ;[State -1, C Aire]
@@ -1022,6 +1007,17 @@ trigger1 = ctrl
 ;triggerall = var(21) > 0
 ;trigger1 = ctrl
 ;---------------------------------------------------------------------------
+; C - Aire
+[State -1, Down + C Aire]
+type = ChangeState
+value = 625
+triggerall = command = "c"
+triggerall = numhelper(621) = 0
+triggerall = power >= 200
+triggerall = var(21) > 0
+Triggerall = statetype = A
+trigger1 = ctrl
+trigger2 = time >= 5 && roundstate = 2 && ailevel > 0 && stateno = 50
 
 ; A.I
 

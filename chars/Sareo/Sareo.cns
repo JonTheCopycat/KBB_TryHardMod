@@ -548,7 +548,7 @@ volumescale = 100
 
 [State 200, End]
 type = ChangeState
-triggerall = time >= 2
+triggerall = time >= 10
 trigger1 = command = "holdup"
 value = 60
 ctrl = 0

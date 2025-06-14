@@ -702,7 +702,7 @@ x = -0.02
 [State 450, NotHitBy]
 type = notHitBy
 trigger1 = time = [2,10]
-value = C
+value = C, NA
 time = 1
 
 [State 200, Jump]
@@ -845,7 +845,7 @@ x = -0.02
 [State 450, NotHitBy]
 type = notHitBy
 trigger1 = time = [2,10]
-value = C
+value = C, NA
 time = 1
 
 [State 200, Jump]

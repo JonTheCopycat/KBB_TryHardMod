@@ -335,7 +335,7 @@ trans = add
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time = [2, 10]
-value = A, AA
+value = A, NA
 time = 1
 
 [State 0, VelSet]
@@ -442,7 +442,7 @@ trans = add
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time = [2, 10]
-value = A, AA
+value = A, NA
 time = 1
 
 [State 0, VelSet]
@@ -1720,11 +1720,11 @@ value = 0
 ctrl = 1
 
 ;-------------------------------------------------------------------------------
-; Low Slide
+; Anti-air
 [Statedef 290]
-type    = C
+type    = S
 movetype= A
-physics = C
+physics = S
 juggle  = 1
 ctrl = 0
 anim = 290
@@ -1744,7 +1744,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 3
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -1771,10 +1771,10 @@ triggerall = vel x < const(velocity.run.fwd.x)
 trigger1 = prevstateno = 30 && time = 6
 x = const(velocity.run.fwd.x)
 
-[State 0, VelSet Slide Start]
+[State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 3
-x = 5.5
+x = 2
 
 [State 200, 1]
 type = HitDef
@@ -1784,9 +1784,9 @@ triggerall = !movecontact
 trigger1 = 1
 attr = C, NA
 animtype  = Medium
-damage    = 15
+damage    = 25
 hitflag = MAFD
-guardflag = LAF
+guardflag = MA
 pausetime = 8,8
 guard.pausetime = 10,10
 guard.hittime  = 15
@@ -1796,14 +1796,14 @@ guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S0,1
 guardsound = 6,10
-ground.type = Low
+ground.type = High
 ground.slidetime = 12
 ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2,-3
-air.velocity = -2,-2
-fall = ifelse(enemy,movetype = A, 1, 0)
-fall.recover = ifelse(enemy,movetype = A, 0, 1)
-fall.recover = 25 + ifelse(enemy,movetype = A, 7,0)
+ground.velocity = -2.2,-5
+air.velocity = -2.2,-4
+fall = 1
+fall.recover = 1
+fall.recovertime = 35 + ifelse(enemy,movetype = A, 7,0)
 
 [State 200, Special 1 - Smash Baby]
 type = ChangeState
@@ -1829,13 +1829,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 5"
 Trigger1 = power >= 2000
 value = 21000
-
-[State 200, 5B]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "b"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 320
 
 [State 200, End]
 type = ChangeState

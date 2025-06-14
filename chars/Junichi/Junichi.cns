@@ -518,7 +518,7 @@ trans = add
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time = [2, 10]
-value = A, AA
+value = A, NA
 time = 1
 
 [State 100, 1]
@@ -647,7 +647,7 @@ trans = add
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time = [2, 10]
-value = A, AA
+value = A, NA
 time = 1
 
 [State 100, 1]
