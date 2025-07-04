@@ -281,7 +281,7 @@ value = movehit
 
 [State 0, Damage Proration]
 type = parentVarAdd
-trigger1 = movehit
+trigger1 = hitcount = 2
 v = 11
 ignorehitpause = 1
 persistent = 0
@@ -1833,13 +1833,6 @@ poweradd = 0
 sprpriority = 2
 velset = 0,0
 
-[State 0, Juggle Map]
-type = RootMapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 5
-persistent = 0
-
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = time = 1
@@ -1885,7 +1878,7 @@ ampl = -8
 
 [State 0, Damage Proration]
 type = parentVarAdd
-trigger1 = movehit
+trigger1 = movehit && AnimElem = 4, > 0
 v = 11
 ignorehitpause = 1
 persistent = 0
@@ -1925,7 +1918,7 @@ triggerall = AnimElem = 4
 trigger1 = 1
 attr = S, SP
 animtype  = Medium
-damage    = 35
+damage    = 70
 hitflag = MAFD
 guardflag = MAF
 pausetime = 10,60
@@ -1961,13 +1954,6 @@ anim = 22007
 poweradd = 0
 sprpriority = 2
 velset = 0,0
-
-[State 0, Juggle Map]
-type = RootMapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 5
-persistent = 0
 
 [State 0, PosSet]
 type = PosSet
@@ -2020,7 +2006,7 @@ ampl = -8
 
 [State 0, Damage Proration]
 type = parentVarAdd
-trigger1 = movehit
+trigger1 = movehit && AnimElem = 4, > 0
 v = 11
 ignorehitpause = 1
 persistent = 0
@@ -2060,7 +2046,7 @@ triggerall = AnimElem = 4
 trigger1 = 1
 attr = S, SP
 animtype  = Heavy
-damage    = 70
+damage    = 50
 hitflag = MAFD
 guardflag = MAF
 pausetime = 1,30
@@ -3112,7 +3098,7 @@ triggerall = time % 2 = 0 && time < 69
 trigger1 = 1
 attr = S, SP
 animtype  = Heavy
-damage    = 15
+damage    = 20
 hitflag = MAFD
 guardflag = MA
 pausetime = 1, ifelse(root,time >= 35, 10, 1)
@@ -4204,8 +4190,8 @@ sprpriority = 2
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 3
-x = -13
+trigger1 = AnimElem = 1
+x = -8
 y = 0
 ;ignorehitpause = 
 ;persistent =
@@ -4233,7 +4219,7 @@ anim = 92006
 time = 10
 sound = F20,0
 pos = 0,-20
-movetime = 0
+movetime = 5
 darken = 1
 p2defmul = 1
 poweradd = 0
@@ -4249,7 +4235,7 @@ pos = 40,0
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 3
+triggerall = AnimElem = 5
 ;triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
 attr = S, SA
@@ -4281,7 +4267,7 @@ kill = 0
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 3
+triggerall = AnimElem = 5
 ;triggerall = enemy,map(hitOverride) = 1
 trigger1 = 1
 attr = S, SA
@@ -4311,7 +4297,7 @@ kill = 0
 
 [State 26000, End]
 type = ChangeState
-triggerall = AnimElem = 7
+triggerall = AnimElem = 9
 triggerall = enemy,map(hitOverride) = 0
 trigger1 = movehit
 value = 26200
@@ -4466,13 +4452,13 @@ y = 0
 [State 0, PosAdd]
 type = PosAdd
 trigger1 = time = 5
-x = 12
+x = 6
 y = 0
 
 
 [State 0, StateTypeSet]
 type = StateTypeSet
-trigger1 = AnimElem = 8
+trigger1 = AnimElem = 9
 statetype = A       ;S,A,C,L
 movetype = A        ;I,A,H
 physics = N         ;A,C,S,N

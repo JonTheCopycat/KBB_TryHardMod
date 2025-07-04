@@ -1968,7 +1968,7 @@ sprpriority = 2
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5
+value = 10
 persistent = 0
 
 [State 0, Damage Proration]
@@ -4337,6 +4337,17 @@ pausemovetime = 0
 inheritjuggle = 1= 1
 keyctrl
 
+[State 0, VelSet]
+type = VelSet
+triggerall = time = 0
+trigger1 = 1
+y = 0
+
+[State 0, PosSet]
+type = PosSet
+triggerall = time = 0
+trigger1 = 1
+y = 0
 
 [State 0, StateTypeSet]
 type = ChangeAnim
@@ -7520,7 +7531,7 @@ sprpriority = 2
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5
+value = 10
 persistent = 0
 
 [State 0, Damage Proration]
@@ -7653,7 +7664,7 @@ sprpriority = 2
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5
+value = 9
 persistent = 0
 
 [State 0, Damage Proration]
@@ -7701,7 +7712,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Light
-damage    = 15
+damage    = 20
 guardflag = HA
 pausetime = 10,10
 guard.pausetime = 10, 10
@@ -8080,7 +8091,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 3
+value = 3	
 
 [State 0, ScreenBound]
 type = ScreenBound
@@ -9355,11 +9366,11 @@ sprpriority = 2
 [State 0, AttackDist]
 type = AttackDist
 trigger1 = 1
-value = 40
+value = 30
 
 [State 0, HitOverride]
 type = HitOverride
-trigger1 = Time = 1
+trigger1 = Time = 0
 attr = SCA, AA, AP, AT
 slot = 0
 stateno = 636
@@ -9373,8 +9384,8 @@ time = -1
 [State 0, VelSet]
 type = VelSet
 trigger1 = time <= 1
-x = (random/50) + (100-time)/80 
-y = ifelse(root,statetype = A, 1.2*(random/70),-2.2*(random/70))
+x = (random/100) + (100-time)/80 
+y = ifelse(root,statetype = A, 1.2*root,time/2,-2.2*root,time/2)
 
 
 [State 0, VelSet]
@@ -9716,7 +9727,7 @@ velset = 0,0
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = time = 1
+trigger1 = time = 0
 ;value = S21500,0
 value = S30000,3
 volume = 50
