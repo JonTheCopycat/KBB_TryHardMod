@@ -3532,14 +3532,7 @@ value = 450
 [State 200, End]
 type = ChangeState
 Triggerall = movehit
-trigger1 = command = "hyperhop"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 60
-
-[State 200, End]
-type = ChangeState
-Triggerall = movehit
-trigger1 = command = "up"
+trigger1 = command = "holdup"
 value = 40
 
 [State 200, 6C]

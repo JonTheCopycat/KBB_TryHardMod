@@ -2340,8 +2340,9 @@ menu.valuename.buttonjam.x = "COUNTER"
 menu.valuename.buttonjam.y = "GRAB"
 menu.valuename.buttonjam.d = "TAG 1"
 menu.valuename.buttonjam.w = "TAG 2"
-menu.valuename.buttonjam.z = ""
 menu.valuename.buttonjam.s = "Instant Air Dash"
+menu.valuename.buttonjam.up = "Jump"
+menu.valuename.buttonjam.upback = "Jump Back"
 
 menu.valuename.life.100 = "100%" ; Triea addition
 menu.valuename.life.70 = "70%" ; Triea addition

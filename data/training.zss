@@ -435,17 +435,24 @@ if gameMode != "training" || isHelper || teamSide != 2 {
 				} else if map(_iksys_trainingButtonJam) = 5 {
 					assertInput{flag: y}
 					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
-				} else if map(_iksys_trainingButtonJam) = 6 {
-					assertInput{flag: z}
-					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
-				} else if map(_iksys_trainingButtonJam) = 7 {
+				}  else if map(_iksys_trainingButtonJam) = 6 {
 					assertInput{flag: s}
 					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
-				} else if map(_iksys_trainingButtonJam) = 8 {
+				} else if map(_iksys_trainingButtonJam) = 7 {
 					assertInput{flag: d}
 					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
-				} else if map(_iksys_trainingButtonJam) = 9 {
+				} else if map(_iksys_trainingButtonJam) = 8 {
 					assertInput{flag: w}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				} else if map(_iksys_trainingButtonJam) = 9 {
+					assertInput{flag: U;}
+					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
+				} else if map(_iksys_trainingButtonJam) = 10 {
+					if (facing = 1) {
+						assertInput{flag: U; flag2: L;}
+					} else {
+						assertInput{flag: U; flag2: R;}
+					}
 					mapSet{map: "_iksys_trainingButtonJamDelay"; value: 1}
 				}
 			}

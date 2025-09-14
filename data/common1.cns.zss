@@ -467,14 +467,6 @@ if animTime = 0 {
 changeAnim{value: ifElse(selfAnimExist(44), 44, 41)}
 if time = 0 {
 	var(3) := 1;
-
-	sysVar(1) := 0;
-}
-
-if SelfAnimExist(44) {
-	ChangeAnim{value: 44;}
-} else {
-	ChangeAnim{value: 41;}
 }
 
 if ailevel = 0 {
@@ -482,6 +474,8 @@ if ailevel = 0 {
 		sysVar(1) := -1;
 	} else if command = "holdfwd" {
 		sysVar(1) := 1;
+	} else {
+		sysVar(1) := 0;
 	}
 } else {
 	if roundstate = 2 && random < (ailevel * 100) && p2movetype != H {
@@ -1185,9 +1179,7 @@ ignorehitpause if NumExplod(13500) > 0 {
 # Stand GuardBroken (shaking)
 [StateDef 160; type: S; moveType: H; physics: N; velSet: 0, 0; ctrl: 0;]
 
-
-
-if (time = 0) {
+if time = 0 {
 	PlaySnd{value: F11,0; volumescale: 100;}
 	PlaySnd{value: F6,31; volumescale: 999;}
 	
@@ -1204,6 +1196,8 @@ if (time = 0) {
 		postype: p1;
 	}
 	changeAnim{value: 5002;}
+
+	persistent(0) { enemynear,var(11) := enemynear,var(11) + 60; }
 }
 
 call GetHitShaking(5002);
@@ -1231,7 +1225,7 @@ if time >= 30 {
 if time >= 45 {
 	velSet{x: 0}
 	MapSet{map: "defence"; value: 0;}
-	changeState{value: 0; ctrl: 1;}
+	SelfState{value: 0; ctrl: 1;}
 }
 
 #-------------------------------------------------------------------------------
@@ -1239,7 +1233,25 @@ if time >= 45 {
 [StateDef 165; type: A; moveType: H; physics: N; velSet: 0, 0; ctrl: 0;]
 
 if time = 0 {
+	PlaySnd{value: F11,0; volumescale: 100;}
+	PlaySnd{value: F6,31; volumescale: 999;}
+	
+	Explod{
+		anim: F14000;
+		ID: 14000;
+		pos: 10, -20;
+		facing: 1;
+		vfacing: -1;
+		scale: 0.8, 0.8;
+		sprpriority: 8;
+		ontop: 1;
+		ignorehitpause: 1;
+		postype: p1;
+	}
+
 	ChangeAnim{value: 5047;}
+
+	persistent(0) { enemynear,var(11) := enemynear,var(11) + 60; }
 } else {
 	changeAnim{value: anim}
 }
@@ -1280,15 +1292,15 @@ if alive && time >= 45 && (command = "recovery"
 || random < (ailevel ** 2) * time/5))) {
 	if vel y > 0 &&
 		pos y >= const(movement.air.gethit.groundrecover.ground.threshold) {
-		changeState{value: 5200}
+		SelfState{value: 5200}
 	}
 	if vel y > const(movement.air.gethit.airrecover.threshold) {
-		changeState{value: 5210}
+		SelfState{value: 5210}
 	}
 }
 if vel y > 0 && pos y >= cond(anim = [5051, 5059] || anim = [5061, 5069], 0,
 	ifElse(majorVersion = 1, const(movement.air.gethit.groundlevel), 25)) {
-	changeState{value: 5100}
+	SelfState{value: 5100}
 }
 
 #-------------------------------------------------------------------------------
@@ -1882,11 +1894,11 @@ x: 9999;
 y: 9999
 }
 if numhelper(99100) > 1 {
-	PosAdd{x: -3 * ((time + 1) ** -0.6); redirectID: root,ID}
-	PosAdd{x: -3 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
+	PosAdd{x: -2 * ((time + 1) ** -0.6); redirectID: root,ID}
+	PosAdd{x: -2 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
 } else {
-	PosAdd{x: -5 * ((time + 1) ** -0.6); redirectID: root,ID}
-	PosAdd{x: -5 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
+	PosAdd{x: -4.5 * ((time + 1) ** -0.6); redirectID: root,ID}
+	PosAdd{x: -4.5 * ((time + 1) ** -0.6); redirectID: enemynear,ID;}
 }
 
 
@@ -1922,8 +1934,27 @@ if time = 8 {
 
 [StateDef -2;]
 if NumExplod(13500) > 0 {
+
 	if (stateno != [120,155] || (command != "hold_x" || command = "holdfwd" || map(_iksys_trainingGuardModeConfigure) != 2)) 
 	&& (stateno != [150, 155]) {
-		RemoveExplod{ID: 13500;}
+
+		if (stateno = [5000, 5201] || stateno = [1000, 1075])
+		&& hitOver = 0 && !(enemy,HitDefAttr = SCA,NT,ST,HT) {
+			PowerAdd{value: -1000;}
+			ModifyExplod{
+				ID: 13500;
+				anim: F13510;
+				removetime: -2;
+				scale: 1.1,1.1;
+			}
+			if statetype = A {
+				ChangeState{value: 165; ctrl: 0;}
+			} else {
+				ChangeState{value: 160; ctrl: 0;}
+			}			
+		}
+		else {
+			RemoveExplod{ID: 13500;}
+		}
 	}
 }

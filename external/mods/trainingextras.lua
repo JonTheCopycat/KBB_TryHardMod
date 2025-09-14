@@ -48,9 +48,11 @@ menu.t_valuename = {
 		{itemname = 'c', displayname = motif.training_info.menu_valuename_buttonjam_c},
 		{itemname = 'x', displayname = motif.training_info.menu_valuename_buttonjam_x},
 		{itemname = 'y', displayname = motif.training_info.menu_valuename_buttonjam_y},
-		{itemname = 'z', displayname = motif.training_info.menu_valuename_buttonjam_z},
 		{itemname = 's', displayname = motif.training_info.menu_valuename_buttonjam_s},
 		{itemname = 'd', displayname = motif.training_info.menu_valuename_buttonjam_d},
+		{itemname = 'w', displayname = motif.training_info.menu_valuename_buttonjam_w},
+		{itemname = 'up', displayname = motif.training_info.menu_valuename_buttonjam_up}, --Jon Addition
+		{itemname = 'upback', displayname = motif.training_info.menu_valuename_buttonjam_upback}, -- Jon Addition
 	},
 	life = { -- Triea Addition
 		{itemname = '100', displayname = motif.training_info.menu_valuename_life_100},

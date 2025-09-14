@@ -148,14 +148,14 @@ if time = 0 {
     }
 
     #Original: 15 frames of oppurtunity, 15 frames of recovery.
-    #Current: 6 frames of opportunity, 12 frames of recovery.
+    #Current: 8 frames of opportunity, 12 frames of recovery.
 
     if (P2Stateno != 801 || P2Stateno != 802 || P2Stateno != 803 || P2Stateno != 811 || P2Stateno != 812 || P2Stateno != 813) {
         HitOverride {
             attr: SCA,NA,SA,NP,SP;
             slot: 0;
             stateno: 801;
-            time: 6;
+            time: 8;
         }
     }
 
@@ -179,7 +179,7 @@ ignorehitpause if time = 1 {
     }
 }
 
-if !movecontact && time >= 7 {
+if !movecontact && time >= 9 {
     persistent(0) if prevStateNo != 820 {
         poweradd{value: -1000}
     }
@@ -660,7 +660,7 @@ if AnimTime = 0 {
 
 AttackDist{value: -1}
 
-if Time >= 15 {
+if Time >= 12 {
     ChangeState{value: 0; ctrl: 1}
 }
 
@@ -712,7 +712,7 @@ if time = 0 {
             attr: SCA,NA,SA,NP,SP;
             slot: 0;
             stateno: 811;
-            time: 6;
+            time: 8;
         }
     }
 
@@ -737,12 +737,12 @@ ignorehitpause if time = 1 {
 }
 
 if prevStateNo != 820 {
-    persistent(0) if time = 7 {
+    persistent(0) if time = 9 {
         poweradd{value: -1000}
     }
 }
 
-if !movecontact && time > 6 {
+if !movecontact && time > 8 {
     #MapSet {map:"defence"; value: 0.2}
     MapSet {map:"hitOverride"; value: 0}
 }
@@ -752,7 +752,7 @@ if enemynear, hitpausetime > 15 && var(47) <= 1 {
     ChangeAnim{value: 810; elem: 1}
 }
 
-if (Vel Y > 0 && Pos Y >= -1) && time > 6 {
+if (Vel Y > 0 && Pos Y >= -1) && time > 8 {
     ChangeState{value:816;ctrl:0}
 }
 
@@ -1152,7 +1152,7 @@ if Vel Y > 0 && Pos Y >= -10 {
     ChangeState{value:816;ctrl:0}
 }
 
-if time = 15 {
+if time = 12 {
     ChangeState{value:50;ctrl:0}
 }
 
@@ -1184,7 +1184,7 @@ HitOverride{
     time: 0
 }
 
-if time >= 20 {
+if time >= 15 { #Originally 20
     ChangeState{value:0; ctrl:1}
 }
 
@@ -2358,9 +2358,9 @@ if Const(KBB_Playable) = 1 {
 
     if command = "hold_x" && ailevel = 0 && stateno = [30, 35] {
         if statetype = A {
-            ChangeState{value: 830; ctrl: 0}
+            ChangeState{value: 810; ctrl: 0}
         } else {
-            ChangeState{value: 830; ctrl: 0}
+            ChangeState{value: 800; ctrl: 0}
         }
     }
 }
