@@ -280,7 +280,7 @@ if time > 2 && pos y >= -1 {
 
 #-------------------------------------------------------------------------------
 # Instant Airdash
-[StateDef 66; type: A; movetype: I; physics: N;
+[StateDef 66; type: A; movetype: I; physics: S;
 ctrl: 0; anim: ifelse(var(10)=0,196,2065); sprpriority: 2;]
 
 if AnimElem = 1 {
@@ -289,17 +289,12 @@ if AnimElem = 1 {
 		paladd: 140, 0, 255;
 		trans: add;
 	}
+	VelSet{x: 6; y: 0;}
 }
 
 if time = 0 {
 	var(4) := 1;
-
-	#-------------Experimental---------------
-	ChangeAnim{value: ifelse(var(10)=0,43,2043);}
-	#----------------------------------------
 } else if time = 2 {
-	VelSet{y: 0;}
-	VelMul{x: 1.02;}
 	CtrlSet{value: 1;}
 } else if time = 15 {
 	ChangeState{value: 50; ctrl: 1;}

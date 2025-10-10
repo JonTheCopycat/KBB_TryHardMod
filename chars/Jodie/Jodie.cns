@@ -6618,12 +6618,12 @@ trigger1 = command = "SPECIAL 3"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 23000
 
-[State 200, Wavedash Cancel]
-type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
-value = 35
-ctrl = 1
+;[State 200, Wavedash Cancel]
+;type = ChangeState
+;Triggerall = command = "WD" && command != "NotWD"
+;trigger1 = movecontact
+;value = 35
+;ctrl = 1
 
 [State 200, 5B]
 type = ChangeState
@@ -7109,7 +7109,7 @@ channel = 0
 [State 0, PosAdd]
 type = VelSet
 trigger1 = animelem = 1
-x = 6
+x = 4
 y = 0
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -7126,8 +7126,26 @@ y = -6
 [State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 4
-x = 3.5
-y = -4.25
+x = 3
+y = -3
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = Animelem >= 7
+statetype = S
+movetype = A
+physics = S
+
+[State 0, Land]
+type = PosSet
+trigger1 = Animelem = 7
+y = 0
+
+[State 0, Land]
+type = VelSet
+trigger1 = AnimElem = 7
+x = 2
+y = 0
 
 [State 200, 1]
 type = HitDef
@@ -7152,40 +7170,10 @@ hitsound   = S5,1
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
-ground.velocity = -2,-3.5
-air.velocity = -1,-3.5
+ground.velocity = -2,-6
+air.velocity = -1,-5
 Fall = 1
-Fall.recover = 0
-Fall.yvelocity = -5
-Envshake.time = 10
-
-[State 200, 1]
-type = HitDef
-getpower = 0
-triggerall = map(juggle) < 100 || hitcount != 0
-triggerall = AnimElem = 9
-trigger1 = 1
-attr = S, NA
-animtype  = Medium
-damage    = 25
-hitflag = MAF
-guardflag = MA
-pausetime = 10,10
-ground.hittime  = 20
-air.hittime  = 20
-guard.pausetime = 10,5
-guard.hittime  = 15
-sparkno = 15000
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = S5,1
-guardsound = 6,11
-ground.type = High
-ground.slidetime = 12
-ground.velocity = -3,-5
-air.velocity = -2,-5
-Fall = 1
-Fall.recover = 0
+Fall.recovertime = 40
 Fall.yvelocity = -5
 Envshake.time = 10
 

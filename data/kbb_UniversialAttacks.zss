@@ -158,7 +158,6 @@ if time = 0 {
             time: 8;
         }
     }
-
 }
 
 ignorehitpause if time = 1 {
@@ -1198,11 +1197,19 @@ if time >= 15 { #Originally 20
  juggle: 0;
  ctrl: 0;
  anim: 820;
- poweradd: -1000;
+ poweradd: -500;
  velset: 0,0;
  sprpriority: 0;]
 
-NotHitBy{time: 1; value: SCA,NA,SA,HA,NP,SP,HP}
+NotHitBy{time: 1; value: SCA,NA,SA,HA,NP,SP,HP} 
+
+if time = 1 && prevstateno = [130, 155] {
+    Pause{
+        time: 10;
+        endcmdbuftime: 7;
+        movetime: 0;
+    }
+}
 
 if AnimTime = 0 {
     if pos y >= 0 {
@@ -1226,7 +1233,13 @@ if AnimTime = 0 {
  velset: 0,0;
  sprpriority: -1;]
 
-NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP; time: 1}
+if AnimElem = 4, < 0 {
+    NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP; time: 1}
+}
+
+if (enemy,pos x - pos x) * facing < - 10 && time < 10 {
+    Turn{}
+}
 
 if AnimElem = 2 {
     SprPriority{value: 2}
@@ -2339,7 +2352,9 @@ if Const(KBB_Playable) = 1 {
         #     ChangeState{value: 800; ctrl: 0}
         # }
 
-        if command = "hold_s" && stateno = [120, 155] && power >= 1000 {
+        if command = "hold_s" 
+        && stateno = [120, 155]
+        && power >= 500 {
             ChangeState{value: 820; ctrl: 0;}
         }
 
@@ -2354,6 +2369,12 @@ if Const(KBB_Playable) = 1 {
                 ChangeState{value: 120; ctrl: 0}
             }
         }
+    }
+
+    #Special Case for first frame of Power Charge
+    if stateno = 500 && time < 2 && power >= 250
+    && command = "hold_x" && command = "hold_s" {
+        ChangeState{value: 820; ctrl: 0;}
     }
 
     if command = "hold_x" && ailevel = 0 && stateno = [30, 35] {
