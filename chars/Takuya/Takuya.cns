@@ -9075,6 +9075,11 @@ trigger1 = AnimElem = 4
 x = 2
 y = 0
 
+[State 0, VelSet]
+type = VelSet
+trigger1 = movehit = 1
+y = -3
+
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = AnimElem = 2
@@ -9099,7 +9104,7 @@ animtype  = Up
 damage    = 20
 hitflag = MAF
 guardflag = MA
-pausetime = 15,10
+pausetime = 15,5
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -9108,8 +9113,8 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15
-ground.velocity = -2,6.5
-air.velocity = -2,6.5
+ground.velocity = -2,9
+air.velocity = -2,9
 Fall = 1
 fall.recover = 0
 Envshake.time = 25
@@ -11866,8 +11871,8 @@ trans = add
 [State 0, VelSet]
 type = VelSet
 trigger1 = animelem = 1
-x = ifelse(prevstateno=600,11,vel x)
-y = ifelse(prevstateno=600,5,10)
+x = ifelse(prevstateno=[600,610],11,vel x)
+y = ifelse(prevstateno=[600,610],5,10)
 
 [State 0, ChangeState]
 type = ChangeState

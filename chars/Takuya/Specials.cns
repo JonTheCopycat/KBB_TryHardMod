@@ -5618,7 +5618,7 @@ type = Destroyself
 trigger1 = AnimTime = 0
 
 ;===============================================================================
-; Power Transfer.
+; Power Transfer
 ;-------------------------------------------------------------------------------
 [Statedef 27000]
 type    = S
@@ -5703,12 +5703,12 @@ ignorehitpause = 1
 supermovetime = 9999
 pausemovetime = 9999
 
-[State 0, Charge]
-type = changestate
-triggerall = animElem = 3 
-trigger1 = command = "hold_c"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 27010
+;[State 0, Charge] goodbyr
+;type = changestate
+;triggerall = animElem = 3 
+;trigger1 = command = "hold_c"
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 27010
 
 [State 0, FatalCounter]
 type = MapSet
@@ -5826,7 +5826,7 @@ triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
 attr = S, NA
 animtype  = Up
-damage    = 80
+damage    = 160
 Hitflag = MAFD
 guardflag = MA
 pausetime = 0,20
@@ -5853,7 +5853,7 @@ trigger1 = !movecontact && !movereversed
 triggerall = enemy, movetype != A
 animtype  = Heavy
 attr = S, NA
-damage = 40
+damage = 80
 guard.kill = 0
 hitflag = MAFD
 guardflag = MA
