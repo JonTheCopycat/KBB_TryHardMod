@@ -2856,9 +2856,17 @@ ctrl = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = Time = 60
+trigger1 = Time >= 60 && movehit
 value = 5120
 ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = Time >= 80
+value = 5120
+ctrl = 1
+
+
 ;===============================================================================
 ; C
 ;-------------------------------------------------------------------------------
@@ -4219,7 +4227,7 @@ air.hittime = 30 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2,-5 + ifelse(prevstateno = [23400,23500], 3,0)
 air.velocity = -2,-5 + ifelse(prevstateno = [23400,23500], 3,0)
 Fall = 1
-Fall.recovertime = 85 + ifelse(enemy,movetype = A, 7,0) + ifelse(prevstateno = [23400,23500], 25,0)
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0) + ifelse(prevstateno = [23400,23500], 25,0)
 
 [State 0, DestroySelf]
 type = DestroySelf
@@ -8728,7 +8736,7 @@ type = ChangeState
 Triggerall = movecontact
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 610
+value = 625
 
 
 [State 200, End]
