@@ -87,7 +87,7 @@ Takuya:
 	* (+) 5[B] now has a wavedash cancel and jump cancel 
 	* Less recovery
 7. (-) J5[B] does less damage (60 -> 45)
-	* J5B and J5[B] hitbox size increased
+	* J5[B] hitbox size increased
 	* J5B is more plus
 8. (+) Wavedash C now has a charged version
 9. (+) 5C cooldown is lower
@@ -107,13 +107,16 @@ Takuya:
 	* 4C when enhanced charges faster
 	* Less endlag on jump cancel
 14. (+) 6C has more blockstun and pulls less
-	* 6[C] does not hit post-juggle  now (hopefully)
+	* 6[C] does not hit post-juggle now (hopefully)
 15. (+) 214A superpause time decreased (10 -> 5)
+	* 214A has more endlag
 16. (+) 236A damage slightly increased (120 -> 125)
 17. (+) 236B damage increased (60 -> 70)
 	* 236[B] damage per hit increased (9 -> 10)
 18. (+) 214C has less recovery, less startup, and no longer costs meter, requiring it instead
 	* 214C requires 1000 meter (1500 -> 1000)
+	* 214[C] was removed
+	* 214C damage increased to 80, 160 on fatal
 19. (-) J5C does less damage
 	* Has slightly more chip damage
 20. (-) 5AA string gives less meter
@@ -122,6 +125,9 @@ Takuya:
 22. (-) 2A now has a leg hurtbox..
 23. (+) Takuya no longer loses extra meter when Charge Cancelling
 24. (~) Takuya now has a sound effect and visual when he places an extra spike (Indicates the timer length increases i hope)
+25. (-) Wavedash C charged now has 10 extra frames of endlag if they don't hit the opponent
+26. (-) 214B now has more endlag
+	* 214B invul now comes at f5 instead of f3 (214[B] still comes in f2 tho)
 
 
 

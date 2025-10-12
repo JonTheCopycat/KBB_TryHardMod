@@ -63,12 +63,12 @@ _! Charged								[^C]
 
 <#f0f000>:STAR STRIKES!:</>
 
-"Space Daniel Assist" (1 Bar)						_D_DF_F^A
+"Space Daniel: Assist" (1 Bar)						_D_DF_F^A
 	"Takuya throws a barrage of punches, Space Daniel
 	flies into the opponent."
 
 "Lunar Ascension" (1/2 Bar, AIR OK)						_D_DF_F^A
-	"Takuya kicks upward, and shapeshifts into a missile."
+	"Takuya kicks upward, and shapeshifts into a missile on hit."
 
 "Strike a Pose-uya!" (1 Bar, AIR OK)						_D_DB_B^B
 	"Takuya super taunts."
@@ -91,12 +91,9 @@ _! Charged								[^B]
 _! Charged								[^C]
 	"Takuya morphs his arm into a hammer to crush the
 	opponent.
-	If Takuya a spike is out, Space Daniel flips the
+	If Takuya has a spike out, Space Daniel flips the
 	spike to land ontop of the opponent."
 
-"Power Transfer." (1 Bar)						_D_DB_B^C
+"Space Daniel: Power Transfer" (1 Bar)						_D_DB_B^C
 	"Space Daniel gives Takuya a bit of his power, this 
 	Enhances Takuya until meter runs out."
-
-_! Charged								[^C]
-	"Takuya's charged moves become faster."
