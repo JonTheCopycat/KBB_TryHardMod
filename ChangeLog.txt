@@ -82,9 +82,10 @@ Takuya:
 4. Grab launch angle changed
 	* Now applies hard knockdown (Still can combo off of it)
 5. (+) J5A has less recovery
-6. (+) 5[B] does more damage (45 -> 60)
+6. (+) 5[B] does more damage (45 -> 55)
 	* 5B and 5[B] go farther
 	* (+) 5[B] now has a wavedash cancel and jump cancel 
+	* More proration (5->7)
 	* Less recovery
 7. (-) J5[B] does less damage (60 -> 45)
 	* J5[B] hitbox size increased

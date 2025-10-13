@@ -1396,7 +1396,7 @@ animtype  = Light
 damage    = 15
 hitflag = MAF
 guardflag = MA
-pausetime = 10,15
+pausetime = 10,10
 guard.pausetime = 10,0
 sparkno = 1
 guard.sparkno = 13000
@@ -1433,7 +1433,7 @@ trigger1 = AnimTime = 0
 ;ignorehitpause = 
 ;persistent = 
 
-;===============================================================================
+;==================/'=============================================================
 ; B:
 ;-------------------------------------------------------------------------------
 [Statedef 300]
@@ -1687,7 +1687,7 @@ sprpriority = 2
 
 [State 0, Wallbounce prevent]
 type = VarAdd
-trigger1 = AnimElem = 4
+trigger1 = movehit = 1
 v = 31
 value = 1
 ignorehitpause = 1
@@ -1811,7 +1811,7 @@ ignorehitpause = 0
 type = MapAdd
 trigger1 = movehit 
 map = "juggle"
-value = 5
+value = 7
 persistent = 0
 
 [State 0, Damage Proration]
@@ -1820,7 +1820,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 5
+value = 7
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -1893,10 +1893,10 @@ trigger1 = var(31) >= 1
 trigger2 = enemy,map(hitOverride) != 0
 attr = S, NA
 animtype  = Medium
-damage    = 60
+damage    = 55
 hitflag = MAFD
 guardflag = MA
-pausetime = 20,20
+pausetime = 20,5
 guard.pausetime = 20,40
 sparkno = 1
 guard.sparkno = 13000
@@ -1925,7 +1925,7 @@ triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
 attr = S, NA
 animtype  = Up
-damage    = 120
+damage    = 110
 Hitflag = MAFD
 guardflag = MA
 pausetime = 40,40
@@ -1960,7 +1960,7 @@ triggerall = var(31) < 1
 triggerall = enemy,map(hitOverride) = 0
 attr = S, NA
 animtype  = Medium
-damage    = 60
+damage    = 55
 hitflag = MAFD
 guardflag = MAF
 pausetime = 20,30
@@ -2544,7 +2544,7 @@ triggerall = AnimElem = 10
 trigger1 = 1
 attr = S, NA
 animtype  = Light
-damage    = 45
+damage    = 35
 guardflag = HA
 hitflag = MAFD
 pausetime = 25,15
@@ -2704,7 +2704,7 @@ y = 0
 
 [State 5110, 13] ;Friction
 type = VelMul
-trigger1 = pos y >= 0 && p2dist x > 0 && movecontact
+trigger1 = pos y >= 0 && p2dist x > 0 
 x = .93
 
 [State 5110, 13] ;Friction
@@ -2798,7 +2798,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Up
-damage    = 150
+damage    = 130
 Hitflag = MAFD
 guardflag = LA
 pausetime = 20,20
@@ -2826,7 +2826,7 @@ triggerall = enemy, movetype != A
 trigger1 = !movecontact
 attr = S, NA
 animtype  = Medium
-damage    = 75
+damage    = 65
 hitflag = MAFD
 guardflag = LA
 pausetime = 10,10
