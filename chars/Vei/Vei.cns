@@ -1301,6 +1301,13 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
+trigger1 = command = "holddown"
+trigger1 = command = "a"
+value = 950
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
 trigger1 = command = "a"
 value = 210
 
@@ -2169,7 +2176,7 @@ x = 1
 [State 0, StateTypeSet]
 type = StateTypeSet
 trigger1 = AnimElem = 5
-movetype = I        ;I,A,H
+movetype = A       ;I,A,H
 physics = S        ;A,C,S,N
 ;ignorehitpause = 
 ;persistent = 
@@ -2484,7 +2491,7 @@ sprpriority = 2
 type = RootMapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5
+value = 10
 persistent = 0
 
 [State 210, Damage Proration]
@@ -2766,7 +2773,7 @@ ignorehitpause = 1
 type = RootMapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5
+value = 10
 persistent = 0
 
 [State 210, Damage Proration]
@@ -3063,7 +3070,7 @@ sprpriority = 2
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5
+value = 10
 persistent = 0
 
 [State 0, PlaySnd]
@@ -3448,6 +3455,15 @@ trigger1 = command = "holddown"
 trigger1 = command = "c"
 value = 480
 
+[State 210, Cancel into 2C]
+type = ChangeState
+triggerall = time >= 8
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(405) != 0
+trigger1 = command = "holdback"
+trigger1 = command = "c"
+value = 450
+
 [State 1000, 6]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -3483,12 +3499,12 @@ value = movehit
 [State 0 , VelSet]
 type = VelSet
 trigger1 = time = 0
-x = 8 + root,vel x
+x = 8.4 + root,vel x
 
 [State 0 , VelSet]
 type = VelAdd
 trigger1 = time > 0
-x = 0.3
+x = 0.2
 
 [State 0, ChangeAnim2]
 type = ChangeAnim2
@@ -3502,7 +3518,7 @@ elem = 2
 [State 0 , VelSet]
 type = Velset
 trigger1 = 1
-y = ifelse(root,command = "holdup", -8, ifelse(root,command = "holddown", 8, 0))
+y = ifelse(root,command = "holdup", -7, ifelse(root,command = "holddown", 7, 0))
 
 [State 0, PosSet]
 type = PosSet
@@ -3511,8 +3527,8 @@ y = -5
 
 [State 0, PosSet]
 type = PosSet
-trigger1 = pos y < -150
-y = -150
+trigger1 = pos y < -180
+y = -180
 
 [State 0 , VelSet]
 type = VelSet
@@ -4158,7 +4174,7 @@ physics = A
 juggle  = 1
 ctrl = 0
 anim = 450
-poweradd = -100
+poweradd = 0
 sprpriority = 2
 
 [State 105, NotHitBy]
@@ -4171,7 +4187,13 @@ time = 1
 type = PlaySnd
 trigger1 = time = 0
 value = F100,0
-volumescale = 500
+volumescale = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = F7,0
+volumescale = 100
 
 [State 105, 1]
 type = VelSet
@@ -4203,14 +4225,14 @@ triggerall = numhelper(405) != 0
 triggerall = helper(405),stateno = [406, 407]
 trigger1 = AnimElem = 5
 x = 5
-y = -2
+y = -3
 
 [State 0, VelSet]
 type = VelSet
 triggerall = numhelper(405) != 0
 triggerall = helper(405),stateno = [415, 416]
 trigger1 = AnimElem = 5
-x = 1.5
+x = 1
 y = -7
 
 [State 0, VelSet]
@@ -4218,8 +4240,8 @@ type = VelSet
 triggerall = numhelper(405) != 0
 triggerall = helper(405),stateno = [417, 418]
 trigger1 = AnimElem = 5
-x = 1.5
-y = 4
+x = 1
+y = 5
 
 [State 0, CtrlSet]
 type = CtrlSet
@@ -4356,7 +4378,7 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 470
-poweradd = -500
+poweradd = 0
 velset = -2.5,0
 sprpriority = 1
 
@@ -4370,6 +4392,12 @@ volumescale = 100
 type = AfterImage
 trigger1 = AnimElem = 1
 time = 10
+
+[State 0, PowerAdd]
+type = PowerAdd
+trigger1 = AnimElem = 3
+value = -500
+
 
 [State 0, Helper]
 type = Helper
@@ -4392,7 +4420,7 @@ inheritJuggle = 1
 type = Changestate
 triggerall = numhelper(405) != 0
 trigger1 = time = 0
-value = 470
+value = 480
 
 [State 1000, 6]
 type = ChangeState
@@ -4422,13 +4450,6 @@ trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
 value = 5
 persistent = 0
-
-[State 0, FatalCounter]
-type = MapSet
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
 
 [State 0, Helper Guarded]
 type = RootMapSet
@@ -4492,15 +4513,15 @@ triggerall = root,map(juggle) < 100 || hitcount != 0
 trigger1 = !movecontact && !movereversed
 animtype  = Heavy
 attr = S, NP
-damage = ifelse(enemy,movetype = A,80,60)
+damage = 30
 guard.kill = 0
 hitflag = MAF
 guardflag = MA
-ground.hittime = ifelse(enemy,movetype = A,44,22)
+ground.hittime = 22
 pausetime = 0,8
 sparkno = 2
 sparkxy = 0, 0
-hitsound = S ifelse(enemy,movetype = A,5,3), 1
+hitsound = S3, 1
 guard.sparkno = 13000
 guardsound = 6,11
 guard.slidetime = 12
@@ -4511,7 +4532,7 @@ airguard.velocity = -1.5,-4
 air.velocity = -1,-4
 fall = 1
 Getpower = 0,0
-Fall.recovertime = ifelse(enemy,movetype = A,80,40)
+Fall.recovertime = 40
 
 [State 200, End]
 type = Changestate
@@ -4531,9 +4552,14 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 480
-poweradd = -500
+poweradd = 0
 velset = -2.5,0
 sprpriority = 1
+
+[State 0, PowerAdd]
+type = PowerAdd
+trigger1 = time = 1
+value = -500
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -4806,13 +4832,6 @@ map = "juggle"
 value = 10
 persistent = 0
 
-[State 0, FatalCounter]
-type = MapSet
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
-
 [State 0, Helper Guarded]
 type = RootMapSet
 trigger1 = 1 
@@ -4882,8 +4901,8 @@ trigger1 = AnimElem = 2
 trigger2 = AnimElem = 4
 trigger3 = AnimElem = 6
 animtype  = Heavy
-attr = S, NP
-damage = 6
+attr = A, NP
+damage = 15
 guard.kill = 0
 hitflag = MAFD
 guardflag = MA
@@ -4893,7 +4912,7 @@ pausetime = 0,4
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound = S  5,1
+hitsound = S0,3
 guard.sparkno = 13000
 guardsound = 6,11
 ground.type = High
@@ -4910,8 +4929,8 @@ type = HitDef
 triggerall = root,map(juggle) < 100 || hitcount != 0
 trigger1 = AnimElem = 7
 animtype  = Heavy
-attr = S, NP
-damage = 6
+attr = A, NP
+damage = 30
 guard.kill = 0
 hitflag = MAFD
 guardflag = MA
@@ -4929,7 +4948,6 @@ ground.velocity = -1.5,-4
 airguard.velocity = -1.5,-1
 air.velocity = -1.5,-4
 air.fall = 1
-Getpower = 0,0
 Fall.recovertime = 30
 
 [State 200, End]
@@ -4959,13 +4977,6 @@ map = "juggle"
 value = 10
 persistent = 0
 
-[State 0, FatalCounter]
-type = MapSet
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
-
 [State 0, Helper Guarded]
 type = RootMapSet
 trigger1 = 1 
@@ -5036,7 +5047,7 @@ trigger2 = AnimElem = 4
 trigger3 = AnimElem = 6
 animtype  = Heavy
 attr = S, NP
-damage = 6
+damage = 15
 guard.kill = 0
 hitflag = MAFD
 guardflag = MA
@@ -5046,13 +5057,12 @@ pausetime = 0,4
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound = S  5,1
+hitsound = S0,3
 guard.sparkno = 13000
 guardsound = 6,11
 ground.type = High
 ground.slidetime = 8
-ground.velocity = -1.5
-airguard.velocity = -1.5,-1
+ground.velocity = -2
 air.velocity = -1.5,-1
 air.fall = 1
 Getpower = 0,0
@@ -5064,7 +5074,7 @@ triggerall = root,map(juggle) < 100 || hitcount != 0
 trigger1 = AnimElem = 7
 animtype  = Heavy
 attr = S, NP
-damage = 6
+damage = 30
 guard.kill = 0
 hitflag = MAFD
 guardflag = MA
@@ -5082,7 +5092,6 @@ ground.velocity = -3
 airguard.velocity = -1.5,-1
 air.velocity = -3,-3
 air.fall = 1
-Getpower = 0,0
 Fall.recovertime = 30
 
 [State 200, End]
@@ -5112,13 +5121,6 @@ map = "juggle"
 value = 10
 persistent = 0
 
-[State 0, FatalCounter]
-type = MapSet
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
-
 [State 0, Helper Guarded]
 type = RootMapSet
 trigger1 = 1 
@@ -5189,7 +5191,7 @@ trigger2 = AnimElem = 4
 trigger3 = AnimElem = 6
 animtype  = Heavy
 attr = S, NP
-damage = 6
+damage = 15
 guard.kill = 0
 hitflag = MAFD
 guardflag = MA
@@ -5199,7 +5201,7 @@ pausetime = 0,4
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound = S  5,1
+hitsound = S0,3
 guard.sparkno = 13000
 guardsound = 6,11
 ground.type = High
@@ -5217,7 +5219,7 @@ triggerall = root,map(juggle) < 100 || hitcount != 0
 trigger1 = AnimElem = 7
 animtype  = Heavy
 attr = S, NP
-damage = 6
+damage = 30
 guard.kill = 0
 hitflag = MAFD
 guardflag = MA
@@ -5226,7 +5228,7 @@ pausetime = 0,4
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound = S  5,1
+hitsound = S5,1
 guard.sparkno = 13000
 guardsound = 6,11
 ground.type = High
@@ -5235,7 +5237,6 @@ ground.velocity = -1.5,4
 airguard.velocity = -1.5,1
 air.velocity = -1.5,5
 air.fall = 1
-Getpower = 0,0
 Fall.recovertime = 30
 
 [State 200, End]
@@ -6115,6 +6116,13 @@ anim = 911
 poweradd = 0
 sprpriority = 2
 
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
+
 [State 0, AttackDist]
 type = AttackDist
 trigger1 = 1
@@ -6218,6 +6226,7 @@ ground.velocity = -2, 4
 air.velocity = -2, 4
 Fall = 1
 fall.recover = 0
+fall.yvelocity = -6
 Envshake.time = 10
 
 [State 200, Hurt]
@@ -6320,13 +6329,8 @@ volumescale = 50
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 2
-x = 3
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = time = [8, 12]
-x = 6
+trigger1 = AnimElem = 3
+x = 4
 
 [State 0, PosAdd]
 type = PosAdd
@@ -6473,6 +6477,7 @@ trigger1 = 1
 attr = A, NA
 animtype  = Light
 damage    = 15
+hitflag = MAFD
 guardflag = HAF
 pausetime = 10,10
 sparkno = 0
@@ -7459,6 +7464,13 @@ type = VelAdd
 trigger1 = 1
 y = 0.44
 
+[State 1000, 6]
+type = ChangeState
+trigger1 = pos Y >= 0 && Vel Y > 0
+trigger1 = AnimElem = 3, > 0
+value = 52
+ctrl = 1
+
 [State 200, End]
 type = StateTypeSet
 trigger1 = pos Y >= 0 && Vel Y > 0
@@ -7474,6 +7486,7 @@ y = 0
 type = VelSet
 trigger1 = pos Y >= 0 && Vel Y > 0
 y = 0
+
 
 [State 1000, 6]
 type = ChangeState
@@ -7517,7 +7530,7 @@ volumescale = 50
 
 [State 0, Damage Proration]
 type = VarAdd
-trigger1 = movehit
+trigger1 = movehit && AnimElem = 11, >= 0
 v = 11
 ignorehitpause = 1
 persistent = 0
@@ -7527,7 +7540,7 @@ value = 8
 type = VelSet
 trigger1 = AnimElem = 1
 y = -3
-x = 2
+x = -2
 
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -7592,7 +7605,7 @@ trigger6 = AnimElem = 9
 trigger7 = AnimElem = 10
 attr = A, NA
 animtype  = Light 
-damage    = 10
+damage    = 5
 Hitflag = MAF
 guardflag = HA
 pausetime = 2,2
@@ -7740,13 +7753,13 @@ persistent = 0
 
 [State 0, IM DOING A HIGH, BOZO]
 type = MapSet
-trigger1 = stateno = [600, 620] || stateno = 900 || Stateno = 470 || Stateno = [21000, 21005]
+trigger1 = helper(31),stateno = 391 || stateno = [600, 620] || stateno = 900 || Stateno = [21000, 21005]
 map = "highAttack"
 value = 1
 
 [State 0, nvm lol]
 type = MapSet
-trigger1 = !(stateno = [600, 620] || stateno = 900 || Stateno = 470 || Stateno = [21000, 21005])
+trigger1 = !(helper(31),stateno = 391 || stateno = [600, 620] || stateno = 900 || Stateno = [21000, 21005])
 map = "highAttack"
 value = 0
 

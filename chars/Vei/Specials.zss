@@ -45,7 +45,7 @@
 
 
 #its a cloak not a scarf
-[Statedef 20000; type: S; movetype: A; physics: S; juggle: 2; ctrl: 0;
+[Statedef 20000; type: S; movetype: A; physics: S; juggle: 0; ctrl: 0;
 anim: 20000; poweradd: -1500; sprpriority: 2; ]
 
 if time = 1 {
@@ -57,10 +57,6 @@ if time = 1 {
     if prevstateno = 625 || prevstateno = 402 {
         var(10) := var(10) + 1;
     }
-}
-
-persistent(0) if movehit && enemy,gethitvar(fall) {
-    MapAdd{map: "juggle"; value: 10; }
 }
 
 ignorehitpause {
@@ -80,8 +76,7 @@ if Animelem = 1 {
     PlaySnd{value: S200,19; volumescale: 300; }
 }
 
-if  (map(juggle) < 100 || hitcount != 0)
-&&  (time >= 3 && time  <= 64  &&  time % 3 = 0) {
+if  (time >= 3 && time  <= 64  &&  time % 3 = 0) {
 	HitDef{
 		attr: A, NA;
 		animtype: Medium;
@@ -113,8 +108,7 @@ if  (map(juggle) < 100 || hitcount != 0)
 
 }
 
-if  (map(juggle) < 100 || hitcount != 0)
-&&  AnimElem = 23 {
+if AnimElem = 23 {
 	HitDef{
 		attr: A, NA;
 		animtype: Medium;
@@ -143,7 +137,19 @@ if  (map(juggle) < 100 || hitcount != 0)
         guard.cornerpush.veloff: -5.25;
         airguard.cornerpush.veloff: -5.25;
 	}
-
+	Explod{
+		anim: 20001;
+		ID: 20001;
+		pos: -45, -10;
+		postype: p1;
+		facing: 1;
+		vfacing: 1;
+		bindtime: -1;
+		removetime: -2;
+		scale: 0.15,0.15;
+        sprpriority: 3;
+        removeongethit: 1;
+	}
 }
 
 if AnimTime = -40 {
@@ -160,22 +166,6 @@ if AnimTime = -40 {
 		inheritJuggle: 1;
         supermovetime: 0;
         pausemovetime: 0;
-	}
-}
-
-if AnimELem = 23 {
-    Explod{
-		anim: 20001;
-		ID: 20001;
-		pos: -45, -10;
-		postype: p1;
-		facing: 1;
-		vfacing: 1;
-		bindtime: -1;
-		removetime: -2;
-		scale: 0.15,0.15;
-        sprpriority: 3;
-        removeongethit: 1;
 	}
 }
 
@@ -762,7 +752,7 @@ if (FrontEdgeBodyDist < - 30 || time = 250 || movecontact || movereversed) {
 
 
 #il bury you
-[Statedef 24000; type: S; movetype: A; physics: S; juggle: 1; ctrl: 0; 
+[Statedef 24000; type: S; movetype: A; physics: S; juggle: 0; ctrl: 0; 
 anim: 24000; poweradd: -500; sprpriority: 2; ]
 
 ignorehitpause {
@@ -772,14 +762,8 @@ ignorehitpause {
 if Time = 1 {
     SuperPause{anim: 92006; time: 10; sound: 20,0; pos: 0,-20; 
     movetime: 0; darken: 1; p2defmul: 1; poweradd: 0; endcmdbuftime: 7; }
-} else if time = 0 {
-    notHitBy{value: A; time: 9; }
 } else if time >= 3 {
         Velset{x: 4; y: 0; }
-}
-
-persistent(0) if movehit && enemy,gethitvar(fall) {
-    MapAdd{map: "juggle"; value: 0; }
 }
 
 If Animelem = 1 && pos Y <= 0 {
@@ -795,8 +779,7 @@ if Animelem = 2 {
 }
 
 
-if  (map(juggle) < 100 || hitcount != 0)
- && (AnimElem = 3 || AnimElem = 9)  {
+if (AnimElem = 3 || AnimElem = 9)  {
 	HitDef{
 		attr: A, NP;
 		animtype: Heavy;
@@ -845,11 +828,7 @@ if Animtime = 0 {
 anim: 24001; sprpriority: 1; ]
 
 ignorehitpause {
-    MapSet{map: "busterable"; value: 1; }
-}
-
-persistent(0) if movehit && enemy,gethitvar(fall) {
-    MapAdd{map: "juggle"; value: 0; }
+    RootMapSet{map: "busterable"; value: 1; }
 }
 
 if time = 0 {
