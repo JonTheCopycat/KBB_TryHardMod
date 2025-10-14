@@ -775,15 +775,6 @@ value = 200
 triggerall = command = "a"
 Triggerall = statetype != A
 trigger1 = ctrl
-;---------------------------------------------------------------------------
-; Back + A
-[State -1, Back + A]
-type = ChangeState
-value = 330
-triggerall = command = "holdback"
-triggerall = command = "a"
-Triggerall = statetype != A
-trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
 ; Down + B

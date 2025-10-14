@@ -179,7 +179,7 @@ value = 1
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = !moveguarded;root,map(juggle) < 100
+triggerall = !moveguarded;root,map(juggle) < 100 || hitcount != 0
 triggerall = time % 4 = 0
 trigger1 = 1
 attr = S, SP
@@ -240,13 +240,6 @@ poweradd = 0
 sprpriority = 2
 velset = 0,0
 
-[State 0, Juggle Map]
-type = RootMapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 5
-persistent = 0
-
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = time = 1
@@ -285,7 +278,7 @@ trigger1 = hitcount = 2
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 15 ; More bombs = more proration
+value = 10 ; More bombs = more proration
 
 
 [State 1010, Helper Attack Scale]
@@ -380,13 +373,6 @@ trigger1 = movehit
 x = 0.01
 y = -0.01
 
-[State 0, Juggle Map]
-type = RootMapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 5
-persistent = 0
-
 [State 1010, Helper Attack Scale]
 type = AttackMulSet
 trigger1 = 1
@@ -434,7 +420,6 @@ value = 1
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = root,map(juggle) < 100
 triggerall = time % 4 = 0
 trigger1 = 1
 attr = S, SP
@@ -569,7 +554,7 @@ value = 1
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = root,map(juggle) < 100
+triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = time % 4 = 0
 trigger1 = 1
 attr = S, SP
@@ -704,7 +689,7 @@ value = 1
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = root,map(juggle) < 100
+triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = time % 4 = 0
 trigger1 = 1
 attr = S, SP
@@ -970,7 +955,7 @@ x = -9
 [State 200, 1]
 type = HitDef
 getpower = 0
-;triggerall = map(juggle) < 100
+;triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
@@ -1013,25 +998,6 @@ keyctrl = 0
 ownpal = 0
 supermovetime = 0
 pausemovetime = 0
-
-
-;[State 0, Helper]
-;type = Helper
-;triggerall = var(22) = 1
-;trigger1 = animelem = 4
-;helpertype = normal ;player
-;name = "Sudsy Mode"
-;ID = 22010
-;stateno = 22010
-;pos = ifelse(frontedgedist > 80,80,40),-15
-;scale = 0.1,0.1
-;postype = p1    ;p2,front,back,left,right
-;facing = 1
-;keyctrl = 0
-;ownpal = 0
-;supermovetime = 0
-;pausemovetime = 0
-;inheritjuggle = 1
 
 [State 200, 2C Cancel]
 type = ChangeState
@@ -1381,7 +1347,7 @@ value = 1
 [State 200, 1]
 type = HitDef
 getpower = 0
-;triggerall = root,map(juggle) < 100
+;triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = time % 4 = 0
 trigger1 = 1
 attr = S, SP
@@ -1635,7 +1601,6 @@ type = HitDef
 getpower = 0
 triggerall = AnimElem = 1
 triggerall = root, var(11) < 200
-triggerall = root,stateno != 950 ; Used for most attacks
 trigger1 = 1
 attr = S, NA
 animtype  = Light
@@ -1655,37 +1620,6 @@ ground.slidetime = 6
 ground.hittime  = 5
 ground.velocity = -1,-5 + (root,map(sudsyTracker)/5)
 air.velocity = -1, ifelse(root,stateno =610, 3, -6)
-Fall = 1
-down.bounce = ifelse(root,stateno = 610,1,0)
-Fall.recovertime = 60 - (root,map(sudsyTracker)*2)
-guard.cornerpush.veloff = -5
-airguard.cornerpush.veloff = -4
-
-[State 200, 1]
-type = HitDef
-getpower = 0
-triggerall = AnimElem = 1
-triggerall = root, var(11) < 200
-triggerall = root,stateno = 950 ; Used for 2a (Hits downed)
-trigger1 = 1
-attr = S, NA
-animtype  = Light
-damage    = 15
-hitflag = MAFD
-guardflag = MAF
-pausetime = 10,12
-guard.pausetime = 0,1
-sparkno = 0
-guard.sparkno = 13000
-sparkxy = -8,-25
-;hitsound   = S23000,1
-hitsound   = S30000,3
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 6
-ground.hittime  = 5
-ground.velocity = -1,-5 + (root,map(sudsyTracker)/5)
-air.velocity = -1, ifelse(root,stateno =610, 12, -6)
 Fall = 1
 down.bounce = ifelse(root,stateno = 610,1,0)
 Fall.recovertime = 60 - (root,map(sudsyTracker)*2)
@@ -2331,12 +2265,12 @@ poweradd = 0
 sprpriority = 2
 velset = 0,0
 
-[State 0, Juggle Map]
-type = RootMapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 5
-persistent = 0
+;[State 0, Juggle Map]
+;type = RootMapAdd
+;trigger1 = movehit && enemy,gethitvar(fall)
+;map = "juggle"
+;value = 5
+;persistent = 0
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -2382,18 +2316,18 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 10 ; More bombs = more proration
+value = 5 ; More bombs = more proration
 
 [State 0, EnvShake]
 type = EnvShake
 trigger1 = AnimElem = 1
 time = 15
-ampl = -4
+ampl = -2
 
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = root,map(juggle) < 100
+triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = AnimElem = 1
 trigger1 = 1
 attr = S, NP
@@ -2401,20 +2335,20 @@ animtype  = Light
 damage    = 40
 hitflag = MAFD
 guardflag = MAF
-pausetime = 12,12
-guard.pausetime = 0,6
+pausetime = 4,4
+guard.pausetime = 0,4
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = S30000,3
-guardsound = 6,0
+guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 10
 ground.velocity = -1,-5
-air.velocity = -1,-5
+air.velocity = -1,-4
 Fall = 1
-Fall.recovertime = 60
+Fall.recovertime = 40
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -2583,8 +2517,8 @@ animtype  = Heavy
 damage    = ifelse(prevstateno = 477, 80,50) ; Grenades do reduced damage in Sudsy mode (To reduce Sudsy's damage boost) 
 hitflag = MAFD
 guardflag = MAF
-pausetime = 12,ifelse(prevstateno = 621,1,12) ;Reduced blockstun if from j.5c
-guard.pausetime = 0,8
+pausetime = 12,12
+guard.pausetime = 0,8 ;Reduced blockstun if from j.5c
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2594,11 +2528,11 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 10
 ground.hittime  = 16
-ground.velocity = ifelse(root,stateno = 625,-3,-1),-5
-air.velocity = ifelse(root,stateno = 625,-3,-1),-5 ; Launches away farther horizontally if from j.5c grenade
+ground.velocity = -2,-5
+air.velocity = -2,-5 ; Launches away farther horizontally if from j.5c grenade
 airguard.velocity = -5,-1
 Fall = 1
-Fall.recovertime = 40
+Fall.recovertime = 60
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -2662,7 +2596,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = root,var(21) + 3 ; More bombs = more proration
+value = 3 ; More bombs = more proration
 
 [State 0, EnvShake]
 type = EnvShake
@@ -2677,7 +2611,7 @@ triggerall = AnimElem = 1
 trigger1 = 1
 attr = A, NP 
 animtype  = Heavy
-damage    = ifelse(root,var(22) = 1,30,20) ; Grenades do reduced damage in Sudsy mode (To reduce Sudsy's damage boost) 
+damage    = ifelse(root,var(22) = 1,45,35) ; Grenades do reduced damage in Sudsy mode (To reduce Sudsy's damage boost) 
 hitflag = MAFD
 guardflag = MAF
 pausetime = 12, 12
@@ -3093,7 +3027,7 @@ value = 5 ; More bombs = more proration
 [State 200, 1]
 type = HitDef
 getpower = 0
-;triggerall = root,map(juggle) < 100
+;triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = time % 2 = 0 && time < 69
 trigger1 = 1
 attr = S, SP
@@ -3125,7 +3059,7 @@ airguard.cornerpush.veloff = 0
 [State 200, 1]
 type = HitDef
 getpower = 0
-;triggerall = root,map(juggle) < 100
+;triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = time = 69
 trigger1 = 1
 attr = S, SP
@@ -3254,7 +3188,7 @@ value = 1
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = root,map(juggle) < 100
+triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = time % 4 = 0
 trigger1 = 1
 attr = S, SP
@@ -3626,6 +3560,13 @@ anim = 25500
 poweradd = 0
 sprpriority = 2
 
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
 [State 0, TargetBind]
 type = TargetBind
 trigger1 = time <=120
@@ -3817,6 +3758,13 @@ poweradd = 0
 ;velset = 0, -2
 sprpriority = 2
 
+[State 0, Busterable]
+type = RootMapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
 [State 0, VelSet]
 type = VelSet
 trigger1 = movehit
@@ -3870,7 +3818,7 @@ value = 1
 [State 200, 1]
 type = HitDef
 getpower = 0
-;triggerall = root,map(juggle) < 100
+;triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = time % 4 = 0
 trigger1 = 1
 attr = S, SP
@@ -3930,6 +3878,13 @@ anim = 25560
 poweradd = 0
 velset = 0,0
 sprpriority = 2
+
+[State 0, Busterable]
+type = RootMapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
 
 [State 0, Damage Proration]
 type = rootVarAdd
@@ -4084,6 +4039,13 @@ ctrl = 0
 anim = 25570
 poweradd = 0
 sprpriority = 2
+
+[State 0, Busterable]
+type = RootMapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -4529,6 +4491,13 @@ anim = 26205;26600
 poweradd = 0
 sprpriority = 2
 
+[State 0, Busterable]
+type = RootMapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
 [State 0, VelSet]
 type = VelSet
 trigger1 = movehit
@@ -4617,7 +4586,7 @@ trans = add
 [State 200, 1]
 type = HitDef
 getpower = 0
-;triggerall = root,map(juggle) < 100
+;triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = time % 4 = 0
 trigger1 = 1
 attr = S, SP
@@ -4668,6 +4637,13 @@ ctrl = 0
 anim = 26206;26600
 poweradd = 0
 sprpriority = 2
+
+[State 0, Busterable]
+type = RootMapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
 
 [State 0, ScreenBound]
 type = ScreenBound
@@ -5134,6 +5110,13 @@ anim = 26600
 poweradd = 0
 sprpriority = 2
 
+[State 0, Busterable]
+type = RootMapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = time = 1
@@ -5160,7 +5143,7 @@ value = 40 ; More bombs = more proration
 [State 200, 1]
 type = HitDef
 getpower = 0
-;triggerall = root,map(juggle) < 100
+;triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = time % 8 = 0 && time < 69
 trigger1 = 1
 attr = S, SP
@@ -5191,7 +5174,7 @@ airguard.cornerpush.veloff = 0
 [State 200, 1]
 type = HitDef
 getpower = 0
-;triggerall = root,map(juggle) < 100
+;triggerall = root,map(juggle) < 100 || hitcount != 0
 triggerall = time = 69
 trigger1 = 1
 attr = S, SP
