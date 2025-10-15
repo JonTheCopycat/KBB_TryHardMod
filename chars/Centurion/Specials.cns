@@ -275,6 +275,16 @@ anim = 21000
 sprpriority = 2
 poweradd = -500
 
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno != [22000,22035]
+value = -1000
+
+[State 200, Power Gain]
+type = PowerAdd
+trigger1 = time = 0 && prevstateno = [22000,22035]
+value = -500
+
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = pos y < 0
@@ -512,6 +522,11 @@ sprpriority = 2
 ;value = S21000,1
 ;volumescale = 100
 
+[State 200, Gravity]
+type = VelAdd
+trigger1 = pos y < 0
+y = 0.44
+
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 0
@@ -535,7 +550,7 @@ value = 1
 [State 0, PosAdd]
 type = VelSet
 trigger1 = AnimElem = 11
-x = 15
+x = 14
 y = 0
 
 ;[State 0, VelSet]
@@ -568,7 +583,7 @@ channel = 4
 type = SuperPause
 trigger1 = Time = 1
 anim = 92006
-time = 5
+time = 10
 sound = 20,0
 pos = 0,-20
 movetime = 0
@@ -658,6 +673,12 @@ guard.velocity = 2
 Fall = 1
 Envshake.time = 20
 fall.recover = 0
+;
+;[State 200, End]
+;type = ChangeState
+;trigger1 = pos y >= 0
+;value = 5080
+;ctrl = 1
 
 [State 200, End]
 type = ChangeState
@@ -688,7 +709,7 @@ value = 1
 [State 200, Power Gain]
 type = PowerAdd
 trigger1 = time = 0 && prevstateno != 22020 && prevstateno != [21000,21005]
-value = -1000
+value = -500
 
 [State 200, Power Gain]
 type = PowerAdd
@@ -897,7 +918,7 @@ type = ChangeState
 triggerall = prevstateno != 21000
 Triggerall = time >= 5
 triggerall = numhelper(3500) = 0
-triggerall = power >= 500
+triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 21000
 
@@ -988,7 +1009,7 @@ type = ChangeState
 triggerall = prevstateno != 21000
 Triggerall = time >= 5
 triggerall = numhelper(3500) = 0
-triggerall = power >= 500
+triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 21000
 
@@ -1071,7 +1092,7 @@ type = ChangeState
 triggerall = prevstateno != 21000
 Triggerall = time >= 5
 triggerall = numhelper(3500) = 0
-triggerall = power >= 500
+triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 21000
 
@@ -1098,7 +1119,7 @@ type = ChangeState
 triggerall = prevstateno != 21000
 Triggerall = time >= 5
 triggerall = numhelper(3500) = 0
-triggerall = power >= 500
+triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 21000
 
@@ -1200,7 +1221,7 @@ type = ChangeState
 triggerall = prevstateno != 21000
 Triggerall = time >= 5
 triggerall = numhelper(3500) = 0
-triggerall = power >= 500
+triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 21000
 
@@ -1296,7 +1317,7 @@ type = ChangeState
 triggerall = prevstateno != 21000
 Triggerall = time >= 5
 triggerall = numhelper(3500) = 0
-triggerall = power >= 500
+triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 21000
 
@@ -1386,7 +1407,7 @@ type = ChangeState
 triggerall = prevstateno != 21000
 Triggerall = time >= 5
 triggerall = numhelper(3500) = 0
-triggerall = power >= 500
+triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 21000
 
@@ -1477,7 +1498,7 @@ type = ChangeState
 triggerall = prevstateno != 21000
 Triggerall = time >= 5
 triggerall = numhelper(3500) = 0
-triggerall = power >= 500
+triggerall = power >= 1000
 trigger1 = command = "SPECIAL 3"
 value = 21000
 

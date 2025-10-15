@@ -31,8 +31,15 @@ Chuck		 						_F_D_DF^C
 <#f0f000>:EX ATTACKS!:</>
 
 Ice Step (1/4 Bar)								^C
-	"Centurion steps forward, breaking ice.
-	Dash Cancellable."
+	"Centurion steps forward, breaking ice."
+_! Low Kick										^A
+	"Kick at their feet."
+
+_! Retreat									^B
+	"Dash backwards"
+
+_! STEP    									^C
+	"Do another Ice Step."
 
 Ice Shard (1/4 Bar)				_D^C
 	"Centurion shoots multiple ice shards."
@@ -54,10 +61,10 @@ Ice Breaker (1 Bar)					_D_DB_B^A
 	"Centurion encases himself with ice, then
 	breaks it."
 
-Spindash (1/2 Bar, _AIR OK)    	_D_DF_F^B
+Spindash (1 Bar, _AIR OK)    	_D_DF_F^B
 	"Centurion dashes forward."
 
-Karambit Rekka (1 Bar)		_D_DB_B^B
+Karambit Rekka (1/2 Bar)		_D_DB_B^B
 	"Centurion slashes with his Karambits."
 _! Slash										^B
 	"Slashes with his Karambits..."

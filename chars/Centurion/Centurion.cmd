@@ -641,7 +641,7 @@ type = ChangeState
 value = 21000
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 3"
-Triggerall = power >= 500
+Triggerall = power >= 1000
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 ; Special 3 (Ground)
@@ -661,7 +661,7 @@ value = 22000
 triggerall = numhelper(22005) = 0
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 4"
-Triggerall = power >= 1000
+Triggerall = power >= 500
 Triggerall = statetype != A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
