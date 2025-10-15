@@ -3,7 +3,7 @@
 | Try-Hard Version 0.8.0 Changes:                    /
 |---------------------------------------------------/
 
-Universal Changes: 
+Universal Changes:
 1. New defensive mechanic: Star guard. performed by inputting what used to be counter. Blocks everything at the cost of meter, and pushes the opponent back in the process.
 2. Counter has been nerfed in light of the new mechanic.
 	* Now inputted with forward + counter.
