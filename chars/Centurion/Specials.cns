@@ -273,7 +273,6 @@ ctrl = 0
 ;velset = 0,0
 anim = 21000
 sprpriority = 2
-poweradd = -500
 
 [State 200, Power Gain]
 type = PowerAdd
@@ -382,7 +381,7 @@ ground.hittime  = 15
 ground.velocity = -2,-3
 air.velocity = -2,-2
 guard.velocity = 2
-Fall = 1
+Fall = 0
 Envshake.time = 20
 fall.recover = 0
 
@@ -524,8 +523,13 @@ sprpriority = 2
 
 [State 200, Gravity]
 type = VelAdd
-trigger1 = pos y < 0
-y = 0.44
+trigger1 = pos y < 0 && AnimElemNo(10) <= 0
+y = -0.22
+
+;[State 200, Gravity]
+;type = VelAdd
+;trigger1 = pos y < 0 && AnimElemNo(10) >= 0
+;y = 0.22
 
 [State 0, VelSet]
 type = VelSet
@@ -616,7 +620,7 @@ ground.hittime  = 15
 ground.velocity = 2,-3
 air.velocity = 2,-2
 guard.velocity = 2
-Fall = 1
+Fall = 0
 Envshake.time = 20
 fall.recover = 0
 
@@ -1844,7 +1848,7 @@ getpower = 0
 trigger1 = !movecontact
 attr = A, NP
 animtype  = Light
-damage    = 60
+damage    = 80
 guardflag = MA
 pausetime = 15,15
 guard.pausetime = 0,5
