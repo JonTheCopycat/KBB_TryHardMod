@@ -605,6 +605,7 @@ trigger1 = ctrl
 trigger2 = stateno = [200, 290] && movecontact
 trigger3 = stateno = [300, 390] && movecontact
 trigger4 = stateno = [600, 610] && movecontact
+trigger5 = stateno = 625 && movecontact
 ;---------------------------------------------------------------------------
 ; Special 1 Failed
 [State -1, Giant Bubble Ball Fail]

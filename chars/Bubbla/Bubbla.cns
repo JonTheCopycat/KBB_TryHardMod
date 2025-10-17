@@ -7574,9 +7574,8 @@ sprpriority = 2
 
 [State 0, VelSet]
 type = VelSet
-triggerall = AnimElem = 1
-trigger1 = 1
-x = 0
+trigger1 = AnimElem = 1
+x = vel x * 0.25
 y = 0
 
 [State 0, VelSet]
@@ -7584,7 +7583,6 @@ type = VelSet
 triggerall = AnimElem = 4
 triggerall = var(21) > 0
 trigger1 = 1
-x = -1
 y = -4
 
 [State 0, VelSet]
@@ -8419,7 +8417,7 @@ ground.velocity = -3,-5
 air.velocity = -3,-2.5 ; Launches away farther horizontally if from j.5c grenade
 airguard.velocity = -5,-1
 Fall = 1
-Fall.recovertime = 40
+Fall.recovertime = 30
 Envshake.time = 5
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4

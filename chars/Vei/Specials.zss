@@ -781,6 +781,7 @@ if Animelem = 2 {
 
 if (AnimElem = 3 || AnimElem = 9)  {
 	HitDef{
+		getpower: 0,0;
 		attr: A, NP;
 		animtype: Heavy;
 		damage: 20;
@@ -851,6 +852,7 @@ NotHitBy{value: SCA; time: 1;}
 if  (map(juggle) < 100 || hitcount != 0)
  && (AnimElem = 6 || AnimElem = 12 || AnimElem = 18)  {
 	HitDef{
+		getpower: 0,0;
 		attr: A, NP;
 		animtype: Heavy;
 		damage: 10;
