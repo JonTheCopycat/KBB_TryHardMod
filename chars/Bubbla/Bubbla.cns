@@ -8325,7 +8325,7 @@ y = -0.4
 
 [State 0, VelSet]
 type = VelAdd
-trigger1 = command != "hold_c" && Anim != 626
+trigger1 = command != "hold_c" && time >= 3 && Anim != 626
 trigger2 = time >= 100 && Anim != 626
 x = 1
 y = -4
@@ -8336,18 +8336,9 @@ y = -4
 ;x = 3
 ;y = -3
 
-[State -3, Bubble Pop] ; Tracks Bubble Pop
-type = MapSet
-trigger1 = command != "hold_c" && Anim != 626
-trigger2 = command != "hold_c" && time = 0 && Anim != 626
-trigger3 = time >= 100 && Anim != 626
-value = 1
-ignorehitpause = 1
-
 [State 0, ChangeAnim2]
 type = ChangeAnim2
-trigger1 = command != "hold_c" && Anim != 626
-trigger2 = command != "hold_c" && time = 0 && Anim != 626
+trigger1 = command != "hold_c" && time >= 3 && Anim != 626
 trigger3 = time >= 100 && Anim != 626
 trigger4 = time >= 20 && roundstate = 2 && ailevel > 0
 value = 626
@@ -8383,7 +8374,7 @@ facing = 1
 vfacing = 0
 bindtime = -1
 removetime = -1
-scale = 1.11,1.11
+scale = 1.2,1.2
 vel = 0,0
 sprpriority = 1
 ontop = 1
@@ -8512,9 +8503,7 @@ value = 620
 
 [State 200, End]
 type = ChangeState
-triggerall = AnimTime = 0 && Anim = 626
-trigger1 = 1
-trigger2 = time >= 20 && roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+trigger1 = AnimTime = 0 && Anim = 626
 value = 50
 ctrl = 1
 
@@ -8811,7 +8800,7 @@ trigger1 = 1
 ; Mini Bubble Spawn
 [Statedef 632]
 type    = S
-movetype= A
+movetype= I
 physics = N
 juggle  = 1
 ctrl = 0
@@ -8819,11 +8808,6 @@ anim = 4560
 velset = 1,0
 poweradd = 0
 sprpriority = 2
-
-[State 0, AttackDist]
-type = AttackDist
-trigger1 = 1
-value = 30
 
 [State 0, HitOverride]
 type = HitOverride
@@ -8842,14 +8826,14 @@ time = -1
 type = VelSet
 trigger1 = time <= 1
 x = (random/100) + (100-time)/60 
-y = ifelse(root,statetype = A, 1.2*root,time/2,-2.6*root,time/1.8)
+y = ifelse(root,statetype = A, 1.6*root,time/2 - 0.5,-2.6*root,time/1.8)
 
 
 [State 0, VelSet]
 type = VelSet
 triggerall = root, stateno != 25500
 trigger1 = time > 1
-x = 0.01+vel x/1.41
+x = 0.01+(vel x + 0.15)/1.41
 y = -0.01+vel y/1.41
 
 ;[State 0, VelSet]
@@ -8858,13 +8842,6 @@ y = -0.01+vel y/1.41
 ;trigger1 = 1
 ;x = (root, pos x - pos x)/10
 ;y = (root,pos y - pos y)/10
-
-[State 0, Juggle Map]
-type = RootMapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 10
-persistent = 0
 
 [State 1010, Helper Attack Scale]
 type = AttackMulSet
@@ -8905,59 +8882,46 @@ facing = 1
 keyctrl = 0
 ownpal = 1
 
-;[State 0, ScreenBound]
-;type = ScreenBound
+;[State 200, 1]
+;type = HitDef
+;getpower = 0
+;;triggerall = root,map(juggle) < 100 || hitcount != 0
+;triggerall = time % 4 = 0
 ;trigger1 = 1
-;value = 1
+;attr = S, SP
+;animtype  = Light
+;damage    = 0
+;hitflag = MAFD
+;guardflag = MA
+;pausetime = 0,12
+;guard.pausetime = 12, 3
+;sparkno = s9999
+;numhits = 0
+;guard.sparkno = 13000
+;sparkxy = -8,-25
+;hitsound   = S30000,0
+;guardsound = 6,0
+;ground.type = High
+;ground.slidetime = 12
+;ground.hittime  = 10
+;ground.velocity = -2.5
+;air.velocity = -3,-1
+;Fall = 0
+;p2stateno = 5000
+;Fall.recovertime = 40
+;guard.cornerpush.veloff = -5
+;airguard.cornerpush.veloff = -4
 
-[State 200, 1]
-type = HitDef
-getpower = 0
-;triggerall = root,map(juggle) < 100 || hitcount != 0
-triggerall = time % 4 = 0
-trigger1 = 1
-attr = S, SP
-animtype  = Light
-damage    = 0
-hitflag = MAFD
-guardflag = MA
-pausetime = 0,12
-guard.pausetime = 12, 3
-sparkno = s9999
-numhits = 0
-guard.sparkno = 13000
-sparkxy = -8,-25
-hitsound   = S30000,0
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 12
-ground.hittime  = 10
-ground.velocity = -2.5
-air.velocity = -3,-1
-Fall = 0
-p2stateno = 5000
-Fall.recovertime = 40
-guard.cornerpush.veloff = -5
-airguard.cornerpush.veloff = -4
-
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 = movehit
-;time = 120+ifelse(moveguarded,-120,0)
-;pos = 0,15
-;;ignorehitpause = 
-;persistent = 1
-
-;[State 475, End] ; Destroys self if the opponent touches it
-;type = ChangeState
-;trigger1 = abs(pos X - enemynear,pos X) <= 30 
-;trigger1 = abs(pos Y - enemynear,pos Y) <= 20
-;value = 21550
+[State 475, End] ; Destroys self if the opponent touches it
+type = ChangeState
+trigger1 = abs(pos X - enemynear,pos X) <= 20 
+trigger1 = abs(pos Y - enemynear,pos Y) <= 20
+value = 634
 
 [State 200, End]
 type = ChangeState
 triggerall = root, stateno != 25500
-trigger1 = time >= 200
+trigger1 = time >= 60
 trigger2 = pos y >= 0 && time >= 50
 trigger3 = movecontact
 trigger4 = root, stateno = 22000
@@ -8972,29 +8936,6 @@ trigger1 = abs(pos Y - root, pos Y) <= 50
 trigger1 = 1
 value = 633
 ctrl = 1
-
-;[State 200, End]
-;type = DestroySelf
-;triggerall = (root, stateno = 624 && root,AnimElem = 3)
-;;trigger1 = abs(pos X - root, pos X) <= 30 
-;;trigger1 = abs(pos Y - root, pos Y) <= 30
-;trigger1 = 1
-;;value = 402
-;;ctrl = 1
-
-;[State 0, ChangeState]
-;type = ChangeState
-;trigger1 = ((BackEdgeBodyDist <= 20 || FrontEdgeBodyDist <= 20) || (BackEdgeBodyDist < 25 || FrontEdgeBodyDist < 25)) && time >= 30
-;value = 402
-;ctrl = 0
-
-;[State 0, Damage Proration]
-;type = ParentVarAdd
-;trigger1 = root, stateno = 25500 && abs(root, pos X - pos X) <= 15  &&  abs(root,pos y - pos y) <= 15
-;v = 21
-;ignorehitpause = 1
-;persistent = 0
-;value = 1
 
 [State 475, End] ; Destroys self once Bubblo Bubbla Slam activates!
 type = DestroySelf
@@ -9219,13 +9160,20 @@ trigger1 = 1
 value = 1 * 0.99**root,var(11)
 ignorehitpause = 1
 
+[State 0, Juggle Map]
+type = RootMapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 0
+persistent = 0
+
 [State 0, Damage Proration]
 type = rootVarAdd
 trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = root,var(21) + 3 ; More bombs = more proration
+value = 3 ; More bombs = more proration
 
 [State 0, EnvShake]
 type = EnvShake
@@ -9261,6 +9209,11 @@ Fall = 0
 Fall.recovertime = 40
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = AnimElem = 4
+movetype = I
 
 [State 0, DestroySelf]
 type = DestroySelf
@@ -9659,7 +9612,7 @@ facing = 1
 vfacing = 0
 bindtime = 0
 removetime = -4
-scale = 1.1,1.1
+scale = 1.2,1.2
 vel = 0,0
 sprpriority = 3
 ontop = 1
