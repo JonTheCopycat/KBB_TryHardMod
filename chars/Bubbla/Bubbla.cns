@@ -5670,7 +5670,7 @@ y = -5
 
 [State 490, Launch VelSet]
 type = VelAdd
-trigger1 = AnimElem = 8 || AnimElem = 9 || AnimElem = 10 || AnimElem = 11
+trigger1 = AnimElem = 8 || AnimElem = 9 || AnimElem = 10
 y = -1
 
 [State 0, StateTypeSet]
@@ -5683,7 +5683,7 @@ physics = A
 [State 200, 1]
 type = HitDef
 getpower = 0
-triggerall = AnimElem = 8 || AnimElem = 9 || AnimElem = 10 || AnimElem = 11
+triggerall = AnimElem = 8 || AnimElem = 9 || AnimElem = 10
 trigger1 = 1
 attr = A, NP 
 animtype  = Heavy
@@ -5691,15 +5691,15 @@ damage    = 5
 hitflag = MAFD
 guardflag = MAF
 pausetime = 1, 12
-guard.pausetime = 12,1
+guard.pausetime = 4,1
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,4
 guardsound = 6,0
 ground.type = High
-ground.slidetime = 10
-ground.hittime  = 16
+ground.slidetime = 8
+ground.hittime  = 12
 ground.velocity = -1,-3
 air.velocity = -1,-3
 airguard.velocity = -5,-1
@@ -5720,8 +5720,8 @@ animtype  = Medium
 damage    = 20
 hitflag = MAF
 guardflag = MA
-pausetime = 12,12
-guard.pausetime = 12,12
+pausetime = 8,8
+guard.pausetime = 8,8
 guard.hittime = 15
 sparkno = 2
 guard.sparkno = 13000
@@ -5743,14 +5743,6 @@ Envshake.time = 20
 Fall.recovertime = 30 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -2
 airguard.cornerpush.veloff = -1
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-triggerall = power >= 1500
-trigger1 = command = "SPECIAL 5"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 25000
 
 [State 200, End]
 type = ChangeState
@@ -8339,8 +8331,8 @@ y = -4
 [State 0, ChangeAnim2]
 type = ChangeAnim2
 trigger1 = command != "hold_c" && time >= 3 && Anim != 626
-trigger3 = time >= 100 && Anim != 626
-trigger4 = time >= 20 && roundstate = 2 && ailevel > 0
+trigger2 = time >= 100 && Anim != 626
+trigger3 = time >= 20 && roundstate = 2 && ailevel > 0
 value = 626
 elem = 0
 ;ignorehitpause = 
@@ -8920,6 +8912,12 @@ value = 634
 
 [State 200, End]
 type = ChangeState
+trigger1 = root,stateno = [5000, 5299]
+value = 636
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
 triggerall = root, stateno != 25500
 trigger1 = time >= 60
 trigger2 = pos y >= 0 && time >= 50
@@ -9391,12 +9389,17 @@ trigger1 = 1
 [Statedef 636]
 movetype= I
 physics = N
-anim = 9999
+anim = 4561
 sprpriority = 2
+
+[State 0, HitOverride]
+type = NotHitBy
+trigger1 = 1
+value = SCA, AA, AP, AT
 
 [State 0, Helper Die]
 type = DestroySelf
-trigger1 = 1
+trigger1 = AnimTime = 0
 
 ;---------------------------------------------------------------------
 
