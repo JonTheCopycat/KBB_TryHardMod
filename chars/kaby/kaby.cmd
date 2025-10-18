@@ -658,8 +658,20 @@ triggerall = command = "SPECIAL 2"
 Triggerall = power >= 1500
 trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
+;---------------------------------------------------------------------------
+; Throw
+[State -1, 22000]
+type = ChangeState
+value = 28000
+triggerall = var(10) = 0
+triggerall = numhelper(3500) = 0
+Triggerall = statetype = A
+triggerall = command = "SPECIAL 2"
+Triggerall = power >= 1000
+trigger1 = ctrl
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
 ;--------------------
-; Sword slash slash slash
+; Sword DP
 [State -1, 26000]
 type = ChangeState
 value = 24000
@@ -683,7 +695,7 @@ trigger1 = ctrl
 trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
 ;--------------------
 ; Sword slash slash slash
-[State -1, 26000]
+[State -1, 23000]
 type = ChangeState
 value = 23000
 triggerall = var(10) = 1

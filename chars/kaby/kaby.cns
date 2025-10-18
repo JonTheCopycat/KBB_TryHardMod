@@ -1676,7 +1676,7 @@ ctrl = 1
 ; A - 3:
 ;===============================================================================
  [Statedef 220]
-type    = S
+type    = A
 movetype= A
 physics = S
 juggle  = 2
@@ -1770,13 +1770,30 @@ fall.recover = 0
 ;x = 3
 ;y = -7
 
+
 [State 200, SPECIAL 3 - CUTTER]
 type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 1"
-value = 23000
+value = 25000
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 2"
+value = 28000
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 3"
+value = 26000
 
 [State 0, VelAdd]
 type = VelAdd
@@ -2027,7 +2044,7 @@ y = -8
 
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = time = [5,15]
+trigger1 = time = [7,15]
 value = SCA,NA,SA,NP,SP
 ;value2 = S,NA
 time = 1
@@ -3593,8 +3610,15 @@ Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 1"
-value = 23000
+value = 25000
 
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 2"
+value = 28000
 
 [State 200, SPECIAL 3 - CUTTER]
 type = ChangeState
@@ -3729,8 +3753,15 @@ Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 1"
-value = 23000
+value = 25000
 
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 2"
+value = 28000
 
 [State 200, SPECIAL 3 - CUTTER]
 type = ChangeState
@@ -3946,7 +3977,15 @@ Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 1"
-value = 23000
+value = 25000
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 2"
+value = 28000
 
 [State 200, SPECIAL 3 - CUTTER]
 type = ChangeState
@@ -4255,6 +4294,7 @@ ctrl = 1
 [Statedef 406]
 type    = S
 movetype= A
+physics = S
 juggle  = 3
 ctrl = 0
 anim = 406
@@ -4270,8 +4310,11 @@ y = 0
 type = VelSet
 trigger1 =  AnimElem = 1
 y = 0
-x = 0
 
+[State 0, ChangeAnim2]
+type = ChangeAnim
+trigger1 = prevstateno = [28000,28005] && anim != 28006
+value = 28006
 ;[State 200, End]
 ;type = ChangeState
 ;triggerall = movecontact
@@ -4393,7 +4436,15 @@ Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 1"
-value = 23000
+value = 25000
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 2"
+value = 28000
 
 [State 200, SPECIAL 3 - CUTTER]
 type = ChangeState
@@ -4567,7 +4618,15 @@ Triggerall = movecontact
 triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 1"
-value = 23000
+value = 25000
+
+[State 200, SPECIAL 3 - CUTTER]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 1000
+trigger1 = command = "SPECIAL 2"
+value = 28000
 
 [State 200, SPECIAL 3 - CUTTER]
 type = ChangeState

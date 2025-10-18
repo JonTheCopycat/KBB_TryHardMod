@@ -588,7 +588,7 @@ pausetime = 15,25
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = S0,1
+hitsound   = ifelse(enemy,movetype = A,8,5),ifelse(enemy,movetype = A,1,1)
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
@@ -831,10 +831,11 @@ getpower = 0
 getpower = 0
 triggerall = !movecontact
 trigger1 = Animelem = 2
+trigger1 = enemy,anim != 40
 attr = S, SA
 animtype  = Heavy
 damage    = 15
-hitflag = MAF
+hitflag = MF
 guardflag = 
 pausetime = 2,4
 sparkno = 1
@@ -1429,7 +1430,7 @@ endcmdbuftime = 7
 [State 0, VelAdd]
 type = VelAdd
 trigger1 = AnimElem = 8 ||  AnimElem = 9
-x = 4.5
+x = 4
 
 [State 0, Voice]
 type = PlaySnd
@@ -1441,6 +1442,7 @@ volumescale = 180
 type = HitDef
 getpower = 0
 triggerall = !movecontact
+triggerall = enemy,movetype = A
 triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
 attr = S, SA
@@ -1449,6 +1451,38 @@ damage    = 225
 hitflag = MAFD
 guardflag =
 pausetime = 45,60
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = 8,1
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 35
+ground.hittime  = 35 + ifelse(enemy,movetype = A || movecountered, 7,0)
+ground.velocity = -20,-4
+guard.velocity = 5
+air.velocity = -20,-4
+p2stateno = 1030
+p2facing = 1
+Fall = 1
+Envshake.time = 45
+fall.recovertime = 100
+fall.recover = 1
+down.bounce = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+triggerall = enemy,movetype != A
+triggerall = enemy,map(hitOverride) = 0
+trigger1 = 1
+attr = S, SA
+animtype  = Heavy
+damage    = 150
+hitflag = MAFD
+guardflag =
+pausetime = 30,46
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -1932,7 +1966,7 @@ persistent = 0
 type = SuperPause
 trigger1 = AnimElem = 1
 anim = 92006
-time = 10
+time = 5
 sound = F20,0
 pos = 0,-20
 movetime = 0
@@ -2376,414 +2410,450 @@ trigger1 = time = 30 * 60
 ;=============================================
 ;Backdrop
 ;=============================================
-;[Statedef 28000]
-;type    = S
-;movetype= A
-;juggle  = 2
-;velset = 0,0
-;sprpriority = 0
-;ctrl = 0
-;anim = 28000
-;poweradd = -1000
-;velset = 0,0
-;sprpriority = 5
-;
-;[State 0, Busterable]
-;type = MapSet
-;trigger1 = 1
-;map = "busterable"
-;value = 0
-;ignorehitpause = 1
-;
-;[State 0, SuperPause]
-;type = SuperPause
-;trigger1 =  Time = 0
-;time =  15
-;sound = 20,0
-;pos = 0,-20
-;movetime = 0
-;darken = 1
-;p2defmul = 1
-;
-;[State 0,helper]
-;type = AfterImage
-;trigger1 = AnimElem = 2
-;time = 80
-;length = 5
-;
-;[State 0, VelSet]
-;type = VelSet
-;trigger1 = AnimElem = 2
-;x = 6
-;
-;[State 0, VelSet]
-;type = VelSet
-;trigger1 = AnimElem = 3
-;x = 2
-;
-;[State 0, VelSet]
-;type = VelSet
-;trigger1 = AnimElem = 9
-;x = 0
-;
-;[State 200, 1]
-;type = HitDef
-;getpower = 0
-;getpower = 0
-;triggerall = !movecontact
-;trigger1 = 1
-;attr = S,HT
-;animtype  = Light
-;damage    = 0
-;hitflag = MFD
-;guardflag = 
-;pausetime = 0,120
-;sparkno = 1
-;guard.sparkno = 13000
-;sparkxy = -8,-25
-;hitsound   = S0,1
-;guardsound = 6,0
-;ground.type = High
-;ground.slidetime = 12
-;ground.hittime  = 15 + ifelse(enemy,movetype = A || movecountered, 7,0)
-;ground.velocity = 0,0
-;guard.velocity = 5
-;air.velocity = 0,0
-;forcenofall = 1
-;Envshake.time = 10
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 =  movehit = 1
-;time = 60
-;pos = 20,0
-;
-;[State 200, End]
-;type = ChangeState
-;trigger1 = movehit = 1
-;value = 28001
-;ctrl = 1
-;
-;[State 200, End]
-;type = ChangeState
-;trigger1 = AnimTime = 0
-;value = 50
-;ctrl = 1
+[Statedef 28000]
+type    = A
+movetype= A
+physics = N
+juggle  = 2
+velset = 0,0
+sprpriority = 0
+ctrl = 0
+anim = 28000
+poweradd = -1000
+sprpriority = 5
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 =  Time = 0
+time =  10
+sound = 20,0
+pos = 0,-20
+movetime = 0
+darken = 1
+p2defmul = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+x = vel x/2
+y = vel y/2
+;ignorehitpause = 
+;persistent = 
+
+;[State 200, Gravity]
+;type = VelAdd
+;trigger1 = AnimElemTime(5) < 0
+;y = 0.11
+
+[State 200, Gravity]
+type = VelAdd
+trigger1 = AnimElemTime(6) > 0
+y = 0.04
+
+[State 200, Gravity]
+type = VelAdd
+trigger1 = time >= 35
+y = 0.4
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = AnimElem = 10
+value = 28000
+elem = 6
+ignorehitpause = 
+persistent = 
+
+[State 0,helper]
+type = AfterImage
+trigger1 = AnimElem = 5
+time = 10
+length = 3
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 2
+x = 2
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 5
+x = 7
+y = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 6
+x = 2
+
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+triggerall = !movecontact
+trigger1 = 1
+attr = A,NT
+animtype  = Light
+damage    = 0
+hitflag = AFD
+guardflag = 
+pausetime = 0,120
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S0,1
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A || movecountered, 7,0)
+ground.velocity = 0,0
+guard.velocity = 5
+air.velocity = 0,0
+forcenofall = 1
+Envshake.time = 10
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 =  movehit = 1
+time = 60
+pos = 20,0
+
+[State 200, End]
+type = ChangeState
+trigger1 = movehit = 1
+value = 28001
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = pos y >= 0
+value = 406
+ctrl = 1
 ;=============================================
 ;Backdrop hit
 ;=============================================
-;[Statedef 28001]
-;type    = S
-;movetype= A
-;juggle  = 2
-;velset = 0,0
-;sprpriority = 0
-;ctrl = 0
-;anim = 28001
-;velset = 0,0
-;sprpriority = 0
-;
-;[State 200, End]
-;type = ChangeState
-;trigger1 = command = "holdup"
-;value = 28002
-;ctrl = 1
-;[State 200, End]
-;type = ChangeState
-;trigger1 = command = "holdback"
-;value = 28004
-;ctrl = 1
-;
-;[State 200, End]
-;type = ChangeState
-;trigger1 = Time = 60
-;value = 28002
-;ctrl = 1
+[Statedef 28001]
+type    = S
+movetype= A
+juggle  = 2
+velset = 0,0
+sprpriority = 0
+ctrl = 0
+anim = 28001
+velset = 0,0
+sprpriority = 0
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "holdback"
+value = 28004
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = Time = 20
+value = 28004
+ctrl = 1
 
 ;=============================================
 ;Backdrop up
 ;=============================================
-;[Statedef 28002]
-;type    = S
-;movetype= A
-;juggle  = 2
-;velset = 0,0
-;sprpriority = 0
-;ctrl = 0
-;anim = 28002
-;velset = 0,0
-;sprpriority = 0
-;
-;[State 0, AfterImage]
-;type = AfterImage
-;trigger1 = time = 0
-;time = 80
-;length = 10
-;
-;[State 0, Busterable]
-;type = MapSet
-;trigger1 = 1
-;map = "busterable"
-;value = 0
-;ignorehitpause = 1
-;
-;
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 =  AnimElem = 1
-;pos = 20,0
-;
-;
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 = AnimElem = 3
-;time = 90
-;pos = 0,-20
-;
-;[State 0, VelSet]
-;type = VelSet
-;trigger1 =  AnimElem = 6
-;y = -6
-;[State 0, VelSet]
-;type = VelSet
-;trigger1 =  AnimElem = 7
-;y = 8
-;[State 0, VelSet]
-;type = VelSet
-;trigger1  =  AnimElem = 8
-;y = 0
-;
-;[State 200, 1]
-;type = HitDef
-;getpower = 0
-;getpower = 0
-;triggerall =  AnimElem = 9
-;trigger1 = 1
-;attr = S, HA
-;animtype  = Light
-;damage    = 75
-;hitflag = MAFD
-;guardflag = MA
-;pausetime = 10,20
-;sparkno = 1
-;guard.sparkno = 13000
-;sparkxy = -8,-25
-;hitsound   = S0,4
-;guardsound = 6,0
-;ground.type = High
-;ground.slidetime = 12
-;ground.hittime  = 15 + ifelse(enemy,movetype = A || movecountered, 7,0)
-;ground.velocity = -3,-3
-;guard.velocity = 5
-;air.velocity = -3,-3
-;Fall = 1
-;fall.recover =  0
-;Envshake.time = 10
-;
-;[State 200, End]
-;type = ChangeState
-;triggerall = command = "hold_b"
-;trigger1 = AnimElem = 7
-;value = 28003	
-;ctrl = 1
-; 
-;[State 200, End]
-;type = ChangeState
-;trigger1 = AnimTime = 0
-;value = 0
-;ctrl = 1
+[Statedef 28002]
+type    = A
+movetype= A
+juggle  = 2
+velset = 0,0
+sprpriority = 0
+ctrl = 0
+anim = 28002
+velset = 0,0
+sprpriority = 0
+
+[State 0, AfterImage]
+type = AfterImage
+trigger1 = time = 0
+time = 80
+length = 10
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 0
+ignorehitpause = 1
+
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 =  AnimElem = 1
+pos = 20,0
+
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 3
+time = 90
+pos = 0,-20
+
+[State 0, VelSet]
+type = VelSet
+trigger1 =  AnimElem = 6
+y = -6
+[State 0, VelSet]
+type = VelSet
+trigger1 =  AnimElem = 7
+y = 8
+[State 0, VelSet]
+type = VelSet
+trigger1  =  AnimElem = 8
+y = 0
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+getpower = 0
+triggerall =  AnimElem = 9
+trigger1 = 1
+attr = S, HA
+animtype  = Light
+damage    = 75
+hitflag = MAFD
+guardflag = MA
+pausetime = 10,20
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S0,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A || movecountered, 7,0)
+ground.velocity = -3,-3
+guard.velocity = 5
+air.velocity = -3,-3
+Fall = 1
+fall.recover =  0
+Envshake.time = 10
+
+[State 200, End]
+type = ChangeState
+triggerall = command = "hold_b"
+trigger1 = AnimElem = 7
+value = 28003	
+ctrl = 1
+ 
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
 ;=============================================
 ;Backdrop back
 ;=============================================
-;[Statedef 28004]
-;type    = S
-;movetype= A
-;juggle  = 2
-;velset = 0,0
-;sprpriority = 0
-;ctrl = 0
-;anim = 28004
-;velset = 0,0
-;sprpriority = 0
-;
-;[State 0, Busterable]
-;type = MapSet
-;trigger1 = 1
-;map = "busterable"
-;value = 0
-;ignorehitpause = 1
-;
-;[State 0, PowerAdd]
-;type = PowerAdd
-;trigger1 = AnimElem = 11
-;value = 500
-;
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 =  AnimElem = 1
-;pos = 20,0
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 = AnimElem = 3
-;time = 50
-;pos = 0,-20
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 = AnimElem = 7
-;pos = -20,-5
-;
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 = AnimElem = 9
-;pos = -20,20
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 = AnimElem = 10
-;time = 90
-;pos = 0,20
-;
-;[State 0, VelSet]
-;type = VelSet
-;trigger1 =  AnimElem = 5
-;y = -6
-;x = -1
-;[State 0, VelSet]
-;type = VelSet
-;trigger1 =  AnimElem = 9
-;y = 8
-;x = -1
-;
-;[State 0, VelSet]
-;type = VelSet
-;trigger1 =  AnimElem = 11
-;y = 0
-;x = 0
-;
-;[State 0, VelSet]
-;type = VelSet
-;trigger1 =  AnimElem = 12
-;y = -2
-;x = -2
-;
-;[State 200, 1]
-;type = HitDef
-;getpower = 0
-;getpower = 0
-;triggerall =  AnimElem = 11
-;trigger1 = 1
-;attr = A, HA
-;animtype  = Light
-;damage    = 120
-;hitflag = MAFD
-;guardflag = MA
-;pausetime = 10,20
-;sparkno = 1
-;guard.sparkno = 13000
-;sparkxy = -8,-25
-;hitsound   = S0,4
-;guardsound = 6,0
-;ground.type = High
-;ground.slidetime = 12
-;ground.hittime  = 15 + ifelse(enemy,movetype = A || movecountered, 7,0)
-;ground.velocity = 2,-8
-;guard.velocity = 5
-;air.velocity = 2,-8
-;Fall = 1
-;fall.recover = 0
-;Envshake.time = 10
-;
+[Statedef 28004]
+type    = A
+movetype= A
+physics = N
+juggle  = 2
+velset = 0,0
+sprpriority = 0
+ctrl = 0
+anim = 28004
+sprpriority = 0
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 =  AnimElem = 1
+pos = 20,0
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 3
+time = 50
+pos = 0,-20
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 7
+pos = -20,-5
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 9
+pos = -20,20
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 10
+time = 90
+pos = 0,20
+
+[State 0, VelSet]
+type = VelSet
+trigger1 =  AnimElem = 1
+y = 0
+x = 0
+
+[State 200, Gravity]
+type = VelAdd
+trigger1 = AnimElemTime(5) > 0
+y = 0.44
+
+[State 0, VelSet]
+type = VelSet
+trigger1 =  AnimElem = 5
+y = -9
+x = -1.5
+
+[State 0, VelSet]
+type = VelSet
+trigger1 =  AnimElem = 13
+y = -6
+x = -3
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = AnimElem = 11 && !MoveContact 
+value = 28004
+elem = 10
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = AnimElemTime(9) >= 0 && pos y >= -40 && !MoveContact
+value = 28004
+elem = 12
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+getpower = 0
+triggerall = !MoveContact
+trigger1 = 1
+attr = A, HA
+animtype  = Light
+damage    = 120
+hitflag = MAFD
+guardflag = MA
+pausetime = 10,10
+sparkno = 1
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S0,4
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15 + ifelse(enemy,movetype = A || movecountered, 7,0)
+ground.velocity = -2,-3
+guard.velocity = 5
+air.velocity = -2,-3
+Fall = 1
+fall.recover = 0
+Envshake.time = 10
+
 ;[State 200, End]
 ;type = ChangeState
 ;triggerall = command = "hold_b"
 ;trigger1 = AnimElem = 6
 ;value = 28003	
 ;ctrl = 1
-;
-;[State 200, End]
-;type = ChangeState
-;trigger1 = AnimTime = 0
-;value = 0
-;ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = pos y >= 0 && AnimElemTime(13) >= 0
+value = 406
+ctrl = 1
 
 ;=============================================
 ;Backdrop air
 ;=============================================
-;[Statedef 28003]
-;type    = S
-;movetype= A
-;juggle  = 2
-;velset = 0,0
-;sprpriority = 0
-;ctrl = 0
-;anim = 28003
-;velset = 0,0
-;sprpriority = 0
-;
-;[State 0, Busterable]
-;type = MapSet
-;trigger1 = 1
-;map = "busterable"
-;value = 0
-;ignorehitpause = 1
-;
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 =  AnimElem = 3
-;pos = -20,-5
-;
-;
-;[State 0, Wallbounce prevent]
+[Statedef 28003]
+type    = S
+movetype= A
+juggle  = 2
+velset = 0,0
+sprpriority = 0
+ctrl = 0
+anim = 28003
+velset = 0,0
+sprpriority = 0
+
+[State 0, Busterable]
+type = MapSet
+trigger1 = 1
+map = "busterable"
+value = 1
+ignorehitpause = 1
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 =  AnimElem = 3
+pos = -20,-5
+
+
+;[State 0, Wallbounce prevent] ;??? sure bro
 ;type = VarAdd
 ;trigger1 = movehit = 1 && movecountered = 0 
 ;v = 31
 ;value = 1
 ;ignorehitpause = 1
-;
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 = AnimElem = 4
-;time = 90
-;pos = -20,5
-;
-;
-;[State 0, TargetBind]
-;type = TargetBind
-;trigger1 = AnimElem = 5
-;time = 90
-;pos = 20,5
-;
-;[State 200, 1]
-;type = HitDef
-;getpower = 0
-;getpower = 0
-;triggerall =  AnimElem = 6
-;trigger1 = 1
-;attr = A, HA
-;animtype  = Light
-;damage    = 150
-;hitflag = MAFD
-;guardflag = MA
-;pausetime = 10,0
-;sparkno = 2
-;guard.sparkno = 13000
-;sparkxy = -8,-25
-;guardsound = 6,0
-;ground.type = High
-;ground.slidetime = 12
-;ground.hittime  = 15
-;ground.velocity = -5,2
-;guard.velocity = -4
-;airguard.velocity = -4,-2
-;air.velocity = -5,2
-;Fall = 1
-;Envshake.time = 30
-;guard.cornerpush.veloff = -5
-;airguard.cornerpush.veloff = -4
-;
-;[State 200, End]
-;type = ChangeState
-;trigger1 = AnimTime = 0
-;value = 50
-;ctrl = 1
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 4
+time = 90
+pos = -20,5
+
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 5
+time = 90
+pos = 20,5
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+getpower = 0
+triggerall =  AnimElem = 6
+trigger1 = 1
+attr = A, HA
+animtype  = Light
+damage    = 120
+hitflag = MAFD
+guardflag = MA
+pausetime = 10,0
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+guardsound = 6,0
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -5,2
+guard.velocity = -4
+airguard.velocity = -4,-2
+air.velocity = -5,2
+Fall = 1
+fall.recover = 0
+Envshake.time = 30
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
 ;--------------------------------------------------------------------------------
 ; "Minecart Call"
 ;--------------------------------------------------------------------------------

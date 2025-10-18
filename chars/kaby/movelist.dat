@@ -1,6 +1,6 @@
 <#f0f000>:PASSIVE ABILLITY:</>
 	"Copy abilites"
-	"Pancakes, use this to avoid aerials."
+	"Pancakes."
 
 Unique Attacks
 	_B  ^B
@@ -10,7 +10,6 @@ Unique Attacks
 
 Inhale  					       ^C
 	"Inhale the enemy!"
-	"press the button again to cancel"
 _! Consume						_D
 	"Take their EX ATTACKS!"
 _! Spit						^A
@@ -22,7 +21,7 @@ Sword (1 Bar)     						_D_DF_F^A
 	"Korby gets the SWORD ability and readies himself."
 
 _! Sword Slash										^A
-	"Quick sword slash, hold A to rapidly slash."
+	"Slashes multiple times"
 _! Sword Thrust										^B
 	"Dash forward with a unblockable thrust."
 _! Sword Toss       									^C
@@ -34,7 +33,11 @@ Burning (1 Bar)     						_AIR_D_DF_F^A
 	in a fiery attack!"
 
 Hammer (1 1/2  Bar)						_D_DB_B^A
-	 "Korby gets the HAMMER ability and swings."
+	 "Korby gets the HAMMER ability and swings forward."
+
+Backdrop (1 Bar)     						_AIR_D_DB_B^A
+	"Korby gets the BACKDROP ability and dashes forward
+	with a airgrab!"
 
 Cutter (1 Bar, _AIR OK)					 _D_DF_F^B
 	 "Korby gets the CUTTER ability and throws the blade."
