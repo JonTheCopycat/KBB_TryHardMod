@@ -7267,7 +7267,7 @@ sprpriority = 2
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 9
+value = 4
 persistent = 0
 
 [State 0, Damage Proration]
@@ -7304,8 +7304,8 @@ type = VelSet
 triggerall = movecontact
 triggerall = var(21) > 0 
 trigger1 = movecontact = 1
-y = -4.5
-x = 4
+y = -2
+x = 2
 
 [State 200, 1]
 type = HitDef
@@ -7327,7 +7327,7 @@ guardsound = 6,10 + (random < 500) * 1
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = -2,-4
+ground.velocity = -2,-5
 air.velocity = -2,-4
 Fall = 0
 Envshake.time = 5
