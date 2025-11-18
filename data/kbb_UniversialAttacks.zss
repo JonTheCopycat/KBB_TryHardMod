@@ -849,7 +849,7 @@ if !movecontact && time = 17 {
 
 if !movecontact {
     HitDef{
-        getpower: 0,0;
+        getpower: 1000,0;
         attr: A, HA;
         animtype: Heavy;
         damage: 15;
@@ -967,7 +967,7 @@ if AnimElem = 3 {
 
 if !movecontact {
     HitDef{
-        getpower: 0,0;
+        getpower: 1000,0;
         attr: A, HA;
         animtype: Heavy;
         damage: 4;
@@ -1073,7 +1073,7 @@ if AnimElem = 3 {
 
 if !movecontact {
     HitDef{
-        getpower: 0,0;
+        getpower: 1000,0;
         attr: A, HA;
         animtype: Heavy;
         damage: 2;
@@ -1122,10 +1122,6 @@ if AnimTime = 0 {
 
 AttackDist{value: -1}
 NotHitBy{time: 1; value: SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT}
-
-persistent(0) if enemynear, movetype = H {
-    poweradd{value:1000}
-}
 
 if p2movetype !=H || (enemy,!alive || !numenemy) {
     ChangeState{value: 50; ctrl: 1}
@@ -1203,7 +1199,7 @@ if time >= 15 { #Originally 20
 
 NotHitBy{time: 1; value: SCA,NA,SA,HA,NP,SP,HP} 
 
-if time = 1 && prevstateno = [130, 155] {
+if time = 1 && prevstateno = [120, 155] {
     Pause{
         time: 10;
         endcmdbuftime: 7;
@@ -1330,14 +1326,20 @@ if AnimTime = 0 {
  velset: 0,0;
  sprpriority: 0;]
 
-NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP; time: 1}
+if AnimElem = 4, < 0 {
+    NotHitBy{value: SCA,NA,SA,HA,NP,SP,HP; time: 1}
+}
+
+if (enemy,pos x - pos x) * facing < - 10 && time < 10 {
+    Turn{}
+}
 
 if AnimElem = 2 {
     SprPriority{value: 2}
 }
 
 if pos y >= 0 {
-    PosSet{y: -5}
+    PosSet{y: 0}
 }
 
 if time = 4 {
@@ -2353,7 +2355,7 @@ if Const(KBB_Playable) = 1 {
         # }
 
         if command = "hold_s" 
-        && stateno = [120, 155]
+        && stateno = [130, 155]
         && power >= 500 {
             ChangeState{value: 820; ctrl: 0;}
         }
@@ -2369,12 +2371,6 @@ if Const(KBB_Playable) = 1 {
                 ChangeState{value: 120; ctrl: 0}
             }
         }
-    }
-
-    #Special Case for first frame of Power Charge
-    if stateno = 500 && time < 2 && power >= 250
-    && command = "hold_x" && command = "hold_s" {
-        ChangeState{value: 820; ctrl: 0;}
     }
 
     if command = "hold_x" && ailevel = 0 && stateno = [30, 35] {
