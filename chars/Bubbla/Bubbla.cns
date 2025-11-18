@@ -1209,14 +1209,6 @@ value = 25000
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
-trigger1 = command = "c"
-triggerall = power >= 200
-;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 440
-
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
 trigger1 = command = "b"
 ;triggerall = power >= 200
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
@@ -1238,7 +1230,15 @@ triggerall = power >= 200
 triggerall = numhelper(3500) = 0
 trigger1 = command = "holdfwd"
 trigger1 = command = "c"
-value = ifelse(var(21) > 0, 460, 451)
+value = 460
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+trigger1 = command = "c"
+triggerall = power >= 200
+;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 440
 
 ;[State 200, End]
 ;type = ChangeState
@@ -1385,13 +1385,14 @@ trigger1 = command = "holddown"
 trigger1 = command = "c"
 value = ifelse(var(21) > 0, 450, 451)
 
-;[State 200, End]
-;type = ChangeState
-;Triggerall = movecontact
-;triggerall = numhelper(3500) = 0
-;triggerall = power >= 200
-;trigger1 = command = "c"
-;value = 400
+[State 200, 2C Cancel]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 200
+triggerall = numhelper(3500) = 0
+trigger1 = command = "holdfwd"
+trigger1 = command = "c"
+value = 460
 
 [State 200, End]
 type = ChangeState
@@ -4190,11 +4191,11 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 10
 ground.hittime  = 16
-ground.velocity = -1,-8;-1+ (-2*ifelse((root,time) < 8, -5, (root,time/6)))
+ground.velocity = -1,-9;-1+ (-2*ifelse((root,time) < 8, -5, (root,time/6)))
 air.velocity = -1,-8; -1+(-2*ifelse((root,time) < 8, -5, (root,time/6)))
-airguard.velocity = -5,-1
+airguard.velocity = -4,-1
 Fall = 1
-Fall.recovertime = 60
+Fall.recovertime = 50
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -4206,7 +4207,7 @@ trigger1 = AnimTime = 0
 
 ;-------------------------------------------------------------------------------
 ; Down C - Bubble Explode
-Statedef 457]
+[Statedef 457]
 type    = S
 movetype= A
 physics = S

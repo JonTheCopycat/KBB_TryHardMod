@@ -602,10 +602,11 @@ triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 1"
 Triggerall = power >= 1000
 trigger1 = ctrl
-trigger2 = stateno = [200, 290] && movecontact
-trigger3 = stateno = [300, 390] && movecontact
-trigger4 = stateno = [600, 610] && movecontact
-trigger5 = stateno = 625 && movecontact
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
+trigger3 = stateno = [200, 290] && movecontact
+trigger4 = stateno = [300, 390] && movecontact
+trigger5 = stateno = [600, 610] && movecontact
+trigger6 = stateno = 625 && movecontact
 ;---------------------------------------------------------------------------
 ; Special 1 Failed
 [State -1, Giant Bubble Ball Fail]
@@ -629,8 +630,9 @@ triggerall = command = "SPECIAL 2"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
-trigger2 = stateno = [200, 210] && movecontact
-trigger3 = stateno = [300, 310] && movecontact
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
+trigger3 = stateno = [200, 210] && movecontact
+trigger4 = stateno = [300, 310] && movecontact
 ;---------------------------------------------------------------------------
 ; Special 3 - Setup
 [State -1, Triple Bubble Ball]
@@ -646,8 +648,9 @@ triggerall = command = "SPECIAL 3"
 Triggerall = statetype != A
 Triggerall = power >= 1000
 trigger1 = ctrl
-trigger2 = stateno = [200, 210] && movecontact
-trigger3 = stateno = [300, 310] && movecontact
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
+trigger3 = stateno = [200, 210] && movecontact
+trigger4 = stateno = [300, 310] && movecontact
 ;---------------------------------------------------------------------------
 ; Special 4
 [State -1, Triple Bubble Burst]
@@ -661,8 +664,9 @@ triggerall = var(21) >= 3
 Triggerall = statetype != A
 Triggerall = power >= 500
 trigger1 = ctrl
-trigger2 = stateno = [200, 210] && movecontact
-trigger3 = stateno = [300, 310] && movecontact
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
+trigger3 = stateno = [200, 210] && movecontact
+trigger4 = stateno = [300, 310] && movecontact
 ;---------------------------------------------------------------------------
 ; Special 5
 [State -1, Deadly Bubble Blowing]
@@ -673,8 +677,9 @@ triggerall = command = "SPECIAL 5"
 Triggerall = statetype != A
 triggerall = power >= 1500
 trigger1 = ctrl
-trigger2 = stateno = [200, 210] && movecontact
-trigger3 = stateno = [300, 310] && movecontact
+trigger2 = stateno = [30, 39] && command = "holdfwd" && !ishelper
+trigger3 = stateno = [200, 210] && movecontact
+trigger4 = stateno = [300, 310] && movecontact
 ;---------------------------------------------------------------------------
 ; Special 6
 [State -1, Bubblo Bubbla Water Beam]
@@ -685,8 +690,9 @@ triggerall = command = "SPECIAL 6"
 Triggerall = statetype != A
 Triggerall = power >= 2000
 trigger1 = ctrl
-trigger2 = stateno = [200, 210] && movecontact
-trigger3 = stateno = [300, 310] && movecontact
+trigger2 = stateno = [30, 39] && command = "holdback" && !ishelper
+trigger3 = stateno = [200, 210] && movecontact
+trigger4 = stateno = [300, 310] && movecontact
 ;===========================================================================
 ;---------------------------------------------------------------------------
 ; Wavedash

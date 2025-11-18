@@ -22,7 +22,7 @@ value = 1
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimTime = 0
+trigger1 = AnimElem = 4
 helpertype = normal ;player
 name = "Power Delay"
 ID = 56000
@@ -71,7 +71,7 @@ persistent = 0
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 2
+trigger1 = AnimElem = 4
 helpertype = normal ;player
 name = "Bubble Cage"
 ID = 21500
@@ -3374,19 +3374,6 @@ map = "busterable"
 value = 1
 ignorehitpause = 1
 
-[State 0, SuperPause]
-type = SuperPause
-trigger1 = AnimElem = 1
-anim = 92006
-time = 20
-sound = F20,0
-pos = 0,-20
-movetime = 0
-darken = 1
-p2defmul = 1
-poweradd = 0
-endcmdbuftime = 7
-
 [State 0, I'm gonna do an unblockable attack!]
 type = Explod
 trigger1 = time = 1
@@ -3410,9 +3397,22 @@ scale = 0.6,0.6
 sprpriority = 5
 removetime = -2
 
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = time = 1
+anim = 92006
+time = 20
+sound = F20,0
+pos = 0,-20
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+endcmdbuftime = 7
+
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 7
+trigger1 = AnimElem = 5
 x = -1
 y = 0
 
@@ -3433,6 +3433,27 @@ type = VelSet
 trigger1 = AnimElem = 10
 x = 1
 y = 0
+
+[State 0, Viento]
+type = Explod
+triggerall = numexplod(130) = 0
+triggerall = AnimElem = 8, >= 0 && AnimElem = 11, < 0
+trigger1 = AnimElemTime(8) % 19 = 0
+anim = 4612
+ID = 25011
+pos = 10,-20
+postype = p1
+facing = 1
+vfacing = 0
+bindtime = -1
+removetime = 18
+scale = 1.5,1.5
+vel = 0,0
+sprpriority = 3
+ontop = 1
+ownpal = 0
+removeongethit = 1
+trans = add
 
 [State 200, 1]
 type = HitDef
