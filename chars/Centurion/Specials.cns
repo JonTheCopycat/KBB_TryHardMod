@@ -752,6 +752,12 @@ type = VelAdd
 trigger1 = AnimElem = 3
 x = 7
 
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+y = 0
+
+
 [State 200, 1]
 type = HitDef
 getpower = 0
@@ -1975,7 +1981,7 @@ y = 0
 type = SuperPause
 trigger1 = Time = 1
 anim = 92006
-time = 10
+time = 15
 sound = 20,0
 pos = 0,-20
 movetime = 0
