@@ -2354,12 +2354,6 @@ if Const(KBB_Playable) = 1 {
         #     ChangeState{value: 800; ctrl: 0}
         # }
 
-        if command = "hold_s" 
-        && stateno = [130, 155]
-        && power >= 500 {
-            ChangeState{value: 820; ctrl: 0;}
-        }
-
         if command = "holdfwd" {
             if statetype = A {
                 ChangeState{value: 810; ctrl: 0}
@@ -2372,6 +2366,13 @@ if Const(KBB_Playable) = 1 {
             }
         }
     }
+
+    if command = "hold_x" && command = "hold_s" 
+        && stateno = [120, 155]
+        && hitOver = 0
+        && power >= 500 {
+            ChangeState{value: 820; ctrl: 0;}
+        }
 
     if command = "hold_x" && ailevel = 0 && stateno = [30, 35] {
         if statetype = A {

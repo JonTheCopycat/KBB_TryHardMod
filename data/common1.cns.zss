@@ -193,9 +193,9 @@ if (command != "holdback" || !inGuardDist) && command != "hold_x" {
 }
 
 [Function CounterCancel()]
-if command = "hold_x" && command = "hold_s" && power >= 500 {
-	ChangeState{value: 820;}
-}
+# if command = "hold_x" && command = "hold_s" && power >= 500 {
+# 	ChangeState{value: 820;}
+# }
 
 #-------------------------------------------------------------------------------
 [Function AirGuardLand()]
@@ -961,7 +961,7 @@ ignorehitpause if NumExplod(13500) > 0 {
 	call StarGuard();
 }
 
-if hitOver = 0 {
+if AnimTime = 0 {
 	changeState{value: 130 + (command = "holddown" && pos y >= 0) + (pos y < 0) * 2; ctrl: 1;}
 }
 call StopGuarding();
