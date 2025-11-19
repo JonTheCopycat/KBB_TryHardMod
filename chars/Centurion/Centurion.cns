@@ -3137,14 +3137,6 @@ triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 3"
 value = 21000
 
-[State 1000, Special 4 - Crossup]
-type = ChangeState
-triggerall = numhelper(3500) = 0
-triggerall = power >= 1000
-trigger1 = command = "SPECIAL 4"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 22000
-
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
