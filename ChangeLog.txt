@@ -4,13 +4,20 @@
 |---------------------------------------------------/
 
 Universal Changes:
-1. New defensive mechanic: Star guard. performed by inputting what used to be counter. Blocks everything at the cost of meter, and pushes the opponent back in the process.
+1. New defensive mechanic: Shield. performed by inputting what used to be counter. Blocks everything at the cost of meter, and pushes the opponent back in the process.
 2. Counter has been nerfed in light of the new mechanic.
 	* Now inputted with forward + counter.
 	* Active frames reduced (15 -> 8). Timing is more important now.
+	* Red counter no longer exists
+3. Guard cancel rebalanced
+	* Cost reduced (1 bar -> 1/2 bar)
+	* No longer fully invul: invul ends right when the hitbox comes out.
+	* Now automatically turns around if the opponent is behind.
+4. Training Mode has new options for the new defensive mechanic.
+5. Wavedash invul is now specifically to normally aerial attacks. Eliminated weird scenarios where wavedash would go through some projectiles.
 
 
-New Characters (?): Say hello to Centurion, Bubbla, and Dharkblu (?)
+New Characters: Say hello to Centurion and Bubbla
 
 
 Aege:
@@ -74,6 +81,13 @@ Junichi:
 2. (+) 214b: damage increased (100 -> 120)
 
 
+Jodie:
+1. Removed Wavedash Cancel from Sword 5b
+2. Sword Wavedash B reworked into an anti-air. no more plus frames from this massive hitbox.
+   * Hitbox size reduced. there is now a deadzone in the ground in front of him.
+   * Different properties on hit. new combes are possible.
+
+
 Takuya:
 1. (+) Takuya runs faster (5.1 -> 5.3)
 2. (+) 5A has less recovery
@@ -87,6 +101,9 @@ Takuya:
 	* (+) 5[B] now has a wavedash cancel and jump cancel 
 	* More proration (5->7)
 	* Less recovery
+	* no longer can have infinite wallbounces if cancelled early
+	* has less hitpause
+	* damage slightly decreased (60->55)
 7. (-) J5[B] does less damage (60 -> 45)
 	* J5[B] hitbox size increased
 	* J5B is more plus
@@ -127,11 +144,44 @@ Takuya:
 23. (+) Takuya no longer loses extra meter when Charge Cancelling
 24. (~) Takuya now has a sound effect and visual when he places an extra spike (Indicates the timer length increases i hope)
 25. (-) Wavedash C charged now has 10 extra frames of endlag if they don't hit the opponent
-26. (-) 214B now has more endlag
+26. (-) Wavedash C and charged damage decreased (Final hit 45->35), (75->65)
+27. (-) 214B now has more endlag
 	* 214B invul now comes at f5 instead of f3 (214[B] still comes in f2 tho)
+28. (-) J.5BB harder to combo off of
 
 
-
+Vei:
+1. (+) All Supers no longer do juggle.
+2. (~) Fixed bug where the turning around animation was too long.
+3. (-) 2a: Redone for a better animation. Range reduced, no longer meaty, startup reduced, recovery reduced.
+4. (+) 5a: Can now cancel into 2a.
+5. (-) 5bb: Increased juggle (5 -> 10)
+6. (+) 4b: Replaced with anti-air hitgrab concept.
+7. (-) Clone 4b: increased juggle (5 -> 10)
+8. (-) Clone 2b: increased juggle (0 -> 10)
+9. (+) Clone 2b: bounce height slightly increased.
+10. (~) Clone 2b: fixed bug where it was not considered a high by star guard.
+12. (+) 5c: can now cancel into 4c at the same timing as 2c.
+13. (~) 5c: Portal travel speed made more consistent. Vertical speed reduced slightly. Max Height increased.
+14. (+) 4c teleport: No longer consumes meter.
+15. (+) 4c teleport: Vei's vertical exit speed  is now increased, allowing him to perform moves near the ground.
+16. (+) 2c portalless: fixed bug where this would consume meter twice.
+17. (-) 2c portalless: Damage reduced, no longer fatals cuz wtf.
+18. (+) 2c with portal: Damage drastically increased (24 -> 75). Hitsounds adjusted.
+19. (~) 2c with portal: No longer marked as fatal (no actual change)
+20. (+) 2c upwards fire: Launch Angle adjusted to send further upwards and less horizontally. Time to combo increased.
+21. (+) 2c side fire: Launch Angle adjusted to send further upwards. Time to combo increased.
+22. (+) 2c down fire: Launch angle adjusted to send less vertical.
+23. (-) j.2c: hitbox made consistent, generally reduced.
+24. (+) 2c upwards fire: Launch Angle adjusted to send further upwards and less horizontally. Time to combo increased.
+25. (+) 2c side fire: Launch Angle adjusted to send further upwards. Time to combo increased.
+(+) 2c down fire: Launch angle adjusted to send less vertical.
+26. (-) j.2c: Damage reduced: (89 -> 55)
+27. (+) 236A: clone attacks no longer burstable.
+28. (-) 236A: no longer invulnerable to all air attacks.
+29. (-) Fixed major bug that would fill Vei's bar under certain replicable conditions:
+     * Cancel window for 5b into wavedash pushed back to when the clone is out of hitpause.
+30. (-) Wavedash: Vei no longer moves as mush forward with the clone. He can no longer approach with wavedash alone from a distance.
 
 
 Watanabe:

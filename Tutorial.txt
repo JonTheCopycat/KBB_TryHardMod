@@ -1,12 +1,20 @@
 How to install:
+
+- For the first time after 0.8.0
 	1. Make a copy of your Kirby Battle Blitz! folder
 	2. Extract and/or Copy all the folders in this zip file.
 	3. Enter the folder of the copy of Kirby Battle Blitz, and
 	4. Paste the folders from the zip file onto this main folder, on top of the original data and char folders
 	5. If a window pops up, click the options to override/replace the data/files.
-	6. Open the game and enjoy the cracked movement.
+	6. Open the game and enjoy the cracked movement and better defense.
 
-
+- After the first time
+	1. To update you only need to extract and/or copy the following folders
+		* chars folder, data folder, and the Changelog for your convenience.
+	2. Enter the folder of your Kirby Battle Blitz: Try-Hard Mod folder, and
+	3. Paste the specified folders from the zip file onto this folder, on top of the current data and char folders.
+	4. If a window pops up, click the options to override/replace the data/files.
+	5. Open the game once again and enjoy the game.
 
 Inputs to wavedash
 	Forward > Down > Down-Forward
@@ -19,17 +27,9 @@ You can:
 	* Do supers while wavedashing
 	* Wavedash Cancel During Starburst.
 
-You can consistently do QCF supers by inputing them as Halfcircles instead.
-
 Inputs to hyperhop:
 	Down > Up
 	This input is very fast
 	You will jump lower than usual, but doing this with Up-Forward or Up-back will allow you to jump with great horizontal speed
 
 You can also do a soft fastfall with every character. When ever you're not going up in the air, you can press down at any time and you will fall faster.
-
-Input to Star Cancel:
-	Pressing Charge Twice
-	You can star cancel any move pretty much.
-	Press a direction while star cancelling to move slightly in that direction.
-
