@@ -28,12 +28,12 @@
 		* Command Dash Cancel During Starburst.
 
 
-Hyperhop:
+- Hyperhop:
 	Down > Up  - or - Jump out of Command Dash
 	You will jump lower than usual, but doing this with Up-Forward or Up-back will allow you to jump with great horizontal speed
 
 
-Soft Fastfall:
+- Soft Fastfall:
 	You can do a soft fastfall with every character. 
 	When ever you're not going up in the air, you can press down at any time and you will fall faster.
 
