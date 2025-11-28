@@ -1,5 +1,45 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
+| Try-Hard Version 0.8.0a Hotfix Changes:            /
+|---------------------------------------------------/
+
+Man this is hard.
+
+Bill:
+(~) Wavedash B is now properly labeled as a high. Shield will guard it now.
+
+
+Metaknight:
+(~) Wavedash B is now properly labeled as a high. Shield will now guard it.
+(-) Wavedash B has less advantage on block (0 -> -8)
+(-) Wavedash B startup reduced (f20 -> f25)
+(-) Wavedash B can no longer be IAD cancelled or old 6c cancelled.
+(~) Wavedash B animation changed to look less jank.
+
+
+Sareo:
+(+) 2c is now a heavy attack. Costs more to shield.
+(-) j.5b now has reduced wrong block cost. It's total cost is now inline with other moves.
+
+
+Stray
+(-) j.5c now has drastically reduced wrong block cost. It's total cost is now slightly higher than other moves.
+
+
+Violet:
+(+) 6c is now considered a heavy attack. Costs more to shield
+(+) j.5b is now considered a heavy attack. Costs more to shield.
+
+
+Yoru:
+(-) All highs are now properly labeled. Star guard now properly works against him.
+(-) j.5a wrong block cost reduced. Total cost is now lower than other moves depending on how many times it hits.
+(+) Wavedash B now counts as a heavy attack.
+(+) j.236B now counts as a heavy attack.
+
+
+===================================================================================================================================
+|-----------------------------------------------------/
 | Try-Hard Version 0.8.0 Changes:                    /
 |---------------------------------------------------/
 
