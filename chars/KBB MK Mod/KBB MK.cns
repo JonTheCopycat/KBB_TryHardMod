@@ -4226,8 +4226,8 @@ value = 100
 [State 0, VelSet]
 type = VelSet
 trigger1 = Time = 0
-x = 6.5
-y = -3.8
+x = 6
+y = -4
 
 [State 0, VelSet]
 type = VelSet
@@ -4240,10 +4240,20 @@ type = VelAdd
 trigger1 = 1 
 y = 0.22
 
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = movecontact
+y = 0.22
+
 [State 0, PlayerPush]
 type = PlayerPush
 trigger1 = Time > 4
 value = 0
+
+[State 0, PlayerPush]
+type = Turn
+trigger1 = AnimElem = 12, >= 0
+trigger1 = p2bodydist x < -15
 
 [State 200, 1]
 type = HitDef
@@ -4271,12 +4281,11 @@ Fall = 1
 Fall.recovertime = 40
 Envshake.time = 20
 
-[State 200, End]
-type = ChangeState
-Triggerall = movecontact
-trigger1 = command = "s"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 66
+[State 0, VelSet]
+type = VelSet
+trigger1 = moveguarded = 1
+x = 1.5
+y = -2
 
 [State -1, SPECIAL 2 - DP]
 type = ChangeState
@@ -4285,14 +4294,6 @@ triggerall = power >= 1000
 triggerall = numhelper(3500) = 0
 trigger1 = command = "SPECIAL 2"
 value = 22000
-
-[State 0, ChangeState]
-type = ChangeState
-triggerall = movecontact
-trigger1 = command = "holdfwd"
-trigger1 = command = "c"
-trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-value = 625
 
 [State 0, ChangeState]
 type = ChangeState
