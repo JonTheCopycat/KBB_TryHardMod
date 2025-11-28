@@ -97,7 +97,8 @@ defence = 0;Used to modify the character's defense during gameplay
 guardCount = 0 ;Used to determine how many hits of an attack was blocked. (on-block counterpart to hitcount)
 helperGuarded = 0 ;Used to determine if a helper's attack was guarded.
 helperHit = 0 ;Used to determine if a helper's attack hit successfully.
-lowAttack = 0 ;Used to check if the attack is a low attack. Used for training mode, the dummy checks if it should block low or not.
+lowAttack = 0 ;Used to check if the attack is a low attack. Used for Shield and Training mode.
+highAttack = 0 ;Used to check if the attack is a low attack. Used for Shield
 juggle = 0 ; Used in place of the built in juggle system
 staleMovesException = 0 ; Used to cancel the effect of stale moves on a state
 reversalMove = 0 ;Used to check if the move is an invincible-on-startup super move or counter
@@ -8027,6 +8028,18 @@ sprpriority = 5
 removetime = -2
 persistent = 0
 
+[State 0, IM DOING A HIGH, BOZO]
+type = MapSet
+trigger1 = stateno = [600, 610] || stateno = 900 || helper, stateno = 630
+map = "highAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = [600, 610] || stateno = 900 || helper, stateno = 630)
+map = "highAttack"
+value = 0
+
 [State 0, Failed to block an air unblockable!]
 type = Explod
 triggerall = (stateno = 200 && enemy, statetype = A) ;Edit this trigger as necessary
@@ -8052,6 +8065,24 @@ scale = 0.5,0.5
 sprpriority = 5
 removetime = -2
 persistent = 0
+
+[State 0, More Guard Damage, BOZO]
+type = MapSet
+trigger1 = stateno = 391 || stateno = 23000
+map = "heavyAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = 391 || stateno = 23000)
+map = "heavyAttack"
+value = 0
+
+[State 0, Wrong block multihit cost]
+type = MapSet
+trigger1 = stateno = 600
+map = "WrongShieldCost"
+value = 175
 
 ; ------ Reversal Move Check ------
 [State -2, Reset reversalMove]

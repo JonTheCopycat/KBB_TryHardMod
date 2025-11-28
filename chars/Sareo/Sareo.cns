@@ -8387,6 +8387,24 @@ ignorehitpause = 1
 persistent = 0
 
 
+[State 0, More Guard Damage, BOZO]
+type = MapSet
+trigger1 = stateno = 450
+map = "heavyAttack"
+value = 1
+
+[State 0, nvm lol]
+type = MapSet
+trigger1 = !(stateno = 450)
+map = "heavyAttack"
+value = 0
+
+
+[State 0, Wrong block multihit cost]
+type = MapSet
+trigger1 = stateno = 610
+map = "WrongShieldCost"
+value = 350
 
 
 

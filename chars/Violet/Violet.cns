@@ -6061,17 +6061,16 @@ sprpriority = 5
 removetime = -2
 persistent = 0
 
-[State 0, IM DOING A AUB, BOZO]
+[State 0, More Guard Damage, BOZO]
 type = MapSet
-trigger1 = stateno = 200
-map = "aubAttack"
+trigger1 = stateno = 465 || stateno = 610 || stateno = 21000
+map = "heavyAttack"
 value = 1
-
 
 [State 0, nvm lol]
 type = MapSet
-trigger1 = !(stateno = 200)
-map = "aubAttack"
+trigger1 = !(stateno = 465 || stateno = 610 || stateno = 21000)
+map = "heavyAttack"
 value = 0
 
 [Statedef -3]

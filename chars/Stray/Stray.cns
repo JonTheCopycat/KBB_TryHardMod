@@ -5410,6 +5410,12 @@ trigger1 = !(stateno = [600, 630] || stateno = 900 || stateno = 24000 || stateno
 map = "highAttack"
 value = 0
 
+[State 0, Wrong block multihit cost]
+type = MapSet
+trigger1 = stateno = 620
+map = "WrongShieldCost"
+value = 150
+
 [State 0, Failed to block an air unblockable!]
 type = Explod
 triggerall = (stateno = 560 && time > 28 && enemy, statetype = A)|| (stateno = 200 && enemy, statetype = A) ;Edit this trigger as necessary

@@ -14,7 +14,7 @@ if command = "holddown" {
 }
 
 #-------------------------------------------------------------------------------
-[Function StartStarGuardCheck()]
+[Function StartShieldCheck()]
 if command = "hold_x" && command != "holdfwd" && power >= 100 && NumExplod(13500) = 0 {
 	Explod{
 		anim: F13500;
@@ -38,7 +38,7 @@ if command = "hold_x" && command != "holdfwd" && power >= 100 && NumExplod(13500
 }
 
 #-------------------------------------------------------------------------------
-[Function StarGuard()]
+[Function Shield()]
 if (enemynear,pos x - pos x) * Facing < -20 {
 	#PalFX{mul: 256, 128, 128; time: 3;}
 	if stateno != [130, 133] && stateno != 150 && stateno != 152 && stateno != 154 {
@@ -80,18 +80,18 @@ if stateType != A {
 }
 
 #-------------------------------------------------------------------------------
-[Function StarGuardHit()]
+[Function ShieldHit()]
 
 let a = call WasBlockedCorrectly();
-MapSet{map:"Starguarded";value:1;}
+MapSet{map:"Shielded";value:1;}
 MapSet{map:"Wrongblock";value:!$a;}
 
 #Guard Cost
 if $a = 1 {
-	PowerAdd{value: -75 - 200 * (enemynear,map(heavyAttack));}
+	PowerAdd{value: -75 - enemynear,map(HeavyShieldCost) * (enemynear,map(heavyAttack));}
 }
 else{
-	PowerAdd{value: -625 - 200 * (enemynear,map(heavyAttack));}
+	PowerAdd{value: -enemynear,map(WrongShieldCost) - enemynear,map(HeavyShieldCost) * (enemynear,map(heavyAttack));}
 	Explod{
 		anim: F13505;
 		ID: 13505;
@@ -220,17 +220,17 @@ if time = 0 {
 	MapSet{map: "timeSinceHitOver"; value: 0;}
 }
 NotHitBy{value: ,HA,NT,ST,HT; time: 8;}
-if time = getHitVar(slideTime) + (map(Starguarded) > 0) * 3 || hitOver
-|| (numhelper(4300) > 0 && helper(4300),stateno = 4301 && time >= 8 + (map(Starguarded) > 0) * 3) {
+if time = getHitVar(slideTime) + (map(Shielded) > 0) * 3 || hitOver
+|| (numhelper(4300) > 0 && helper(4300),stateno = 4301 && time >= 8 + (map(Shielded) > 0) * 3) {
 	velSet{x: 0}
 }
-if time = getHitVar(ctrlTime) + (map(Starguarded) > 0) * 3
-|| (numhelper(4300) > 0 && helper(4300),stateno = 4301 && time >= 8 + (map(Starguarded) > 0) * 3) {
+if time = getHitVar(ctrlTime) + (map(Shielded) > 0) * 3
+|| (numhelper(4300) > 0 && helper(4300),stateno = 4301 && time >= 8 + (map(Shielded) > 0) * 3) {
 	ctrlSet{value: 1}
 }
 call HiToLoAndLoToHi();
 if hitOver {
-	if map(Starguarded) > 0 {
+	if map(Shielded) > 0 {
 		if map(timeSinceHitOver) > 3 {
 			changeState{value: $nextState; ctrl: 1}
 		}
@@ -956,9 +956,9 @@ if time = 0 {
 
 call HiToLoAndLoToHi();
 
-call StartStarGuardCheck();
+call StartShieldCheck();
 ignorehitpause if NumExplod(13500) > 0 {
-	call StarGuard();
+	call Shield();
 }
 
 if AnimTime = 0 {
@@ -970,9 +970,9 @@ call StopGuarding();
 # Stand guard (guarding)
 [StateDef 130; type: S; physics: S;]
 
-call StartStarGuardCheck();
+call StartShieldCheck();
 ignorehitpause if NumExplod(13500) > 0 {
-	call StarGuard();
+	call Shield();
 }
 
 if anim != 130 {
@@ -989,9 +989,9 @@ call CounterCancel();
 #-------------------------------------------------------------------------------
 # Crouch guard (guarding)
 [StateDef 131; type: C; physics: C;]
-call StartStarGuardCheck();
+call StartShieldCheck();
 ignorehitpause if NumExplod(13500) > 0 {
-	call StarGuard();
+	call Shield();
 }
 
 if anim != 131 {
@@ -1007,9 +1007,9 @@ call CounterCancel();
 #-------------------------------------------------------------------------------
 # Air guard (guarding)
 [StateDef 132; type: A; physics: N;]
-call StartStarGuardCheck();
+call StartShieldCheck();
 ignorehitpause if NumExplod(13500) > 0 {
-	call StarGuard();
+	call Shield();
 }
 
 VelAdd{y: Const(movement.yaccel);}
@@ -1043,10 +1043,10 @@ call HiToLoAndLoToHi();
 [StateDef 150; type: S; moveType: H; physics: N; velSet: 0, 0;]
 
 if time = 0 {
-	MapSet{map:"Starguarded";value:0;}
+	MapSet{map:"Shielded";value:0;}
 	MapSet{map:"Wrongblock";value:0}
 	if NumExplod(13500) > 0 {
-		call StarGuardHit();
+		call ShieldHit();
 	}
 
 	forceFeedback{waveform: square; time: 3;}
@@ -1056,9 +1056,9 @@ if pos Y < 0 {
 	ChangeState{value: 154;}
 }
 
-call StartStarGuardCheck();
+call StartShieldCheck();
 ignorehitpause if NumExplod(13500) > 0 {
-	call StarGuard();
+	call Shield();
 }
 
 call CheckInstantBlock();
@@ -1071,9 +1071,9 @@ call CounterCancel();
 call GuardKnockedBack(130);
 call CounterCancel();
 
-call StartStarGuardCheck();
+call StartShieldCheck();
 ignorehitpause if NumExplod(13500) > 0 {
-	call StarGuard();
+	call Shield();
 }
 
 #-------------------------------------------------------------------------------
@@ -1081,10 +1081,10 @@ ignorehitpause if NumExplod(13500) > 0 {
 [StateDef 152; type: C; moveType: H; physics: N; velSet: 0, 0;]
 
 if time = 0 {
-	MapSet{map:"Starguarded";value:0;}
+	MapSet{map:"Shielded";value:0;}
 	MapSet{map:"Wrongblock";value:0}
 	if NumExplod(13500) > 0 {
-		call StarGuardHit();
+		call ShieldHit();
 	}
 
 	forceFeedback{waveform: square; time: 4}
@@ -1094,9 +1094,9 @@ if pos Y < 0 {
 	ChangeState{value: 154;}
 }
 
-call StartStarGuardCheck();
+call StartShieldCheck();
 ignorehitpause if NumExplod(13500) > 0 {
-	call StarGuard();
+	call Shield();
 }
 
 call CheckInstantBlock();
@@ -1112,9 +1112,9 @@ call CounterCancel();
 call GuardKnockedBack(131);
 call CounterCancel();
 
-call StartStarGuardCheck();
+call StartShieldCheck();
 ignorehitpause if NumExplod(13500) > 0 {
-	call StarGuard();
+	call Shield();
 }
 
 #-------------------------------------------------------------------------------
@@ -1125,10 +1125,10 @@ NotHitBy{value: ,HA,NT,ST,HT;}
 changeAnim{value: 152}
 
 if time = 0 {
-	MapSet{map:"Starguarded";value:0;}
+	MapSet{map:"Shielded";value:0;}
 	MapSet{map:"Wrongblock";value:0}
 	if NumExplod(13500) > 0 {
-		call StarGuardHit();
+		call ShieldHit();
 	}
 
 	forceFeedback{waveform: square; time: 4}
@@ -1137,9 +1137,9 @@ if hitShakeOver {
 changeState{value: 155}
 }
 
-call StartStarGuardCheck();
+call StartShieldCheck();
 ignorehitpause if NumExplod(13500) > 0 {
-	call StarGuard();
+	call Shield();
 }
 
 call CheckInstantBlock();
@@ -1161,9 +1161,9 @@ if time = getHitVar(ctrlTime) + (numexplod(13500) > 0) * 3
 
 call AirGuardLand();
 
-call StartStarGuardCheck();
+call StartShieldCheck();
 ignorehitpause if NumExplod(13500) > 0 {
-	call StarGuard();
+	call Shield();
 }
 
 
@@ -1947,6 +1947,12 @@ if NumExplod(13500) > 0 {
 	if time % 3 != 0 {
 		PowerAdd{value: -2;}
 	}
+}
+
+
+if time = 0 {
+	MapSet{ map:"WrongShieldCost"; value: 675; }	
+	MapSet{ map:"HeavyShieldCost"; value: 200; }
 }
 
 [StateDef -3]

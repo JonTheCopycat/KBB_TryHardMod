@@ -4336,7 +4336,7 @@ value = 0
 
 [State 0, Failed to block an overhead!]
 type = Explod
-triggerall = stateno = [600, 610] || stateno = 900
+triggerall = stateno = [600, 610] || stateno = 900 || stateno = 390
 triggerall = enemy, prevstateno = [120,160] && numexplod(31000) = 0
 trigger1 = enemy, movetype = H && enemy, stateno != [120,160]
 anim = F35000
@@ -4362,7 +4362,7 @@ persistent = 0
 
 [State 0, IM DOING A HIGH, BOZO]
 type = MapSet
-trigger1 = stateno = [600, 610] || stateno = 900
+trigger1 = stateno = [600, 610] || stateno = 900 || stateno = 390
 map = "highAttack"
 value = 1
 ;ignorehitpause = 
@@ -4370,7 +4370,7 @@ value = 1
 
 [State 0, nvm lol]
 type = MapSet
-trigger1 = !(stateno = [600, 610] || stateno = 900)
+trigger1 = !(stateno = [600, 610] || stateno = 900 || stateno = 390)
 map = "highAttack"
 value = 0
 ;ignorehitpause = 

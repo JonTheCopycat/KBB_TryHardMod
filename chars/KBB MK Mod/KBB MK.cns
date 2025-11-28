@@ -6045,13 +6045,13 @@ persistent = 0
 
 [State 0, IM DOING A HIGH, BOZO]
 type = MapSet
-trigger1 = stateno = [600, 610] || stateno = 900
+trigger1 = stateno = [600, 610] || stateno = 900 || stateno = 910
 map = "highAttack"
 value = 1
 
 [State 0, nvm lol]
 type = MapSet
-trigger1 = !(stateno = [600, 610] || stateno = 900)
+trigger1 = !(stateno = [600, 610] || stateno = 900 || stateno = 910)
 map = "highAttack"
 value = 0
 
