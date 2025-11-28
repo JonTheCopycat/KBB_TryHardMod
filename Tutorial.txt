@@ -1,4 +1,4 @@
-How to install:
+=================== How to install:
 
 - For the first time after 0.8.0
 	1. Make a copy of your Kirby Battle Blitz! folder
@@ -16,20 +16,49 @@ How to install:
 	4. If a window pops up, click the options to override/replace the data/files.
 	5. Open the game once again and enjoy the game.
 
-Inputs to wavedash
+
+=================== About Movement:
+- Command Dash:
 	Forward > Down > Down-Forward
 	Doing so gives you access to at least 3 moves in A, B and C.
+	You can:
+		* Jump out of Command Dash. This will do a hyperhop
+		* Dash out of Command Dash
+		* Do supers while Command Dashing
+		* Command Dash Cancel During Starburst.
 
-You can:
-	* Jump out of wavedash. This will do a hyperhop
-	* Dash out of wavedash
-	* Wavedash a little bit after the start of a wavedash
-	* Do supers while wavedashing
-	* Wavedash Cancel During Starburst.
 
-Inputs to hyperhop:
-	Down > Up
-	This input is very fast
+Hyperhop:
+	Down > Up  - or - Jump out of Command Dash
 	You will jump lower than usual, but doing this with Up-Forward or Up-back will allow you to jump with great horizontal speed
 
-You can also do a soft fastfall with every character. When ever you're not going up in the air, you can press down at any time and you will fall faster.
+
+Soft Fastfall:
+	You can do a soft fastfall with every character. 
+	When ever you're not going up in the air, you can press down at any time and you will fall faster.
+
+Important tip for newbies:
+It may be your first time encountering inputs like these, and they can feel too hard or too fast. Remember:
+	* Practice makes perfect: Start doing the inputs slowly, then speed up slowly.
+	* Practice on both sides. The input will feel different.
+	* Take breaks. Your hands do most of their learning during them, so don't rush to learn it in one go.
+	* Slow is smooth, and smooth is fast. Even once you have the input down, don't rush it.
+
+=================== About Defense:
+The mod contains defense that was been heavily modified from vanilla.
+
+- Counter? no, Shield
+	* The counter button has been renamed the guard button
+	* It now activates your shield, guarding all incoming highs and lows automatically.
+
+- But... Counter? Okay
+	* You can still use counter by pressing Forward + Shield.
+
+- Also Guard Cancel. Use it.
+	* Guard cancel is less expensive and more useful now, but more reactable and more vulnerable.
+
+Reminder: Inputs for guard cancel are Shield + Charge during block.
+	* guard cancel turns around automatically for crossups, but it can be hit once the attack comes out.
+
+
+
