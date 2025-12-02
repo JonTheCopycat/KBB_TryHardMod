@@ -1,64 +1,109 @@
-=================== How to install:
+=================== How to install ===================
 
 - For the first time after 0.8.0
+
 	1. Make a copy of your Kirby Battle Blitz! folder
+
 	2. Extract and/or Copy all the folders in this zip file.
+
 	3. Enter the folder of the copy of Kirby Battle Blitz, and
+
 	4. Paste the folders from the zip file onto this main folder, on top of the original data and char folders
+
 	5. If a window pops up, click the options to override/replace the data/files.
+
 	6. Open the game and enjoy the cracked movement and better defense.
 
+
 - After the first time
+
 	1. To update you only need to extract and/or copy the following folders
 		* chars folder, data folder, and the Changelog for your convenience.
+
 	2. Enter the folder of your Kirby Battle Blitz: Try-Hard Mod folder, and
-	3. Paste the specified folders from the zip file onto this folder, on top of the current data and char folders.
+
+	3. Paste the specified folders from the zip file onto this folder, on top of the current folders.
+
 	4. If a window pops up, click the options to override/replace the data/files.
+
 	5. Open the game once again and enjoy the game.
 
 
-=================== About Movement:
+
+
+=================== About Movement ===================
+
 - Command Dash:
+
 	Forward > Down > Down-Forward
+
 	Doing so gives you access to at least 3 moves in A, B and C.
+
+	This can also evade some attacks. Which onces depends on the character.
+
 	You can:
+
 		* Jump out of Command Dash. This will do a hyperhop
+
 		* Dash out of Command Dash
+
 		* Do supers while Command Dashing
-		* Command Dash Cancel During Starburst.
+
+		* Cancel any move into Command Dash during Starburst.
 
 
 - Hyperhop:
+
 	Down > Up  - or - Jump out of Command Dash
-	You will jump lower than usual, but doing this with Up-Forward or Up-back will allow you to jump with great horizontal speed
+
+	You will jump lower and faster than usual.
 
 
 - Soft Fastfall:
+
 	You can do a soft fastfall with every character. 
+
 	When ever you're not going up in the air, you can press down at any time and you will fall faster.
 
-Important tip for newbies:
-It may be your first time encountering inputs like these, and they can feel too hard or too fast. Remember:
-	* Practice makes perfect: Start doing the inputs slowly, then speed up slowly.
-	* Practice on both sides. The input will feel different.
-	* Take breaks. Your hands do most of their learning during them, so don't rush to learn it in one go.
-	* Slow is smooth, and smooth is fast. Even once you have the input down, don't rush it.
 
-=================== About Defense:
+
+=================== About Defense ===================
+
 The mod contains defense that was been heavily modified from vanilla.
 
 - Counter? no, Shield
 	* The counter button has been renamed the guard button
 	* It now activates your shield, guarding all incoming highs and lows automatically.
 
+
 - But... Counter? Okay
+
 	* You can still use counter by pressing Forward + Shield.
 
+
 - Also Guard Cancel. Use it.
+
 	* Guard cancel is less expensive and more useful now, but more reactable and more vulnerable.
 
+
 Reminder: Inputs for guard cancel are Shield + Charge during block.
+
 	* guard cancel turns around automatically for crossups, but it can be hit once the attack comes out.
+
+
+
+=================== Important tip for newbies ===================
+
+It may be your first time encountering inputs like these, and they can feel difficult or too fast. 
+Stay calm and remember:
+
+	* Practice makes perfect: Start doing the inputs slowly, then speed up slowly.
+
+	* Take breaks. Your hands do most of their learning during them, so don't rush to learn it in one go.
+
+	* Practice on both sides. The input will feel different.
+
+	* Slow is smooth, and smooth is fast. Even once you have the input down, don't rush it.
 
 
 
