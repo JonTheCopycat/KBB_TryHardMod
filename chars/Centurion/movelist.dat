@@ -1,31 +1,28 @@
 <#f0f000>:PASSIVE!:</>
 Special Transition
-	"Centurion can transition from 5C to 2C or
-	 vice versa once."
+	"Centurion can transition from the same
+	button specials."
+	Ex. 5C to 2C
 
 Super Transition
 	"Centurion can transition from the same
 	button supers for 1/2 a bar."
 	Ex. 214A to 236A
-	
 
-<#f0f000>:COMMAND DASH ATTACKS:</>
+Ice Drift						_F_D_DF
+	"Centurion wavedash is followed up with
+	ice physics lol."
 
-Release							_F_D_DF^A
-	"Centurion releases the iceball, dashing
-	slightly back. This slowly decreases
-	the iceball's power."
+<#f0f000>:ICE DRIFT CANCELS:</>
+^A_F_D_DF
+^B^B_F_D_DF
+_D^A_F_D_DF
+^C_F_D_DF
 
-Dash										_F_D_DF^B
-	"Centurion dashes ahead of the iceball.
-	 This rapidly decreases the iceball's
-	 power."
+<#f0f000>:ICE DRIFT ATTACKS:</>
 
-Chuck		 						_F_D_DF^C
-	"Centurion chucks the iceball, making
-	it bounce.
-	Each bounce decreases the iceball's
-	power."
+Retreat							_D_DB
+	"Dash backwards."
 
 
 <#f0f000>:EX ATTACKS!:</>
@@ -66,14 +63,14 @@ Spindash (1 Bar, _AIR OK)    	_D_DF_F^B
 
 Karambit Rekka (1/2 Bar)		_D_DB_B^B
 	"Centurion slashes with his Karambits."
-_! Slash										^B
+_!Slash										^B
 	"Slashes with his Karambits..."
 
-_! Jumping Slash									_D^B
+_!Jumping Slash									_D^B
 	"Rising Slash, press again to do an additional
 	overhead kick."
 
-_! Low Kick     									_D^A
+_!Low Kick     									_D^A
 	"Kick at their feet."
 
 Grab: "The Move Of All Time" (1 1/2 Bars)				_D_DF_F^C
@@ -84,4 +81,4 @@ Grab: "The Move Of All Time" (1 1/2 Bars)				_D_DF_F^C
 Ice Shield (1 Bar)				_D_DB_B^C
 	"Centurion creates an ice shield around him.
 	If Centurion is hit while this is up, he
-	blocks the hit."
+	automatically blocks the hit."

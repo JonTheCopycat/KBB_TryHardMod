@@ -701,6 +701,18 @@ anim = 200
 poweradd = 0
 sprpriority = 2
 
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 
+x = 1.185
+
 [State 0, Juggle Map]
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
@@ -740,7 +752,7 @@ volumescale = 50
 
 [State 200, Move Forward]
 type = VelAdd
-trigger1 = animelem = 2
+trigger1 = animelem = 2 && prevstateno != 492
 x = 2
 
 [State 200, Explod]
@@ -883,7 +895,7 @@ value = 400
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
-value = 0
+value = ifelse(prevstateno=492,492,0)
 ctrl = 1
 ;-------------------------------------------------------------------------------
 ; A - 2
@@ -1093,6 +1105,18 @@ poweradd = 0
 anim = 300
 sprpriority = 2
 
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 
+x = 1.185
+
 [State 0, Juggle Map]
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
@@ -1132,7 +1156,7 @@ volumescale = 50
 
 [State 0, VelSet]
 type = VelAdd
-trigger1 = Animelem = 2
+trigger1 = Animelem = 2 && prevstateno != 492
 x = 4
 
 [State 200, 1]
@@ -1246,7 +1270,7 @@ value = 400
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
-value = 0
+value = ifelse(prevstateno=492,492,0)
 ctrl = 1
 
 ; B - 2
@@ -1295,7 +1319,7 @@ persistent = 0
 
 
 [State 0, VelSet]
-type = VelSet
+type = VelAdd
 trigger1 = Animelem = 2
 x = 7
 
@@ -1576,6 +1600,12 @@ type = ChangeState
 triggerall = power >= 200
 trigger1 = command = "c" && time >= 7 ; give me my neutral skips
 value = 400
+ctrl = 1
+
+[State 1000, 6]
+type = ChangeState
+trigger1 = command = "WD" && time >= 7 ; give me my movement
+value = 490
 ctrl = 1
 
 [State 1000, 6]
@@ -1944,6 +1974,19 @@ anim = 450
 poweradd = -200
 sprpriority = 2
 
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 
+x = 1.185
+
+
 [State 0, Helper]
 type = Helper
 trigger1 = AnimElem = 1
@@ -2034,6 +2077,12 @@ value = 400
 
 [State 200, End]
 type = ChangeState
+trigger1 = AnimTime = 0 && prevstateno = 492
+value = 492
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
@@ -2049,6 +2098,14 @@ ctrl = 0
 anim = 420
 velset = 0,0
 sprpriority = 2
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = root,stateno = 450
+x = root,pos x + 30
+y = root,pos y + -90
+;ignorehitpause = 
+;persistent = 
 
 [State -2, Counterhit TSP]
 type = Helper
@@ -2148,6 +2205,14 @@ pausemovetime = 0
 scale = 1.3,1.3
 sprpriority = 5
 removeongethit = 1
+
+[State 0, ModifyExplod]
+type = ModifyExplod
+trigger1 = time >= 1 && time < 45
+ID = 452
+pos = 0,0
+postype = P1  ;P2, Front, Back, Left, Right
+
 
 ;[State 0, Explod]
 ;type = Explod
@@ -2313,6 +2378,14 @@ anim = 460
 poweradd = -200
 sprpriority = 2
 
+
+[State 0, PlaySnd]
+type = PlaySnd
+triggerall = random < 600
+trigger1 = AnimElem = 1
+value = S21000,1
+volumescale = 200
+channel = 0
 
 [State 0, Explod]
 type = Explod
@@ -2767,10 +2840,29 @@ type    = S
 movetype= I
 physics = S
 juggle  = 1
-velset = 0,0
 ctrl = 0
 anim = 500
 sprpriority = 2
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = prevstateno != 492 
+x = 0
+y = 0
+
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 
+x = 1.1
+
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -2819,7 +2911,7 @@ triggerall = ailevel = 0
 triggerall = time >= 12
 trigger1 = command != "hold_s"
 trigger2 = power = 3000
-value = 501
+value = ifelse(prevstateno=492,492,501)
 
 [State 200, End]
 type = ChangeState
@@ -2828,7 +2920,7 @@ triggerall = ailevel > 0
 trigger1 = inguarddist
 trigger2 = power = 3000
 trigger3 = p2bodydist x < 60
-value = 501
+value = ifelse(prevstateno=492,492,501)
 
 [State 200, End]
 type = ChangeState
@@ -2836,7 +2928,7 @@ triggerall = time >= 12
 triggerall = ailevel > 0
 triggerall = enemy, ailevel = 0 
 trigger1 = Time > 110
-value = 501
+value = ifelse(prevstateno=492,492,501)
 
 [State 200, End]
 type = ChangeState
@@ -2844,7 +2936,7 @@ triggerall = time >= 12
 triggerall = ailevel > 0
 triggerall = enemy, ailevel > 0 
 trigger1 = Time > 80
-value = 501
+value = ifelse(prevstateno=492,492,501)
 
 ;-------------------------------------------------------------------------------
 ; Power Charge - Fin
@@ -3057,7 +3149,6 @@ type    = A
 movetype= A
 physics = N
 juggle  = 0
-velset = 0,0
 ctrl = 0
 anim = 900
 poweradd = 0
@@ -3088,14 +3179,13 @@ volumescale = 50
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = prevstateno != [30,35] && time = 0
+trigger1 = prevstateno != 492 && time = 0
 x = 2
 y = -3
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = prevstateno = [30,35] && time = 0
-x = 4
+trigger1 = prevstateno = 492 && time = 0
 y = -3
 
 
@@ -3180,6 +3270,18 @@ poweradd = 0
 ;velset = 0,0
 sprpriority = 2
 
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 
+x = 1.21
+
 [State 0, Juggle Map]
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
@@ -3218,12 +3320,12 @@ volumescale = 50
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 3 && prevstateno != 492
 x = 4 
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 4
+trigger1 = AnimElem = 4 && prevstateno != 492
 x = 2
 
 [State 0, PosAdd]
@@ -3350,7 +3452,7 @@ value = 310
 [State 200, On Hit]
 type = ChangeState
 trigger1 = AnimTime = 0
-value = 0
+value = ifelse(prevstateno=492,492,0)
 ctrl = 1
 ;-------------------------------------------------------------------------------
 ; A - Aire
@@ -3689,6 +3791,14 @@ poweradd = -500
 sprpriority = 2
 
 
+[State 0, PlaySnd]
+type = PlaySnd
+triggerall = random < 600
+trigger1 = AnimElem = 1
+value = S21000,0
+volumescale = 200
+channel = 0
+
 ;[State 0, Helper]
 ;type = Helper
 ;trigger1 = time = 10
@@ -4021,7 +4131,7 @@ trigger1 = root,movetype = H && time <= 60
 ;persistent = 
 
 ;------------------------------------------------------------------------------------------
-; Wavedash
+; Wavedash.. start.
 [Statedef 490]
 type    = S
 movetype= A
@@ -4032,22 +4142,22 @@ anim = 21
 poweradd = 0
 sprpriority = 2
 
-[State 0, VelSet]
-type = VelSet
-trigger1 = 1
-x = 1.5
-
-[State 0, Juggle Map]
-type = MapSet
-trigger1 = time = 0
-map = "charge"
-value = 0
-
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = map(charge) < 150 
-map = "charge"
-value = .9
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = 1
+;x = 1.5
+;
+;[State 0, Juggle Map]
+;type = MapSet
+;trigger1 = time = 0
+;map = "charge"
+;value = 0
+;
+;[State 0, Juggle Map]
+;type = MapAdd
+;trigger1 = map(charge) < 150 
+;map = "charge"
+;value = .9
 
 [State 0, Explod]
 type = Explod
@@ -4065,21 +4175,21 @@ scale = 1,1
 sprpriority = 1
 removeongethit = 1
 
-[State 0, Helper]
-type = Helper
-trigger1 = time = 0
-helpertype = normal ;player
-name = "mesmerizer"
-ID = 495
-stateno = 495
-pos = 0,0
-postype = p1    ;p2,front,back,left,right
-facing = 1
-ownpal = 0
-supermovetime = 0
-pausemovetime = 0
-inheritJuggle = 1
-keyctrl = 0
+;[State 0, Helper]
+;type = Helper
+;trigger1 = time = 0
+;helpertype = normal ;player
+;name = "mesmerizer"
+;ID = 495
+;stateno = 495
+;pos = 0,0
+;postype = p1    ;p2,front,back,left,right
+;facing = 1
+;ownpal = 0
+;supermovetime = 0
+;pausemovetime = 0
+;inheritJuggle = 1
+;keyctrl = 0
 
 
 
@@ -4095,7 +4205,7 @@ value = 491
 
 [State 200, End]
 type = Changestate
-trigger1 = command = "b" ; yeah bro you still get yo wavedash.. 
+trigger1 = time = 0 ; w laziness or nah
 value = 492
 
 [State 200, End]
@@ -4110,7 +4220,7 @@ value = 60
 ctrl = 0
 
 ;------------------------------------------------------------------------------------------
-; Wavedash A
+; old Wavedash A
 [Statedef 491]
 type    = S
 movetype= A
@@ -4133,11 +4243,11 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-;Wavedash B
+;Slippery State
 [Statedef 492]
 type = C
 movetype= I
-physics = S
+physics = C
 anim = 30
 ctrl = 0
 sprpriority = 1
@@ -4145,31 +4255,55 @@ sprpriority = 1
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = time = 0
+value = S35,0 
+volume = 100
+channel = 2
+
+[State 0, sword]
+type = MapSet
+trigger1 = 1
+map = "slippy"
+value = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0 && prevstateno = 490
 value = F65,0
 volumescale = 500
 
+[State 0, StopSnd]
+type = StopSnd
+trigger1 = time = 0 && prevstateno = 500
+channel = 6
+
 [State 0, AfterImage]
 type = AfterImage
-triggerall = numhelper(51000) = 0
-trigger1 = AnimElem = 1
+triggerall = numhelper(51000) = 0 && prevstateno = 490
+trigger1 = AnimElem = 1 
 paladd = 240,50,0
 time = 10
 trans = add
 
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [2, 10] && prevstateno = 490 ; think this supposed to be here
+value = A, NA
+time = 1
+
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = 0
+trigger1 = time = 0 && prevstateno = 490
 x = const(velocity.run.fwd.x) * 1.8 * 0.6
 y = 0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = [1, 3]
-x = const(velocity.run.fwd.x) * 1.8 * 1.7
+trigger1 = time = [1, 3] && prevstateno = 490
+x = const(velocity.run.fwd.x) * 1.25
 
 [State 0, Explod]
 type = Explod
-trigger1 = AnimElem = 1
+trigger1 = AnimElem = 1 && prevstateno = 490
 anim = F16000
 ID = 16000
 pos = -40,0
@@ -4188,6 +4322,46 @@ ontop = 0
 shadow = 0,0,0
 ownpal = 0
 
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = (time = 10 && anim = 30 || command != "holdfwd" && command != "holdback" && time >= 10 || prevstateno != 490 && time < 5) && anim != [10,11]
+value = 0
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = time >= 5 && prevstateno = 490 || time >= 0 && prevstateno != 490
+x = 1.2
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = command = "holdback" && time >= 5
+x = -.05
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = command = "holdback" && time >= 5 && anim != 21 && anim != [10,11]
+value = 21
+
+[State 0, VelAdd]
+type = VelAdd
+trigger1 = command = "holdfwd" && time >= 10
+x = .05
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = command = "holdfwd" && time >= 5 && anim != 20 && anim != [10,11]
+value = 20
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = command = "holddown" && anim != [10,11] && time >= 10
+value = 10
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = command != "holddown" && anim = [10,11] && time >= 10
+value = 12
+
 [State 200, End]
 type = ChangeState
 trigger1 = command = "holdup"
@@ -4196,18 +4370,92 @@ ctrl = 0
 
 [State 200, End]
 type = ChangeState
-trigger1 = command = "holdback"
-value = 11
+trigger1 = command = "SPECIAL 1" && power >= 1000  && time >= 5
+value = 23000
 ctrl = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = AnimTime = 0
-value = 11
+trigger1 = command = "SPECIAL 2" && power >= 1000  && time >= 5
+value = 20000
 ctrl = 1
 
+[State 200, End]
+type = ChangeState
+trigger1 = command = "SPECIAL 3" && power >= 1000  && time >= 5
+value = 21000
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "SPECIAL 4" && power >= 500  && time >= 5
+value = 22000
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "SPECIAL 5" && power >= 1500  && time >= 5
+value = 24000
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "hold_a" && command = "holddown"  && time >= 10
+value = 950
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "hold_b" && command = "holddown"  && time >= 10
+value = 900
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "hold_a"  && time >= 10
+value = 200
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "hold_b"   && time >= 10
+value = 300
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "hold_c" && command = "holddown"  && time >= 10 && power >= 200
+value = 450
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "c" && time >= 10 && power >= 200
+value = 400
+ctrl = 1
+
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "s" && time >= 5 && power < 3000
+value = 500
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = command = "holddownback" && time >= 5
+value = 410
+ctrl = 1
+
+[State 200, Run faster!]
+type = ChangeState
+Trigger1 = enemy, life <= 0
+value = 0
+ctrl = 1
+
+
 ;------------------------------------------------------------------------------------------
-; Wavedash C
+; old Wavedash C
 [Statedef 493]
 type    = S
 movetype= A
@@ -4931,6 +5179,62 @@ persistent = 0
 
 [Statedef -3]
 
+[State 0, Explod]
+type = Explod
+trigger1 = numexplod(36) <= 0 && map(slippy) >= 1
+anim = 36
+ID = 36
+pos = 0,0
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = -2
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 1,1
+sprpriority = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = numexplod(37) <= 0 && map(slippy) >= 1
+anim = 23002
+ID = 37
+pos = 0,0
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = -2
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 2,.25
+sprpriority = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time%42 = 0 && map(slippy) >= 1
+value = S35,0 
+volume = 100
+channel = 2
+
+[State 0, StopSnd]
+type = StopSnd
+trigger1 = map(slippy) = 0
+channel = 2
+;ignorehitpause = 
+;persistent = 
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = map(slippy) = 0
+id = 37
+;ignorehitpause = 
+;persistent = 
+
+[State 0, score !]
+type = MapSet
+trigger1 = stateno = 0 || stateno = 60 || movetype = H || stateno = 210 || stateno = 310 || stateno = 400 || stateno = 21005 || stateno = [22000,22035] || stateno = 700 || stateno = 410 || stateno = 900 || stateno = 24000
+map = "slippy"
+value = 0
 
 ;wallbounce spam prevent ----------
 [State 0, Wallbounce prevent reset]

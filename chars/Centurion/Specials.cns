@@ -12,8 +12,20 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 20000
-velset = 0,0
+;velset = 0,0
 sprpriority = 1
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 
+x = 1.185
 
 [State 200, Power Gain]
 type = PowerAdd
@@ -273,6 +285,18 @@ ctrl = 0
 ;velset = 0,0
 anim = 21000
 sprpriority = 2
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 && time <= 16
+x = 1.185
 
 [State 200, Power Gain]
 type = PowerAdd
@@ -704,6 +728,18 @@ anim = 22000
 sprpriority = 2
 poweradd = 0
 
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 
+x = 1.185
+
 [State 0, staleMovesException] ;Negates stale moves
 type = MapSet
 trigger1 = 1
@@ -846,7 +882,7 @@ value = 21000
 type = ChangeState
 triggerall = pos y = 0
 trigger1 = AnimTime = 0
-value = 0
+value = ifelse(prevstateno=492,492,0)
 ctrl = 1
 
 [State 200, End]
@@ -1526,8 +1562,19 @@ physics = C
 juggle  = 0
 ctrl = 0
 anim = 23000
-velset = 0,0
 sprpriority = 2
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 
+x = 1.185
 
 [State 200, Power Gain]
 type = PowerAdd
@@ -1555,7 +1602,7 @@ value = 1
 
 [State 0, VelSet]
 type = VelAdd
-trigger1 = AnimElem = 2
+trigger1 = AnimElem = 2 && prevstateno != 492
 x = -6
 
 [State 0, SuperPause]
@@ -1632,7 +1679,7 @@ value = 20000
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = AnimTime = 0
-value = 50
+value = ifelse(prevstateno=492,492,0)
 ctrl = 1
 
 ;-------------------------------------------------------------------------------
@@ -1923,8 +1970,20 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 24000
-velset = 0,0
+;velset = 0,0
 sprpriority = 2
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 && time < 32
+x = 1.185
 
 [State 200, Power Gain]
 type = PowerAdd
@@ -1967,13 +2026,13 @@ value = 1
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 1
+trigger1 = AnimElem = 1 && prevstateno != 492 
 x = -3
 y = 0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = AnimElem = 5
+trigger1 = AnimElem = 5 && prevstateno != 492 
 x = 7.5
 y = 0
 
@@ -2265,6 +2324,13 @@ kill = 0
 Envshake.time = 20
 fall.recover = 0
 
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 27
+value = S200,6
+volumescale = 200
+channel = 0
+
 [State 0, Juggle Map]
 type = MapSet
 trigger1 = AnimElem = 27
@@ -2306,8 +2372,8 @@ physics = N
 juggle  = 0
 ctrl = 0
 anim = 25000
-velset = 0,0
 sprpriority = 1
+velset = 0,0
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -2459,6 +2525,18 @@ anim = 26005
 velset = 0,0
 sprpriority = 2
 
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = prevstateno = 492 
+physics = C         ;A,C,S,N
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = prevstateno = 492 
+x = 1.185
+
 [State 200, Power Gain]
 type = PowerAdd
 trigger1 = time = 0 && prevstateno != [24000,24500]
@@ -2510,7 +2588,7 @@ value = 24000
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
-value = 0
+value = ifelse(prevstateno=492,492,0)
 ctrl = 1
 
 ;===============================================================================
@@ -2523,7 +2601,6 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 26000
-velset = 0,0
 sprpriority = 7
 
 [State 0, HitOverrideCheck]
