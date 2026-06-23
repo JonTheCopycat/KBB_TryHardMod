@@ -1,13 +1,40 @@
 ===================================================================================================================================
 |-----------------------------------------------------/
-| Try-Hard Version 0.8.0b (idk what it would be):    /
+| Try-Hard Version 0.8.1 Changes:		     /
 |---------------------------------------------------/
+
+New Character: The Dharkblu has arrived
+
+Dharkblu:
+(Changes from Vanilla)
+(+) Toned down hurtboxes of J5B, J5BB, and J5C
+(~) Removed some unused sounds to cut down on file size
+(~) Corner check radius for the sword is larger.
+(+) Swordless normals now give 15 bonus score, totaling to 23 on hit. (10 -> 15)
+(+) Sword 2B now gets 10 bonus score, totaling to 18 on hit.
+(+) 4B damage increased (25 + LVL*2 -> 30 + LVL*3)
+(~) Removed 66B screech sound.
+(-) 5C now only gets 10 bonus score when levels 1-3, and no bonus on level 4+
+(-) J5C no longer gives bonus score 
+(~) J5C spawns slightly closer to Dharkblu to hopefully make it stop dropping on corner
+(-) 236A now gets the 50 juggle from doing it multiple times.
+(-) 236A now only gives 20 bonus score when level 3 or higher, totaling to 60 (30 -> 20)
+(+) 214A now gives 20 bonus score (15 -> 20)
+(~) 214A now pauses whenever there is superpause
+(+) 236B now gives 20 bonus score, totaling to 60 at level 5 (15 -> 20)
+(~) 236B's hits modified
+  * 2nd hit no longer wallbounces, now groundbounces
+  * 3rd hit now has long hitpause, and also is an air unblockable lol
+  * 4th hit no longer groundbounces, now wallbounces
+(+) 214B now gives 35 bonus score (15 -> 35)
 
 Centurion:
 (~) Reworked Wavedash, now gives Centurion ice physics after using it
 (~) 236C now plays a voiceline on the final hit
 (~) J2C now plays a voiceline.
 (~) Updated movelist
+
+
 
 ===================================================================================================================================
 |-----------------------------------------------------/
