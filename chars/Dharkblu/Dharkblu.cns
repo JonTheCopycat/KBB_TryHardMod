@@ -1314,6 +1314,7 @@ type = ChangeState
 triggerall = movecontact
 triggerall = pos y >= 0
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = power >= 200
 triggerall = map(HasSword) = 1
 trigger1 = command = "holddown"
@@ -1469,7 +1470,7 @@ inheritJuggle = 1
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 4 + 5/map(EmotionLv)
+value = 4 + (4-map(EmotionLv))
 persistent = 0
 
 [State 0, Damage Proration]
@@ -1478,7 +1479,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 9 + 5/map(EmotionLv)
+value = 9 + (4-map(EmotionLv))
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -1588,6 +1589,7 @@ value = 22000
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = power >= 200
 triggerall = map(HasSword) = 1
 trigger1 = command = "holddown"
@@ -1604,12 +1606,12 @@ trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 400
 
-;[State 200, End]
-;type = ChangeState
-;Triggerall = movehit
-;trigger1 = command = "b"
-;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
-;value = 326
+[State 200, End]
+type = ChangeState
+Triggerall = movehit
+trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 326
 
 
 [State 200, End]
@@ -1796,13 +1798,13 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 4 + 5/root,map(EmotionLv)
+value = 5 + (5-root,map(EmotionLv))
 
 [State 0, Juggle Map]
 type = RootMapAdd
 trigger1 = movehit && enemy,gethitvar(fall) 
 map = "juggle"
-value = 4 + 5/root,map(EmotionLv)
+value = 5 + (5-root,map(EmotionLv))
 persistent = 0
 
 ;[State 200, 1]
@@ -1837,11 +1839,12 @@ persistent = 0
 type = HitDef
 getpower = 0
 ;trigger1 =  time%6 = 0 && EnemyNear,stateno = [120,155] ; for fun (bc i took it from 2c)
-trigger1 = time%5 = 0 
+trigger1 = time%6 = 0 
+trigger1 = enemy,statetype != A || enemy,movetype = H 
 attr = A, NP
 animtype  = Light
-damage    = 8
-hitflag = MFD
+damage    = 7
+hitflag = MAFD
 fall = 1
 guardflag = MA
 pausetime = 2,2
@@ -1855,9 +1858,9 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 18
-ground.velocity = -1.5,-3
+ground.velocity = -1,-2
 guard.velocity = -5
-air.velocity = -1.5,-3
+air.velocity = -1,-1
 ;fall.xvelocity = -2
 fall.recovertime = 30
 envshake.time = 5
@@ -2776,6 +2779,7 @@ value = 300
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = power >= 200
 triggerall = map(HasSword) = 1
 triggerall = numhelper(440) <= 1
@@ -2976,6 +2980,7 @@ value = 260
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = power >= 500
 triggerall = map(HasSword) = 1
 triggerall = numhelper(440) <= 1
@@ -3302,6 +3307,7 @@ value = ifelse(map(HasSword) = 1, 300, 350)
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = AnimElemTime(4) > 0
 triggerall = power >= 200
 triggerall = map(HasSword) = 1
@@ -3374,7 +3380,7 @@ value = 0
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 4 + 5/map(EmotionLv)
+value = 5 + (4-map(EmotionLv))
 persistent = 0
 
 [State 0, Damage Proration]
@@ -3383,7 +3389,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 3 + 5/map(EmotionLv)
+value = 4 + (4-map(EmotionLv))
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -3495,6 +3501,7 @@ value = 260
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = power >= 200
 triggerall = map(HasSword) = 1
 trigger1 = command = "holddown"
@@ -3749,6 +3756,7 @@ value = 22000
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = power >= 200
 triggerall = map(HasSword) = 1
 trigger1 = command = "holddown"
@@ -3893,7 +3901,7 @@ value = 0
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 4 + 5/map(EmotionLv)
+value = 5 + (4-map(EmotionLv))
 persistent = 0
 
 [State 0, Damage Proration]
@@ -3902,7 +3910,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 2 + 5/map(EmotionLv)
+value = 3 + (4-map(EmotionLv))
 
 [State 0, ChangeAnim2]
 type = ChangeAnim2
@@ -4075,6 +4083,7 @@ value = 22000
 type = ChangeState
 triggerall = movecontact && AnimElemTime(11) >= 0
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = power >= 200
 triggerall = map(HasSword) = 1
 trigger1 = command = "holddown"
@@ -4249,7 +4258,7 @@ value = 0
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 4 + 5/map(EmotionLv)
+value = 5 + (4-map(EmotionLv))
 persistent = 0
 
 [State 0, Damage Proration]
@@ -4258,7 +4267,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 3 + 5/map(EmotionLv)
+value = 4 + (4-map(EmotionLv))
 
 [State 0, ChangeAnim2]
 type = ChangeAnim2
@@ -4353,6 +4362,7 @@ value = 955
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = power >= 200
 triggerall = map(HasSword) = 1
 trigger1 = command = "holddown"
@@ -4516,7 +4526,7 @@ inheritJuggle = 1
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 4 + 5/map(EmotionLv)
+value = 5 + (4-map(EmotionLv))
 persistent = 0
 
 [State 0, Damage Proration]
@@ -4525,7 +4535,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 4 + 5/map(EmotionLv)
+value = 5 + (4-map(EmotionLv))
 
 ;[State 0, Explod]
 ;type = Explod
@@ -5079,6 +5089,7 @@ type = ChangeState
 triggerall = movecontact
 triggerall = pos y >= 0
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = power >= 200
 triggerall = map(HasSword) = 1
 trigger1 = command = "holddown"
@@ -5366,7 +5377,7 @@ value = 8
 persistent = 0
 
 [State 0, Damage Proration]
-type = ParentVarAdd ; spam deny
+type = ParentVarAdd 
 trigger1 = movehit  && root,map(EmotionLv) >= 4
 v = 11
 ignorehitpause = 1
@@ -5381,7 +5392,7 @@ value = 7/(root,map(EmotionLv)-2)
 persistent = 0
 
 [State 0, Damage Proration]
-type = ParentVarAdd ; lowk idk why this did no proration or juggle
+type = ParentVarAdd ; spam deny
 trigger1 = numhelper(406) >= 1 && movehit
 v = 11
 ignorehitpause = 1
@@ -5671,20 +5682,6 @@ trigger1 = AnimElemTime(5) >= 0 && time < (16 - floor((map(EmotionLv) - 1) * 1))
 value = 450
 elem = 5
 
-[State 0, ChangeAnim]
-type = ChangeAnim
-trigger1 = map(EmotionLv) >=  2 && time = 0 
-value = 450
-elem = 5
-
-[State 0, ChangeAnim]
-type = ChangeAnim
-trigger1 = map(EmotionLv) >=  4 && time = 0 
-value = 450
-elem = 6
-;ignorehitpause = 
-;persistent = 
-
 [State 0, sword]
 type = MapSet
 trigger1 = 1
@@ -5747,6 +5744,21 @@ persistent = 0
 ;type = PosSet
 ;trigger1 = pos y >= 0
 ;y = 0
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElem = 5
+helpertype = normal ;player
+name = "spam deny"
+ID = 409
+stateno = 409
+pos = 5,10
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
 
 [State 200, Special 3 - Air Kick]
 type = ChangeState
@@ -5843,13 +5855,13 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 4 + 5/root,map(EmotionLv)
+value = 5 + (5-root,map(EmotionLv))
 
 [State 0, Juggle Map]
 type = RootMapAdd
 trigger1 = movehit && enemy,gethitvar(fall) 
 map = "juggle"
-value = 4 + 5/root,map(EmotionLv)
+value = 5 + (5-root,map(EmotionLv))
 persistent = 0
 
 ;[State 200, 1]
@@ -7129,6 +7141,7 @@ value = 200
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = numhelper(409) = 0
 triggerall = power >= 200
 triggerall = map(HasSword) = 1
 trigger1 = command = "holddown"
@@ -7530,7 +7543,7 @@ volumescale = 75
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 4 + 5/map(EmotionLv)
+value = 5 + (4-map(EmotionLv))
 persistent = 0
 
 [State 0, Damage Proration]
@@ -7539,7 +7552,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 3 + 5/map(EmotionLv)
+value = 4 + (4-map(EmotionLv))
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -7749,7 +7762,7 @@ volumescale = 75
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 4 + 5/map(EmotionLv)
+value = 5 + (4-map(EmotionLv))
 persistent = 0
 
 [State 0, Damage Proration]
@@ -7758,7 +7771,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 3 + 5/map(EmotionLv)
+value = 4 + (4-map(EmotionLv))
 
 
 
@@ -7879,7 +7892,7 @@ sprpriority = 2
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 10
+value = 5
 persistent = 0
 
 [State 0, sword]
@@ -8068,7 +8081,7 @@ value = 100
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5 
+value = 10
 persistent = 0
 
 [State 0, Damage Proration]
@@ -12703,6 +12716,24 @@ value = 0
 type = Changestate
 trigger1 = time = 80
 value = 430
+
+;-------------------------------------------------------------------------------
+; 2C Check
+[Statedef 409]
+type    = S
+movetype= I
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 9999
+sprpriority = 5
+
+[State 200, End]
+type = Changestate
+trigger1 = p2movetype != H
+trigger2 = time = 300
+value = 430
+
 
 
 ;----------------------------------------------------------------------------------

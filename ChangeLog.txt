@@ -8,6 +8,8 @@ New Character: The Dharkblu has arrived
 Dharkblu:
 (Changes from Vanilla)
 (+) Toned down hurtboxes of J5B, J5BB, and J5C
+(~) Grab has 2 less frames of recovery 
+(~) Proration and Juggle formulas changed, now is (X+(4-Level))
 (~) Removed some unused sounds to cut down on file size
 (~) Corner check radius for the sword is larger.
 (+) Swordless normals now give 15 bonus score, totaling to 23 on hit. (10 -> 15)
@@ -26,6 +28,8 @@ Dharkblu:
   * 2nd hit no longer wallbounces, now groundbounces
   * 3rd hit now has long hitpause, and also is an air unblockable lol
   * 4th hit no longer groundbounces, now wallbounces
+  * 5th hit now wallsplats, due to this the recovery of the final hit has been increased.
+(+) 236B's final hit now does increased damage (120 -> 150), totaling to be 370 
 (+) 214B now gives 35 bonus score (15 -> 35)
 
 Centurion:

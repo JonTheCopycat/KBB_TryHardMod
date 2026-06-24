@@ -845,6 +845,7 @@ type = ChangeState
 value = 450
 Triggerall = power >= 500
 triggerall = numhelper(465) = 0
+triggerall = numhelper(409) = 0
 triggerall = map(HasSword) = 1
 triggerall = numhelper(3500) = 0
 triggerall = command = "holddown"
