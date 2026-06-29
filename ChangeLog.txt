@@ -14,6 +14,7 @@ Dharkblu:
 (~) Corner check radius for the sword is larger.
 (+) Swordless normals now give 15 bonus score, totaling to 23 on hit. (10 -> 15)
 (+) Sword 2B now gets 10 bonus score, totaling to 18 on hit.
+(+) Swordless 2B goes a bit higher.
 (+) 4B damage increased (25 + LVL*2 -> 30 + LVL*3)
 (~) Removed 66B screech sound.
 (-) 5C now only gets 10 bonus score when levels 1-3, and no bonus on level 4+

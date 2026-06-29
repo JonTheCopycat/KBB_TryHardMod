@@ -834,23 +834,23 @@ trigger1 = command = "holdback"
 value = 11
 ctrl = 1
 
-; i was lazy so its a bit hardcoded. If the sword is in the "wavedash" state then Dharkblu just has to wait 10 frames before doing the sword version. Otherwise, he can do the sword version immediately if he's near it.
+; i was lazy so its a bit hardcoded. If the sword is in the "wavedash" state then Dharkblu just has to wait 12 frames before doing the sword version. Otherwise, he can do the sword version immediately if he's near it.
 [State 200, End]
 type = ChangeState
 trigger1 = command = "a" 
-value = cond((helper(880),stateno=930 && time>=10 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),290,260)
+value = cond((helper(880),stateno=930 && time>=12 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),290,295)
 ctrl = 0
 ;
 [State 200, End]
 type = ChangeState
 trigger1 = command = "b" 
-value = cond((helper(880),stateno=930 && time>=10 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),390,360)
+value = cond((helper(880),stateno=930 && time>=12 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),390,395)
 ctrl = 0
 ;
 [State 200, End]
 type = ChangeState
 trigger1 = command = "c"  && power >= 500
-value = cond((helper(880),stateno=930 && time>=10 && helper(880),stateno!=491 || helper(880),stateno!= 930 && helper(880),stateno!=491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),490,495)
+value = cond((helper(880),stateno=930 && time>=12 && helper(880),stateno!=491 || helper(880),stateno!= 930 && helper(880),stateno!=491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),490,495)
 ctrl = 0
 
 [State 200, End]
@@ -959,23 +959,23 @@ trigger1 = command = "holdback"
 value = 11
 ctrl = 1
 
-; i was lazy so its a bit hardcoded. If the sword is in the "wavedash" state then Dharkblu just has to wait 10 frames before doing the sword version. Otherwise, he can do the sword version immediately if he's near it.
+; i was lazy so its a bit hardcoded. If the sword is in the "wavedash" state then Dharkblu just has to wait 12 frames before doing the sword version. Otherwise, he can do the sword version immediately if he's near it.
 [State 200, End]
 type = ChangeState
 trigger1 = command = "a" 
-value = cond((helper(880),stateno=930 && time>=10 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),290,260)
+value = cond((helper(880),stateno=930 && time>=12 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),290,295)
 ctrl = 0
 ;
 [State 200, End]
 type = ChangeState
 trigger1 = command = "b" 
-value = cond((helper(880),stateno=930 && time>=10 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),390,360)
+value = cond((helper(880),stateno=930 && time>=12 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),390,395)
 ctrl = 0
 ;
 [State 200, End]
 type = ChangeState
 trigger1 = command = "c"  && power >= 500
-value = cond((helper(880),stateno=930 && time>=10 && helper(880),stateno!=491 || helper(880),stateno!= 930 && helper(880),stateno!=491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),490,495)
+value = cond((helper(880),stateno=930 && time>=12 && helper(880),stateno!=491 || helper(880),stateno!= 930 && helper(880),stateno!=491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),490,495)
 ctrl = 0
 
 [State 200, End]
@@ -1188,7 +1188,7 @@ volumescale = 80
 
 [State 200, Gravity]
 type = VelAdd
-trigger1 = AnimElemTime(2) > 0 && pos y < 0
+trigger1 = AnimElemTime(2) > 0 && pos y < 0 && statetype = A
 y = 0.55
 
 
@@ -1350,6 +1350,218 @@ ctrl = 1
 ;anim =
 ;ignorehitpause = 
 ;persistent = 
+
+;-------------------------------------------------------------------------------
+; Wavedash A: Swordless
+[Statedef 295]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 295
+poweradd = 0
+sprpriority = 2
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit ; Wavedash moves get increased score.. but this one might be a little too good on block
+map = "TotalScore"
+value = 10
+persistent = 0
+
+;[State 0, Juggle Map]
+;type = MapAdd
+;trigger1 = movehit && map(HasSword) = 0 ; "Swordless" normals get increased score this not getting the bonus i think
+;map = "TotalScore"
+;value = 15
+;persistent = 0
+
+[State 0, sword]
+type = MapSet
+trigger1 = 1
+map = "SwordVisible"
+value = 1
+
+[State 0, sword]
+type = MapSet
+trigger1 = 1
+map = "BladeOn"
+value = 0
+
+;[State 0, Juggle Map] ; juggleless too cuz why not
+;type = MapAdd
+;trigger1 = movehit && enemy,gethitvar(fall)
+;map = "juggle"
+;value = 10
+;persistent = 0
+
+;[State 0, Damage Proration] ; prorationless too? Maybe, its pretty slow
+;type = VarAdd
+;trigger1 = movehit
+;v = 11
+;ignorehitpause = 1
+;persistent = 0
+;value = 5
+
+[State 0, sword]
+type = MapSet
+trigger1 = time = 0
+map = "AfterAnim"
+value = anim
+
+[State 0, sword]
+type = MapSet
+trigger1 = time = 0
+map = "AfterElem"
+value = Animelemno(0)
+
+[State 0, sword]
+type = MapSet
+trigger1 = time = 0
+map = "AfterVelX"
+value = -.5
+
+[State 0, sword]
+type = MapSet
+trigger1 = time = 0
+map = "AfterVelY"
+value = 0
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(56000) = 0
+triggerall = numhelper(55000) = 0
+trigger1 = movecontact = 1
+value = 100
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S1,2
+volumescale = 80
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 2
+x = 7
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 4
+x = 3
+;y = -1.5
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = AnimElem = 4
+time = 25
+
+[State 200, Woosh]
+type = PlaySnd
+trigger1 =  AnimElem = 4
+value = S880,0
+volumescale = 100
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 =  AnimElem = 4
+anim = 892
+ID = 892
+pos = 20,10
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 1
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 1,1
+sprpriority = 1
+removeongethit = 1
+;ignorehitpause = 
+persistent = 0
+
+
+[State 200, 1]	;ATTACK 02
+type = HitDef
+getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
+triggerall = AnimElem = 4
+trigger1 = 1
+attr = S, NA
+animtype  = Light
+damage    = 20
+hitflag = MAFD
+guardflag = HA
+pausetime = 20,20
+guard.hittime = 5
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = S0,5
+guardsound = 6,10
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 25
+ground.velocity = -2,10
+air.velocity = -2,10
+air.hittime  = 35
+Fall = 1
+fall.yvelocity = -8
+fall.xvelocity = -2
+fall.recover = 0
+Envshake.time = 15
+
+[State 200, SPECIAL 1 - CLONE KICK]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(23001) = 0
+triggerall = numhelper(3500) = 0
+triggerall = power >= 1000
+triggerall = map(HasSword) = 1
+trigger1 = command = "SPECIAL 1"
+value = 19000
+
+[State 200, SPECIAL 1 - CLONE KICK]
+type = ChangeState
+Triggerall = movecontact
+triggerall = numhelper(23001) = 0
+triggerall = numhelper(3500) = 0
+triggerall = power >= 1000
+triggerall = map(HasSword) = 1
+trigger1 = command = "SPECIAL 2"
+value = 20000
+
+[State 200, Special 3 - Air Kick]
+type = ChangeState
+Triggerall = movecontact
+triggerall = power >= 1500
+triggerall = numhelper(3500) = 0
+triggerall = map(HasSword) = 1
+trigger1 = command = "SPECIAL 3"
+value = 21000
+
+[State 200, End]
+type = ChangeState
+Triggerall = movehit
+trigger1 = command = "up"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 955
+
+[State 200, Wavedash]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
+value = 35
+ctrl = 1
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
 
 
 ;===============================================================================
@@ -1619,6 +1831,133 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+;-------------------------------------------------------------------------------
+; Wavedash B: Swordless
+[Statedef 395]
+type    = S
+movetype= A
+physics = S
+juggle  = 2
+ctrl = 0
+anim = 30
+poweradd = 0
+sprpriority = 2
+
+[State 0, Helper]
+type = Helper
+trigger1 = time = 0
+helpertype = normal ;player
+name = "Afterimage"
+ID = 396
+stateno = 396
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 0
+scale = 1,1
+supermovetime = 99999
+pausemovetime = 99999
+inheritJuggle = 1
+
+[State 0, Fade Out]
+type = Trans
+trigger1 = time < 10
+trans = addalpha
+alpha = 256-time * (256/10), time * (256/10)
+
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = time = 10
+x = 20 ; any more and it becomes a crossup
+y = -40
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = time >= 10
+value = 612
+ctrl = 0
+;anim =
+;ignorehitpause = 
+;persistent = 
+
+
+;-------------------------------------------------------------------------------
+; afterimage2
+[Statedef 396]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+velset = 0,0
+sprpriority = 1
+
+[State 0, Helper Guarded]
+type = RootMapSet
+trigger1 = 1 
+map = "helperGuarded"
+value = moveguarded
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Helper Hit]
+type = RootMapSet
+trigger1 = 1 
+map = "helperHit"
+value = movehit
+;ignorehitpause = 
+;persistent = 
+
+[State 1010, Helper Attack Scale]
+type = AttackMulSet
+trigger1 = 1
+value = 1 * 0.99**root,var(11)
+ignorehitpause = 1
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 5
+
+[State 0, NotHitBy]
+type = PlayerPush
+trigger1 = 1
+value = 0
+;map(AfterAnim)
+;map(AfterElem)
+[State 0, ChangeAnim2]
+type = ChangeAnim2
+trigger1 = time = 0
+value = 290
+elem = 1
+
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = 1
+value = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 0
+x = 9
+y = 0
+;ignorehitpause = 
+;persistent = 
+
+[State 0, Fade Out]
+type = Trans
+trigger1 = time < 25
+trans = addalpha
+alpha = 256-time * (256/25), time * (256/25)
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = time >= 25
+;ignorehitpause = 
+;persistent = 
 
 ;===============================================================================
 ; Wavedash C: Sword
@@ -3518,14 +3857,6 @@ trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 400
 
-
-[State 200, Wavedash]
-type = ChangeState
-Triggerall = command = "WD" && command != "NotWD"
-trigger1 = movecontact
-value = 35
-ctrl = 1
-
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -4833,6 +5164,12 @@ triggerall = map(HasSword) = 0
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 360
 
+[State 200, Wavedash]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
+value = 35
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
@@ -6903,7 +7240,7 @@ x = 1
 type = VelSet
 trigger1 = AnimElem = 3
 x = 1
-y = -4
+y = -5
 
 [State 0, VelSet]
 type = VelSet
@@ -12816,7 +13153,7 @@ persistent = 0
 
 [State 0, IM DOING A LOW, BOZO]
 type = MapSet
-trigger1 = stateno = 900 || stateno = [600,618]
+trigger1 = stateno = 900 || stateno = [600,618] || stateno = 295
 map = "highAttack"
 value = 1
 ;ignorehitpause = 
@@ -12824,7 +13161,7 @@ value = 1
 
 [State 0, nvm lol]
 type = MapSet
-trigger1 = stateno != 900 && stateno != [600,618]
+trigger1 = stateno != 900 && stateno != [600,618] && stateno != 295
 map = "highAttack"
 value = 0
 
@@ -12847,7 +13184,7 @@ value = 0
 
 [State 0, Failed to block an overhead!]
 type = Explod
-triggerall = stateno = [600, 620] || stateno = [900, 920] || Stateno = 470 
+triggerall = stateno = [600, 620] || stateno = [900, 920] || Stateno = 295 
 triggerall = enemy, prevstateno = [120,160] && numexplod(31000) = 0
 trigger1 = enemy, movetype = H && enemy, stateno != [120,160]
 anim = F35000

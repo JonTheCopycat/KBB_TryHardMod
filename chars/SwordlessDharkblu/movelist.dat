@@ -1,0 +1,108 @@
+<#f0f000>:PASSIVES:</>
+
+Emotional Power
+	"Dharkblu's power increases the more
+	he pressures his opponent."
+_!Level Gauge
+	"Fill the gauge to increase emotional power.
+	Affects his damage output and attack speed."
+
+Forgetting Something?
+	"If Dharkblu loses his sword, moves are 
+	 or locked until he regains his sword."
+_!Sword Pickup										 _D OR ^B
+
+<#f0f000>:UNIQUE NORMALS:</>
+
+_B^B
+_F^A
+
+<#f0f000>:SWORDLESS NORMALS:</>
+
+_F_F^B
+_AIR_D^B
+
+<#f0f000>:EX ATTACKS!:</>
+
+Shadow: Volley (1/4 Bar)							^C
+	"Dharkblu throws a shadow that shoots
+	a projectile."
+_!I-III
+	"Increased range."
+_!IV-V
+	"More projectiles? Say less. Give 'em hell."
+
+Shadow: Lock (1/2 Bar)								_AIR^C
+	"Dharkblu summons a shadow to shoot chains
+	that grab the opponent."
+_!I-III
+	"Increased range."
+_!III-V
+	"Summons more chains, and swings the enemy to the
+	other side of the screen ."
+
+Hurl (1/2 Bar)									_D^C
+	"Dharkblu tosses his sword forward."
+_! 	"Blade duration scales with Emotional Power."
+
+_! _U
+	"Sword drifts upwards."
+
+
+Aerial Hurl (1/4 Bar)								_AIR_D^C
+	"Dharkblu throws his sword from the air."
+_! 	"Blade duration scales with Emotional Power."
+
+_!IV-V
+	"The blade no longer deactivates."
+
+
+Emotion Change									_B^C
+	"Immediately changes Dharkblu's Emotional Power.
+	Training Only"
+_!Level Lock									^C
+	"Saves Dharkblu's current level, sets level to
+	the saved level when ending a combo"
+
+<#f0f000>:STAR STRIKES!:</>
+
+Shadow: Beam (1 Bar)									_D_DF_F^A
+	"Dharkblu cuts through the air, creating a shadowy 
+	sword beam."
+_!I-II
+	"Dharkblu slashes once."
+_!III
+	"Dharkblu slashes twice."
+_!IV-V
+	"Dharkblu slashes twice quicker and the two sword
+	beams are combined."
+
+Javelin (1 Bar, _AIR OK)										_D_DB_B^A
+	"Dharkblu hurls his sword forward like a drill.
+_! 	"Blade duration scales with Emotional Power."
+
+Onrush (1 1/2 Bars)										 _D_DF_F^B
+	"Dharkblu swiftly strikes his opponent."
+_! 	"Strike amount scales with Emotional Power"
+
+Recollect (1 Bar)						_D_DB_B^B
+	"Dharkblu pulls his sword to him."
+_! 	"Speed scales with Emotional Power"
+
+Smoke Break (3 Bars, LEVEL 5)								_D_DF_F^C
+	"Dharkblu pulls out a cig and begins smoking 
+	to calm his emotions. He throws it, 
+	disappearing into a foggy area. 
+	Afterwards, Dharkblu"
+_!Opportune Strike								_F
+	"Slashes across the ground, soon
+	returning for another stronger slash."
+
+_!Downfall Pillar								_U
+	"Strikes upwards, following it 
+	with a slam into the ground."
+
+_!Skyward Ripple								_D	
+	"Swiftly slams the ground from 
+	the skies, and explodes upwards, slashing forward
+	for a shadow sword beam."
