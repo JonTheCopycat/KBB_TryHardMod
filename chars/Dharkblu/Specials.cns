@@ -517,7 +517,7 @@ getpower = 0
 Trigger1 = !movecontact
 attr = S, SP
 animtype  = Heavy 
-damage    = 30
+damage    = ifelse(root,map(EmotionLv) >= 4,30,50)
 Hitflag = MAFD
 guardflag = MAF
 pausetime = 10,10
@@ -2268,7 +2268,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S,SA
 animtype  = Hard
-damage    = 150
+damage    = 150,30
 hitflag = MAFD
 guardflag = MA
 sparkno = 2
@@ -2289,6 +2289,7 @@ p2getp1state = 0
 p2facing = 1
 Fall = 1
 fall.recovertime = 90
+guard.kill = 0
 
 [State 0, VelSet]
 type = VelAdd
@@ -2959,7 +2960,7 @@ value = 3
 
 [State 0, Turn]
 type = Turn
-trigger1 = rootdist x < 0 && AnimElemTime(4) >= 0
+trigger1 = rootdist x < 0
 
 
 

@@ -2163,27 +2163,21 @@ value = 1
 
 [State 0, ChangeAnim]
 type = ChangeAnim
-trigger1 = time = 45
+trigger1 = time = 55
 value = 461
-;elem = 1
+elem = 7
 ;ignorehitpause = 
 ;persistent = 
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time >= 45
-x = 6
-y = 6
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = time >= 50
-x = 8
-y = 8
+trigger1 = time >= 55
+x = 12
+y = 12
 
 [State 0, PosAdd]
 type = PosAdd
-trigger1 = time = 45
+trigger1 = time = 55
 x = 30
 y = 35
 ;ignorehitpause = 
@@ -2208,7 +2202,7 @@ removeongethit = 1
 
 [State 0, ModifyExplod]
 type = ModifyExplod
-trigger1 = time >= 1 && time < 45
+trigger1 = time >= 1 && time < 55
 ID = 452
 pos = 0,0
 postype = P1  ;P2, Front, Back, Left, Right
@@ -2477,8 +2471,8 @@ hitflag = MAF
 guardflag = MA
 pausetime = 10,5
 ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
-guard.hittime = 14
-guard.pausetime = 15,7
+guard.hittime = 10
+guard.pausetime = 10,5
 sparkno = 2
 guard.sparkno = s7000
 sparkxy = -8,-25

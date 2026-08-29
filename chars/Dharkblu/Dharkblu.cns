@@ -778,6 +778,40 @@ trigger1 = time = [2, 10]
 value = A, NA
 time = 1
 
+[State 0, PalFX]
+type = PalFX 
+trigger1 = (helper(880),stateno=930 && helper(880),time=12 || time >= 2 && helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70])
+time = 8 ;shrug
+add = 0,0,139
+sinadd = 90,90,0,10
+color = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = helper(880),stateno=930 && helper(880),time=12
+value = S1800,4
+volumescale = 100
+
+[State 0, Explod]
+type = Explod
+trigger1 = helper(880),stateno=930 && helper(880),time=12
+anim = 6001
+ID = 6001
+pos = 0,-20
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 99999
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+bindtime = 60 
+scale = 1,1
+sprpriority = 1
+removeongethit = 1
+;ignorehitpause = 
+persistent = 0
+
+
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 0
@@ -834,23 +868,23 @@ trigger1 = command = "holdback"
 value = 11
 ctrl = 1
 
-; i was lazy so its a bit hardcoded. If the sword is in the "wavedash" state then Dharkblu just has to wait 12 frames before doing the sword version. Otherwise, he can do the sword version immediately if he's near it.
+; i was lazy so its a bit hardcoded. If the sword is in the "wavedash" state then Dharkblu just has to wait 13 frames before doing the sword version. Otherwise, he can do the sword version immediately if he's near it.
 [State 200, End]
 type = ChangeState
 trigger1 = command = "a" 
-value = cond((helper(880),stateno=930 && time>=12 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),290,295)
+value = cond((helper(880),stateno=930 && helper(880),time>=13 || time >= 2 && helper(880),stateno!= 930 && helper(880),stateno!= 491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),290,295)
 ctrl = 0
 ;
 [State 200, End]
 type = ChangeState
 trigger1 = command = "b" 
-value = cond((helper(880),stateno=930 && time>=12 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),390,395)
+value = cond((helper(880),stateno=930 && helper(880),time>=13 || time >= 2 && helper(880),stateno!= 930 && helper(880),stateno!= 491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),390,395)
 ctrl = 0
 ;
 [State 200, End]
 type = ChangeState
 trigger1 = command = "c"  && power >= 500
-value = cond((helper(880),stateno=930 && time>=12 && helper(880),stateno!=491 || helper(880),stateno!= 930 && helper(880),stateno!=491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),490,495)
+value = cond((helper(880),stateno=930 && helper(880),time>=13 || time >= 2 && helper(880),stateno!= 930 && helper(880),stateno!= 491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),490,495)
 ctrl = 0
 
 [State 200, End]
@@ -963,19 +997,19 @@ ctrl = 1
 [State 200, End]
 type = ChangeState
 trigger1 = command = "a" 
-value = cond((helper(880),stateno=930 && time>=12 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),290,295)
+value = cond((helper(880),stateno=930 && helper(880),time>=13 || time >= 2 && helper(880),stateno!= 930 && helper(880),stateno!= 491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),290,295)
 ctrl = 0
 ;
 [State 200, End]
 type = ChangeState
 trigger1 = command = "b" 
-value = cond((helper(880),stateno=930 && time>=12 || helper(880),stateno!= 930 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),390,395)
+value = cond((helper(880),stateno=930 && helper(880),time>=13 || time >= 2 && helper(880),stateno!= 930 && helper(880),stateno!= 491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),390,395)
 ctrl = 0
 ;
 [State 200, End]
 type = ChangeState
 trigger1 = command = "c"  && power >= 500
-value = cond((helper(880),stateno=930 && time>=12 && helper(880),stateno!=491 || helper(880),stateno!= 930 && helper(880),stateno!=491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),490,495)
+value = cond((helper(880),stateno=930 && helper(880),time>=13 || time >= 2 && helper(880),stateno!= 930 && helper(880),stateno!= 491 && helper(880),rootdist x = [-90,90] && helper(880),rootdist y = [-70,70]),490,495)
 ctrl = 0
 
 [State 200, End]
@@ -1127,11 +1161,17 @@ anim = 290
 poweradd = 0
 sprpriority = 2
 
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S1800,5
+volumescale = 100
+
 [State 0, Juggle Map]
 type = MapAdd
-trigger1 = movecontact ; Wavedash moves get increased score 
+trigger1 = movecontact ; Timed wavedash moves get slightly more increased score 
 map = "TotalScore"
-value = 10
+value = 15
 persistent = 0
 
 [State 0, sword]
@@ -1150,19 +1190,12 @@ type = PosAdd
 trigger1 = AnimElem = 3
 x = 15
 
-;[State 0, Juggle Map] ; juggleless too cuz why not
-;type = MapAdd
-;trigger1 = movehit && enemy,gethitvar(fall)
-;map = "juggle"
-;value = 10
-;persistent = 0
-
-[State 0, FatalCounter]
-type = MapSet
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
+[State 0, Juggle Map] ; not juggleless too.
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 10
+persistent = 0
 
 [State 0, Damage Proration]
 type = VarAdd
@@ -1205,7 +1238,7 @@ physics = N         ;A,C,S,N
 type = VelSet
 trigger1 = AnimElem = 2
 x = 4
-y = -3
+y = -2
 
 [State 0, PosSet]
 type = PosSet
@@ -1232,15 +1265,15 @@ triggerall = AnimElem = 3
 trigger1 = 1
 attr = S, NA
 animtype  = Light
-damage    = ifelse(enemy,movetype = A,60,30)
+damage    = 30
 hitflag = MAFD
 guardflag = MA
-pausetime = ifelse(enemy,movetype = A,20,10),ifelse(enemy,movetype = A,40,20)
+pausetime = 10,20
 guard.hittime = 5
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
-hitsound   = ifelse(enemy,movetype = A,8,5),ifelse(enemy,movetype = A,1,3)
+hitsound   = 5,3
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
@@ -1249,7 +1282,7 @@ ground.velocity = -5,-3
 air.velocity = -5,-2
 air.hittime  = 35
 Fall = 0
-fall.recover = ifelse(enemy,movetype = A,0,1)
+fall.recover = 0
 fall.recovertime = 45
 Envshake.time = 15
 
@@ -1331,6 +1364,15 @@ triggerall = power >= 200
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 400
+
+[State 200, End]
+type = ChangeState
+Triggerall = movecontact
+triggerall = pos y >= 0
+triggerall = map(HasSword) = 1
+trigger1 = command = "a"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 200
 
 [State 200, End]
 type = ChangeState
@@ -1461,6 +1503,13 @@ time = 25
 [State 200, Woosh]
 type = PlaySnd
 trigger1 =  AnimElem = 4
+value = S1,1
+volumescale = 100
+persistent = 0
+
+[State 200, Woosh]
+type = PlaySnd
+trigger1 =  AnimElem = 4
 value = S880,0
 volumescale = 100
 persistent = 0
@@ -1483,6 +1532,24 @@ removeongethit = 1
 ;ignorehitpause = 
 persistent = 0
 
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 4
+anim = 616
+ID = 616
+pos = 20,-10
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 99999
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = .4,.6
+sprpriority = 3
+removeongethit = 1
+ignorehitpause = 0
+persistent = 0
+
 
 [State 200, 1]	;ATTACK 02
 type = HitDef
@@ -1492,7 +1559,7 @@ triggerall = AnimElem = 4
 trigger1 = 1
 attr = S, NA
 animtype  = Light
-damage    = 20
+damage    = 35
 hitflag = MAFD
 guardflag = HA
 pausetime = 20,20
@@ -1577,6 +1644,19 @@ poweradd = 0
 anim = 390
 sprpriority = 2
 
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S1800,5
+volumescale = 100
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movecontact ; Timed wavedash moves get slightly more increased score 
+map = "TotalScore"
+value = 15
+persistent = 0
+
 [State 0, sword]
 type = MapSet
 trigger1 = 1
@@ -1616,12 +1696,6 @@ ontop = 0
 ownpal = 1
 removeongethit = 1
 
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = movecontact ; Wavedash moves get increased score 
-map = "TotalScore"
-value = 10
-persistent = 0
 
 
 [State 0, sword]
@@ -1714,8 +1788,8 @@ x = -100
 ;
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = 1
-x = 16 + map(EmotionLv) * 4
+trigger1 = time = 1 || AnimElem = 4
+x = 10 + map(EmotionLv) * 4
 
 [State 200, 1]
 type = HitDef
@@ -1843,6 +1917,12 @@ ctrl = 0
 anim = 30
 poweradd = 0
 sprpriority = 2
+
+[State 0, sword]
+type = MapSet
+trigger1 = 1
+map = "SwordVisible"
+value = 0
 
 [State 0, Helper]
 type = Helper
@@ -1972,6 +2052,12 @@ anim = 490
 poweradd = -500
 sprpriority = 2
 
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time = 0
+value = S1800,5
+volumescale = 100
+
 [State 0, sword]
 type = MapSet
 trigger1 = 1
@@ -2091,12 +2177,12 @@ value = 890
 ctrl = 0
 
 
-[State 0, ChangeAnim]
-type = ChangeAnim
-trigger1 = time >= 20 + (root,map(EmotionLv) * 10)
-value = 455
-;elem = 0
-persistent = 0
+;[State 0, ChangeAnim]
+;type = ChangeAnim
+;trigger1 = time >= 20 + (root,map(EmotionLv) * 16)
+;value = 455
+;;elem = 0
+;persistent = 0
 
 [State 0, sword]
 type = RootMapSet
@@ -2212,7 +2298,7 @@ x = .5
 
 [State 0, VelSet]
 type = VelAdd
-trigger1 = time >= 20 + (root,map(EmotionLv) * 10)
+trigger1 = time >= 30 + (root,map(EmotionLv) * 15)
 y = .22
 
 [State 0, Explod]
@@ -2338,6 +2424,66 @@ type = VelSet
 trigger1 = time = 0
 x = 2
 y = -6
+
+[State 0, Explod]
+type = Explod
+trigger1 =  (AnimElem = 5, = 0  && map(EmotionLv) >= 4) || (AnimElem = 5, = 0 &&  map(EmotionLv) = 1) 
+anim = 489
+ID = 489
+pos = 25,-10
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 1
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = .5,.3
+vel = 2,3
+sprpriority = 2
+removeongethit = 1
+angle = 305
+;ignorehitpause = 
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 =  (AnimElem = 5, = 2  && map(EmotionLv) >= 4) ||  AnimElem = 5, = 0 &&  map(EmotionLv) = 2
+anim = 489
+ID = 489
+pos = 30,-10
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 1
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = .5,.3
+vel = 2,2
+sprpriority = 2
+removeongethit = 1
+angle = 315
+;ignorehitpause = 
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = ( AnimElem = 5, = 4  && map(EmotionLv) >= 4) ||  AnimElem = 5, = 0 &&  map(EmotionLv) = 3
+anim = 489
+ID = 489
+pos = 40,-10
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 1
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = .5,.3
+vel = 2,2
+sprpriority = 2
+removeongethit = 1
+angle = 330
+;ignorehitpause = 
+persistent = 0
 
 [State 0, Helper]
 type = Helper
@@ -2490,10 +2636,10 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NP
 animtype  = Heavy
-damage    = 10
+damage    = 5
 Hitflag = MAFD
 guardflag = MA
-pausetime = 0,5
+pausetime = 5,5
 guard.pausetime = 0,10
 sparkno = 0
 guard.sparkno = 13000
@@ -2503,8 +2649,8 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 1
-ground.velocity = -10,-2
-air.velocity = -10,-2
+ground.velocity = -10,2
+air.velocity = -10,2
 fall.recovertime = 30
 Envshake.time = 10
 
@@ -2599,8 +2745,8 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 1
-ground.velocity = -3,-6
-air.velocity = -3,-5
+ground.velocity = -2,-5
+air.velocity = -2,-5
 fall = 1
 fall.recovertime = 30
 Envshake.time = 10
@@ -2626,8 +2772,8 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 1
-ground.velocity = -2,-5
-air.velocity = -2,-4
+ground.velocity = -2,-6
+air.velocity = -2,-6
 fall = 1
 fall.recovertime = 30
 Envshake.time = 10
@@ -2653,8 +2799,8 @@ guardsound = 6,11
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 1
-ground.velocity = -2,-5
-air.velocity = -2,-4
+ground.velocity = -2,-6
+air.velocity = -2,-6
 fall = 1
 fall.recovertime = 30
 Envshake.time = 10
@@ -2680,13 +2826,6 @@ value = 1
 type = PlaySnd
 trigger1 = time = 0
 value = S880,0
-volumescale = 100
-persistent = 0
-
-[State 200, Woosh]
-type = PlaySnd
-trigger1 = time = 0
-value = S5,1
 volumescale = 100
 persistent = 0
 
@@ -3136,6 +3275,14 @@ trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 400
 
+
+[State 200, Dash cancel Forward]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
+value = 35
+ctrl = 1
+
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -3376,6 +3523,14 @@ Triggerall = movecontact
 trigger1 = command = "b"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 350
+
+
+[State 200, Dash cancel Forward]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movecontact
+value = 35
+ctrl = 1
 
 [State 200, End]
 type = ChangeState
@@ -5180,12 +5335,175 @@ trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 400
 
+;[State 200, End]
+;type = ChangeState
+;Triggerall = AnimElem = 5
+;trigger1 = command = "hold_b"
+;;trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+;value = 355
+
 
 [State 200, End]
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+;===============================================================================
+; Charged Swordless B:
+;-------------------------------------------------------------------------------
+[Statedef 355]
+type    = S
+movetype= A
+physics = S
+juggle  = 1
+ctrl = 0
+poweradd = 0
+velset = 10,0
+anim = 355
+sprpriority = 2
+
+[State 0 , Charge sound]
+type = PlaySnd
+triggerall = time = 0
+trigger1 = time = 0
+value = F10,1
+volumescale = 300
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+triggerall = time = 0
+trigger1 = animElem = 1
+anim = F580
+ID = 580
+pos = -10,-20
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 9999999999
+scale = .3,.3
+sprpriority = 3
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = AnimElem = 4
+anim = 616
+ID = 616
+pos = 30,-10
+postype = P1  ;P2, Front, Back, Left, Right
+facing = 1
+bindtime = 99999
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = .45,.5
+sprpriority = 1
+removeongethit = 1
+ignorehitpause = 0
+persistent = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movecontact ;  Swordless normals get increased score
+map = "TotalScore"
+value = 15
+persistent = 0
+
+[State 0, Juggle Map]
+type = MapAdd
+trigger1 = movehit && enemy,gethitvar(fall)
+map = "juggle"
+value = 5
+persistent = 0
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
+[State 0, PowerAdd]
+type = PowerAdd
+triggerall = numhelper(51000) = 0
+triggerall = numhelper(55000) = 0
+triggerall = numhelper(56000) = 0
+trigger1 = movecontact = 1
+value = 100
+
+;[State 0, PlaySnd]
+;type = PlaySnd
+;trigger1 = AnimElem = 7
+;value = S1,1
+;volumescale = 75
+
+;[State 0, VelSet]
+;type = VelSet
+;trigger1 = Animelem = 5
+;x = 4
+
+[State 200, Wavedash]
+type = ChangeState
+Triggerall = command = "WD" && command != "NotWD"
+trigger1 = movehit
+value = 35
+ctrl = 1
+
+[State 200, 1]
+type = HitDef
+getpower = 0
+trigger1 = !MoveContact
+attr = S, NA
+animtype  = Heavy
+damage    = 30
+hitflag = MAFD
+guardflag = MA
+pausetime = 15,15
+guard.pausetime = 15,15
+guard.hittime = 10
+sparkno = 2
+guard.sparkno = 13000
+sparkxy = -8,-25
+hitsound   = s0,4
+guardsound = 6,11
+ground.type = High
+ground.slidetime = 20
+ground.hittime  = 25 + ifelse(enemy,movetype = A, 7,0)
+air.hittime = 25 + ifelse(enemy,movetype = A, 7,0)
+fall = 1
+ground.velocity = -2,-8
+air.velocity = -2,-7
+Envshake.time = 20
+Fall.recovertime = 45 + ifelse(enemy,movetype = A, 15,0)
+guard.cornerpush.veloff = -5
+airguard.cornerpush.veloff = -4
+
+[State 200, End]
+type = ChangeState
+triggerall = MoveHit
+trigger1 = command = "up"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 955
+
+[State 200, End]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
 
 ;===============================================================================
 ; Swordless Dash B:
@@ -5280,12 +5598,12 @@ removeongethit = 1
 [State 0, VelSet]
 type = VelSet
 trigger1 = Animelem = 2 || Animelem = 3 
-x = 4.5
+x = 6
 
 [State 0, VelSet]
 type = VelSet
 trigger1 =  Animelem = 3
-y = -4.5
+y = -3.5
 
 [State 200, Gravity]
 type = VelAdd
@@ -5339,8 +5657,8 @@ animtype  = Medium
 damage    = 25 
 hitflag = MAFD
 guardflag = MA
-pausetime = 15,15
-guard.pausetime = 15,10
+pausetime = 10,10
+guard.pausetime = 10,10
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -7290,6 +7608,15 @@ Envshake.time = 15
 
 [State 200, End]
 type = ChangeState
+Triggerall = movehit
+triggerall = map(HasSword) = 0
+trigger1 = command = "holddown"
+trigger1 = command = "b"
+trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
+value = 612
+
+[State 200, End]
+type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
@@ -8099,7 +8426,7 @@ volumescale = 75
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 5 + (4-map(EmotionLv))
+value = 7 + (4-map(EmotionLv))
 persistent = 0
 
 [State 0, Damage Proration]
@@ -8108,7 +8435,7 @@ trigger1 = movehit
 v = 11
 ignorehitpause = 1
 persistent = 0
-value = 4 + (4-map(EmotionLv))
+value = 6 + (4-map(EmotionLv))
 
 
 
@@ -8304,7 +8631,7 @@ air.velocity = -6,-1
 airguard.velocity = -4
 Fall = 1
 Envshake.time = 5
-Fall.recovertime = 40 + ifelse(enemy,movetype = A, 7,0)
+Fall.recovertime = 60 + ifelse(enemy,movetype = A, 7,0)
 guard.cornerpush.veloff = -5
 airguard.cornerpush.veloff = -4
 
@@ -8386,11 +8713,11 @@ anim = 612
 poweradd = 0
 sprpriority = 2
 
-[State 0, Juggle Map]
-type = MapSet
-trigger1 = 1 ; this probably shouldnt fatal lol
-map = "fatal"
-value = 1
+;[State 0, Juggle Map]
+;type = MapSet
+;trigger1 = 1 ; this probably shouldnt fatal lol yeah bro why did i make this a fatal
+;map = "fatal"
+;value = 1
 
 [State 0, Juggle Map]
 type = MapAdd
@@ -8472,10 +8799,10 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Light
-damage    = ifelse(enemy,movetype = A, 40,20)
+damage    = 20
 hitflag = MAFD
 guardflag = MA
-pausetime = ifelse(enemy,movetype = A, 20,10),ifelse(enemy,movetype = A, 20,10)
+pausetime = 10,10
 guard.pausetime = 5,10
 sparkno = 1
 guard.sparkno = 13000
@@ -11908,7 +12235,7 @@ ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = root,stateno = [30,35] && root,time <= 1
+trigger1 = root,stateno = [30,35] && root,time <= 2
 value = 930
 ctrl = 0
 
@@ -13272,7 +13599,7 @@ keyctrl = 0
 [State 0, score !]
 type = RootMapAdd
 triggerall = ishelper
-trigger1 = movetype = A && movecontact = 1 && (stateno != 455 && stateno != 463 && stateno != [20005,20010] && stateno != 491)
+trigger1 = movetype = A && movecontact = 1 && (stateno != 455 && stateno != 463 && stateno != [20005,20010] && stateno != 491 && stateno != [622,625])
 map = "TotalScore"
 value = cond(movehit, 8, 2)
 ;
@@ -13280,7 +13607,7 @@ value = cond(movehit, 8, 2)
 [State 0, score !]
 type = RootMapAdd
 triggerall = ishelper
-trigger1 = movetype = A && movecontact = 1 && (stateno = 455 || stateno = 463 || stateno = [20005,20010] || stateno = 491)
+trigger1 = movetype = A && movecontact = 1 && (stateno = 455 || stateno = 463 || stateno = [20005,20010] || stateno = 491 || stateno = [622,625])
 map = "TotalScore"
 value = cond(movehit, 3, 1)
 
@@ -13307,13 +13634,13 @@ keyctrl = 0
 type = MapAdd
 trigger1 = stateno = [30,35] && facing != enemynear,facing
 map = "TotalScore"
-value = 1 ;  and then here we'd have wavedash compatibility...
+value = 1 * ifelse(map(HasSword)=0,2,1) ;  and then here we'd have wavedash compatibility...
 
 [State 0, score !]
 type = MapAdd
 trigger1 = stateno = 100 && facing != enemynear,facing
 map = "TotalScore"
-value = .75
+value = .75 * ifelse(map(HasSword)=0,2,1)
 
 [State 0, no score !]
 type = MapAdd
@@ -13325,7 +13652,7 @@ value = -1
 type = MapAdd
 trigger1 = stateno = 65 && facing != enemynear,facing
 map = "TotalScore"
-value = 1 ; Because you are barely in the airdash state
+value = 1
 
 [State 0, no score !]
 type = MapAdd

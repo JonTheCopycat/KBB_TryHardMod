@@ -8,7 +8,7 @@ _!Level Gauge
 	Affects his damage output and attack speed."
 
 Forgetting Something?
-	"If Dharkblu loses his sword, moves are 
+	"If Dharkblu loses his sword, moves are changed 
 	 or locked until he regains his sword."
 _!Sword Pickup										 _D OR ^B
 
@@ -104,5 +104,4 @@ _!Downfall Pillar								_U
 
 _!Skyward Ripple								_D	
 	"Swiftly slams the ground from 
-	the skies, and explodes upwards, slashing forward
-	for a shadow sword beam."
+	the skies, and explodes upwards"
